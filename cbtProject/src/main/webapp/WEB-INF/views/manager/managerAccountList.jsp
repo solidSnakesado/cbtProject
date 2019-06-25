@@ -11,15 +11,15 @@
 </head>
 <body>
 <nav id="nav2">
-				<a href="candidateUserMain.html">로그아웃</a>
+				<a href="candidateUserMain.jsp">로그아웃</a>
 			</nav>
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='accountControl.html'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='request_list_admin.html'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='consulting_list_admin.html'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='admin_chart.html'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -32,12 +32,12 @@
       <th>가입일</th>
    </tr>
    <tr>
-      <td><a href="managerAccountManageMody.html">Google</a></td>
+      <td><a href="managerAccountManageMody.jsp">Google</a></td>
       <td>구글</td>
       <td>2019-04-12</td>
    </tr>
    <tr>
-      <td><a href="managerAccountManageMody.html">MS</a></td>
+      <td><a href="managerAccountManageMody.jsp">MS</a></td>
       <td>마이크로소프트</td>
       <td>2019-04-12</td>
    </tr>

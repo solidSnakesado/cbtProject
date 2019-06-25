@@ -17,18 +17,18 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("companyCoHeader.html")
+			$("#header").load("companyCoHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='managerAccountControl.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='companyRequestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='companyConSultingList.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='companyTestList.html'">시험목록</button></li>
-         <li><button type="button" onclick="location.href='companyChart.html'">통계</button></li>
+         <li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='companyRequestList.jsp'">의뢰목록</button></li>
+         <li><button type="button" onclick="location.href='companyConSultingList.jsp'">상담목록</button></li>
+         <li><button type="button" onclick="location.href='companyTestList.jsp'">시험목록</button></li>
+         <li><button type="button" onclick="location.href='companyChart.jsp'">통계</button></li>
       </ul>
    </article>
 </section>
@@ -64,7 +64,7 @@
    <!--테이블 끝-->
    
       <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정하기</button>
-      <button type="button" value="reset" onclick="location.href='companyMain.html'">돌아가기</button>
+      <button type="button" value="reset" onclick="location.href='companyMain.jsp'">돌아가기</button>
    
    
    

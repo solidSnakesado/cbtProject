@@ -17,9 +17,9 @@
 		<article>
 			<ul>
 				<li><button type="button" onclick="location.href='managerAccountControl.html'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestListAdmin.html'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingListAdmin.html'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerAdminChart.html'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.html'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.html'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.html'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
