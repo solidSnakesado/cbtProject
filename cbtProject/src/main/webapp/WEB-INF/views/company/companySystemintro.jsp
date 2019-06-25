@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +12,10 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("in_header.html")
+			$("#header").load("co_header.html")
 		});
 	</script>
 	<header id="header"></header>
-   <br>
-   <br>
-	<a href="in_signUp.html"><img src="image/individual.png"></a>
-	<a href="co_signUp.html"><img src="image/company.png"></a>
-	<br><br>
-	<br>
-	<button onclick="location.href='userMain.html'">돌아가기</button>
+	<img src="image/systemintro.png">
 </body>
 </html>
