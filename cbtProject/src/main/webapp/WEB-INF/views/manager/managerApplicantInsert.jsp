@@ -65,7 +65,7 @@
 	<br>
 	</form>			
 	
-	<button onclick="location.href='managerUserAccountList.jsp'">등록</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='managerUserAccountList.html'">돌아가기</button>
+	<button onclick="location.href='managerUserAccountList.jsp'">등록</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='managerUserAccountList.jsp'">돌아가기</button>
 
 </body>
 </html>

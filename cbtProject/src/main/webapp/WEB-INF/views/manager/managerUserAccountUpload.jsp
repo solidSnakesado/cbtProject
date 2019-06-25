@@ -13,19 +13,19 @@
 <section>
 <h1>응시자 회원 파일추가</h1>
 <nav id="nav2">
-				<a href="candidateUserMain.html">로그아웃</a>
+				<a href="candidateUserMain.jsp">로그아웃</a>
 			</nav>
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='accountControl.html'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='request_list_admin.html'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='consulting_list_admin.html'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='admin_chart.html'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
 	<input type="text">
-    <a href="userAccountList.html"><button type="button">업로드</button></a>
+    <a href="managerUserAccountList.jsp"><button type="button">업로드</button></a>
 </body>
 </html>

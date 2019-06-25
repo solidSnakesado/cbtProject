@@ -17,16 +17,16 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='userAccountManageMody.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">응시목록</button></li>
-         <li><button type="button" onclick="location.href='personal_chart.html'">통계</button></li>
+         <li><button type="button" onclick="location.href='managerUserAccountEdit.jsp'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='candidateRequestList.jsp'">응시목록</button></li>
+         <li><button type="button" onclick="location.href='managerChart.jsp'">통계</button></li>
       </ul>
    </article>
 </section>
@@ -61,7 +61,7 @@
    <!--테이블 끝-->
    
       <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정</button>
-      <button type="button" value="reset" onclick="location.href='userMain.html'">돌아가기</button>
+      <button type="button" value="reset" onclick="location.href='candidateUserMain.jsp'">돌아가기</button>
    
    
    

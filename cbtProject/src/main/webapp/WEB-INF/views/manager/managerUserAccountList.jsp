@@ -16,10 +16,10 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='accountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='request_list_admin.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='consulting_list_admin.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='admin_chart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -32,7 +32,7 @@
       <th>가입일</th>
    </tr>
    <tr>
-      <td><a href="userAccountManageMody.jsp">AA1</a></td>
+      <td><a href="managerUserAccountEdit.jsp">AA1</a></td>
       <td>홍길동</td>
       <td>2019-04-12</td>
    </tr>
@@ -68,7 +68,7 @@
    </tr>
 </table>
 </form>
-<a href="applicantInsert.jsp"><button type="button">응시자 추가</button></a>
-<a href="userAccountUpload.jsp"><button type="button">엑셀파일 업로드</button></a>
+<a href="managerApplicantInsert.jsp"><button type="button">응시자 추가</button></a>
+<a href="managerUserAccountUpload.jsp"><button type="button">엑셀파일 업로드</button></a>
 </body>
 </html>
