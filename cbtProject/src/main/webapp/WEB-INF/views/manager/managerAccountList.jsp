@@ -32,12 +32,12 @@
       <th>가입일</th>
    </tr>
    <tr>
-      <td><a href="managerAccountManageMody.jsp">Google</a></td>
+      <td><a href="managerAccountManageEdit.jsp">Google</a></td>
       <td>구글</td>
       <td>2019-04-12</td>
    </tr>
    <tr>
-      <td><a href="managerAccountManageMody.jsp">MS</a></td>
+      <td><a href="managerAccountManageEdit.jsp">MS</a></td>
       <td>마이크로소프트</td>
       <td>2019-04-12</td>
    </tr>
