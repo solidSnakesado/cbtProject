@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="../css/main.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>

@@ -17,16 +17,16 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='candidateUserAccountManageModify.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='candidateRequestList.html'">응시목록</button></li>
-         <li><button type="button" onclick="location.href='candidatePersonalChart.html'">통계</button></li>
+         <li><button type="button" onclick="location.href='candidateUserAccountManageModify.jsp'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='candidateRequestList.jsp'">응시목록</button></li>
+         <li><button type="button" onclick="location.href='candidatePersonalChart.jsp'">통계</button></li>
       </ul>
    </article>
 </section>
@@ -60,8 +60,8 @@
    </table>
    <!--테이블 끝-->
    
-      <button type="button" value="submit" onclick="location.href='candidateUserAccountManageModify.html'">수정</button>
-      <button type="button" value="reset" onclick="location.href='candidateUserMain.html'">돌아가기</button>   
+      <button type="button" value="submit" onclick="location.href='candidateUserAccountManageModify.jsp'">수정</button>
+      <button type="button" value="reset" onclick="location.href='candidateUserMain.jsp'">돌아가기</button>   
 
 </body>
 </html>

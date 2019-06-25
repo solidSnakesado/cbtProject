@@ -12,7 +12,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
@@ -67,6 +67,6 @@
 	<br>
 	<br>
 	
-	<div align="right"><button onclick="location.href='candidateUserMain.html'">가입</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='candidateSignUp.html'">돌아가기</button></div>
+	<div align="right"><button onclick="location.href='candidateUserMain.jsp'">가입</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='candidateSignUp.jsp'">돌아가기</button></div>
 </body>
 </html>

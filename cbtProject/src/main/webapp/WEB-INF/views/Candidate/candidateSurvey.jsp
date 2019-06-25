@@ -12,7 +12,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
@@ -27,7 +27,7 @@
 	<br><br><br><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="button">preview</button><button type="button">next</button>
-	<div align="center"><input type="submit" value="제출" onclick="location.href='candidateTestResult.html'">&nbsp;&nbsp;&nbsp;&nbsp;
+	<div align="center"><input type="submit" value="제출" onclick="location.href='candidateTestResult.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="reset" value="초기화"></div>
 	
 

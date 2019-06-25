@@ -17,7 +17,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
@@ -64,7 +64,7 @@
    <!--테이블 끝-->
    
       <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정확인</button>
-      <button type="button" value="reset" onclick="location.href='candidateUserMain.html'">취소</button>
+      <button type="button" value="reset" onclick="location.href='candidateUserMain.jsp'">취소</button>
    
    
    

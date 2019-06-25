@@ -14,7 +14,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
@@ -42,7 +42,7 @@
 		<td>2019.03.04 13:30 ~<br>&nbsp;&nbsp;&nbsp;2019.03.04 15:30</td>
 		<td>100점</td>
 		<td>60점 이상</td>
-		<td><button type="button" onclick="location.href='candidateApplication.html'">응시하기</button></td>
+		<td><button type="button" onclick="location.href='candidateApplication.jsp'">응시하기</button></td>
 	</tr>
 	<tr>
 		<td>2019년 / 제 2회</td>
@@ -52,7 +52,7 @@
 		<td>2019.03.07 13:30 ~<br>&nbsp;&nbsp;&nbsp;2019.03.07 15:30</td>
 		<td>100점</td>
 		<td>60점 이상</td>
-		<td><button type="button" onclick="location.href='candidateApplication.html'">응시하기</button></td>
+		<td><button type="button" onclick="location.href='candidateApplication.jsp'">응시하기</button></td>
 	</tr>
 	<tr>
 		<td>2019년 / 제 1회</td>
@@ -62,7 +62,7 @@
 		<td>2019.06.22 13:00 ~<br>&nbsp;&nbsp;&nbsp;2019.03.04 13:30</td>
 		<td>100점</td>
 		<td>70점 이상</td>
-		<td><button type="button" onclick="location.href='candidateApplication.html'">응시하기</button></td>
+		<td><button type="button" onclick="location.href='candidateApplication.jsp'">응시하기</button></td>
 	</tr>
 	<tr>
 		<td>2020년 / 제 1회</td>
@@ -72,7 +72,7 @@
 		<td>2020.03.04 13:30 ~<br>&nbsp;&nbsp;&nbsp;2020.03.04 15:30</td>
 		<td>100점</td>
 		<td>60점 이상</td>
-		<td><button type="button" onclick="location.href='candidateApplication.html'">응시하기</button></td>
+		<td><button type="button" onclick="location.href='candidateApplication.jsp'">응시하기</button></td>
 	</tr>
 	<tr>
 		<td>2020년 / 제 1회</td>
@@ -82,10 +82,10 @@
 		<td>2020.05.07 13:30 ~<br>&nbsp;&nbsp;&nbsp;2020.05.07 15:30</td>
 		<td>100점</td>
 		<td>60점 이상</td>
-		<td><button type="button" onclick="location.href='candidateApplication.html'">응시하기</button></td>
+		<td><button type="button" onclick="location.href='candidateApplication.jsp'">응시하기</button></td>
 	</tr>
 	</table>
 	<br>
-	<div align="right"><button onclick="location.href='candidateUserMain.html'">돌아가기</button></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><button onclick="location.href='candidateUserMain.jsp'">돌아가기</button></div>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

@@ -13,7 +13,7 @@
 		var innerWidth = window.innerWidth/2;
 		var innerHeight= window.innerHeight/2;
 		
-		window.open("candidateExaminationListDetail.html","a","height=innerHeight ,width=innerWidth,left=0,top=0");
+		window.open("candidateExaminationListDetail.jsp","a","height=innerHeight ,width=innerWidth,left=0,top=0");
 	}
 </script>
 </head>
@@ -26,7 +26,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("in_header.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>

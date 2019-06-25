@@ -14,7 +14,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.html")
+			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
@@ -22,7 +22,7 @@
 	<table>
 		<tr>
 			<td colspan="2"><p align="center">
-					<a href="candidateInIntroduce.html"><img src="../image/main.PNG"></a>
+					<a href="candidateInIntroduce.jsp"><img src="../image/main.PNG"></a>
 				</p></td>
 		</tr>
 	</table>
