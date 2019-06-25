@@ -11,15 +11,15 @@
 </head>
 <body>
 <nav id="nav2">
-				<a href="candidateUserMain.html">로그아웃</a>
+				<a href="candidateUserMain.jsp">로그아웃</a>
 			</nav>
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='accountControl.html'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='request_list_admin.html'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='consulting_list_admin.html'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='admin_chart.html'">통 계</button></li>
+				<li><button type="button" onclick="location.href='accountControl.jsp'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='request_list_admin.jsp'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='consulting_list_admin.jsp'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='admin_chart.jsp'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -32,7 +32,7 @@
       <th>가입일</th>
    </tr>
    <tr>
-      <td><a href="userAccountManageMody.html">AA1</a></td>
+      <td><a href="userAccountManageMody.jsp">AA1</a></td>
       <td>홍길동</td>
       <td>2019-04-12</td>
    </tr>
@@ -68,7 +68,7 @@
    </tr>
 </table>
 </form>
-<a href="applicantInsert.html"><button type="button">응시자 추가</button></a>
-<a href="userAccountUpload.html"><button type="button">엑셀파일 업로드</button></a>
+<a href="applicantInsert.jsp"><button type="button">응시자 추가</button></a>
+<a href="userAccountUpload.jsp"><button type="button">엑셀파일 업로드</button></a>
 </body>
 </html>
