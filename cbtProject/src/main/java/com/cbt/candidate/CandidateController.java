@@ -91,6 +91,12 @@ public class CandidateController {
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateTakeExam.do")	
 	public String candidateTakeExam() {
-		return "candidate/candidateTakeExam";
+		return "candidate/candidateTakeExam";   
 	}
+	
+	//2019.06.27 장세준 - *.do & view 등록
+		@RequestMapping("candidateTestResult.do")	
+		public String candidateTestResult() {
+			return "candidate/candidateTestResult";
+		}
 }
