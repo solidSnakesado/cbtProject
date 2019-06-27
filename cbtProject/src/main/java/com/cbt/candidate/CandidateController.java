@@ -95,8 +95,8 @@ public class CandidateController {
 	}
 	
 	//2019.06.27 장세준 - *.do & view 등록
-		@RequestMapping("candidateTestResult.do")	
-		public String candidateTestResult() {
-			return "candidate/candidateTestResult";
-		}
+	@RequestMapping("candidateTestResult.do")	
+	public String candidateTestResult() {
+		return "candidate/candidateTestResult";
+	}	
 }
