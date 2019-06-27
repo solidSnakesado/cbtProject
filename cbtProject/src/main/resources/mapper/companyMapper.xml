@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 2019.06.27 성재민 -->
+<!-- 컴퍼니 관련 dao 처리 -->
+<mapper namespace="companyDAO">
+
+	<!-- 2019.06.27 성재민 -->
+	<!-- 컴퍼니 등록 sql -->
+	<insert id="insertCompany" parameterType="CompanyVO">
+		INSERT INTO COMPANY (COMPANY_ID
+							,COMPANY_PASSWORD
+							,COMPANY_NAME
+							,BUSINESS_NUMBER
+							,COMPANY_CLASSIFICATION
+							,COMPANY_SECTORS
+							,COMPANY_CREDIT
+							,COMPANY_MANAGER)
+		VALUES (#{companyId}
+				,#{companyPassword}
+				,#{companyName}
+				,#{businessNumber}
+				,#{companyClassification}
+				,#{companySectors}
+				,#{companyCredit}
+				,#{companyManager})
+	</insert>	
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
