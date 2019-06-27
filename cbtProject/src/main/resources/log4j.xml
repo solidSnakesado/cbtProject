@@ -10,6 +10,24 @@
 		</layout>
 	</appender>
 	
+	<!-- 19/06/27 재홍  jdbc 로그설정  -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+
 	<!-- Application Loggers -->
 	<logger name="com.cbt.project">
 		<level value="info" />
@@ -32,6 +50,8 @@
 		<level value="info" />
 	</logger>
 
+
+	
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

@@ -15,7 +15,14 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-
+		
+		<!-- 19/06/27 재홍 log jdbc 추가 -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
+		</dependency>
+		<!-- 19/06/27 재홍  -->
 		<!-- 19/06/26 재홍 start -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
