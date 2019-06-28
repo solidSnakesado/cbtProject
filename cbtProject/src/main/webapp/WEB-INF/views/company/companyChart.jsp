@@ -12,18 +12,18 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("companyCoHeader.html")
+			$("#header").load("companyCoHeader.jsp")
 		});
 	</script>
 	<header id="header"></header>
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='accountManage.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='conSulting_List.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='test_List.html'">시험목록</button></li>
-         <li><button type="button" onclick="location.href='company_chart.html'">통계</button></li>
+         <li><button type="button" onclick="location.href='managerAccount.jsp'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='companyRequestList.jsp'">의뢰목록</button></li>
+         <li><button type="button" onclick="location.href='companyConSultingList.jsp'">상담목록</button></li>
+         <li><button type="button" onclick="location.href='companyTestList.jsp'">시험목록</button></li>
+         <li><button type="button" onclick="location.href='companyChart.jsp'">통계</button></li>
       </ul>
    </article>
 </section>
@@ -85,6 +85,6 @@ eg1.render();
 
 </script>
 </div>
-<button onclick="location.href='accountManage.html'">확인</button>
+<button onclick="location.href='managerAccount.jsp'">확인</button>
 </body>
 </html>

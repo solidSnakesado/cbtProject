@@ -1,40 +1,53 @@
 package com.cbt.company;
 
 import java.util.List;
+import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.cbt.candidate.CandidateVO;
+import com.cbt.common.Paging;
 
-@Repository
-public class CompanyDAO {
+@Service
+public class CompanyServiceImpl implements CompanyService {
+
 	@Autowired
-	private SqlSessionTemplate mybatis;
-
+	CompanyDAO companyDAO;
+	
+	@Override
 	public void insertCompany(CompanyVO vo) {
-		System.out.println("insertCompany()");
-		mybatis.insert("companyDAO.insertCompany", vo);
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
 	public void updateCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		
 	}
 
+	@Override
 	public void deleteCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		
 	}
 
+	@Override
 	public CompanyVO getCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
