@@ -1,4 +1,4 @@
-package com.cbt.company;
+package com.cbt.manager;
 
 import java.util.List;
 
@@ -9,31 +9,31 @@ import org.springframework.stereotype.Repository;
 import com.cbt.candidate.CandidateVO;
 
 @Repository
-public class CompanyDAO {
+public class ManagerDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
-
-	public void insertCompany(CompanyVO vo) {
-		System.out.println("insertCompany()");
-		mybatis.insert("companyDAO.insertCompany", vo);
-	}
-
-	public void updateCompany(CompanyVO vo) {
+	
+	public void insertManager(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		mybatis.insert("", vo);
 	}
 
-	public void deleteCompany(CompanyVO vo) {
+	public void updateManager(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		mybatis.insert("", vo);
 	}
 
-	public CompanyVO getCompany(CompanyVO vo) {
+	public void deleteManager(ManagerVO vo) {
+		// TODO Auto-generated method stub
+		mybatis.insert("", vo);
+	}
+
+	public CandidateVO getManager(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<CompanyVO> getCompanyList(CompanyVO vo) {
+	public List<ManagerVO> getManagerList(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
