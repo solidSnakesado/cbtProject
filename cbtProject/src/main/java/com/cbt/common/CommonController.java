@@ -9,4 +9,9 @@ public class CommonController {
 	public String commonLogin() {
 		return "common/commonLogin";
 	}
+	
+	@RequestMapping("commonSignUp.do")
+	public String companySignUp() {
+		return "common/commonSignUp";
+	}
 }

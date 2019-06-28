@@ -1,7 +1,6 @@
 package com.cbt.company;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // 2019.06.27 성재민
@@ -13,6 +12,13 @@ public class CompanyController {
 		return "company/companyMain";
 	}
 	
-	//@RequestMapping("companySignUp.do")
+	@RequestMapping("companySignUp.do")
+	public String companySignUp() {
+		return "company/companySignUp";
+	}
 	
+	@RequestMapping("companyLogin.do")
+	public String companyLogin() {
+		return "company/companyLogin";
+	}
 }

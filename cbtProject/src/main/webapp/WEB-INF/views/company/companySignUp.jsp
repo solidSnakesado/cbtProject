@@ -16,12 +16,67 @@
 		});
 	</script>
 	<header id="header"></header>
-   <br>
-   <br>
-	<a href="in_signUp.html"><img src="image/individual.png"></a>
-	<a href="co_signUp.html"><img src="image/company.png"></a>
-	<br><br>
+	<table border="1" align="center">
+		<tr>
+			<td>기업ID</td>
+			<td></td>
+			<td><button>중복확인</button></td>
+		</tr>
+		<tr>
+			<td>기업PW</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>PW확인</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>기업명</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>사업자번호</td>
+			<td></td>
+			<td><button>중복확인</button></td>
+		</tr>
+		<tr>
+			<td>회사분류</td>
+			<td><select name="company">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>세부업종</td>
+			<td><select name="job">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+			</select></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>담당자</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>연락처</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
 	<br>
-	<button onclick="location.href='userMain.html'">돌아가기</button>
+	<br>
+	<div align="right"><button onclick="location.href='companyMain.html'">가입</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='signUp.html'">돌아가기</button></div>
 </body>
-    
+</html>
