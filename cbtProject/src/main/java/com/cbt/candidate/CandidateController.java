@@ -9,7 +9,6 @@ public class CandidateController {
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
 		return "candidate/candidateMain";
-		
 	}
 	
 	//2019.06.27 장세준 - *.do & view 등록
