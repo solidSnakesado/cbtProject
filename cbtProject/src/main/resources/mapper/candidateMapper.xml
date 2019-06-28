@@ -8,7 +8,6 @@
 		<select id="selectCandidate" resultType="CandidateVO">
 			SELECT 1 FROM DUAL
 		</select>
-		
 </mapper>
  
  
