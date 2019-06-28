@@ -10,6 +10,9 @@
 
 	<typeAliases>
 		<typeAlias type="com.cbt.company.CompanyVO" alias="CompanyVO" />
+		
+		<!-- candidate alias 연결                 6/28 김재용 -->
+		<typeAlias type="com.cbt.candidate.CandidateVO" alias="CandidateVO" />
 	</typeAliases>
 </configuration>
 
