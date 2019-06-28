@@ -4,7 +4,10 @@
 <!-- 2019.06.28 김재용 -->
 <!-- candidate 관련 dao 처리 -->
 <mapper namespace="candidateDAO">
-
+		<!-- 6/28 candidate 더미 쿼리       김재용 -->
+		<select id="selectCandidate" resultType="CandidateVO">
+			SELECT 1 FROM DUAL
+		</select>
 		
 </mapper>
  
