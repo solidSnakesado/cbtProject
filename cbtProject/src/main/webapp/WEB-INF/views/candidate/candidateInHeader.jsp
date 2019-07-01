@@ -18,7 +18,7 @@
 				<a href="candidateAccountManage.do">마이페이지</a>
 			</nav>
 			<nav id="nav2">
-				<a href="commonLogin.do">로그인</a> 
+				<a href="commonLogin.dod">로그인</a> 
 				<a href="commonSignUp.do">회원가입</a>
 			</nav>
 		</div>
