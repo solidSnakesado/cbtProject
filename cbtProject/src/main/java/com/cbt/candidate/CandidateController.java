@@ -3,6 +3,7 @@ package com.cbt.candidate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+//2019.07.01 장세준 - candidate3controller로 이전
 @Controller
 public class CandidateController {
 

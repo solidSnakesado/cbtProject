@@ -11,9 +11,10 @@ public class CandidateDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	//2019.07.01 장세준 - insert
 	public void insertCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.insert("candidateDAO.insertCandidate", vo);
 	}
 
 	public void updateCandidate(CandidateVO vo) {
