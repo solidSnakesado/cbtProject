@@ -98,5 +98,5 @@ public class CandidateController {
 	@RequestMapping("candidateTestResult.do")	
 	public String candidateTestResult() {
 		return "candidate/candidateTestResult";
-	}	
+	}
 }
