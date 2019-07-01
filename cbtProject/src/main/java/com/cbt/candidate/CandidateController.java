@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CandidateController {
 
-	@RequestMapping("candidateMain.do")
-	public String candidateMain() {
-		return "candidate/candidateMain";
-	}
+	//2019.07.01 장세준 - candidate3controller로 이전
+	/*
+	 * @RequestMapping("candidateMain.do") public String candidateMain() { return
+	 * "candidate/candidateMain"; }
+	 */
 	
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateAccountManage.do")	
@@ -53,21 +54,23 @@ public class CandidateController {
 		return "candidate/candidateInIntroduce";
 	}
 
+	//2019.07.01 장세준 - candidate3controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateInSignUp.do")	
-	public String candidateInSignUp() {
-		return "candidate/candidateInSignUp";
-	}
+	/*
+	 * @RequestMapping("candidateInSignUp.do") public String candidateInSignUp() {
+	 * return "candidate/candidateInSignUp"; }
+	 */
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidatePersonalChart.do")	
 	public String candidatePersonalChart() {
 		return "candidate/candidatePersonalChart";
 	}
+	//2019.07.01 장세준 - candidate3controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateLogin.do")	
-	public String candidateLogin() {
-		return "candidate/candidateLogin";
-	}
+	/*
+	 * @RequestMapping("candidateLogin.do") public String candidateLogin() { return
+	 * "candidate/candidateLogin"; }
+	 */
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateRightAnswer.do")	
 	public String candidateRightAnswer() {
@@ -78,11 +81,12 @@ public class CandidateController {
 	public String candidateScheduleCheck() {
 		return "candidate/candidateScheduleCheck";
 	}
+	//2019.07.01 장세준 - candidate3controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateSignUp.do")	
-	public String candidateSignUp() {
-		return "candidate/candidateSignUp";
-	}
+	/*
+	 * @RequestMapping("candidateSignUp.do") public String candidateSignUp() {
+	 * return "candidate/candidateSignUp"; }
+	 */
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateSurvey.do")	
 	public String candidateSurvey() {
