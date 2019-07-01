@@ -12,16 +12,16 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
    <br>
    <br>
-	<a href="candidateInSignUp.jsp"><img src="../image/individual.png"></a>
-	<a href="../company/companyCoSignUp.jsp"><img src="../image/company.png"></a>
+	<a href="candidateInSignUp.do"><img src="${pageContext.request.contextPath}/image/individual.png"></a>
+	<a href="companyCoSignUp.do"><img src="${pageContext.request.contextPath}/image/company.png"></a>
 	<br><br>
 	<br>
-	<button onclick="location.href='candidateUserMain.jsp'">돌아가기</button>
+	<a href="candidateMain.do"><button>돌아가기</button></a>
 </body>
 </html>

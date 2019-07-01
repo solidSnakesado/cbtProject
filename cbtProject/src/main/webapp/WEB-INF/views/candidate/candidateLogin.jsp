@@ -12,7 +12,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
@@ -22,10 +22,10 @@
 	<input type="radio" name="user" value="기업">기업
 	<input type="radio" name="user" value="응시자">응시자
 	<br><br>
-	<button onclick="location.href='../manager/managerAccount.jsp'">관리자 계정으로 로그인하기</button>
-	<a href="companyMain.jsp"><img src="../image/login_company.png"></a>
-	<a href="userMain.jsp"><img src="../image/login_individual.png"></a>
-	<button onclick="location.href='candidateUserMain.jsp'">로그인</button><button onclick="location.href='candidateSignUp.jsp'">회원가입</button><button onclick="location.href='candidateUserMain.jsp'">돌아가기</button>
+	<a href="managerAccount.do"><button>관리자 계정으로 로그인하기</button></a>
+	<a href="companyMain.do"><img src="${pageContext.request.contextPath}/image/login_company.png"></a>
+	<a href="candidateMain.do"><img src="${pageContext.request.contextPath}/image/login_individual.png"></a>
+	<a href="candidateMain.do"><button>로그인</button></a><a href="candidateInSignUp.do"><button>회원가입</button></a><a href="candidateMain.do"><button>돌아가기</button></a>
 	
 </body>
 </html>
