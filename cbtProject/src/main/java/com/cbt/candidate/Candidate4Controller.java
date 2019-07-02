@@ -12,4 +12,9 @@ public class Candidate4Controller {
 //		return "candidate/candidateSurvey";
 //	}
 	
+	@RequestMapping("candidateTestResult.do")	
+	public String candidateTestResult() {
+		return "candidate/candidateTestResult";
+	}
+	
 }
