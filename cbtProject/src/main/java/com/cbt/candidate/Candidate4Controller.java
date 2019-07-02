@@ -17,4 +17,9 @@ public class Candidate4Controller {
 		return "candidate/candidateTestResult";
 	}
 	
+	@RequestMapping("candidateTakeExam.do")	
+	public String candidateTakeExam() {
+		return "candidate/candidateTakeExam";
+	}
+	
 }

@@ -19,12 +19,12 @@ public class CandidateDAO {
 
 	public void updateCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.update("", vo);
 	}
 
 	public void deleteCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.delete("", vo);
 	}
 
 	public CandidateVO getCandidate(CandidateVO vo) {
