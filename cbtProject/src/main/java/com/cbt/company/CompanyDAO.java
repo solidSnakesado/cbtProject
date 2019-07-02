@@ -29,13 +29,11 @@ public class CompanyDAO {
 	}
 
 	public CompanyVO getCompany(CompanyVO vo) {
-		mybatis.selectOne("", vo);
-		return null;
+		return mybatis.selectOne("companyDAO.getCompanyID", vo);
 	}
 	
 	public CompanyVO loginCompany(CompanyVO vo) {
-		CompanyVO loginCompany = mybatis.selectOne("companyDAO.getCompany", vo);
-		return loginCompany;
+		return mybatis.selectOne("companyDAO.getCompanyIDPW", vo);
 	}
 
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
