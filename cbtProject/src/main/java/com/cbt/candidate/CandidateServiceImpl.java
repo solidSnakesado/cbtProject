@@ -14,10 +14,10 @@ public class CandidateServiceImpl implements CandidateService {
 	@Autowired
 	CandidateDAO candidateDAO;
 	
+	//2019.07.01 장세준 insert method 
 	@Override
 	public void insertCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		
+		candidateDAO.insertCandidate(vo);
 	}
 
 	@Override
@@ -34,8 +34,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public CandidateVO getCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return candidateDAO.getCandidate(vo);
 	}
 
 	@Override

@@ -16,7 +16,7 @@
 				<a href="companyEstimate.jsp">견적서 입력</a> 
 				<a href="companySystemintro.jsp">시스템 소개</a>
 				<a href="companyConsulting.jsp">상담신청 </a> 
-				<a href="managerAccount.jsp">마이페이지</a>
+				<a href="companyAccount.jsp">마이페이지</a>
 			</nav>
 			<nav id="nav2">
 				<a href="../candidate/candidateMain.jsp">로그아웃</a>

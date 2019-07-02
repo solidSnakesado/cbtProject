@@ -15,7 +15,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
@@ -27,12 +27,12 @@
 	<br>
 	<div align="center">
 		<h2>시험 안내</h2>
-			<img src="../image/시험안내.PNG" alt="시험 안내">
+			<img src="${pageContext.request.contextPath}/image/시험안내.PNG" alt="시험 안내">
 		<br><br><br><br><br>
 		<h2>시험 유의사항</h2>
-			<img src="../image/원서 시험유의사항.PNG" alt="시험 안내">
+			<img src="${pageContext.request.contextPath}/image/원서 시험유의사항.PNG" alt="시험 안내">
 		<br><br><br><br>
-		<button onclick="location.href=''">원서접수</button>
+		<button onclick="">원서접수</button>
 	</div>
 	
 </body>
