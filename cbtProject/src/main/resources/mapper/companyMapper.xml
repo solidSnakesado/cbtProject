@@ -7,6 +7,8 @@
 
 	<!-- 2019.06.27 성재민 -->
 	<!-- 컴퍼니 등록 sql -->
+	<!-- 2019.07.02 성재민 -->
+	<!-- COMPANY_MANAGER_TELNUM 추가 -->
 	<insert id="insertCompany" parameterType="CompanyVO">
 		INSERT INTO COMPANY (COMPANY_ID
 							,COMPANY_PASSWORD
@@ -15,7 +17,8 @@
 							,COMPANY_CLASSIFICATION
 							,COMPANY_SECTORS
 							,COMPANY_CREDIT
-							,COMPANY_MANAGER)
+							,COMPANY_MANAGER
+							,COMPANY_MANAGER_TELNUM)
 		VALUES (#{companyId}
 				,#{companyPassword}
 				,#{companyName}
@@ -23,7 +26,8 @@
 				,#{companyClassification}
 				,#{companySectors}
 				,#{companyCredit}
-				,#{companyManager})
+				,#{companyManager}
+				,#{companyManagerTelNum})
 	</insert>	
 </mapper>
  
