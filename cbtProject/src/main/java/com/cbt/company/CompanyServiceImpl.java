@@ -17,7 +17,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void insertCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		
+		companyDAO.insertCompany(vo);
 	}
 
 	@Override
