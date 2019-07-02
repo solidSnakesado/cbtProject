@@ -3,53 +3,52 @@ package com.cbt.candidate;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
 
-@Service
+@Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
 
-	@Autowired
-	CandidateDAO candidateDAO;
+	@Resource
+	private CandidateDAO candidateDAO;
 	
 	//2019.07.01 장세준 insert method 
-	@Override
 	public void insertCandidate(CandidateVO vo) {
 		candidateDAO.insertCandidate(vo);
 	}
 
-	@Override
 	public void updateCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		
+		candidateDAO.updateCandidate(vo);
 	}
 
-	@Override
 	public void deleteCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		
+		candidateDAO.deleteCandidate(vo);
 	}
 
-	@Override
 	public CandidateVO getCandidate(CandidateVO vo) {
 		return candidateDAO.getCandidate(vo);
 	}
 
-	@Override
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return candidateDAO.getCandidateList(vo);
 	}
 
-	@Override
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging) {
-		// TODO Auto-generated method stub
+		paging.setPageUnit(10);
+		if(paging.getPage() == null) {
+			paging.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		
+		paging.setTotalRecord(candidateDAO.getCount(vo));
 		return null;
 	}
 
-	@Override
 	public CandidateVO loginCandidate(CandidateVO vo) {
 		return candidateDAO.loginCandidate(vo);
 	}

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 //2019.07.01 장세준 - candidate3controller로 이전
 @Controller
 public class CandidateController {
+	
 	@Autowired
 	CandidateService candidateService;
 	
@@ -82,15 +84,15 @@ public class CandidateController {
 		return "candidate/candidateMain";
 	}
 	
-	//등록form 2019.07.01 생성
-	@RequestMapping(value="candidateInSignUp.do", method=RequestMethod.GET)
-	public String candidateInSignUpForm() {
+	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
+	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
+	public String insertCandidateForm() {
 		return "candidate/candidateInSignUp";
 	}
 	
-	//등록처리  2019.07.01 생성
-	@RequestMapping(value="candidateInSignUp.do", method=RequestMethod.POST)
-	public String candidateAccount(CandidateVO vo) {
+	//등록처리  2019.07.01 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
+	@RequestMapping(value="insertCandidate.do", method=RequestMethod.POST)
+	public String insertCandidate(CandidateVO vo) {
 		candidateService.insertCandidate(vo);
 		return "redirect:candidateMain.do";
 	}
@@ -112,12 +114,18 @@ public class CandidateController {
 		}
 		return targetPage;
 	}
-	
-	@RequestMapping("candidateSignUp.do")
-	public String candidateSignUp() {
-		return "candidate/candidateSignUp";
+	//계정수정  장세준 (7/2)
+	@RequestMapping("updateCandidate.do")
+	public String updateCandidate(CandidateVO vo) {
+		candidateService.updateCandidate(vo);
+		return "candidate/candidateMain";
 	}
-	
+	//삭제처리 장세준 (7/2)
+	@RequestMapping("deleteCandidate.do")
+	public String deleteBoard(CandidateVO vo) {
+		candidateService.deleteCandidate(vo);
+		return "candidate/candidateMain";
+	}
 	@RequestMapping("candidateTestResult.do")	
 	public String candidateTestResult() {
 		return "candidate/candidateTestResult";
