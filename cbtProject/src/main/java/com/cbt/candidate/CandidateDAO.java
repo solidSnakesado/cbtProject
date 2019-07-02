@@ -28,12 +28,16 @@ public class CandidateDAO {
 	}
 
 	public CandidateVO getCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("===> my batis getCandidate()");
+		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public CandidateVO loginCandidate(CandidateVO vo) {
+		return getCandidate(vo);
 	}
 }

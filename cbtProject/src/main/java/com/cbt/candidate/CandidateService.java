@@ -18,6 +18,9 @@ public interface CandidateService {
 	// 글 상세 조회
 	CandidateVO getCandidate(CandidateVO vo);
 
+	// 로그인
+	CandidateVO loginCandidate(CandidateVO vo);
+	
 	// 글 목록 조회
 	List<CandidateVO> getCandidateList(CandidateVO vo);
 

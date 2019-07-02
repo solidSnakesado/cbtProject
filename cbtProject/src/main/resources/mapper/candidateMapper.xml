@@ -24,6 +24,17 @@
  				 ,#{takerEmail}
 				 ,#{takerPassword} )
 	</insert>
+	<!-- 7/2 	로그인을 위해 candidate를 단건 조회 	장세준  -->
+	<select id="getCandidate" resultType="CandidateVO">
+		SELECT	TAKER_ID
+				, TAKER_NAME
+				, TAKER_INFO
+				, TAKER_EDUCATION
+				, TAKER_EMAIL
+				, TAKER_PASSWORD
+		FROM 	TAKER
+		WHERE	TAKER_ID = #{takerId} AND TAKER_PASSWORD= #{takerPassword}
+	</select>
 		
 </mapper>
  

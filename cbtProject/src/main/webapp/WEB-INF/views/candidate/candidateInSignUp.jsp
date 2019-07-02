@@ -16,6 +16,7 @@
 		});
 	</script>
 	<header id="header"></header>
+<!-- 2019.07.02 장세준 - 테이블 간격 및 양식, 입력변수 조정, form 태그로 전환  -->
 	<form action="candidateInSignUp.do" method="post">
 	<table border="1" align="center">
 		<tr>

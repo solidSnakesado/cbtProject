@@ -19,6 +19,8 @@
 	</script>
 	<header id="header"></header>
 	<hr />
+	
+	${takerId} 
 	<table>
 		<tr>
 			<td colspan="2"><p align="center">
