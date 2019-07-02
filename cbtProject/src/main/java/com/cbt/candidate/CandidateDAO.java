@@ -28,11 +28,7 @@ public class CandidateDAO {
 	}
 
 	public CandidateVO getCandidate(CandidateVO vo) {
-<<<<<<< HEAD
 		System.out.println("===> my batis getCandidate()");
-=======
-		// TODO Auto-generated method stub
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 
