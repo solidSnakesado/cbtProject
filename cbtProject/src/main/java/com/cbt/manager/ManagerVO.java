@@ -4,7 +4,15 @@ public class ManagerVO {
 	private String manager_id;
 	private String manager_pw;
 	private String manager_name;
+	private String searchManager;
 	
+	
+	public String getSearchManager() {
+		return searchManager;
+	}
+	public void setSearchManager(String searchManager) {
+		this.searchManager = searchManager;
+	}
 	public String getManager_id() {
 		return manager_id;
 	}
@@ -26,7 +34,7 @@ public class ManagerVO {
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_id=" + manager_id + ", manager_pw=" + manager_pw + ", manager_name=" + manager_name
-				+ "]";
+				+ ", searchManager=" + searchManager + "]";
 	}
 	
 	

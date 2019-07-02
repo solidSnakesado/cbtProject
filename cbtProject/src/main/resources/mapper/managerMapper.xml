@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ManagerDAO">
+	<insert id="insertManager" parameterType="manager">
+		INSERT INTO MANAGER(
+							MANAGER_ID
+							, MANAGER_PW
+							, MANAGER_NAME)
+		VALUES	(#{manager_id}
+				,#{manager_pw}
+				,#{manager_name})
+	</insert>
+	
+	<select id="getManager" resultType="manager">
+		SELECT 
+				  MANAGER_ID
+				, MANAGER_PW
+				, MANAGER_NAME
+		FROM MANAGER		
+		WHERE MANAGER_ID = #{manager_id}
+	
+	</select>
+
+</mapper>
