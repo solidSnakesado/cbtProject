@@ -17,15 +17,16 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
 <section>
    <article>
       <ul>
-         <li><button type="button">계정관리</button></li>
-         <li><button type="button">응시목록</button></li>
+         <li><a href="candidateAccountManageModify.do"><button>계정관리</button></a></li>
+         <li><a href="commonDetailRequestList.do"><button>응시목록</button></a></li>
+         <li><a href="candidatePersonalChart.do"><button>통계</button></a></li>
       </ul>
    </article>
 </section>

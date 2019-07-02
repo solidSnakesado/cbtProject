@@ -1,9 +1,12 @@
 package cbtProject;
 
+import org.junit.Test;
+
 public class CandidateClient {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	
 
 	}
 

@@ -12,7 +12,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
