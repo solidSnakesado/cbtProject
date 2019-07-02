@@ -3,13 +3,15 @@ package com.cbt.candidate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+//2019.07.01 장세준 - candidate3controller로 이전
 @Controller
 public class CandidateController {
 
-	@RequestMapping("candidateMain.do")
-	public String candidateMain() {
-		return "candidate/candidateMain";
-	}
+	//2019.07.01 장세준 - candidate3controller로 이전
+	/*
+	 * @RequestMapping("candidateMain.do") public String candidateMain() { return
+	 * "candidate/candidateMain"; }
+	 */
 	
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateAccountManage.do")	
@@ -41,62 +43,70 @@ public class CandidateController {
 		return "candidate/candidateExaminationListDetail";
 	}
 	
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateInHeader.do")	
-	public String candidateInHeader() {
-		return "candidate/candidateInHeader";
-	}
+	 //2019.07.01 이재홍 - candidate2controller로 이전
+	  //2019.06.27 장세준 - *.do & view 등록
+	 /* 
+	 * @RequestMapping("candidateInHeader.do") public String candidateInHeader() {
+	 * return "candidate/candidateInHeader"; }
+	 */
 	
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateInIntroduce.do")	
-	public String candidateInIntroduce() {
-		return "candidate/candidateInIntroduce";
-	}
+	 //2019.07.01 이재홍 - candidate2controller로 이전
+	 /* //2019.06.27 장세준 - *.do & view 등록
+	 * 
+	 * @RequestMapping("candidateInIntroduce.do") public String
+	 * candidateInIntroduce() { return "candidate/candidateInIntroduce"; }
+	 */
 
+	//2019.07.01 장세준 - candidate3controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateInSignUp.do")	
-	public String candidateInSignUp() {
-		return "candidate/candidateInSignUp";
-	}
+	/*
+	 * @RequestMapping("candidateInSignUp.do") public String candidateInSignUp() {
+	 * return "candidate/candidateInSignUp"; }
+	 */
+	
+	//2019.07.01 이재홍 - candidate2controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidatePersonalChart.do")	
-	public String candidatePersonalChart() {
-		return "candidate/candidatePersonalChart";
-	}
+	 /* @RequestMapping("candidatePersonalChart.do") public String
+	 * candidatePersonalChart() { return "candidate/candidatePersonalChart"; }
+	 */
+	//2019.07.01 장세준 - candidate3controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateLogin.do")	
-	public String candidateLogin() {
-		return "candidate/candidateLogin";
-	}
+	/*
+	 * @RequestMapping("candidateLogin.do") public String candidateLogin() { return
+	 * "candidate/candidateLogin"; }
+	 */
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateRightAnswer.do")	
 	public String candidateRightAnswer() {
 		return "candidate/candidateRightAnswer";
 	}
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateScheduleCheck.do")	
-	public String candidateScheduleCheck() {
-		return "candidate/candidateScheduleCheck";
-	}
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateSignUp.do")	
-	public String candidateSignUp() {
-		return "candidate/candidateSignUp";
-	}
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateSurvey.do")	
-	public String candidateSurvey() {
-		return "candidate/candidateSurvey";
-	}
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateTakeExam.do")	
-	public String candidateTakeExam() {
-		return "candidate/candidateTakeExam";   
-	}
 	
+	//2019.07.01 이재홍 - candidate2controller로 이전
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateTestResult.do")	
-	public String candidateTestResult() {
-		return "candidate/candidateTestResult";
-	}	
+	 /* @RequestMapping("candidateScheduleCheck.do") public String
+	 * candidateScheduleCheck() { return "candidate/candidateScheduleCheck"; }
+	 */
+	//2019.07.01 장세준 - candidate3controller로 이전
+	//2019.06.27 장세준 - *.do & view 등록
+	/*
+	 * @RequestMapping("candidateSignUp.do") public String candidateSignUp() {
+	 * return "candidate/candidateSignUp"; }
+	 */
+	
+	//2019.07.01 이재홍 - candidate2controller로 이전
+	//2019.06.27 장세준 - *.do & view 등록
+	 /* @RequestMapping("candidateSurvey.do") public String candidateSurvey() {
+	 * return "candidate/candidateSurvey"; }
+	 */
+//	//2019.06.27 장세준 - *.do & view 등록
+//	@RequestMapping("candidateTakeExam.do")	
+//	public String candidateTakeExam() {
+//		return "candidate/candidateTakeExam";   
+//	}
+//	
+//	//2019.06.27 장세준 - *.do & view 등록
+//	@RequestMapping("candidateTestResult.do")	
+//	public String candidateTestResult() {
+//		return "candidate/candidateTestResult";
+//	}
 }

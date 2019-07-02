@@ -15,7 +15,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.jsp")
+			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
@@ -60,7 +60,7 @@
 	 </table>
 	 <tr> 
 	 	<td colspan="2" align="center" valign="top">
-	 		<button>이의제기</button>&nbsp;<button onclick="location.href'candidateUserMain.jsp'">메인으로</button>
+	 		<button>이의제기</button>&nbsp;<a href="candidateMain.jsp"><button>메인으로</button></a>
 		</td>
    	</tr>
    
