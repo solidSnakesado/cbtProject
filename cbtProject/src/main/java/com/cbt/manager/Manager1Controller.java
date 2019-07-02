@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class Manager1Controller {
 	
 	ManagerService managerService;
-	@ModelAttribute("")
+	
 }
