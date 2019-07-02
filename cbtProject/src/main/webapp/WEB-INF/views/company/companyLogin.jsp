@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="companyLogin.do" method="post">
-		id : <input type="text" name="companyId"><br>
+		id : <input type="text" name="companyId" value="${companyVO.companyId}"><br>
 		pw : <input type="password" name="companyPassword"><br>
 		<button>로그인</button>
 	</form>
