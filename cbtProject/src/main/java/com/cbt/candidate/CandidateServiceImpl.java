@@ -34,8 +34,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public CandidateVO getCandidate(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return candidateDAO.getCandidate(vo);
 	}
 
 	@Override

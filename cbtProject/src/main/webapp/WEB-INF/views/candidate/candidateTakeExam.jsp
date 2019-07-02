@@ -18,6 +18,7 @@
 			$("#header").load("candidateInHeader.do")
 		});
 	</script>
+	
 	<header id="header"></header>
 <table border="1">
  <form name="takeExam" method="post">
