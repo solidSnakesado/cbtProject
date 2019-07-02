@@ -17,6 +17,9 @@ public interface CompanyService {
 
 	// 글 상세 조회
 	CompanyVO getCompany(CompanyVO vo);
+	
+	// 로그인
+	CompanyVO loginCompany(CompanyVO vo);
 
 	// 글 목록 조회
 	List<CompanyVO> getCompanyList(CompanyVO vo);

@@ -17,7 +17,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void insertCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		
+		companyDAO.insertCompany(vo);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public CompanyVO loginCompany(CompanyVO vo) {
+		return companyDAO.loginCompany(vo);
 	}
 
 }

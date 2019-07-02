@@ -8,18 +8,27 @@ public class CompanyVO {
 	private String companyClassification;  
 	private String companySectors;      
 	private String companyCredit;       
-	private String companyManager;       
+	private String companyManager;    
+	private String companyManagerTelNum;	// 2019.07.02 성재민 COMPANY_MANAGER_TELNUM 추가
 	
-	public CompanyVO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getClientId() {
+	public String getCompanyId() {
 		return companyId;
 	}
 
-	public void setClientId(String clientId) {
-		this.companyId = clientId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getCompanyManagerTelNum() {
+		return companyManagerTelNum;
+	}
+
+	public void setCompanyManagerTelNum(String companyManagerTelNum) {
+		this.companyManagerTelNum = companyManagerTelNum;
+	}
+
+	public CompanyVO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getCompanyPassword() {

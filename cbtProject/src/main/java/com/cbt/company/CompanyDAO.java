@@ -29,8 +29,13 @@ public class CompanyDAO {
 	}
 
 	public CompanyVO getCompany(CompanyVO vo) {
-		// TODO Auto-generated method stub
+		mybatis.selectOne("", vo);
 		return null;
+	}
+	
+	public CompanyVO loginCompany(CompanyVO vo) {
+		CompanyVO loginCompany = mybatis.selectOne("companyDAO.getCompany", vo);
+		return loginCompany;
 	}
 
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {

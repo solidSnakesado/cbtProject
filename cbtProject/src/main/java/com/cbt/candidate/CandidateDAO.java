@@ -19,16 +19,20 @@ public class CandidateDAO {
 
 	public void updateCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.update("", vo);
 	}
 
 	public void deleteCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.delete("", vo);
 	}
 
 	public CandidateVO getCandidate(CandidateVO vo) {
+<<<<<<< HEAD
 		System.out.println("===> my batis getCandidate()");
+=======
+		// TODO Auto-generated method stub
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 
