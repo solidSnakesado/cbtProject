@@ -14,27 +14,27 @@ public class ManagerDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		System.out.println("===> insertManager() 기능처리");
+		mybatis.insert("ManagerDAO.insertManager", vo);
 	}
 
 	public void updateManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		System.out.println("===> updateManager() 기능처리");
+		mybatis.update("ManagerDAO.updateManager", vo);
 	}
 
-	public void deleteManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+	public void deleteManager(String manager_id) {
+		System.out.println("===> deleteManager() 기능처리");
+		mybatis.delete("ManagerDAO.deleteManager", manager_id);
 	}
 
 	public ManagerVO getManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("===> getManager() 기능처리");
+		return mybatis.selectOne("ManagerDAO.getManager", vo);
 	}
 
 	public List<ManagerVO> getManagerList(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("===> getManagerList() 기능처리");
+		return mybatis.selectList("ManagerDAO.getManagerList", vo);
 	}
 }

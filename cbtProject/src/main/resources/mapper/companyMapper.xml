@@ -32,7 +32,7 @@
 	
 	<!-- 단건 조회  -->
 	<!--  "" alias 를 이용하여 소문자로 변경. -->
-	<select id="getCompany" resultType="CompanyVO">
+	<select id="getCompanyID" resultType="CompanyVO">
 		SELECT COMPANY_ID
 				,COMPANY_PASSWORD
 				,COMPANY_NAME 
@@ -44,6 +44,20 @@
 				,COMPANY_MANAGER_TELNUM
 		FROM COMPANY
 		WHERE COMPANY_ID = #{companyId}
+	</select>
+	<select id="getCompanyIDPW" resultType="CompanyVO">
+		SELECT COMPANY_ID
+				,COMPANY_PASSWORD
+				,COMPANY_NAME 
+				,BUSINESS_NUMBER
+				,COMPANY_CLASSIFICATION
+				,COMPANY_SECTORS
+				,COMPANY_CREDIT
+				,COMPANY_MANAGER
+				,COMPANY_MANAGER_TELNUM
+		FROM COMPANY
+		WHERE COMPANY_ID = #{companyId}
+		AND COMPANY_PASSWORD = #{companyPassword}
 	</select>
 </mapper>
  
