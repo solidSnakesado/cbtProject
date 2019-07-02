@@ -28,7 +28,7 @@ public class ManagerDAO {
 		mybatis.insert("", vo);
 	}
 
-	public CandidateVO getManager(ManagerVO vo) {
+	public ManagerVO getManager(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
