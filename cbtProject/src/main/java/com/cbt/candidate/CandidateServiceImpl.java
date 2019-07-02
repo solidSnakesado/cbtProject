@@ -49,4 +49,9 @@ public class CandidateServiceImpl implements CandidateService {
 		return null;
 	}
 
+	@Override
+	public CandidateVO loginCandidate(CandidateVO vo) {
+		return candidateDAO.loginCandidate(vo);
+	}
+
 }
