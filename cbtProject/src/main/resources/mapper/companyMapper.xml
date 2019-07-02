@@ -29,6 +29,22 @@
 				,#{companyManager}
 				,#{companyManagerTelNum})
 	</insert>	
+	
+	<!-- 단건 조회  -->
+	<!--  "" alias 를 이용하여 소문자로 변경. -->
+	<select id="getCompany" resultType="CompanyVO">
+		SELECT COMPANY_ID
+				,COMPANY_PASSWORD
+				,COMPANY_NAME 
+				,BUSINESS_NUMBER
+				,COMPANY_CLASSIFICATION
+				,COMPANY_SECTORS
+				,COMPANY_CREDIT
+				,COMPANY_MANAGER
+				,COMPANY_MANAGER_TELNUM
+		FROM COMPANY
+		WHERE COMPANY_ID = #{companyId}
+	</select>
 </mapper>
  
  

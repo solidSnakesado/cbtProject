@@ -50,4 +50,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
+	@Override
+	public CompanyVO loginCompany(CompanyVO vo) {
+		return companyDAO.loginCompany(vo);
+	}
+
 }
