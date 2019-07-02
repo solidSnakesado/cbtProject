@@ -29,7 +29,7 @@ public class CandidateDAO {
 
 	public CandidateVO getCandidate(CandidateVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
