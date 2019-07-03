@@ -1,5 +1,7 @@
 package com.cbt.company;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,11 +49,12 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
-	public String companyLogin(CompanyVO vo, Model model) {
+	public String companyLogin(CompanyVO vo, HttpSession session) {
 		String 		targetPage 		= "company/companyLogin";
 		CompanyVO 	loginCompany 	= companyService.loginCompany(vo);
 		
 		if(loginCompany != null) {
+			session.setAttribute("company", loginCompany);
 			targetPage = "company/companyMain";
 		}
 		
@@ -61,5 +64,15 @@ public class CompanyController {
 	@RequestMapping(value = "companyAccount.do",  method = RequestMethod.GET)
 	public String companyAccount() {		
 		return "company/companyAccount";
+	}
+	
+	@RequestMapping(value = "companyDelete.do",  method = RequestMethod.GET)
+	public String companyDelete(HttpSession session) {
+		CompanyVO vo = (CompanyVO) session.getAttribute("company");
+		
+		companyService.deleteCompany(vo);
+		session.invalidate();
+		
+		return "redirect:companyLogin.do";
 	}
 }

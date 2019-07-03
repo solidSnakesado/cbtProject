@@ -17,17 +17,16 @@
 	</script>
 	<header id="header"></header>
 
-	${companyVO.companyId}
 	<form action="companyUpdate.do" method="post">
 		<table border="1" align="center">
 			<tr>
 				<td>기업ID</td>
-				<td><input type="text" name="companyId" id="companyId"></td>
+				<td><input type="text" name="companyId" id="companyId" value="${company.companyId}"></td>
 				<td><button>중복확인</button></td>
 			</tr>
 			<tr>
 				<td>기업PW</td>
-				<td><input type="password" name="companyPassword" id="companyPassword"></td>
+				<td><input type="password" name="companyPassword" id="companyPassword" value="${company.companyPassword}"></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -37,12 +36,12 @@
 			</tr>
 			<tr>
 				<td>기업명</td>
-				<td><input type="text" name="companyName" id="companyName"></td>
+				<td><input type="text" name="companyName" id="companyName" value="${company.companyName}"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>사업자번호</td>
-				<td><input type="text" name="businessNumber" id="businessNumber"></td>
+				<td><input type="text" name="businessNumber" id="businessNumber" value="${company.businessNumber}"></td>
 				<td><button>중복확인</button></td>
 			</tr>
 			<tr>
@@ -69,23 +68,23 @@
 			</tr>
 			<tr>
 				<td>주거래 은행</td>
-				<td><input type="text" name="companyCredit" id="companyCredit"></td>
+				<td><input type="text" name="companyCredit" id="companyCredit" value="${company.companyCredit}"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>담당자</td>
-				<td><input type="text" name="companyManager" id="companyManager"></td>
+				<td><input type="text" name="companyManager" id="companyManager" value="${company.companyManager}"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>연락처</td>
-				<td><input type="text" name="companyManagerTelNum" id="companyManagerTelNum"></td>
+				<td><input type="text" name="companyManagerTelNum" id="companyManagerTelNum" value="${company.companyManagerTelNum}"></td>
 				<td></td>
 			</tr>
 		</table>
 		<div align="right">
 			<!-- <button onclick="location.href='companySignUp.do'">가입</button>&nbsp;&nbsp;&nbsp; -->
-			<input type="submit" value="가입">
+			<input type="submit" value="수정">
 			<input type="reset" value="취소">
 			<!-- <button onclick="location.href='companyMain.do'">돌아가기</button> -->
 		</div>

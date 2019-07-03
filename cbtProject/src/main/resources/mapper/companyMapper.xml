@@ -10,80 +10,98 @@
 	<!-- 2019.07.02 성재민 -->
 	<!-- COMPANY_MANAGER_TELNUM 추가 -->
 	<insert id="insertCompany" parameterType="CompanyVO">
-		INSERT INTO COMPANY (COMPANY_ID
-							,COMPANY_PASSWORD
-							,COMPANY_NAME
-							,BUSINESS_NUMBER
-							,COMPANY_CLASSIFICATION
-							,COMPANY_SECTORS
-							,COMPANY_CREDIT
-							,COMPANY_MANAGER
-							,COMPANY_MANAGER_TELNUM)
+		INSERT INTO COMPANY
+		(COMPANY_ID
+		,COMPANY_PASSWORD
+		,COMPANY_NAME
+		,BUSINESS_NUMBER
+		,COMPANY_CLASSIFICATION
+		,COMPANY_SECTORS
+		,COMPANY_CREDIT
+		,COMPANY_MANAGER
+		,COMPANY_MANAGER_TELNUM)
 		VALUES (#{companyId}
-				,#{companyPassword}
-				,#{companyName}
-				,#{businessNumber}
-				,#{companyClassification}
-				,#{companySectors}
-				,#{companyCredit}
-				,#{companyManager}
-				,#{companyManagerTelNum})
-	</insert>	
-	
+		,#{companyPassword}
+		,#{companyName}
+		,#{businessNumber}
+		,#{companyClassification}
+		,#{companySectors}
+		,#{companyCredit}
+		,#{companyManager}
+		,#{companyManagerTelNum})
+	</insert>
+
 	<!-- 2019.07.03 성재민 -->
 	<!-- 기업 정보 수정 -->
 	<update id="updateCompany" parameterType="CompanyVO">
-		UPDATE COMPANY 
+		UPDATE COMPANY
 		<set>
-			<if test="companyId != null and companyId != '' ">COMPANY_PASSWORD 			= #{companyPassword},</if>
-			<if test="companyId != null and companyId != '' ">COMPANY_NAME 				= #{companyName},</if>
-			<if test="companyId != null and companyId != '' ">BUSINESS_NUMBER 			= #{businessNumber},</if>
-			<if test="companyId != null and companyId != '' ">COMPANY_CLASSIFICATION 	= #{companyClassification},</if>
-			<if test="companyId != null and companyId != '' ">COMPANY_SECTORS 			= #{companySectors},</if>
-			<if test="companyId != null and companyId != '' ">COMPANY_CREDIT 			= #{companyCredit},</if>
-			<if test="companyId != null and companyId != '' ">COMPANY_MANAGER 			= #{companyManager},</if>	
-			<if test="companyId != null and companyId != '' ">COMPANY_MANAGER_TELNUM 	= #{companyManagerTelNum},</if>
-		 </set> 
-		 <where>
-		 	COMPANY_ID = #{companyId}
-		 </where>
+			<if test="companyPassword != null and companyPassword != '' ">
+				COMPANY_PASSWORD = #{companyPassword},
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				COMPANY_NAME = #{companyName},
+			</if>
+			<if test="businessNumber != null and businessNumber != '' "> 
+				BUSINESS_NUMBER = #{businessNumber},
+			</if>
+			<if test="companyClassification != null and companyClassification != '' "> 
+				COMPANY_CLASSIFICATION = #{companyClassification},
+			</if>
+			<if test="companySectors != null and companySectors != '' ">
+				COMPANY_SECTORS = #{companySectors},
+			</if>
+			<if test="companyCredit != null and companyCredit != '' ">
+				COMPANY_CREDIT = #{companyCredit},
+			</if>
+			<if test="companyManager != null and companyManager != '' ">
+				COMPANY_MANAGER = #{companyManager},
+			</if>
+			<if test="companyManagerTelNum != null and companyManagerTelNum != '' ">
+				COMPANY_MANAGER_TELNUM = #{companyManagerTelNum},
+			</if>
+		</set>
+		<where>
+			COMPANY_ID = #{companyId}
+		</where>
 	</update>
-	
+
 	<delete id="deleteCompany" parameterType="CompanyVO">
-		DELETE FROM COMPANY 
+		DELETE FROM COMPANY
 		<where>
 			COMPANY_ID = #{companyId}
 		</where>
 	</delete>
-	
-	<!-- 단건 조회  -->
-	<!--  "" alias 를 이용하여 소문자로 변경. -->
+
+	<!-- 단건 조회 -->
+	<!-- "" alias 를 이용하여 소문자로 변경. -->
 	<select id="getCompanyID" resultType="CompanyVO">
 		SELECT COMPANY_ID
-				,COMPANY_PASSWORD
-				,COMPANY_NAME 
-				,BUSINESS_NUMBER
-				,COMPANY_CLASSIFICATION
-				,COMPANY_SECTORS
-				,COMPANY_CREDIT
-				,COMPANY_MANAGER
-				,COMPANY_MANAGER_TELNUM
+		,COMPANY_PASSWORD
+		,COMPANY_NAME
+		,BUSINESS_NUMBER
+		,COMPANY_CLASSIFICATION
+		,COMPANY_SECTORS
+		,COMPANY_CREDIT
+		,COMPANY_MANAGER
+		,COMPANY_MANAGER_TELNUM
 		FROM COMPANY
 		WHERE COMPANY_ID = #{companyId}
 	</select>
 	<select id="getCompanyIDPW" resultType="CompanyVO">
 		SELECT COMPANY_ID
-				,COMPANY_PASSWORD
-				,COMPANY_NAME 
-				,BUSINESS_NUMBER
-				,COMPANY_CLASSIFICATION
-				,COMPANY_SECTORS
-				,COMPANY_CREDIT
-				,COMPANY_MANAGER
-				,COMPANY_MANAGER_TELNUM
+		,COMPANY_PASSWORD
+		,COMPANY_NAME
+		,BUSINESS_NUMBER
+		,COMPANY_CLASSIFICATION
+		,COMPANY_SECTORS
+		,COMPANY_CREDIT
+		,COMPANY_MANAGER
+		,COMPANY_MANAGER_TELNUM
 		FROM COMPANY
 		WHERE COMPANY_ID = #{companyId}
-		AND COMPANY_PASSWORD = #{companyPassword}
+		AND COMPANY_PASSWORD =
+		#{companyPassword}
 	</select>
 </mapper>
  
