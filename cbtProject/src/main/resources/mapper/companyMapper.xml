@@ -30,6 +30,32 @@
 				,#{companyManagerTelNum})
 	</insert>	
 	
+	<!-- 2019.07.03 성재민 -->
+	<!-- 기업 정보 수정 -->
+	<update id="updateCompany" parameterType="CompanyVO">
+		UPDATE COMPANY 
+		<set>
+			<if test="companyId != null and companyId != '' ">COMPANY_PASSWORD 			= #{companyPassword},</if>
+			<if test="companyId != null and companyId != '' ">COMPANY_NAME 				= #{companyName},</if>
+			<if test="companyId != null and companyId != '' ">BUSINESS_NUMBER 			= #{businessNumber},</if>
+			<if test="companyId != null and companyId != '' ">COMPANY_CLASSIFICATION 	= #{companyClassification},</if>
+			<if test="companyId != null and companyId != '' ">COMPANY_SECTORS 			= #{companySectors},</if>
+			<if test="companyId != null and companyId != '' ">COMPANY_CREDIT 			= #{companyCredit},</if>
+			<if test="companyId != null and companyId != '' ">COMPANY_MANAGER 			= #{companyManager},</if>	
+			<if test="companyId != null and companyId != '' ">COMPANY_MANAGER_TELNUM 	= #{companyManagerTelNum},</if>
+		 </set> 
+		 <where>
+		 	COMPANY_ID = #{companyId}
+		 </where>
+	</update>
+	
+	<delete id="deleteCompany" parameterType="CompanyVO">
+		DELETE FROM COMPANY 
+		<where>
+			COMPANY_ID = #{companyId}
+		</where>
+	</delete>
+	
 	<!-- 단건 조회  -->
 	<!--  "" alias 를 이용하여 소문자로 변경. -->
 	<select id="getCompanyID" resultType="CompanyVO">
