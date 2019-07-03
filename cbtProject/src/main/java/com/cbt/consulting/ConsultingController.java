@@ -1,7 +1,5 @@
 package com.cbt.consulting;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +35,7 @@ public class ConsultingController {
 	
 	@RequestMapping(value = "companyConsultingInsert.do", method = RequestMethod.POST)
 	public String companyConsultingInsert(ConsultingVO vo) {
+		vo.setConsultingId("상담" + System.currentTimeMillis());
 		consultingService.insertConsulting(vo);
 		return "redirect:companyConSultingList.do";
 	}
@@ -59,8 +58,11 @@ public class ConsultingController {
 	// 기업에서도 접근이 가능 하고 매니저에서도 접근이 가능함.
 	// 현재 로그인 된 유저가 기업인지 매니저인지 체크 할수 있으면
 	// 하나의 메서드로 기업화면과 매니저 화면으로 각각 관리 할수 있음.
-	@RequestMapping(value = "companyConSultingDelete.do", method = RequestMethod.GET)
-	public String companyConsultingDelete(ConsultingVO vo) {
-		return "redirect:companyConSultingList.do";
+	@RequestMapping(value = "companyConSultingDelete.do/{id}", method = RequestMethod.GET)
+	public String companyConsultingDelete(@PathVariable("id") String id) {
+		ConsultingVO vo = new ConsultingVO();
+		vo.setConsultingId(id);
+		consultingService.deleteConsulting(vo);
+		return "redirect:${pageContext.request.contextPath}/companyConSultingList.do";
 	}
 }

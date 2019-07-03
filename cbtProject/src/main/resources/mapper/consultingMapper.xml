@@ -8,19 +8,16 @@
 	<!-- 2019.07.03 성재민 -->
 	<!-- 컨설팅 등록 sql -->
 	<insert id="insertConsulting" parameterType="ConsultingVO">
-		INSERT INTO CONSULTING
-		(CONSULTING_ID
-		,COMPANY_ID
-		,CONSULTING_CONTENTS
-		,CONSULTING_DESIRED_DATE
-		,CONSULTING_DATE
-		,CONSULTING_REMARKS)
-		VALUES (#{consultingId}
-		,#{companyId}
-		,#{consultingContents}
-		,#{consultingDesiredDate}
-		,#{consultingDate}
-		,#{consultingRemarks})
+		INSERT INTO CONSULTING(
+			CONSULTING_ID,
+			CONSULTING_CONTENTS,
+			CONSULTING_DESIRED_DATE
+			)
+		VALUES (
+			#{consultingId},
+			#{consultingContents},
+			#{consultingDesiredDate}
+		)
 	</insert>
 
 	<!-- 2019.07.03 성재민 -->
@@ -28,6 +25,8 @@
 	<update id="updateConsulting" parameterType="ConsultingVO">
 		UPDATE CONSULTING
 		<set>
+			CONSULTING_DATE = #{consultingDate},
+			CONSULTING_REMARKS = #{consultingRemarks},
 			<if test="companyId != null and companyId != '' ">
 				COMPANY_ID = #{companyId},
 			</if>
@@ -35,13 +34,7 @@
 				CONSULTING_CONTENTS = #{consultingContents},
 			</if>
 			<if test="consultingDesiredDate != null"> 
-				CONSULTING_DESIRED_DATE = #{consultingDesiredDate},
-			</if>
-			<if test="consultingDate != null"> 
-				CONSULTING_DATE = #{consultingDate},
-			</if>
-			<if test="consultingRemarks != null and consultingRemarks != '' ">
-				CONSULTING_REMARKS = #{consultingRemarks},
+				CONSULTING_DESIRED_DATE = #{consultingDesiredDate}
 			</if>
 		</set>
 		<where>

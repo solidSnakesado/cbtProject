@@ -16,7 +16,7 @@
 		 }); */
 	</script>
 	<header id="header"></header>
-	<h3>시험 목록 세부 내용(기업)</h3>
+	<h3>상담 세부 항목(기업)</h3>
 	
 	<table border="1">
 		<tr>
@@ -42,8 +42,8 @@
 	</table>
 	<br>
 
-	<input type="button" onclick="location.href='../companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
-	<input type="button" onclick="location.href='../companyConSultingDelete.do'" value="삭제하기">
+	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
+	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
 	<input type="button" onclick='window.close()' value="확인">
 </body>
 </html>

@@ -16,8 +16,8 @@
 		}); */
 	</script>
 	<header id="header"></header>
-	<h3>시험 목록 세부 내용(기업)</h3>
-	<form action="../companyConSultingUpdate.do" method="post">
+	<h3>상담 수정(기업)</h3>
+	<form action="${pageContext.request.contextPath}/companyConSultingUpdate.do" method="post">
 		<table border = "1">
 			<tr>
 				<th>상담코드</th>
@@ -42,8 +42,7 @@
 		</table>
 		<br>
 		<input type="submit" value="수정하기">
-		<input type="text" onclick = '../companyConSultingDelete.do' value="삭제하기">
-		<input type = "button" onclick =  'window.close()' value = "확인">
+		<input type = "button" onclick =  'window.close()' value = "취소">
 	</form>
 	
 

@@ -9,16 +9,6 @@
 <title>Insert title here</title>
 
 <title>CBT 시험 일정 확인</title>
-
-<script>
-	function showPopup(id) {
-		var innerWidth = window.innerWidth / 2;
-		var innerHeight = window.innerHeight / 2;
-
-		window.open("companyConSultingDetail.do/" + id, "a",
-				"height=innerHeight ,width=innerWidth,left=0,top=0");
-	}
-</script>
 </head>
 
 
@@ -54,7 +44,7 @@
 			<th>비고</th>
 		</tr>
 		<c:forEach items="${consultingList}" var="consulting">
-			<tr onclick="showPopup('${consulting.consultingId}');">
+			<tr onclick="location.href='companyConSultingDetail.do/${consulting.consultingId}'">
 				<td>${consulting.consultingId}</td>
 				<td>${consulting.consultingDesiredDate}</td>
 				<td>${consulting.consultingDate}</td>
