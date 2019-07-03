@@ -1,5 +1,6 @@
 package com.cbt.question;
 
+import java.util.List;
 import java.util.Map;
 
 import com.cbt.common.Paging;
@@ -14,8 +15,12 @@ public interface QuestionService {
 	
 	void deleteQuestion(QuestionVO vo);
 	
+	List<Map<String, Object>> getTestList();
+	
 	QuestionVO getQuestion(QuestionVO vo);
 	
 	Map<String, Object> getQuestionList(QuestionVO vo, Paging paging);
+	
+	
 
 }

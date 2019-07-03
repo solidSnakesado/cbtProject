@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 2019.06.28 김재용 -->
+<!-- Question 관련 dao 처리 -->
+<mapper namespace="QuestionDAO">
+
+
+	<resultMap type="com.cbt.question.QuestionVOt" id="testBeanResult">
+		<result property="takeExamId" column="take_exam_id" javaType="int"/>
+		<result property="questionId" column="QUESTION_ID" javaType="string"/>
+		<result property="examName" column="EXAM_NAME" javaType="string"/>
+		<result property="takerName" column="TAKER_NAME" javaType="string"/>
+		<result property="examId" column="EXAM_ID" javaType="string"/>
+		<result property="point" column="POINT" javaType="string"/>
+		<result property="passingScore" column="PASSING_SCORE" javaType="string"/>
+	</resultMap>
+	<!-- <parameterMap type="java.util.HashMap" id="examAnswer">
+		<parameter property="v_take_exam_id" jdbcType="NUMBER" mode="IN"/>
+		<parameter property="v_check_refcur" jdbcType="CURSOR" mode="OUT" resultMap="resultMap"/>
+	</parameterMap> -->
+	
+	<select id="getTestList" statementType="CALLABLE" parameterType="hashmap">
+		<![CDATA[
+			{
+				call ref_cursor_pkg.ref_cursor_pro(
+					#{takeExamId, mode=IN, jdbcType=NUMERIC, javaType=int}, 
+					#{result, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=testBeanResult}
+				)
+			}
+		]]>
+	</select>
+	
+
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

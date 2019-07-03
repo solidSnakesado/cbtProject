@@ -1,5 +1,8 @@
 package com.cbt.question;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,6 +33,10 @@ public class QuestionDAO {
 		return mybatis.selectOne("", vo);
 	}
 	
+	public List<Map<String, Object>> getTestList(Map<String, Object> vo){
+		System.out.println("go");
+		return mybatis.selectList("QuestionDAO.getTestList", vo);
+	}
 	
 
 }
