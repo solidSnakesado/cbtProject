@@ -30,22 +30,24 @@
 		</article>
 	</section>
 	<h1>계정관리</h1>
-	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post">
-	<input type="hidden" name="takerId" value="${candidate.takerId}"/>
+<%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
+		<form action="updateCandidate.do" method="post">
 		<table width="940" style="padding: 5px 0 5px 0;">
 			<tr>
 				<th>ID</th>
-				<td>${candidate.takerId}</td>
+				<td><input type="hidden" name="takerId"/>${candidate.takerId}</td>
 			</tr>
-<!--
  			<tr>
 				<th>패스워드</th>
-				<td>***********</td>
+				<td><input type="password" name="takerPassword" value="${candidate.takerPassword}"/></td>
 			</tr> 
--->
+ 			<tr>
+				<th>패스워드확인</th>
+				<td><input type="password" name="takerPwcheck" value="${candidate.takerPwcheck}"/></td>
+			</tr> 
 			<tr>
 				<th>이름</th>
-				<td>${candidate.takerName}</td>
+				<td><input type="hidden" name="takerName"/>${candidate.takerName}</td>
 			</tr>
 <!--		DB와 동일한 구조로 만들기 위해 삭제 (7/2 장세준)
 			<tr>

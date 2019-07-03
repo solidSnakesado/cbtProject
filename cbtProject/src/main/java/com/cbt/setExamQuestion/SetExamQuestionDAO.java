@@ -12,7 +12,7 @@ public class SetExamQuestionDAO {
 	
 	public void insertSetExamQuestion(SetExamQuestionVO vo) {
 		
-		mybatis.insert("", vo);
+		mybatis.insert("setExamQuestionDAO.insertSetExamQuestion", vo);
 	}
 	
 	public void updateSetExamQuestion(SetExamQuestionVO vo) {
