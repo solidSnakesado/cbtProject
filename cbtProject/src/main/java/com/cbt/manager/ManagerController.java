@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cbt.common.Paging;
 
 @Controller
-@SessionAttributes("manager")
 public class ManagerController {
 	
 	@Autowired

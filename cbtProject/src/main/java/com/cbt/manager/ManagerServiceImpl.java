@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
@@ -12,7 +13,7 @@ import com.cbt.common.Paging;
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
 	
-	@Resource
+	@Autowired
 	ManagerDAO managerDAO;
 	
 	@Override
