@@ -21,9 +21,7 @@
 	
 <body>
 상담목록확인(기업)
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#header").load("co_header.html")
@@ -33,20 +31,21 @@
 	<section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='accountManage.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='conSulting_List.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='test_List.html'">시험목록</button></li>
+         <li><button type="button" onclick="location.href='companyAccount.do'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='companyRequestList.do'">의뢰목록</button></li>
+         <li><button type="button" onclick="location.href='companyTestList.do'">시험목록</button></li>
       </ul>
    </article>
 </section>
 	<table border="1" align="center">
 	<tr >
 		<th>상담번호</th>
-		<th>생각</th>
-		<th>담당자</th>
-		<th>상담일시</th>
+		<th>기업ID</th>
+		<th>상담신청일</th>
+		<th>상담일</th>
+		<th>상담내용</th>
 		<th>상담유무</th>
+		<th>비고</th>
 	</tr>
 	<tr onclick="showPopup();">
 		<td>1</td>

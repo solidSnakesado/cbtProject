@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class ConsultingVO {
 	private String 		consultingId;
 	private String 		companyId;
-	private String 		consulting_CONTENTS;
+	private String 		consultingContents;
 	private Timestamp 	consultingDesiredDate;
 	private Timestamp 	consultingDate;
 	private String 		consultingRemarks;
@@ -30,12 +30,12 @@ public class ConsultingVO {
 		this.companyId = companyId;
 	}
 
-	public String getConsulting_CONTENTS() {
-		return consulting_CONTENTS;
+	public String getConsultingContents() {
+		return consultingContents;
 	}
 
-	public void setConsulting_CONTENTS(String consulting_CONTENTS) {
-		this.consulting_CONTENTS = consulting_CONTENTS;
+	public void setConsultingContents(String consultingContents) {
+		this.consultingContents = consultingContents;
 	}
 
 	public Timestamp getConsultingDesiredDate() {
