@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SurveyDAO">
-
+	
+	<!-- 전체 조회 -->
+	<select id="selectSurvey">
+		select SURVEY_ID,
+			   SURVEY_TYPE,
+			   TAKE_EXAM_ID
+		from SURVEY
+	</select>
+	
+	<!-- 등록 -->
 </mapper>

@@ -29,5 +29,6 @@
 		</tr>
 		</c:forEach>
 	</table>
+	<a href="insertManager.do">매니저 등록</a>
 </body>
 </html>
