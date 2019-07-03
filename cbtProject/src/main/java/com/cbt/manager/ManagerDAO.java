@@ -23,9 +23,9 @@ public class ManagerDAO {
 		mybatis.update("ManagerDAO.updateManager", vo);
 	}
 
-	public void deleteManager(String manager_id) {
+	public void deleteManager(ManagerVO vo) {
 		System.out.println("===> deleteManager() 기능처리");
-		mybatis.delete("ManagerDAO.deleteManager", manager_id);
+		mybatis.delete("ManagerDAO.deleteManager", vo);
 	}
 
 	public ManagerVO getManager(ManagerVO vo) {

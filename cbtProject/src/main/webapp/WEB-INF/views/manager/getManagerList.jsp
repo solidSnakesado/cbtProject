@@ -11,24 +11,29 @@
 	<h3>매니저 목록</h3>
 	<form>
 		검색조건<select name="searchManager">
-			<option value="manager_id">관리자 아이디
-			<option value="manager_name">관리자 이름
+			<option value="managerId">관리자 아이디
+			<option value="managerName">관리자 이름
 		</select><br>
 		<input type="text" name="searchManager">
 		<button>검색</button>
 	</form>
+	<form action="deleteManager.do">
+	<button id="">삭제</button>
 	<table>
 		<tr>
+			<th>선택</th>
 			<th>관리자 아이디</th>
 			<th>관리자 이름</th>
 		</tr>
-		<c:forEach items="${managerList }" var="manager">
+		<c:forEach items="${result.managerList }" var="manager">
 		<tr>
-			<td>${manager.manager_id }</td>
-			<td><a href="updateManagerForm.do?seq=${manager.manager_id }">${manager.manager_id }</a></td>
+			<td><input type="checkbox" name="mngList" value="${manager.managerId }"></td>
+			<td><a href="updateManager/${manager.managerId }">${manager.managerId }</a></td>
+			<td>${manager.managerName }</td>
 		</tr>
 		</c:forEach>
 	</table>
+	</form>
 	<a href="insertManager.do">매니저 등록</a>
 </body>
 </html>
