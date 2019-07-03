@@ -10,11 +10,14 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccount.do'">보기</button></li>
-				<li><button type="button" onclick="location.href='companyRequestList.do'">수정</button></li>
-				<li><button type="button" onclick="location.href='companyConsulting.do'">삭제</button></li>
+				<li><button type="button" onclick="location.href='companyUpdate.do'">수정</button></li>
+				<li><button type="button" onclick="location.href='companyDelete.do'">삭제</button></li>
 			</ul>
 		</article>
 	</section>
+	
+	<form action="">
+		
+	</form>
 </body>
 </html>

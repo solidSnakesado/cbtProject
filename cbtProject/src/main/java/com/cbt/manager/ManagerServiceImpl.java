@@ -3,38 +3,47 @@ package com.cbt.manager;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cbt.common.Paging;
 
+@Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
-
+	
+	@Autowired
+	ManagerDAO managerDAO;
+	
 	@Override
 	public void insertManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
+		managerDAO.insertManager(vo);
 		
 	}
 
 	@Override
 	public void updateManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
+		managerDAO.updateManager(vo);
 		
 	}
 
 	@Override
 	public void deleteManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
+		managerDAO.deleteManager(vo.getManager_id());
 		
 	}
 
 	@Override
 	public ManagerVO getManager(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return managerDAO.getManager(vo);
 	}
 
 	@Override
 	public List<ManagerVO> getManagerList(ManagerVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		 
+		return managerDAO.getManagerList(vo);
 	}
 
 	@Override

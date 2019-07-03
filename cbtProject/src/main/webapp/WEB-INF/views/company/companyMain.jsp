@@ -10,7 +10,7 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccount.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='companyAccount.do'">계정관리</button></li>
 				<li><button type="button" onclick="location.href='companyRequestList.do'">의뢰목록</button></li>
 				<li><button type="button" onclick="location.href='companyConsulting.do'">상담하기</button></li>
 				<li><button type="button" onclick="location.href='companyTestList.do'">시험목록</button></li>
