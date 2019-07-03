@@ -27,13 +27,23 @@ public class CompanyController {
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
 	public String companySignUp(CompanyVO vo) {
 		companyService.insertCompany(vo);
-		return "company/companySignUp";
+		return "redirect:companyLogin.do";
+	}
+	
+	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.GET)
+	public String companyUpdateForm() {
+		return "company/companyUpdate";
+	}
+	
+	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.POST)
+	public String companyUpdate(CompanyVO vo) {
+		companyService.updateCompany(vo);
+		return "company/companyMain";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.GET)
-	public String companyLoginForm() 
-	{		
-		return "company/companyLogin";		
+	public String companyLoginForm() {		
+		return "company/companyLogin";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
@@ -48,11 +58,8 @@ public class CompanyController {
 		return targetPage;
 	}
 	
-	/*
-	 * @RequestMapping(value = "companyConsulting.do", method = RequestMethod.GET)
-	 * public String companyConsultingForm() { return "company/companyConsulting"; }
-	 * 
-	 * @RequestMapping(value = "companyConsulting.do", method = RequestMethod.POST)
-	 * public String companyConsulting() { return "company/companyMain"; }
-	 */
+	@RequestMapping(value = "companyAccount.do",  method = RequestMethod.GET)
+	public String companyAccount() {		
+		return "company/companyAccount";
+	}
 }
