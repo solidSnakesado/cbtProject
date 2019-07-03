@@ -1,10 +1,12 @@
 package com.cbt.manager;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
@@ -12,7 +14,7 @@ import com.cbt.common.Paging;
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
 	
-	@Resource
+	@Autowired
 	ManagerDAO managerDAO;
 	
 	@Override
@@ -29,7 +31,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public void deleteManager(ManagerVO vo) {
-		managerDAO.deleteManager(vo.getManager_id());
+		managerDAO.deleteManager(vo);
 		
 	}
 
@@ -47,8 +49,9 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public Map<String, Object> getManagerList(ManagerVO vo, Paging paging) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("managerList", managerDAO.getManagerList(vo));
+		return map;
 	}
 
 }
