@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,48 +35,30 @@
 	<section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='accountManage.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='conSulting_List.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='test_List.html'">시험목록</button></li>
+         <li><button type="button" onclick="location.href='companyAccount.do'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='companyRequestList.do'">의뢰목록</button></li>
+         <li><button type="button" onclick="location.href='companyTestList.do'">시험목록</button></li>
       </ul>
    </article>
 </section>
 	<table border="1" align="center">
-	<tr >
-		<th>상담번호</th>
-		<th>생각</th>
-		<th>담당자</th>
-		<th>상담일시</th>
-		<th>상담유무</th>
-	</tr>
-	<tr onclick="showPopup();">
-		<td>1</td>
-		<td></td>
-		<td>제프 베조스</td>
-		<td>2019.03.04 13:30 ~<br>&nbsp;&nbsp;&nbsp;2019.03.04 15:30</td>
-		<td>상담완료</td>
-		
-	</tr>
-	<tr onclick="showPopup();">
-		<td>2</td>
-		<td></td>
-		<td>제레</td>
-		<td>2019.03.04 13:30 ~<br>&nbsp;&nbsp;&nbsp;2019.03.04 15:30</td>
-		<td>상담예정</td>
-		
-	</tr>
-	<tr onclick="showPopup();">
-		<td>3</td>
-		<td></td>
-		<td>승환이형</td>
-		<td>2019.03.04 13:30 ~<br>&nbsp;&nbsp;&nbsp;2019.03.04 15:30</td>
-		<td>상담완료</td>
-		
-	</tr>
+		<tr>
+			<th>상담번호</th>
+			<th>담당자</th>
+			<th>상담일시</th>
+			<th>상담유무</th>
+		</tr>
+		<c:forEach items="" var="">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</c:forEach>
 	
 	</table>
 	<br>
-	<button onclick="location.href='companyMain.html'">돌아가기</button>
+	<button onclick="location.href='companyMain.do'">돌아가기</button>
 </body>
 </html>
