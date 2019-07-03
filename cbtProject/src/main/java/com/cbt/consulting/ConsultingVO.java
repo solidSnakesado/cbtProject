@@ -9,7 +9,8 @@ public class ConsultingVO {
 	private Timestamp 	consultingDesiredDate;
 	private Timestamp 	consultingDate;
 	private String 		consultingRemarks;
-	
+	private int			consultingState;	// 2019.07.03 성재민 상담 상태 설정 변수 추가
+
 	public ConsultingVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -60,5 +61,13 @@ public class ConsultingVO {
 
 	public void setConsultingRemarks(String consultingRemarks) {
 		this.consultingRemarks = consultingRemarks;
+	}
+	
+	public int getConsultingState() {
+		return consultingState;
+	}
+
+	public void setConsultingState(int consultingState) {
+		this.consultingState = consultingState;
 	}
 }
