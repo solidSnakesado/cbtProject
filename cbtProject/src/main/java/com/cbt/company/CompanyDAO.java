@@ -20,12 +20,12 @@ public class CompanyDAO {
 
 	public void updateCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.update("companyDAO.updateCompany", vo);
 	}
 
 	public void deleteCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("", vo);
+		mybatis.delete("companyDAO.deleteCompany", vo);
 	}
 
 	public CompanyVO getCompany(CompanyVO vo) {

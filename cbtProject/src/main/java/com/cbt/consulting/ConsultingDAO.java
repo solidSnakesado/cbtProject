@@ -11,8 +11,14 @@ public class ConsultingDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertConsulting(ConsultingVO vo) {
-		
 		mybatis.insert("", vo);
 	}
 	
+	public void updateConsulting(ConsultingVO vo) {
+		mybatis.insert("", vo);
+	}
+	
+	public void deleteConsulting(ConsultingVO vo) {
+		mybatis.insert("", vo);
+	}
 }

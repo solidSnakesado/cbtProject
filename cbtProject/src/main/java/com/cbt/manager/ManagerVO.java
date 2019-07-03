@@ -1,41 +1,52 @@
 package com.cbt.manager;
 
+import java.util.Arrays;
+
 public class ManagerVO {
-	private String manager_id;
-	private String manager_pw;
-	private String manager_name;
+	private String managerId;
+	private String managerPassword;
+	private String managerName;
 	private String searchManager;
+	private String[] mngList;
 	
 	
+	public String[] getMngList() {
+		return mngList;
+	}
+	public void setMngList(String[] mngList) {
+		this.mngList = mngList;
+	}
 	public String getSearchManager() {
 		return searchManager;
 	}
 	public void setSearchManager(String searchManager) {
 		this.searchManager = searchManager;
 	}
-	public String getManager_id() {
-		return manager_id;
+	public String getManagerId() {
+		return managerId;
 	}
-	public void setManager_id(String manager_id) {
-		this.manager_id = manager_id;
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
-	public String getManager_pw() {
-		return manager_pw;
+	public String getManagerPassword() {
+		return managerPassword;
 	}
-	public void setManager_pw(String manager_pw) {
-		this.manager_pw = manager_pw;
+	public void setManagerPassword(String managerPassword) {
+		this.managerPassword = managerPassword;
 	}
-	public String getManager_name() {
-		return manager_name;
+	public String getManagerName() {
+		return managerName;
 	}
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 	@Override
 	public String toString() {
-		return "ManagerVO [manager_id=" + manager_id + ", manager_pw=" + manager_pw + ", manager_name=" + manager_name
-				+ ", searchManager=" + searchManager + "]";
+		return "ManagerVO [managerId=" + managerId + ", managerPassword=" + managerPassword + ", managerName="
+				+ managerName + ", searchManager=" + searchManager + ", mngList=" + Arrays.toString(mngList) + "]";
 	}
 	
+	
+
 	
 }

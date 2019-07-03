@@ -1,9 +1,15 @@
 package com.cbt.manager;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,18 +22,18 @@ public class ManagerController {
 	ManagerService managerService;
 	
 	//메인
-	@RequestMapping("managerMain.do")
+	@RequestMapping(value ="/manager", method=RequestMethod.GET)
 	public String managerMain() {
 		return "manager/managerMain";
 	}
 	//등록폼
-	@RequestMapping("insertManagerForm.do")
+	@RequestMapping(value = "insertManager.do", method = RequestMethod.GET)
 	public String insertManagerForm() {
 		return "manager/insertManager";
 	}
 	
 	//등록처리
-	@RequestMapping("insertManager.do")
+	@RequestMapping(value = "insertManager.do", method = RequestMethod.POST)
 	public String insertManager(ManagerVO vo) {
 		managerService.insertManager(vo);
 		return "redirect:getManagerList.do";
@@ -35,21 +41,31 @@ public class ManagerController {
 	
 	//전체조회
 	@RequestMapping("/getManagerList.do")
-	public String getManagerList(ManagerVO vo, Model model) {
-		model.addAttribute("managerList", managerService.getManagerList(vo));
-		return "manager/getManagerList";
+	public ModelAndView getManagerList(ModelAndView mv, Paging paging ,
+										@RequestParam(value="searchManager", required=false) String searchManager) {
+		
+		
+		ManagerVO vo = new ManagerVO();
+		vo.setSearchManager(searchManager);
+		mv.addObject("result", managerService.getManagerList(vo, paging));
+		mv.setViewName("manager/getManagerList");
+		return mv;
 	}
 	
 	//수정폼
-	@RequestMapping("/updateManagerForm.do")
-	public String updateManagerForm(ManagerVO vo, Model model) {
+	@RequestMapping("/updateManager/{managerId}")
+	public String updateManagerForm( @PathVariable("managerId") String managerId, 
+									 ManagerVO vo,
+									 Model model) {
+		vo.setManagerId(managerId);
 		model.addAttribute("manager", managerService.getManager(vo));
 		return "manager/updateManager";
 	}
 	
 	//수정처리
 	@RequestMapping("updateManager.do")
-	public String updateManager(ManagerVO vo) {
+	public String updateManager(@ModelAttribute("manager") ManagerVO vo) {
+		System.out.println("===========\n" + vo);
 		managerService.updateManager(vo);
 		return "redirect:getManagerList.do";
 	}

@@ -12,5 +12,7 @@
 		pw : <input type="password" name="companyPassword"><br>
 		<button>로그인</button>
 	</form>
+	
+	<a href="companySignUp.do">가입하기</a>
 </body>
 </html>
