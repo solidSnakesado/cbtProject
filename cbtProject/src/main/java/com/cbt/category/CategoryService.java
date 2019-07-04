@@ -1,5 +1,7 @@
 package com.cbt.category;
 
+import java.util.List;
+
 public interface CategoryService {
 	
 	void insertCategory(CategoryVO vo);
@@ -10,4 +12,5 @@ public interface CategoryService {
 	
 	CategoryVO getCategory(CategoryVO vo);
 
+	List<CategoryVO> getAllCategory();
 }

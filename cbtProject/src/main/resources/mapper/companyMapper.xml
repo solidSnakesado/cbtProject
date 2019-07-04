@@ -10,25 +10,28 @@
 	<!-- 2019.07.02 성재민 -->
 	<!-- COMPANY_MANAGER_TELNUM 추가 -->
 	<insert id="insertCompany" parameterType="CompanyVO">
-		INSERT INTO COMPANY
-		(COMPANY_ID
-		,COMPANY_PASSWORD
-		,COMPANY_NAME
-		,BUSINESS_NUMBER
-		,COMPANY_CLASSIFICATION
-		,COMPANY_SECTORS
-		,COMPANY_CREDIT
-		,COMPANY_MANAGER
-		,COMPANY_MANAGER_TELNUM)
-		VALUES (#{companyId}
-		,#{companyPassword}
-		,#{companyName}
-		,#{businessNumber}
-		,#{companyClassification}
-		,#{companySectors}
-		,#{companyCredit}
-		,#{companyManager}
-		,#{companyManagerTelNum})
+		INSERT INTO COMPANY(
+				COMPANY_ID
+				,COMPANY_PASSWORD
+				,COMPANY_NAME
+				,BUSINESS_NUMBER
+				,COMPANY_CLASSIFICATION
+				,COMPANY_SECTORS
+				,COMPANY_CREDIT
+				,COMPANY_MANAGER
+				,COMPANY_MANAGER_TELNUM
+			)
+		VALUES (
+				#{companyId}
+				,#{companyPassword}
+				,#{companyName}
+				,#{businessNumber}
+				,#{companyClassification}
+				,#{companySectors}
+				,#{companyCredit}
+				,#{companyManager}
+				,#{companyManagerTelNum}
+			)
 	</insert>
 
 	<!-- 2019.07.03 성재민 -->
@@ -76,32 +79,37 @@
 	<!-- 단건 조회 -->
 	<!-- "" alias 를 이용하여 소문자로 변경. -->
 	<select id="getCompanyID" resultType="CompanyVO">
-		SELECT COMPANY_ID
-		,COMPANY_PASSWORD
-		,COMPANY_NAME
-		,BUSINESS_NUMBER
-		,COMPANY_CLASSIFICATION
-		,COMPANY_SECTORS
-		,COMPANY_CREDIT
-		,COMPANY_MANAGER
-		,COMPANY_MANAGER_TELNUM
+		SELECT 
+			COMPANY_ID
+			,COMPANY_PASSWORD
+			,COMPANY_NAME
+			,BUSINESS_NUMBER
+			,COMPANY_CLASSIFICATION
+			,COMPANY_SECTORS
+			,COMPANY_CREDIT
+			,COMPANY_MANAGER
+			,COMPANY_MANAGER_TELNUM
 		FROM COMPANY
-		WHERE COMPANY_ID = #{companyId}
+		<where>
+			COMPANY_ID = #{companyId}
+		</where>
 	</select>
 	<select id="getCompanyIDPW" resultType="CompanyVO">
-		SELECT COMPANY_ID
-		,COMPANY_PASSWORD
-		,COMPANY_NAME
-		,BUSINESS_NUMBER
-		,COMPANY_CLASSIFICATION
-		,COMPANY_SECTORS
-		,COMPANY_CREDIT
-		,COMPANY_MANAGER
-		,COMPANY_MANAGER_TELNUM
+		SELECT 
+			COMPANY_ID
+			,COMPANY_PASSWORD
+			,COMPANY_NAME
+			,BUSINESS_NUMBER
+			,COMPANY_CLASSIFICATION
+			,COMPANY_SECTORS
+			,COMPANY_CREDIT
+			,COMPANY_MANAGER
+			,COMPANY_MANAGER_TELNUM
 		FROM COMPANY
-		WHERE COMPANY_ID = #{companyId}
-		AND COMPANY_PASSWORD =
-		#{companyPassword}
+		<where>
+			COMPANY_ID = #{companyId}
+			AND COMPANY_PASSWORD = #{companyPassword}
+		</where>
 	</select>
 </mapper>
  

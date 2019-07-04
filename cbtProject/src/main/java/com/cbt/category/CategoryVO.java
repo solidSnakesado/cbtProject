@@ -2,57 +2,41 @@ package com.cbt.category;
 
 public class CategoryVO {
 	/*19 07 03 재홍 DB맞게 수정*/
-	private String categoryId;
-	private int mainCategory;
-	private int middleCategory;
-	private int smallCategory;
-	
+	private String 	categoryId;
+	private int 	categoryMainId;
+	private int 	categoryMiddleId;
+	private int 	categorySamllId;
 	
 	public String getCategoryId() {
 		return categoryId;
 	}
 
-
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
 
-
-	public int getMainCategory() {
-		return mainCategory;
+	public int getCategoryMainId() {
+		return categoryMainId;
 	}
 
-
-	public void setMainCategory(int mainCategory) {
-		this.mainCategory = mainCategory;
+	public void setCategoryMainId(int categoryMainId) {
+		this.categoryMainId = categoryMainId;
 	}
 
-
-	public int getMiddleCategory() {
-		return middleCategory;
+	public int getCategoryMiddleId() {
+		return categoryMiddleId;
 	}
 
-
-	public void setMiddleCategory(int middleCategory) {
-		this.middleCategory = middleCategory;
+	public void setCategoryMiddleId(int categoryMiddleId) {
+		this.categoryMiddleId = categoryMiddleId;
 	}
 
-
-	public int getSmallCategory() {
-		return smallCategory;
+	public int getCategorySamllId() {
+		return categorySamllId;
 	}
 
-
-	public void setSmallCategory(int smallCategory) {
-		this.smallCategory = smallCategory;
+	public void setCategorySamllId(int categorySamllId) {
+		this.categorySamllId = categorySamllId;
 	}
 
-
-	@Override
-	public String toString() {
-		return "CategoryVO [mainCategory=" + mainCategory + ", middleCategory=" + middleCategory + ", smallCategory="
-				+ smallCategory + ", categoryId=" + categoryId + "]";
-	}
-	
-	
 }
