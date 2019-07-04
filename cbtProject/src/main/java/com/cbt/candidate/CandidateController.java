@@ -237,11 +237,8 @@ public class CandidateController {
 	}
 >>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 	
-<<<<<<< HEAD
 //	@RequestMapping("candidateTakeExam.do")	
 //	public String candidateTakeExam() {
 //		return "candidate/candidateTakeExam";
 //	}
-=======
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 }
