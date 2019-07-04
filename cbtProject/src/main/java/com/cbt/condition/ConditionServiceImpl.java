@@ -1,48 +1,50 @@
 package com.cbt.condition;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cbt.common.Paging;
-
 @Service("conditionService")
 public class ConditionServiceImpl implements ConditionService {
-
 	@Resource
 	ConditionDAO dao;
 	
-	public ConditionServiceImpl() {
-	}
-	
+	@Override
 	public void insertCondition(ConditionVO vo) {
-		
 		dao.insertCondition(vo);
 	}
 
+	@Override
 	public void updateCondition(ConditionVO vo) {
-		
 		dao.updateCondition(vo);
 	}
 
+	@Override
 	public void deleteCondition(ConditionVO vo) {
-		
 		dao.deleteCondition(vo);
 	}
-
+	
+	@Override
 	public ConditionVO getCondition(ConditionVO vo) {
-
 		return dao.getCondition(vo);
+	}
+	
+	@Override
+	public List<ConditionVO> getConditionList(ConditionVO vo) {
+		return dao.getConditionList(vo);
 	}
 
 	@Override
-	public Map<String, Object> getConditionList(ConditionVO vo, Paging paging) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("conditionList", dao.getConditionList(vo));
-		return null;
+	public List<ConditionVO> getAllConditionList() {
+		return dao.getAllConditionList();
 	}
 
+	/*
+	 * @Override public Map<String, Object> getConditionList(ConditionVO vo, Paging
+	 * paging) { Map<String, Object> map = new HashMap<String, Object>();
+	 * map.put("conditionList", dao.getConditionList(vo)); return map; }
+	 */
+	
 }

@@ -154,8 +154,8 @@ public class CandidateController {
 		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
 		
 		if(loginCandidate != null) {
-			session.setAttribute("canidate", loginCandidate);
-			targetPage = "candidate/candidateMain";
+			session.setAttribute("candidate", loginCandidate);
+			targetPage = "redirect:candidateMain.do";
 		}
 		return targetPage;
 	}
@@ -196,11 +196,11 @@ public class CandidateController {
 	 * candidateService.updateCandidate(vo); return "candidate/candidateMain"; }
 	 */
 	//삭제처리			 장세준 (7/3)
-	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.GET)
+	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
 	public String deleteBoard(HttpSession session) {
 		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
 		candidateService.deleteCandidate(vo);
-		return "return:candidateLogin.do";
+		return "redirect:candidateLogin.do";
 	}
 	//삭제처리			 장세준 (7/2)
 	/*

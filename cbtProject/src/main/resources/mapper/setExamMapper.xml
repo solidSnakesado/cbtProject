@@ -13,5 +13,15 @@
 				,#{setExamQuestionId}
 				,#{point} )
 	</insert>
+	
+	<!-- 관리자용 출제 리스트 -->
+	<select id="getSetExamQuestionList" resultType="SetExamQuestionVO">
+		SELECT 	
+			EXAM_ID
+			,QUESTION_ID
+			,SET_EXAM_QUESTION_ID
+			,POINT
+		FROM SET_EXAM_QUESTION
+	</select>
 </mapper>
 

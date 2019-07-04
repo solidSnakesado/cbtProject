@@ -11,7 +11,7 @@
 		<article>
 			<ul>
 				<li><button type="button" onclick="location.href='updateCandidate.do'">수정</button></li>
-				<li><button type="button" onclick="location.href='deleteCandidate.do'">탈퇴하기</button></li>
+				<li><button type="button" onclick="location.href='candidateAccountManage.do'">탈퇴하기</button></li>
 			</ul>
 		</article>
 	</section>
