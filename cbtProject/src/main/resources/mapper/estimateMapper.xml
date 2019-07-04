@@ -10,26 +10,30 @@
 								, TRADE_PROGRESS
 								, REMARKS
 								, APPLICANTS
+								
 								, LEVEL_OF_DIFFICULTY
 								, CANDIDATE
 								, APPLY_PURPOSE
 								, EXAM_DATE
 								, CATEGORY_ID
+								
 								, EXAM_CLASSFICATION
 								, COMPANY_ID
 								, EXAM_COUNT
 								, EXAM_INTERVAL )
 		VALUES ( #{estimateId}
 				,#{estimatePrice}
-				,#{requestDay}
+				,SYSDATE <!-- REQUEST_DAY -->
 				,#{tradeProgress}
 				,#{remarks}
 				,#{applicants}
+				
 				,#{levelOfDifficulty}
 				,#{candidate}
 				,#{applyPurpose}
 				,#{examDate}
-				,#{category_id}
+				,#{categoryId}
+				
 				,#{examClassfication}
 				,#{companyId}
 				,#{examCount}
@@ -47,7 +51,7 @@
 						,	CANDIDATE			= #{candidate}
 						,	APPLY_PURPOSE		= #{applyPurpose}
 						,	EXAM_DATE			= #{examDate}
-						,	CATEGORY_ID			= #{examClassfication}
+						,	CATEGORY_ID			= #{categoryId}
 						,	EXAM_CLASSFICATION	= #{examClassfication}
 						,	COMPANY_ID			= #{companyId}
 						,	EXAM_COUNT			= #{examCount}

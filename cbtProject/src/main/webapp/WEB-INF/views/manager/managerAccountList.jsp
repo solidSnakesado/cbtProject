@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,56 +17,28 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
-<h2>계정관리</h2>
+<h2>기업회원 관리</h2>
 <form>
 <table border="1">
    <tr>
       <th>기업ID</th>
       <th>기업명</th>
-      <th>가입일</th>
+      <th>기업 담당자</th>
    </tr>
-   <tr>
-      <td><a href="managerAccountManageEdit.jsp">Google</a></td>
-      <td>구글</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td><a href="managerAccountManageEdit.jsp">MS</a></td>
-      <td>마이크로소프트</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>Apple</td>
-      <td>애플</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>FaceBook</td>
-      <td>페이스북</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>ORACLE</td>
-      <td>오라클</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>LG</td>
-      <td>엘지</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>Sony</td>
-      <td>소니</td>
-      <td>2019-04-12</td>
-   </tr>
+   <c:forEach items="${result }" var="CompanyVO">
+		<tr>
+			<td>${CompanyVO.companyId }</td>
+			<td><a href="updateCompany/${CompanyVO.companyId }">${CompanyVO.companyName }</a></td>
+			<td>${CompanyVO.companyManager }</td>
+		</tr>
+		</c:forEach>
 </table>
 </form>
 </body>

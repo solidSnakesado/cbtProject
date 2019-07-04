@@ -4,33 +4,38 @@ import java.sql.Date;
 
 public class EstimateVO {
 	
-	private String estimateId;
-	private String estimatePrice;
-	private Date   requestDay;
-	private String tradeProgress;
-	private String remarks;
-	private String applicants;
-	private String levelOfDifficulty;
-	private String candidate;
-	private String applyPurpose;
-	private String examDate;
-	private int category_id;
-	private String examClassfication;
-	private String companyId;
-	private int examCount;
-	private int examInterval;
-	
+	private String estimateId; 		//의뢰ID
+	private String categoryId;		//카테고리ID
+	private String companyId;		//기업ID
+	private Date   requestDay;		//의뢰일ID
+	private int estimatePrice;		//금액
+	private int tradeProgress;		//진행상태
+	private String candidate;		//응시대상자
+	private String applyPurpose;	//응시목적
+	private String applicants;		//응시자 수
+	private int examClassfication;	//시험분류
+	private int levelOfDifficulty;	//난이도
+	private Date examDate;			//시험일시
+	private String remarks;			//비고
+	private int examCount;			//시험횟수
+	private int examInterval;		//시험간격
 	public String getEstimateId() {
 		return estimateId;
 	}
 	public void setEstimateId(String estimateId) {
 		this.estimateId = estimateId;
 	}
-	public String getEstimatePrice() {
-		return estimatePrice;
+	public String getCategoryId() {
+		return categoryId;
 	}
-	public void setEstimatePrice(String estimatePrice) {
-		this.estimatePrice = estimatePrice;
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 	public Date getRequestDay() {
 		return requestDay;
@@ -38,29 +43,17 @@ public class EstimateVO {
 	public void setRequestDay(Date requestDay) {
 		this.requestDay = requestDay;
 	}
-	public String getTradeProgress() {
+	public int getEstimatePrice() {
+		return estimatePrice;
+	}
+	public void setEstimatePrice(int estimatePrice) {
+		this.estimatePrice = estimatePrice;
+	}
+	public int getTradeProgress() {
 		return tradeProgress;
 	}
-	public void setTradeProgress(String tradeProgress) {
+	public void setTradeProgress(int tradeProgress) {
 		this.tradeProgress = tradeProgress;
-	}
-	public String getRemarks() {
-		return remarks;
-	}
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-	public String getApplicants() {
-		return applicants;
-	}
-	public void setApplicants(String applicants) {
-		this.applicants = applicants;
-	}
-	public String getLevelOfDifficulty() {
-		return levelOfDifficulty;
-	}
-	public void setLevelOfDifficulty(String levelOfDifficulty) {
-		this.levelOfDifficulty = levelOfDifficulty;
 	}
 	public String getCandidate() {
 		return candidate;
@@ -74,29 +67,35 @@ public class EstimateVO {
 	public void setApplyPurpose(String applyPurpose) {
 		this.applyPurpose = applyPurpose;
 	}
-	public String getExamDate() {
-		return examDate;
+	public String getApplicants() {
+		return applicants;
 	}
-	public void setExamDate(String examDate) {
-		this.examDate = examDate;
+	public void setApplicants(String applicants) {
+		this.applicants = applicants;
 	}
-	public int getCategory_id() {
-		return category_id;
-	}
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
-	}
-	public String getExamClassfication() {
+	public int getExamClassfication() {
 		return examClassfication;
 	}
-	public void setExamClassfication(String examClassfication) {
+	public void setExamClassfication(int examClassfication) {
 		this.examClassfication = examClassfication;
 	}
-	public String getCompanyId() {
-		return companyId;
+	public int getLevelOfDifficulty() {
+		return levelOfDifficulty;
 	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setLevelOfDifficulty(int levelOfDifficulty) {
+		this.levelOfDifficulty = levelOfDifficulty;
+	}
+	public Date getExamDate() {
+		return examDate;
+	}
+	public void setExamDate(Date examDate) {
+		this.examDate = examDate;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 	public int getExamCount() {
 		return examCount;
@@ -112,13 +111,23 @@ public class EstimateVO {
 	}
 	@Override
 	public String toString() {
-		return "EstimateVO [estimateId=" + estimateId + ", estimatePrice=" + estimatePrice + ", requestDay="
-				+ requestDay + ", tradeProgress=" + tradeProgress + ", remarks=" + remarks + ", applicants="
-				+ applicants + ", levelOfDifficulty=" + levelOfDifficulty + ", candidate=" + candidate
-				+ ", applyPurpose=" + applyPurpose + ", examDate=" + examDate + ", category_id=" + category_id
-				+ ", examClassfication=" + examClassfication + ", companyId=" + companyId + ", examCount=" + examCount
-				+ ", examInterval=" + examInterval + "]";
+		return "EstimateVO [estimateId=" + estimateId + ", categoryId=" + categoryId + ", companyId=" + companyId
+				+ ", requestDay=" + requestDay + ", estimatePrice=" + estimatePrice + ", tradeProgress=" + tradeProgress
+				+ ", candidate=" + candidate + ", applyPurpose=" + applyPurpose + ", applicants=" + applicants
+				+ ", examClassfication=" + examClassfication + ", levelOfDifficulty=" + levelOfDifficulty
+				+ ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount + ", examInterval="
+				+ examInterval + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 

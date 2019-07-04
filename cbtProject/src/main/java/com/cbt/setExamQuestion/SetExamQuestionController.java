@@ -39,8 +39,9 @@ public class SetExamQuestionController {
 	} 
 	// 등록처리
 	@RequestMapping(value = "insertSetExamQuestion.do", method = RequestMethod.POST)
-	public String insertSetExamQuestion() {
-		return "candidate/SetExamQuestionList";
+	public String insertSetExamQuestion(SetExamQuestionVO vo) {
+		setExamQuestionService.insertSetExamQuestion(vo);
+		return "redirect:SetExamQuestionList.do";
 	}
 	@RequestMapping("/SetExamQuestionList.do")
 	public ModelAndView SetExamQuestionList(ModelAndView mv) {

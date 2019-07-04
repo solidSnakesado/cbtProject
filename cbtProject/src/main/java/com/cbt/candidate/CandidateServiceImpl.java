@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyVO;
 
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
@@ -33,10 +34,6 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.getCandidate(vo);
 	}
 
-	public List<CandidateVO> getCandidateList(CandidateVO vo) {
-		return candidateDAO.getCandidateList(vo);
-	}
-
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging) {
 		paging.setPageUnit(10);
 		if(paging.getPage() == null) {
@@ -52,5 +49,22 @@ public class CandidateServiceImpl implements CandidateService {
 	public CandidateVO loginCandidate(CandidateVO vo) {
 		return candidateDAO.loginCandidate(vo);
 	}
+
+	public int idcheck(String takerId) {
+		return candidateDAO.idcheck(takerId);
+	}
+
+	@Override
+	public List<CandidateVO> getCandidateList(CandidateVO vo) {
+		return candidateDAO.getCandidateList(vo);
+	}
+
+	@Override
+	public List<CompanyVO> getCompanyList(CandidateVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

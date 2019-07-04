@@ -12,20 +12,20 @@ public class ConditionVO {
 	private String useYn;
 	
 	private String searchCondition;
-	private String[] cdtionList;
+	private String[] cdTionList;
 	
 	public ConditionVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public String[] getCdtionList() {
-		return cdtionList;
+		
+	public String[] getCdTionList() {
+		return cdTionList;
 	}
-	
-	public void setCdtionList(String[] cdtionList) {
-		this.cdtionList = cdtionList;
+
+	public void setCdTionList(String[] cdTionList) {
+		this.cdTionList = cdTionList;
 	}
-	
+
 	public String getSearchCondition() {
 		return searchCondition;
 	}
@@ -81,12 +81,14 @@ public class ConditionVO {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ConditionVO [conditionSeq=" + conditionSeq + ", masterCd=" + masterCd + ", masterNm=" + masterNm
 				+ ", detailCd=" + detailCd + ", detailNm=" + detailNm + ", useYn=" + useYn + ", searchCondition="
-				+ searchCondition + ", cdtionList=" + Arrays.toString(cdtionList) + "]";
+				+ searchCondition + ", cdTionList=" + Arrays.toString(cdTionList) + "]";
 	}
+	
+	
 	
 }

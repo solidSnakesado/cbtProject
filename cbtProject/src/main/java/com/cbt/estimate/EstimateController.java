@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class EstimateController {
@@ -24,11 +23,13 @@ public class EstimateController {
 	//기업은 의뢰 등록 할수 있다.
 	@RequestMapping(value = "companyEstimateInsert.do", method = RequestMethod.GET)
 	public String companyEstimateInsertForm() {
-		return "company/companyEstimate"; 
+		return "test2";
+		//return "company/companyEstimate"; 
 	}
 	
 	@RequestMapping(value = "companyEstimateInsert.do", method = RequestMethod.POST)
 	public String companyEstimateInsert(EstimateVO vo) {
+		
 		estimateService.insertEstimate(vo);		
 		return "redirect:companyEstimateList.do"; 
 	}
@@ -36,7 +37,8 @@ public class EstimateController {
 	//기업은 자기의뢰 수정 할수 있다.
 	@RequestMapping(value = "companyEstimateUpdate.do", method = RequestMethod.GET)
 	public String companyEstimateUpdateForm() {
-		return "company/companyDetailRequestList"; 
+		return "test3";
+		//return "company/companyDetailRequestList"; 
 	}
 	@RequestMapping(value = "companyEstimateUpdate.do", method = RequestMethod.POST)
 	public String companyEstimateUpdate(EstimateVO vo) {

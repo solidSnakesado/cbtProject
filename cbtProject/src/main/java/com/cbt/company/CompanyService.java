@@ -21,7 +21,7 @@ public interface CompanyService {
 	// 로그인
 	CompanyVO loginCompany(CompanyVO vo);
 
-	// 글 목록 조회
+	// 글 목록 조회 --이승환이 쓰고있음
 	List<CompanyVO> getCompanyList(CompanyVO vo);
 
 	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging);

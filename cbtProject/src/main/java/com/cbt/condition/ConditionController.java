@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+
 @Controller
 public class ConditionController {
 	
@@ -27,7 +28,7 @@ public class ConditionController {
 	@RequestMapping(value="insertCondition.do", method=RequestMethod.POST)
 	public String insertCondition(ConditionVO vo) {
 		conditionService.insertCondition(vo);
-		return "redirect:getCondition.do";
+		return "redirect:getConditionList.do";
 		
 	}
 	
@@ -39,15 +40,15 @@ public class ConditionController {
 		return "condition/getConditionList";
 	}
 	
-	/*
-	 * //수정폼
-	 * 
-	 * @RequestMapping("/updateCondition/{conditionSeq}") public String
-	 * updateConditionForm( @PathVariable("conditionSeq") int conditionSeq,
-	 * ConditionVO vo, Model model) { vo.setConditionSeq(conditionSeq);
-	 * model.addAttribute("condition", conditionService.getCondition(vo)); return
-	 * "condition/updateCondition"; }
-	 */
+	//수정폼
+	@RequestMapping("/updateCondition/{conditionSeq}")
+	public String updateConditionForm(  @PathVariable("conditionSeq") int conditionSeq, 
+										ConditionVO vo, 
+										Model model) {
+		vo.setConditionSeq(conditionSeq);
+		model.addAttribute("condition", conditionService.getCondition(vo));
+		return "condition/updateCondition";
+	}
 	
 	//수정처리
 	@RequestMapping("updateCondition.do")
@@ -63,4 +64,5 @@ public class ConditionController {
 		conditionService.deleteCondition(vo);
 		return "redirect:getConditionList.do";
 	}
+	
 }
