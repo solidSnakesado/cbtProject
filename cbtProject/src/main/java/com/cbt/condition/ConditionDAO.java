@@ -1,5 +1,7 @@
 package com.cbt.condition;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,23 +13,28 @@ public class ConditionDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertCondition(ConditionVO vo) {
-		
-		mybatis.insert("", vo);
+		System.out.println("===> insertCondition() 기능처리");
+		mybatis.insert("ConditionDAO.insertCondition", vo);
 	}
 	
 	public void updateCondition(ConditionVO vo) {
-		
-		mybatis.update("", vo);
+		System.out.println("===> updateCondition() 기능처리");
+		mybatis.update("ConditionDAO.updateCondition", vo);
 	}
 	
 	public void deleteCondition(ConditionVO vo) {
-		
-		mybatis.delete("", vo);
+		System.out.println("===> deleteCondition() 기능처리");
+		mybatis.delete("ConditionDAO.deleteCondition", vo);
 	}
 	
 	public ConditionVO getCondition(ConditionVO vo) {
-		
-		return mybatis.selectOne("", vo);
+		System.out.println("===> getCondition() 기능처리");
+		return mybatis.selectOne("ConditionDAO.getCondition", vo);
+	}
+	
+	public List<ConditionVO> getConditionList(ConditionVO vo) {
+		System.out.println("===> getConditionList() 기능 처리");
+		return mybatis.selectList("ConditionDAO.getConditionList", vo);
 	}
 
 }
