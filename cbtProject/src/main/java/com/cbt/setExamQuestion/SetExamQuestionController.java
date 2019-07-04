@@ -23,6 +23,6 @@ public class SetExamQuestionController {
 	// 등록처리
 	@RequestMapping(value = "insertSetExamQuestion.do", method = RequestMethod.POST)
 	public String insertSetExamQuestion() {
-		return "candidate/SetExamQuestionInsert";
+		return "candidate/SetExamQuestionList";
 	}
 }
