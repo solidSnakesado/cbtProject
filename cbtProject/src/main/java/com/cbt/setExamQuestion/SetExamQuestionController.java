@@ -2,6 +2,7 @@ package com.cbt.setExamQuestion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +23,6 @@ public class SetExamQuestionController {
 	// 등록처리
 	@RequestMapping(value = "insertSetExamQuestion.do", method = RequestMethod.POST)
 	public String insertSetExamQuestion() {
-		return "candidate/SetExamQuestionList";
+		return "candidate/SetExamQuestionInsert";
 	}
 }

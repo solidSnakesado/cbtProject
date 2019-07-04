@@ -25,7 +25,7 @@
 			</tr>
 			<c:forEach var="setExam" items="${list}">
 			<tr>
-				<td>${setExam.examId} </td><<td>${setExam.questionId} </td><td>${setExam.setExamQuestionId} </td><td>${setExam.point} </td>
+				<td>${setExam.examId} </td><td>${setExam.questionId} </td><td>${setExam.setExamQuestionId} </td><td>${setExam.point} </td>
 			</tr>
 			</c:forEach>
 		</table>
