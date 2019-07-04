@@ -1,8 +1,6 @@
 package com.cbt.condition;
 
-import java.util.Map;
-
-import com.cbt.common.Paging;
+import java.util.List;
 
 public interface ConditionService {
 
@@ -15,9 +13,15 @@ public interface ConditionService {
 	// 상태 삭제
 	void deleteCondition(ConditionVO vo);
 	
-	// 상태목록 조회
+	// 상태목록 상세조회
 	ConditionVO getCondition(ConditionVO vo);
 	
-	public Map<String, Object> getConditionList(ConditionVO vo, Paging paging);
+	// 상태 목록 조회
+	List<ConditionVO> getConditionList(ConditionVO vo);
+	
+	// 상태 목록 조회
+	List<ConditionVO> getAllConditionList();
+	
+	/* public Map<String, Object> getConditionList(ConditionVO vo); */
 	
 }
