@@ -18,6 +18,7 @@
 		<typeAlias type="com.cbt.exam.ExamVO" 						alias="ExamVO" />
 		<typeAlias type="com.cbt.manager.ManagerVO" 				alias="ManagerVO" />
 		<typeAlias type="com.cbt.question.QuestionVO" 				alias="QuestionVO" />
+		<typeAlias type="com.cbt.question.QuestionVOt" 				alias="QuestionVOt" />
 		<typeAlias type="com.cbt.setExamQuestion.SetExamQuestionVO" alias="SetExamQuestionVO" />
 		<typeAlias type="com.cbt.survey.SurveyVO" 					alias="SurveyVO" />
 		<typeAlias type="com.cbt.takeExam.TakeExamVO" 				alias="TakeExamVO" />

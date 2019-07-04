@@ -1,5 +1,7 @@
 package com.cbt.question;
 
+import java.util.List;
+
 public class QuestionVO {
 	
 	
@@ -16,7 +18,29 @@ public class QuestionVO {
 	private String levelOfDifficulty;
 	private int categoryId;
 	private String questionType;
+	private String point;
+	private String setExamQuestionId;
+	private String examId;
 	
+	
+	public String getPoint() {
+		return point;
+	}
+	public void setPoint(String point) {
+		this.point = point;
+	}
+	public String getSetExamQuestionId() {
+		return setExamQuestionId;
+	}
+	public void setSetExamQuestionId(String setExamQuestionId) {
+		this.setExamQuestionId = setExamQuestionId;
+	}
+	public String getExamId() {
+		return examId;
+	}
+	public void setExamId(String examId) {
+		this.examId = examId;
+	}
 	public String getQuestionId() {
 		return questionId;
 	}

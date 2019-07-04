@@ -44,10 +44,10 @@ public class CandidateController {
 	}
 	
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateRightAnswer.do")	
-	public String candidateRightAnswer() {
-		return "candidate/candidateRightAnswer";
-	}
+//	@RequestMapping("candidateRightAnswer.do")	
+//	public String candidateRightAnswer() {
+//		return "candidate/candidateRightAnswer";
+//	}
 
 	@RequestMapping("candidateRequestList.do")
 	public String candidateRequest() {
@@ -126,13 +126,13 @@ public class CandidateController {
 		candidateService.deleteCandidate(vo);
 		return "candidate/candidateMain";
 	}
-	@RequestMapping("candidateTestResult.do")	
-	public String candidateTestResult() {
-		return "candidate/candidateTestResult";
-	}
+//	@RequestMapping("candidateTestResult.do")	
+//	public String candidateTestResult() {
+//		return "candidate/candidateTestResult";
+//	}
 	
-	@RequestMapping("candidateTakeExam.do")	
-	public String candidateTakeExam() {
-		return "candidate/candidateTakeExam";
-	}
+//	@RequestMapping("candidateTakeExam.do")	
+//	public String candidateTakeExam() {
+//		return "candidate/candidateTakeExam";
+//	}
 }

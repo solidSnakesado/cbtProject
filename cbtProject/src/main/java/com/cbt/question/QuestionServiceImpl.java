@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cbt.common.Paging;
 
 
+
 // 7/2 문제 서비스impl 작성    -재용
 
 @Service
@@ -44,23 +45,46 @@ public class QuestionServiceImpl implements QuestionService {
 		return null;
 	}
 
-	public List<Map<String, Object>> getTestList() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("takeExamId", 1);
+	public void getTestList() {
 		
-		int takeExamId;
-		String questionId;
-		String examName;
-		String takerName;
-		String examId;
-		String point;
-		String passingScore;
+	}
+
+	public List<Map<String, Object>> getTestList(Map<String, Object> map) {
+		System.out.println("2 " + map);
+		questionDAO.getTestList(map);
+		System.out.println("3 "+map.get("result"));
 		
-		List<Map<String, Object>> list = questionDAO.getTestList(map);
-		for(QuestionVOt vo : (List<QuestionVOt>)map.get("result")) {
-			takeExamId = vo.getTakeExamId();
-		}
+		return null;
+	}
+
+	public QuestionVOt getTestResultList(QuestionVOt vo) {
+		vo = questionDAO.getTestResultList(vo);
+		System.out.println(vo.getExamId());
+		System.out.println(vo.getExamName());
+		System.out.println(vo.getPassingScore());
+		System.out.println(vo.getPoint());
+		System.out.println(vo.getTakeExamId());
+		System.out.println(vo.getTakerName());
+		
+		return vo;
+	}
+	
+	public List<QuestionVO> candidateRightAnswerList(QuestionVO vo) {
+		List<QuestionVO> list = questionDAO.candidateRightAnswerList(vo);
+		
+		System.out.println("Impl + "+list);
 		return list;
 	}
+	
+	public List<QuestionVO> candidateTakeExamList(QuestionVO vo) {
+		List<QuestionVO> list = questionDAO.candidateTakeExamList(vo);
+		
+		return list;
+	}
+	
+	
+
+
+	
 
 }

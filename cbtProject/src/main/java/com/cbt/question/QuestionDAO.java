@@ -1,5 +1,6 @@
 package com.cbt.question;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +34,26 @@ public class QuestionDAO {
 		return mybatis.selectOne("", vo);
 	}
 	
-	public List<Map<String, Object>> getTestList(Map<String, Object> vo){
-		System.out.println("go");
-		return mybatis.selectList("QuestionDAO.getTestList", vo);
+	public List<Map<String, Object>> getTestList(Map<String, Object> map){
+		System.out.println("3+go");
+		
+		
+		return mybatis.selectOne("QuestionDAO.getTestList", map);
 	}
 	
+	public QuestionVOt getTestResultList(QuestionVOt vo) {
+		
+		return mybatis.selectOne("QuestionDAO.getTestResultList", vo);
+	}
+	
+	public List<QuestionVO> candidateRightAnswerList(QuestionVO vo) {
+		
+		return mybatis.selectList("QuestionDAO.candidateRightAnswerList", vo);
+	}
+	
+	public List<QuestionVO> candidateTakeExamList(QuestionVO vo) {
+		
+		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
+	}
 
 }

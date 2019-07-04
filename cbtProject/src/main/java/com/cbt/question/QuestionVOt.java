@@ -4,24 +4,24 @@ package com.cbt.question;
 public class QuestionVOt {
 
 	private int takeExamId;
-	private String questionId;
 	private String examName;
 	private String takerName;
 	private String examId;
 	private String point;
 	private String passingScore;
+	private String count;
 	
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
 	public int getTakeExamId() {
 		return takeExamId;
 	}
 	public void setTakeExamId(int takeExamId) {
 		this.takeExamId = takeExamId;
-	}
-	public String getQuestionId() {
-		return questionId;
-	}
-	public void setQuestionId(String questionId) {
-		this.questionId = questionId;
 	}
 	public String getExamName() {
 		return examName;
@@ -53,12 +53,13 @@ public class QuestionVOt {
 	public void setPassingScore(String passingScore) {
 		this.passingScore = passingScore;
 	}
+	
 	@Override
 	public String toString() {
-		return "QuestionVOt [takeExamId=" + takeExamId + ", questionId=" + questionId + ", examName=" + examName
-				+ ", takerName=" + takerName + ", examId=" + examId + ", point=" + point + ", passingScore="
-				+ passingScore + "]";
+		return "QuestionVOt [takeExamId=" + takeExamId + ", examName=" + examName + ", takerName=" + takerName
+				+ ", examId=" + examId + ", point=" + point + ", passingScore=" + passingScore + "]";
 	}
+	
 	
 	
 }

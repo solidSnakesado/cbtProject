@@ -5,32 +5,110 @@
 <!-- Question 관련 dao 처리 -->
 <mapper namespace="QuestionDAO">
 
-
-	<resultMap type="com.cbt.question.QuestionVOt" id="testBeanResult">
-		<result property="takeExamId" column="take_exam_id" javaType="int"/>
-		<result property="questionId" column="QUESTION_ID" javaType="string"/>
-		<result property="examName" column="EXAM_NAME" javaType="string"/>
-		<result property="takerName" column="TAKER_NAME" javaType="string"/>
-		<result property="examId" column="EXAM_ID" javaType="string"/>
-		<result property="point" column="POINT" javaType="string"/>
-		<result property="passingScore" column="PASSING_SCORE" javaType="string"/>
-	</resultMap>
 	<!-- <parameterMap type="java.util.HashMap" id="examAnswer">
 		<parameter property="v_take_exam_id" jdbcType="NUMBER" mode="IN"/>
 		<parameter property="v_check_refcur" jdbcType="CURSOR" mode="OUT" resultMap="resultMap"/>
 	</parameterMap> -->
 	
-	<select id="getTestList" statementType="CALLABLE" parameterType="hashmap">
+	<resultMap type="QuestionVOt" id="beanResult">
+		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="int"/>
+		<result property="examName" column="EXAM_NAME" javaType="string"/>
+		<result property="takerName" column="TAKER_NAME" javaType="string"/>
+		<result property="examId" column="EXAM_ID" javaType="string"/>
+		<result property="passingScore" column="PASSING_SCORE" javaType="string"/>
+		<result property="point" column="sum(s.POINT)" javaType="string" />
+		<result property="count" column="count(*)" javaType="string" />
+	</resultMap>
+	
+	<resultMap type="QuestionVO" id="questionVO">
+		<result property="questionContent" column="QUESTION_CONTENT" javaType="string" />
+		<result property="questionId" column="QUESTION_ID" javaType="string" />
+		<result property="example1" column="EXAMPLE_1" javaType="string" />
+		<result property="example2" column="EXAMPLE_2" javaType="string" />
+		<result property="example3" column="EXAMPLE_3" javaType="string" />
+		<result property="example4" column="EXAMPLE_4" javaType="string" />
+		<result property="rightAnswer" column="RIGHT_ANSWER" javaType="string" />
+		<result property="rightCommentary" column="RIGHT_COMMENTARY" javaType="string" />
+		<result property="setExamQuestionId" column="SET_EXAM_QUESTION_ID" javaType="string" />
+		<result property="point" column="POINT" javaType="string" />
+		<result property="examId" column="EXAM_ID" javaType="string" />
+	</resultMap>
+	
+	<!-- <select id="getTestList" statementType="CALLABLE">
 		<![CDATA[
 			{
-				call ref_cursor_pkg.ref_cursor_pro(
+				call TEST_ANSWER_PKG.TEST_ANSWER_RESULT_PRO(
 					#{takeExamId, mode=IN, jdbcType=NUMERIC, javaType=int}, 
-					#{result, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=testBeanResult}
+					#{result, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=beanResult}
 				)
 			}
 		]]>
+	</select> -->
+	
+	<select id="getTestResultList" resultMap="beanResult">					<!-- 리턴값 받을땐 리절타입 -->
+		SELECT 	t.TAKE_EXAM_ID,  
+				e.EXAM_NAME, 
+				c.TAKER_NAME, 
+				e.EXAM_ID, 
+				e.PASSING_SCORE, 
+				SUM(s.POINT),
+				COUNT(*)
+                        FROM  EXAM e JOIN SET_EXAM_QUESTION s
+                        ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
+                        ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
+                        ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                        ON s.QUESTION_ID = q.QUESTION_ID
+                        WHERE s.question_id = q.question_id AND t.TAKER_ANSWER = q.RIGHT_ANSWER AND t.TAKE_EXAM_ID = #{takeExamId}
+                        GROUP BY t.take_exam_id, e.EXAM_NAME, c.TAKER_NAME, e.EXAM_ID, e.PASSING_SCORE
 	</select>
 	
+	<select id="candidateRightAnswerList" resultMap="questionVO">
+		SELECT 	q.QUESTION_CONTENT,
+				q.QUESTION_ID,
+				q.EXAMPLE_1, 
+				q.EXAMPLE_2, 
+				q.EXAMPLE_3, 
+				q.EXAMPLE_4, 
+				q.RIGHT_ANSWER, 
+				q.RIGHT_COMMENTARY, 
+				s.SET_EXAM_QUESTION_ID, 
+				s.POINT, 
+				s.EXAM_ID
+				
+		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
+                   
+                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
+                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
+                    ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                    ON s.QUESTION_ID = q.QUESTION_ID
+                    
+           WHERE e.EXAM_ID = #{examId} 
+           and q.QUESTION_ID = s.QUESTION_ID
+	</select>
+	
+	<select id="candidateTakeExamList" resultMap="questionVO">
+		SELECT 	q.QUESTION_CONTENT,
+				q.QUESTION_ID,
+				q.EXAMPLE_1, 
+				q.EXAMPLE_2, 
+				q.EXAMPLE_3, 
+				q.EXAMPLE_4, 
+				q.RIGHT_ANSWER, 
+				q.RIGHT_COMMENTARY, 
+				s.SET_EXAM_QUESTION_ID, 
+				s.POINT, 
+				s.EXAM_ID
+				
+		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
+                   
+                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
+                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
+                    ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                    ON s.QUESTION_ID = q.QUESTION_ID
+                    
+           WHERE e.EXAM_ID = #{examId} 
+           and q.QUESTION_ID = s.QUESTION_ID
+	</select>
 
 </mapper>
  

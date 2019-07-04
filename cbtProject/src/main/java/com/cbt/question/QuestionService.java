@@ -15,7 +15,13 @@ public interface QuestionService {
 	
 	void deleteQuestion(QuestionVO vo);
 	
-	List<Map<String, Object>> getTestList();
+	List<QuestionVO> candidateTakeExamList(QuestionVO vo);
+	
+	List<QuestionVO> candidateRightAnswerList(QuestionVO vo);
+	
+	QuestionVOt getTestResultList(QuestionVOt vo);
+	
+	List<Map<String, Object>> getTestList(Map<String, Object> map);
 	
 	QuestionVO getQuestion(QuestionVO vo);
 	
