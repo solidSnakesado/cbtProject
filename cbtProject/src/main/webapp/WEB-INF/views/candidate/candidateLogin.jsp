@@ -20,7 +20,7 @@
 		<table border="1" align="center">
 			<tr>
 				<td>ID :</td>
-				<td><input type="text" name="takerId"></td>
+				<td><input type="text" name="takerId" value="${candidateVO.takerId}"></td>
 			</tr>
 			<tr>
 				<td>PW :</td>

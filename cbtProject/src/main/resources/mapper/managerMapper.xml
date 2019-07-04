@@ -4,21 +4,57 @@
 	<insert id="insertManager" parameterType="ManagerVO">
 		INSERT INTO MANAGER(
 							MANAGER_ID
-							, MANAGER_PW
+							, MANAGER_PASSWORD
 							, MANAGER_NAME)
-		VALUES	(#{manager_id}
-				,#{manager_pw}
-				,#{manager_name})
+		VALUES	(#{managerId}
+				,#{managerPassword}
+				,#{managerName})
 	</insert>
 	
 	<select id="getManager" resultType="ManagerVO">
 		SELECT 
 				  MANAGER_ID
-				, MANAGER_PW
+				, MANAGER_PASSWORD
 				, MANAGER_NAME
 		FROM MANAGER		
-		WHERE MANAGER_ID = #{manager_id}
+		WHERE MANAGER_ID = #{managerId}
 	
 	</select>
+	
+	<select id="getManagerList" resultType="ManagerVO">
+		SELECT 
+				  MANAGER_ID
+				, MANAGER_PASSWORD
+				, MANAGER_NAME
+		FROM MANAGER		
+	
+	</select>
+	
+	<update id="updateManager">
+		UPDATE MANAGER
+		<set>
+			<if test="managerPassword != null"> MANAGER_PASSWORD = #{managerPassword} ,</if>
+			<if test="managerName != null"> MANAGER_NAME = #{managerName} </if>
+		</set>
+		WHERE MANAGER_ID = #{managerId}
+	</update>
 
+	<delete id="deleteManager" parameterType="ManagerVO">
+		DELETE FROM MANAGER
+		<where>
+			<choose>
+				<when test="mngList != null and mngList.length>0">
+					MANAGER_ID in
+					<foreach collection="mngList"
+							 open="(" close=")" separator=","
+							 item="item">
+							 #{item}
+					</foreach>
+				</when>
+				<otherwise>
+					MANAGER_ID = #{managerId}
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
 </mapper>

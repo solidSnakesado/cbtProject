@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="managerMain.do" method="post">
+Manager Main
+</form>
 </body>
 </html>

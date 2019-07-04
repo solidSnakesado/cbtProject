@@ -6,9 +6,8 @@ public class EstimateVO {
 	
 	private String estimateId;
 	private String estimatePrice;
-	private Date requestDay;
+	private Date   requestDay;
 	private String tradeProgress;
-	private String companyId;
 	private String remarks;
 	private String applicants;
 	private String levelOfDifficulty;
@@ -17,6 +16,9 @@ public class EstimateVO {
 	private String examDate;
 	private int category_id;
 	private String examClassfication;
+	private String companyId;
+	private int examCount;
+	private int examInterval;
 	
 	public String getEstimateId() {
 		return estimateId;
@@ -41,12 +43,6 @@ public class EstimateVO {
 	}
 	public void setTradeProgress(String tradeProgress) {
 		this.tradeProgress = tradeProgress;
-	}
-	public String getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
 	}
 	public String getRemarks() {
 		return remarks;
@@ -96,14 +92,34 @@ public class EstimateVO {
 	public void setExamClassfication(String examClassfication) {
 		this.examClassfication = examClassfication;
 	}
-	
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+	public int getExamCount() {
+		return examCount;
+	}
+	public void setExamCount(int examCount) {
+		this.examCount = examCount;
+	}
+	public int getExamInterval() {
+		return examInterval;
+	}
+	public void setExamInterval(int examInterval) {
+		this.examInterval = examInterval;
+	}
 	@Override
 	public String toString() {
 		return "EstimateVO [estimateId=" + estimateId + ", estimatePrice=" + estimatePrice + ", requestDay="
-				+ requestDay + ", tradeProgress=" + tradeProgress + ", companyId=" + companyId + ", remarks=" + remarks
-				+ ", applicants=" + applicants + ", levelOfDifficulty=" + levelOfDifficulty + ", candidate=" + candidate
+				+ requestDay + ", tradeProgress=" + tradeProgress + ", remarks=" + remarks + ", applicants="
+				+ applicants + ", levelOfDifficulty=" + levelOfDifficulty + ", candidate=" + candidate
 				+ ", applyPurpose=" + applyPurpose + ", examDate=" + examDate + ", category_id=" + category_id
-				+ ", examClassfication=" + examClassfication + "]";
+				+ ", examClassfication=" + examClassfication + ", companyId=" + companyId + ", examCount=" + examCount
+				+ ", examInterval=" + examInterval + "]";
 	}
+	
+	
 
 }

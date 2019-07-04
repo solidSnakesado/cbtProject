@@ -23,13 +23,13 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void updateCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		
+		companyDAO.updateCompany(vo);
 	}
 
 	@Override
 	public void deleteCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
-		
+		companyDAO.deleteCompany(vo);
 	}
 
 	@Override

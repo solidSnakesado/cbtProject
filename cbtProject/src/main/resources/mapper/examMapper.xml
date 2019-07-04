@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ExamDAO">
-	<select id="test">
-	select 1 from dual
-	</select>
+	<!-- 190703 재홍 CRUD 쿼리 입력 -->
+	<!-- 시험 등록 -->
+	<insert id="insertExam" parameterType="ExamVO">
+		INSERT INTO EXAM (	EXAM_ID
+						,	EXAM_START_TIME
+						,	EXAM_END_TIME
+						,	QUESTION_QUANTITY
+						,	ESTIMATE_ID
+						,	NUMBER_OF_TIMES
+						,	PASSING_SCORE
+						,	POSSIBLE_APPLICANTS
+						,	EXAM_NAME
+						,	EXAM_STATUS
+						,	DISCLOSURE_STATUS
+						,	SET_EXAM_STATUS)
+		VALUES ( #{examId}
+				,#{examStartTime}
+				,#{examEndTime}
+				,#{questionQuantity}
+				,#{estimateId}
+				,#{numberOfTimes}
+				,#{passingScore}
+				,#{possibleApplicants}
+				,#{examName}
+				,#{examStatus} )
+	</insert>
 </mapper>

@@ -1,9 +1,21 @@
 package com.cbt.candidate;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cbt.common.Paging;
 
 
 //2019.07.01 장세준 - candidate3controller로 이전
@@ -12,6 +24,17 @@ public class CandidateController {
 	
 	@Autowired
 	CandidateService candidateService;
+	
+	//	7/3 생성 장세준
+	@ModelAttribute("conditionMap")
+	public Map<String, String> conditionMap(){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("takerId", "takerId");
+		map.put("takerName", "takerName");
+		map.put("takerInfo", "takerInfo");
+		return map;
+	}
+	
 	
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateAccountManage.do")	
@@ -83,6 +106,20 @@ public class CandidateController {
 	public String candidateMain() {
 		return "candidate/candidateMain";
 	}
+	@RequestMapping("candidateTestResult.do")	
+	public String candidateTestResult() {
+		return "candidate/candidateTestResult";
+	}
+	
+	@RequestMapping("candidateTakeExam.do")	
+	public String candidateTakeExam() {
+		return "candidate/candidateTakeExam";
+	}
+	
+	
+	
+	
+	
 	
 	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
 	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
@@ -96,43 +133,115 @@ public class CandidateController {
 		candidateService.insertCandidate(vo);
 		return "redirect:candidateMain.do";
 	}
-	
-	//로그인  2019.07.02 생성
+	@RequestMapping(value = "candidateAccount.do",  method = RequestMethod.GET)
+	public String canidateAccount() {		
+		return "candidate/candidateAccount";
+	}
+	//로그인  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.GET)
 	public String candidateLoginForm() {
 		return "candidate/candidateLogin";
 	}
-	
-	//로그인  2019.07.02 생성
+	//로그인  2019.07.02 생성 ver.1
+	/* 
+	 * @RequestMapping(value="candidateLogin.do", method=RequestMethod.GET) public
+	 * String candidateLoginForm() { return "candidate/candidateLogin"; }
+	 */
+	//로그인  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.POST)
-	public String candidateLogin(CandidateVO vo) {
+	public String candidateLogin(CandidateVO vo, HttpSession session) {
 		String targetPage = "candidate/candidateLogin";
-		
 		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
+		
 		if(loginCandidate != null) {
-			targetPage = "candidate/candidateMain";
+			session.setAttribute("candidate", loginCandidate);
+			targetPage = "redirect:candidateMain.do";
 		}
 		return targetPage;
 	}
-	//계정수정  장세준 (7/2)
+	//로그인  2019.07.02 생성  ver.1
+	/*
+	 * @RequestMapping(value="candidateLogin.do", method=RequestMethod.POST) public
+	 * String candidateLogin(CandidateVO vo, HttpSession session) { String
+	 * targetPage = "candidate/candidateLogin"; CandidateVO loginCandidate =
+	 * candidateService.loginCandidate(vo);
+	 * 
+	 * if(loginCandidate != null) { session.setAttribute("canidate",
+	 * loginCandidate); targetPage = "candidate/candidateMain"; } return targetPage;
+	 * }
+	 */
+	//계정수정 form		 장세준 (7/3 ver.2)
+	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
+	public String updateCandidateForm() {
+		return "candidate/candidateAccountManageModify";
+	}
+	//계정수정 form		 장세준 (7/3 ver.1)
+	/*
+	 * @RequestMapping("/updateCandidate/{takerId}") public String
+	 * updateCandidateForm(@PathVariable("takerId") String takerId, CandidateVO vo,
+	 * Model model) { vo.setTakerId(takerId); model.addAttribute("candidate",
+	 * candidateService.getCandidate(vo)); return
+	 * "candidate/candidateAccountManageModify"; }
+	 */
+	//수정처리			장세준(7/3 ver.2)
 	@RequestMapping("updateCandidate.do")
 	public String updateCandidate(CandidateVO vo) {
 		candidateService.updateCandidate(vo);
 		return "candidate/candidateMain";
 	}
-	//삭제처리 장세준 (7/2)
-	@RequestMapping("deleteCandidate.do")
-	public String deleteBoard(CandidateVO vo) {
+	//수정처리			장세준(7/3 ver.1)
+	/*
+	 * @RequestMapping("updateCandidate.do") public String
+	 * updateCandidate(@ModelAttribute("candidate")CandidateVO vo) {
+	 * candidateService.updateCandidate(vo); return "candidate/candidateMain"; }
+	 */
+	//삭제처리			 장세준 (7/3)
+	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
+	public String deleteBoard(HttpSession session) {
+		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
 		candidateService.deleteCandidate(vo);
-		return "candidate/candidateMain";
+		return "redirect:candidateLogin.do";
 	}
+<<<<<<< HEAD
 //	@RequestMapping("candidateTestResult.do")	
 //	public String candidateTestResult() {
 //		return "candidate/candidateTestResult";
 //	}
+=======
+	//삭제처리			 장세준 (7/2)
+	/*
+	 * @RequestMapping("deleteCandidate.do") public String
+	 * deleteBoard(@ModelAttribute("candidate")CandidateVO vo) {
+	 * candidateService.deleteCandidate(vo); return "candidate/candidateMain"; }
+	 */
+	//단건조회			 장세준 (7/2)
+	@RequestMapping("/getCandidate/{takerId}")
+	public String getCandidate(@PathVariable("takerId") String takerId, CandidateVO vo, Model model) {
+		vo.setTakerId(takerId);
+		model.addAttribute("candidate", candidateService.getCandidate(vo));
+		return "candidate/candidateAccountManage";
+	}
+	@RequestMapping("getCandidateList.do")
+	public ModelAndView getCandidateList(Paging paging, ModelAndView mv,
+			@RequestParam(value = "searchCondition", required =false) String searchCondition,
+			@RequestParam(value = "searchKeyword", required =false) String searchKeyword,
+			@RequestParam(value = "sort", required =false, defaultValue = "takerId") String sort) {
+		CandidateVO vo = new CandidateVO();
+		vo.setSearchCondition(searchCondition);
+		vo.setSearchKeyword(searchKeyword);
+		vo.setSort(sort);
+		
+		mv.addObject("result", candidateService.getCandidateList(vo, paging));
+		mv.setViewName("candidate/getCandidateList");
+		return mv;
+	}
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 	
+<<<<<<< HEAD
 //	@RequestMapping("candidateTakeExam.do")	
 //	public String candidateTakeExam() {
 //		return "candidate/candidateTakeExam";
 //	}
+=======
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 }

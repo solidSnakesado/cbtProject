@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>getManagerList.jsp</title>
+<title>getCondition.jsp</title>
 </head>
 <body>
-	<h3>매니저 목록</h3>
+	<h3>상태 목록</h3>
 	<form>
-		검색조건<select name="searchManager">
+		검색조건<select name="searchCondition">
 			<option value="managerId">관리자 아이디
 			<option value="managerName">관리자 이름
 		</select><br>
