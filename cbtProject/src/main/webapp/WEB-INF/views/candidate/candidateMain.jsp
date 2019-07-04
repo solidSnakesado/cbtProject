@@ -19,7 +19,15 @@
 	</script>
 	<header id="header"></header>
 	<hr />
-	
+	<section>
+		<article>
+			<ul>
+				<li><button type="button" onclick="location.href='candidateAccount.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href=#">시험목록</button></li>
+				<li><button type="button" onclick="location.href=#">응시내역</button></li>
+			</ul>
+		</article>
+	</section>
 	${takerId} 
 	<table>
 		<tr>

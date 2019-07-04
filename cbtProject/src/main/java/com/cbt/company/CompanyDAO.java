@@ -28,6 +28,8 @@ public class CompanyDAO {
 		mybatis.delete("companyDAO.deleteCompany", vo);
 	}
 
+	
+	
 	public CompanyVO getCompany(CompanyVO vo) {
 		return mybatis.selectOne("companyDAO.getCompanyID", vo);
 	}

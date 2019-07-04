@@ -3,6 +3,8 @@ package com.cbt.candidate;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,43 +133,81 @@ public class CandidateController {
 		candidateService.insertCandidate(vo);
 		return "redirect:candidateMain.do";
 	}
-	
-	//로그인  2019.07.02 생성
+	@RequestMapping(value = "candidateAccount.do",  method = RequestMethod.GET)
+	public String canidateAccount() {		
+		return "candidate/candidateAccount";
+	}
+	//로그인  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.GET)
 	public String candidateLoginForm() {
 		return "candidate/candidateLogin";
 	}
-	
-	//로그인  2019.07.02 생성
+	//로그인  2019.07.02 생성 ver.1
+	/* 
+	 * @RequestMapping(value="candidateLogin.do", method=RequestMethod.GET) public
+	 * String candidateLoginForm() { return "candidate/candidateLogin"; }
+	 */
+	//로그인  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.POST)
-	public String candidateLogin(CandidateVO vo) {
+	public String candidateLogin(CandidateVO vo, HttpSession session) {
 		String targetPage = "candidate/candidateLogin";
-		
 		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
+		
 		if(loginCandidate != null) {
+			session.setAttribute("canidate", loginCandidate);
 			targetPage = "candidate/candidateMain";
 		}
 		return targetPage;
 	}
-	//계정수정 form		 장세준 (7/3)
-	@RequestMapping("/updateCandidate/{takerId}")
-	public String updateCandidateForm(@PathVariable("takerId") String takerId, CandidateVO vo, Model model) {
-		vo.setTakerId(takerId);
-		model.addAttribute("candidate", candidateService.getCandidate(vo));
+	//로그인  2019.07.02 생성  ver.1
+	/*
+	 * @RequestMapping(value="candidateLogin.do", method=RequestMethod.POST) public
+	 * String candidateLogin(CandidateVO vo, HttpSession session) { String
+	 * targetPage = "candidate/candidateLogin"; CandidateVO loginCandidate =
+	 * candidateService.loginCandidate(vo);
+	 * 
+	 * if(loginCandidate != null) { session.setAttribute("canidate",
+	 * loginCandidate); targetPage = "candidate/candidateMain"; } return targetPage;
+	 * }
+	 */
+	//계정수정 form		 장세준 (7/3 ver.2)
+	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
+	public String updateCandidateForm() {
 		return "candidate/candidateAccountManageModify";
 	}
-	//수정처리			장세준(7/3)
+	//계정수정 form		 장세준 (7/3 ver.1)
+	/*
+	 * @RequestMapping("/updateCandidate/{takerId}") public String
+	 * updateCandidateForm(@PathVariable("takerId") String takerId, CandidateVO vo,
+	 * Model model) { vo.setTakerId(takerId); model.addAttribute("candidate",
+	 * candidateService.getCandidate(vo)); return
+	 * "candidate/candidateAccountManageModify"; }
+	 */
+	//수정처리			장세준(7/3 ver.2)
 	@RequestMapping("updateCandidate.do")
-	public String updateCandidate(@ModelAttribute("candidate")CandidateVO vo) {
+	public String updateCandidate(CandidateVO vo) {
 		candidateService.updateCandidate(vo);
 		return "candidate/candidateMain";
 	}
-	//삭제처리			 장세준 (7/2)
-	@RequestMapping("deleteCandidate.do")
-	public String deleteBoard(@ModelAttribute("candidate")CandidateVO vo) {
+	//수정처리			장세준(7/3 ver.1)
+	/*
+	 * @RequestMapping("updateCandidate.do") public String
+	 * updateCandidate(@ModelAttribute("candidate")CandidateVO vo) {
+	 * candidateService.updateCandidate(vo); return "candidate/candidateMain"; }
+	 */
+	//삭제처리			 장세준 (7/3)
+	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.GET)
+	public String deleteBoard(HttpSession session) {
+		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
 		candidateService.deleteCandidate(vo);
-		return "candidate/candidateMain";
+		return "return:candidateLogin.do";
 	}
+	//삭제처리			 장세준 (7/2)
+	/*
+	 * @RequestMapping("deleteCandidate.do") public String
+	 * deleteBoard(@ModelAttribute("candidate")CandidateVO vo) {
+	 * candidateService.deleteCandidate(vo); return "candidate/candidateMain"; }
+	 */
 	//단건조회			 장세준 (7/2)
 	@RequestMapping("/getCandidate/{takerId}")
 	public String getCandidate(@PathVariable("takerId") String takerId, CandidateVO vo, Model model) {

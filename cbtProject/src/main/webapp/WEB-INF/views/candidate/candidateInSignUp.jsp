@@ -47,12 +47,12 @@
 		<tr>
 			<td>최종학력</td>
 			<td colspan="2"><select name="takerEducation">
-					<option value="1">중졸</option>
-					<option value="2">고졸</option>
-					<option value="3">초대졸</option>
-					<option value="4">학사</option>
-					<option value="5">석사</option>
-					<option value="6">박사</option>
+					<option value="중졸">중졸</option>
+					<option value="고졸">고졸</option>
+					<option value="초대졸">초대졸</option>
+					<option value="학사">학사</option>
+					<option value="석사">석사</option>
+					<option value="박사">박사</option>
 			</select></td>
 		</tr>
 	</table>
