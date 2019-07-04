@@ -1,5 +1,7 @@
 package com.cbt.estimate;
 
+import java.util.List;
+
 public interface EstimateService {
 	
 	void insertEstimate(EstimateVO vo);
@@ -9,5 +11,7 @@ public interface EstimateService {
 	void deleteEstimate(EstimateVO vo);
 	
 	EstimateVO getEstimate(EstimateVO vo);
+	
+	List<EstimateVO> getEstimateList(EstimateVO vo);
 
 }
