@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ConditionDAO">
+
+	<insert id="insertCondition" parameterType="ConditionVO">
+		<selectKey keyProperty="conditionSeq" resultType="int" order="BEFORE">
+			SELECT
+			MAX(CONDITION_SEQ) + 1 FROM CONDITION
+		</selectKey>
+		INSERT INTO CONDITION( 
+								  CONDITION_SEQ
+								, MASTER_CD
+								, MASTER_NM
+								, DETAIL_CD
+								, DETAIL_NM
+								, USE_YN 
+					)
+		VALUES (		#{conditionSeq}
+						, #{masterCd}
+						, #{masterNm}
+						, #{detailCd}
+						, #{detailNm}
+						, #{useYn}
+						)
+				
+	</insert>
+	<select id="getConditionList" resultType="ConditionVO">
+		SELECT 
+			CONDITION_SEQ 
+			, MASTER_CD
+			, MASTER_NM
+			, DETAIL_CD
+			, DETAIL_NM
+			, USE_YN
+		FROM CONDITION
+	</select>
+	
+	<update id="updateCondition" parameterType="ConditionVO">
+		UPDATE CONDITION
+		<set>
+			<if test="masterCd != null">MASTER_CD = #{masterCd}, </if>
+			<if test="masterNm != null">MASTER_NM = #{masterNm}, </if>
+			<if test="detailCd != null">DETAIL_CD = #{detailCd}, </if>
+			<if test="detailNm != null">DETAIL_NM = #{detailNm}, </if>
+			<if test="useYn != null">USE_YN = #{useYn} </if>
+		</set>
+		WHRER CONDITION_SEQ = #{conditionSeq}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteCondition" parameterType="ConditionVO">
+		DELETE FROM CONDITION
+		<where>
+			<choose>
+				<when test="cdtionList != null and cdtionList.length>0">
+					CONDITION_SEQ in
+					<foreach collection="cdtionList"
+						open="(" close=")" separator=","
+						item="item">
+						#{item}
+					</foreach>
+				</when>
+				<otherwise>
+					CONDITION_SEQ = #{conditionSeq}
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
+</mapper>

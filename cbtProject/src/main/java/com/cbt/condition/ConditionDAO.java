@@ -37,4 +37,8 @@ public class ConditionDAO {
 		return mybatis.selectList("ConditionDAO.getConditionList", vo);
 	}
 
+	public List<ConditionVO> getAllConditionList() {
+		System.out.println("===> getAllConditionList() 기능 처리");
+		return mybatis.selectList("ConditionDAO.getConditionList");
+	}
 }
