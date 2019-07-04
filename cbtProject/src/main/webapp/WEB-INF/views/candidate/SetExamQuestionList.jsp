@@ -23,7 +23,7 @@
 			<tr>
 				<th>EXAM_ID</th><th>QUESTION_ID</th><th>SET_EXAM_QUESTION_ID</th><th>POINT</th>
 			</tr>
-			<c:forEach var="setExam" items="${list}">
+			<c:forEach var="setExam" items="${result.getSetExamQuestionList}">
 			<tr>
 				<td>${setExam.examId} </td><td>${setExam.questionId} </td><td>${setExam.setExamQuestionId} </td><td>${setExam.point} </td>
 			</tr>
