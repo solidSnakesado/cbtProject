@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SurveyDAO">
+	<!-- 190703 재홍 CRUD 쿼리 입력 -->
+	<!-- 설문조사 등록 -->
+	<insert id = "insertSurvey" parameterType="SurveyVO">
+		INSERT INTO SURVEY (  SURVEY_ID
+							, SURVEY_TYPE
+							, TAKE_EXAM_ID )
+		VALUES ( #{surveyId}
+				,#{surveyType}
+				,#{takeExamId} )
+	</insert>
 	
-	<!-- 전체 조회 -->
-	<select id="selectSurvey">
-		select SURVEY_ID,
-			   SURVEY_TYPE,
-			   TAKE_EXAM_ID
-		from SURVEY
+	<!-- 설문조사 수정 -->
+	<update id = "updateSurvey" parameterType="SurveyVO">
+		UPDATE SURVEY SET SURVEY_TYPE = #{surveyType}
+						, TAKE_EXAM_ID = #{takeExamId}
+		WHERE SURVEY_ID = #{surveyId}
+	</update>
+	
+	<!--설문조사 삭제 -->
+	<delete id = "deleteSurvey" parameterType="SurveyVO">
+		DELETE FROM SURVEY
+		WHERE SURVEY_ID = #{surveyId}
+	</delete>
+	
+	<!-- 설문조사 ID로 조회 -->
+	<select id="getSurveyID" resultType="SurveyVO">
+		SELECT 	 SURVEY_ID
+			   , SURVEY_TYPE
+			   , TAKE_EXAM_ID
+		FROM SURVEY
+		WHERE SURVEY_ID = #{surveyId}
 	</select>
-	
-	<!-- 등록 -->
 </mapper>

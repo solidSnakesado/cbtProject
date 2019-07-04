@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="setExamQuestionDAO">
+	<insert id="insertSetExamQuestion" parameterType="SetExamQuestionVO">
+		INSERT INTO SETEXAMQUESTION
+		(	EXAM_ID
+			,QUESTION_ID
+			,SET_EXAM_QUESTION_ID
+			,POINT )
+		VALUES(	#{examId}
+				,#{questionId}
+				,#{setExamQuestionId}
+				,#{point} )
+	</insert>
+</mapper>
+

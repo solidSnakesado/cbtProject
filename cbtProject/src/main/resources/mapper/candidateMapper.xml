@@ -34,7 +34,8 @@
 					, TAKER_EMAIL
 					, TAKER_PASSWORD
 			FROM 	TAKER
-			WHERE	TAKER_ID = #{takerId} AND TAKER_PASSWORD= #{takerPassword}
+			WHERE	TAKER_ID = #{takerId} 
+			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
 		</select>
 		
 		<!-- 7/2 	응시자 전체 리스트 조회 	장세준  -->
@@ -49,48 +50,25 @@
 		</select>
 		
 		<!-- 7/2 	candidate Update 	장세준  -->
-		<update id="updateCandidate" >
-			UPDATE CANDIDATE SET	TAKER_INFO = #{takerInfo}
-									, TAKER_EMAIL = #{takerEmail}
-									, TAKER_PASSWORD = #{takerPassword}
+		<update id="updateCandidate">
+			UPDATE TAKER 
+			<set>	
+				<if test="takerInfo != null and takerInfo != ''"> TAKER_INFO = #{takerInfo}</if>
+				<if test="takerEmail != null and takerEmail != ''">, TAKER_EMAIL = #{takerEmail}</if>
+			</set>
 			WHERE TAKER_ID = #{takerId}
 		</update>
 		
 		<!-- 7/2 	candidate delete 	장세준  -->
-		<update id="deleteCandidate" parameterType="CandidateVO">
+		<delete id="deleteCandidate" parameterType="CandidateVO">
 			DELETE	FROM TAKER
 			WHERE TAKER_ID = #{takerId}
-		</update>
+		</delete>
 		
 		<select id="getCount" resultType="int">
 			SELECT COUNT(*) FROM TAKER
 		</select>
 		
 </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
