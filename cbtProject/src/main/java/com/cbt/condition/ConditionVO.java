@@ -2,93 +2,65 @@ package com.cbt.condition;
 
 public class ConditionVO {
 	
-	private String conditionId;
-	private String companyCreditCondition;
-	private String examStatusCondition;
-	private String tradeProgressCondition;
-	private String companyClassificationCon;
-	private String companySectorsCondition;
-	private String examClassificationCondition;
-	private String levelOfDifficultyCondition;
-	private String numberOfTiems;
-	private String questionType;
-	private String takerEducation;
+	private int conditionSeq;
+	private int masterCd;
+	private String masterNm;
+	private int detailCd;
+	private String detailNm;
+	private int useYn;
+	private String searchCondition;
 	
-	public String getConditionId() {
-		return conditionId;
+	public String getSearchCondition() {
+		return searchCondition;
 	}
-	public void setConditionId(String conditionId) {
-		this.conditionId = conditionId;
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
 	}
-	public String getCompanyCreditCondition() {
-		return companyCreditCondition;
+	public int getConditionSeq() {
+		return conditionSeq;
 	}
-	public void setCompanyCreditCondition(String companyCreditCondition) {
-		this.companyCreditCondition = companyCreditCondition;
+	public void setConditionSeq(int conditionSeq) {
+		this.conditionSeq = conditionSeq;
 	}
-	public String getExamStatusCondition() {
-		return examStatusCondition;
+	public int getMasterCd() {
+		return masterCd;
 	}
-	public void setExamStatusCondition(String examStatusCondition) {
-		this.examStatusCondition = examStatusCondition;
+	public void setMasterCd(int masterCd) {
+		this.masterCd = masterCd;
 	}
-	public String getTradeProgressCondition() {
-		return tradeProgressCondition;
+	public String getMasterNm() {
+		return masterNm;
 	}
-	public void setTradeProgressCondition(String tradeProgressCondition) {
-		this.tradeProgressCondition = tradeProgressCondition;
+	public void setMasterNm(String masterNm) {
+		this.masterNm = masterNm;
 	}
-	public String getCompanyClassificationCon() {
-		return companyClassificationCon;
+	public int getDetailCd() {
+		return detailCd;
 	}
-	public void setCompanyClassificationCon(String companyClassificationCon) {
-		this.companyClassificationCon = companyClassificationCon;
+	public void setDetailCd(int detailCd) {
+		this.detailCd = detailCd;
 	}
-	public String getCompanySectorsCondition() {
-		return companySectorsCondition;
+	public String getDetailNm() {
+		return detailNm;
 	}
-	public void setCompanySectorsCondition(String companySectorsCondition) {
-		this.companySectorsCondition = companySectorsCondition;
+	public void setDetailNm(String detailNm) {
+		this.detailNm = detailNm;
 	}
-	public String getExamClassificationCondition() {
-		return examClassificationCondition;
+	public int getUseYn() {
+		return useYn;
 	}
-	public void setExamClassificationCondition(String examClassificationCondition) {
-		this.examClassificationCondition = examClassificationCondition;
+	public void setUseYn(int useYn) {
+		this.useYn = useYn;
 	}
-	public String getLevelOfDifficultyCondition() {
-		return levelOfDifficultyCondition;
-	}
-	public void setLevelOfDifficultyCondition(String levelOfDifficultyCondition) {
-		this.levelOfDifficultyCondition = levelOfDifficultyCondition;
-	}
-	public String getNumberOfTiems() {
-		return numberOfTiems;
-	}
-	public void setNumberOfTiems(String numberOfTiems) {
-		this.numberOfTiems = numberOfTiems;
-	}
-	public String getQuestionType() {
-		return questionType;
-	}
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-	public String getTakerEducation() {
-		return takerEducation;
-	}
-	public void setTakerEducation(String takerEducation) {
-		this.takerEducation = takerEducation;
-	}
-	
 	@Override
 	public String toString() {
-		return "ConditionVO [conditionId=" + conditionId + ", companyCreditCondition=" + companyCreditCondition
-				+ ", examStatusCondition=" + examStatusCondition + ", tradeProgressCondition=" + tradeProgressCondition
-				+ ", companyClassificationCon=" + companyClassificationCon + ", companySectorsCondition="
-				+ companySectorsCondition + ", examClassificationCondition=" + examClassificationCondition
-				+ ", levelOfDifficultyCondition=" + levelOfDifficultyCondition + ", numberOfTiems=" + numberOfTiems
-				+ ", questionType=" + questionType + ", takerEducation=" + takerEducation + "]";
+		return "ConditionVO [conditionSeq=" + conditionSeq + ", masterCd=" + masterCd + ", masterNm=" + masterNm
+				+ ", detailCd=" + detailCd + ", detailNm=" + detailNm + ", useYn=" + useYn + "]";
 	}
+	
+	
+	
+	
+	
 	
 }
