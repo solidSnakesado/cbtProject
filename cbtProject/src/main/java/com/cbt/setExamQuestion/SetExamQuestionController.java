@@ -1,6 +1,7 @@
 package com.cbt.setExamQuestion;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class SetExamQuestionController {
 	@RequestMapping("/SetExamQuestionList.do")
 	public ModelAndView SetExamQuestionList(ModelAndView mv) {
 		SetExamQuestionVO vo = new SetExamQuestionVO();
-
+		
 		mv.addObject("result", setExamQuestionService.SetExamQuestionList(vo));
 		mv.setViewName("candidate/SetExamQuestionList");
 		return mv;
