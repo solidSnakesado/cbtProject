@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="my"  tagdir="/WEB-INF/tags"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +35,9 @@
       </ul>
    </article>
 </section>
-${candidateVO}
+
 <h1>나의 정보</h1>
-<form action="../deleteCandidate.do" method="POST">
+<form action="deleteCandidate.do" method="POST">
 <input type="hidden" name="takerId" value="${candidate.takerId}"/>
 	<table width="940" style="padding:5px 0 5px 0;">
 	      <tr>
@@ -59,7 +61,7 @@ ${candidateVO}
 <button>삭제</button>
 </form>
    
-      <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정확인</button>
+ <!--      <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정확인</button> -->
       <button type="button" value="reset" onclick="location.href='candidateUserMain.jsp'">취소</button>
 
 </body>

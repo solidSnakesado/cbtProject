@@ -29,13 +29,13 @@
 			</ul>
 		</article>
 	</section>
-	<h1>계정관리</h1>
+	<h1>계정관리</h1>${sessionScope.candidate}====
 <%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
 		<form action="updateCandidate.do" method="post">
 		<table width="940" style="padding: 5px 0 5px 0;">
 			<tr>
 				<th>ID</th>
-				<td><input type="hidden" name="takerId"/>${candidate.takerId}</td>
+				<td><input type="hidden" name="takerId" value="${candidate.takerId}"/>${candidate.takerId}</td>
 			</tr>
  			<tr>
 				<th>패스워드</th>
@@ -43,7 +43,7 @@
 			</tr> 
  			<tr>
 				<th>패스워드확인</th>
-				<td><input type="password" name="takerPwcheck" value="${candidate.takerPwcheck}"/></td>
+				<td><input type="password" name="takerPwcheck"/></td>
 			</tr> 
 			<tr>
 				<th>이름</th>

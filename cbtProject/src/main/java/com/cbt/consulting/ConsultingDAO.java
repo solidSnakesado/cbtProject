@@ -25,12 +25,11 @@ public class ConsultingDAO {
 	}
 	
 	public ConsultingVO getConsulting(ConsultingVO vo) {
-		mybatis.selectOne("consultingDAO.getConsulting", vo);
-		return null;
+		
+		return mybatis.selectOne("consultingDAO.getConsulting", vo);
 	}
 	
 	public List<ConsultingVO> getConsultingList() {
-		mybatis.selectList("consultingDAO.getConsultingList");
-		return null;
+		return mybatis.selectList("consultingDAO.getConsultingList");
 	}
 }
