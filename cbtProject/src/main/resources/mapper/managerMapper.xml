@@ -30,7 +30,7 @@
 	
 	</select>
 	
-	<update id="updateManager">
+	<update id="updateManager" parameterType="ManagerVO">
 		UPDATE MANAGER
 		<set>
 			<if test="managerPassword != null"> MANAGER_PASSWORD = #{managerPassword} ,</if>

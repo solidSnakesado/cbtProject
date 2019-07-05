@@ -1,66 +1,92 @@
 package com.cbt.condition;
 
+import java.util.Arrays;
+
 public class ConditionVO {
 	
 	private int conditionSeq;
-	private int masterCd;
+	private String masterCd;
 	private String masterNm;
-	private int detailCd;
+	private String detailCd;
 	private String detailNm;
-	private int useYn;
+	private String useYn;
+	
 	private String searchCondition;
+	private String[] cdtionList;
+	
+	public ConditionVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String[] getCdtionList() {
+		return cdtionList;
+	}
+	
+	public void setCdtionList(String[] cdtionList) {
+		this.cdtionList = cdtionList;
+	}
 	
 	public String getSearchCondition() {
 		return searchCondition;
 	}
+	
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+	
 	public int getConditionSeq() {
 		return conditionSeq;
 	}
+	
 	public void setConditionSeq(int conditionSeq) {
 		this.conditionSeq = conditionSeq;
 	}
-	public int getMasterCd() {
+	
+	public String getMasterCd() {
 		return masterCd;
 	}
-	public void setMasterCd(int masterCd) {
+	
+	public void setMasterCd(String masterCd) {
 		this.masterCd = masterCd;
 	}
+	
 	public String getMasterNm() {
 		return masterNm;
 	}
+	
 	public void setMasterNm(String masterNm) {
 		this.masterNm = masterNm;
 	}
-	public int getDetailCd() {
+	
+	public String getDetailCd() {
 		return detailCd;
 	}
-	public void setDetailCd(int detailCd) {
+	
+	public void setDetailCd(String detailCd) {
 		this.detailCd = detailCd;
 	}
+	
 	public String getDetailNm() {
 		return detailNm;
 	}
+	
 	public void setDetailNm(String detailNm) {
 		this.detailNm = detailNm;
 	}
-	public int getUseYn() {
+	
+	public String getUseYn() {
 		return useYn;
 	}
-	public void setUseYn(int useYn) {
+	
+	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
+	
 	@Override
 	public String toString() {
 		return "ConditionVO [conditionSeq=" + conditionSeq + ", masterCd=" + masterCd + ", masterNm=" + masterNm
-				+ ", detailCd=" + detailCd + ", detailNm=" + detailNm + ", useYn=" + useYn + "]";
+				+ ", detailCd=" + detailCd + ", detailNm=" + detailNm + ", useYn=" + useYn + ", searchCondition="
+				+ searchCondition + ", cdtionList=" + Arrays.toString(cdtionList) + "]";
 	}
-	
-	
-	
-	
-	
 	
 }

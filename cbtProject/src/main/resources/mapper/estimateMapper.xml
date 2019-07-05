@@ -61,7 +61,7 @@
 		WHERE ESTIMATE_ID = #{estimateId}
 	</delete>
 	
-	<!-- 의뢰 ID로 조회 -->
+	<!-- 의뢰목록 ID로 조회 -->
 	<select id="getEstimate" resultType="EstimateVO">
 		SELECT 	  ESTIMATE_ID
 				, ESTIMATE_PRICE
@@ -80,5 +80,25 @@
 				, EXAM_INTERVAL
 		FROM ESTIMATE
 		WHERE ESTIMATE_ID = #{estimateId}
+	</select>
+	
+	<!-- 의뢰목록 전체 조회 -->
+		<select id="getEstimateList" resultType="EstimateVO">
+		SELECT 	  ESTIMATE_ID
+				, ESTIMATE_PRICE
+				, REQUEST_DAY
+				, TRADE_PROGRESS
+				, REMARKS
+				, APPLICANTS
+				, LEVEL_OF_DIFFICULTY
+				, CANDIDATE
+				, APPLY_PURPOSE
+				, EXAM_DATE
+				, CATEGORY_ID
+				, EXAM_CLASSFICATION
+				, COMPANY_ID
+				, EXAM_COUNT
+				, EXAM_INTERVAL
+		FROM ESTIMATE
 	</select>
 </mapper>
