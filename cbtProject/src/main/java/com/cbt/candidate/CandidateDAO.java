@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.company.CompanyVO;
+
 @Repository
 public class CandidateDAO {
 	
@@ -27,11 +29,7 @@ public class CandidateDAO {
 
 	public CandidateVO getCandidate(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
-	}
-
-	public List<CandidateVO> getCandidateList(CandidateVO vo) {
-		return mybatis.selectOne("candidateDAO.getCandidateList", vo);
-	}
+	}	
 	
 	public CandidateVO loginCandidate(CandidateVO vo) {
 		return getCandidate(vo);
@@ -39,5 +37,10 @@ public class CandidateDAO {
 	
 	public int getCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
+	}
+	
+	// 이승환이 쓰고있음
+	public List<CandidateVO> getCandidateList(CandidateVO vo) {
+		return mybatis.selectList("candidateDAO.getCandidateList", vo);
 	}
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.candidate.CandidateService;
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
@@ -26,9 +28,11 @@ public class ManagerController {
 	ManagerService managerService;
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	CandidateService candidateService;
 	
 	//메인
-	@RequestMapping(value ="/manager", method=RequestMethod.GET)
+	@RequestMapping(value ="/managerMain.do", method=RequestMethod.GET)
 	public String managerMain() {
 		return "manager/managerMain";
 	}
@@ -99,11 +103,7 @@ public class ManagerController {
 	}
 	
 	// 7/5 재용추가
-	@RequestMapping("managerUserAccountList.do")
-	public String managerUserAccountList() {
-		
-		return "manager/managerUserAccountList";
-	}
+	
 	
 	// 7/5 재용추가
 	@RequestMapping("managerRequestListDetail.do")
@@ -119,10 +119,17 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="managerAccountList.do", method=RequestMethod.GET)
-	public String managerAccountList(Model model, CompanyVO vo) {
+	public String getManagerAccountList(Model model, CompanyVO vo) {
 		model.addAttribute("result", companyService.getCompanyList(vo));
 		return "manager/managerAccountList";
 	}
+	
+	@RequestMapping(value="managerUserAccountList.do", method=RequestMethod.GET)
+	public String managerUserAccountList(Model model, CandidateVO vo) {
+		model.addAttribute("result", candidateService.getCandidateList(vo));
+		return "manager/managerUserAccountList";
+	}
+	
 	
 	
 }

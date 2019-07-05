@@ -32,10 +32,10 @@
       <th>기업명</th>
       <th>기업 담당자</th>
    </tr>
-   <c:forEach items="${result.companyList }" var="CompanyVO">
+   <c:forEach items="${result }" var="CompanyVO">
 		<tr>
 			<td>${CompanyVO.companyId }</td>
-			<td>${CompanyVO.companyName }</td>
+			<td><a href="updateCompany/${CompanyVO.companyId }">${CompanyVO.companyName }</a></td>
 			<td>${CompanyVO.companyManager }</td>
 		</tr>
 		</c:forEach>

@@ -32,11 +32,11 @@
       <th>이름</th>
       <th>E-Mail</th>
    </tr>
-   		<c:forEach items="${result.takerList }" var="taker">
+   		<c:forEach items="${result }" var="CandidateVO">
 		<tr>
-			<td>${taker.takerId }</td>
-			<td><a href="updateCompany/${taker.takerName }">${company.takerName }</a></td>
-			<td>${taker.takerEmail }</td>
+			<td>${CandidateVO.takerId }</td>
+			<td><a href="updateCandidate/${CandidateVO.takerName }">${CandidateVO.takerName }</a></td>
+			<td>${CandidateVO.takerEmail }</td>
 		</tr>
 		</c:forEach>
 </table>
