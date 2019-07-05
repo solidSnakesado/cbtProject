@@ -40,4 +40,7 @@ public class CandidateDAO {
 	public int getCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
+	public int idcheck(String takerId) {
+		return mybatis.selectOne(takerId);
+	}
 }

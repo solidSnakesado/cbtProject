@@ -25,4 +25,6 @@ public interface CandidateService {
 	List<CandidateVO> getCandidateList(CandidateVO vo);
 
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging);
+
+	int idcheck(String takerId);
 }
