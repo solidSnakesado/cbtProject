@@ -11,8 +11,8 @@
 <body>
 	<h3>상태 목록</h3>
 	
-	<form action="deleteCondition.do">
 	
+	<form action="deleteCondition.do">
 	<table>
 		<tr>
 			<th>선택</th>
@@ -27,7 +27,7 @@
 		<tr>
 			<td><input type="checkbox" name="CdTionList" value="${condition.conditionSeq }"></td>
 			<td>${condition.conditionSeq }</td>
-			<td><a href="updateCondtion/${condition.conditionSeq }">${condition.masterCd }</a></td>
+			<td><a href="updateCondition/${condition.conditionSeq }">${condition.masterCd }</a></td>
 			<td>${condition.masterNm }</td>
 			<td>${condition.detailCd }</td>
 			<td>${condition.detailNm }</td>
@@ -35,6 +35,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+	
 	<button>삭제</button>
 	</form>
 	<a href="insertCondition.do">상태 등록</a>

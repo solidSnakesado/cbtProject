@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyDAO;
+import com.cbt.company.CompanyVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
@@ -36,14 +38,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerVO getManager(ManagerVO vo) {
-		
+	public ManagerVO getManager(ManagerVO vo) {		
 		return managerDAO.getManager(vo);
 	}
 
 	@Override
-	public List<ManagerVO> getManagerList(ManagerVO vo) {
-		 
+	public List<ManagerVO> getManagerList(ManagerVO vo) {		 
 		return managerDAO.getManagerList(vo);
 	}
 
@@ -56,9 +56,18 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	
 	// 7/5 재용 추가
-	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {
-		
+	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {		
 		return managerDAO.getManagerUserAccountView(vo);
+	}
+	
+	public List<CompanyVO> managerAccountList(CompanyDAO dao, CompanyVO vo) {
+		return dao.getCompanyList(vo);
+	}
+
+	@Override
+	public List<CompanyVO> managerAccountList(CompanyVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

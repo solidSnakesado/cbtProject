@@ -4,9 +4,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>updateManager.jsp</title>
 </head>
 <body>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#header").load("candidateInHeader.jsp")
+		});
+	</script>
+	<header id="header"></header>
+<section>
+   <article>
+      <ul>
+         <li><button type="button" onclick="location.href='managerUserAccountEdit.jsp'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='candidateRequestList.jsp'">응시목록</button></li>
+         <li><button type="button" onclick="location.href='managerChart.jsp'">통계</button></li>
+      </ul>
+   </article>
+</section>
 	<h1>매니저 정보 수정</h1>	
 		
 		<form action="${pageContext.request.contextPath }/updateManager.do" method="post">
