@@ -50,11 +50,10 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.loginCandidate(vo);
 	}
 
-<<<<<<< HEAD
 	public int idcheck(String takerId) {
 		return candidateDAO.idcheck(takerId);
 	}
-=======
+
 	@Override
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return candidateDAO.getCandidateList(vo);
@@ -67,6 +66,5 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 
 }
