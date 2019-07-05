@@ -37,9 +37,9 @@ public class CompanyDAO {
 	public CompanyVO loginCompany(CompanyVO vo) {
 		return mybatis.selectOne("companyDAO.getCompanyIDPW", vo);
 	}
-
+	
+	// 이승환 추가
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mybatis.selectList("ManagerDAO.getCompanyList", vo);
 	}
 }

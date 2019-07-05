@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
+import com.cbt.manager.ManagerDAO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -37,11 +38,10 @@ public class CompanyServiceImpl implements CompanyService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	// 이승환이쓰고있음
 	@Override
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return companyDAO.getCompanyList(vo);
 	}
 
 	@Override
