@@ -13,6 +13,8 @@
 		<typeAlias type="com.cbt.candidate.CandidateVO" 			alias="CandidateVO" />	
 		<typeAlias type="com.cbt.category.CategoryVO" 				alias="CategoryVO" />
 		<typeAlias type="com.cbt.categoryMain.CategoryMainVO" 		alias="CategoryMainVO" />
+		<typeAlias type="com.cbt.categoryMiddle.CategoryMiddleVO" 	alias="CategoryMiddleVO" />
+		<typeAlias type="com.cbt.categorySmall.CategorySmallVO" 	alias="CategorySmallVO" />
 		<typeAlias type="com.cbt.condition.ConditionVO" 			alias="ConditionVO" />
 		<typeAlias type="com.cbt.consulting.ConsultingVO" 			alias="ConsultingVO" />
 		<typeAlias type="com.cbt.estimate.EstimateVO" 				alias="EstimateVO" />
