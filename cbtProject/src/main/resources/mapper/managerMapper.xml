@@ -70,4 +70,20 @@
 		WHERE	TAKER_ID = #{takerId}
 	</select>
 	
+	<!-- 기업 목록 조회 -->
+	<select id="getCompanyList" resultType="CompanyVO">
+		SELECT COMPANY_ID
+			,COMPANY_NAME
+			,COMPANY_MANAGER
+		FROM COMPANY			
+	</select>
+	
+	<!-- 응시자 목록 조회 -->
+	<select id="getTakerList" resultType="CandidateVO">
+		SELECT    TAKERID
+				, TAKERNAME
+				, TAKEREMAIL
+		FROM TAKER
+	</select>
+	
 </mapper>

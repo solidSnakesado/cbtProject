@@ -1,5 +1,7 @@
 package com.cbt.manager;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyService;
+import com.cbt.company.CompanyVO;
 
 @Controller
 public class ManagerController {
 	
 	@Autowired
 	ManagerService managerService;
+	@Autowired
+	CompanyService companyService;
 	
 	//메인
 	@RequestMapping(value ="/manager", method=RequestMethod.GET)
@@ -105,5 +111,18 @@ public class ManagerController {
 		
 		return "manager/managerRequestListDetail";
 	}
+	
+	@RequestMapping("managerAccountControl.do")
+	public String managerAccountControl() {
+		
+		return "manager/managerAccountControl";
+	}
+	
+	@RequestMapping(value="managerAccountList.do", method=RequestMethod.GET)
+	public String managerAccountList(Model model, CompanyVO vo) {
+		model.addAttribute("result", companyService.getCompanyList(vo));
+		return "manager/managerAccountList";
+	}
+	
 	
 }

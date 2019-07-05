@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyVO;
 
 public interface ManagerService {
 	// 글 등록
@@ -25,4 +26,7 @@ public interface ManagerService {
 	ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo);
 
 	public Map<String, Object> getManagerList(ManagerVO vo, Paging paging);
+	
+	// 기업목록 조회
+	List<CompanyVO> managerAccountList(CompanyVO vo);
 }

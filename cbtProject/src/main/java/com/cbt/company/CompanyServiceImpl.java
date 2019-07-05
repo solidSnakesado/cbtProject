@@ -37,7 +37,7 @@ public class CompanyServiceImpl implements CompanyService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
 		// TODO Auto-generated method stub

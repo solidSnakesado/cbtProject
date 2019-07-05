@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,56 +17,28 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
-<h2>관리자 계정관리</h2>
+<h2>응시자 계정관리</h2>
 <form>
 <table border="1">
    <tr>
       <th>응시자ID</th>
       <th>이름</th>
-      <th>가입일</th>
+      <th>E-Mail</th>
    </tr>
-   <tr>
-      <td><a href="managerUserAccountEdit.jsp">AA1</a></td>
-      <td>홍길동</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA2</td>
-      <td>강감찬</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA3</td>
-      <td>이순신</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA4</td>
-      <td>을지문덕</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA5</td>
-      <td>연개소문</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA6</td>
-      <td>이방원</td>
-      <td>2019-04-12</td>
-   </tr>
-   <tr>
-      <td>AA7</td>
-      <td>왕건</td>
-      <td>2019-04-12</td>
-   </tr>
+   		<c:forEach items="${result.takerList }" var="taker">
+		<tr>
+			<td>${taker.takerId }</td>
+			<td><a href="updateCompany/${taker.takerName }">${company.takerName }</a></td>
+			<td>${taker.takerEmail }</td>
+		</tr>
+		</c:forEach>
 </table>
 </form>
 <a href="managerApplicantInsert.jsp"><button type="button">응시자 추가</button></a>
