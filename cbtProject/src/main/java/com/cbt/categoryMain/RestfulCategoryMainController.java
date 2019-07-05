@@ -13,8 +13,8 @@ public class RestfulCategoryMainController {
 	CategoryMainService categoryMainService;
 	
 	// 대분류 전체 조회
-	@RequestMapping(value="getCategoryMain.do", method=RequestMethod.POST)
-	public List<CategoryMainVO> getCategoryMainList() {
+	@RequestMapping(value="getAllCategoryMainList.do", method=RequestMethod.POST)
+	public List<CategoryMainVO> getAllCategoryMainList() {
 		return categoryMainService.getAllCategoryMain();
 	}
 }
