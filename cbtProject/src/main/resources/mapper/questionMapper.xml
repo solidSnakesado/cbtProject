@@ -11,13 +11,13 @@
 	</parameterMap> -->
 	
 	<resultMap type="QuestionVOt" id="beanResult">
-		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="int"/>
+		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="string"/>
 		<result property="examName" column="EXAM_NAME" javaType="string"/>
 		<result property="takerName" column="TAKER_NAME" javaType="string"/>
 		<result property="examId" column="EXAM_ID" javaType="string"/>
-		<result property="passingScore" column="PASSING_SCORE" javaType="string"/>
-		<result property="point" column="sum(s.POINT)" javaType="string" />
-		<result property="count" column="count(*)" javaType="string" />
+		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
+		<result property="point" column="sum(s.POINT)" javaType="int" />
+		<result property="count" column="count(*)" javaType="int" />
 	</resultMap>
 	
 	<resultMap type="QuestionVO" id="questionVO">
@@ -30,7 +30,7 @@
 		<result property="rightAnswer" column="RIGHT_ANSWER" javaType="string" />
 		<result property="rightCommentary" column="RIGHT_COMMENTARY" javaType="string" />
 		<result property="setExamQuestionId" column="SET_EXAM_QUESTION_ID" javaType="string" />
-		<result property="point" column="POINT" javaType="string" />
+		<result property="point" column="POINT" javaType="int" />
 		<result property="examId" column="EXAM_ID" javaType="string" />
 	</resultMap>
 	
@@ -56,10 +56,10 @@
                         FROM  EXAM e JOIN SET_EXAM_QUESTION s
                         ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
                         ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                        ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                        ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
                         ON s.QUESTION_ID = q.QUESTION_ID
                         WHERE s.question_id = q.question_id AND t.TAKER_ANSWER = q.RIGHT_ANSWER AND t.TAKE_EXAM_ID = #{takeExamId}
-                        GROUP BY t.take_exam_id, e.EXAM_NAME, c.TAKER_NAME, e.EXAM_ID, e.PASSING_SCORE
+                        GROUP BY t.TAKE_EXAM_ID, e.EXAM_NAME, c.TAKER_NAME, e.EXAM_ID, e.PASSING_SCORE
 	</select>
 	
 	<select id="candidateRightAnswerList" resultMap="questionVO">
@@ -79,7 +79,7 @@
                    
                     ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
                     ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                    ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
                     ON s.QUESTION_ID = q.QUESTION_ID
                     
            WHERE e.EXAM_ID = #{examId} 
@@ -103,7 +103,7 @@
                    
                     ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
                     ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                    ON t.EXAM_TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
                     ON s.QUESTION_ID = q.QUESTION_ID
                     
            WHERE e.EXAM_ID = #{examId} 

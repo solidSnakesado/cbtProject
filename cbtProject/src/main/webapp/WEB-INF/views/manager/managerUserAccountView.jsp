@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,34 +35,34 @@
 <table width="940" style="padding:5px 0 5px 0;">
       <tr>
         <th>ID</th>
-        <td>peter123</td>
+        <td>${getManagerUserAccountView.takerId}</td>
       </tr>
       <tr>
          <th>패스워드</th>
-         <td>***********</td>
+         <td>${getManagerUserAccountView.takerPassword}</td>
       </tr>
       <tr>
          <th>이름</th>
-         <td>이승환</td>
+         <td>${getManagerUserAccountView.takerName}</td>
       </tr>
       <tr>
          <th>주민등록번호</th>
-         <td>920529-1******</td>
+         <td>${getManagerUserAccountView.takerInfo}</td>
       </tr>
  
       <tr>
          <th>연락처</th>
-         <td>010-2222-3333</td>
+         <td>${getManagerUserAccountView.takerEducation}</td>
       </tr>
       <tr>
          <th>이메일</th>
-         <td>peter123@gmail.com</td>
+         <td>${getManagerUserAccountView.takerEmail}</td>
          </tr>
    </table>
    <!--테이블 끝-->
-   
-      <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정</button>
-      <button type="button" value="reset" onclick="location.href='candidateUserMain.jsp'">돌아가기</button>
+   <!-- 수정버튼 이벤트 어떻게 할건지 정의하자 -->
+      <button type="button" value="submit" onclick="location.href=''">수정</button>
+      <button type="button" value="reset" onclick="location.href='candidateMain.do'">돌아가기</button>
    
    
    

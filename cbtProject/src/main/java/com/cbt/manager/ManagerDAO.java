@@ -37,4 +37,9 @@ public class ManagerDAO {
 		System.out.println("===> getManagerList() 기능처리");
 		return mybatis.selectList("ManagerDAO.getManagerList", vo);
 	}
+	
+	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {
+		
+		return mybatis.selectOne("ManagerDAO.getManagerUserAccountView", vo);
+	}
 }

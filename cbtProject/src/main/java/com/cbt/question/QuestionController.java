@@ -23,7 +23,7 @@ public class QuestionController {
 	@RequestMapping("candidateTakeExam.do")	
 	public ModelAndView candidateTakeExamList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("1");
+		vo.setExamId("E001");
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -36,7 +36,7 @@ public class QuestionController {
 	@RequestMapping("candidateRightAnswer.do")
 	public ModelAndView candidateRightAnswerList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("1");
+		vo.setExamId("E001");
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -48,40 +48,40 @@ public class QuestionController {
 	
 		
 		
-	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)
-	public String candidateTestResult() {
-		return "candidate/candidateTestResult";
-	}
+//	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)
+//	public String candidateTestResult() {
+//		return "candidate/candidateTestResult";
+//	}
 	
-	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.POST)
-	public String candidateTestResultForm() {
-		return "redirect:candidateTestResult.do";
-	}
+//	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.POST)
+//	public String candidateTestResultForm() {
+//		return "redirect:candidateTestResult.do";
+//	}
 	
-	@RequestMapping("/getTestList.do")
-	public ModelAndView getTestList() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("takeExamId", 1);
-		System.out.println("1"+map.get("result"));
-		
-		
-		questionService.getTestList(map);
-		ModelAndView mv = new ModelAndView();
-		
-		System.out.println(map);
-		
-		map.get("result");
-		
-		mv.addObject("takerName", map.get("result"));
-		mv.setViewName("candidate/candidateTestResult");
-		
-		return mv;
-	}
+//	@RequestMapping("/candidateTestResult.do")
+//	public ModelAndView getTestList() {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("takeExamId", 1);
+//		System.out.println("1"+map.get("result"));
+//		
+//		
+//		questionService.getTestList(map);
+//		ModelAndView mv = new ModelAndView();
+//		
+//		System.out.println(map);
+//		
+//		map.get("result");
+//		
+//		mv.addObject("takerName", map.get("result"));
+//		mv.setViewName("candidate/candidateTestResult");
+//		
+//		return mv;
+//	}
 	
 	@RequestMapping("getTestResultList.do")
 	public ModelAndView getTestResultList() {
 		QuestionVOt vo = new QuestionVOt();
-		vo.setTakeExamId(1);
+		vo.setTakeExamId("1");
 		vo = questionService.getTestResultList(vo);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("getExamId", vo.getExamId());

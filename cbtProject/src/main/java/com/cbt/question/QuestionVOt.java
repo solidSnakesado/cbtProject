@@ -3,24 +3,19 @@ package com.cbt.question;
 
 public class QuestionVOt {
 
-	private int takeExamId;
+	private String takeExamId;
 	private String examName;
 	private String takerName;
 	private String examId;
-	private String point;
-	private String passingScore;
-	private String count;
+	private int point;
+	private int passingScore;
+	private int count;
 	
-	public String getCount() {
-		return count;
-	}
-	public void setCount(String count) {
-		this.count = count;
-	}
-	public int getTakeExamId() {
+	
+	public String getTakeExamId() {
 		return takeExamId;
 	}
-	public void setTakeExamId(int takeExamId) {
+	public void setTakeExamId(String takeExamId) {
 		this.takeExamId = takeExamId;
 	}
 	public String getExamName() {
@@ -41,24 +36,25 @@ public class QuestionVOt {
 	public void setExamId(String examId) {
 		this.examId = examId;
 	}
-	public String getPoint() {
+	public int getPoint() {
 		return point;
 	}
-	public void setPoint(String point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
-	public String getPassingScore() {
+	public int getPassingScore() {
 		return passingScore;
 	}
-	public void setPassingScore(String passingScore) {
+	public void setPassingScore(int passingScore) {
 		this.passingScore = passingScore;
 	}
-	
-	@Override
-	public String toString() {
-		return "QuestionVOt [takeExamId=" + takeExamId + ", examName=" + examName + ", takerName=" + takerName
-				+ ", examId=" + examId + ", point=" + point + ", passingScore=" + passingScore + "]";
+	public int getCount() {
+		return count;
 	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 	
 	
 	

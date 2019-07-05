@@ -77,4 +77,33 @@ public class ManagerController {
 		return "redirect:getManagerList.do";
 	}
 	
+	// 7/5 재용추가
+	@RequestMapping("managerUserAccountView.do")
+	public ModelAndView managerUserAccountView() {
+		ManagerTakerVO vo = new ManagerTakerVO();
+		vo.setTakerId("sime00");
+		
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("getManagerUserAccountView", managerService.getManagerUserAccountView(vo));
+		mv.setViewName("manager/managerUserAccountView");
+		
+		return mv;
+	}
+	
+	// 7/5 재용추가
+	@RequestMapping("managerUserAccountList.do")
+	public String managerUserAccountList() {
+		
+		return "manager/managerUserAccountList";
+	}
+	
+	// 7/5 재용추가
+	@RequestMapping("managerRequestListDetail.do")
+	public String managerRequestListDetail() {
+		
+		return "manager/managerRequestListDetail";
+	}
+	
 }

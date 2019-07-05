@@ -57,4 +57,17 @@
 			</choose>
 		</where>
 	</delete>
+	
+	<!-- 7/5 재용 추가 -->
+	<select id="getManagerUserAccountView" parameterType="ManagerTakerVO" resultType="ManagerTakerVO">
+		SELECT 	TAKER_ID,
+				TAKER_NAME,
+				TAKER_INFO,
+				TAKER_EDUCATION,
+				TAKER_EMAIL,
+				TAKER_PASSWORD
+		FROM	TAKER
+		WHERE	TAKER_ID = #{takerId}
+	</select>
+	
 </mapper>

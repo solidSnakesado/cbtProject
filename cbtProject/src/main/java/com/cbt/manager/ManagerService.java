@@ -20,6 +20,9 @@ public interface ManagerService {
 
 	// 글 목록 조회
 	List<ManagerVO> getManagerList(ManagerVO vo);
+	
+	// 7/5 재용추가
+	ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo);
 
 	public Map<String, Object> getManagerList(ManagerVO vo, Paging paging);
 }

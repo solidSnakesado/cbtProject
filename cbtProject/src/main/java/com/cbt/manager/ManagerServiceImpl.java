@@ -53,5 +53,12 @@ public class ManagerServiceImpl implements ManagerService {
 		map.put("managerList", managerDAO.getManagerList(vo));
 		return map;
 	}
+	
+	
+	// 7/5 재용 추가
+	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {
+		
+		return managerDAO.getManagerUserAccountView(vo);
+	}
 
 }

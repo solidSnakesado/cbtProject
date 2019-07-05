@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <title>candidateTestResult.jsp</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function surveyDo(){
+		location.href="candidateSurvey.do";
+	}
+	
+	function mainDo(){
+		location.href="candidateMain.do";
+	}
+</script>
 </head>
 <body>
    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -45,15 +54,12 @@
 			<td>
 				<c:set var="point" value="${getPoint}"/>
 				<c:set var="passingScore" value="${getPassingScore}" />
-				<c:if test="${passingScore lt point}">불합격</c:if>
-				<c:if test="${passingScore ge point}">합격</c:if>
+				<c:if test="${passingScore lt point}">합격</c:if>
+				<c:if test="${passingScore ge point}">불합격</c:if>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<form action="getTestResultList.do" method="post">
-		<button>TEST go</button>
-	</form>
-	<div align="right"><button>설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button>메인으로</button></div>
+	<div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
 </body>
 </html>

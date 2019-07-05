@@ -38,7 +38,7 @@ public class CandidateClient {
 	@Ignore @Test
 	public void getTestResultList() {
 		QuestionVOt vo = new QuestionVOt();
-		vo.setTakeExamId(1);
+		vo.setTakeExamId("1");
 		
 		vo = dao.getTestResultList(vo);
 		
@@ -57,30 +57,8 @@ public class CandidateClient {
 		QuestionVO vo = new QuestionVO();
 		vo.setExamId("1");
 		List<QuestionVO> list = dao.candidateRightAnswerList(vo);
-		JSONObject obj = new JSONObject();
-		JSONArray ary = new JSONArray();
-		for(QuestionVO dto : list) {
-			
-			JSONArray arr = new JSONArray();
-			
-			arr.add(dto.getQuestionContent());
-			arr.add(dto.getQuestionId());
-			arr.add(dto.getExample1());
-			arr.add(dto.getExample2());
-			arr.add(dto.getExample3());
-			arr.add(dto.getExample4());
-			arr.add(dto.getRightAnswer());
-			arr.add(dto.getRightCommentary());
-			arr.add(dto.getSetExamQuestionId());
-			arr.add(dto.getPoint());
-			arr.add(dto.getExamId());
-			ary.add(arr);
-			
-		}
 		
-		obj.put("data", ary);
-		
-		System.out.println(obj.toString());
+		System.out.println(list);
 	}
 
 }

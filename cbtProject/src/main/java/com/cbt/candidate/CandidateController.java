@@ -106,15 +106,15 @@ public class CandidateController {
 	public String candidateMain() {
 		return "candidate/candidateMain";
 	}
-	@RequestMapping("candidateTestResult.do")	
-	public String candidateTestResult() {
-		return "candidate/candidateTestResult";
-	}
+//	@RequestMapping("candidateTestResult.do")	
+//	public String candidateTestResult() {
+//		return "candidate/candidateTestResult";
+//	}
 	
-	@RequestMapping("candidateTakeExam.do")	
-	public String candidateTakeExam() {
-		return "candidate/candidateTakeExam";
-	}
+//	@RequestMapping("candidateTakeExam.do")	
+//	public String candidateTakeExam() {
+//		return "candidate/candidateTakeExam";
+//	}
 	
 	
 	
@@ -202,12 +202,10 @@ public class CandidateController {
 		candidateService.deleteCandidate(vo);
 		return "redirect:candidateLogin.do";
 	}
-<<<<<<< HEAD
 //	@RequestMapping("candidateTestResult.do")	
 //	public String candidateTestResult() {
 //		return "candidate/candidateTestResult";
 //	}
-=======
 	//삭제처리			 장세준 (7/2)
 	/*
 	 * @RequestMapping("deleteCandidate.do") public String
@@ -235,7 +233,6 @@ public class CandidateController {
 		mv.setViewName("candidate/getCandidateList");
 		return mv;
 	}
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 	
 //	@RequestMapping("candidateTakeExam.do")	
 //	public String candidateTakeExam() {

@@ -15,32 +15,14 @@ public class QuestionVO {
 	private String example4;
 	private String rightAnswer;
 	private String rightCommentary;
-	private String levelOfDifficulty;
-	private int categoryId;
+	private int levelOfDifficulty;
+	private String categoryId;
 	private String questionType;
-	private String point;
-	private String setExamQuestionId;
 	private String examId;
+	private String setExamQuestionId;
+	private int point;
 	
 	
-	public String getPoint() {
-		return point;
-	}
-	public void setPoint(String point) {
-		this.point = point;
-	}
-	public String getSetExamQuestionId() {
-		return setExamQuestionId;
-	}
-	public void setSetExamQuestionId(String setExamQuestionId) {
-		this.setExamQuestionId = setExamQuestionId;
-	}
-	public String getExamId() {
-		return examId;
-	}
-	public void setExamId(String examId) {
-		this.examId = examId;
-	}
 	public String getQuestionId() {
 		return questionId;
 	}
@@ -89,16 +71,16 @@ public class QuestionVO {
 	public void setRightCommentary(String rightCommentary) {
 		this.rightCommentary = rightCommentary;
 	}
-	public String getLevelOfDifficulty() {
+	public int getLevelOfDifficulty() {
 		return levelOfDifficulty;
 	}
-	public void setLevelOfDifficulty(String levelOfDifficulty) {
+	public void setLevelOfDifficulty(int levelOfDifficulty) {
 		this.levelOfDifficulty = levelOfDifficulty;
 	}
-	public int getCategoryId() {
+	public String getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getQuestionType() {
@@ -107,13 +89,25 @@ public class QuestionVO {
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
 	}
-	
-	@Override
-	public String toString() {
-		return "QuestionVO [questionId=" + questionId + ", questionContent=" + questionContent + ", example1="
-				+ example1 + ", example2=" + example2 + ", example3=" + example3 + ", example4=" + example4
-				+ ", rightAnswer=" + rightAnswer + ", rightCommentary=" + rightCommentary + ", levelOfDifficulty="
-				+ levelOfDifficulty + ", categoryId=" + categoryId + ", questionType=" + questionType + "]";
+	public String getExamId() {
+		return examId;
 	}
+	public void setExamId(String examId) {
+		this.examId = examId;
+	}
+	public String getSetExamQuestionId() {
+		return setExamQuestionId;
+	}
+	public void setSetExamQuestionId(String setExamQuestionId) {
+		this.setExamQuestionId = setExamQuestionId;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	
+	
 
 }
