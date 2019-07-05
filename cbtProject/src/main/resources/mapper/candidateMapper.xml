@@ -69,6 +69,10 @@
 			SELECT COUNT(*) FROM TAKER
 		</select>
 		
+		<select id="idcheck" parameterType="String" resultType="Integer">
+			SELECT	COUNT(*) FROM TAKER
+      		WHERE   takerId = #{takerId}
+		</select>
 </mapper>
  
  

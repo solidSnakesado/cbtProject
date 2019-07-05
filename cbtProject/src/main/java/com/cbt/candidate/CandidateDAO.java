@@ -38,9 +38,14 @@ public class CandidateDAO {
 	public int getCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
+<<<<<<< HEAD
+	public int idcheck(String takerId) {
+		return mybatis.selectOne(takerId);
+=======
 	
 	// 이승환이 쓰고있음
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 	}
 }
