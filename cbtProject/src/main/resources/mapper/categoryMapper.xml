@@ -16,7 +16,7 @@
 				,CATEGORY_SMALL_ID
 			)
 		VALUES (  
-				#{categoryId}
+				category_id_seq.nextval
 				, #{categoryName}
 				, #{categoryMainId}
 				, #{categoryMiddleId}

@@ -3,6 +3,7 @@ package com.cbt.category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,6 +28,15 @@ public class CategoryController {
 	@RequestMapping(value = "insertCategory.do", method = RequestMethod.POST)
 	public String insertCategory(CategoryVO vo) {
 		categoryService.insertCategory(vo);
+		return "redirect:categoryMain.do";
+	}
+	
+	@RequestMapping(value = "deleteCategory.do/{categoryId}", method = RequestMethod.POST)
+	public String deleteCategory(@PathVariable("categoryId") int categoryId) {
+		CategoryVO vo = new CategoryVO();
+		vo.setCategoryId(categoryId);
+		categoryService.deleteCategory(vo);
+		
 		return "redirect:categoryMain.do";
 	}
 }

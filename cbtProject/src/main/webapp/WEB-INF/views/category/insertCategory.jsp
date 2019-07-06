@@ -106,6 +106,12 @@
 		});
 		
 		$("#submitBtn").click(function() {
+			var categoryName = $("#categoryName").val();
+			if(categoryName == '' || categoryName == null){
+				alert("카테고리 이름을 입력해 주세요.");
+				return false;
+			}
+			
 			var selectedIdx = $("#mainCategory option:selected").val();
 			if(selectedIdx == -1){
 				alert("대분류를 입력해 주세요.");
@@ -131,15 +137,15 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath }/insertCategory.do" method="post" id="insertCategoryForm">
-		이름 : <input type="text" name="catego">
+		카테고리 이름 : <input type="text" name="categoryName" id="categoryName">
 		대분류
-		<select name="mainCategory" id="mainCategory">
+		<select name="categoryMainId" id="mainCategory">
 		</select>
 		중분류
-		<select name="middleCategory" id="middleCategory">
+		<select name="categoryMiddleId" id="middleCategory">
 		</select>
 		소분류
-		<select name="smallCategory" id="smallCategory">
+		<select name="categorySamllId" id="smallCategory">
 		</select>
 		<input type="button" id="submitBtn" value="카테고리 생성">
 		<input type="reset" value="취소">
