@@ -2,18 +2,11 @@ package com.cbt.category;
 
 public class CategoryVO {
 	/*19 07 03 재홍 DB맞게 수정*/
-	private String 	categoryId;
+	private int 	categoryId;
 	private int 	categoryMainId;
 	private int 	categoryMiddleId;
 	private int 	categorySamllId;
-	
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
+	private String	categoryName;
 
 	public int getCategoryMainId() {
 		return categoryMainId;
@@ -37,6 +30,22 @@ public class CategoryVO {
 
 	public void setCategorySamllId(int categorySamllId) {
 		this.categorySamllId = categorySamllId;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }

@@ -5,15 +5,19 @@
 	<!-- 카테고리 등록 -->
 	<!-- 2019.07.04 성재민 -->
 	<!-- where update set 부분을 쿼리가 아니라 키워드 명령어로 처리 하게 변경  -->
+	<!-- 2019.07.05 성재민 -->
+	<!-- 카테고리 이름 컬럼 추가 -->
 	<insert id="insertCategory" parameterType="CategoryVO">
 		INSERT INTO CATEGORY (	  
 				CATEGORY_ID
+				,CATEGORY_NAME
 				,CATEGORY_MAIN_ID
 				,CATEGORY_MIDDLE_ID
 				,CATEGORY_SMALL_ID
 			)
 		VALUES (  
 				#{categoryId}
+				, #{categoryName}
 				, #{categoryMainId}
 				, #{categoryMiddleId}
 				, #{categorySamllId} 
@@ -35,6 +39,7 @@
 			UPDATE CATEGORY
 			<set>
 				CATEGORY_MAIN_ID   		= #{categoryMainId}
+				, CATEGORY_NAME			= #{categoryName}
 				, CATEGORY_MIDDLE_ID 	= #{categoryMiddleId}
 				, CATEGORY_SMALL_ID  	= #{categorySamllId}
 			</set>
@@ -56,6 +61,7 @@
 	<select id="getCategory" resultType="CategoryVO">
 		SELECT 
 			CATEGORY_ID
+			,CATEGORY_NAME
 			,CATEGORY_MAIN_ID
 			,CATEGORY_MIDDLE_ID
 			,CATEGORY_SMALL_ID
@@ -69,6 +75,7 @@
 	<select id="getAllCategory" resultType="CategoryVO">
 		SELECT 
 			CATEGORY_ID
+			,CATEGORY_NAME
 			,CATEGORY_MAIN_ID
 			,CATEGORY_MIDDLE_ID
 			,CATEGORY_SMALL_ID
