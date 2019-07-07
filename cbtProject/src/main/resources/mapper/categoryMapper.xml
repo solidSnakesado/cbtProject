@@ -33,20 +33,16 @@
 	<!-- 카테고리 수정 -->
 	<!-- 전달되는 값이 하나라도 null 이거나 0 이하라면 진행하지 않는다. -->
 	<update id="updateCategory" parameterType="CategoryVO">
-		<if test="categoryMainId != null and categoryMainId gte 0) and
-					(categoryMiddleId != null and categoryMiddleId gte 0) and 
-					(categorySamllId != null and categorySamllId gte 0)">	
-			UPDATE CATEGORY
-			<set>
-				CATEGORY_MAIN_ID   		= #{categoryMainId}
-				, CATEGORY_NAME			= #{categoryName}
-				, CATEGORY_MIDDLE_ID 	= #{categoryMiddleId}
-				, CATEGORY_SMALL_ID  	= #{categorySamllId}
-			</set>
-			<where>
-				CATEGORY_ID = #{categoryId}
-			</where>
-		</if>
+		UPDATE CATEGORY
+		<set>
+			CATEGORY_MAIN_ID   		= #{categoryMainId}
+			, CATEGORY_NAME			= #{categoryName}
+			, CATEGORY_MIDDLE_ID 	= #{categoryMiddleId}
+			, CATEGORY_SMALL_ID  	= #{categorySamllId}
+		</set>
+		<where>
+			CATEGORY_ID = #{categoryId}
+		</where>
 	</update>
 	
 	<!-- 카테고리 삭제  -->

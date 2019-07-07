@@ -1,10 +1,8 @@
 package com.cbt.category;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +41,14 @@ public class CategoryController {
 	public String updateCategoryForm(@PathVariable("categoryId") int categoryId, Model model) {
 		CategoryVO vo = new CategoryVO();
 		vo.setCategoryId(categoryId);
-		CategoryVO getVo = categoryService.getCategory(vo);
 		model.addAttribute("updateTargetCategory", categoryService.getCategory(vo));
-		
 		return "category/updateCategory";
+	}
+	
+	@RequestMapping(value = "updateCategory.do", method = RequestMethod.POST)
+	public String updateCategory(CategoryVO vo) {
+		categoryService.updateCategory(vo);
+		return "redirect:categoryMain.do";
 	}
 	
 	@RequestMapping(value = "deleteCategory.do/{categoryId}", method = RequestMethod.GET)

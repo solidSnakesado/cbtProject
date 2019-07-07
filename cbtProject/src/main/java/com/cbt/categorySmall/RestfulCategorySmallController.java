@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbt.categoryMiddle.CategoryMiddleVO;
+
 @RestController
 public class RestfulCategorySmallController {
 	@Autowired
@@ -19,5 +21,15 @@ public class RestfulCategorySmallController {
 		CategorySmallVO vo = new CategorySmallVO();
 		vo.setCategoryMiddleId(middleIdx);
 		return categorySmallService.getCategorySmallList(vo);
+	}
+	
+	// 2019.07.08 성재민
+	// 이름 조회
+	@RequestMapping(value="getCategorySmallName.do/{id}", produces = "application/text; charset=utf8" ,method=RequestMethod.POST)
+	public String getCategorySmallName(@PathVariable("id") int id) {
+		CategorySmallVO vo = new CategorySmallVO();
+		vo.setCategorySmallId(id);
+		CategorySmallVO resultVo = categorySmallService.getCategorySmall(vo);
+		return resultVo.getCategorySmallName();
 	}
 }

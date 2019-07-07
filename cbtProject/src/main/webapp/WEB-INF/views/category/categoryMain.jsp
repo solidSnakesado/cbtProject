@@ -10,6 +10,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>카테고리 목록</title>
 <script type="text/javascript">
+	function setCategoryName(mainId, middleId, smallId) {
+		$.ajax({
+			type: "POST",
+			url:"${pageContext.request.contextPath}/getCategoryMainName.do/" + mainId,
+			success : function(data){
+				$("#categoryMainName_" + mainId).text(data);
+			}, error : function() {
+				alert('에러발생');
+			}
+		});
+		
+		$.ajax({
+			type: "POST",
+			url:"${pageContext.request.contextPath}/getCategoryMiddleName.do/" + middleId,
+			success : function(data){
+				$("#categoryMiddleName_" + middleId).text(data);
+			}, error : function() {
+				alert('에러발생');
+			}
+		});
+		
+		$.ajax({
+			type: "POST",
+			url:"${pageContext.request.contextPath}/getCategorySmallName.do/" + smallId,
+			success : function(data){
+				$("#categorySamllName_" + smallId).text(data);
+			}, error : function() {
+				alert('에러발생');
+			}
+		});
+	};
+
 	function categoryDelete(categoryId) {
 		/* $.ajax({
 			type: "POST",
@@ -44,22 +76,23 @@
 		<tr>
 			<th>카테고리 ID</th>
 			<th>카테고리 이름</th>
-			<!-- <th>대분류 ID</th>
-			<th>중분류 ID</th>
-			<th>소분류 ID</th> -->
+			<th>대분류</th>
+			<th>중분류</th>
+			<th>소분류</th>
 			<th></th>
 			<th></th>
 		</tr>
 		<c:forEach items="${categoryList}" var="category">
 			<tr>
 				<td>${category.categoryId}</td>
-				<td>${category.categoryName}</td>
-				<%-- <td>${category.categoryMainId}</td>
-				<td>${category.categoryMiddleId}</td>
-				<td>${category.categorySamllId}</td> --%>
+				<td>"${category.categoryName}"</td>
+				<td id="categoryMainName_${category.categoryMainId}"></td>
+				<td id="categoryMiddleName_${category.categoryMiddleId}"></td>
+				<td id="categorySamllName_${category.categorySamllId}"></td>
 				<td><button id="updateBtn" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
 				<td><button id="deleteBtn" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
 			</tr>
+			<script>setCategoryName("${category.categoryMainId}", "${category.categoryMiddleId}", "${category.categorySamllId}")</script>
 		</c:forEach>
 	</table>
 </body>

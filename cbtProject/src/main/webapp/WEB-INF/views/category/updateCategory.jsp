@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var temp = "${updateTargetCategory.categoryMainId}"; 
-		console.log(temp);
+		var isInit = false;
 		// 2019.07.05 성재민
 		// 페이지가 시작 하면 값들을 초기화 한다.
 		$("#mainCategory option").remove();
@@ -58,13 +57,12 @@
 			$("#middleCategory").append(optionBasicMiddle);
 			
 			$("#smallCategory option").remove();
-			var optionBasicSmall = $("<option value=-1>" + "소분류" + "</option>");
+			var optionBasicSmall = $("< value=-1>" + "소분류" + "</option>");
 			$("#smallCategory").append(optionBasicSmall);
 			
 			// 2019.07.05 성재민
 			// 대분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#mainCategory option:selected").val();
-			console.log(selectedIdx);
 			
 			$.ajax({
 				type: "POST",
@@ -81,8 +79,13 @@
 					// 2019.07.07 성재민
 					// 중분류 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
 					// 소분류 의 셀렉트 옵션 값을 채운다.
-					var middleId = "${updateTargetCategory.categoryMiddleId}";		
-					$("#middleCategory").val(middleId).trigger("change");
+					// 처음에 한번만 시행하도록 isInit 변수값 지정
+					if(isInit == false){
+						var middleId = "${updateTargetCategory.categoryMiddleId}";		
+						$("#middleCategory").val(middleId).trigger("change");
+					} else{
+						$("#middleCategory").val(-1).trigger("change");
+					}
 
 				}, error : function() {
 					alert('에러발생');
@@ -100,7 +103,6 @@
 			// 2019.07.05 성재민
 			// 중분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#middleCategory option:selected").val();
-			console.log(selectedIdx);
 			
 			$.ajax({
 				type: "POST",
@@ -118,9 +120,15 @@
 					// 2019.07.07 성재민
 					// 소분류 값을 전달받은 값으로 지정한다.
 					
-					var samllId = "${updateTargetCategory.categorySamllId}";		
-					console.log("소분류" + samllId);
-					$("#smallCategory").val(samllId).trigger("change");
+					if(isInit == false){
+						var samllId = "${updateTargetCategory.categorySamllId}";	
+						$("#smallCategory").val(samllId).trigger("change");
+						
+						isInit = true;
+					} else{
+						$("#smallCategory").val(-1).trigger("change");
+					}
+					
 				}, error : function() {
 					alert('에러발생');
 				}
@@ -152,7 +160,7 @@
 				return false;
 			}
 			
-			$("#insertCategoryForm").submit();
+			$("#updateCategoryForm").submit();
 		});
 		
 		$("#backPageBtn").click(function() {
@@ -162,8 +170,9 @@
 </script>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath }/insertCategory.do" method="post" id="insertCategoryForm">
-		카테고리 이름 : <input type="text" name="categoryName" id="categoryName">
+	<form action="${pageContext.request.contextPath }/updateCategory.do" method="post" id="updateCategoryForm">
+		<input type="hidden" name="categoryId" value="${updateTargetCategory.categoryId}">
+		카테고리 이름 : <input type="text" name="categoryName" id="categoryName" value="${updateTargetCategory.categoryName}">
 		<br><br>
 		대분류
 		<select name="categoryMainId" id="mainCategory">
@@ -175,8 +184,7 @@
 		<select name="categorySamllId" id="smallCategory">
 		</select>
 		<br><br>
-		<input type="button" id="submitBtn" value="카테고리 생성">
-		<input type="reset" value="값 초기화">
+		<input type="button" id="submitBtn" value="카테고리 수정">
 		<input type="button" id="backPageBtn" value="카테고리 메인으로">
 	</form>
 </body>
