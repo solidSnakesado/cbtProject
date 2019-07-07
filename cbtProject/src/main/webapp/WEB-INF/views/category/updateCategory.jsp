@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var temp = "${updateTargetCategory.categoryMainId}"; 
+		console.log(temp);
 		// 2019.07.05 성재민
 		// 페이지가 시작 하면 값들을 초기화 한다.
 		$("#mainCategory option").remove();
@@ -38,6 +40,11 @@
 					var optionMain = $("<option value=" + data[i].categoryMainId + ">" + data[i].categoryMainName + "</option>");
 					$("#mainCategory").append(optionMain);
 				}
+				// 2019.07.07 성재민
+				// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+				// 중분류 의 셀렉트 옵션 값을 채운다.
+				var mainId = "${updateTargetCategory.categoryMainId}";		
+				$("#mainCategory").val(mainId).trigger("change");
 			}, error : function() {
 				alert('에러발생');
 			}
@@ -70,6 +77,13 @@
 						var optionMain = $("<option value=" + data[i].categoryMiddleId + ">" + data[i].categoryMiddleName + "</option>");
 						$("#middleCategory").append(optionMain);
 					}
+					
+					// 2019.07.07 성재민
+					// 중분류 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+					// 소분류 의 셀렉트 옵션 값을 채운다.
+					var middleId = "${updateTargetCategory.categoryMiddleId}";		
+					$("#middleCategory").val(middleId).trigger("change");
+
 				}, error : function() {
 					alert('에러발생');
 				}
@@ -99,6 +113,14 @@
 						var optionMain = $("<option value=" + data[i].categorySmallId + ">" + data[i].categorySmallName + "</option>");
 						$("#smallCategory").append(optionMain);
 					}
+					
+					//$("#smallCategory option").val("${updateTargetCategory.categorySamllId}").attr("selected", "selected");
+					// 2019.07.07 성재민
+					// 소분류 값을 전달받은 값으로 지정한다.
+					
+					var samllId = "${updateTargetCategory.categorySamllId}";		
+					console.log("소분류" + samllId);
+					$("#smallCategory").val(samllId).trigger("change");
 				}, error : function() {
 					alert('에러발생');
 				}

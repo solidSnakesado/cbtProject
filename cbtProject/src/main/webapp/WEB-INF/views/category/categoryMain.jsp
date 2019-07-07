@@ -11,18 +11,35 @@
 <title>카테고리 목록</title>
 <script type="text/javascript">
 	function categoryDelete(categoryId) {
-		$.ajax({
+		/* $.ajax({
 			type: "POST",
 			url: "${pageContext.request.contextPath }/deleteCategory.do/" + categoryId,
 			success : function() {
-				
+				location.reload();
 			}
-		});
+		}); */
+		
+		/* var deleteform = $("<form></form>");
+		deleteform.attr("action", "${pageContext.request.contextPath }/deleteCategory.do/" + categoryId);
+	    deleteform.attr("method", "POST");
+	    deleteform.appendTo("body")
+		deleteform.submit();  */
+		
+		location.href = "${pageContext.request.contextPath }/deleteCategory.do/" + categoryId;
+	}
+	
+	function categoryInsert() {
+		location.href = "${pageContext.request.contextPath }/insertCategory.do/";
+	}
+	
+	function categoryUpdate(categoryId) {
+		location.href = "${pageContext.request.contextPath }/updateCategory.do/" + categoryId;
 	}
 </script>
 </head>
 <body>
 	<h3>카테고리 목록</h3>
+	<button id="insertCategoryBtn" name="insertCategoryBtn" onclick="categoryInsert()">카테고리 생성</button><br><br>
 	<table border="1">
 		<tr>
 			<th>카테고리 ID</th>
@@ -40,7 +57,7 @@
 				<%-- <td>${category.categoryMainId}</td>
 				<td>${category.categoryMiddleId}</td>
 				<td>${category.categorySamllId}</td> --%>
-				<td><button>수정하기</button></td>
+				<td><button id="updateBtn" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
 				<td><button id="deleteBtn" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
 			</tr>
 		</c:forEach>

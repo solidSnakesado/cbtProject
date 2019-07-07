@@ -57,28 +57,32 @@
 		</where>
 	</delete>
 	
+	<!-- 2019.07.07 성재민 -->
+	<!-- 값이 제대로 넘어오지 않아서 별칭으로 수정 -->
 	<!-- 카테고리 ID로 조회  -->
 	<select id="getCategory" resultType="CategoryVO">
 		SELECT 
-			CATEGORY_ID
-			,CATEGORY_NAME
-			,CATEGORY_MAIN_ID
-			,CATEGORY_MIDDLE_ID
-			,CATEGORY_SMALL_ID
+			CATEGORY_ID				"categoryId"
+			,CATEGORY_NAME			"categoryName"
+			,CATEGORY_MAIN_ID		"categoryMainId"
+			,CATEGORY_MIDDLE_ID		"categoryMiddleId"
+			,CATEGORY_SMALL_ID		"categorySamllId"
 		FROM CATEGORY
 		<where>
 			CATEGORY_ID = #{categoryId}
 		</where>
 	</select>
 	
+	<!-- 2019.07.07 성재민 -->
+	<!-- 값이 제대로 넘어오지 않아서 별칭으로 수정 -->
 	<!-- 모든 카테고리 조회 -->
 	<select id="getAllCategory" resultType="CategoryVO">
 		SELECT 
-			CATEGORY_ID
-			,CATEGORY_NAME
-			,CATEGORY_MAIN_ID
-			,CATEGORY_MIDDLE_ID
-			,CATEGORY_SMALL_ID
+			CATEGORY_ID				"categoryId"
+			,CATEGORY_NAME			"categoryName"
+			,CATEGORY_MAIN_ID		"categoryMainId"
+			,CATEGORY_MIDDLE_ID		"categoryMiddleId"
+			,CATEGORY_SMALL_ID		"categorySamllId"
 		FROM CATEGORY
 	</select>
 </mapper>
