@@ -245,11 +245,12 @@ public class CandidateController {
 	//
 	@RequestMapping("idcheck.do")
 	@ResponseBody
-	public Map<Object, Object> idcheck(@RequestBody String takerId) {
-		int count=0;
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		count = candidateService.idcheck(takerId);
-		map.put("cnt", count);
-		return map;
+	public String idcheck(@RequestBody String takerId) {
+		
+		String idRst;
+		int count=candidateService.idcheck(takerId);
+		if(count > 0)	idRst ="f";
+		else			idRst ="s";
+		return idRst;
 	}
 }

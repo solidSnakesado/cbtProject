@@ -40,7 +40,7 @@ public class CandidateDAO {
 	}
 
 	public int idcheck(String takerId) {
-		return mybatis.selectOne(takerId);
+		return mybatis.selectOne("idcheck",takerId.replace("=", ""));
 	}
 	
 	// 이승환이 쓰고있음

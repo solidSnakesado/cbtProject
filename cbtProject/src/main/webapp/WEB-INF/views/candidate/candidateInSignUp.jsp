@@ -7,6 +7,30 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+var idck = 0;
+function openIdChk() {
+    var takerId = $("takerId").val();
+    $.ajax({
+        async: false,
+        type : "post",
+        data : takerId,
+        url : "idcheck.do",
+        dataType : takerId,
+        contentType: "application/json; charset=UTF-8",
+        success : function(data) {
+            if (data== "s") {
+                alert("사용가능한 아이디입니다.");
+                $("#takerId").focus();
+                idck = 1
+            } else {
+                alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+            }
+        },
+        error : function(error) {
+            alert("error : " + error);
+        }
+    });
+};
 function checkForm() {
     var takerId 		= document.fmField.takerId;
     var idDuplication	= document.fmField.idDuplication;
@@ -22,6 +46,11 @@ function checkForm() {
         document.fmField.takerId.focus();
         document.getElementById('takerId').select();
         return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
+    }
+    if(idck == 0) { 
+    	window.alert("아이디 중복 체크를 해주세요."); 
+    	document.fmField.takerId.focuss(); 
+    	return false; 
     }
     // 암호 입력 유무 체크
     if(document.fmField.takerPassword.value == ''){
@@ -53,38 +82,6 @@ function checkForm() {
     }
 }
 </script>
-
-<script type="text/javascript">
-//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
-var idck = 0;
-$(function() {
-    $("#openIdChk").click(function() {
-        var takerId = document.fmField.takerId;
-        $.ajax({
-            async: false,
-            type : 'POST',
-            data : takerId,
-            url : "candidate/idcheck.do",
-            dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-            success : function(data) {
-                if (data.cnt > 0) {
-                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-                    $("#takerId").focus();
-                } else {
-                    alert("사용가능한 아이디입니다.");
-                    idck = 1;
-                }
-            },
-            error : function(error) {
-                alert("error : " + error);
-            }
-        });
-    });
-});
- 
- 
-</script>
 	
 	
 	
@@ -103,7 +100,7 @@ $(function() {
 			<tr>
 				<td>응시자ID</td>
 				<td><input type="text" name="takerId" id="takerId"></td>
-				<td><input type="button" value="중복확인" onclick="openIdChk()"></td>
+				<td><input type="button" value="중복확인" onclick="openIdChk();"/></td>
 			</tr>
 			<tr>
 				<td>응시자PW</td>
