@@ -17,7 +17,7 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@RequestMapping(value = "/company", method = RequestMethod.GET)
+	@RequestMapping(value = "companyMain.do", method = RequestMethod.GET)
 	public String companyMain() {
 		return "company/company/companyMain";
 	}
@@ -56,10 +56,17 @@ public class CompanyController {
 		
 		if(loginCompany != null) {
 			session.setAttribute("company", loginCompany);
-			targetPage = "company/company/companyMain";
+			targetPage = "redirect:companyMain.do";
 		}
 		
 		return targetPage;
+	}
+	
+	//로그아웃 폼
+	@RequestMapping(value="companyLogout.do", method=RequestMethod.GET)
+	public String companyLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:companyMain.do";
 	}
 	
 	@RequestMapping(value = "companyAccount.do",  method = RequestMethod.GET)
