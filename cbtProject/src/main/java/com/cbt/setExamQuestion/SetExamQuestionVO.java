@@ -1,44 +1,43 @@
 package com.cbt.setExamQuestion;
 
 public class SetExamQuestionVO {
-	
-	private String 	examId;
-	private String 	questionId;
-	private String 	setExamQuestionId;
-	private String 	point;
+	private int examId;
+	private int questionId;
+	private int setExamQuestionId;
+	private int point;
 
 	public SetExamQuestionVO() {
 	}
 	
-	public String getExamId() {
+	public int getExamId() {
 		return examId;
 	}
 
-	public void setExamId(String examId) {
+	public void setExamId(int examId) {
 		this.examId = examId;
 	}
 
-	public String getQuestionId() {
+	public int getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 
-	public String getSetExamQuestionId() {
+	public int getSetExamQuestionId() {
 		return setExamQuestionId;
 	}
 
-	public void setSetExamQuestionId(String setExamQuestionId) {
+	public void setSetExamQuestionId(int setExamQuestionId) {
 		this.setExamQuestionId = setExamQuestionId;
 	}
 
-	public String getPoint() {
+	public int getPoint() {
 		return point;
 	}
 
-	public void setPoint(String point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 
@@ -47,5 +46,4 @@ public class SetExamQuestionVO {
 		return "SetExamQuestionVO [examId=" + examId + ", questionId=" + questionId + ", setExamQuestionId="
 				+ setExamQuestionId + ", point=" + point + "]";
 	}
-	
 }

@@ -11,23 +11,19 @@ public class SurveyServiceImpl implements SurveyService {
 	SurveyDAO dao;
 	
 	public void insertSurvey(SurveyVO vo) {
-		
 		dao.insertSurvey(vo);
 	}
 
 	public void updateSurvey(SurveyVO vo) {
-		
 		dao.updateSurvey(vo);
 	}
 
 	public void deleteSurvey(SurveyVO vo) {
-		
 		dao.deleteSurvey(vo);
 	}
 
 	public SurveyVO getSurvey(SurveyVO vo) {
-		
-		return null;
+		return dao.getSurvey(vo);
 	}
 
 }
