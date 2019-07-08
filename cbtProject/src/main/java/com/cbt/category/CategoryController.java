@@ -19,12 +19,12 @@ public class CategoryController {
 	@RequestMapping(value = "categoryMain.do", method = RequestMethod.GET)
 	public String categoryMain(Model model) {
 		model.addAttribute("categoryList", categoryService.getAllCategoryMap());
-		return "category/categoryMain";
+		return "manager/category/categoryMain";
 	}
 	
 	@RequestMapping(value = "insertCategory.do", method = RequestMethod.GET)
 	public String insertCategoryForm() {
-		return "category/insertCategory";
+		return "manager/category/insertCategory";
 	}
 	
 	@RequestMapping(value = "insertCategory.do", method = RequestMethod.POST)
@@ -42,7 +42,7 @@ public class CategoryController {
 		CategoryVO vo = new CategoryVO();
 		vo.setCategoryId(categoryId);
 		model.addAttribute("updateTargetCategory", categoryService.getCategory(vo));
-		return "category/updateCategory";
+		return "manager/category/updateCategory";
 	}
 	
 	@RequestMapping(value = "updateCategory.do", method = RequestMethod.POST)

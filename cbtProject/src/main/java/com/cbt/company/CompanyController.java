@@ -23,7 +23,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.GET)
 	public String companySignUpForm() {
-		return "company/companySignUp";
+		return "company/company/companySignUp";
 	}
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
