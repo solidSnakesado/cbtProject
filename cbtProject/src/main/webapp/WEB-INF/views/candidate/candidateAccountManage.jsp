@@ -25,7 +25,7 @@
 	</script> 
 -->
 
-	<header id="header"></header>
+<!-- 	<header id="header"></header>
 <section>
    <article>
       <ul>
@@ -34,7 +34,7 @@
          <li><a href="candidatePersonalChart.do"><button>통계</button></a></li>
       </ul>
    </article>
-</section>
+</section> -->
 
 <h1>나의 정보</h1>
 <form action="deleteCandidate.do" method="POST">
