@@ -17,11 +17,14 @@
 	</script>
 	<header id="header"></header>
 	<h3>상담 세부 항목(기업)</h3>
-	
 	<table border="1">
 		<tr>
-			<th>상담코드</th>
-			<td><input type="text" name="consultingId" id="consultingId" value="${consulting.consultingId}" readonly></td>
+			<th>기업ID</th>
+			<td><input type="text" name="companyId" id="companyId" value="${consulting.companyId}" style="width: 100%;" readonly="readonly"></td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td><input type="text" name="consultingTitle" id="consultingTitle" value="${consulting.consultingTitle}" style="width: 100%;"></td>
 		</tr>
 		<tr>
 			<th>상담희망일</th>
@@ -34,10 +37,6 @@
 		<tr>
 			<th>상담일</th>
 			<td><input type="text" name="consultingDate" id="consultingDate" readonly="readonly" value="${consulting.consultingDate}"></td>
-		</tr>
-		<tr>
-			<th>진행상태</th>
-			<td><input type="text" name="consultingState" id="consultingState" readonly="readonly" value="${consulting.consultingState}"></td>
 		</tr>
 	</table>
 	<br>
