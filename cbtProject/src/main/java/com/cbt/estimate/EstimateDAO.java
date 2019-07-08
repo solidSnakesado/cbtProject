@@ -28,7 +28,7 @@ public class EstimateDAO {
 	}
 	
 	public EstimateVO getEstimate(EstimateVO vo) {
-		return mybatis.selectOne("EstimateDAO.getConsulting", vo);
+		return mybatis.selectOne("EstimateDAO.getEstimate", vo);
 	}
 	
 	public List<EstimateVO> getEstimateList(EstimateVO vo) {

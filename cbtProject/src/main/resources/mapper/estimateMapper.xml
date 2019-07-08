@@ -20,7 +20,8 @@
 								, EXAM_CLASSFICATION
 								, COMPANY_ID
 								, EXAM_COUNT
-								, EXAM_INTERVAL )
+								, EXAM_INTERVAL
+								, ESTIMATE_NAME )
 		VALUES ( #{estimateId}
 				,#{estimatePrice}
 				,SYSDATE <!-- REQUEST_DAY -->
@@ -37,26 +38,14 @@
 				,#{examClassfication}
 				,#{companyId}
 				,#{examCount}
-				,#{examInterval})
+				,#{examInterval}
+				,#{estimateName})
 	</insert>
 	
 	<!-- 의뢰 수정 -->
 	<update id="updateEstimate" parameterType="EstimateVO">
-		UPDATE ESTIMATE SET ESTIMATE_PRICE  	= #{estimatePrice}
-						,	REQUEST_DAY	    	= #{requestDay}
-						,	TRADE_PROGRESS  	= #{tradeProgress}
-						,	REMARKS 	    	= #{remarks}
-						,	APPLICANTS			= #{applicants}
-						,	LEVEL_OF_DIFFICULTY	= #{levelOfDifficulty}
-						,	CANDIDATE			= #{candidate}
-						,	APPLY_PURPOSE		= #{applyPurpose}
-						,	EXAM_DATE			= #{examDate}
-						,	CATEGORY_ID			= #{categoryId}
-						,	EXAM_CLASSFICATION	= #{examClassfication}
-						,	COMPANY_ID			= #{companyId}
-						,	EXAM_COUNT			= #{examCount}
-						,	EXAM_INTERVAL		= #{examInterval}
-		WHERE ESTIMATE_ID = #{estimateId}
+		UPDATE ESTIMATE SET ESTIMATE_ID=8
+		WHERE ESTIMATE_ID = 6
 	</update>
 	
 	<!-- 의뢰 ID로 삭제 -->
@@ -68,6 +57,7 @@
 	<!-- 의뢰목록 ID로 조회 -->
 	<select id="getEstimate" resultType="EstimateVO">
 		SELECT 	  ESTIMATE_ID
+				, ESTIMATE_NAME
 				, ESTIMATE_PRICE
 				, REQUEST_DAY
 				, TRADE_PROGRESS
@@ -81,14 +71,17 @@
 				, EXAM_CLASSFICATION
 				, COMPANY_ID
 				, EXAM_COUNT
-				, EXAM_INTERVAL
+				, EXAM_INTERVAL 
+				
 		FROM ESTIMATE
 		WHERE ESTIMATE_ID = #{estimateId}
+		
 	</select>
 	
 	<!-- 의뢰목록 전체 조회 -->
 		<select id="getEstimateList" resultType="EstimateVO">
 		SELECT 	  ESTIMATE_ID
+				, ESTIMATE_NAME
 				, ESTIMATE_PRICE
 				, REQUEST_DAY
 				, TRADE_PROGRESS
@@ -104,5 +97,6 @@
 				, EXAM_COUNT
 				, EXAM_INTERVAL
 		FROM ESTIMATE
+		ORDER BY REQUEST_DAY DESC
 	</select>
 </mapper>
