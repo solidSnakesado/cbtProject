@@ -128,7 +128,7 @@ public class CandidateController {
 	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
 	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
 	public String insertCandidateForm() {
-		return "candidate/candidateInSignUp";
+		return "candidate/candidate/candidateInSignUp";
 	}
 	
 	//등록처리  2019.07.01 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
@@ -139,22 +139,28 @@ public class CandidateController {
 	}
 	@RequestMapping(value = "candidateAccount.do",  method = RequestMethod.GET)
 	public String canidateAccount() {		
-		return "candidate/candidateAccount";
+		return "candidate/candidate/candidateAccount";
 	}
-	//로그인  2019.07.03 생성 ver.2
+	//로그아웃 폼
+	@RequestMapping(value="candidateLogout.do", method=RequestMethod.GET)
+	public String candidateLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:candidateMain.do";
+	}
+	//로그인 폼  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.GET)
 	public String candidateLoginForm() {
-		return "candidate/candidateLogin";
+		return "candidate/candidate/candidateLogin";
 	}
 	//로그인  2019.07.02 생성 ver.1
 	/* 
 	 * @RequestMapping(value="candidateLogin.do", method=RequestMethod.GET) public
 	 * String candidateLoginForm() { return "candidate/candidateLogin"; }
 	 */
-	//로그인  2019.07.03 생성 ver.2
+	//로그인 처리  2019.07.03 생성 ver.2
 	@RequestMapping(value="candidateLogin.do", method=RequestMethod.POST)
 	public String candidateLogin(CandidateVO vo, HttpSession session) {
-		String targetPage = "candidate/candidateLogin";
+		String targetPage = "candidate/candidate/candidateLogin";
 		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
 		
 		if(loginCandidate != null) {
@@ -176,8 +182,10 @@ public class CandidateController {
 	 */
 	//계정수정 form		 장세준 (7/3 ver.2)
 	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
-	public String updateCandidateForm() {
-		return "candidate/candidateAccountManageModify";
+	public String updateCandidateForm(CandidateVO vo, Model model, HttpSession session) {
+		vo.setTakerId(((CandidateVO)session.getAttribute("candidate")).getTakerId());
+		model.addAttribute("candidate", candidateService.getCandidate(vo));
+		return "candidate/candidate/candidateAccountManageModify";
 	}
 	//계정수정 form		 장세준 (7/3 ver.1)
 	/*
