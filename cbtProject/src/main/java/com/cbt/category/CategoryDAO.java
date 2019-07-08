@@ -1,6 +1,8 @@
 package com.cbt.category;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,11 @@ public class CategoryDAO {
 	
 	public List<CategoryVO> getAllCategory() {
 		return mybatis.selectList("categoryDAO.getAllCategory");
+	}
+	
+	// 2019.07.08 성재민
+	// 대,중,소 분류 id 값이 아니라 이름값으로 가져오는 함수
+	public List<Map<String, String>> getAllCategoryMap() {
+		return mybatis.selectList("categoryDAO.getAllCategoryMap");
 	}
 }

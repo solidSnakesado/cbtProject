@@ -18,7 +18,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "categoryMain.do", method = RequestMethod.GET)
 	public String categoryMain(Model model) {
-		model.addAttribute("categoryList", categoryService.getAllCategory());
+		model.addAttribute("categoryList", categoryService.getAllCategoryMap());
 		return "category/categoryMain";
 	}
 	

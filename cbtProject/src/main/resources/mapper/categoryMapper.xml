@@ -81,4 +81,23 @@
 			,CATEGORY_SMALL_ID		"categorySamllId"
 		FROM CATEGORY
 	</select>
+	
+	<!-- 2019.07.08 성재민 -->
+	<!-- 카테고리 와 대/중/소 분류 이름을 join 하여서 다 가져옴 -->
+	<select id="getAllCategoryMap" resultType="map">
+		SELECT 
+				CATEGORY_ID 			"categoryId"
+				,CATEGORY_NAME 			"categoryName"
+				,CATEGORY_MAIN_NAME 	"categoryMainName"
+				,CATEGORY_MIDDLE_NAME 	"categoryMiddleName"
+				,CATEGORY_SMALL_NAME	"categorySamllName"
+		FROM 	CATEGORY C
+		JOIN 	CATEGORY_MAIN M
+		ON 		C.CATEGORY_MAIN_ID 		= M.CATEGORY_MAIN_ID
+		JOIN 	CATEGORY_MIDDLE MI
+		ON 		C.CATEGORY_MIDDLE_ID 	= MI.CATEGORY_MIDDLE_ID
+		JOIN 	CATEGORY_SMALL S
+		ON 		C.CATEGORY_SMALL_ID 	= S.CATEGORY_SMALL_ID
+		ORDER BY CATEGORY_ID
+	</select>
 </mapper>
