@@ -1,6 +1,5 @@
 package com.cbt.question;
 
-import java.util.List;
 
 public class QuestionVO {
 	
@@ -21,8 +20,15 @@ public class QuestionVO {
 	private String examId;
 	private String setExamQuestionId;
 	private int point;
+	private int count;
 	
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getQuestionId() {
 		return questionId;
 	}

@@ -1,8 +1,10 @@
 package com.cbt.question;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Phaser;
 
 import javax.annotation.Resource;
 
@@ -80,6 +82,42 @@ public class QuestionServiceImpl implements QuestionService {
 		List<QuestionVO> list = questionDAO.candidateTakeExamList(vo);
 		
 		return list;
+	}
+
+	public List<Map<Object, String>> getTestStart(QuestionVO vo) {
+		List<Map<Object, String>> list = new ArrayList<Map<Object,String>>();
+		Map<Object, String> map = new HashMap<Object, String>();
+		List<QuestionVO> daoList = questionDAO.getTestStart(vo);
+		
+		System.out.println(daoList);
+		
+		for(QuestionVO dto : daoList) {
+			map = new HashMap<Object, String>();
+			map.put("questionId", dto.getQuestionId());
+			map.put("questionContent", dto.getQuestionContent());
+			map.put("example1", dto.getExample1());
+			map.put("example2", dto.getExample2());
+			map.put("example3", dto.getExample3());
+			map.put("example4", dto.getExample4());
+			map.put("rightAnswer", dto.getRightAnswer());
+			map.put("rightCommentary", dto.getRightCommentary());
+			map.put("levelOfDifficulty", Integer.toString(dto.getLevelOfDifficulty()));
+			map.put("categoryId", dto.getCategoryId());
+			map.put("questionType", dto.getQuestionType());
+			map.put("examId", dto.getExamId());
+			map.put("setExamQuestionId", dto.getSetExamQuestionId());
+			map.put("point", Integer.toString(dto.getPoint()));
+			
+			list.add(map);
+			
+		}
+		
+		return list;
+	}
+
+	public QuestionVO getCount(QuestionVO vo) {
+		
+		return questionDAO.getCount(vo);
 	}
 	
 	

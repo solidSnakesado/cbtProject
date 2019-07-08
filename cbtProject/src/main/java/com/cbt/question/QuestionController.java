@@ -1,13 +1,13 @@
 package com.cbt.question;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -29,7 +29,27 @@ public class QuestionController {
 		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
 		mv.setViewName("candidate/candidateTakeExam");
 		
+		System.out.println(mv);
+		
 		return mv;
+	}
+	
+//	@RequestMapping("candidateTakeExam.do")	
+//	public String candidateTakeExam() {
+//		
+//		return "candidate/candidateTakeExam";
+//	}
+	
+	@RequestMapping("/getTestStart.do")
+	@ResponseBody
+	public List<Map<Object, String>> getTestStart() {
+		QuestionVO vo = new QuestionVO();
+		vo.setExamId("E001");
+		List<Map<Object, String>> list = questionService.getTestStart(vo);
+		
+		System.out.println(list);
+		
+		return list;
 	}
 	
 	@RequestMapping("candidateRightAnswer.do")
@@ -45,8 +65,24 @@ public class QuestionController {
 		return mv;
 	}
 	
+	@RequestMapping("getTestResultList.do")
+	public ModelAndView getTestResultList() {
+		QuestionVOt vo = new QuestionVOt();
+		vo.setTakeExamId("1");
+		vo = questionService.getTestResultList(vo);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("getExamId", vo.getExamId());
+		mv.addObject("getExamName", vo.getExamName());
+		mv.addObject("getPassingScore", vo.getPassingScore());
+		mv.addObject("getPoint", vo.getPoint());
+		mv.addObject("getTakeExamId", vo.getTakeExamId());
+		mv.addObject("getTakerName", vo.getTakerName());
+		mv.addObject("getCount", vo.getCount());
+		mv.setViewName("candidate/candidateTestResult");
 		
-		
+		return mv;
+	}
+
 //	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)
 //	public String candidateTestResult() {
 //		return "candidate/candidateTestResult";
@@ -76,23 +112,4 @@ public class QuestionController {
 //		
 //		return mv;
 //	}
-	
-	@RequestMapping("getTestResultList.do")
-	public ModelAndView getTestResultList() {
-		QuestionVOt vo = new QuestionVOt();
-		vo.setTakeExamId("1");
-		vo = questionService.getTestResultList(vo);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("getExamId", vo.getExamId());
-		mv.addObject("getExamName", vo.getExamName());
-		mv.addObject("getPassingScore", vo.getPassingScore());
-		mv.addObject("getPoint", vo.getPoint());
-		mv.addObject("getTakeExamId", vo.getTakeExamId());
-		mv.addObject("getTakerName", vo.getTakerName());
-		mv.addObject("getCount", vo.getCount());
-		mv.setViewName("candidate/candidateTestResult");
-		
-		return mv;
-	}
-
 }

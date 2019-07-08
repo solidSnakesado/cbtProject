@@ -32,6 +32,7 @@
 		<result property="setExamQuestionId" column="SET_EXAM_QUESTION_ID" javaType="string" />
 		<result property="point" column="POINT" javaType="int" />
 		<result property="examId" column="EXAM_ID" javaType="string" />
+		<result property="count" column="count(*)" javaType="int" />
 	</resultMap>
 	
 	<!-- <select id="getTestList" statementType="CALLABLE">
@@ -98,6 +99,20 @@
 				s.SET_EXAM_QUESTION_ID, 
 				s.POINT, 
 				s.EXAM_ID
+				
+		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
+                   
+                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
+                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
+                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
+                    ON s.QUESTION_ID = q.QUESTION_ID
+                    
+           WHERE e.EXAM_ID = #{examId} 
+           and q.QUESTION_ID = s.QUESTION_ID
+	</select>
+	
+	<select id="getCount" resultMap="questionVO">
+		SELECT 	COUNT(*)
 				
 		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
                    
