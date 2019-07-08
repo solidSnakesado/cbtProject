@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -74,5 +75,19 @@ public class CompanyController {
 		session.invalidate();
 		
 		return "redirect:companyLogin.do";
+	}
+	// 관리자 컴퍼니 상세조회, 수정폼
+	@RequestMapping(value="managerAccountManage.do/{companyId}", method=RequestMethod.GET)
+	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
+		vo.setCompanyId(companyId);
+		model.addAttribute("result", companyService.getCompany(vo));
+		return "manager/managerAccountManage";
+	}
+	
+	// 관리자 컴퍼니 정보 수정처리
+	@RequestMapping("updateManagerAccount.do")
+	public String updateManagerAccount(@ModelAttribute("company") CompanyVO vo) {
+		companyService.updateCompany(vo);
+		return "redirect:managerAccountList.do";
 	}
 }

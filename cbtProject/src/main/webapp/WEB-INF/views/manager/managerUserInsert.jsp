@@ -26,47 +26,23 @@
 		<h1 >응시자 등록 페이지(관리자 화면)</h1>
 	<hr>	
 	</div>
-<form>
-		<table border="1" align="center">
-		<tr>
-			<td>성명</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>주민등록번호</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>E-mail</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>최종학력</td>
-			<td><select name="job">
+<form action="managerUserInsert.do" method="post" enctype="application/x-www-form-urlencoded">
+			응시자ID : <input type="text" name="takerId">
+			성명 : <input type="text" name="takerName">
+			주민등록번호 : <input type="text" name="takerInfo">
+			최종학력 : <select name="takerEducation">
 					<option>중졸</option>
 					<option>고졸</option>
 					<option>초대졸</option>
 					<option>대졸</option>
 					<option>석사</option>
 					<option>박사</option>
-			</select></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>연락처</td>
-			<td></td>
-			<td></td>
-		</tr>
-	</table>
-	<br>
-	<br>
-	</form>			
-	
-	<button onclick="location.href='managerUserAccountList.jsp'">등록</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='managerUserAccountList.jsp'">돌아가기</button>
-
+					</select>
+			E-mail : <input type="text" name="takerEmail">
+			연락처 : 	<input type="text" name="takerPhoneNum">
+		</form>
+	<button onclick="location.href='managerUserAccountList.jsp'">등록</button>&nbsp;&nbsp;&nbsp;
+	<button onclick="location.href='managerUserAccountList.jsp'">돌아가기</button>
 </body>
 </html>
     

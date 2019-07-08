@@ -111,6 +111,43 @@
 			AND COMPANY_PASSWORD = #{companyPassword}
 		</where>
 	</select>
+	<!-- 0708 이승환 추가 -->
+	<select id="managerAccountManage" resultType="CompanyVO">
+		SELECT 
+			COMPANY_ID
+			,COMPANY_NAME
+			,COMPANY_PASSWORD
+			,COMPANY_CLASSIFICATION
+			,COMPANY_MANAGER
+			,COMPANY_MANAGER_TELNUM
+		FROM COMPANY
+	</select>
+	
+	<!-- 0708 이승환 추가 -->
+	<update id="updateManagerAccount" parameterType="CompanyVO">
+		UPDATE COMPANY
+		<set>
+			<if test="companyId != null and companyId != '' ">
+				COMPANY_ID = #{companyId},
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				COMPANY_NAME = #{companyName},
+			</if>
+			<if test="companyPassword != null and companyPassword != '' ">
+				COMPANY_PASSWORD = #{companyPassword},
+			</if>
+			<if test="companyClassification != null and companyClassification != '' "> 
+				COMPANY_CLASSIFICATION = #{companyClassification},
+			</if>
+			<if test="companyManager != null and companyManager != '' ">
+				COMPANY_MANAGER = #{companyManager},
+			</if>
+			<if test="companyManagerTelNum != null and companyManagerTelNum != '' ">
+				COMPANY_MANAGER_TELNUM = #{companyManagerTelNum}
+			</if>
+		</set>
+		WHERE COMPANY_ID = #{companyId}	
+	</update>
 </mapper>
  
  
