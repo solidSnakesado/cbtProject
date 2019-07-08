@@ -4,11 +4,13 @@ import java.sql.Timestamp;
 
 public class ExamVO {
 
-	private String 		examId;
+	// 2019.07.08 성재민
+	// examId, estimateId 타입 int 로 변경
+	private int 		examId;
 	private Timestamp 	examStartTime;
 	private Timestamp 	examEndTime;
 	private int 		questionQuantity;
-	private String 		estimateId;
+	private int 		estimateId;
 	private int 		numberOfTimes;
 	private int 		passingScore;
 	private int 		possibleApplicants;
@@ -16,14 +18,6 @@ public class ExamVO {
 	private int 		examStatus;
 	private int 		disclosureStatus;
 	private int 		setExamStatus;
-	
-	public String getExamId() {
-		return examId;
-	}
-	
-	public void setExamId(String examId) {
-		this.examId = examId;
-	}
 	
 	public Timestamp getExamStartTime() {
 		return examStartTime;
@@ -47,14 +41,6 @@ public class ExamVO {
 	
 	public void setQuestionQuantity(int questionQuantity) {
 		this.questionQuantity = questionQuantity;
-	}
-	
-	public String getEstimateId() {
-		return estimateId;
-	}
-	
-	public void setEstimateId(String estimateId) {
-		this.estimateId = estimateId;
 	}
 	
 	public int getNumberOfTimes() {
@@ -113,6 +99,22 @@ public class ExamVO {
 		this.setExamStatus = setExamStatus;
 	}
 	
+	public int getExamId() {
+		return examId;
+	}
+
+	public void setExamId(int examId) {
+		this.examId = examId;
+	}
+
+	public int getEstimateId() {
+		return estimateId;
+	}
+
+	public void setEstimateId(int estimateId) {
+		this.estimateId = estimateId;
+	}
+
 	@Override
 	public String toString() {
 		return "ExamVO [examId=" + examId + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
@@ -121,7 +123,4 @@ public class ExamVO {
 				+ ", examName=" + examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
 				+ ", setExamStatus=" + setExamStatus + "]";
 	}
-	
-	
-	
 }

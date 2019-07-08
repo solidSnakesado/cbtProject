@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,27 +8,21 @@
 <title>Insert title here</title>
 <title>CBT 시험 일정 확인</title>
 
+
 <script>
-	function showPopup(){
-		var innerWidth = window.innerWidth/2;
-		var innerHeight= window.innerHeight/2;
-		
-		window.open("test_List_Detail.html","a","height=innerHeight ,width=innerWidth,left=0,top=0");
+	// 2019.07.09 성재민 
+	// showPopup() 메소드 변수 하나 받게 수정
+	// 팝업창이 아니라 다음 화면으로 이동하게 수정
+	function showDetail(examId){
+		location.href = "companyExamListDetail.do/" + examId;
 	}
 </script>
 </head>
-
-	
 <body>
 시험목록확인(기업)
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#header").load("co_header.html")
-		});
-	</script>
 	<header id="header"></header>
    <section>
    <article>
@@ -40,33 +35,18 @@
    </article>
 </section>
 	<table border="1" align="center">
-	<tr >
-		<th>시험분류</th>
-		<th>시험이름</th>
-		<th>시험일시</th>
-		<th>결제여부</th>
-	
-	</tr>
-	<tr onclick="showPopup();">
-		<td>재직자 테스트</td>
-		<td>재직자 내  테스트</td>
-		<td>2019.03.04 13:30 ~ 15 : 00</td>
-		<td>완료</td>
-	</tr>
-	<tr onclick="showPopup();">
-		<td>신입사원테스트</td>
-		<td>신입사원 타자 경진대회</td>
-		<td>2019.03.04 13:30 ~ 15 : 00</td>
-		<td>미결</td>
-	</tr>
-	<tr onclick="showPopup();">
-		<td>..</td>
-		<td>..</td>
-		<td>..</td>
-		<td>..</td>
-		
-	</tr>
-	
+		<tr >
+			<th>시험이름</th>
+			<th>시험일시</th>
+		</tr>
+		<!-- 2019.07.09 성재민 -->
+		<!-- c:forEach 로 값 설정 -->
+		<c:forEach items="${companyExamList}" var="exam">
+			<tr onclick="showDetail(${exam.examId});">
+				<td>${exam.examName}</td>
+				<td>${exam.examStartTime}</td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>
