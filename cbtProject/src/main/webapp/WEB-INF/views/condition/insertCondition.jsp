@@ -14,7 +14,7 @@
 		마스터 이름 : <input type="text" name="masterNm"><br>
 		상세 코드 : <input type="text" name="detailCd"><br>
 		상세 이름 : <input type="text" name="detailNm"><br>
-		사용 여부 : <input type="text" name="useYn"><br>
+		사용 여부 : <input type="text" name="useYn" placeholder="Y or N"><br>
 		
 		<input type="submit" id="submit" value="등록">
 		

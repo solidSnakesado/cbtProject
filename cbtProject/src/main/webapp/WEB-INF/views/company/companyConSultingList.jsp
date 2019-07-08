@@ -6,9 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<title>CBT 시험 일정 확인</title>
+<title>CBT 상담 목록</title>
 </head>
 
 

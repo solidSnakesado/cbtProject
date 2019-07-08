@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.Paging;
@@ -238,4 +241,16 @@ public class CandidateController {
 //	public String candidateTakeExam() {
 //		return "candidate/candidateTakeExam";
 //	}
+	
+	//
+	@RequestMapping("idcheck.do")
+	@ResponseBody
+	public String idcheck(@RequestBody String takerId) {
+		
+		String idRst;
+		int count=candidateService.idcheck(takerId);
+		if(count > 0)	idRst ="f";
+		else			idRst ="s";
+		return idRst;
+	}
 }

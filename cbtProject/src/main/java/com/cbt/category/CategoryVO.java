@@ -2,57 +2,49 @@ package com.cbt.category;
 
 public class CategoryVO {
 	/*19 07 03 재홍 DB맞게 수정*/
-	private String categoryId;
-	private int mainCategory;
-	private int middleCategory;
-	private int smallCategory;
-	
-	
-	public String getCategoryId() {
+	private int 	categoryId;
+	private int 	categoryMainId;
+	private int 	categoryMiddleId;
+	private int 	categorySamllId;
+	private String	categoryName;
+
+	public int getCategoryMainId() {
+		return categoryMainId;
+	}
+
+	public void setCategoryMainId(int categoryMainId) {
+		this.categoryMainId = categoryMainId;
+	}
+
+	public int getCategoryMiddleId() {
+		return categoryMiddleId;
+	}
+
+	public void setCategoryMiddleId(int categoryMiddleId) {
+		this.categoryMiddleId = categoryMiddleId;
+	}
+
+	public int getCategorySamllId() {
+		return categorySamllId;
+	}
+
+	public void setCategorySamllId(int categorySamllId) {
+		this.categorySamllId = categorySamllId;
+	}
+
+	public int getCategoryId() {
 		return categoryId;
 	}
 
-
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
-
-	public int getMainCategory() {
-		return mainCategory;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-
-	public void setMainCategory(int mainCategory) {
-		this.mainCategory = mainCategory;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-
-
-	public int getMiddleCategory() {
-		return middleCategory;
-	}
-
-
-	public void setMiddleCategory(int middleCategory) {
-		this.middleCategory = middleCategory;
-	}
-
-
-	public int getSmallCategory() {
-		return smallCategory;
-	}
-
-
-	public void setSmallCategory(int smallCategory) {
-		this.smallCategory = smallCategory;
-	}
-
-
-	@Override
-	public String toString() {
-		return "CategoryVO [mainCategory=" + mainCategory + ", middleCategory=" + middleCategory + ", smallCategory="
-				+ smallCategory + ", categoryId=" + categoryId + "]";
-	}
-	
-	
 }

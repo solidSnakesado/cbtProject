@@ -11,9 +11,9 @@
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+/* 		$(document).ready(function() {
 			$("#header").load("in_header.html")
-		});
+		}); */
 	</script>
 	<header id="header"></header>
 
@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>SET_EXAM_QUESTION_ID</td>
-				<td><input type="text" name="setExamQuestionId" id="setExamQuestionId"></td>
+				<td><input type="hidden" name="setExamQuestionId" id="setExamQuestionId"></td>
 			</tr>
 			<tr>
 				<td>POINT</td>

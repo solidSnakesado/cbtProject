@@ -1,5 +1,7 @@
 package com.cbt.category;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,23 +14,22 @@ public class CategoryDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertCategory(CategoryVO vo) {
-		
-		mybatis.insert("CategoryDAO.insertCategory", vo);
+		mybatis.insert("categoryDAO.insertCategory", vo);
 	}
 	
 	public void updateCategory(CategoryVO vo) {
-		
-		mybatis.update("CategoryDAO.updateCategory", vo);
+		mybatis.update("categoryDAO.updateCategory", vo);
 	}
 
 	public void deleteCategory(CategoryVO vo) {
-		
-		mybatis.delete("CategoryDAO.deleteCategory", vo);
+		mybatis.delete("categoryDAO.deleteCategory", vo);
 	}
 	
 	public CategoryVO getCategory(CategoryVO vo) {
-		
-		return mybatis.selectOne("CategoryDAO.getCategory", vo);
+		return mybatis.selectOne("categoryDAO.getCategory", vo);
 	}
 	
+	public List<CategoryVO> getAllCategory() {
+		return mybatis.selectList("categoryDAO.getAllCategory");
+	}
 }

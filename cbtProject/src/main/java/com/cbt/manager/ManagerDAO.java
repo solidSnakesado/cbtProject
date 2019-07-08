@@ -42,4 +42,12 @@ public class ManagerDAO {
 		
 		return mybatis.selectOne("ManagerDAO.getManagerUserAccountView", vo);
 	}
+	
+	public ManagerTakerVO getManagerUserAccountList(ManagerTakerVO vo) {
+		
+		return mybatis.selectOne("ManagerDAO.getManagerUserAccountList", vo);
+	}
+	
+	
+	
 }

@@ -14,8 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cbt.question.QuestionDAO;
 import com.cbt.question.QuestionVO;
 import com.cbt.question.QuestionVOt;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:config/applicationContext.xml")
