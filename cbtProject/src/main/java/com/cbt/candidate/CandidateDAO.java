@@ -47,4 +47,8 @@ public class CandidateDAO {
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
 	}
+	// 이승환 추가
+	public void managerInsertCandidate(CandidateVO vo) {
+		mybatis.insert("candidateDAO.managerInsertCandidate", vo);
+	} 
 }

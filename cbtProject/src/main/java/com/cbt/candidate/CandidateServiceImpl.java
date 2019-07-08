@@ -59,11 +59,7 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.getCandidateList(vo);
 	}
 
-	@Override
-	public List<CompanyVO> getCompanyList(CandidateVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 

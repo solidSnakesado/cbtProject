@@ -25,6 +25,10 @@
 		</article>
 	</section>
 <h2>응시자 계정관리</h2>
+<button type="button" onclick="location.href='managerUserInsert.do'">응시자 추가</button>
+<a href="managerUserAccountUpload.do"><button type="button">엑셀파일 업로드</button></a>
+<button type="button">응시자 삭제</button>
+<br><br>
 <form>
 <table border="1">
    <tr>
@@ -35,13 +39,11 @@
    		<c:forEach items="${result }" var="CandidateVO">
 		<tr>
 			<td>${CandidateVO.takerId }</td>
-			<td><a href="updateCandidate/${CandidateVO.takerName }">${CandidateVO.takerName }</a></td>
+			<td><a href="managerUserAccountEdit.do/${CandidateVO.takerId }">${CandidateVO.takerName }</a></td>
 			<td>${CandidateVO.takerEmail }</td>
 		</tr>
 		</c:forEach>
 </table>
 </form>
-<a href="managerApplicantInsert.jsp"><button type="button">응시자 추가</button></a>
-<a href="managerUserAccountUpload.jsp"><button type="button">엑셀파일 업로드</button></a>
 </body>
 </html>
