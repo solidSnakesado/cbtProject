@@ -6,19 +6,70 @@
 <meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
-<style>
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		
+	<style>
+		
+	</style>
+	<script type="text/javascript">
+		/* $(document).ready(function() {
+			$("#header").load("co_header.html")
+		}); */
+		
+		$(function(){
+			estimateList();
 
-</style>
+			estimateSelect();
+			
+			/* estimateDelete();
+			
+			estimateInsert();
+		
+			estimateUpdate();
+			
+			init(); */
+		});
+		
+		//EstimateList
+		function estimateList(){
+			$.ajax({
+				url:'Estimate',
+				type:'GET',
+				dataType:'json',
+				error:function(xhr,status,msg){
+					alert("상태값 :" + status + " Http에러메시지 :"+msg);
+				},
+				success:EstimateListResult
+			});
+		}
+		
+		function EstimateListResult(data){
+			$("tbody").empty();
+			$.each(data,function(idx,item){
+				$('<tr onClick="estimateDetail('+item.estimateId+')" id="hover">')
+				.append($('<td>').html(item.estimateId))
+				.append($('<td>').html(item.categoryId))
+				.append($('<td>').html(item.requestDay))
+				.append($('<td>').html(item.tradeProgress))
+				.append($('<td>').html(item.examDate))
+				.append($('<td>').append('<button type="button">삭제</button>'))
+				.appendTo('tbody');
+			});
+		}
+		
+		
+		function estimateDetail(estimateId){
+			console.log(estimateId);
+			var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
+			var winopen = window.open("companyDetailRequestList.do/"+estimateId,"windowopen",wintype);
+			
+		}
+		
+		
+	</script>
 </head>
 <body>
-   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#header").load("co_header.html")
-		});
-	</script>
+  
 	<header id="header"></header>
 <section>
    <article>
@@ -30,50 +81,28 @@
       </ul>
    </article>
 </section>
-<h2>의뢰목록</h2>
-<table border="1">
-   <tr>
-      <th>의뢰번호</th>
-      <th>시험이름</th>
-      <th>의뢰기업</th>
-      <th>의뢰일</th>
-      <th>담당자</th>
-      <th>상세보기</th>   
-   </tr>
-   <tr>
-      <td>1</td>
-      <td>2019 제1차 URACLE 신입공채 시험</td>
-      <td>URACLE</td>
-      <td>2019-04-12</td>
-      <td>이승환</td>
-      <td><button type="button" onclick="location.href='detailRequestList.html'">상세보기</button></td>
-   </tr>
-   <tr>
-      <td>2</td>
-      <td>2019 제2차 URACLE 신입공채 시험</td>
-      <td>URACLE</td>
-      <td>2019-04-13</td>
-      <td>이승환</td>
-      <td><button type="button" onclick="location.href='detailRequestList.html'">상세보기</button></td>
-   </tr>
-      <tr>
-      <td>3</td>
-      <td>2019 제3차 URACLE 신입공채 시험</td>
-      <td>URACLE</td>
-      <td>2019-04-14</td>
-      <td>이승환</td>
-      <td><button type="button" onclick="location.href='detailRequestList.html'">상세보기</button></td>
-   </tr>
-      <tr>
-      <td>4</td>
-      <td>2019 제4차 URACLE 신입공채 시험</td>
-      <td>URACLE</td>
-      <td>2019-04-15</td>
-      <td>이승환</td>
-      <td><button type="button" onclick="location.href='detailRequestList.html'">상세보기</button></td>
-   </tr>
-</table>
 
-
+<h2>의뢰목록</h2>	
+<hr/>		
+<div class="container">	
+	
+	<table class="table text-center" border="1">
+		<thead>
+		<tr>
+			<th class="text-center">순번</th>
+			<th class="text-center">카테고리ID</th>
+			<th class="text-center">의뢰일</th>
+			<th class="text-center">진행상태</th>
+			<th class="text-center">시험일시</th>
+			<th class="text-center">삭제</th>
+		</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	
+	<button type="button"  class="btn btn-primary" value="등록"  id="btnInsert"  onclick="location.href='companyEstimateInsert.do'">의뢰등록</button>
+		
+	</div>	
 </body>
+
 </html>
