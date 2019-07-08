@@ -19,7 +19,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/company", method = RequestMethod.GET)
 	public String companyMain() {
-		return "company/companyMain";
+		return "company/company/companyMain";
 	}
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.GET)
@@ -35,18 +35,18 @@ public class CompanyController {
 	
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.GET)
 	public String companyUpdateForm() {
-		return "company/companyUpdate";
+		return "company/company/companyUpdate";
 	}
 	
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.POST)
 	public String companyUpdate(CompanyVO vo) {
 		companyService.updateCompany(vo);
-		return "company/companyMain";
+		return "company/company/companyMain";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.GET)
 	public String companyLoginForm() {		
-		return "company/companyLogin";
+		return "company/company/companyLogin";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
@@ -56,7 +56,7 @@ public class CompanyController {
 		
 		if(loginCompany != null) {
 			session.setAttribute("company", loginCompany);
-			targetPage = "company/companyMain";
+			targetPage = "company/company/companyMain";
 		}
 		
 		return targetPage;
@@ -64,7 +64,7 @@ public class CompanyController {
 	
 	@RequestMapping(value = "companyAccount.do",  method = RequestMethod.GET)
 	public String companyAccount() {		
-		return "company/companyAccount";
+		return "company/company/companyAccount";
 	}
 	
 	@RequestMapping(value = "companyDelete.do",  method = RequestMethod.GET)

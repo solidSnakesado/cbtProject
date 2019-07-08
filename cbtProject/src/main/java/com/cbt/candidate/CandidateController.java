@@ -82,14 +82,14 @@ public class CandidateController {
 		return "candidate/candidateRequestList";
 	}
 
-	@RequestMapping("candidateInHeader.do")
-	public String candidateInHeader() {
-		return "candidate/candidateInHeader";
-	}
+	/*// header 별도 지정(tiles에 candidateHeader.xml)
+	 * @RequestMapping("candidateInHeader.do") public String candidateInHeader() {
+	 * return "candidate/candidateInHeader"; }
+	 */
 
 	@RequestMapping("candidateInIntroduce.do")
 	public String candidateInIntroduce() {
-		return "candidate/candidateInIntroduce";
+		return "candidate/candidate/candidateInIntroduce";
 	}
 	
 	@RequestMapping("candidatePersonalChart.do")	
