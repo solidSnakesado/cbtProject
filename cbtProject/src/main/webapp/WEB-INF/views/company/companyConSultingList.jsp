@@ -35,19 +35,13 @@
 	</section>
 	<table border="1" align="center">
 		<tr>
-			<th>상담코드</th>
+			<th>제목</th>
 			<th>상담신청일</th>
-			<th>상담일</th>
-			<th>상담유무</th>
-			<th>비고</th>
 		</tr>
 		<c:forEach items="${consultingList}" var="consulting">
 			<tr onclick="location.href='companyConSultingDetail.do/${consulting.consultingId}'">
-				<td>${consulting.consultingId}</td>
+				<td>${consulting.consultingTitle}</td>
 				<td>${consulting.consultingDesiredDate}</td>
-				<td>${consulting.consultingDate}</td>
-				<td>${consulting.consultingState}</td>
-				<td>${consulting.consultingRemarks}</td>
 			</tr>
 		</c:forEach>
 	</table>

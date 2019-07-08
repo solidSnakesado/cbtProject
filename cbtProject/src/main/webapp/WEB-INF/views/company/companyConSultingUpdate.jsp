@@ -18,14 +18,19 @@
 	<header id="header"></header>
 	<h3>상담 수정(기업)</h3>
 	<form action="${pageContext.request.contextPath}/companyConSultingUpdate.do" method="post">
+		<input type = "hidden" name = "consultingId" id = "consultingId" value="${consulting.consultingId}" readonly="readonly">
 		<table border = "1">
 			<tr>
-				<th>상담코드</th>
-				<td><input type = "text" name = "consultingId" id = "consultingId" value="${consulting.consultingId}" readonly="readonly"></td>
+				<th>기업ID</th>
+				<td><input type = "text" name = "companyId" id = "companyId" value="${consulting.companyId}" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><input type = "text" name = "consultingTitle" id="consultingTitle" value="${consulting.consultingTitle}" style="width: 100%;"></td>
 			</tr>
 			<tr>
 				<th>상담희망일</th>
-				<td><input type = "text" name = "consultingDesiredDate" id="consultingDesiredDate" value="${consulting.consultingDesiredDate}" ></td>
+				<td><input type = "text" name = "consultingDesiredDate" id="consultingDesiredDate" value="${consulting.consultingDesiredDate}" style="width: 100%;"></td>
 			</tr>
 			<tr>
 				<th>상담내용</th>
@@ -35,17 +40,10 @@
 				<th>상담일</th>
 				<td><input type="text" name="consultingDate" id="consultingDate" value="${consulting.consultingDate}" readonly="readonly"></td>
 			</tr>
-			<tr>
-				<th>진행상태</th>
-				<td><input type="text" name="consultingState" id="consultingState" value="${consulting.consultingState}" readonly="readonly"></td>
-			</tr>
 		</table>
 		<br>
 		<input type="submit" value="수정하기">
-		<input type = "button" onclick =  'window.close()' value = "취소">
+		<input type = "button" value = "돌아가기">
 	</form>
-	
-
-
 </body>
 </html>
