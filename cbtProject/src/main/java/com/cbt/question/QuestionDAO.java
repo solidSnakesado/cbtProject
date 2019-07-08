@@ -1,5 +1,6 @@
 package com.cbt.question;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,16 @@ public class QuestionDAO {
 	public List<QuestionVO> candidateTakeExamList(QuestionVO vo) {
 		
 		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
+	}
+	
+	public List<QuestionVO> getTestStart(QuestionVO vo) {
+		
+		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
+	}
+	
+	public QuestionVO getCount(QuestionVO vo) {
+		
+		return mybatis.selectOne("QuestionDAO.getCount", vo);
 	}
 
 }

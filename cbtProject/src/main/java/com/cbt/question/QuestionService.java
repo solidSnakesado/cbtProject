@@ -15,6 +15,10 @@ public interface QuestionService {
 	
 	void deleteQuestion(QuestionVO vo);
 	
+	QuestionVO getCount(QuestionVO vo);
+	
+	List<Map<Object, String>> getTestStart(QuestionVO vo);
+	
 	List<QuestionVO> candidateTakeExamList(QuestionVO vo);
 	
 	List<QuestionVO> candidateRightAnswerList(QuestionVO vo);
