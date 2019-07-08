@@ -1,5 +1,6 @@
 package com.cbt.candidate;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class CandidateController {
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateAccountManage.do")	
 	public String candidateAccountManage() {
-		return "candidate/candidateAccountManage";
+		return "candidate/candidate/candidateAccountManage";
 	}
 	
 	//2019.06.27 장세준 - *.do & view 등록
@@ -107,7 +108,7 @@ public class CandidateController {
 	
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
-		return "candidate/candidateMain";
+		return "candidate/candidate/candidateMain";
 	}
 //	@RequestMapping("candidateTestResult.do")	
 //	public String candidateTestResult() {
@@ -243,14 +244,21 @@ public class CandidateController {
 //	}
 	
 	//
-	@RequestMapping("idcheck.do")
 	@ResponseBody
+	@RequestMapping(value="idcheck.do",method=RequestMethod.POST, consumes="application/json")
+/*	
 	public String idcheck(@RequestBody String takerId) {
 		
-		String idRst;
-		int count=candidateService.idcheck(takerId);
-		if(count > 0)	idRst ="f";
-		else			idRst ="s";
-		return idRst;
+	  String idRst; 
+	  int count = candidateService.idcheck(takerId); 
+	  if(count > 0)	  idRst ="f"; 
+	  else idRst ="s"; return idRst;*/
+	  
+  	public  Map<String, Boolean> idcheck(@RequestBody CandidateVO vo, Model model){
+		candidateService.getCandidateList(vo);
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("result", true);
+	return map;
+		 
 	}
 }
