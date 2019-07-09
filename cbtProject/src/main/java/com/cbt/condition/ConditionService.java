@@ -22,7 +22,7 @@ public interface ConditionService {
 	// 상태 목록 조회
 	List<ConditionVO> getAllConditionList();
 	
-	// 마스터 상태 상세 조회
+	//190709 마스터 상세 조회 재홍
 	public List<ConditionVO> getConditionDetailList(String code);
 	/* public Map<String, Object> getConditionList(ConditionVO vo); */
 	
