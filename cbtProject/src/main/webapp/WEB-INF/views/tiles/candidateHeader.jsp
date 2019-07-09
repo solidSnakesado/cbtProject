@@ -7,7 +7,7 @@
     <!-- 2019.07.09 성재민 -->
     <!-- cbt 클릭시 메인화면으로 -->
     <a href="candidateMain.do" class="w3-bar-item w3-button w3-padding-large">CBT</a>
-    <a href="candidateInIntroduce.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">회사소개</a>
+    <a href="candidateScheduleCheck.do/${candidate.takerId}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">회사소개</a>
     <!-- 2019.07.09 성재민 -->
     <!-- 시험일정 메뉴 연결 -->
     <a href="candidateScheduleCheck.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a>
