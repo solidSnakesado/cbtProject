@@ -7,7 +7,7 @@ public class CandidateVO {
 	private String takerId;
 	private String takerName;
 	private String takerInfo;
-	private String takerEducation;
+	private int takerEducation;
 	private String takerEmail;
 	private String takerPassword;
 	private String takerPhoneNum;
@@ -98,10 +98,10 @@ public class CandidateVO {
 	public void setTakerInfo(String takerInfo) {
 		this.takerInfo = takerInfo;
 	}
-	public String getTakerEducation() {
+	public int getTakerEducation() {
 		return takerEducation;
 	}
-	public void setTakerEducation(String takerEducation) {
+	public void setTakerEducation(int takerEducation) {
 		this.takerEducation = takerEducation;
 	}
 	public String getTakerEmail() {

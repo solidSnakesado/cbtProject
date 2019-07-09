@@ -32,7 +32,7 @@ public class CandidateDAO {
 	}	
 	
 	public CandidateVO loginCandidate(CandidateVO vo) {
-		return getCandidate(vo);
+		return mybatis.selectOne("candidateDAO.candidateLogin", vo);
 	}
 	
 	public int getCount(CandidateVO vo) {

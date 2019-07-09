@@ -3,6 +3,7 @@ package com.cbt.manager;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -130,6 +131,27 @@ public class ManagerController {
 		return "manager/manager/managerUserAccountList";
 	}
 	
-	
+	//로그인 폼 (7/9 생성, JUNE)
+	@RequestMapping(value="managerLogin.do", method=RequestMethod.GET)
+	public String managerLoginForm() {
+		return "manager/manager/managerLogin";
+	}
+	//로그인처리 (7/9 생성, JUNE)
+	@RequestMapping(value="managerLogin.do", method=RequestMethod.POST)
+	public String managerLogin(ManagerVO vo, HttpSession session) {
+		String targetPage="manager/manager/managerLogin";
+		ManagerVO loginManager = managerService.loginManager(vo);
+		if(loginManager != null) {
+			session.setAttribute("manager", loginManager);
+			targetPage = "redirect:managerMain.do";
+		}
+		return targetPage;
+	}
+	//로그아웃 처리(7/9 생성, JUNE)
+	@RequestMapping(value="managerLogout.do", method=RequestMethod.GET)
+	public String managerLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:managerMain.do";
+	}
 	
 }
