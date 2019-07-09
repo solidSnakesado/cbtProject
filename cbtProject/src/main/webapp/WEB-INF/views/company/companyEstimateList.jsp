@@ -50,7 +50,7 @@
 				.append($('<td>').html(item.estimateId))
 				.append($('<td>').html(item.categoryId))
 				.append($('<td>').html(item.requestDay))
-				.append($('<td>').html(item.tradeProgress))
+				.append($('<td>').html(item.tradeProgressNm))
 				.append($('<td>').html(item.examDate))
 				.append($('<td>').append('<button type="button">삭제</button>'))
 				.appendTo('tbody');

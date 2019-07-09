@@ -41,6 +41,13 @@ public class ConditionServiceImpl implements ConditionService {
 		return dao.getAllConditionList();
 	}
 
+	//190709 마스터 상세 조회 재홍
+	@Override
+	public List<ConditionVO> getConditionDetailList(String code) {
+
+		return dao.getConditionDetailList(code);
+	}
+
 	/*
 	 * @Override public Map<String, Object> getConditionList(ConditionVO vo, Paging
 	 * paging) { Map<String, Object> map = new HashMap<String, Object>();
