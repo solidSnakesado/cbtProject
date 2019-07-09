@@ -125,26 +125,7 @@ public class CandidateController {
 	return map;
 		 
 	}
-	//관리자 응시자 상세조회, 수정폼
-	@RequestMapping(value="managerUserAccountEdit.do/{takerId}", method=RequestMethod.GET)
-	public String managerUserAccountEdit(@PathVariable String takerId, Model model, CandidateVO vo) {
-		vo.setTakerId(takerId);
-		model.addAttribute("result", candidateService.getCandidate(vo));
-		return "manager/managerUserAccountEdit";
-	}
-	//관리자 응시자 정보 수정처리
-	@RequestMapping("updateUserAccountEdit.do")
-	public String updateUserAccount(@ModelAttribute("taker") CandidateVO vo) {
-		candidateService.updateCandidate(vo);
-		return "redirect:managerUserAccountList.do";
-	}
 	
-	// 매니저가 유저 추가
-	@RequestMapping("managerUserInsert.do")
-	public String managerUserInsert() {
-//		candidateService.insertCandidate(vo);
-		return "manager/managerUserAccountList";
-	}
 	
 	// 회사소개
 	@RequestMapping("candidateInIntroduce.do")

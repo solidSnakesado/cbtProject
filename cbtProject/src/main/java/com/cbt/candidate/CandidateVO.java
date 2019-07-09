@@ -98,6 +98,7 @@ public class CandidateVO {
 	public void setTakerInfo(String takerInfo) {
 		this.takerInfo = takerInfo;
 	}
+
 	public int getTakerEducation() {
 		return takerEducation;
 	}
