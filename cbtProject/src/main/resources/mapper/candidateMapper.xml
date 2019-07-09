@@ -74,23 +74,6 @@
       		WHERE   TAKER_ID = #{takerId}
 		</select>
 		
-
-		<insert id="managerInsertCandidate" parameterType="CandidateVO">
-		INSERT INTO TAKER (TAKER_ID
-							, TAKER_NAME
-							, TAKER_INFO
-							, TAKER_EDUCATION
-							, TAKER_EMAIL
-							, TAKER_PHONENUM)
-		VALUES( #{takerId}
-				 ,#{takerName}
-				 ,#{takerInfo}
-				 ,#{takerEducation}
- 				 ,#{takerEmail}
- 				 ,#{takerPhoneNum})
-		
-		</insert>
-		
 </mapper>
  
  

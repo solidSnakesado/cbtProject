@@ -41,7 +41,7 @@
 			E-mail : <input type="text" name="takerEmail">
 			연락처 : 	<input type="text" name="takerPhoneNum">
 		</form>
-	<button onclick="location.href='managerUserAccountList.jsp'">등록</button>&nbsp;&nbsp;&nbsp;
+	<input type="submit" id="submit" value="등록">
 	<button onclick="location.href='managerUserAccountList.jsp'">돌아가기</button>
 </body>
 </html>

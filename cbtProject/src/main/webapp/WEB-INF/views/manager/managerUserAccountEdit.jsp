@@ -27,7 +27,6 @@
 <h2>관리자 계정관리</h2>
 <form action="${pageContext.request.contextPath }/managerUserAccountEdit.do" method="post">
 <table border="1">
-
    <tr>
       <th>응시자ID</th>
       <td>${result.takerId}</td> 

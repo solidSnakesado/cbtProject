@@ -58,7 +58,7 @@ public class ManagerController {
 		ManagerVO vo = new ManagerVO();
 		vo.setSearchManager(searchManager);
 		mv.addObject("result", managerService.getManagerList(vo, paging));
-		mv.setViewName("manager/getManagerList");
+		mv.setViewName("manager/manager/getManagerList");
 		return mv;
 	}
 	
@@ -124,12 +124,69 @@ public class ManagerController {
 		return "manager/manager/managerAccountList";
 	}
 	
+	// 관리자 컴퍼니 상세조회, 수정폼
+	@RequestMapping(value="managerAccountManage.do/{companyId}", method=RequestMethod.GET)
+	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
+		vo.setCompanyId(companyId);
+		model.addAttribute("result", companyService.getCompany(vo));
+		return "manager/manager/managerAccountManage";
+	}
+		
+	// 관리자 컴퍼니 정보 수정처리
+	@RequestMapping(value="managerAccountManage.do", method=RequestMethod.POST)
+	public String ManagerAccountManage(@ModelAttribute("company") CompanyVO vo) {
+		companyService.updateCompany(vo);
+		return "redirect:managerAccountList.do";
+	}
+	
+	// 매니저가 회사 추가폼
+	@RequestMapping(value="managerAccountInsert.do", method=RequestMethod.GET)
+	public String managerAccountInsertForm(CompanyVO vo) {
+		return "manager/manager/managerAccountInsert";
+	}
+	
+	// 매니저가 회사 추가
+	@RequestMapping(value="managerAccountInsert.do", method=RequestMethod.POST)
+	public String managerAccountInsert(CompanyVO vo) {
+		companyService.insertCompany(vo);
+		return "redirect:managerAccountList";
+	}
+	
+	//매니저가 회사 삭제처리
+	@RequestMapping("managerAccountDelete.do")
+	public String managerAccountDelete(CompanyVO vo) {
+		companyService.deleteCompany(vo);
+		return "redirect:managerAccountList.do";
+	}
+	
+	//관리자 유저 리스트 출력
 	@RequestMapping(value="managerUserAccountList.do", method=RequestMethod.GET)
 	public String managerUserAccountList(Model model, CandidateVO vo) {
 		model.addAttribute("result", candidateService.getCandidateList(vo));
 		return "manager/manager/managerUserAccountList";
 	}
 	
+	//관리자 응시자 상세조회, 수정폼
+	@RequestMapping(value="managerUserAccountEdit.do/{takerId}", method=RequestMethod.GET)
+	public String managerUserAccountEdit(@PathVariable String takerId, Model model, CandidateVO vo) {
+		vo.setTakerId(takerId);
+		model.addAttribute("result", candidateService.getCandidate(vo));
+		return "manager/manager/managerUserAccountEdit";
+	}
+	
+		//관리자 응시자 정보 수정처리
+	@RequestMapping("updateUserAccountEdit.do")
+	public String updateUserAccount(@ModelAttribute("taker") CandidateVO vo) {
+		candidateService.updateCandidate(vo);
+		return "redirect:managerUserAccountList.do";
+	}
+		
+	// 매니저가 유저 추가
+	@RequestMapping("managerUserInsert.do")
+	public String managerUserInsert(CandidateVO vo) {
+		candidateService.insertCandidate(vo);
+		return "manager/manager/managerUserAccountList";
+	}
 	
 	
 }

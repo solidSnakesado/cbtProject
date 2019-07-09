@@ -29,4 +29,6 @@ public interface ManagerService {
 	
 	// 기업목록 조회
 	List<CompanyVO> managerAccountList(CompanyVO vo);
+	
+
 }
