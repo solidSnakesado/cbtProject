@@ -70,4 +70,9 @@ public class ManagerServiceImpl implements ManagerService {
 		return null;
 	}
 
+	@Override
+	public ManagerVO loginManager(ManagerVO vo) {
+		return managerDAO.loginManager(vo);
+	}
+
 }

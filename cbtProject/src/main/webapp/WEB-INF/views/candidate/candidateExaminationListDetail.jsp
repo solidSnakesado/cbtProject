@@ -14,24 +14,13 @@
 	
 <body>
 마이페이지(개인) 응시목록 세부목록
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#header").load("candidateInHeader.do")
 		});
 	</script>
 	<header id="header"></header>
-    <section>
-   <article>
-      <ul>
-         <li><button type="button">계정관리</button></li>
-         <li><button type="button">응시목록</button></li>
-      </ul>
-   </article>
-</section>
-	<table border = "1">
+	<table border = "1" align="center">
 		<tr>
 			<th>시험명</th>
 			<td>2019년 제1차 ULACLE 신입공채 시험</td>

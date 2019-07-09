@@ -30,6 +30,16 @@
 	
 	</select>
 	
+	<select id="managerLogin" resultType="ManagerVO">
+		SELECT 
+				  MANAGER_ID
+				, MANAGER_PASSWORD
+				, MANAGER_NAME
+		FROM MANAGER		
+		WHERE MANAGER_ID = #{managerId} AND MANAGER_PASSWORD = #{managerPassword}
+	
+	</select>
+	
 	<update id="updateManager" parameterType="ManagerVO">
 		UPDATE MANAGER
 		<set>
