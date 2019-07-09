@@ -48,6 +48,11 @@ public class ManagerDAO {
 		return mybatis.selectOne("ManagerDAO.getManagerUserAccountList", vo);
 	}
 	
+	// 로그인 구현(7/9 생성, june)
+	public ManagerVO loginManager(ManagerVO vo) {
+		return mybatis.selectOne("ManagerDAO.managerLogin", vo);
+	}
+	
 	
 	
 }
