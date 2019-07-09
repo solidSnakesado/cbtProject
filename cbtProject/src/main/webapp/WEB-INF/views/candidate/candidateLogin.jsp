@@ -13,7 +13,7 @@
 	    var takerId 		= document.fmField.takerId;
 	    var takerPassword 	= document.fmField.takerPassword;
 	    // 아이디 입력 유무 체크
-	    if(takerId.value == '' || !(takerId.value.length >= 3 && takerId.value.length <= 12)) {
+	    if(takerId.value == '') {
 	        window.alert("아이디를 입력하세요");
 	    }
 	    if(document.fmField.takerPassword.value == ''){
