@@ -88,30 +88,6 @@
 		FROM COMPANY			
 	</select>
 	
-	<!-- 응시자 목록 조회 -->
-	<select id="getCandidateList" resultType="CandidateVO">
-		SELECT    TAKER_ID
-				, TAKER_NAME
-				, TAKER_EMAIL
-		FROM TAKER
-	</select>
-	
-	<!-- 관리자 응시자 추가 -->
-	<insert id="managerInsertCandidate" parameterType="CandidateVO">
-		INSERT INTO TAKER (TAKER_ID
-							, TAKER_NAME
-							, TAKER_INFO
-							, TAKER_EDUCATION
-							, TAKER_EMAIL
-							, TAKER_PHONENUM)
-		VALUES( #{takerId}
-				 ,#{takerName}
-				 ,#{takerInfo}
-				 ,#{takerEducation}
- 				 ,#{takerEmail}
- 				 ,#{takerPhoneNum})
-		
-		</insert>
 		<!-- 관리자 회사 등록 -->
 		<insert id="managerAccountInsert" parameterType="CompanyVO">
 			INSERT INTO COMPANY (
@@ -136,7 +112,7 @@
 						,#{companyManagerTelNum})
 		</insert>
 		
-		<!-- 0708 이승환 추가  // 기업리스트-->
+		<!-- 0708 이승환 추가  // 기업리스트 출력 -->
 	<select id="managerAccountList" resultType="CompanyVO">
 		SELECT 
 			COMPANY_ID
@@ -148,7 +124,7 @@
 		FROM COMPANY
 	</select>
 	
-	<!-- 0708 이승환 추가  // 기업 수정-->
+	<!-- 0708 이승환 추가  // 매니저 기업 수정-->
 	<update id="managerAccountManage" parameterType="CompanyVO">
 		UPDATE COMPANY
 		<set>
@@ -182,5 +158,32 @@
 		</set>
 		WHERE COMPANY_ID = #{companyId}	
 	</update>
+	
+	<!-- 응시자 목록 조회 -->
+	<select id="getCandidateList" resultType="CandidateVO">
+		SELECT    TAKER_ID
+				, TAKER_NAME
+				, TAKER_EMAIL
+		FROM TAKER
+	</select>
+	
+	<!-- 응시자 목록 상세조회 -->
+	
+	<!-- 관리자 응시자 추가 -->
+	<insert id="managerUserInsert" parameterType="CandidateVO">
+		INSERT INTO TAKER (TAKER_ID
+							, TAKER_NAME
+							, TAKER_INFO
+							, TAKER_EDUCATION
+							, TAKER_EMAIL
+							, TAKER_PHONENUM)
+		VALUES( #{takerId}
+				 ,#{takerName}
+				 ,#{takerInfo}
+				 ,#{takerEducation}
+ 				 ,#{takerEmail}
+ 				 ,#{takerPhoneNum})
+		
+		</insert>
 	
 </mapper>

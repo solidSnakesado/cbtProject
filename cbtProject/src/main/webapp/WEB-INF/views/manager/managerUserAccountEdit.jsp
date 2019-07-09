@@ -17,16 +17,17 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
-<h2>관리자 계정관리</h2>
+<h2>응시자 계정관리</h2>
 <form action="${pageContext.request.contextPath }/managerUserAccountEdit.do" method="post">
-<table border="1">
+<input type="hidden" name="takerId" value="${result.takerId }">
+<table border="1" align="center">
    <tr>
       <th>응시자ID</th>
       <td>${result.takerId}</td> 
@@ -53,8 +54,9 @@
    </tr>
    
 </table>
-<button type="button" >확인</button>
-<button type="button" >삭제하기</button>
+		<br><br>
+	<input type="submit" value="수정" >
+	<input type="button" value="돌아가기" onclick="location.href='../managerUserAccountList.do'">
 </form>
 
 </body>

@@ -24,11 +24,11 @@
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='companyRequestList.jsp'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='companyConSultingList.jsp'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='companyTestList.jsp'">시험목록</button></li>
-         <li><button type="button" onclick="location.href='companyChart.jsp'">통계</button></li>
+         <li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='companyRequestList.do'">의뢰목록</button></li>
+         <li><button type="button" onclick="location.href='companyConSultingList.do'">상담목록</button></li>
+         <li><button type="button" onclick="location.href='companyTestList.do'">시험목록</button></li>
+         <li><button type="button" onclick="location.href='companyChart.do'">통계</button></li>
       </ul>
    </article>
 </section>

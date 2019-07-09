@@ -17,10 +17,10 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
+				<li><button type="button" onclick="location.href='/managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='/managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='/managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -32,12 +32,14 @@
 <form>
 <table border="1" align="center">
    <tr>
+   	  <th>선택</th>
       <th>응시자ID</th>
       <th>이름</th>
       <th>E-Mail</th>
    </tr>
    		<c:forEach items="${result }" var="CandidateVO">
 		<tr>
+			<td><input type="checkbox" name="takerList" value="${CandidateVO.takerId }"></td>
 			<td>${CandidateVO.takerId }</td>
 			<td><a href="managerUserAccountEdit.do/${CandidateVO.takerId }">${CandidateVO.takerName }</a></td>
 			<td>${CandidateVO.takerEmail }</td>
