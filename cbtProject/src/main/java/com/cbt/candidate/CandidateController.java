@@ -115,7 +115,7 @@ public class CandidateController {
 		mv.setViewName("candidate/getCandidateList");
 		return mv;
 	}
-
+	//아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value="idcheck.do",method=RequestMethod.POST, consumes="application/json")
   	public  Map<String, Boolean> idcheck(@RequestBody CandidateVO vo, Model model){
@@ -146,6 +146,15 @@ public class CandidateController {
 		return "manager/managerUserAccountList";
 	}
 	
+	// 회사소개
+	@RequestMapping("candidateInIntroduce.do")
+	public String candidateInIntroduce() {
+		return "candidate/candidate/candidateInIntroduce";
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -162,22 +171,16 @@ public class CandidateController {
 	}
 	
 	
-	//2019.06.27 장세준 - *.do & view 등록
+	//2019.06.27 장세준 - 응시자 정보 조회(단건) --> 탈퇴 가능
 	@RequestMapping("candidateAccountManage.do")	
 	public String candidateAccountManage() {
 		return "candidate/candidate/candidateAccountManage";
 	}
 	
-	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateAccountManageModify.do")	
-	public String candidateAccountManageModify() {
-		return "candidate/candidateAccountManageModify";
-	}
-	
-	//2019.06.27 장세준 - *.do & view 등록
+	//원서접수 
 	@RequestMapping("candidateApplication.do")	
 	public String candidateApplication() {
-		return "candidate/candidateApplication";
+		return "candidate/candidate/candidateApplication";
 	}
 	
 	// 2019.07.09 성재민
@@ -196,18 +199,16 @@ public class CandidateController {
 		return "candidate/candidate/candidateExaminationListDetail";
 	}
 	
+	// 시험목록리스트
 	@RequestMapping("candidateRequestList.do")
 	public String candidateRequest() {
-		return "candidate/candidateRequestList";
+		return "candidate/candidate/candidateRequestList";
 	}
 
-	@RequestMapping("candidateInIntroduce.do")
-	public String candidateInIntroduce() {
-		return "candidate/candidate/candidateInIntroduce";
-	}
 	
 	// 2019.07.09 성재민
 	// 경로 수정
+	// 시험결과 페이지 --> 설문작성 / 메인 으로 이동 
 	@RequestMapping("candidatePersonalChart.do")	
 	public String candidatePersonalChart() {
 		return "candidate/candidate/candidatePersonalChart";
@@ -215,6 +216,7 @@ public class CandidateController {
 	
 	// 2019.07.09 성재민
 	// 경로 수정
+	//연간시험일정  --> 응시하기
 	@RequestMapping("candidateScheduleCheck.do")	
 	public String candidateScheduleCheck() {
 		return "candidate/candidate/candidateScheduleCheck";
@@ -226,7 +228,7 @@ public class CandidateController {
 	public String candidateSurvey() {
 		return "candidate/candidate/candidateSurvey";
 	}
-	
+	//메인화면
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
 		return "candidate/candidate/candidateMain";
@@ -238,6 +240,14 @@ public class CandidateController {
 	
 	
 	
+	
+	/*
+	 * //2019.06.27 장세준 - *.do & view 등록
+	 * 
+	 * @RequestMapping("candidateAccountManageModify.do") public String
+	 * candidateAccountManageModify() { return
+	 * "candidate/candidateAccountManageModify"; }
+	 */
 	/*
 	 * @RequestMapping("candidateTestResult.do") public String candidateTestResult()
 	 * { return "candidate/candidateTestResult"; }

@@ -110,11 +110,11 @@ function checkForm() {
 			</tr>
 			<tr>
 				<td>응시자PW</td>
-				<td colspan="2"><input type="text" name="takerPassword" id="takerPassword"></td>
+				<td colspan="2"><input type="password" name="takerPassword" id="takerPassword"></td>
 			</tr>
 			<tr>
 				<td>PW확인</td>
-				<td colspan="2"><input type="text" name="takerPasswordRe" id="takerPasswordRe"></td>
+				<td colspan="2"><input type="password" name="takerPasswordRe" id="takerPasswordRe"></td>
 			</tr>
 			<tr>
 				<td>성명</td>
