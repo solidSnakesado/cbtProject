@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cbt.condition.ConditionService;
+
 /* @RestController가 @ResponseBody를 포함하고 있기 때문에
  * view가 필요하고 restfulAPI와 묶고 싶을 경우 클래스에 @Controller로 지정해주고, restfulAPI에는 일일이 @ResponseBody를 붙여야된다.
  */
 @Controller
 public class EstimateController {
-
+	
+	@Autowired
+	ConditionService conditionService;
 	@Autowired
 	EstimateService estimateService;
 	
@@ -57,8 +61,6 @@ public class EstimateController {
 	
 	@RequestMapping(value = "/companyEstimateUpdate.do", method=RequestMethod.POST)
 	public String companyEstimateUpdate(EstimateVO vo) {
-
-		System.out.println(vo.getCategoryId());
 		
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
@@ -81,7 +83,9 @@ public class EstimateController {
 		
 		vo.setEstimateId(estimateId); 
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
-		return "company/company/companyDetailRequestList";
+		model.addAttribute("G", conditionService.getConditionDetailList("G"));
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));
+		return "empty/company/companyDetailRequestList";
 	}
 	
 	

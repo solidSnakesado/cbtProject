@@ -41,4 +41,10 @@ public class ConditionDAO {
 		System.out.println("===> getAllConditionList() 기능 처리");
 		return mybatis.selectList("ConditionDAO.getConditionList");
 	}
+	
+	//190709 디테일 코드 조회 재홍 
+	public List<ConditionVO> getConditionDetailList(String code) {
+		System.out.println("===> getConditionDetailList() 기능 처리");
+		return mybatis.selectList("ConditionDAO.getConditionDetailList",code);
+	}
 }
