@@ -10,8 +10,8 @@ public class ConsultingVO {
 	private String 		companyId;
 	private String		consultingTitle;
 	private String 		consultingContents;
-	private Timestamp 	consultingDesiredDate;
-	private Timestamp 	consultingDate;
+	private String 	consultingDesiredDate;
+	private String 	consultingDate;
 	private String 		consultingRemarks;
 	private int			consultingState;	// 2019.07.03 성재민 상담 상태 설정 변수 추가
 
@@ -35,19 +35,21 @@ public class ConsultingVO {
 		this.consultingContents = consultingContents;
 	}
 
-	public Timestamp getConsultingDesiredDate() {
+	
+
+	public String getConsultingDesiredDate() {
 		return consultingDesiredDate;
 	}
 
-	public void setConsultingDesiredDate(Timestamp consultingDesiredDate) {
+	public void setConsultingDesiredDate(String consultingDesiredDate) {
 		this.consultingDesiredDate = consultingDesiredDate;
 	}
 
-	public Timestamp getConsultingDate() {
+	public String getConsultingDate() {
 		return consultingDate;
 	}
 
-	public void setConsultingDate(Timestamp consultingDate) {
+	public void setConsultingDate(String consultingDate) {
 		this.consultingDate = consultingDate;
 	}
 

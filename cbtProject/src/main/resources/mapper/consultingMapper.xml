@@ -5,6 +5,8 @@
 <!-- 컴퍼니 관련 dao 처리 -->
 <mapper namespace="consultingDAO">
 
+	<!-- 2019.07.09 성재민 -->
+	<!-- 날짜 처리 를 문자열로 받아 TO_DATE로 변환하여 db에 전달 -->
 	<!-- 2019.07.08 성재민 -->
 	<!-- 비회원이 상담신청을 하는 경우 companyId 값이 없을 수도 있으므로 예외처리 -->
 	<!-- 2019.07.03 성재민 -->
@@ -21,11 +23,11 @@
 			</if>
 			)
 		VALUES (
-			#{consultingId}
+			CONSULTING_ID_SEQ.NEXTVAL
 			,#{consultingContents}
-			,#{consultingDesiredDate}
-			,#{consultingState}
-			,#{consultingTitle}
+			,TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			,0
+			, #{consultingTitle}
 			<if test="companyId != null and companyId != ''">
 				,#{companyId}
 			</if>
@@ -42,8 +44,8 @@
 	<update id="updateConsulting" parameterType="ConsultingVO">
 		UPDATE CONSULTING
 		<set>
-			<if test="consultingDate != null">
-				CONSULTING_DATE = #{consultingDate}
+			<if test="consultingDate != null and consultingDate != ''">
+				CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
 			</if>
 			<if test="consultingRemarks != null and consultingRemarks != ''">
 				,CONSULTING_REMARKS = #{consultingRemarks}
@@ -55,7 +57,7 @@
 				,CONSULTING_CONTENTS = #{consultingContents}
 			</if>
 			<if test="consultingDesiredDate != null"> 
-				,CONSULTING_DESIRED_DATE = #{consultingDesiredDate}
+				,CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
 			</if>
 			<if test="consultingState != null and consultingState gte 0"> 
 				,CONSULTING_STATE = #{consultingState}
@@ -81,8 +83,8 @@
  		SELECT CONSULTING_ID
 				,COMPANY_ID
 				,CONSULTING_CONTENTS
-				,CONSULTING_DESIRED_DATE
-				,CONSULTING_DATE
+				,TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI')	"consultingDesiredDate"
+				,TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI')			"consultingDate"
 				,CONSULTING_REMARKS
 				,CONSULTING_STATE
 				,CONSULTING_TITLE
@@ -95,8 +97,8 @@
 		SELECT CONSULTING_ID
 				,COMPANY_ID
 				,CONSULTING_CONTENTS
-				,CONSULTING_DESIRED_DATE
-				,CONSULTING_DATE
+				,TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI') "consultingDesiredDate"
+				,TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI')			"consultingDate"
 				,CONSULTING_REMARKS
 				,CONSULTING_STATE
 				,CONSULTING_TITLE
