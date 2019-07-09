@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
+import com.cbt.takeExam.TakeExamVOt;
 
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
@@ -59,8 +60,8 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.getCandidateList(vo);
 	}
 
-	
-
-	
-
+	@Override
+	public List<Map<String, String>> getExamList(CandidateVO vo) {
+		return candidateDAO.getExamList(vo);
+	}
 }

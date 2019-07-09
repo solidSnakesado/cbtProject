@@ -1,12 +1,13 @@
 package com.cbt.candidate;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cbt.company.CompanyVO;
+import com.cbt.takeExam.TakeExamVOt;
 
 @Repository
 public class CandidateDAO {
@@ -27,8 +28,10 @@ public class CandidateDAO {
 		mybatis.delete("candidateDAO.deleteCandidate", vo);
 	}
 
-	public CandidateVO getCandidate(CandidateVO vo) {
-		return mybatis.selectOne("candidateDAO.getCandidate", vo);
+	// 2019.07.09
+	// 시험정보 가져옴
+	public List<Map<String, String>> getExamList(CandidateVO vo) {
+		return mybatis.selectList("candidateDAO.getExamList", vo);
 	}	
 	
 	public CandidateVO loginCandidate(CandidateVO vo) {
@@ -41,6 +44,11 @@ public class CandidateDAO {
 
 	public int idcheck(String takerId) {
 		return mybatis.selectOne("candidateDAO.idcheck",takerId);
+	}
+	
+	// 2019.07.09
+	public CandidateVO getCandidate(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 	
 	// 이승환이 쓰고있음

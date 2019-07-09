@@ -31,11 +31,11 @@ function checkForm() {
 		<table border="1" align="center">
 			<tr>
 				<td>ID :</td>
-				<td><input type="text" name="managerId" value="${VO.managerId}"></td>
+				<td><input type="text" name="managerId"></td>
 			</tr>
 			<tr>
 				<td>PW :</td>
-				<td><input type="text" name="managerPassword"></td>
+				<td><input type="password" name="managerPassword"></td>
 			</tr>
 			<tr>
 				<td align="center" colspan="2"><input type="button" value="관리자로 로그인" onclick="checkForm()"/>&nbsp; <input type="reset" value="취소" /></td>
