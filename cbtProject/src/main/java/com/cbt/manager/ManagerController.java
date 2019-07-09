@@ -34,12 +34,12 @@ public class ManagerController {
 	//메인
 	@RequestMapping(value ="/managerMain.do", method=RequestMethod.GET)
 	public String managerMain() {
-		return "manager/managerMain";
+		return "manager/manager/managerMain";
 	}
 	//등록폼
 	@RequestMapping(value = "insertManager.do", method = RequestMethod.GET)
 	public String insertManagerForm() {
-		return "manager/insertManager";
+		return "manager/manager/insertManager";
 	}
 	
 	//등록처리
@@ -69,7 +69,7 @@ public class ManagerController {
 									 Model model) {
 		vo.setManagerId(managerId);
 		model.addAttribute("manager", managerService.getManager(vo));
-		return "manager/updateManager";
+		return "manager/manager/updateManager";
 	}
 	
 	//수정처리
@@ -109,25 +109,25 @@ public class ManagerController {
 	@RequestMapping("managerRequestListDetail.do")
 	public String managerRequestListDetail() {
 		
-		return "manager/managerRequestListDetail";
+		return "manager/manager/managerRequestListDetail";
 	}
 	
 	@RequestMapping("managerAccountControl.do")
 	public String managerAccountControl() {
 		
-		return "manager/managerAccountControl";
+		return "manager/manager/managerAccountControl";
 	}
 	
 	@RequestMapping(value="managerAccountList.do", method=RequestMethod.GET)
 	public String getManagerAccountList(Model model, CompanyVO vo) {
 		model.addAttribute("result", companyService.getCompanyList(vo));
-		return "manager/managerAccountList";
+		return "manager/manager/managerAccountList";
 	}
 	
 	@RequestMapping(value="managerUserAccountList.do", method=RequestMethod.GET)
 	public String managerUserAccountList(Model model, CandidateVO vo) {
 		model.addAttribute("result", candidateService.getCandidateList(vo));
-		return "manager/managerUserAccountList";
+		return "manager/manager/managerUserAccountList";
 	}
 	
 	
