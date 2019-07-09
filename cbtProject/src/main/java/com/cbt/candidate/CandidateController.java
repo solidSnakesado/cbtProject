@@ -59,16 +59,20 @@ public class CandidateController {
 		return "candidate/candidateApplication";
 	}
 	
+	// 2019.07.09 성재민
+		// 경로 수정
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateExaminationList.do")	
 	public String candidateExaminationList() {
-		return "candidate/candidateExaminationList";
+		return "candidate/candidate/candidateExaminationList";
 	}
 	
+	// 2019.07.09 성재민
+		// 경로 수정
 	//2019.06.27 장세준 - *.do & view 등록
 	@RequestMapping("candidateExaminationListDetail.do")	
 	public String candidateExaminationListDetail() {
-		return "candidate/candidateExaminationListDetail";
+		return "candidate/candidate/candidateExaminationListDetail";
 	}
 	
 	//2019.06.27 장세준 - *.do & view 등록
@@ -92,19 +96,25 @@ public class CandidateController {
 		return "candidate/candidate/candidateInIntroduce";
 	}
 	
+	// 2019.07.09 성재민
+	// 경로 수정
 	@RequestMapping("candidatePersonalChart.do")	
 	public String candidatePersonalChart() {
-		return "candidate/candidatePersonalChart";
+		return "candidate/candidate/candidatePersonalChart";
 	}
 	
+	// 2019.07.09 성재민
+	// 경로 수정
 	@RequestMapping("candidateScheduleCheck.do")	
 	public String candidateScheduleCheck() {
-		return "candidate/candidateScheduleCheck";
+		return "candidate/candidate/candidateScheduleCheck";
 	}
 	
+	// 2019.07.09 성재민
+	// 경로 수정
 	@RequestMapping("candidateSurvey.do")	
 	public String candidateSurvey() {
-		return "candidate/candidateSurvey";
+		return "candidate/candidate/candidateSurvey";
 	}
 	
 	@RequestMapping("candidateMain.do")
