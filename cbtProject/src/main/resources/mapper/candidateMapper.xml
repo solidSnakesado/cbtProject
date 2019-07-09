@@ -50,8 +50,8 @@
 		<!-- 7/9 	시험목록조회 	장세준  -->
 		<select id="getExamList" resultType="map">
 			SELECT	 EXAM_NAME										"examName"
-					,TO_CHAR(EXAM_START_TIME, "YYYY.MM.DD HH:MI")	"examStartTime"
-				    ,TO_CHAR(EXAM_END_TIME, "YYYY.MM.DD HH:MI")		"examEndTime"
+					,TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+				    ,TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')		"examEndTime"
 				    ,QUESTION_QUANTITY								"questionQuantity"
 				    ,PASSING_SCORE									"passingScore"
 				    ,TAKER_ID										"takerId"
