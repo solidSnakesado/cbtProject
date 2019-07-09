@@ -97,4 +97,19 @@ public class CompanyController {
 		companyService.updateCompany(vo);
 		return "redirect:managerAccountList.do";
 	}
+	
+	@RequestMapping(value="companyIntroduce.do", method=RequestMethod.GET)
+	public String companyIntroduce() {
+		return "company/company/companyIntroduce";
+	}
+	
+	@RequestMapping(value="companySystemintro.do", method=RequestMethod.GET)
+	public String companySystemintro() {
+		return "company/company/companySystemintro";
+	}
+
+	@RequestMapping(value="companyChart.do", method=RequestMethod.GET)
+	public String companyChart() {
+		return "company/company/companyChart";
+	}
 }
