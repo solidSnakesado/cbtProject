@@ -25,34 +25,34 @@
 		</article>
 	</section>
 <h2>관리자 계정관리</h2>
-<form>
+<form action="${pageContext.request.contextPath }/managerUserAccountEdit.do" method="post">
 <table border="1">
 
    <tr>
       <th>응시자ID</th>
-      <td> AA1 </td> 
+      <td>${result.takerId}</td> 
+   </tr>
+   <tr>
+      <th>비밀번호</th>
+      <td><input type="password" name="takerPassword" value="${result.takerPassword }"></td> 
    </tr>
    <tr>
       <th>이름</th>
-      <td> 홍길동 </td> 
+      <td><input type="text" name="takerName" value="${result.takerName }"></td> 
    </tr>
    <tr>
       <th>주민번호 </th>
-      <td> 111111-1******* </td> 
+      <td><input type="text" name="takerInfo" value="${result.takerInfo }"></td> 
    </tr>
       <tr>
       <th>최종학력</th>
-      <td> 대졸 </td> 
+      <td><input type="text" name="takerEducation" value="${result.takerEducation }"></td> 
    </tr>
-   </tr>
-      <tr>
-      <th>연락처</th>
-      <td> 010-111-1111 </td> 
-   </tr>
-   <tr>
+    <tr>
       <th>이메일</th>
-      <td>ceo@gmail.com</td> 
+      <td><input type="text" name="takerEmail" value="${result.takerEmail }"></td> 
    </tr>
+   
 </table>
 <button type="button" >확인</button>
 <button type="button" >삭제하기</button>

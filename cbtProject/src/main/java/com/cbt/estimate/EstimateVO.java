@@ -2,11 +2,18 @@ package com.cbt.estimate;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class EstimateVO {
 	
-	private String estimateId; 		//의뢰ID
+	
+
+
+	private int estimateId; 		//의뢰ID
+	private String estimateName;	//의뢰이름
 	private String categoryId;		//카테고리ID
 	private String companyId;		//기업ID
+	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
 	private int estimatePrice;		//금액
 	private int tradeProgress;		//진행상태
@@ -15,14 +22,17 @@ public class EstimateVO {
 	private String applicants;		//응시자 수
 	private int examClassfication;	//시험분류
 	private int levelOfDifficulty;	//난이도
+	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date examDate;			//시험일시
 	private String remarks;			//비고
 	private int examCount;			//시험횟수
 	private int examInterval;		//시험간격
-	public String getEstimateId() {
+	
+	
+	public int getEstimateId() {
 		return estimateId;
 	}
-	public void setEstimateId(String estimateId) {
+	public void setEstimateId(int estimateId) {
 		this.estimateId = estimateId;
 	}
 	public String getCategoryId() {
@@ -109,6 +119,12 @@ public class EstimateVO {
 	public void setExamInterval(int examInterval) {
 		this.examInterval = examInterval;
 	}
+	public String getEstimateName() {
+		return estimateName;
+	}
+	public void setEstimateName(String estimateName) {
+		this.estimateName = estimateName;
+	}
 	@Override
 	public String toString() {
 		return "EstimateVO [estimateId=" + estimateId + ", categoryId=" + categoryId + ", companyId=" + companyId
@@ -116,19 +132,8 @@ public class EstimateVO {
 				+ ", candidate=" + candidate + ", applyPurpose=" + applyPurpose + ", applicants=" + applicants
 				+ ", examClassfication=" + examClassfication + ", levelOfDifficulty=" + levelOfDifficulty
 				+ ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount + ", examInterval="
-				+ examInterval + "]";
+				+ examInterval + ", estimateName=" + estimateName + "]";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-
 }

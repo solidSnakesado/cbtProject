@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,14 +17,14 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@RequestMapping(value = "/company", method = RequestMethod.GET)
+	@RequestMapping(value = "companyMain.do", method = RequestMethod.GET)
 	public String companyMain() {
-		return "company/companyMain";
+		return "company/company/companyMain";
 	}
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.GET)
 	public String companySignUpForm() {
-		return "company/companySignUp";
+		return "company/company/companySignUp";
 	}
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
@@ -34,18 +35,18 @@ public class CompanyController {
 	
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.GET)
 	public String companyUpdateForm() {
-		return "company/companyUpdate";
+		return "company/company/companyUpdate";
 	}
 	
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.POST)
 	public String companyUpdate(CompanyVO vo) {
 		companyService.updateCompany(vo);
-		return "company/companyMain";
+		return "company/company/companyMain";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.GET)
 	public String companyLoginForm() {		
-		return "company/companyLogin";
+		return "company/company/companyLogin";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
@@ -55,15 +56,22 @@ public class CompanyController {
 		
 		if(loginCompany != null) {
 			session.setAttribute("company", loginCompany);
-			targetPage = "company/companyMain";
+			targetPage = "redirect:companyMain.do";
 		}
 		
 		return targetPage;
 	}
 	
+	//로그아웃 폼
+	@RequestMapping(value="companyLogout.do", method=RequestMethod.GET)
+	public String companyLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:companyMain.do";
+	}
+	
 	@RequestMapping(value = "companyAccount.do",  method = RequestMethod.GET)
 	public String companyAccount() {		
-		return "company/companyAccount";
+		return "company/company/companyAccount";
 	}
 	
 	@RequestMapping(value = "companyDelete.do",  method = RequestMethod.GET)
@@ -74,5 +82,19 @@ public class CompanyController {
 		session.invalidate();
 		
 		return "redirect:companyLogin.do";
+	}
+	// 관리자 컴퍼니 상세조회, 수정폼
+	@RequestMapping(value="managerAccountManage.do/{companyId}", method=RequestMethod.GET)
+	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
+		vo.setCompanyId(companyId);
+		model.addAttribute("result", companyService.getCompany(vo));
+		return "manager/managerAccountManage";
+	}
+	
+	// 관리자 컴퍼니 정보 수정처리
+	@RequestMapping("updateManagerAccount.do")
+	public String updateManagerAccount(@ModelAttribute("company") CompanyVO vo) {
+		companyService.updateCompany(vo);
+		return "redirect:managerAccountList.do";
 	}
 }

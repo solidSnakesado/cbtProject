@@ -1,5 +1,7 @@
 package com.cbt.candidate;
 
+import java.util.Arrays;
+
 //2019.07.01 장세준 - VO 생성
 public class CandidateVO {
 	private String takerId;
@@ -8,7 +10,15 @@ public class CandidateVO {
 	private String takerEducation;
 	private String takerEmail;
 	private String takerPassword;
+	private String takerPhoneNum;
 	
+	public String getTakerPhoneNum() {
+		return takerPhoneNum;
+	}
+	public void setTakerPhoneNum(String takerPhoneNum) {
+		this.takerPhoneNum = takerPhoneNum;
+	}
+
 	// 페이징을 위한 추가 (cnt, sort~ seqList)   장세준    7/2 
 	private int cnt;
 	private String sort;
@@ -111,7 +121,9 @@ public class CandidateVO {
 	public String toString() {
 		return "CandidateVO [takerId=" + takerId + ", takerName=" + takerName + ", takerInfo=" + takerInfo
 				+ ", takerEducation=" + takerEducation + ", takerEmail=" + takerEmail + ", takerPassword="
-				+ takerPassword + "]";
+				+ takerPassword + ", takerPhoneNum=" + takerPhoneNum + ", cnt=" + cnt + ", sort=" + sort
+				+ ", searchKeyword=" + searchKeyword + ", searchCondition=" + searchCondition + ", start=" + start
+				+ ", end=" + end + ", seqList=" + Arrays.toString(seqList) + ", outMsg=" + outMsg + "]";
 	}
 	
 	

@@ -17,7 +17,7 @@ public class ConsultingController {
 	@RequestMapping(value = "companyConSultingList.do", method = RequestMethod.GET)
 	public String companyConsultingList(Model model) {
 		model.addAttribute("consultingList", consultingService.getConsultingList());
-		return "company/companyConSultingList";
+		return "company/company/companyConSultingList";
 	}
 	
 	// 2019.07.08 성재민
@@ -27,12 +27,12 @@ public class ConsultingController {
 		ConsultingVO vo = new ConsultingVO();
 		vo.setConsultingId(id);
 		model.addAttribute("consulting", consultingService.getConsulting(vo));
-		return "company/companyConSultingDetail";
+		return "company/company/companyConSultingDetail";
 	}
 	
 	@RequestMapping(value = "companyConsultingInsert.do", method = RequestMethod.GET)
 	public String companyConsultingInsertForm() {
-		return "company/companyConsultingInsert";
+		return "company/company/companyConsultingInsert";
 	}
 	
 	// 2019.07.08 성재민
@@ -52,7 +52,7 @@ public class ConsultingController {
 		ConsultingVO vo = new ConsultingVO();
 		vo.setConsultingId(id);
 		model.addAttribute("consulting", consultingService.getConsulting(vo));
-		return "company/companyConSultingUpdate";
+		return "company/company/companyConSultingUpdate";
 	}
 	
 	@RequestMapping(value = "companyConSultingUpdate.do", method = RequestMethod.POST)

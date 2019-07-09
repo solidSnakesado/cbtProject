@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TakeExamHistoryDAO">
+	<!-- 190703 재홍 CRUD 쿼리 입력 -->
+	<!-- 설문조사 등록 -->
+	<insert id = "insertTakeExamHistory" parameterType="TakeExamHistoryVO">
+		INSERT INTO TAKE_EXAM_HISTORY (  
+					TAKER_ID
+				,	TAKE_EXAM_HISTORY_ID
+				,	SET_EXAM_QUESTION_ID
+				,	TAKER_ANSWER
+				,	TAKER_SCORE
+				,	TAKE_EXAM_ID
+			)
+		VALUES ( 
+					#{takerId}
+				,	#{takeExamHistoryId}
+				,	#{setExamQuestionId} 
+				,	#{takerAnswer}
+				,	#{takerScore}
+				,	#{takeExamId} 
+			)
+	</insert>
+</mapper>

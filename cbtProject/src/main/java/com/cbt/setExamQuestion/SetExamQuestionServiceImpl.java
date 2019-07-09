@@ -35,13 +35,10 @@ public class SetExamQuestionServiceImpl implements SetExamQuestionService {
 
 	public SetExamQuestionVO getSetExamQuestion(SetExamQuestionVO vo) {
 		
-		return null;
+		return dao.getSetExamQuestion(vo);
 	}
 
 	public List<SetExamQuestionVO> SetExamQuestionList(SetExamQuestionVO vo) {
-		return dao.SetExamQuestionList(vo);
+		return dao.getSetExamQuestionList(vo);
 	}
-
-
-
 }
