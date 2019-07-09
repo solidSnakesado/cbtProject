@@ -30,7 +30,7 @@
 <button type="button">응시자 삭제</button>
 <br><br>
 <form>
-<table border="1">
+<table border="1" align="center">
    <tr>
       <th>응시자ID</th>
       <th>이름</th>

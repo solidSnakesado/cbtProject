@@ -37,13 +37,11 @@ public class ConsultingController {
 	
 	// 2019.07.08 성재민
 	// vo객체 변경에 따른 수정 필요.
-	/*
-	 * @RequestMapping(value = "companyConsultingInsert.do", method =
-	 * RequestMethod.POST) public String companyConsultingInsert(ConsultingVO vo) {
-	 * vo.setConsultingId("상담" + System.currentTimeMillis());
-	 * consultingService.insertConsulting(vo); return
-	 * "redirect:companyConSultingList.do"; }
-	 */
+	@RequestMapping(value = "companyConsultingInsert.do", method = RequestMethod.POST) 
+	public String companyConsultingInsert(ConsultingVO vo) {
+		consultingService.insertConsulting(vo);
+		return "redirect:companyConSultingList.do"; 
+	}
 	
 	// 2019.07.08 성재민
 	// id int로 변경

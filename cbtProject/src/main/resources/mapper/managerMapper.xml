@@ -96,4 +96,91 @@
 		FROM TAKER
 	</select>
 	
+	<!-- 관리자 응시자 추가 -->
+	<insert id="managerInsertCandidate" parameterType="CandidateVO">
+		INSERT INTO TAKER (TAKER_ID
+							, TAKER_NAME
+							, TAKER_INFO
+							, TAKER_EDUCATION
+							, TAKER_EMAIL
+							, TAKER_PHONENUM)
+		VALUES( #{takerId}
+				 ,#{takerName}
+				 ,#{takerInfo}
+				 ,#{takerEducation}
+ 				 ,#{takerEmail}
+ 				 ,#{takerPhoneNum})
+		
+		</insert>
+		<!-- 관리자 회사 등록 -->
+		<insert id="managerAccountInsert" parameterType="CompanyVO">
+			INSERT INTO COMPANY (
+								COMPANY_ID
+								, COMPANY_PASSWORD
+								, COMPANY_NAME
+								, BUSINESS_NUMBER
+								, COMPANY_CLASSIFICATION
+								, COMPANY_SECTORS
+								, COMPANY_CREDIT
+								, COMPANY_MANAGER
+								, COMPANY_MANAGER_TELNUM )
+								
+			VALUES ( #{companyId}
+						,#{companyPassword}
+						,#{companyName}
+						,#{businessNumber}
+						,#{companyClassification}
+						,#{companySectors}
+						,#{companyCredit}
+						,#{companyManager}
+						,#{companyManagerTelNum})
+		</insert>
+		
+		<!-- 0708 이승환 추가  // 기업리스트-->
+	<select id="managerAccountList" resultType="CompanyVO">
+		SELECT 
+			COMPANY_ID
+			,COMPANY_NAME
+			,COMPANY_PASSWORD
+			,COMPANY_CLASSIFICATION
+			,COMPANY_MANAGER
+			,COMPANY_MANAGER_TELNUM
+		FROM COMPANY
+	</select>
+	
+	<!-- 0708 이승환 추가  // 기업 수정-->
+	<update id="managerAccountManage" parameterType="CompanyVO">
+		UPDATE COMPANY
+		<set>
+			<if test="companyId != null and companyId != '' ">
+				COMPANY_ID = #{companyId},
+			</if>
+			<if test="companyPassword != null and companyPassword != '' ">
+				COMPANY_PASSWORD = #{companyPassword},
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				COMPANY_NAME = #{companyName},
+			</if>
+			<if test="businessNumber != null and businessNumber != '' ">
+				BUSINESS_NUMBER = #{businessNumber},
+			</if>
+			<if test="companyClassification != null and companyClassification != '' "> 
+				COMPANY_CLASSIFICATION = #{companyClassification},
+			</if>
+			<if test="companySectors != null and companySectors != '' "> 
+				COMPANY_SECTORS = #{companySectors},
+			</if>
+			<if test="companyCredit != null and companyCredit != '' "> 
+				COMPANY_CREDIT = #{companyCredit},
+			</if>
+			<if test="companyManager != null and companyManager != '' ">
+				COMPANY_MANAGER = #{companyManager},
+			</if>
+			<if test="companyManagerTelNum != null and companyManagerTelNum != '' ">
+				COMPANY_MANAGER_TELNUM = #{companyManagerTelNum}
+			</if>
+		</set>
+		WHERE COMPANY_ID = #{companyId}	
+	</update>
+	
 </mapper>

@@ -21,18 +21,6 @@
 		}); */
 	</script>
 	<header id="header"></header>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button"
-						onclick="location.href='companyAccount.do'">계정관리</button></li>
-				<li><button type="button"
-						onclick="location.href='companyRequestList.do'">의뢰목록</button></li>
-				<li><button type="button"
-						onclick="location.href='companyTestList.do'">시험목록</button></li>
-			</ul>
-		</article>
-	</section>
 	<table border="1" align="center">
 		<tr>
 			<th>제목</th>

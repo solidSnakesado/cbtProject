@@ -21,7 +21,7 @@ public class ConditionController {
 	//등록폼
 	@RequestMapping(value="insertCondition.do", method=RequestMethod.GET)
 	public String insertConditionForm() {
-		return "condition/insertCondition";
+		return "manager/condition/insertCondition";
 	}
 	
 	//등록처리
@@ -37,7 +37,7 @@ public class ConditionController {
 	public String getConditionList(Model model) {
 		List<ConditionVO> conditionList = conditionService.getAllConditionList();
 		model.addAttribute("result", conditionService.getAllConditionList());
-		return "condition/getConditionList";
+		return "manager/condition/getConditionList";
 	}
 	
 	//수정폼
@@ -47,7 +47,7 @@ public class ConditionController {
 										Model model) {
 		vo.setConditionSeq(conditionSeq);
 		model.addAttribute("condition", conditionService.getCondition(vo));
-		return "condition/updateCondition";
+		return "manager/condition/updateCondition";
 	}
 	
 	//수정처리

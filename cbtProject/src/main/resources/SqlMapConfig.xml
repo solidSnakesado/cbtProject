@@ -26,6 +26,7 @@
 		<typeAlias type="com.cbt.setExamQuestion.SetExamQuestionVO" alias="SetExamQuestionVO" />
 		<typeAlias type="com.cbt.survey.SurveyVO" 					alias="SurveyVO" />
 		<typeAlias type="com.cbt.takeExam.TakeExamVO" 				alias="TakeExamVO" />
+		<typeAlias type="com.cbt.takeExam.TakeExamVOt" 				alias="TakeExamVOt" />
 		<typeAlias type="com.cbt.takeExamHistory.TakeExamHistoryVO" alias="TakeExamHistoryVO" />
 	</typeAliases>
 </configuration>
