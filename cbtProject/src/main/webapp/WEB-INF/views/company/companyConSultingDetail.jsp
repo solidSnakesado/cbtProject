@@ -10,12 +10,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		/* 		$(document).ready(function() {
-		 $("#header").load("co_header.html")
-		 }); */
-	</script>
-	<header id="header"></header>
 	<h3>상담 세부 항목(기업)</h3>
 	<table border="1">
 		<tr>

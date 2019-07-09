@@ -30,6 +30,10 @@ public interface ManagerService {
 	// 기업목록 조회
 	List<CompanyVO> managerAccountList(CompanyVO vo);
 	
+
+
+
 	// 로그인 처리 (7/9 추가, June)
 	ManagerVO loginManager(ManagerVO vo);
+
 }

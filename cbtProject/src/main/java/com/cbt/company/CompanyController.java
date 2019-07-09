@@ -83,18 +83,28 @@ public class CompanyController {
 		
 		return "redirect:companyLogin.do";
 	}
-	// 관리자 컴퍼니 상세조회, 수정폼
-	@RequestMapping(value="managerAccountManage.do/{companyId}", method=RequestMethod.GET)
-	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
-		vo.setCompanyId(companyId);
-		model.addAttribute("result", companyService.getCompany(vo));
-		return "manager/managerAccountManage";
-	}
 	
+
 	// 관리자 컴퍼니 정보 수정처리
 	@RequestMapping("updateManagerAccount.do")
 	public String updateManagerAccount(@ModelAttribute("company") CompanyVO vo) {
 		companyService.updateCompany(vo);
 		return "redirect:managerAccountList.do";
 	}
+	
+	@RequestMapping(value="companyIntroduce.do", method=RequestMethod.GET)
+	public String companyIntroduce() {
+		return "company/company/companyIntroduce";
+	}
+	
+	@RequestMapping(value="companySystemintro.do", method=RequestMethod.GET)
+	public String companySystemintro() {
+		return "company/company/companySystemintro";
+	}
+
+	@RequestMapping(value="companyChart.do", method=RequestMethod.GET)
+	public String companyChart() {
+		return "company/company/companyChart";
+	}
+
 }

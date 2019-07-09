@@ -11,19 +11,18 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#header").load("co_header.html")
-		});
-	</script>
 	<header id="header"></header>
 	<form name="companyConsultingInsert.do" method="post">
 		<h2>기업상담신청</h2>
 		<table style="padding: 5px 0 5px 0;">
 			<tr>
 				<th>희망상담일</th>
-				<td><input type="text" name="consultingDesiredDate" size="80"
-					placeholder="상담을 원하시는 시간을 입력하여 주시면 최대한 반영하도록 하겠습니다. (예) 2019-6-18 15:00 "></td>
+				<td><input type="datetime-local" name="consultingDesiredDate" size="80"
+					placeholder="상담을 원하시는 시간을 입력하여 주시면 최대한 반영하도록 하겠습니다."></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="consultingTitle" placeholder="제목을 입력해 주세요."><td>
 			</tr>
 			<tr>
 				<th>상담내용</th>

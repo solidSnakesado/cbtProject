@@ -10,7 +10,8 @@ public class CompanyVO {
 	private String companyCredit;       
 	private String companyManager;    
 	private String companyManagerTelNum;	// 2019.07.02 성재민 COMPANY_MANAGER_TELNUM 추가
-	
+	private String[] cpnList;
+
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -85,6 +86,14 @@ public class CompanyVO {
 
 	public void setCompanyManager(String companyManager) {
 		this.companyManager = companyManager;
+	}
+	
+	public String[] getCpnList() {
+		return cpnList;
+	}
+
+	public void setCpnList(String[] cpnList) {
+		this.cpnList = cpnList;
 	}
 
 	@Override
