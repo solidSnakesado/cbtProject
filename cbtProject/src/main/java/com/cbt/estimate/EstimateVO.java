@@ -11,12 +11,12 @@ public class EstimateVO {
 
 	private int estimateId; 		//의뢰ID
 	private String estimateName;	//의뢰이름
-	private String categoryId;		//카테고리ID
+	private int categoryId;		//카테고리ID
 	private String companyId;		//기업ID
 	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
 	private int estimatePrice;		//금액
-	private String tradeProgress;		//진행상태
+	private String tradeProgress;	//진행상태
 	private String candidate;		//응시대상자
 	private String applyPurpose;	//응시목적
 	private String applicants;		//응시자 수
@@ -26,12 +26,23 @@ public class EstimateVO {
 	private Date examDate;			//시험일시
 	private String remarks;			//비고
 	private String examCount;			//시험횟수
-	private int examInterval;		//시험간격
+	private String examInterval;		//시험간격
 	private String examCountNm;
 	private String tradeProgressNm;
 	
 	
 	
+	
+	public String getExamInterval() {
+		return examInterval;
+	}
+
+
+	public void setExamInterval(String examInterval) {
+		this.examInterval = examInterval;
+	}
+
+
 	public String getTradeProgressNm() {
 		return tradeProgressNm;
 	}
@@ -72,12 +83,14 @@ public class EstimateVO {
 	}
 
 
-	public String getCategoryId() {
+	
+
+	public int getCategoryId() {
 		return categoryId;
 	}
 
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -202,14 +215,6 @@ public class EstimateVO {
 	}
 
 
-	public int getExamInterval() {
-		return examInterval;
-	}
-
-
-	public void setExamInterval(int examInterval) {
-		this.examInterval = examInterval;
-	}
 
 
 	@Override

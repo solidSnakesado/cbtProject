@@ -28,9 +28,9 @@
 			<tr>	<td>응시자 수</td>		<td><input type="text" name="applicants" value="${myEstimateList.applicants}" ></td></tr>
 			<tr>	<td>시험분류</td>		<td><input type="text" name="examClassfication" value="${myEstimateList.examClassfication}"></td></tr>
 			<tr>	<td>난이도</td>		<td><input type="text" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></td></tr>
-			<tr>	<td>시험일시</td>		<td><input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
+			<tr>	<td>시험일시</td>		<td><input type="datetime-local" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
 	 		<tr>	<td>비고</td>		<td><input type="text" name="remarks" value="${myEstimateList.remarks}"></td></tr>
-			<tr>	<td>시험횟수</td>		<td><input type="text" name="examCount" value="${myEstimateList.examCount}">
+			<tr>	<td>시험횟수</td>		<td>
 			<my:radio value="${myEstimateList.examCount}" items="${H}" name="examCount"></my:radio>
 			
 			</td></tr>  

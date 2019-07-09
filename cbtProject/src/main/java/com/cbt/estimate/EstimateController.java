@@ -83,8 +83,8 @@ public class EstimateController {
 		
 		vo.setEstimateId(estimateId); 
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
-		model.addAttribute("G", conditionService.getConditionDetailList("0G"));
-		model.addAttribute("H", conditionService.getConditionDetailList("0H"));
+		model.addAttribute("G", conditionService.getConditionDetailList("G"));
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));
 		return "empty/company/companyDetailRequestList";
 	}
 	
