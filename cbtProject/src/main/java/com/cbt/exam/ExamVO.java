@@ -2,12 +2,16 @@ package com.cbt.exam;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ExamVO {
 
 	// 2019.07.08 성재민
 	// examId, estimateId 타입 int 로 변경
 	private int 		examId;
+	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
 	private Timestamp 	examStartTime;
+	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
 	private Timestamp 	examEndTime;
 	private int 		questionQuantity;
 	private int 		estimateId;
@@ -18,7 +22,25 @@ public class ExamVO {
 	private int 		examStatus;
 	private int 		disclosureStatus;
 	private int 		setExamStatus;
+	private String 		examDes1;
+	private String 		examDes2;
 	
+	public String getExamDes1() {
+		return examDes1;
+	}
+
+	public void setExamDes1(String examDes1) {
+		this.examDes1 = examDes1;
+	}
+
+	public String getExamDes2() {
+		return examDes2;
+	}
+
+	public void setExamDes2(String examDes2) {
+		this.examDes2 = examDes2;
+	}
+
 	public Timestamp getExamStartTime() {
 		return examStartTime;
 	}
@@ -121,6 +143,7 @@ public class ExamVO {
 				+ ", questionQuantity=" + questionQuantity + ", estimateId=" + estimateId + ", numberOfTimes="
 				+ numberOfTimes + ", passingScore=" + passingScore + ", possibleApplicants=" + possibleApplicants
 				+ ", examName=" + examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
-				+ ", setExamStatus=" + setExamStatus + "]";
+				+ ", setExamStatus=" + setExamStatus + ", examDes1=" + examDes1 + ", examDes2=" + examDes2 + "]";
 	}
+
 }
