@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 		<h1 >기업 등록 페이지(관리자 화면)</h1>
 	<hr>	
 	</div>
-<form action="managerAccountInsert.do" method="post" enctype="application/x-www-form-urlencoded">
+<form action="${pageContext.request.contextPath }/managerAccountInsert.do" method="post" enctype="application/x-www-form-urlencoded">
 <table align="center" border="1">
 			<tr>
 				<th>Company 아이디</th><td><input type="text" name="companyId"></td>
@@ -40,30 +41,15 @@
 				<th>사업자번호</th><td><input type="text" name="businessNumber"></td>
 			</tr>
 			<tr>
-			<th>회사분류</th><td><select name="companyClassification">
-					<option selected>회사분류</option>
-					<option>대기업</option>
-					<option>중기업</option>
-					<option>소기업</option>
-					</select></td>
+			<th>회사분류</th><td>
+					<my:select items="${E}" name="companyClassification" value="${result.companyClassification }"></my:select>
+					</td>
 			</tr>
 			<tr>
-			<th>세부업종 </th><td><select name="companySectors">
-					<option selected>세부업종</option>
-					<option>경영·사무</option>
-					<option>마케팅·광고·홍보</option>
-					<option>IT·인터넷</option>
-					<option>무역·유통</option>
-					<option>영업·고객상담</option>
-					<option>서비스</option>
-					<option>연구개발·설계</option>
-					<option>생산·제조</option>
-					<option>교육</option>
-					<option>건설</option>
-					<option>의료</option>
-					<option>미디어</option>
-					<option>전문·특수직</option>
-					</select></td>
+			<th>세부업종 </th><td>
+					<my:select items="${F}" name="companySectors" value="${result.companySectors }"></my:select>
+					</td>
+			</tr>
 			<tr>
 				<th>결제정보</th><td><input type="text" name="companyCredit"></td>
 			</tr>

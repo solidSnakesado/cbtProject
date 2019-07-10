@@ -18,15 +18,15 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
 <h2>응시자 계정관리</h2>
-<form action="${pageContext.request.contextPath }/managerUserAccountEdit.do" method="post">
+<form action="${pageContext.request.contextPath}/managerUserAccountEdit.do" method="post">
 <input type="hidden" name="takerId" value="${result.takerId }">
 <table border="1" align="center">
    <tr>
@@ -42,19 +42,22 @@
       <td><input type="text" name="takerName" value="${result.takerName }"></td> 
    </tr>
    <tr>
-      <th>주민번호 </th>
+      <th>생년월일</th>
       <td><input type="text" name="takerInfo" value="${result.takerInfo }"></td> 
    </tr>
       <tr>
       <th>최종학력</th>
-      <td><input type="text" name="takerEducation" value="${result.takerEducation }">
+      <td><my:select items="${J}" name="takerEducation" value="${result.takerEducation }"></my:select>
       </td> 
    </tr>
     <tr>
       <th>이메일</th>
       <td><input type="text" name="takerEmail" value="${result.takerEmail }"></td> 
    </tr>
-   
+   <tr>
+   	  <th>연락처</th>
+   	  <td><input type="text" name="takerPhoneNum" value="${result.takerPhoneNum }"></td>
+   </tr>
 </table>
 		<br><br>
 	<input type="submit" value="수정" >

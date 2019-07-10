@@ -16,10 +16,10 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -27,16 +27,19 @@
 		<h1 >응시자 등록 페이지(관리자 화면)</h1>
 	<hr>	
 	</div>
-<form action="managerUserInsert.do" method="post" enctype="application/x-www-form-urlencoded">
+<form action="${pageContext.request.contextPath }/managerUserInsert.do" method="post" enctype="application/x-www-form-urlencoded">
 <table align="center" border="1">
 			<tr>
 				<th>응시자ID</th><td><input type="text" name="takerId"></td>
 			</tr>
 			<tr>
-				<th>성명</th><td><input type="text" name="takerName"></td>
+				<th>비밀번호</th><td><input type="password" name="takerPassword"></td>
 			</tr>
 			<tr>
-				<th>주민등록번호 </th><td><input type="text" name="takerInfo"></td>
+				<th>이름</th><td><input type="text" name="takerName"></td>
+			</tr>
+			<tr>
+				<th>생년월일</th><td><input type="text" name="takerInfo"></td>
 			</tr>
 			<tr>
 				<th>최종학력</th><td>

@@ -133,6 +133,8 @@ public class ManagerController {
 	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
 		vo.setCompanyId(companyId);
 		model.addAttribute("result", companyService.getCompany(vo));
+		model.addAttribute("E", conditionService.getConditionDetailList("E"));
+		model.addAttribute("F", conditionService.getConditionDetailList("F"));
 		return "manager/manager/managerAccountManage";
 	}
 		
@@ -145,7 +147,9 @@ public class ManagerController {
 	
 	// 매니저가 회사 추가폼
 	@RequestMapping(value="managerAccountInsert.do", method=RequestMethod.GET)
-	public String managerAccountInsertForm(CompanyVO vo) {
+	public String managerAccountInsertForm(CompanyVO vo, Model model) {
+		model.addAttribute("E", conditionService.getConditionDetailList("E"));
+		model.addAttribute("F", conditionService.getConditionDetailList("F"));
 		return "manager/manager/managerAccountInsert";
 	}
 	
@@ -175,11 +179,12 @@ public class ManagerController {
 	public String managerUserAccountEdit(@PathVariable String takerId, Model model, CandidateVO vo) {
 		vo.setTakerId(takerId);
 		model.addAttribute("result", candidateService.getCandidate(vo));
+		model.addAttribute("J", conditionService.getConditionDetailList("J"));
 		return "manager/manager/managerUserAccountEdit";
 	}
 	
 		//관리자 응시자 정보 수정처리
-	@RequestMapping("updateUserAccountEdit.do")
+	@RequestMapping(value="managerUserAccountEdit.do", method=RequestMethod.POST)
 	public String updateUserAccount(@ModelAttribute("taker") CandidateVO vo) {
 		candidateService.updateCandidate(vo);
 		return "redirect:managerUserAccountList.do";
@@ -195,25 +200,15 @@ public class ManagerController {
 	// 매니저가 유저 추가
 	@RequestMapping(value="managerUserInsert.do", method=RequestMethod.POST)
 	public String managerUserInsert(CandidateVO vo) {
-	candidateService.insertCandidate(vo);
+		candidateService.insertCandidate(vo);
 		return "redirect:managerUserAccountList.do";
 	}
-	
-	
-	/*
-	 * // 매니저가 회사 추가폼
-	 * 
-	 * @RequestMapping(value="managerAccountInsert.do", method=RequestMethod.GET)
-	 * public String managerAccountInsertForm(CompanyVO vo) { 
-	 * return "manager/manager/managerAccountInsert"; }
-	 * 
-	 * // 매니저가 회사 추가
-	 * 
-	 * @RequestMapping(value="managerAccountInsert.do", method=RequestMethod.POST)
-	 * public String managerAccountInsert(CompanyVO vo) {
-	 * companyService.insertCompany(vo); 
-	 * 	return "redirect:managerAccountList.do"; }
-	 */
+	// 매니저가 유저 삭제
+	@RequestMapping("managerUserDelete.do")
+	public String managerUserDelete(CandidateVO vo) {
+		candidateService.deleteCandidate(vo);
+		return "redirect:managerUserAccountList.do";
+	}
 	
 	//로그인 폼 (7/9 생성, JUNE)
 	@RequestMapping(value="managerLogin.do", method=RequestMethod.GET)
