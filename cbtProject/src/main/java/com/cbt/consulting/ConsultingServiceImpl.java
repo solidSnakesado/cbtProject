@@ -53,7 +53,7 @@ public class ConsultingServiceImpl implements ConsultingService {
 	@Override
 	public Map<String, Object> getConsultingList(ConsultingVO vo, Paging paging) {
 		if(paging != null) {
-			paging.setPageUnit(1);
+			//paging.setPageUnit(1);
 			// 페이지 번호 파라미터
 			if(paging.getPage() == null) {
 				paging.setPage(1);

@@ -50,13 +50,17 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
-	public String companyLogin(CompanyVO vo, HttpSession session) {
-		String 		targetPage 		= "company/companyLogin";
+	public String companyLogin(CompanyVO vo, HttpSession session, Model model) {
+		String 		targetPage 		= "company/company/companyLogin";
 		CompanyVO 	loginCompany 	= companyService.loginCompany(vo);
 		
 		if(loginCompany != null) {
 			session.setAttribute("company", loginCompany);
 			targetPage = "redirect:companyMain.do";
+		} else {
+			// 2019.07.10 성재민
+			// 로그인 실패시 로그인 실패 메시지를 띄우기 위해 값 설정
+			model.addAttribute("loginFail", true);
 		}
 		
 		return targetPage;

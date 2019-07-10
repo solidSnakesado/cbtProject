@@ -19,6 +19,11 @@
 			$(arrTD[i]).text($(arrTD[i]).text().replace("T", " "))
 		}
 	});
+	
+	function goList(p){
+		searchFrm.page.value = p;
+		searchFrm.submit();
+	}
 </script>
 </head>
 
@@ -27,12 +32,11 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		/* $(document).ready(function() {
-			$("#header").load("co_header.html")
-		}); */
-	</script>
 	<header id="header"></header>
+	
+	<form name="searchFrm">
+		<input type = "hidden" name="page" value="1">
+	</form>
 	<table border="1" align="center">
 		<tr>
 			<th>제목</th>
@@ -47,7 +51,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<my:paging jsFunc="goList" paging="${result.paging }"/>
+	<div align="center"><my:paging jsFunc="goList" paging="${result.paging }"/></div>
+	
 	<br>
 	<button onclick="location.href='companyMain.do'">돌아가기</button>
 </body>

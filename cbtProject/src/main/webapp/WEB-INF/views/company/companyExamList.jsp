@@ -19,21 +19,11 @@
 </script>
 </head>
 <body>
-시험목록확인(기업)
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<header id="header"></header>
-   <section>
-   <article>
-      <ul>
-         <li><button type="button" onclick="location.href='accountManage.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='conSulting_List.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='test_List.html'">시험목록</button></li>
-      </ul>
-   </article>
-</section>
+	<h3>시험목록확인(기업)</h3>
 	<table border="1" align="center">
 		<tr >
 			<th>시험이름</th>
