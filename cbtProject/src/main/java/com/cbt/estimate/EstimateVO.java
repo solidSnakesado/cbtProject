@@ -16,7 +16,7 @@ public class EstimateVO {
 	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
 	private int estimatePrice;		//금액
-	private String tradeProgress;	//진행상태
+	private String tradeProgress;	//의뢰진행상태
 	private String candidate;		//응시대상자
 	private String applyPurpose;	//응시목적
 	private String applicants;		//응시자 수
