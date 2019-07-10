@@ -83,6 +83,8 @@
 			,	EXAM_STATUS
 			,	DISCLOSURE_STATUS
 			,	SET_EXAM_STATUS
+			,	EXAM_DES1
+			,	EXAM_DES2
 		FROM EXAM
 		<where>
 			EXAM_ID = #{examId}
