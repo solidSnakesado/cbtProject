@@ -51,8 +51,8 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.loginCandidate(vo);
 	}
 
-	public int idcheck(String takerId) {
-		return candidateDAO.idcheck(takerId);
+	public int idcheck(CandidateVO vo) {
+		return candidateDAO.idcheck(vo);
 	}
 
 	@Override

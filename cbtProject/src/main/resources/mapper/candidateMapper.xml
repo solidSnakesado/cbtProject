@@ -149,7 +149,7 @@
 			SELECT COUNT(*) FROM TAKER
 		</select>
 		
-		<select id="idcheck" parameterType="String" resultType="Integer">
+		<select id="idcheck" parameterType="CandidateVO" resultType="Integer">
 			SELECT	COUNT(*) FROM TAKER
       		WHERE   TAKER_ID = #{takerId}
 		</select>

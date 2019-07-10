@@ -10,7 +10,7 @@ public class CandidateVO {
 	private String takerEducation;
 	private String takerEmail;
 	private String takerPassword;
-	private String takerPhoneNum;
+	private String takerPhoneNum; 
 	private String takerEducationNm;
 	
 	public String getTakerEducationNm() {

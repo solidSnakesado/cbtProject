@@ -8,22 +8,30 @@
 
 <script>
 var idck = 0;
+var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+var pattern1 = /[0-9]/;	// 숫자 
+var pattern2 = /[a-zA-Z]/;	// 문자 
+var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;	// 특수문자
+
 function openIdChk() {
     var takerId = $("#takerId").val();
-    var pattern = /([^가-힣 \x20a-zA-Z0-9])/i; 
- /*    
-	if (pattern.test(takerId)) { 
-		window.alert("아이디는 한글,영어,숫자로만 입력하실수 있습니다");
-		return false;
-	}
-	if(takerId.search(/\s/) != -1) {
-		window.alert("공백은 허용되지 않습니다");
-		return false;
-	}
-	if(takerId.value.length <= 4) {
-		window.alert("아이디는 4자리 이상으로 구성하실수 있습니다");
-		return false;
-	} */
+     
+    if(special_pattern.test(takerId.value) == true) {
+        window.alert("아이디에는 특수문자를 사용하실 수 없습니다");
+    	e.preventDefault();
+    	return false; 
+    }
+    if(takerId.search(/\s/) != -1) {
+        window.alert("아이디에는 공백를 사용하실 수 없습니다");
+    	e.preventDefault();
+    	return false; 
+    }
+/*     if(takerId.value == '' || !(takerId.value.length >= 3 && takerId.value.length <= 12)) {
+        window.alert("아이디를 입력하시오");
+    	e.preventDefault();
+        document.fmField.takerId.focus();
+        return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
+    } */
 		$.ajax({
 			async : false,
 			type : "post",
@@ -82,6 +90,11 @@ function openIdChk() {
 			document.fmField.takerPassword.focus()
 			return false;
 		}
+		//암호 보안 강화
+	    if(!pattern1.test(document.fmField.takerPassword.value) || !pattern2.test(document.fmField.takerPassword.value) || !pattern3.test(document.fmField.takerPassword.value) || document.fmField.takerPassword.value.length < 8) { 
+	    	window.alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다."); 
+	    	return false; 
+	    } 
 		//  
 		if (document.fmField.takerName.value == '') {
 			window.alert('이름을 입력하세요.');
@@ -146,13 +159,17 @@ function openIdChk() {
 			<tr>
 				<td>최종학력</td>
 				<td colspan="2"><select name="takerEducation">
-						<option value="1">중졸</option>
-						<option value="2">고졸</option>
-						<option value="3">초대졸</option>
-						<option value="4">학사</option>
-						<option value="5">석사</option>
-						<option value="6">박사</option>
+						<option value="J1">중졸</option>
+						<option value="J2">고졸</option>
+						<option value="J3">초대졸</option>
+						<option value="J4">학사</option>
+						<option value="J5">석사</option>
+						<option value="J6">박사</option>
 				</select></td>
+			</tr>
+			<tr>
+				<td>PHONE NUMBER</td>
+				<td colspan="2"><input type="text" name="takerPhoneNum" id="takerPhoneNum"></td>
 			</tr>
 		</table>
 		<br> <br>
