@@ -16,13 +16,15 @@
 						   , TAKER_INFO
 						   , TAKER_EDUCATION
 						   , TAKER_EMAIL
-						   , TAKER_PASSWORD) 
+						   , TAKER_PASSWORD
+						   , TAKER_PHONENUM) 
 		VALUES (  #{takerId}
 				 ,#{takerName}
 				 ,#{takerInfo}
 				 ,#{takerEducation}
  				 ,#{takerEmail}
-				 ,#{takerPassword} )
+				 ,#{takerPassword}
+				 ,#{takerPhoneNum} )
 		</insert>
 		
 		<!-- 7/2 	단건 조회 	장세준  -->
@@ -31,8 +33,10 @@
 					, TAKER_NAME
 					, TAKER_INFO
 					, TAKER_EDUCATION
+					, FIND_CODENM(TAKER_EDUCATION) AS TAKER_EDUCATION_NM
 					, TAKER_EMAIL
 					, TAKER_PASSWORD
+					, TAKER_PHONENUM
 			FROM 	TAKER
 			WHERE	TAKER_ID = #{takerId} 
 			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
@@ -90,19 +94,56 @@
 		
 		<!-- 7/2 	candidate Update 	장세준  -->
 		<update id="updateCandidate">
-			UPDATE TAKER 
-			<set>	
-				<if test="takerInfo != null and takerInfo != ''"> TAKER_INFO = #{takerInfo}</if>
-				<if test="takerEmail != null and takerEmail != ''">, TAKER_EMAIL = #{takerEmail}</if>
-			</set>
-			WHERE TAKER_ID = #{takerId}
-		</update>
+			UPDATE TAKER
+		<set>
+			<if test="takerPassword != null and takerPassword != '' ">
+				TAKER_PASSWORD = #{takerPassword},
+			</if>
+			<if test="takerName != null and takerName != '' ">
+				TAKER_NAME = #{takerName},
+			</if>
+			<if test="takerInfo != null and takerInfo != '' ">
+				TAKER_INFO = #{takerInfo},
+			</if>
+			<if test="takerEducation != null and takerEducation != '' "> 
+				TAKER_EDUCATION = #{takerEducation},
+			</if>
+			<if test="takerEmail != null and takerEmail != '' "> 
+				TAKER_EMAIL = #{takerEmail},
+			</if>
+			<if test="takerPhoneNum != null and takerPhoneNum != '' "> 
+				TAKER_PHONENUM = #{takerPhoneNum},
+			</if>
+		</set>
+		WHERE TAKER_ID = #{takerId}	
+	</update>
 		
 		<!-- 7/2 	candidate delete 	장세준  -->
-		<delete id="deleteCandidate" parameterType="CandidateVO">
+		<!-- <delete id="deleteCandidate" parameterType="CandidateVO">
 			DELETE	FROM TAKER
 			WHERE TAKER_ID = #{takerId}
 		</delete>
+		 -->
+		 
+		<!-- 단건, 다건 삭제 // 이승환추가 -->
+	<delete id="deleteCandidate" parameterType="CandidateVO">
+		DELETE FROM TAKER
+		<where>
+			<choose>
+				<when test="takerList != null and takerList">
+					TAKER_ID in
+					<foreach collection="takerList"
+							 open="(" close=")" separator=","
+							 item="item">
+							 #{item}
+					</foreach>
+				</when>
+				<otherwise>
+					TAKER_ID = #{takerId}
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
 		
 		<select id="getCount" resultType="int">
 			SELECT COUNT(*) FROM TAKER

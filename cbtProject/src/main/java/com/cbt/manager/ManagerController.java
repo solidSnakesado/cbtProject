@@ -1,5 +1,7 @@
 package com.cbt.manager;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateService;
@@ -21,6 +26,7 @@ import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
+import com.cbt.condition.ConditionService;
 
 @Controller
 public class ManagerController {
@@ -31,6 +37,8 @@ public class ManagerController {
 	CompanyService companyService;
 	@Autowired
 	CandidateService candidateService;
+	@Autowired
+	ConditionService conditionService;
 	
 	//메인
 	@RequestMapping(value ="/managerMain.do", method=RequestMethod.GET)
@@ -130,6 +138,8 @@ public class ManagerController {
 	public String managerAccountManage(@PathVariable String companyId, Model model, CompanyVO vo) {
 		vo.setCompanyId(companyId);
 		model.addAttribute("result", companyService.getCompany(vo));
+		model.addAttribute("E", conditionService.getConditionDetailList("E"));
+		model.addAttribute("F", conditionService.getConditionDetailList("F"));
 		return "manager/manager/managerAccountManage";
 	}
 		
@@ -142,7 +152,9 @@ public class ManagerController {
 	
 	// 매니저가 회사 추가폼
 	@RequestMapping(value="managerAccountInsert.do", method=RequestMethod.GET)
-	public String managerAccountInsertForm(CompanyVO vo) {
+	public String managerAccountInsertForm(CompanyVO vo, Model model) {
+		model.addAttribute("E", conditionService.getConditionDetailList("E"));
+		model.addAttribute("F", conditionService.getConditionDetailList("F"));
 		return "manager/manager/managerAccountInsert";
 	}
 	
@@ -172,11 +184,12 @@ public class ManagerController {
 	public String managerUserAccountEdit(@PathVariable String takerId, Model model, CandidateVO vo) {
 		vo.setTakerId(takerId);
 		model.addAttribute("result", candidateService.getCandidate(vo));
+		model.addAttribute("J", conditionService.getConditionDetailList("J"));
 		return "manager/manager/managerUserAccountEdit";
 	}
 	
 		//관리자 응시자 정보 수정처리
-	@RequestMapping("updateUserAccountEdit.do")
+	@RequestMapping(value="managerUserAccountEdit.do", method=RequestMethod.POST)
 	public String updateUserAccount(@ModelAttribute("taker") CandidateVO vo) {
 		candidateService.updateCandidate(vo);
 		return "redirect:managerUserAccountList.do";
@@ -184,31 +197,23 @@ public class ManagerController {
 		
 	// 매니저가 유저 추가폼
 	@RequestMapping(value="managerUserInsert.do", method=RequestMethod.GET)
-	public String managerUserInsertForm(CandidateVO vo) {
+	public String managerUserInsertForm(CandidateVO vo, Model model) {
+		model.addAttribute("J", conditionService.getConditionDetailList("J"));
+		
 		return "manager/manager/managerUserInsert";
 	}
 	// 매니저가 유저 추가
 	@RequestMapping(value="managerUserInsert.do", method=RequestMethod.POST)
 	public String managerUserInsert(CandidateVO vo) {
-	candidateService.insertCandidate(vo);
+		candidateService.insertCandidate(vo);
 		return "redirect:managerUserAccountList.do";
 	}
-	
-	
-	/*
-	 * // 매니저가 회사 추가폼
-	 * 
-	 * @RequestMapping(value="managerAccountInsert.do", method=RequestMethod.GET)
-	 * public String managerAccountInsertForm(CompanyVO vo) { 
-	 * return "manager/manager/managerAccountInsert"; }
-	 * 
-	 * // 매니저가 회사 추가
-	 * 
-	 * @RequestMapping(value="managerAccountInsert.do", method=RequestMethod.POST)
-	 * public String managerAccountInsert(CompanyVO vo) {
-	 * companyService.insertCompany(vo); 
-	 * 	return "redirect:managerAccountList.do"; }
-	 */
+	// 매니저가 유저 삭제
+	@RequestMapping("managerUserDelete.do")
+	public String managerUserDelete(CandidateVO vo) {
+		candidateService.deleteCandidate(vo);
+		return "redirect:managerUserAccountList.do";
+	}
 	
 	//로그인 폼 (7/9 생성, JUNE)
 	@RequestMapping(value="managerLogin.do", method=RequestMethod.GET)
@@ -232,4 +237,27 @@ public class ManagerController {
 		session.invalidate();
 		return "redirect:managerMain.do";
 	}	
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/excelUploadAjax", method = RequestMethod.POST)
+	 * public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)
+	 * throws Exception{ MultipartFile excelFile =request.getFile("excelFile");
+	 * System.out.println("엑셀 파일 업로드 컨트롤러"); if(excelFile==null ||
+	 * excelFile.isEmpty()){ throw new RuntimeException("엑셀파일을 선택 해 주세요."); }
+	 * 
+	 * File destFile = new File("D:\\"+excelFile.getOriginalFilename()); try{
+	 * excelFile.transferTo(destFile); }catch(IllegalStateException | IOException
+	 * e){ throw new RuntimeException(e.getMessage(),e); }
+	 * 
+	 * userService.excelUpload(destFile);
+	 * 
+	 * //FileUtils.delete(destFile.getAbsolutePath());
+	 * 
+	 * ModelAndView view = new ModelAndView(); view.setViewName(""); return view; }
+	 */
+
+
+
 }
