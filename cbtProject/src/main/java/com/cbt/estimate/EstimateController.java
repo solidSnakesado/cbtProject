@@ -44,8 +44,10 @@ public class EstimateController {
 	public String companyEstimateInsertForm(Model model) {
 		model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수
 		model.addAttribute("M", conditionService.getConditionDetailList("M")); 	//M-시험분류
 		model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
+		model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
 		return "company/company/companyEstimate"; 
 	}
 	
@@ -90,9 +92,11 @@ public class EstimateController {
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
-		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-응시가능횟수
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수
 		model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
 		model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
+		model.addAttribute("M", conditionService.getConditionDetailList("M"));	//M-시험분류
+		model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
 		return "empty/company/companyDetailRequestList";
 	}
 	

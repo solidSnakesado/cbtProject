@@ -57,8 +57,10 @@
 			
 			<tr>	<td>시험일시	</td>		<td><input type="text" id="datepicker" name="examDate"></td>	</tr>
 			<tr>	<td>비고		</td>		<td><input type="text" name="remarks"></td>						</tr>
-			<tr>	<td>시험횟수	</td>		<td><input type="number" style="ime-mode: disabled;" name="examCount"></td>	</tr>
-			<tr>	<td>시험간격(ex 연 2회)</td><td><input type="number" style="ime-mode:disabled;" name="examInterval"></td></tr>
+			
+			
+			<tr>	<td>시험횟수	</td>		<td><my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select>
+			<tr>	<td>시험간격	</td>		<td><my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 		</table>
 		
 		<div>
