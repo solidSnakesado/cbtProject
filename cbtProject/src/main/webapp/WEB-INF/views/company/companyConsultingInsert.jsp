@@ -16,7 +16,7 @@
 		<h2>기업상담신청</h2>
 		<table style="padding: 5px 0 5px 0;">
 			<tr>
-				<th>희망상담일</th>
+				<th>상담희망일</th>
 				<td><input type="datetime-local" name="consultingDesiredDate" size="80"
 					placeholder="상담을 원하시는 시간을 입력하여 주시면 최대한 반영하도록 하겠습니다."></td>
 			</tr>

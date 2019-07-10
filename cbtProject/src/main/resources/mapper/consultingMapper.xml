@@ -44,8 +44,12 @@
 	<update id="updateConsulting" parameterType="ConsultingVO">
 		UPDATE CONSULTING
 		<set>
+			CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			,CONSULTING_CONTENTS 	= #{consultingContents}
+			,CONSULTING_TITLE 		= #{consultingTitle}
+			
 			<if test="consultingDate != null and consultingDate != ''">
-				CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+				,CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
 			</if>
 			<if test="consultingRemarks != null and consultingRemarks != ''">
 				,CONSULTING_REMARKS = #{consultingRemarks}
@@ -53,17 +57,8 @@
 			<if test="companyId != null and companyId != '' ">
 				,COMPANY_ID = #{companyId}
 			</if>
-			<if test="consultingContents != null and consultingContents != ''">
-				,CONSULTING_CONTENTS = #{consultingContents}
-			</if>
-			<if test="consultingDesiredDate != null"> 
-				,CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
-			</if>
 			<if test="consultingState != null and consultingState gte 0"> 
 				,CONSULTING_STATE = #{consultingState}
-			</if>
-			<if test="consultingTitle != null and consultingTitle != ''">
-				,CONSULTING_TITLE = #{consultingTitle}
 			</if>
 		</set>
 		<where>
@@ -83,8 +78,8 @@
  		SELECT CONSULTING_ID
 				,COMPANY_ID
 				,CONSULTING_CONTENTS
-				,TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI')	"consultingDesiredDate"
-				,TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI')			"consultingDate"
+				,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')	"consultingDesiredDate"
+				,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
 				,CONSULTING_REMARKS
 				,CONSULTING_STATE
 				,CONSULTING_TITLE
@@ -97,11 +92,18 @@
 		SELECT CONSULTING_ID
 				,COMPANY_ID
 				,CONSULTING_CONTENTS
-				,TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI') "consultingDesiredDate"
-				,TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI')			"consultingDate"
+				,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T') 	"consultingDesiredDate"
+				,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
 				,CONSULTING_REMARKS
 				,CONSULTING_STATE
 				,CONSULTING_TITLE
+		FROM CONSULTING
+	</select>
+	
+	<!-- 2019.07.10 성재민 -->
+	<!-- 컨설팅 개수 불러오기 -->
+	<select id="getConsultingCount" resultType="int">
+		SELECT COUNT(*)
 		FROM CONSULTING
 	</select>
 </mapper>

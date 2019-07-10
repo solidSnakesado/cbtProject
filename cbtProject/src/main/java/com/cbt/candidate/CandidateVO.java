@@ -7,11 +7,18 @@ public class CandidateVO {
 	private String takerId;
 	private String takerName;
 	private String takerInfo;
-	private int takerEducation;
+	private String takerEducation;
 	private String takerEmail;
 	private String takerPassword;
 	private String takerPhoneNum;
+	private String takerEducationNm;
 	
+	public String getTakerEducationNm() {
+		return takerEducationNm;
+	}
+	public void setTakerEducationNm(String takerEducationNm) {
+		this.takerEducationNm = takerEducationNm;
+	}
 	public String getTakerPhoneNum() {
 		return takerPhoneNum;
 	}
@@ -27,7 +34,15 @@ public class CandidateVO {
 	private int start;
 	private int end;
 	private int[] seqList;
+	private String[] takerList;
 	
+	
+	public String[] getTakerList() {
+		return takerList;
+	}
+	public void setTakerList(String[] takerList) {
+		this.takerList = takerList;
+	}
 	public int getCnt() {
 		return cnt;
 	}
@@ -99,10 +114,10 @@ public class CandidateVO {
 		this.takerInfo = takerInfo;
 	}
 
-	public int getTakerEducation() {
+	public String getTakerEducation() {
 		return takerEducation;
 	}
-	public void setTakerEducation(int takerEducation) {
+	public void setTakerEducation(String takerEducation) {
 		this.takerEducation = takerEducation;
 	}
 	public String getTakerEmail() {

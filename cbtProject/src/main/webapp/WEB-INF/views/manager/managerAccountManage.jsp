@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,10 +50,14 @@
         <th>사업자번호</th><td><input type="text" name="businessNumber" value="${result.businessNumber }"><br></td>
       </tr>
       <tr>
-         <th>회사분류</th><td><input type="text" name="companyClassification" value="${result.companyClassification }"></td>
+         <th>회사분류</th>
+         <td><my:select items="${E}" name="companyClassification" value="${result.companyClassification }"></my:select>
+         </td>
       </tr>
       <tr>
-         <th>세부업종</th><td><input type="text" name="companySectors" value="${result.companySectors }"></td>
+         <th>세부업종</th>
+         <td><my:select items="${F}" name="companySectors" value="${result.companySectors }"></my:select>
+         </td>
       </tr>
       <tr>
          <th>결제정보</th><td><input type="text" name="companyCredit" value="${result.companyCredit }"></td>

@@ -172,12 +172,14 @@
 	<!-- 관리자 응시자 추가 -->
 	<insert id="managerUserInsert" parameterType="CandidateVO">
 		INSERT INTO TAKER (TAKER_ID
+							, TAKER_PASSWORD
 							, TAKER_NAME
 							, TAKER_INFO
 							, TAKER_EDUCATION
 							, TAKER_EMAIL
 							, TAKER_PHONENUM)
 		VALUES( #{takerId}
+				 ,#{takerPassword}
 				 ,#{takerName}
 				 ,#{takerInfo}
 				 ,#{takerEducation}
@@ -185,5 +187,30 @@
  				 ,#{takerPhoneNum})
 		
 		</insert>
+		
+		<update id="managerUserAccountEdit" parameterType="CandidateVO">
+		UPDATE TAKER
+		<set>
+			<if test="takerPassword != null and takerPassword != '' ">
+				TAKER_PASSWORD = #{takerPassword},
+			</if>
+			<if test="takerName != null and takerName != '' ">
+				TAKER_NAME = #{takerName},
+			</if>
+			<if test="takerInfo != null and takerInfo != '' ">
+				TAKER_INFO = #{takerInfo},
+			</if>
+			<if test="takerEducation != null and takerEducation != '' "> 
+				TAKER_EDUCATION = #{takerEducation},
+			</if>
+			<if test="takerEmail != null and takerEmail != '' "> 
+				TAKER_EMAIL = #{takerEmail},
+			</if>
+			<if test="takerPhoneNum != null and takerPhoneNum != '' "> 
+				TAKER_PHONENUM = #{takerPhoneNum},
+			</if>
+		</set>
+		WHERE TAKER_ID = #{takerId}	
+	</update>
 	
 </mapper>
