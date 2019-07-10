@@ -29,11 +29,10 @@
 	<form action="companyEstimateInsert.do" method="POST">
 	
 		<table>
-			<tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr>
+			<!-- <tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr> -->
 			<tr>	<td>의뢰이름	</td> 	<td><input type="text" name="estimateName">	</td>	</tr>
 			<tr>	<td>카테고리ID</td>	<td><input type="text" name="categoryId">	</td>	</tr>
 			<tr>	<td>기업ID	</td>	<td><input type="text" name="companyId">	</td>	</tr>
-			<tr>	<td>의뢰일	</td>	<td><input type="text" value="입력안해도됨 sysdate로 들어감"></td></tr>
 			<tr>	<td>금액		</td>	<td><input type="text" name="estimatePrice"></td>	</tr>
 			<tr>	<td>진행상태	</td>	<td><select name="tradeProgress">
 													<option value="3">완료</option>
@@ -62,7 +61,7 @@
 										</select></td></tr>
 			
 			<tr>
-					<td>난이도</td>		<td><select name="levelOfDifficulty">
+					<td>시험난이도</td>		<td><select name="levelOfDifficulty">
 													<option value="3">상</option>
 													<option value="2">중</option>
 													<option value="1">하</option>

@@ -27,8 +27,9 @@ public class EstimateVO {
 	private String remarks;			//비고
 	private String examCount;			//시험횟수
 	private String examInterval;		//시험간격
-	private String examCountNm;
-	private String tradeProgressNm;
+	//코드값에대한 이름을 저장하기위한 변수들
+	private String examCountNm;		// 
+	private String tradeProgressNm; // 
 	
 	
 	

@@ -21,19 +21,16 @@
  			<tr>	<td>카테고리ID</td>	<td><input type="text" name="categoryId" value="${myEstimateList.categoryId}"></td></tr>
 	 		<tr>	<td>기업ID</td>		<td><input type="text" name="companyId" value="${myEstimateList.companyId}" ></td></tr>
 			<tr>	<td>의뢰일</td>		<td><input type="text" name="requestDay" value="${myEstimateList.requestDay}" ></td></tr>
-			<tr>	<td>금액</td>		<td><input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" ></td></tr>
-			<tr>	<td>진행상태</td>		<td><input type="text" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></td></tr>
- 			<tr>	<td>응시대상자</td>	<td><input type="text" name="candidate" value="${myEstimateList.candidate}"></td></tr>
+			<tr>	<td>금액</td>			<td><input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" ></td></tr>
+			<tr>	<td>진행상태</td>		<td><input type="text" name="tradeProgress" value="${myEstimateList.tradeProgressNm}" ></td></tr>
+ 			<tr>	<td>응시대상자</td>		<td><input type="text" name="candidate" value="${myEstimateList.candidate}"></td></tr>
 			<tr>	<td>응시목적</td>		<td><input type="text" name="applyPurpose" value="${myEstimateList.applyPurpose}"></td></tr>
 			<tr>	<td>응시자 수</td>		<td><input type="text" name="applicants" value="${myEstimateList.applicants}" ></td></tr>
 			<tr>	<td>시험분류</td>		<td><input type="text" name="examClassfication" value="${myEstimateList.examClassfication}"></td></tr>
 			<tr>	<td>난이도</td>		<td><input type="text" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></td></tr>
 			<tr>	<td>시험일시</td>		<td><input type="datetime-local" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
-	 		<tr>	<td>비고</td>		<td><input type="text" name="remarks" value="${myEstimateList.remarks}"></td></tr>
-			<tr>	<td>시험횟수</td>		<td>
-			<my:radio value="${myEstimateList.examCount}" items="${H}" name="examCount"></my:radio>
-			
-			</td></tr>  
+	 		<tr>	<td>비고</td>			<td><input type="text" name="remarks" value="${myEstimateList.remarks}"></td></tr>
+			<tr>	<td>시험횟수</td>		<td><my:radio value="${myEstimateList.examCount}" items="${H}" name="examCount"></my:radio></td></tr>  
 			<tr>	<td>시험간격</td>		<td><input type="text" name="examInterval" value="${myEstimateList.examInterval}"></td></tr>
 			<tr>	<td>의뢰이름</td>		<td><input type="text" name="estimateName" value="${myEstimateList.estimateName}"></td></tr>
 			
