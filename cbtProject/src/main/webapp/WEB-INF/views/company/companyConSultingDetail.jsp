@@ -44,6 +44,6 @@
 		<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
 	</c:if>
 	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
-	<input type="button" onclick='window.close()' value="확인">
+	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="확인">
 </body>
 </html>

@@ -1,5 +1,8 @@
 package com.cbt.consulting;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyVO;
 
 // 2019.07.03 성재민
 // 컨설팅 컨트롤러 추가
@@ -18,9 +22,16 @@ public class ConsultingController {
 	ConsultingService consultingService;
 	
 	@RequestMapping(value = "companyConSultingList.do", method = RequestMethod.GET)
-	public String companyConsultingList(ConsultingVO vo, Model model, Paging paging) {
-		model.addAttribute("result", consultingService.getConsultingList(vo, paging));
-		return "company/company/companyConSultingList";
+	public String companyConsultingList(HttpSession session, Model model, Paging paging) {
+		CompanyVO loginCompany = (CompanyVO) session.getAttribute("company");
+		if(loginCompany != null) {
+			ConsultingVO vo = new ConsultingVO();
+			vo.setCompanyId(loginCompany.getCompanyId());
+			model.addAttribute("result", consultingService.getConsultingList(vo, paging));
+			return "company/company/companyConSultingList";
+		} else {
+			return "company/company/companyLogin";
+		}
 	}
 	
 	// 2019.07.08 성재민
@@ -41,9 +52,13 @@ public class ConsultingController {
 	// 2019.07.08 성재민
 	// vo객체 변경에 따른 수정 필요.
 	@RequestMapping(value = "companyConsultingInsert.do", method = RequestMethod.POST) 
-	public String companyConsultingInsert(ConsultingVO vo) {
+	public String companyConsultingInsert(ConsultingVO vo, HttpSession session) {
 		consultingService.insertConsulting(vo);
-		return "redirect:companyConSultingList.do"; 
+		if(session.getAttribute("company") == null) {
+			return "redirect:companyMain.do";
+		} else {
+			return "redirect:companyConSultingList.do";
+		}
 	}
 	
 	// 2019.07.08 성재민
@@ -69,10 +84,10 @@ public class ConsultingController {
 	// 현재 로그인 된 유저가 기업인지 매니저인지 체크 할수 있으면
 	// 하나의 메서드로 기업화면과 매니저 화면으로 각각 관리 할수 있음.
 	@RequestMapping(value = "companyConSultingDelete.do/{id}", method = RequestMethod.GET)
-	public String companyConsultingDelete(@PathVariable("id") int id) {
+	public String companyConsultingDelete(@PathVariable("id") int id, HttpServletRequest request) {
 		ConsultingVO vo = new ConsultingVO();
 		vo.setConsultingId(id);
 		consultingService.deleteConsulting(vo);
-		return "redirect:${pageContext.request.contextPath}/companyConSultingList.do";
+		return "redirect:/companyConSultingList.do";
 	}
 }

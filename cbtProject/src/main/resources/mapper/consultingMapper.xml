@@ -89,15 +89,25 @@
 	
 	<!-- 전체 조회 -->
 	<select id="getConsultingList" resultType="ConsultingVO">
-		SELECT CONSULTING_ID
-				,COMPANY_ID
-				,CONSULTING_CONTENTS
-				,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T') 	"consultingDesiredDate"
-				,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
-				,CONSULTING_REMARKS
-				,CONSULTING_STATE
-				,CONSULTING_TITLE
-		FROM CONSULTING
+		SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
+			SELECT CONSULTING_ID
+					,COMPANY_ID
+					,CONSULTING_CONTENTS
+					,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T') 	"consultingDesiredDate"
+					,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
+					,CONSULTING_REMARKS
+					,CONSULTING_STATE
+					,CONSULTING_TITLE
+			FROM CONSULTING
+			<where>
+				COMPANY_ID = #{companyId}
+			</where>
+			ORDER BY CONSULTING_ID
+		) A ) B 
+		<where>
+			RN BETWEEN #{start} AND #{end}
+		</where>
+		
 	</select>
 	
 	<!-- 2019.07.10 성재민 -->
