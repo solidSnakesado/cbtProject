@@ -17,19 +17,21 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='/managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='/managerRequestList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='/managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='/managerChart.do'">통 계</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
 <h2>응시자 계정관리</h2>
 <button type="button" onclick="location.href='managerUserInsert.do'">응시자 추가</button>
 <a href="managerUserAccountUpload.do"><button type="button">엑셀파일 업로드</button></a>
-<button type="button">응시자 삭제</button>
 <br><br>
-<form>
+<form action="managerUserDelete.do">
+<button type="">응시자 삭제</button>
+<br><br>
+
 <table border="1" align="center">
    <tr>
    	  <th>선택</th>
