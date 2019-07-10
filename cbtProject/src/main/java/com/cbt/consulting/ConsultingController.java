@@ -3,9 +3,12 @@ package com.cbt.consulting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.cbt.common.Paging;
 
 // 2019.07.03 성재민
 // 컨설팅 컨트롤러 추가
@@ -15,8 +18,8 @@ public class ConsultingController {
 	ConsultingService consultingService;
 	
 	@RequestMapping(value = "companyConSultingList.do", method = RequestMethod.GET)
-	public String companyConsultingList(Model model) {
-		model.addAttribute("consultingList", consultingService.getConsultingList());
+	public String companyConsultingList(ConsultingVO vo, Model model, Paging paging) {
+		model.addAttribute("result", consultingService.getConsultingList(vo, paging));
 		return "company/company/companyConSultingList";
 	}
 	
