@@ -13,10 +13,6 @@
 	<h3>상담 세부 항목(기업)</h3>
 	<table border="1">
 		<tr>
-			<th>기업ID</th>
-			<td><input type="text" name="companyId" id="companyId" value="${consulting.companyId}" style="width: 100%;" readonly="readonly"></td>
-		</tr>
-		<tr>
 			<th>제목</th>
 			<td><input type="text" name="consultingTitle" id="consultingTitle" value="${consulting.consultingTitle}" style="width: 100%;"></td>
 		</tr>
