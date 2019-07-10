@@ -32,5 +32,5 @@ public interface CandidateService {
 
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging);
 
-	int idcheck(String takerId);
+	int idcheck(CandidateVO vo);
 }
