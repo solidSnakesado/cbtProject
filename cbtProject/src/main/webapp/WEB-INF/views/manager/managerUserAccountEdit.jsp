@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,8 @@
    </tr>
       <tr>
       <th>최종학력</th>
-      <td><input type="text" name="takerEducation" value="${result.takerEducation }"></td> 
+      <td><input type="text" name="takerEducation" value="${result.takerEducation }">
+      </td> 
    </tr>
     <tr>
       <th>이메일</th>

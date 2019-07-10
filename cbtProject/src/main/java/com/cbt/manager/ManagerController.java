@@ -21,6 +21,7 @@ import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
+import com.cbt.condition.ConditionService;
 
 @Controller
 public class ManagerController {
@@ -31,6 +32,8 @@ public class ManagerController {
 	CompanyService companyService;
 	@Autowired
 	CandidateService candidateService;
+	@Autowired
+	ConditionService conditionService;
 	
 	//메인
 	@RequestMapping(value ="/managerMain.do", method=RequestMethod.GET)
@@ -184,7 +187,9 @@ public class ManagerController {
 		
 	// 매니저가 유저 추가폼
 	@RequestMapping(value="managerUserInsert.do", method=RequestMethod.GET)
-	public String managerUserInsertForm(CandidateVO vo) {
+	public String managerUserInsertForm(CandidateVO vo, Model model) {
+		model.addAttribute("J", conditionService.getConditionDetailList("J"));
+		
 		return "manager/manager/managerUserInsert";
 	}
 	// 매니저가 유저 추가

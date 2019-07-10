@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,14 +39,9 @@
 				<th>주민등록번호 </th><td><input type="text" name="takerInfo"></td>
 			</tr>
 			<tr>
-				<th>최종학력</th><td><select name="takerEducation">
-					<option>중졸</option>
-					<option>고졸</option>
-					<option>초대졸</option>
-					<option>대졸</option>
-					<option>석사</option>
-					<option>박사</option>
-					</select></td>
+				<th>최종학력</th><td>
+					<my:select items="${J}" name="takerEducation" value="${result.takerEducation }"></my:select>
+					</td>
 			</tr>
 			<tr>
 				<th>E-mail</th><td><input type="text" name="takerEmail"></td>
