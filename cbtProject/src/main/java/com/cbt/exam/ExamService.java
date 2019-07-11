@@ -20,10 +20,5 @@ public interface ExamService {
 
 	List<ExamVO> getExamList(ExamVO vo);
 	
-	Map<String, Object> getExamList(ExamVO vo, Paging paging);
-	
-	int getExamCount();
-	
-
 	List<ExamVO> getExamList(CompanyVO vo);
 }

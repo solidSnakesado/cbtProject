@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
-import com.cbt.takeExam.TakeExamVOt;
 
 public interface CandidateService {
 	// 글 등록

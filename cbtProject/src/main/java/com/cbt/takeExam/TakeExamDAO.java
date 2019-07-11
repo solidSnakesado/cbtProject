@@ -1,5 +1,7 @@
 package com.cbt.takeExam;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +31,16 @@ public class TakeExamDAO {
 		
 		return mybatis.selectOne("", vo);
 	}
+	
+	public int getExamCount(TakeExamVO vo) {
+		return mybatis.selectOne("takeExamDAO.getExamCount", vo);
+	}
 
+	public List<TakeExamVO> getExamList(TakeExamVO vo) {
+		if(vo == null) {
+			return mybatis.selectList("takeExamDAO.getExamList");
+		} else {
+			return mybatis.selectList("takeExamDAO.getExamList", vo);
+		}
+	}
 }
