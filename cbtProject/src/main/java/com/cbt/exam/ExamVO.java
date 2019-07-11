@@ -22,25 +22,26 @@ public class ExamVO {
 	private int 		examStatus;
 	private int 		disclosureStatus;
 	private int 		setExamStatus;
-	private String 		examDes1;
-	private String 		examDes2;
+	private String 		examDescriptionSimple;
+	private String 		examDescriptionDetail;
+
 	
-	public String getExamDes1() {
-		return examDes1;
+	public String getExamDescriptionSimple() {
+		return examDescriptionSimple;
 	}
 
-	public void setExamDes1(String examDes1) {
-		this.examDes1 = examDes1;
+	public void setExamDescriptionSimple(String examDescriptionSimple) {
+		this.examDescriptionSimple = examDescriptionSimple;
 	}
 
-	public String getExamDes2() {
-		return examDes2;
+	public String getExamDescriptionDetail() {
+		return examDescriptionDetail;
 	}
 
-	public void setExamDes2(String examDes2) {
-		this.examDes2 = examDes2;
+	public void setExamDescriptionDetail(String examDescriptionDetail) {
+		this.examDescriptionDetail = examDescriptionDetail;
 	}
-
+	
 	public Timestamp getExamStartTime() {
 		return examStartTime;
 	}
@@ -143,7 +144,9 @@ public class ExamVO {
 				+ ", questionQuantity=" + questionQuantity + ", estimateId=" + estimateId + ", numberOfTimes="
 				+ numberOfTimes + ", passingScore=" + passingScore + ", possibleApplicants=" + possibleApplicants
 				+ ", examName=" + examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
-				+ ", setExamStatus=" + setExamStatus + ", examDes1=" + examDes1 + ", examDes2=" + examDes2 + "]";
+				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
+				+ ", examDescriptionDetail=" + examDescriptionDetail + "]";
 	}
 
+	
 }
