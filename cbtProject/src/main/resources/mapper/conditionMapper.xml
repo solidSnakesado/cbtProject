@@ -38,18 +38,7 @@
 		ORDER BY CONDITION_SEQ
 	</select>
 	
-	<!-- 단건조회 -->
-	<select id="getCondition" resultType="ConditionVO">
-		SELECT 
-			CONDITION_SEQ 
-			, MASTER_CD
-			, MASTER_NM
-			, DETAIL_CD
-			, DETAIL_NM
-			, USE_YN
-		FROM CONDITION
-		WHERE CONDITION_SEQ = #{conditionSeq}
-	</select>
+
 	
 	<!-- 상태 수정 -->
 	<update id="updateCondition" parameterType="ConditionVO">
@@ -82,7 +71,30 @@
 				</otherwise>
 			</choose>
 		</where>
-	</delete>
+	</delete>   
 	
+	<!-- 단건 코드 조회 -->
+	<select id="getCondition" resultType="ConditionVO">
+		SELECT 
+			CONDITION_SEQ 
+			, MASTER_CD
+			, MASTER_NM
+			, DETAIL_CD
+			, DETAIL_NM
+			, USE_YN
+		FROM CONDITION
+		WHERE CONDITION_SEQ = #{conditionSeq}
+	</select>
+	
+	
+	<!-- 디테일 코드 조회 -->
+	<select id="getConditionDetailList" resultType="ConditionVO">
+		SELECT 
+			  DETAIL_CD
+			, DETAIL_NM
+			, USE_YN
+		FROM CONDITION
+		WHERE MASTER_CD = #{value}
+	</select>
 	
 </mapper>

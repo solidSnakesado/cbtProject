@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,45 +18,50 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
-<h2>관리자 계정관리</h2>
-<form>
-<table border="1">
-
+<h2>응시자 계정관리</h2>
+<form action="${pageContext.request.contextPath}/managerUserAccountEdit.do" method="post">
+<input type="hidden" name="takerId" value="${result.takerId }">
+<table border="1" align="center">
    <tr>
       <th>응시자ID</th>
-      <td> AA1 </td> 
+      <td>${result.takerId}</td> 
+   </tr>
+   <tr>
+      <th>비밀번호</th>
+      <td><input type="password" name="takerPassword" value="${result.takerPassword }"></td> 
    </tr>
    <tr>
       <th>이름</th>
-      <td> 홍길동 </td> 
+      <td><input type="text" name="takerName" value="${result.takerName }"></td> 
    </tr>
    <tr>
-      <th>주민번호 </th>
-      <td> 111111-1******* </td> 
+      <th>생년월일</th>
+      <td><input type="text" name="takerInfo" value="${result.takerInfo }"></td> 
    </tr>
       <tr>
       <th>최종학력</th>
-      <td> 대졸 </td> 
+      <td><my:select items="${J}" name="takerEducation" value="${result.takerEducation }"></my:select>
+      </td> 
    </tr>
-   </tr>
-      <tr>
-      <th>연락처</th>
-      <td> 010-111-1111 </td> 
+    <tr>
+      <th>이메일</th>
+      <td><input type="text" name="takerEmail" value="${result.takerEmail }"></td> 
    </tr>
    <tr>
-      <th>이메일</th>
-      <td>ceo@gmail.com</td> 
+   	  <th>연락처</th>
+   	  <td><input type="text" name="takerPhoneNum" value="${result.takerPhoneNum }"></td>
    </tr>
 </table>
-<button type="button" >확인</button>
-<button type="button" >삭제하기</button>
+		<br><br>
+	<input type="submit" value="수정" >
+	<input type="button" value="돌아가기" onclick="location.href='../managerUserAccountList.do'">
 </form>
 
 </body>

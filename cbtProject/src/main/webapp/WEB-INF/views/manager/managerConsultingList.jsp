@@ -17,10 +17,10 @@
 	<section>
 		<article>
 			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.jsp'">통 계</button></li>
+				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
+				<li><button type="button" onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
+				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>
@@ -28,14 +28,16 @@
 <form>
 <table border="1">
    <tr >
-      <th>기업 ID</th>
-      <th>기업명</th>
-      <th>담당자</th>
+      <th>상담 ID</th>
+      <th>상담 내용</th>
       <th>상담희망일</th>
-      <th>상담유무</th>
+      <th>상담일</th>
+      <th>비고</th>
+      <th>상담기업</th>
+      <th>상담상태</th>
    </tr>
    <tr onclick="location.href='managerConsultingListDetail.jsp'">
-      <td>AMAZON</td>
+      <td>${consulting. }</td>
       <td>아마존</td>
       <td>제프 베조스</td>
       <td>2020.06.20 

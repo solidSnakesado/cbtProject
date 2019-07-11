@@ -16,17 +16,60 @@
 						   , TAKER_INFO
 						   , TAKER_EDUCATION
 						   , TAKER_EMAIL
-						   , TAKER_PASSWORD) 
+						   , TAKER_PASSWORD
+						   , TAKER_PHONENUM) 
 		VALUES (  #{takerId}
 				 ,#{takerName}
 				 ,#{takerInfo}
 				 ,#{takerEducation}
  				 ,#{takerEmail}
-				 ,#{takerPassword} )
+				 ,#{takerPassword}
+				 ,#{takerPhoneNum} )
 		</insert>
 		
-		<!-- 7/2 	로그인을 위해 candidate를 단건 조회 	장세준  -->
+		<!-- 7/2 	단건 조회 	장세준  -->
 		<select id="getCandidate" resultType="CandidateVO">
+			SELECT	TAKER_ID
+					, TAKER_NAME
+					, TAKER_INFO
+					, TAKER_EDUCATION
+					, FIND_CODENM(TAKER_EDUCATION) AS TAKER_EDUCATION_NM
+					, TAKER_EMAIL
+					, TAKER_PASSWORD
+					, TAKER_PHONENUM
+			FROM 	TAKER
+			WHERE	TAKER_ID = #{takerId} 
+			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
+		</select>
+		
+<!-- 	<resultMap type="TakeExamVOt" id="beanResult">
+		<result property="examName" column="EXAM_NAME" javaType="string"/>
+		<result property="examStartTime" column="EXAM_START_TIME" javaType="date"/>
+		<result property="examEndTime" column="EXAM_END_TIME" javaType="date"/>
+		<result property="questionQuantity" column="QUESTION_QUANTITY" javaType="int"/>
+		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
+		<result property="takerId" column="TAKER_ID" javaType="string" />
+	</resultMap> -->
+	
+		<!-- 7/9 	시험목록조회 	장세준  -->
+		<select id="getExamList" resultType="map">
+			SELECT	EXAM.EXAM_ID									"examId"
+					,EXAM_NAME										"examName"
+					,TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+				    ,TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
+				    ,QUESTION_QUANTITY								"questionQuantity"
+				    ,PASSING_SCORE									"passingScore"
+				    ,TAKER_ID										"takerId"
+				    ,EXAM_DESCRIPTION_SIMPLE						"examDescriptionSimple"
+				    ,EXAM_DESCRIPTION_DETAIL						"examDescriptionDetail"
+			FROM    EXAM, TAKE_EXAM
+			WHERE   EXAM.EXAM_ID = TAKE_EXAM.EXAM_ID
+			AND		TAKER_ID = #{takerId}
+			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
+		</select>
+		
+		<!-- 7/9 	로그인 	장세준  -->
+		<select id="candidateLogin" resultType="CandidateVO">
 			SELECT	TAKER_ID
 					, TAKER_NAME
 					, TAKER_INFO
@@ -34,7 +77,7 @@
 					, TAKER_EMAIL
 					, TAKER_PASSWORD
 			FROM 	TAKER
-			WHERE	TAKER_ID = #{takerId} 
+			WHERE	TAKER_ID = #{takerId} AND TAKER_PASSWORD = #{takerPassword}
 			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
 		</select>
 		
@@ -51,28 +94,66 @@
 		
 		<!-- 7/2 	candidate Update 	장세준  -->
 		<update id="updateCandidate">
-			UPDATE TAKER 
-			<set>	
-				<if test="takerInfo != null and takerInfo != ''"> TAKER_INFO = #{takerInfo}</if>
-				<if test="takerEmail != null and takerEmail != ''">, TAKER_EMAIL = #{takerEmail}</if>
-			</set>
-			WHERE TAKER_ID = #{takerId}
-		</update>
+			UPDATE TAKER
+		<set>
+			<if test="takerPassword != null and takerPassword != '' ">
+				TAKER_PASSWORD = #{takerPassword},
+			</if>
+			<if test="takerName != null and takerName != '' ">
+				TAKER_NAME = #{takerName},
+			</if>
+			<if test="takerInfo != null and takerInfo != '' ">
+				TAKER_INFO = #{takerInfo},
+			</if>
+			<if test="takerEducation != null and takerEducation != '' "> 
+				TAKER_EDUCATION = #{takerEducation},
+			</if>
+			<if test="takerEmail != null and takerEmail != '' "> 
+				TAKER_EMAIL = #{takerEmail},
+			</if>
+			<if test="takerPhoneNum != null and takerPhoneNum != '' "> 
+				TAKER_PHONENUM = #{takerPhoneNum},
+			</if>
+		</set>
+		WHERE TAKER_ID = #{takerId}	
+	</update>
 		
 		<!-- 7/2 	candidate delete 	장세준  -->
-		<delete id="deleteCandidate" parameterType="CandidateVO">
+		<!-- <delete id="deleteCandidate" parameterType="CandidateVO">
 			DELETE	FROM TAKER
 			WHERE TAKER_ID = #{takerId}
 		</delete>
+		 -->
+		 
+		<!-- 단건, 다건 삭제 // 이승환추가 -->
+	<delete id="deleteCandidate" parameterType="CandidateVO">
+		DELETE FROM TAKER
+		<where>
+			<choose>
+				<when test="takerList != null and takerList">
+					TAKER_ID in
+					<foreach collection="takerList"
+							 open="(" close=")" separator=","
+							 item="item">
+							 #{item}
+					</foreach>
+				</when>
+				<otherwise>
+					TAKER_ID = #{takerId}
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
 		
 		<select id="getCount" resultType="int">
 			SELECT COUNT(*) FROM TAKER
 		</select>
 		
-		<select id="idcheck" parameterType="String" resultType="Integer">
+		<select id="idcheck" parameterType="CandidateVO" resultType="Integer">
 			SELECT	COUNT(*) FROM TAKER
-      		WHERE   takerId = #{takerId}
+      		WHERE   TAKER_ID = #{takerId}
 		</select>
+		
 </mapper>
  
  

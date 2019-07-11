@@ -68,11 +68,23 @@
 			COMPANY_ID = #{companyId}
 		</where>
 	</update>
-
+	<!-- 단건, 다건 삭제 // 이승환추가 -->
 	<delete id="deleteCompany" parameterType="CompanyVO">
 		DELETE FROM COMPANY
 		<where>
-			COMPANY_ID = #{companyId}
+			<choose>
+				<when test="cpnList != null and cpnList.length>0">
+					COMPANY_ID in
+					<foreach collection="cpnList"
+							 open="(" close=")" separator=","
+							 item="item">
+							 #{item}
+					</foreach>
+				</when>
+				<otherwise>
+					COMPANY_ID = #{companyId}
+				</otherwise>
+			</choose>
 		</where>
 	</delete>
 
@@ -84,8 +96,8 @@
 			,COMPANY_PASSWORD
 			,COMPANY_NAME
 			,BUSINESS_NUMBER
-			,COMPANY_CLASSIFICATION
-			,COMPANY_SECTORS
+			,FIND_CODENM(COMPANY_CLASSIFICATION) AS COMPANY_CLASSIFICATION_NM
+			,FIND_CODENM(COMPANY_SECTORS) AS COMPANY_SECTORS_NM
 			,COMPANY_CREDIT
 			,COMPANY_MANAGER
 			,COMPANY_MANAGER_TELNUM
@@ -111,6 +123,7 @@
 			AND COMPANY_PASSWORD = #{companyPassword}
 		</where>
 	</select>
+	
 </mapper>
  
  

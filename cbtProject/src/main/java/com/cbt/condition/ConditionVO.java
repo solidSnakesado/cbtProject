@@ -3,7 +3,6 @@ package com.cbt.condition;
 import java.util.Arrays;
 
 public class ConditionVO {
-	
 	private int conditionSeq;
 	private String masterCd;
 	private String masterNm;

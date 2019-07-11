@@ -10,8 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>카테고리 목록</title>
 <script type="text/javascript">
-	function setCategoryName(mainId, middleId, smallId) {
-		$.ajax({
+	//function setCategoryName(mainId, middleId, smallId) {
+		/* $.ajax({
 			type: "POST",
 			url:"${pageContext.request.contextPath}/getCategoryMainName.do/" + mainId,
 			success : function(data){
@@ -19,9 +19,9 @@
 			}, error : function() {
 				alert('에러발생');
 			}
-		});
+		}); */
 		
-		$.ajax({
+		/* $.ajax({
 			type: "POST",
 			url:"${pageContext.request.contextPath}/getCategoryMiddleName.do/" + middleId,
 			success : function(data){
@@ -29,9 +29,9 @@
 			}, error : function() {
 				alert('에러발생');
 			}
-		});
+		}); */
 		
-		$.ajax({
+		/* $.ajax({
 			type: "POST",
 			url:"${pageContext.request.contextPath}/getCategorySmallName.do/" + smallId,
 			success : function(data){
@@ -39,8 +39,8 @@
 			}, error : function() {
 				alert('에러발생');
 			}
-		});
-	};
+		}); */
+	//};
 
 	function categoryDelete(categoryId) {
 		/* $.ajax({
@@ -85,10 +85,13 @@
 		<c:forEach items="${categoryList}" var="category">
 			<tr>
 				<td>${category.categoryId}</td>
-				<td>"${category.categoryName}"</td>
-				<td id="categoryMainName_${category.categoryMainId}"></td>
+				<td>${category.categoryName}</td>
+				<%-- <td id="categoryMainName_${category.categoryMainId}"></td>
 				<td id="categoryMiddleName_${category.categoryMiddleId}"></td>
-				<td id="categorySamllName_${category.categorySamllId}"></td>
+				<td id="categorySamllName_${category.categorySamllId}"></td> --%>
+				<td>${category.categoryMainName}</td>
+				<td>${category.categoryMiddleName}</td>
+				<td>${category.categorySamllName}</td>
 				<td><button id="updateBtn" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
 				<td><button id="deleteBtn" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
 			</tr>

@@ -22,9 +22,9 @@
 <section>
    <article>
       <ul>
-         <li><button type="button" onclick="location.href='managerUserAccountEdit.jsp'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='candidateRequestList.jsp'">응시목록</button></li>
-         <li><button type="button" onclick="location.href='managerChart.jsp'">통계</button></li>
+         <li><button type="button" onclick="location.href='managerUserAccountEdit.do'">계정관리</button></li>
+         <li><button type="button" onclick="location.href='candidateRequestList.do'">응시목록</button></li>
+         <li><button type="button" onclick="location.href='managerChart.do'">통계</button></li>
       </ul>
    </article>
 </section>

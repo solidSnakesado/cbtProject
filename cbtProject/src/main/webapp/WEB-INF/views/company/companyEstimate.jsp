@@ -1,126 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!-- 의뢰 html -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	<style>
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  
-}
-	
-	.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-</style>
 </head>
 <body>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<script type="text/javascript">
+	
+<!-- 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#header").load("co_header.html")
 		});
-	</script>
+	</script> -->
 	<header id="header"></header>
 	<div align="center">
-		<h1 >시험의뢰(견적서)</h1>
-	<hr>	
+		<h1>시험의뢰(견적서)</h1>
+		<hr>
 	</div>
+
 	
-	<div>
-		의뢰일: <input type="text"><br>
-		금액: <input type="text"><br>
-		진행상태: 
-			<select >
-			    <option value="진행대기">진행대기</option>
-			    <option value="진행완료">진행완료</option>
-			    <option value="진행거절">진행거절</option>
-			    
-			</select>
-		<br>
-		응시자수: <input type="text" placeholder="ex)50명"><br>
-		난이도: <select >
-			    <option value="상">상</option>
-			    <option value="중">중</option>
-			    <option value="하">하</option>
-			</select>
-				<br>
-		비고: <input type="text"> <br>
-		응시대상자: <select >
-			    <option value="재직자">재직자</option>
-			    <option value="신입사원">신입사원</option>
-			    <option value="학생">학생</option>
-			</select>
-		<br>
-		응시목적: <select >
-			    <option value="자격증">자격증</option>
-			    <option value="직무시험">직무시험</option>
-			    <option value="승진시험">승진시험</option>
-			</select>
-		<br>
-		시험일시: <input type="text"><br>
-		시험분류: <select >
-			    <option value="응시목적별분류1">응시목적별분류1</option>
-			    <option value=""></option>
-			    <option value=""></option>
-			    <option value=""></option>
-			</select>
-				<br>
-		합격점수: <input type="text" placeholder="ex)60점"> <br>
-		시험명: <input type="text" placeholder="ex)정보처리기사"> <br>
-		시험 시간: <select >
-			    <option value="30">0:30:00</option>
-			    <option value="60">1:00:00</option>
-			    <option value="90">1:30:00</option>
-			    <option value="120">2:00:00</option>
-			</select>
-				<br>
-		문항수: <input type="text" placeholder="ex)50문제"> <br>
-		응시 가능 횟수: <select >
-			    <option value="">1회</option>
-			    <option value="학생">2회</option>
-			    <option value="회사원">3회</option>
-			    <option value="기타">4회</option>
-			</select>
-		<br>
+	<form action="companyEstimateInsert.do" method="POST">
+	
+		<table>
+			<!-- <tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr> -->
+			<tr>	<td>의뢰이름	</td> 	<td><input type="text" name="estimateName">	</td>	</tr>
+			<tr>	<td>카테고리ID</td>	<td><input type="text" name="categoryId">	</td>	</tr>
+			<tr>	<td>기업ID	</td>	<td><input type="text" name="companyId">	</td>	</tr>
+			<tr>	<td>금액		</td>	<td><input type="text" name="estimatePrice"></td>	</tr>
+			<tr>	<td>응시대상자</td>	<td>
+				<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"></my:select>
+								</td></tr>
+			
+			<tr>	<td>응시목적</td>		<td><my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
+			
+			<tr>	<td>응시자 수</td>		<td><input type="text" name="applicants"></td>	</tr>
+
+			<tr>
+					<td>시험분류</td>		
+					<td>
+						<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select>
+					</td></tr>
+			
+			<tr>
+					<td>시험난이도</td>		<td>
+					<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select>
+						 				
+						 				</td></tr>
+			
+			<tr>	<td>시험일시	</td>		<td><input type="text" id="datepicker" name="examDate"></td>	</tr>
+			<tr>	<td>비고		</td>		<td><input type="text" name="remarks"></td>						</tr>
+			
+			
+			<tr>	<td>시험횟수	</td>		<td><my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select>
+			<tr>	<td>시험간격	</td>		<td><my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
+		</table>
 		
-		<button onclick="location.href='companyMain.html'"> 확인 </button> <button onclick="location.href='companyMain.html'">취소</button>
+		<div>
+			<button>확인</button>
+			<button type="button"
+				onclick="location.href='companyEstimateList.do'">취소</button>
+
+		</div>
 		
-	</div>
+		</form>
+		
+		<script>
+			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
+		</script>
+		
 	
-	
+
 </body>
 </html>

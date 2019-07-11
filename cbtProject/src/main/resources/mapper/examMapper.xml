@@ -3,8 +3,11 @@
 <mapper namespace="ExamDAO">
 	<!-- 190703 재홍 CRUD 쿼리 입력 -->
 	<!-- 시험 등록 -->
+	<!-- 2019.07.09 성재민 -->
+	<!-- #{disclosureStatus} #{setExamStatus} 추가 -->
 	<insert id="insertExam" parameterType="ExamVO">
-		INSERT INTO EXAM (	EXAM_ID
+		INSERT INTO EXAM (	
+							EXAM_ID
 						,	EXAM_START_TIME
 						,	EXAM_END_TIME
 						,	QUESTION_QUANTITY
@@ -15,16 +18,93 @@
 						,	EXAM_NAME
 						,	EXAM_STATUS
 						,	DISCLOSURE_STATUS
-						,	SET_EXAM_STATUS)
-		VALUES ( #{examId}
-				,#{examStartTime}
-				,#{examEndTime}
-				,#{questionQuantity}
-				,#{estimateId}
-				,#{numberOfTimes}
-				,#{passingScore}
-				,#{possibleApplicants}
-				,#{examName}
-				,#{examStatus} )
+						,	SET_EXAM_STATUS
+					)
+		VALUES ( 
+					#{examId}
+				,	#{examStartTime}
+				,	#{examEndTime}
+				,	#{questionQuantity}
+				,	#{estimateId}
+				,	#{numberOfTimes}
+				,	#{passingScore}
+				,	#{possibleApplicants}
+				,	#{examName}
+				,	#{examStatus} 
+				,	#{disclosureStatus} 
+				,	#{setExamStatus} 
+			)
 	</insert>
+	
+	<!-- 2019.07.09 성재민 -->
+	<!-- 업데이트 추가 -->
+	<update id="updateExam" parameterType="ExamVO">
+		UPDATE EXAM
+		<set>	
+			EXAM_START_TIME   		= #{examStartTime}
+			, EXAM_END_TIME			= #{examEndTime}
+			, QUESTION_QUANTITY 	= #{questionQuantity}
+			, ESTIMATE_ID  			= #{estimateId}
+			, NUMBER_OF_TIMES 		= #{numberOfTimes}
+			, PASSING_SCORE 		= #{passingScore}
+			, POSSIBLE_APPLICANTS 	= #{possibleApplicants}
+			, EXAM_NAME 			= #{examName}
+			, EXAM_STATUS 			= #{examStatus}
+			, DISCLOSURE_STATUS 	= #{disclosureStatus}
+			, SET_EXAM_STATUS 		= #{setExamStatus}
+		</set>
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</update>
+	
+	<!-- 2019.07.09 성재민 -->
+	<!-- 삭제 추가 -->
+	<delete id="deleteExam" parameterType="ExamVO">
+		DELETE FROM EXAM
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</delete>
+	
+	<!-- 2019.07.09 성재민 -->
+	<!-- select 추가 -->
+	<select id="getExam" resultType="ExamVO">
+		SELECT 
+				EXAM_ID
+			,	EXAM_START_TIME
+			,	EXAM_END_TIME
+			,	QUESTION_QUANTITY
+			,	ESTIMATE_ID
+			,	NUMBER_OF_TIMES
+			,	PASSING_SCORE
+			,	POSSIBLE_APPLICANTS
+			,	EXAM_NAME
+			,	EXAM_STATUS
+			,	DISCLOSURE_STATUS
+			,	SET_EXAM_STATUS
+			,	EXAM_DESCRIPTION_SIMPLE
+			,	EXAM_DESCRIPTION_DETAIL
+		FROM EXAM
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</select>
+	
+	<select id="getExamList" resultType="ExamVO">
+		SELECT 
+				EXAM_ID
+			,	EXAM_START_TIME
+			,	EXAM_END_TIME
+			,	QUESTION_QUANTITY
+			,	ESTIMATE_ID
+			,	NUMBER_OF_TIMES
+			,	PASSING_SCORE
+			,	POSSIBLE_APPLICANTS
+			,	EXAM_NAME
+			,	EXAM_STATUS
+			,	DISCLOSURE_STATUS
+			,	SET_EXAM_STATUS
+		FROM EXAM
+	</select>
 </mapper>

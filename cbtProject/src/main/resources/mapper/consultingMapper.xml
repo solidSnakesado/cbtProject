@@ -5,36 +5,60 @@
 <!-- 컴퍼니 관련 dao 처리 -->
 <mapper namespace="consultingDAO">
 
+	<!-- 2019.07.09 성재민 -->
+	<!-- 날짜 처리 를 문자열로 받아 TO_DATE로 변환하여 db에 전달 -->
+	<!-- 2019.07.08 성재민 -->
+	<!-- 비회원이 상담신청을 하는 경우 companyId 값이 없을 수도 있으므로 예외처리 -->
 	<!-- 2019.07.03 성재민 -->
 	<!-- 컨설팅 등록 sql -->
 	<insert id="insertConsulting" parameterType="ConsultingVO">
 		INSERT INTO CONSULTING(
-			CONSULTING_ID,
-			CONSULTING_CONTENTS,
-			CONSULTING_DESIRED_DATE
+			CONSULTING_ID
+			,CONSULTING_CONTENTS
+			,CONSULTING_DESIRED_DATE
+			,CONSULTING_STATE
+			,CONSULTING_TITLE
+			<if test="companyId != null and companyId != ''">
+				,COMPANY_ID
+			</if>
 			)
 		VALUES (
-			#{consultingId},
-			#{consultingContents},
-			#{consultingDesiredDate}
+			CONSULTING_ID_SEQ.NEXTVAL
+			,#{consultingContents}
+			,TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			,0
+			, #{consultingTitle}
+			<if test="companyId != null and companyId != ''">
+				,#{companyId}
+			</if>
 		)
 	</insert>
 
+	<!-- if 태그 안에서 부등호 처리 법 -->
+	<!-- 부등호 <, 			대체식 lt 	예제  <if test="logCount lt 0"> -->
+	<!-- 부등호 >, 			대체식 gt 	예제  <if test="logCount gt 0"> -->
+	<!-- 부등호 <= (또는 =<), 	대체식 lte  	예제  <if test="logCount lte 0"> -->
+	<!-- 부등호 >= (또는 =>), 	대체식 gte 	예제  <if test="logCount gte 0"> -->
 	<!-- 2019.07.03 성재민 -->
 	<!-- 컨설팅 정보 수정 -->
 	<update id="updateConsulting" parameterType="ConsultingVO">
 		UPDATE CONSULTING
 		<set>
-			CONSULTING_DATE = #{consultingDate},
-			CONSULTING_REMARKS = #{consultingRemarks},
+			CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			,CONSULTING_CONTENTS 	= #{consultingContents}
+			,CONSULTING_TITLE 		= #{consultingTitle}
+			
+			<if test="consultingDate != null and consultingDate != ''">
+				,CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+			<if test="consultingRemarks != null and consultingRemarks != ''">
+				,CONSULTING_REMARKS = #{consultingRemarks}
+			</if>
 			<if test="companyId != null and companyId != '' ">
-				COMPANY_ID = #{companyId},
+				,COMPANY_ID = #{companyId}
 			</if>
-			<if test="consultingContents != null and consultingContents != '' ">
-				CONSULTING_CONTENTS = #{consultingContents},
-			</if>
-			<if test="consultingDesiredDate != null"> 
-				CONSULTING_DESIRED_DATE = #{consultingDesiredDate}
+			<if test="consultingState != null and consultingState gte 0"> 
+				,CONSULTING_STATE = #{consultingState}
 			</if>
 		</set>
 		<where>
@@ -54,23 +78,42 @@
  		SELECT CONSULTING_ID
 				,COMPANY_ID
 				,CONSULTING_CONTENTS
-				,CONSULTING_DESIRED_DATE
-				,CONSULTING_DATE
+				,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')	"consultingDesiredDate"
+				,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
 				,CONSULTING_REMARKS
 				,CONSULTING_STATE
+				,CONSULTING_TITLE
 		FROM CONSULTING
 		WHERE CONSULTING_ID = #{consultingId}
 	</select>
 	
 	<!-- 전체 조회 -->
 	<select id="getConsultingList" resultType="ConsultingVO">
-		SELECT CONSULTING_ID
-				,COMPANY_ID
-				,CONSULTING_CONTENTS
-				,CONSULTING_DESIRED_DATE
-				,CONSULTING_DATE
-				,CONSULTING_REMARKS
-				,CONSULTING_STATE
+		SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
+			SELECT CONSULTING_ID
+					,COMPANY_ID
+					,CONSULTING_CONTENTS
+					,REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T') 	"consultingDesiredDate"
+					,REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
+					,CONSULTING_REMARKS
+					,CONSULTING_STATE
+					,CONSULTING_TITLE
+			FROM CONSULTING
+			<where>
+				COMPANY_ID = #{companyId}
+			</where>
+			ORDER BY CONSULTING_ID
+		) A ) B 
+		<where>
+			RN BETWEEN #{start} AND #{end}
+		</where>
+		
+	</select>
+	
+	<!-- 2019.07.10 성재민 -->
+	<!-- 컨설팅 개수 불러오기 -->
+	<select id="getConsultingCount" resultType="int">
+		SELECT COUNT(*)
 		FROM CONSULTING
 	</select>
 </mapper>

@@ -35,8 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public CompanyVO getCompany(CompanyVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return companyDAO.getCompany(vo);
 	}
 	// 이승환이쓰고있음
 	@Override

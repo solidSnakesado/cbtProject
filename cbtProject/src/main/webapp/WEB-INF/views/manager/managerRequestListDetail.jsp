@@ -17,13 +17,13 @@
 		<article>
 			<ul>
 				<li><button type="button"
-						onclick="location.href='managerAccountControl.jsp'">계정관리</button></li>
+						onclick="location.href='managerAccountControl.do'">계정관리</button></li>
 				<li><button type="button"
-						onclick="location.href='managerRequestList.jsp'">의뢰목록</button></li>
+						onclick="location.href='managerRequestList.do'">의뢰목록</button></li>
 				<li><button type="button"
-						onclick="location.href='managerConsultingList.jsp'">상담목록</button></li>
+						onclick="location.href='managerConsultingList.do'">상담목록</button></li>
 				<li><button type="button"
-						onclick="location.href='managerChart.jsp'">통 계</button></li>
+						onclick="location.href='managerChart.do'">통 계</button></li>
 			</ul>
 		</article>
 	</section>

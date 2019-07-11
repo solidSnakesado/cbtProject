@@ -4,6 +4,9 @@
 	<!-- 190703 재홍 CRUD 쿼리 입력 -->
 	<!-- 의뢰 등록 -->
 	<insert id="insertEstimate" parameterType="EstimateVO">
+		<selectKey keyProperty="estimateId" resultType="int" order="BEFORE">
+			SELECT MAX(ESTIMATE_ID)+1 FROM ESTIMATE
+		</selectKey>
 		INSERT INTO ESTIMATE (	  ESTIMATE_ID
 								, ESTIMATE_PRICE
 								, REQUEST_DAY
@@ -20,11 +23,12 @@
 								, EXAM_CLASSFICATION
 								, COMPANY_ID
 								, EXAM_COUNT
-								, EXAM_INTERVAL )
+								, EXAM_INTERVAL
+								, ESTIMATE_NAME )
 		VALUES ( #{estimateId}
 				,#{estimatePrice}
-				,SYSDATE <!-- REQUEST_DAY -->
-				,#{tradeProgress}
+				,SYSDATE <!-- REQUEST_DAY ESTIMATE_ID_SEQ-->
+				, 'B1' <!-- 의뢰진행상태 : 진행전상태 ==B1 -->
 				,#{remarks}
 				,#{applicants}
 				
@@ -37,25 +41,32 @@
 				,#{examClassfication}
 				,#{companyId}
 				,#{examCount}
-				,#{examInterval})
+				,#{examInterval}
+				,#{estimateName})
 	</insert>
 	
 	<!-- 의뢰 수정 -->
 	<update id="updateEstimate" parameterType="EstimateVO">
-		UPDATE ESTIMATE SET ESTIMATE_PRICE  	= #{estimatePrice}
-						,	REQUEST_DAY	    	= #{requestDay}
-						,	TRADE_PROGRESS  	= #{tradeProgress}
-						,	REMARKS 	    	= #{remarks}
-						,	APPLICANTS			= #{applicants}
-						,	LEVEL_OF_DIFFICULTY	= #{levelOfDifficulty}
-						,	CANDIDATE			= #{candidate}
-						,	APPLY_PURPOSE		= #{applyPurpose}
-						,	EXAM_DATE			= #{examDate}
-						,	CATEGORY_ID			= #{categoryId}
-						,	EXAM_CLASSFICATION	= #{examClassfication}
-						,	COMPANY_ID			= #{companyId}
-						,	EXAM_COUNT			= #{examCount}
-						,	EXAM_INTERVAL		= #{examInterval}
+		UPDATE ESTIMATE
+		SET	  ESTIMATE_ID 		= #{estimateId}
+			, ESTIMATE_PRICE 	= #{estimatePrice}
+			, REQUEST_DAY 		= SYSDATE
+			, TRADE_PROGRESS 	= #{tradeProgress}
+			, REMARKS 			= #{remarks}
+			, APPLICANTS		= #{applicants}
+			
+			, LEVEL_OF_DIFFICULTY = #{levelOfDifficulty}
+			, CANDIDATE 		= #{candidate}
+			, APPLY_PURPOSE 	= #{applyPurpose}
+			, EXAM_DATE 		= #{examDate}
+			, CATEGORY_ID		= #{categoryId}
+			
+			, EXAM_CLASSFICATION= #{examClassfication}
+			, COMPANY_ID		= #{companyId}
+			, EXAM_COUNT		= #{examCount}
+			, EXAM_INTERVAL		= #{examInterval}
+			, ESTIMATE_NAME		= #{estimateName}
+			
 		WHERE ESTIMATE_ID = #{estimateId}
 	</update>
 	
@@ -71,6 +82,7 @@
 				, ESTIMATE_PRICE
 				, REQUEST_DAY
 				, TRADE_PROGRESS
+				, FIND_CODENM(TRADE_PROGRESS) AS TRADE_PROGRESS_NM
 				, REMARKS
 				, APPLICANTS
 				, LEVEL_OF_DIFFICULTY
@@ -82,8 +94,11 @@
 				, COMPANY_ID
 				, EXAM_COUNT
 				, EXAM_INTERVAL
+				, ESTIMATE_NAME
+
 		FROM ESTIMATE
 		WHERE ESTIMATE_ID = #{estimateId}
+		
 	</select>
 	
 	<!-- 의뢰목록 전체 조회 -->
@@ -92,6 +107,7 @@
 				, ESTIMATE_PRICE
 				, REQUEST_DAY
 				, TRADE_PROGRESS
+				, FIND_CODENM(TRADE_PROGRESS) AS TRADE_PROGRESS_NM
 				, REMARKS
 				, APPLICANTS
 				, LEVEL_OF_DIFFICULTY
@@ -102,7 +118,10 @@
 				, EXAM_CLASSFICATION
 				, COMPANY_ID
 				, EXAM_COUNT
+				, FIND_CODENM(EXAM_COUNT) AS EXAM_COUNT_NM
 				, EXAM_INTERVAL
+				, ESTIMATE_NAME
 		FROM ESTIMATE
+		ORDER BY REQUEST_DAY DESC
 	</select>
 </mapper>

@@ -1,6 +1,9 @@
 package com.cbt.consulting;
 
 import java.util.List;
+import java.util.Map;
+
+import com.cbt.common.Paging;
 
 public interface ConsultingService {
 
@@ -12,5 +15,9 @@ public interface ConsultingService {
 	
 	ConsultingVO getConsulting(ConsultingVO vo);
 	
-	List<ConsultingVO> getConsultingList();
+	List<ConsultingVO> getConsultingList(ConsultingVO vo);
+	
+	Map<String, Object> getConsultingList(ConsultingVO vo, Paging paging);
+	
+	int getConsultingCount();
 }

@@ -9,25 +9,7 @@
 </style>
 </head>
 <body>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#header").load("candidateInHeader.do")
-		});
-	</script>
-	<header id="header"></header>
-	<hr />
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='candidateAccount.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href=#">시험목록</button></li>
-				<li><button type="button" onclick="location.href=#">응시내역</button></li>
-			</ul>
-		</article>
-	</section>
+
 	${takerId} 
 	<table>
 		<tr>
