@@ -34,5 +34,10 @@ public class EstimateDAO {
 	public List<EstimateVO> getEstimateList(EstimateVO vo) {
 		return mybatis.selectList("EstimateDAO.getEstimateList", vo);
 	}
-
+	
+	
+	 //페이지 글수 가져오는 메서드
+    public int getCount(EstimateVO vo) {
+    	return mybatis.selectOne("EstimateDAO.getCount", vo);
+    }
 }

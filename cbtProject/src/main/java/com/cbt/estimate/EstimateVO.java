@@ -12,6 +12,7 @@ public class EstimateVO {
 	private int estimateId; 		//의뢰ID
 	private String estimateName;	//의뢰이름
 	private int categoryId;		//카테고리ID
+	private String categoryNm; //카테고리이름
 	private String companyId;		//기업ID
 	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
@@ -31,9 +32,45 @@ public class EstimateVO {
 	private String examCountNm;		// 
 	private String tradeProgressNm; // 
 	
+	//페이징
+	private int start;
+	private int end;
 	
 	
 	
+	
+
+
+	public String getCategoryNm() {
+		return categoryNm;
+	}
+
+
+	public void setCategoryNm(String categoryNm) {
+		this.categoryNm = categoryNm;
+	}
+
+
+	public int getStart() {
+		return start;
+	}
+
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+
+	public int getEnd() {
+		return end;
+	}
+
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+
 	public String getExamInterval() {
 		return examInterval;
 	}
@@ -216,17 +253,21 @@ public class EstimateVO {
 	}
 
 
-
-
 	@Override
 	public String toString() {
-		return "EstimateVO [estimateId=" + estimateId + ", categoryId=" + categoryId + ", companyId=" + companyId
-				+ ", requestDay=" + requestDay + ", estimatePrice=" + estimatePrice + ", tradeProgress=" + tradeProgress
-				+ ", candidate=" + candidate + ", applyPurpose=" + applyPurpose + ", applicants=" + applicants
-				+ ", examClassfication=" + examClassfication + ", levelOfDifficulty=" + levelOfDifficulty
-				+ ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount + ", examInterval="
-				+ examInterval + ", estimateName=" + estimateName + "]";
+		return "EstimateVO [estimateId=" + estimateId + ", estimateName=" + estimateName + ", categoryId=" + categoryId
+				+ ", companyId=" + companyId + ", requestDay=" + requestDay + ", estimatePrice=" + estimatePrice
+				+ ", tradeProgress=" + tradeProgress + ", candidate=" + candidate + ", applyPurpose=" + applyPurpose
+				+ ", applicants=" + applicants + ", examClassfication=" + examClassfication + ", levelOfDifficulty="
+				+ levelOfDifficulty + ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount
+				+ ", examInterval=" + examInterval + ", examCountNm=" + examCountNm + ", tradeProgressNm="
+				+ tradeProgressNm + ", start=" + start + ", end=" + end + "]";
 	}
+
+
+
+
+	
 	
 	
 }

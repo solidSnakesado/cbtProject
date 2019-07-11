@@ -21,9 +21,9 @@
  			<tr>	<td>카테고리ID</td>	<td>	<input type="text" name="categoryId" value="${myEstimateList.categoryId}" ></td></tr>
 	 		<tr>	<td>기업ID</td>		<td>	<input type="text" name="companyId" value="${myEstimateList.companyId}" readonly></td></tr>
 			<tr>	<td>의뢰일</td>		<td>	<input type="text" name="requestDay" value="${myEstimateList.requestDay}" readonly></td></tr>
-			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" readonly></td></tr>
+			<tr>	<td>금액</td>		<td>		<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" readonly></td></tr>
 			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
- 			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"></my:select></td></tr>
+ 			<tr>	<td>응시대상자</td>	<td>		<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"></my:select></td></tr>
 			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" ></td></tr>
 			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
@@ -37,17 +37,13 @@
 			
 			
 		</table>
-		<button onclick="window_close()">수정하기</button> <button type="button" onclick="window_close()"> 확인 </button> 
+		<button>수정하기</button> <button type="button" onclick="window_close()"> 확인 </button> 
 	</form>
 	
 	<script>
 			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
 			
-			function window_close(){ //윈도우창새로고침 후 닫기
-					//window.opener.top.location.href="companyEstimateUpdate.do"
-					window.opener.top.location.reload();//새로고침
-					window.close()
-			}
+			
 			tradeProgress.readOnly =true;
 	</script>
 </body>
