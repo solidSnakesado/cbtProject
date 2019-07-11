@@ -21,47 +21,23 @@ public class ExamVO {
 	private String 	setExamStatus;
 	private String 	examDescriptionSimple;
 	private String 	examDescriptionDetail;
-	
+
 	public String getExamStartTime() {
 		return examStartTime;
-	public String getExamDescriptionSimple() {
-		return examDescriptionSimple;
 	}
 
 	public void setExamStartTime(String examStartTime) {
 		this.examStartTime = examStartTime;
-	public void setExamDescriptionSimple(String examDescriptionSimple) {
-		this.examDescriptionSimple = examDescriptionSimple;
 	}
 
 	public String getExamEndTime() {
 		return examEndTime;
-	public String getExamDescriptionDetail() {
-		return examDescriptionDetail;
 	}
 
 	public void setExamEndTime(String examEndTime) {
 		this.examEndTime = examEndTime;
-	public void setExamDescriptionDetail(String examDescriptionDetail) {
-		this.examDescriptionDetail = examDescriptionDetail;
 	}
-	
-	public Timestamp getExamStartTime() {
-		return examStartTime;
-	}
-	
-	public void setExamStartTime(Timestamp examStartTime) {
-		this.examStartTime = examStartTime;
-	}
-	
-	public Timestamp getExamEndTime() {
-		return examEndTime;
-	}
-	
-	public void setExamEndTime(Timestamp examEndTime) {
-		this.examEndTime = examEndTime;
-	}
-	
+
 	public int getQuestionQuantity() {
 		return questionQuantity;
 	}
