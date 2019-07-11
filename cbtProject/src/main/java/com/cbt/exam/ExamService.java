@@ -2,6 +2,8 @@ package com.cbt.exam;
 
 import java.util.List;
 
+import com.cbt.company.CompanyVO;
+
 public interface ExamService {
 	
 	void insertExam(ExamVO vo);
@@ -12,5 +14,5 @@ public interface ExamService {
 	
 	ExamVO getExam(ExamVO vo);
 
-	List<ExamVO> getExamList(ExamVO vo);
+	List<ExamVO> getExamList(CompanyVO vo);
 }

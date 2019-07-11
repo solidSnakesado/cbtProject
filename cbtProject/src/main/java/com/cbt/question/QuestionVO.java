@@ -6,7 +6,7 @@ public class QuestionVO {
 	
 	
 	// 7/2 생성    -재용
-	private String questionId;
+	private int questionId;
 	private String questionContent;
 	private String example1;
 	private String example2;
@@ -15,24 +15,44 @@ public class QuestionVO {
 	private String rightAnswer;
 	private String rightCommentary;
 	private int levelOfDifficulty;
-	private String categoryId;
+	private int categoryId;
 	private String questionType;
-	private String examId;
+	private int examId;
 	private String setExamQuestionId;
 	private int point;
 	private int count;
+	private int takeExamId;
+	private String takerId;
+	private String takerAnswer;
 	
-	
-	public int getCount() {
-		return count;
+	public String getTakerAnswer() {
+		return takerAnswer;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setTakerAnswer(String takerAnswer) {
+		this.takerAnswer = takerAnswer;
 	}
-	public String getQuestionId() {
+	public String getTakerId() {
+		return takerId;
+	}
+	public void setTakerId(String takerId) {
+		this.takerId = takerId;
+	}
+	public int getTakeExamId() {
+		return takeExamId;
+	}
+	public void setTakeExamId(int takeExamId) {
+		this.takeExamId = takeExamId;
+	}
+	public int getExamId() {
+		return examId;
+	}
+	public void setExamId(int examId) {
+		this.examId = examId;
+	}
+	public int getQuestionId() {
 		return questionId;
 	}
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 	public String getQuestionContent() {
@@ -83,10 +103,10 @@ public class QuestionVO {
 	public void setLevelOfDifficulty(int levelOfDifficulty) {
 		this.levelOfDifficulty = levelOfDifficulty;
 	}
-	public String getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getQuestionType() {
@@ -94,12 +114,6 @@ public class QuestionVO {
 	}
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
-	}
-	public String getExamId() {
-		return examId;
-	}
-	public void setExamId(String examId) {
-		this.examId = examId;
 	}
 	public String getSetExamQuestionId() {
 		return setExamQuestionId;
@@ -113,6 +127,15 @@ public class QuestionVO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
+	
 	
 	
 

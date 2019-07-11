@@ -16,7 +16,7 @@ var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;	// 특수문자
 function openIdChk() {
     var takerId = $("#takerId").val();
      
-    if(special_pattern.test(takerId.value) == true) {
+    if(special_pattern.test(takerId) == true) {
         window.alert("아이디에는 특수문자를 사용하실 수 없습니다");
     	e.preventDefault();
     	return false; 
@@ -26,12 +26,12 @@ function openIdChk() {
     	e.preventDefault();
     	return false; 
     }
-/*     if(takerId.value == '' || !(takerId.value.length >= 3 && takerId.value.length <= 12)) {
+     if(takerId == '' || !(takerId.length >= 3 && takerId.length <= 12)) {
         window.alert("아이디를 입력하시오");
     	e.preventDefault();
         document.fmField.takerId.focus();
         return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
-    } */
+    } 
 		$.ajax({
 			async : false,
 			type : "post",

@@ -52,7 +52,7 @@
 		<article>
 			<ul>
 				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
+				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerEstimateList.do'">의뢰목록</button></li>
 				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
 				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
 			</ul>

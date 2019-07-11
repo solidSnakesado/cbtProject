@@ -213,4 +213,10 @@
 		WHERE TAKER_ID = #{takerId}	
 	</update>
 	
+	<select id="managerConsultingList" resultType="ConsultingVO">
+		SELECT	CONSULTING_TITLE
+				, CONSULTING_DESIRED_DATE
+		
+		FROM CONSULTING
+	</select>
 </mapper>

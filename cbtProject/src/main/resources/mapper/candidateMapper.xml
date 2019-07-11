@@ -60,8 +60,8 @@
 				    ,QUESTION_QUANTITY								"questionQuantity"
 				    ,PASSING_SCORE									"passingScore"
 				    ,TAKER_ID										"takerId"
-				    ,EXAM_DES1										"examDes1"
-				    ,EXAM_DES2										"examDes2"
+				    ,EXAM_DESCRIPTION_SIMPLE						"examDescriptionSimple"
+				    ,EXAM_DESCRIPTION_DETAIL						"examDescriptionDetail"
 			FROM    EXAM, TAKE_EXAM
 			WHERE   EXAM.EXAM_ID = TAKE_EXAM.EXAM_ID
 			AND		TAKER_ID = #{takerId}

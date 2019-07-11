@@ -22,16 +22,17 @@
 	
 	<resultMap type="QuestionVO" id="questionVO">
 		<result property="questionContent" column="QUESTION_CONTENT" javaType="string" />
-		<result property="questionId" column="QUESTION_ID" javaType="string" />
+		<result property="questionId" column="QUESTION_ID" javaType="int" />
 		<result property="example1" column="EXAMPLE_1" javaType="string" />
 		<result property="example2" column="EXAMPLE_2" javaType="string" />
 		<result property="example3" column="EXAMPLE_3" javaType="string" />
 		<result property="example4" column="EXAMPLE_4" javaType="string" />
 		<result property="rightAnswer" column="RIGHT_ANSWER" javaType="string" />
+		<result property="takerAnswer" column="TAKER_ANSWER" javaType="string" />
 		<result property="rightCommentary" column="RIGHT_COMMENTARY" javaType="string" />
 		<result property="setExamQuestionId" column="SET_EXAM_QUESTION_ID" javaType="string" />
 		<result property="point" column="POINT" javaType="int" />
-		<result property="examId" column="EXAM_ID" javaType="string" />
+		<result property="examId" column="EXAM_ID" javaType="int" />
 		<result property="count" column="count(*)" javaType="int" />
 	</resultMap>
 	
@@ -88,42 +89,70 @@
 	</select>
 	
 	<select id="candidateTakeExamList" resultMap="questionVO">
-		SELECT 	q.QUESTION_CONTENT,
-				q.QUESTION_ID,
+		SELECT q.QUESTION_ID,
+				s.SET_EXAM_QUESTION_ID,
 				q.EXAMPLE_1, 
 				q.EXAMPLE_2, 
 				q.EXAMPLE_3, 
 				q.EXAMPLE_4, 
-				q.RIGHT_ANSWER, 
+				t.TAKER_ANSWER, 
 				q.RIGHT_COMMENTARY, 
-				s.SET_EXAM_QUESTION_ID, 
+				q.QUESTION_CONTENT,
 				s.POINT, 
 				s.EXAM_ID
-				
-		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
-                   
-                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
-                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
-                    ON s.QUESTION_ID = q.QUESTION_ID
-                    
-           WHERE e.EXAM_ID = #{examId} 
-           and q.QUESTION_ID = s.QUESTION_ID
+		FROM 	SET_EXAM_QUESTION s JOIN QUESTION q 
+		ON q.QUESTION_ID = s.QUESTION_ID JOIN TAKE_EXAM_HISTORY t
+		ON t.SET_EXAM_QUESTION_ID = s.SET_EXAM_QUESTION_ID
+		WHERE t.TAKE_EXAM_ID = #{takeExamId} and s.EXAM_ID = #{examId}
+		
 	</select>
 	
-	<select id="getCount" resultMap="questionVO">
+	<select id="getSetCount" resultType="int">
 		SELECT 	COUNT(*)
 				
-		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
-                   
-                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
-                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
-                    ON s.QUESTION_ID = q.QUESTION_ID
+		  FROM  SET_EXAM_QUESTION
                     
-           WHERE e.EXAM_ID = #{examId} 
-           and q.QUESTION_ID = s.QUESTION_ID
+           WHERE EXAM_ID = #{examId} 
 	</select>
+	
+	<select id="getTakeCount" resultType="int">
+		SELECT 	COUNT(*)
+				
+		  FROM  TAKE_EXAM
+                    
+           WHERE EXAM_ID = #{examId} AND TAKER_ID = #{takerId}
+	</select>
+	
+	<select id="getHistoryCount" resultType="int">
+		SELECT COUNT(*)
+				FROM SET_EXAM_QUESTION s join TAKE_EXAM_HISTORY t
+				ON t.SET_EXAM_QUESTION_ID = s.SET_EXAM_QUESTION_ID
+				WHERE s.EXAM_ID = #{examId}
+	</select>
+	
+	<insert id="insertTakeExamHistory" parameterType="QuestionVO">
+		insert into TAKE_EXAM_HISTORY (	TAKER_ID,
+										TAKE_EXAM_HISTORY_ID,
+										SET_EXAM_QUESTION_ID,
+										TAKE_EXAM_ID	)
+
+				SELECT  	t.TAKER_ID, 
+							ROWNUM+(SELECT MAX(TAKE_EXAM_HISTORY_ID) FROM TAKE_EXAM_HISTORY) TAKE_EXAM_HISTORY_ID, 
+							s.SET_EXAM_QUESTION_ID,
+							t.TAKE_EXAM_ID
+							
+				FROM    TAKE_EXAM t JOIN SET_EXAM_QUESTION s
+				
+				ON t.EXAM_ID = s.EXAM_ID
+				
+				WHERE t.TAKE_EXAM_ID = #{takeExamId}
+	</insert>
+	
+	<update id="updateTakeExamHistory" parameterType="QuestionVO">
+		UPDATE	TAKE_EXAM_HISTORY
+		SET		TAKER_ANSWER = #{takerAnswer}
+		WHERE	TAKE_EXAM_ID = #{takeExamId} AND TAKER_ID = #{takerId} AND SET_EXAM_QUESTION_ID = #{setExamQuestionId}
+	</update>
 
 </mapper>
  

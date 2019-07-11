@@ -25,7 +25,7 @@
 		VALUES (
 			CONSULTING_ID_SEQ.NEXTVAL
 			,#{consultingContents}
-			,TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			,TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
 			,0
 			, #{consultingTitle}
 			<if test="companyId != null and companyId != ''">
@@ -44,12 +44,12 @@
 	<update id="updateConsulting" parameterType="ConsultingVO">
 		UPDATE CONSULTING
 		<set>
-			CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+			CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
 			,CONSULTING_CONTENTS 	= #{consultingContents}
 			,CONSULTING_TITLE 		= #{consultingTitle}
 			
 			<if test="consultingDate != null and consultingDate != ''">
-				,CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI:SS')
+				,CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
 			</if>
 			<if test="consultingRemarks != null and consultingRemarks != ''">
 				,CONSULTING_REMARKS = #{consultingRemarks}

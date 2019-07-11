@@ -12,7 +12,7 @@
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<h3>상담 세부 항목</h3>
-	<table style="padding: 5px 0 5px 0;">
+	<table align="center">
 		<tr>
 			<th>상담희망일</th>
 			<td style="text-align: left;"><input type="datetime-local" name="consultingDesiredDate" id="consultingDesiredDate" value="${consulting.consultingDesiredDate}" readonly></td>
