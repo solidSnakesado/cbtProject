@@ -42,8 +42,8 @@ public class CandidateDAO {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
 	}
 
-	public int idcheck(String takerId) {
-		return mybatis.selectOne("candidateDAO.idcheck",takerId);
+	public int idcheck(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.idcheck",vo);
 	}
 	
 	// 2019.07.09

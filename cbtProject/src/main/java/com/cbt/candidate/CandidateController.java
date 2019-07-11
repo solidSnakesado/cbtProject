@@ -120,9 +120,14 @@ public class CandidateController {
 	@ResponseBody
 	@RequestMapping(value="idcheck.do",method=RequestMethod.POST, consumes="application/json")
   	public  Map<String, Boolean> idcheck(@RequestBody CandidateVO vo, Model model){
-		candidateService.getCandidateList(vo);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("result", true);
+		int n = candidateService.idcheck(vo);
+		if (n == 0) {
+			map.put("result", true);
+		}
+		else {
+			map.put("result", false);
+		}
 	return map;
 		 
 	}

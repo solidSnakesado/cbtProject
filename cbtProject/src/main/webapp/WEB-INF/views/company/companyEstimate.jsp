@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!-- 의뢰 html -->
 <!DOCTYPE html>
 <html>
@@ -29,49 +30,37 @@
 	<form action="companyEstimateInsert.do" method="POST">
 	
 		<table>
-			<tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr>
+			<!-- <tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr> -->
 			<tr>	<td>의뢰이름	</td> 	<td><input type="text" name="estimateName">	</td>	</tr>
 			<tr>	<td>카테고리ID</td>	<td><input type="text" name="categoryId">	</td>	</tr>
 			<tr>	<td>기업ID	</td>	<td><input type="text" name="companyId">	</td>	</tr>
-			<tr>	<td>의뢰일	</td>	<td><input type="text" value="입력안해도됨 sysdate로 들어감"></td></tr>
 			<tr>	<td>금액		</td>	<td><input type="text" name="estimatePrice"></td>	</tr>
-			<tr>	<td>진행상태	</td>	<td><select name="tradeProgress">
-													<option value="3">완료</option>
-													<option value="2">진행대기</option>
-													<option value="1">진행거절</option>
-											</select></td></tr>
-			<tr>	<td>응시대상자</td>	<td><select name="candidate">
-													<option value="재직자">재직자</option>
-													<option value="신입사원">신입사원</option>
-													<option value="학생">학생</option>
-										</select></td></tr>
+			<tr>	<td>응시대상자</td>	<td>
+				<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"></my:select>
+								</td></tr>
 			
-			<tr>	<td>응시목적</td>		<td><select name="applyPurpose">
-													<option value="자격증">자격증</option>
-													<option value="직무시험">직무시험</option>
-													<option value="승진시험">승진시험</option>
-					  					</select></td></tr>
+			<tr>	<td>응시목적</td>		<td><my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
 			
 			<tr>	<td>응시자 수</td>		<td><input type="text" name="applicants"></td>	</tr>
 
 			<tr>
-					<td>시험분류</td>		<td><select name="examClassfication">
-													<option value="3">자격증</option>
-													<option value="2">직무시험</option>
-													<option value="1">승진시험</option>
-										</select></td></tr>
+					<td>시험분류</td>		
+					<td>
+						<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select>
+					</td></tr>
 			
 			<tr>
-					<td>난이도</td>		<td><select name="levelOfDifficulty">
-													<option value="3">상</option>
-													<option value="2">중</option>
-													<option value="1">하</option>
-						 				</select></td></tr>
+					<td>시험난이도</td>		<td>
+					<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select>
+						 				
+						 				</td></tr>
 			
 			<tr>	<td>시험일시	</td>		<td><input type="text" id="datepicker" name="examDate"></td>	</tr>
 			<tr>	<td>비고		</td>		<td><input type="text" name="remarks"></td>						</tr>
-			<tr>	<td>시험횟수	</td>		<td><input type="number" style="ime-mode: disabled;" name="examCount"></td>	</tr>
-			<tr>	<td>시험간격(ex 연 2회)</td><td><input type="number" style="ime-mode:disabled;" name="examInterval"></td></tr>
+			
+			
+			<tr>	<td>시험횟수	</td>		<td><my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select>
+			<tr>	<td>시험간격	</td>		<td><my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 		</table>
 		
 		<div>

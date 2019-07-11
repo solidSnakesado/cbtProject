@@ -4,6 +4,9 @@
 	<!-- 190703 재홍 CRUD 쿼리 입력 -->
 	<!-- 의뢰 등록 -->
 	<insert id="insertEstimate" parameterType="EstimateVO">
+		<selectKey keyProperty="estimateId" resultType="int" order="BEFORE">
+			SELECT MAX(ESTIMATE_ID)+1 FROM ESTIMATE
+		</selectKey>
 		INSERT INTO ESTIMATE (	  ESTIMATE_ID
 								, ESTIMATE_PRICE
 								, REQUEST_DAY
@@ -24,8 +27,8 @@
 								, ESTIMATE_NAME )
 		VALUES ( #{estimateId}
 				,#{estimatePrice}
-				,SYSDATE <!-- REQUEST_DAY -->
-				,#{tradeProgress}
+				,SYSDATE <!-- REQUEST_DAY ESTIMATE_ID_SEQ-->
+				, 'B1' <!-- 의뢰진행상태 : 진행전상태 ==B1 -->
 				,#{remarks}
 				,#{applicants}
 				
@@ -79,6 +82,7 @@
 				, ESTIMATE_PRICE
 				, REQUEST_DAY
 				, TRADE_PROGRESS
+				, FIND_CODENM(TRADE_PROGRESS) AS TRADE_PROGRESS_NM
 				, REMARKS
 				, APPLICANTS
 				, LEVEL_OF_DIFFICULTY

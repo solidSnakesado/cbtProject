@@ -41,13 +41,20 @@ public class EstimateController {
 	
 	//기업의뢰 등록		기업은 의뢰 등록 할수 있다.
 	@RequestMapping(value = "companyEstimateInsert.do", method = RequestMethod.GET)
-	public String companyEstimateInsertForm() {
+	public String companyEstimateInsertForm(Model model) {
+		model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
+		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수
+		model.addAttribute("M", conditionService.getConditionDetailList("M")); 	//M-시험분류
+		model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
+		model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
 		return "company/company/companyEstimate"; 
 	}
 	
 	@RequestMapping(value = "companyEstimateInsert.do", method = RequestMethod.POST)
 	public String companyEstimateInsert(EstimateVO vo) {
-		estimateService.insertEstimate(vo);		
+		estimateService.insertEstimate(vo);	
+		
 		return "redirect:companyEstimateList.do"; 
 	}
 	
@@ -83,8 +90,13 @@ public class EstimateController {
 		
 		vo.setEstimateId(estimateId); 
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
-		model.addAttribute("G", conditionService.getConditionDetailList("G"));
-		model.addAttribute("H", conditionService.getConditionDetailList("H"));
+		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
+		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
+		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수
+		model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
+		model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
+		model.addAttribute("M", conditionService.getConditionDetailList("M"));	//M-시험분류
+		model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
 		return "empty/company/companyDetailRequestList";
 	}
 	
