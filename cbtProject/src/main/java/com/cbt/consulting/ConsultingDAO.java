@@ -40,4 +40,8 @@ public class ConsultingDAO {
 	public int getConsultingCount(ConsultingVO vo) {
 		return mybatis.selectOne("consultingDAO.getConsultingCount", vo);
 	}
+	//승환추가
+	public List<ConsultingVO> managerConsultingList(ConsultingVO vo) {
+		return mybatis.selectList("consultingDAO.managerConsultingList", vo);
+	}
 }

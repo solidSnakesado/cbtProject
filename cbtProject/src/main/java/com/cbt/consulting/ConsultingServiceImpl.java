@@ -73,4 +73,9 @@ public class ConsultingServiceImpl implements ConsultingService {
 		
 		return null;
 	}
+
+	@Override
+	public List<ConsultingVO> managerConsultingList(ConsultingVO vo) {
+		return dao.managerConsultingList(vo);
+	}
 }

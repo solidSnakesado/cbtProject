@@ -116,6 +116,15 @@
 		SELECT COUNT(*)
 		FROM CONSULTING
 	</select>
+	
+	<!-- 2019.07.12 이승환 -->
+	<!--  managerConsulting 리스트 불러오기 -->
+	<select id="managerConsultingList" resultType="ConsultingVO">
+		SELECT 	CONSULTING_ID
+				,CONSULTING_TITLE
+				,CONSULTING_DESIRED_DATE
+		FROM CONSULTING
+	</select>
 </mapper>
  
  

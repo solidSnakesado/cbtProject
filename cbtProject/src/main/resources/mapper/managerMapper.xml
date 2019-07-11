@@ -124,6 +124,14 @@
 		FROM COMPANY
 	</select>
 	
+		<!-- 매니저, 상담리스트 출력 -->
+	<select id="managerConsultingList" resultType="ConsultingVO">
+		SELECT	CONSULTING_TITLE
+				, CONSULTING_DESIRED_DATE
+		
+		FROM CONSULTING
+	</select>
+	
 	<!-- 0708 이승환 추가  // 매니저 기업 수정-->
 	<update id="managerAccountManage" parameterType="CompanyVO">
 		UPDATE COMPANY
@@ -213,10 +221,5 @@
 		WHERE TAKER_ID = #{takerId}	
 	</update>
 	
-	<select id="managerConsultingList" resultType="ConsultingVO">
-		SELECT	CONSULTING_TITLE
-				, CONSULTING_DESIRED_DATE
-		
-		FROM CONSULTING
-	</select>
+	
 </mapper>
