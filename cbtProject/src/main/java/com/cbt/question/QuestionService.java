@@ -9,13 +9,17 @@ import com.cbt.common.Paging;
 //  7/2 문제 서비스 작성    -재용
 public interface QuestionService {
 	
-	void insertQuestion(QuestionVO vo);
+	void insertTakeExamHistory(QuestionVO vo);
 	
-	void updateQuestion(QuestionVO vo);
+	void updateTakeExamHistory(QuestionVO vo);
 	
 	void deleteQuestion(QuestionVO vo);
 	
-	QuestionVO getCount(QuestionVO vo);
+	int getSetCount(QuestionVO vo);
+	
+	int getTakeCount(QuestionVO vo);
+	
+	int getHistoryCount(QuestionVO vo);
 	
 	List<Map<Object, String>> getTestStart(QuestionVO vo);
 	

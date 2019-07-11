@@ -11,16 +11,20 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 	var i = 0;
 	var data;
 	var a = 1;
 	var count = 0;
-	
 	$(document).ready(function() {
+		
+		
 		$("#header").load("candidateInHeader.do")
 		$("#examId").html("시험 응시")
 		$("#question").html("문제")
 		
+		
+		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
 			$.ajax({
 				url : "./getTestStart.do",
@@ -30,150 +34,174 @@
 					
 					data = datas;
 					count = datas.length;
-					console.log(data[0].examId);
-					$("#examId").html(data[i].examId+" 시험 응시");
-					$("#question").html(a+" .   "+data[i].questionContent);
-					$("#point").html("배점 : " + data[i].point);
-					$("#exam1").html("1 . " + data[i].example1);
-					$("#exam2").html("2 . " + data[i].example2);
-					$("#exam3").html("3 . " + data[i].example3);
-					$("#exam4").html("4 . " + data[i].example4);
-					$("#pExam1").html("1 . " + data[i].example1);
-					$("#pExam2").html("2 . " + data[i].example2);
-					$("#pExam3").html("3 . " + data[i].example3);
-					$("#pExam4").html("4 . " + data[i].example4);
 					
-					$("#td1").html("1 . ").append($("<input>").attr("value","1").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-					$("#td2").html("2 . ").append($("<input>").attr("value","2").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-					$("#td3").html("3 . ").append($("<input>").attr("value","3").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-					$("#td4").html("4 . ").append($("<input>").attr("value","4").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
 					
+					/*                         문제 난수 만들기        Start          */
+					var numbers = [];
+			        var pickNumbers = data.length;
+			         
+			        for(insertCur = 0; insertCur < pickNumbers; insertCur++){
+			            numbers[insertCur] = Math.floor(Math.random() * data.length);
+
+			            for(searchCur = 0; searchCur < insertCur; searchCur++){
+			                if(numbers[insertCur] == numbers[searchCur]){
+			                    insertCur--; 
+			                    break; 
+			                }
+			            }
+			        }
+			        console.log(data);
+			        
+			        
+			        /*                         보기 난수 만들기           Start          	   */
+			        var num = [];
+			        var examNum = 4;
+			        
+			        for(insertCur = 0; insertCur < examNum ; insertCur++){
+			        	num[insertCur] = Math.floor(Math.random() * examNum);
+
+			            for(searchCur = 0; searchCur < insertCur; searchCur ++){
+			                if(num[insertCur] == num[searchCur]){
+			                    insertCur--; 
+			                    break; 
+			                }
+			            }
+			        }
+			        
+			        
+			        /*  보기 난수값 활용해 보기 출력하는 펑션	*/
+			        function mixExam(){
+			        	var ex = new Array;
+				        
+			        	ex[num[0]] = data[numbers[i]].example1;
+			        	ex[num[1]] = data[numbers[i]].example2;
+			        	ex[num[2]] = data[numbers[i]].example3;
+			        	ex[num[3]] = data[numbers[i]].example4;
+			        	
+			        	for(var v=0;v<=3;v++){
+			        		var j=v+1;
+			        		/* 보기 출력    */
+			        		$("#exam"+j).html(j+" . " + ex[v]);
+			        		/* 보기 라디오 버튼  */
+			        		$("#td"+j).html(j+" . ").append($("<input>").attr("type","radio").attr("id","example"+num[v]).attr("name","rExam").attr("value",ex[v]));
+			        		
+			        	}
+			        	
+			        	if(data[numbers[i]].takerAnswer != null){
+							$("[name ='rExam']").val([data[numbers[i]].takerAnswer]);
+						}
+			        	
+			        	$("#examId").html(data[numbers[i]].examId+" 시험 응시");
+			        	$("#question").html(a+" .   "+data[numbers[i]].questionContent);
+						$("#point").html("배점 : " + data[numbers[i]].point);
+			        	
+			        }
+			        
+			        
+			        /* 문제 수 만큼의 OMR 라디오 버튼 만들기 */
 					for(var c=1; c <= count; c++) {
-						
+		        		var ex = new Array;
+				        
+			        	ex[num[0]] = data[numbers[c-1]].example1;
+			        	ex[num[1]] = data[numbers[c-1]].example2;
+			        	ex[num[2]] = data[numbers[c-1]].example3;
+			        	ex[num[3]] = data[numbers[c-1]].example4;
+			        	
 						$("#answer1").append($("<tr>")
 							.append($("<td>").attr("id","answer"+c).html(c+" ."))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value","1")))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value","2")))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value","3")))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value","4"))))
+							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value",ex[0])))
+							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value",ex[1])))
+							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value",ex[2])))
+							.append($("<td>").append($("<input>").attr("type","radio").attr("name","exam"+c).attr("value",ex[3]))))
+						
+						if(data[numbers[c-1]].takerAnswer != null){
+							$("[name ='exam"+c+"']").val([data[numbers[c-1]].takerAnswer]);
+						} 
+						
 					}
+			        
+			        
+			        /* 섞은 보기 출력 */
+			        mixExam();
+			        
 					
+					/* 실시간 문제 업데이트 */
+					function updateAnswer(){
+						
+						$("input:radio[name ='rExam']").on("click", function() {
+							var choice = $(this).attr('id');
+				        	var examValue = $(this).attr('value');
+				        	var setExamQuestionId = data[numbers[i]].setExamQuestionId;
+				    		console.log(choice);
+				    		console.log(examValue);
+				    		
+				    		$.ajax({
+								url : "./updateTakeExamHistory.do",
+								method : "post",
+								data : {examValue : examValue, setExamQuestionId : setExamQuestionId} , 
+								datatype : "json",
+								success : function(data){
+									
+					    			$("[name ='exam"+a+"']").val([examValue]);
+									
+								}
+				    		})
+						})
+					}
+					updateAnswer();
+					
+					
+					/* 다음문제 or Next 버튼 클릭시 섞은 다음 문제, 예제 보기 */
 					$('#nBtn').on("click", function() {
 						
-						if(a == count){
-							console.log('마지막이야');
-						
-						} else {
+						if(a != count){
+							
 							i = i+1;	
 							a = a+1;
-								
-							$("#examId").html(data[i].examId+" 시험 응시");
-							$("#question").html(a+" .   "+data[i].questionContent);
-							$("#point").html("배점 : " + data[i].point);
-							$("#exam1").html("1 . " + data[i].example1);
-							$("#exam2").html("2 . " + data[i].example2);
-							$("#exam3").html("3 . " + data[i].example3);
-							$("#exam4").html("4 . " + data[i].example4);
-							$("#pExam1").html("1 . " + data[i].example1);
-							$("#pExam2").html("2 . " + data[i].example2);
-							$("#pExam3").html("3 . " + data[i].example3);
-							$("#pExam4").html("4 . " + data[i].example4);
 							
-							$("#td1").html("1 . ").append($("<input>").attr("value","1").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td2").html("2 . ").append($("<input>").attr("value","2").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td3").html("3 . ").append($("<input>").attr("value","3").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td4").html("4 . ").append($("<input>").attr("value","4").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
+							console.log(a+"번 문제");
 							
-						}
-					})
-					
-					
-					
-					$('#pBtn').on("click", function() {
-						
-						if(i == 0){
-							console.log('처음이야');
+							mixExam();
+							
 						
 						} else {
-							i = i-1;	
-							a = a-1;
-								
-							$("#examId").html(data[i].examId+" 시험 응시");
-							$("#question").html(a+" .   "+data[i].questionContent);
-							$("#point").html("배점 : " + data[i].point);
-							$("#exam1").html("1 . " + data[i].example1);
-							$("#exam2").html("2 . " + data[i].example2);
-							$("#exam3").html("3 . " + data[i].example3);
-							$("#exam4").html("4 . " + data[i].example4);
-							$("#pExam1").html("1 . " + data[i].example1);
-							$("#pExam2").html("2 . " + data[i].example2);
-							$("#pExam3").html("3 . " + data[i].example3);
-							$("#pExam4").html("4 . " + data[i].example4);
 							
-							$("#td1").html("1 . ").append($("<input>").attr("value","1").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td2").html("2 . ").append($("<input>").attr("value","2").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td3").html("3 . ").append($("<input>").attr("value","3").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
-							$("#td4").html("4 . ").append($("<input>").attr("value","4").attr("type","radio").attr("name","rExam'"+a+"'").attr("onclick","radioSelFunc(value)"));
+							console.log('없어');
 							
 						}
+						updateAnswer();
 					})
 					
+					
+					/* 이전문제 or Previous 버튼 클릭시 섞은 이전 문제, 예제 보기 */
+					$('#pBtn').on("click", function() {
+						
+						if(a != 1){
+							
+							i = i-1;	
+							a = a-1;
+							
+							console.log(a+"번 문제");
+							
+							mixExam();
+							
+						
+						} else {
+							
+							console.log('없어');
+							
+						}
+						updateAnswer();
+					})
 				}
 			})
 		})
 	});
 	
-	function answerReset(){
-		for(var c=0; c <= count; c++){
-			$("input:radio[name ='exam"+c+"']:input:radio[value ='1']").attr("checked",false);
-			$("input:radio[name ='exam"+c+"']:input:radio[value ='2']").attr("checked",false);
-			$("input:radio[name ='exam"+c+"']:input:radio[value ='3']").attr("checked",false);
-			$("input:radio[name ='exam"+c+"']:input:radio[value ='4']").attr("checked",false);
-		}
-	}
-	
-	function answerSubmit(){
-		
-	}
-	
-	function radioSelFunc(v) {
-		console.log(i,a,v);
-		switch (v) {
-		case '1':
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='2']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='3']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='4']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='1']").attr("checked",true);
-			break;
-		case '2':
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='1']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='3']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='4']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='2']").attr("checked",true);
-			break;
-		case '3':
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='1']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='2']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='4']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='3']").attr("checked",true);
-			break;
-		case '4':
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='1']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='2']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='3']").attr("checked",false);
-			$("input:radio[name ='exam"+a+"']:input:radio[value ='4']").attr("checked",true);
-			break;
-		}
-	};
-	
-	
-		
 </script>
 </head>
 <body>
-
 <button id="btn">Click</button>
-
 	<header id="header"></header>
 	<table border="1">
 		<tr>
@@ -188,15 +216,6 @@
 						<td>4.</td>
 					</tr>
 					<form action=""> 
-					<%-- <c:forEach var="takeExamList" items="${takeExamList}" varStatus="status">
-					<tr>
-						<td id="answerTd">${status.count}</td>
-						<td id="answerTd1"><input type="radio" name="exam${status.count}" value="1"></td>
-						<td id="answerTd2"><input type="radio" name="exam${status.count}" value="2"></td>
-						<td id="answerTd3"><input type="radio" name="exam${status.count}" value="3"></td>
-						<td id="answerTd4"><input type="radio" name="exam${status.count}" value="4"></td>
-					</tr>
-					</c:forEach> --%>
 					<tr>
 						<td colspan="5" align="center" valign="top">
 						</td>
@@ -206,7 +225,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><div><h2 align="center" id="question">문제</h2><p align="right" id="timer">TIMER : </p></div></td>
+			<td><div><h2 align="center" id="question"></h2><p align="right" id="timer"></p></div></td>
 		</tr>
 		<tr>
 			<td align="left" valign="top" style="">
@@ -215,44 +234,41 @@
 						<td>
 							<table width="820">
 								<tr>
-									<th id="point" align="left">배점 : </th>
-									<th>OMR Check</th>
+									<th id="point" align="left"></th>
+									<th></th>
+								</tr>
+								<form name="answerForm">
+								<tr>
+									<td id="exam1"></td>
+									<td align="center" id="td1"></td>
 								</tr>
 								<tr>
-									<td id="exam1">1.</td>
-									<td align="center" id="td1">1 .<input type="radio" name="" value="1" class="radio" onclick="radioSelFunc(value)"></td>
+									<td id="exam2"></td>
+									<td align="center" id="td2"></td>
 								</tr>
 								<tr>
-									<td id="exam2">2.</td>
-									<td align="center" id="td2">2 .<input type="radio" name="" value="2" class="radio" onclick="radioSelFunc(value)"></td>
+									<td id="exam3"></td>
+									<td align="center" id="td3"></td>
 								</tr>
 								<tr>
-									<td id="exam3">3.</td>
-									<td align="center" id="td3">3 .<input type="radio" name="" value="3" class="radio" onclick="radioSelFunc(value)"></td>
+									<td id="exam4"></td>
+									<td align="center" id="td4"></td>
 								</tr>
-								<tr>
-									<td id="exam4">4.</td>
-									<td align="center" id="td4">4 .<input type="radio" name="" value="4" class="radio" onclick="radioSelFunc(value)"></td>
-								</tr>
+								</form>
 							</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		<tr>
-			<td align="center">
+			<td align="center" colspan="2">
 				<button class="previous" id="pBtn" >Previous</button>
 				<button class="next"  id="nBtn" >Next</button>
-			</td>
-			<td>
-				<button type="button" onclick="answerSubmit()">제출</button>
-				<button type="button" onclick="answerReset()">초기화</button>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center" valign="top">
 				<input type='submit'>
-				<input type='reset'>
 			</td>
 		</tr>
 	</table>

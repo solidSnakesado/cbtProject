@@ -54,7 +54,7 @@ public class CandidateClient {
 	@Test
 	public void getcandidateTakeExamList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("1");
+		vo.setExamId(1);
 		List<QuestionVO> list = dao.candidateRightAnswerList(vo);
 		
 		System.out.println(list);

@@ -1,12 +1,29 @@
 package com.cbt.question;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,14 +39,15 @@ public class QuestionController {
 	@RequestMapping("candidateTakeExam.do")	
 	public ModelAndView candidateTakeExamList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
+		vo.setTakeExamId(3);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
 		mv.setViewName("candidate/candidateTakeExam");
 		
-		System.out.println(mv);
+		System.out.println("1"+mv);
 		
 		return mv;
 	}
@@ -44,7 +62,19 @@ public class QuestionController {
 	@ResponseBody
 	public List<Map<Object, String>> getTestStart() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
+		vo.setTakeExamId(3);
+		vo.setTakerId("sime00");
+		
+		int setCount = questionService.getSetCount(vo);
+		int takeCount = questionService.getTakeCount(vo);
+		
+		int count = setCount*takeCount;
+		int history = questionService.getHistoryCount(vo);
+		System.out.println(count + history);
+		if(count > history) {
+			questionService.insertTakeExamHistory(vo);
+		}
 		List<Map<Object, String>> list = questionService.getTestStart(vo);
 		
 		System.out.println(list);
@@ -55,7 +85,7 @@ public class QuestionController {
 	@RequestMapping("candidateRightAnswer.do")
 	public ModelAndView candidateRightAnswerList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -81,6 +111,24 @@ public class QuestionController {
 		mv.setViewName("candidate/candidateTestResult");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateTakeExamHistory(	@RequestParam(value="examValue")String examValue,
+										@RequestParam(value="setExamQuestionId")String setExamQuestionId) {
+		QuestionVO vo = new QuestionVO();
+		vo.setTakeExamId(3);
+		vo.setTakerId("sime00");
+		vo.setTakerAnswer(examValue);
+		vo.setSetExamQuestionId(setExamQuestionId);
+		
+		System.out.println(examValue);
+		
+		System.out.println("ok");
+		
+		questionService.updateTakeExamHistory(vo);
+		
 	}
 
 //	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)

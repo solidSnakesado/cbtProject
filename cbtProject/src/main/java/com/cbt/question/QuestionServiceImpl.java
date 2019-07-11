@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Phaser;
 
 import javax.annotation.Resource;
 
@@ -25,12 +24,12 @@ public class QuestionServiceImpl implements QuestionService {
 	public QuestionServiceImpl() {
 	}
 
-	public void insertQuestion(QuestionVO vo) {
-		questionDAO.insertQuestion(vo);
+	public void insertTakeExamHistory(QuestionVO vo) {
+		questionDAO.insertTakeExamHistory(vo);
 	}
 
-	public void updateQuestion(QuestionVO vo) {
-		questionDAO.updateQuestion(vo);
+	public void updateTakeExamHistory(QuestionVO vo) {
+		questionDAO.updateTakeExamHistory(vo);
 	}
 
 	public void deleteQuestion(QuestionVO vo) {
@@ -93,7 +92,7 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		for(QuestionVO dto : daoList) {
 			map = new HashMap<Object, String>();
-			map.put("questionId", dto.getQuestionId());
+			map.put("questionId", Integer.toString(dto.getQuestionId()));
 			map.put("questionContent", dto.getQuestionContent());
 			map.put("example1", dto.getExample1());
 			map.put("example2", dto.getExample2());
@@ -102,11 +101,12 @@ public class QuestionServiceImpl implements QuestionService {
 			map.put("rightAnswer", dto.getRightAnswer());
 			map.put("rightCommentary", dto.getRightCommentary());
 			map.put("levelOfDifficulty", Integer.toString(dto.getLevelOfDifficulty()));
-			map.put("categoryId", dto.getCategoryId());
+			map.put("categoryId", Integer.toString(dto.getCategoryId()));
 			map.put("questionType", dto.getQuestionType());
-			map.put("examId", dto.getExamId());
+			map.put("examId", Integer.toString(dto.getExamId()));
 			map.put("setExamQuestionId", dto.getSetExamQuestionId());
 			map.put("point", Integer.toString(dto.getPoint()));
+			map.put("takerAnswer", dto.getTakerAnswer());
 			
 			list.add(map);
 			
@@ -115,12 +115,20 @@ public class QuestionServiceImpl implements QuestionService {
 		return list;
 	}
 
-	public QuestionVO getCount(QuestionVO vo) {
+	public int getSetCount(QuestionVO vo) {
 		
-		return questionDAO.getCount(vo);
+		return questionDAO.getSetCount(vo);
 	}
 	
+	public int getTakeCount(QuestionVO vo) {
+		
+		return questionDAO.getTakeCount(vo);
+	}
 	
+	public int getHistoryCount(QuestionVO vo) {
+		
+		return questionDAO.getHistoryCount(vo);
+	}
 
 
 	
