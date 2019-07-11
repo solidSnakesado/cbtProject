@@ -1,10 +1,13 @@
 package com.cbt.setExamQuestion;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.cbt.exam.ExamVO;
 
 @Repository
 public class SetExamQuestionDAO {
@@ -40,5 +43,9 @@ public class SetExamQuestionDAO {
 		} else {
 			return mybatis.selectList("setExamQuestionDAO.getSetExamQuestionList");
 		}
+	}
+	
+	public List<Map<String, String>> getQuestionList(ExamVO vo) {
+		return mybatis.selectList("setExamQuestionDAO.getQuestionList", vo);
 	}
 }
