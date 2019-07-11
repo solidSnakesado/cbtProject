@@ -1,24 +1,9 @@
 package com.cbt.question;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.Principal;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +25,12 @@ public class QuestionController {
 	public ModelAndView candidateTakeExamList() {
 		QuestionVO vo = new QuestionVO();
 		vo.setExamId(1);
-		vo.setTakeExamId(3);
+		vo.setTakeExamId(1);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
-		mv.setViewName("candidate/candidateTakeExam");
+		mv.setViewName("candidate/candidate/candidateTakeExam");
 		
 		System.out.println("1"+mv);
 		
@@ -63,7 +48,7 @@ public class QuestionController {
 	public List<Map<Object, String>> getTestStart() {
 		QuestionVO vo = new QuestionVO();
 		vo.setExamId(1);
-		vo.setTakeExamId(3);
+		vo.setTakeExamId(1);
 		vo.setTakerId("sime00");
 		
 		int setCount = questionService.getSetCount(vo);
@@ -90,7 +75,7 @@ public class QuestionController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("rightAnswer",questionService.candidateRightAnswerList(vo));
-		mv.setViewName("candidate/candidateRightAnswer");
+		mv.setViewName("candidate/candidate/candidateRightAnswer");
 		
 		return mv;
 	}
@@ -108,7 +93,7 @@ public class QuestionController {
 		mv.addObject("getTakeExamId", vo.getTakeExamId());
 		mv.addObject("getTakerName", vo.getTakerName());
 		mv.addObject("getCount", vo.getCount());
-		mv.setViewName("candidate/candidateTestResult");
+		mv.setViewName("candidate/candidate/candidateTestResult");
 		
 		return mv;
 	}
@@ -118,7 +103,7 @@ public class QuestionController {
 	public void updateTakeExamHistory(	@RequestParam(value="examValue")String examValue,
 										@RequestParam(value="setExamQuestionId")String setExamQuestionId) {
 		QuestionVO vo = new QuestionVO();
-		vo.setTakeExamId(3);
+		vo.setTakeExamId(1);
 		vo.setTakerId("sime00");
 		vo.setTakerAnswer(examValue);
 		vo.setSetExamQuestionId(setExamQuestionId);

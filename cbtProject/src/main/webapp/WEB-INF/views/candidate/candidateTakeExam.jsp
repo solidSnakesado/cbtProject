@@ -19,7 +19,6 @@
 	$(document).ready(function() {
 		
 		
-		$("#header").load("candidateInHeader.do")
 		$("#examId").html("시험 응시")
 		$("#question").html("문제")
 		
