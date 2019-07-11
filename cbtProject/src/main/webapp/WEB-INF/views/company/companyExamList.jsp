@@ -28,13 +28,35 @@
 		<tr >
 			<th>시험이름</th>
 			<th>시험일시</th>
+			<th>시험상태</th>
+			<th>시험출제상태</th>
 		</tr>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->
+		<!-- 2019.07.11 성재민 -->
+		<!-- 각종 상태값을 코드로 받아서 해당 코드별 문자열로 변환 -->
 		<c:forEach items="${companyExamList}" var="exam">
 			<tr onclick="showDetail(${exam.examId});">
 				<td>${exam.examName}</td>
-				<td>${exam.examStartTime}</td>
+				<td>${exam.examStartTime}~<br>${exam.examEndTime}</td>
+				<c:if test="${exam.examStatus == 'D1'}">
+					<td>시험전</td>
+				</c:if>
+				<c:if test="${exam.examStatus == 'D2'}">
+					<td>시험중</td>
+				</c:if>
+				<c:if test="${exam.examStatus == 'D3'}">
+					<td>시험완료</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I1'}">
+					<td>출제전</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I2'}">
+					<td>출제중</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I3'}">
+					<td>출제완료</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

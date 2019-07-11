@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,14 +24,15 @@ public class QuestionController {
 	@RequestMapping("candidateTakeExam.do")	
 	public ModelAndView candidateTakeExamList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
+		vo.setTakeExamId(1);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
-		mv.setViewName("candidate/candidateTakeExam");
+		mv.setViewName("candidate/candidate/candidateTakeExam");
 		
-		System.out.println(mv);
+		System.out.println("1"+mv);
 		
 		return mv;
 	}
@@ -44,7 +47,19 @@ public class QuestionController {
 	@ResponseBody
 	public List<Map<Object, String>> getTestStart() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
+		vo.setTakeExamId(1);
+		vo.setTakerId("sime00");
+		
+		int setCount = questionService.getSetCount(vo);
+		int takeCount = questionService.getTakeCount(vo);
+		
+		int count = setCount*takeCount;
+		int history = questionService.getHistoryCount(vo);
+		System.out.println(count + history);
+		if(count > history) {
+			questionService.insertTakeExamHistory(vo);
+		}
 		List<Map<Object, String>> list = questionService.getTestStart(vo);
 		
 		System.out.println(list);
@@ -55,12 +70,12 @@ public class QuestionController {
 	@RequestMapping("candidateRightAnswer.do")
 	public ModelAndView candidateRightAnswerList() {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId("E001");
+		vo.setExamId(1);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("rightAnswer",questionService.candidateRightAnswerList(vo));
-		mv.setViewName("candidate/candidateRightAnswer");
+		mv.setViewName("candidate/candidate/candidateRightAnswer");
 		
 		return mv;
 	}
@@ -78,9 +93,27 @@ public class QuestionController {
 		mv.addObject("getTakeExamId", vo.getTakeExamId());
 		mv.addObject("getTakerName", vo.getTakerName());
 		mv.addObject("getCount", vo.getCount());
-		mv.setViewName("candidate/candidateTestResult");
+		mv.setViewName("candidate/candidate/candidateTestResult");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateTakeExamHistory(	@RequestParam(value="examValue")String examValue,
+										@RequestParam(value="setExamQuestionId")String setExamQuestionId) {
+		QuestionVO vo = new QuestionVO();
+		vo.setTakeExamId(1);
+		vo.setTakerId("sime00");
+		vo.setTakerAnswer(examValue);
+		vo.setSetExamQuestionId(setExamQuestionId);
+		
+		System.out.println(examValue);
+		
+		System.out.println("ok");
+		
+		questionService.updateTakeExamHistory(vo);
+		
 	}
 
 //	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)

@@ -1,5 +1,7 @@
 package com.cbt.exam;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,13 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cbt.company.CompanyVO;
+
 @Controller
 public class ExamController {
 	@Autowired
 	ExamService examService;
 	
+	// 2019.07.11 성재민
+	// 시험 검색시 해당 기업의 시험만 검색 되도록 변경
+	// 해당 기업의 시험만 검색 할수 있도록 로그인 된 기업의 정보를 메소드의 전달인자로 사용
 	@RequestMapping(value = "companyExamList.do", method = RequestMethod.GET)
-	public String companyExamList(ExamVO vo, Model model) {
+	public String companyExamList(Model model, HttpSession session) {
+		CompanyVO vo = (CompanyVO) session.getAttribute("company");
+		// 2019.07.11 성재민
+		// 로그인 되지 않았을 경우 로그인 화면으로 전달
+		if(vo == null) {
+			model.addAttribute("loginFail", true);
+			return "company/company/companyLogin";
+		}
 		model.addAttribute("companyExamList", examService.getExamList(vo));
 		return "company/company/companyExamList";
 	}

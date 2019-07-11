@@ -1,7 +1,5 @@
 package com.cbt.question;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +16,13 @@ public class QuestionDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public void insertQuestion(QuestionVO vo) {
-		mybatis.insert("", vo);
+	public void insertTakeExamHistory(QuestionVO vo) {
+		System.out.println("insert");
+		mybatis.insert("QuestionDAO.insertTakeExamHistory", vo);
 	}
 	
-	public void updateQuestion(QuestionVO vo) {
-		mybatis.update("", vo);
+	public void updateTakeExamHistory(QuestionVO vo) {
+		mybatis.update("QuestionDAO.updateTakeExamHistory", vo);
 	}
 	
 	public void deleteQuestion(QuestionVO vo) {
@@ -62,9 +61,20 @@ public class QuestionDAO {
 		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
 	}
 	
-	public QuestionVO getCount(QuestionVO vo) {
+	public int getSetCount(QuestionVO vo) {
 		
-		return mybatis.selectOne("QuestionDAO.getCount", vo);
+		return mybatis.selectOne("QuestionDAO.getSetCount", vo);
 	}
+	
+	public int getTakeCount(QuestionVO vo) {
+		
+		return mybatis.selectOne("QuestionDAO.getTakeCount", vo);
+	}
+	
+	public int getHistoryCount(QuestionVO vo) {
+		
+		return mybatis.selectOne("QuestionDAO.getHistoryCount", vo);
+	}
+
 
 }

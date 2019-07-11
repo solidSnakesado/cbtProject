@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
+import com.cbt.exam.ExamVO;
 
 @Service("setExamService")
 public class SetExamQuestionServiceImpl implements SetExamQuestionService {
@@ -40,5 +41,12 @@ public class SetExamQuestionServiceImpl implements SetExamQuestionService {
 
 	public List<SetExamQuestionVO> SetExamQuestionList(SetExamQuestionVO vo) {
 		return dao.getSetExamQuestionList(vo);
+	}
+
+	// 2019.07.11 성재민
+	// 문제를 가져오는 메소드
+	@Override
+	public List<Map<String, String>> getQuestionList(ExamVO vo) {
+		return dao.getQuestionList(vo);
 	}
 }

@@ -26,8 +26,8 @@ function getExamInfoResult(item){
 	$("#examStartTime").html(item.examStartTime);
 	$("#examEndTime").html(item.examEndTime);
 	$("#passingScore").html(item.passingScore);
-	$("#examDes1").html(item.examDes1);
-	$("#examDes2").html(item.examDes2);
+	$("#examDescriptionSimple").html(item.examDescriptionSimple);
+	$("#examDescriptionDetail").html(item.examDescriptionDetail);
 	
 /* 	$.each(data,function(idx,item){
 		$('<tr onClick="getExamInfoDetail('+item.examName+')" id="hover">')
@@ -36,8 +36,8 @@ function getExamInfoResult(item){
 		.append($('<td>').html(item.examStartTime))
 		.append($('<td>').html(item.examEndTime))
 		.append($('<td>').html(item.passingScore))
-		.append($('<td>').html(item.examDes1))
-		.append($('<td>').html(item.examDes2))
+		.append($('<td>').html(item.examDescriptionSimple))
+		.append($('<td>').html(item.examDescriptionDetail))
 		.appendTo('tbody');
 	}); */
 }
@@ -76,8 +76,8 @@ function getExamInfoResult(item){
 					<td>${examInfo.examStartTime}</td>
 					<td>${examInfo.examEndTime}</td>
 					<td>${examInfo.passingScore}</td>
-<%-- 					<td>${examInfo.examDes1}</td>
-					<td>${examInfo.examDes2}</td> --%>
+<%-- 					<td>${examInfo.examDescriptionSimple}</td>
+					<td>${examInfo.examDescriptionDetail}</td> --%>
 				</tr>
 			</c:forEach>  
 		
@@ -107,10 +107,10 @@ function getExamInfoResult(item){
 				<th>합격기준</th><td id="passingScore"></td>
 			</tr>
 			<tr>
-				<th>시험안내</th><td id="examDes1"></td>
+				<th>시험안내</th><td id="examDescriptionSimple"></td>
 			</tr>
 			<tr>
-				<th>시험설명</th><td id="examDes2"></td>
+				<th>시험설명</th><td id="examDescriptionDetail"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><button>응시하기</button></td>
