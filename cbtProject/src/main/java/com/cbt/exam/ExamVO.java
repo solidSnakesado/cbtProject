@@ -1,13 +1,10 @@
 package com.cbt.exam;
 
-import java.sql.Timestamp;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ExamVO {
 
 	// 2019.07.08 성재민
 	// examId, estimateId 타입 int 로 변경
+<<<<<<< HEAD
 	private int 		examId;
 	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
 	private Timestamp 	examStartTime;
@@ -27,7 +24,11 @@ public class ExamVO {
 	private int 		start;
 	private int 		end;
 
+=======
+	private int 	examId;
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 	
+<<<<<<< HEAD
 	public int getStart() {
 		return start;
 	}
@@ -47,35 +48,40 @@ public class ExamVO {
 	public String getExamDescriptionSimple() {
 		return examDescriptionSimple;
 	}
+=======
+	// 2019.07.11 성재민
+	// 시간 변수들 문자열로 수정
+	private String 	examStartTime;
+	private String 	examEndTime;
+	private int 	questionQuantity;
+	private int 	estimateId;
+	private int 	numberOfTimes;
+	private int 	passingScore;
+	private int 	possibleApplicants;
+	private String 	examName;
+	private String 	examStatus;
+	private String 	disclosureStatus;
+	private String 	setExamStatus;
+	private String 	examDescriptionSimple;
+	private String 	examDescriptionDetail;
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 
-	public void setExamDescriptionSimple(String examDescriptionSimple) {
-		this.examDescriptionSimple = examDescriptionSimple;
-	}
-
-	public String getExamDescriptionDetail() {
-		return examDescriptionDetail;
-	}
-
-	public void setExamDescriptionDetail(String examDescriptionDetail) {
-		this.examDescriptionDetail = examDescriptionDetail;
-	}
-	
-	public Timestamp getExamStartTime() {
+	public String getExamStartTime() {
 		return examStartTime;
 	}
-	
-	public void setExamStartTime(Timestamp examStartTime) {
+
+	public void setExamStartTime(String examStartTime) {
 		this.examStartTime = examStartTime;
 	}
-	
-	public Timestamp getExamEndTime() {
+
+	public String getExamEndTime() {
 		return examEndTime;
 	}
-	
-	public void setExamEndTime(Timestamp examEndTime) {
+
+	public void setExamEndTime(String examEndTime) {
 		this.examEndTime = examEndTime;
 	}
-	
+
 	public int getQuestionQuantity() {
 		return questionQuantity;
 	}
@@ -156,6 +162,22 @@ public class ExamVO {
 		this.estimateId = estimateId;
 	}
 
+	public String getExamDescriptionSimple() {
+		return examDescriptionSimple;
+	}
+
+	public void setExamDescriptionSimple(String examDescriptionSimple) {
+		this.examDescriptionSimple = examDescriptionSimple;
+	}
+
+	public String getExamDescriptionDetail() {
+		return examDescriptionDetail;
+	}
+
+	public void setExamDescriptionDetail(String examDescriptionDetail) {
+		this.examDescriptionDetail = examDescriptionDetail;
+	}
+
 	@Override
 	public String toString() {
 		return "ExamVO [examId=" + examId + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
@@ -165,6 +187,4 @@ public class ExamVO {
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
 				+ ", examDescriptionDetail=" + examDescriptionDetail + "]";
 	}
-
-	
 }

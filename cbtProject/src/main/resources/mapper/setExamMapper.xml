@@ -7,15 +7,15 @@
 	<!-- select 수정 -->
 	<insert id="insertSetExamQuestion" parameterType="SetExamQuestionVO">
 		INSERT INTO SET_EXAM_QUESTION(	
-				EXAM_ID
+				SET_EXAM_QUESTION_ID
 				,QUESTION_ID
-				,SET_EXAM_QUESTION_ID
+				,EXAM_ID
 				,POINT 
 			)
 		VALUES(	
-				#{examId}
+				SET_EXAM_QUESTION_ID_SEQ.NEXTVAL
 				,#{questionId}
-				,#{setExamQuestionId}
+				,#{examId}
 				,#{point} 
 			)
 	</insert>
@@ -25,12 +25,12 @@
 	<update id="updateSetExamQuestion" parameterType="SetExamQuestionVO">
 		UPDATE SET_EXAM_QUESTION
 		<set>
-				QUESTION_ID 			= #{questionId}
-			,	SET_EXAM_QUESTION_ID 	= #{setExamQuestionId}
-			,	POINT 					= #{point}
+				QUESTION_ID	= #{questionId}
+			,	EXAM_ID		= #{examId}
+			,	POINT 		= #{point}
 		</set>
 		<where>
-			EXAM_ID = #{examId}
+			SET_EXAM_QUESTION_ID = #{setExamQuestionId}
 		</where>
 	</update>
 	
@@ -39,7 +39,7 @@
 	<delete id="deleteSetExamQuestion" parameterType="SetExamQuestionVO">
 		DELETE FROM SET_EXAM_QUESTION
 		<where>
-			EXAM_ID = #{examId}
+			SET_EXAM_QUESTION_ID = #{setExamQuestionId}
 		</where>
 	</delete>
 	
@@ -47,13 +47,13 @@
 	<!-- 단건 조회 -->
 	<select id="getSetExamQuestion" resultType="SetExamQuestionVO">
 		SELECT 	
-			EXAM_ID
-			,QUESTION_ID
-			,SET_EXAM_QUESTION_ID
+			EXAM_ID					"examId"
+			,QUESTION_ID			"questionId"
+			,SET_EXAM_QUESTION_ID	"setExamQuestionId"
 			,POINT
 		FROM SET_EXAM_QUESTION
 		<where>
-			EXAM_ID = #{examId}
+			SET_EXAM_QUESTION_ID = #{setExamQuestionId}
 		</where>
 	</select>
 	
@@ -62,12 +62,31 @@
 	<!-- 관리자용 출제 리스트 -->
 	<select id="getSetExamQuestionList" resultType="SetExamQuestionVO">
 		SELECT 	
-			EXAM_ID
-			,QUESTION_ID
-			,SET_EXAM_QUESTION_ID
+			EXAM_ID					"examId"
+			,QUESTION_ID			"questionId"
+			,SET_EXAM_QUESTION_ID	"setExamQuestionId"
 			,POINT
 		FROM SET_EXAM_QUESTION
 		ORDER BY SET_EXAM_QUESTION_ID ASC
+	</select>
+	
+	<select id="getQuestionList" parameterType="ExamVO" resultType="map">
+		<![CDATA[
+		SELECT * FROM (
+			SELECT 
+					E.EXAM_ID			"examId"
+				, 	ES.CATEGORY_ID		"categoryId"
+				, 	Q.QUESTION_ID		"questionId"
+			FROM EXAM E
+			JOIN ESTIMATE ES
+			ON E.ESTIMATE_ID = ES.ESTIMATE_ID
+			JOIN QUESTION Q
+			ON Q.CATEGORY_ID = ES.CATEGORY_ID
+			WHERE E.EXAM_ID = #{examId}
+			ORDER BY SYS.DBMS_RANDOM.RANDOM
+		)
+		WHERE ROWNUM <= #{questionQuantity}
+		]]>
 	</select>
 </mapper>
 

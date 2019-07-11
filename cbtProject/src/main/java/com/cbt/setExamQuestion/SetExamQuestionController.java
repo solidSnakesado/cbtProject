@@ -1,5 +1,6 @@
 package com.cbt.setExamQuestion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
+import com.cbt.exam.ExamService;
+import com.cbt.exam.ExamVO;
 
 //  7/2 출제 컨트롤러 생성     -재용
 @Controller
@@ -21,6 +25,8 @@ public class SetExamQuestionController {
 
 	@Autowired
 	SetExamQuestionService setExamQuestionService;
+	@Autowired
+	ExamService examService;
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> conditionMap() {
@@ -52,4 +58,34 @@ public class SetExamQuestionController {
 		return mv;
 	}
 	
+	@RequestMapping("/getQuestionList.do/{examId}")
+	public String getQuestionList(@PathVariable("examId") int examId, SetExamQuestionVO vo, Model model) {
+		ExamVO examVo = new ExamVO();
+		examVo.setExamId(examId);
+		examVo = examService.getExam(examVo);
+		List<Map<String, String>> tempMapList = setExamQuestionService.getQuestionList(examVo);
+		List<SetExamQuestionVO> setExamvoList = new ArrayList<SetExamQuestionVO>();
+		
+		for (Map<String, String> item : tempMapList) {
+			SetExamQuestionVO setExamvo = new SetExamQuestionVO();
+			setExamvo.setExamId(Integer.parseInt(String.valueOf(item.get("examId"))));
+			setExamvo.setQuestionId(Integer.parseInt(String.valueOf(item.get("questionId"))));
+			setExamvo.setPoint(10);
+			
+			setExamQuestionService.insertSetExamQuestion(setExamvo);
+			setExamvoList.add(setExamvo);
+		}
+		
+		// 2019.07.11 성재민
+		// 출제 상태 출제 중으로 변경 출제 중으로
+		// 출제된 문제 기업회원에게 컨펌 후 다시 출제 하거나 출제를 확정한다.
+		examVo.setSetExamStatus("I2");
+		examService.updateExam(examVo);
+		
+		model.addAttribute("setExamResult", setExamvoList);
+		
+		// 2019.07.11 성재민
+		// 출제된 문제 볼수 있는 화면으로 연결이 되어야 함.
+		return "";
+	}
 }

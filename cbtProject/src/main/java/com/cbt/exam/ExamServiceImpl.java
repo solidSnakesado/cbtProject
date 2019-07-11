@@ -8,7 +8,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import com.cbt.common.Paging;
+=======
+import com.cbt.company.CompanyVO;
+>>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -39,7 +43,7 @@ public class ExamServiceImpl implements ExamService {
 	// 2019.07.08 성재민
 	// 시험 리스트를 가져오는 메소드
 	@Override
-	public List<ExamVO> getExamList(ExamVO vo) {
+	public List<ExamVO> getExamList(CompanyVO vo) {
 		return dao.getExamList(vo);
 	}
 
