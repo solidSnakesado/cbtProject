@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.Paging;
 import com.cbt.exam.*;
+import com.cbt.takeExam.TakeExamService;
+import com.cbt.takeExam.TakeExamVO;
 
 
 //2019.07.01 장세준 - candidate3controller로 이전
@@ -30,6 +32,8 @@ public class CandidateController {
 	CandidateService candidateService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	TakeExamService takeExamService;
 	
 	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
 	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
@@ -200,11 +204,16 @@ public class CandidateController {
 		return "candidate/candidate/candidatePersonalChart";
 	}
 	
+	/*
+	 * //temp
+	 * @RequestMapping(value="candidateScheduleCheck.do", method =
+	 * RequestMethod.GET) public String candidateScheduleCheck() { return
+	 * "candidate/candidate/candidateScheduleCheck"; }
+	 */
 	
-	@RequestMapping(value="candidateScheduleCheck.do", method = RequestMethod.GET)
-	public String candidateScheduleCheck() {
-		return "candidate/candidate/candidateScheduleCheck";
-	}
+
+	
+	
 	
 	
 	
@@ -220,15 +229,15 @@ public class CandidateController {
 	// 2019.07.09 성재민
 	// 경로 수정
 	//연간시험일정  --> 응시하기
-	
-	@RequestMapping(value = "candidateScheduleCheck.do/{id}", method = RequestMethod.GET)
-	public String candidateScheduleCheck(Model model, @PathVariable("id") String id) {
-		CandidateVO vo = new CandidateVO();
-		vo.setTakerId(id);
-		CandidateVO taker = candidateService.getCandidate(vo);
-		model.addAttribute("result", candidateService.getExamList(taker));
-		return "candidate/candidate/candidateScheduleCheck";
-	}
+	/*
+	 * //temp
+	 * @RequestMapping(value = "candidateScheduleCheck.do/{id}", method =
+	 * RequestMethod.GET) public String candidateScheduleCheck(Model
+	 * model, @PathVariable("id") String id) { CandidateVO vo = new CandidateVO();
+	 * vo.setTakerId(id); CandidateVO taker = candidateService.getCandidate(vo);
+	 * model.addAttribute("result", candidateService.getExamList(taker)); return
+	 * "candidate/candidate/candidateScheduleCheck"; }
+	 */
 	
 	// 2019.07.09 성재민
 	// 경로 수정

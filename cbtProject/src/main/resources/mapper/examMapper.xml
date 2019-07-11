@@ -82,7 +82,6 @@
 	<!-- 2019.07.11 성재민 -->
 	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
 	<select id="getExam" resultType="ExamVO">
-	SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
 		SELECT 
 				EXAM_ID
 			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
@@ -103,10 +102,6 @@
 			EXAM_ID = #{examId}
 		</where>
 		ORDER BY EXAM_ID
-	) A ) B
-	<where>
-			RN BETWEEN #{start} AND #{end}
-	</where>
 		
 	</select>
 	
