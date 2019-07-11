@@ -70,6 +70,7 @@
 	<!-- 2019.07.09 성재민 -->
 	<!-- select 추가 -->
 	<select id="getExam" resultType="ExamVO">
+	SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
 		SELECT 
 				EXAM_ID
 			,	EXAM_START_TIME
@@ -89,6 +90,12 @@
 		<where>
 			EXAM_ID = #{examId}
 		</where>
+		ORDER BY EXAM_ID
+	) A ) B
+	<where>
+			RN BETWEEN #{start} AND #{end}
+	</where>
+		
 	</select>
 	
 	<select id="getExamList" resultType="ExamVO">
@@ -105,6 +112,10 @@
 			,	EXAM_STATUS
 			,	DISCLOSURE_STATUS
 			,	SET_EXAM_STATUS
+		FROM EXAM
+	</select>
+	<select id="getExamCount" resultType="int">
+		SELECT COUNT(*)
 		FROM EXAM
 	</select>
 </mapper>

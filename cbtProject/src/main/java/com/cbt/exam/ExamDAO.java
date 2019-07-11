@@ -37,4 +37,9 @@ public class ExamDAO {
 			return mybatis.selectList("ExamDAO.getExamList", vo);
 		}
 	}
+	
+	//paging 처리를 위한 메소드 7/11 준
+	public int getExamCount(ExamVO vo) {
+		return mybatis.selectOne("ExamDAO.getExamCount", vo);
+	}
 }

@@ -19,13 +19,31 @@ public class ExamVO {
 	private int 		passingScore;
 	private int 		possibleApplicants;
 	private String 		examName;
-	private int 		examStatus;
-	private int 		disclosureStatus;
-	private int 		setExamStatus;
+	private String 		examStatus;
+	private String 		disclosureStatus;
+	private String 		setExamStatus;
 	private String 		examDescriptionSimple;
 	private String 		examDescriptionDetail;
+	private int 		start;
+	private int 		end;
 
 	
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
 	public String getExamDescriptionSimple() {
 		return examDescriptionSimple;
 	}
@@ -98,27 +116,27 @@ public class ExamVO {
 		this.examName = examName;
 	}
 	
-	public int getExamStatus() {
+	public String getExamStatus() {
 		return examStatus;
 	}
 	
-	public void setExamStatus(int examStatus) {
+	public void setExamStatus(String examStatus) {
 		this.examStatus = examStatus;
 	}
 	
-	public int getDisclosureStatus() {
+	public String getDisclosureStatus() {
 		return disclosureStatus;
 	}
 	
-	public void setDisclosureStatus(int disclosureStatus) {
+	public void setDisclosureStatus(String disclosureStatus) {
 		this.disclosureStatus = disclosureStatus;
 	}
 	
-	public int getSetExamStatus() {
+	public String getSetExamStatus() {
 		return setExamStatus;
 	}
 	
-	public void setSetExamStatus(int setExamStatus) {
+	public void setSetExamStatus(String setExamStatus) {
 		this.setExamStatus = setExamStatus;
 	}
 	

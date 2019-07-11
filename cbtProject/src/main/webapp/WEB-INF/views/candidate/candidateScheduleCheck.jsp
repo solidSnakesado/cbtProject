@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
 function getExamInfo(examId){
@@ -41,6 +44,7 @@ function getExamInfoResult(item){
 		.appendTo('tbody');
 	}); */
 }
+
 /* function getExamInfoDetail(examName){
 	console.log(examName);
 	var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
@@ -48,12 +52,35 @@ function getExamInfoResult(item){
 } */
 
 </script>
+<script>
+/* 
+$('#itemAdd').click(function(){
+
+    var contents = '';
+
+    contents += '<tr>';
+    contents +=     '<td><input type="text" name="examName" /></td>';
+    contents +=     '<td><input type="text" name="questionQuantity" /></td>';
+    contents +=     '<td><input type="text" name="examStartTime" /></td>';
+    contents +=     '<td><input type="text" name="examEndTime" /></td>';
+    contents +=     '<td><input type="text" name="passingScore" /></td>';
+    contents +=     '<td><input type="text" name="examDescriptionSimple" /></td>';
+    contents +=     '<td><input type="text" name="examDescriptionDetail" /></td>';
+    contents +=     '<td><input type="button" value="응시하기" /></td>';
+    contents += '</tr>';
+});
+
+ */
+</script>
 <title>CBT 시험 일정 확인</title>
 </head>
 <body>
 	<h1>응시가능한 시험</h1>
 	<br>
-	
+	<form name="searchFrm">
+		<input type = "hidden" name="page" value="1">
+	</form>
+
 	<div class="container">
 		<table class="table text-center" border="1">
 			<thead>
@@ -83,7 +110,8 @@ function getExamInfoResult(item){
 		
 			</tbody>
 		</table><br>
-	</div><br><br><br>
+	</div>
+	<div align="center"><my:paging jsFunc="goList" paging="${result.paging }"/></div><br>
 	
 	<div class="container">
 	<table class="table text-center" border="0">
@@ -118,6 +146,14 @@ function getExamInfoResult(item){
 	</table><br>
 	</div>
 	
+<!-- 	<table cellpadding='2' cellspacing='0' border="1" width="500">
+	    <thead>
+	    </thead>
+	    <tbody id="AddOption">
+	    </tbody>
+	</table>
+ -->
+
 	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

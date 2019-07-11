@@ -11,7 +11,7 @@
 </head>
 <body>
 	<!-- 마이페이지<개인> 계정관리-->
-	<h1>계정관리</h1>${sessionScope.candidate}====
+	<h1>계정관리</h1>${sessionScope.candidate.takerId} 님의 정보입니다.
 <%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
 		<form action="updateCandidate.do" method="post">
 		<table width="940" style="padding: 5px 0 5px 0;">
