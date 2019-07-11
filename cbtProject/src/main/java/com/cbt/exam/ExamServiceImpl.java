@@ -8,11 +8,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
+
 import com.cbt.common.Paging;
-=======
 import com.cbt.company.CompanyVO;
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -60,7 +58,7 @@ public class ExamServiceImpl implements ExamService {
 			paging.setTotalRecord(dao.getExamCount(vo));
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("consultingList", dao.getExamList(vo));
+			map.put("consultingList", dao.getExam(vo));
 			map.put("paging", paging);
 			
 			return map;
@@ -71,5 +69,11 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public int getExamCount() {
 		return dao.getExamCount(null);
+	}
+
+	@Override
+	public List<ExamVO> getExamList(ExamVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

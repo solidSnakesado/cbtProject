@@ -4,31 +4,28 @@ public class ExamVO {
 
 	// 2019.07.08 성재민
 	// examId, estimateId 타입 int 로 변경
-<<<<<<< HEAD
-	private int 		examId;
-	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
-	private Timestamp 	examStartTime;
-	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
-	private Timestamp 	examEndTime;
-	private int 		questionQuantity;
-	private int 		estimateId;
-	private int 		numberOfTimes;
-	private int 		passingScore;
-	private int 		possibleApplicants;
-	private String 		examName;
-	private String 		examStatus;
-	private String 		disclosureStatus;
-	private String 		setExamStatus;
-	private String 		examDescriptionSimple;
-	private String 		examDescriptionDetail;
-	private int 		start;
-	private int 		end;
 
-=======
+	// 2019.07.11 성재민
+	// 시간 변수들 문자열로 수정
+
 	private int 	examId;
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
+	private String 	examStartTime;
+	private String 	examEndTime;
+	private int 	questionQuantity;
+	private int 	estimateId;
+	private int 	numberOfTimes;
+	private int 	passingScore;
+	private int 	possibleApplicants;
+	private String 	examName;
+	private String 	examStatus;
+	private String 	disclosureStatus;
+	private String 	setExamStatus;
+	private String 	examDescriptionSimple;
+	private String 	examDescriptionDetail;
+	private int 	start;
+	private int 	end;
+
 	
-<<<<<<< HEAD
 	public int getStart() {
 		return start;
 	}
@@ -44,28 +41,7 @@ public class ExamVO {
 	public void setEnd(int end) {
 		this.end = end;
 	}
-
-	public String getExamDescriptionSimple() {
-		return examDescriptionSimple;
-	}
-=======
-	// 2019.07.11 성재민
-	// 시간 변수들 문자열로 수정
-	private String 	examStartTime;
-	private String 	examEndTime;
-	private int 	questionQuantity;
-	private int 	estimateId;
-	private int 	numberOfTimes;
-	private int 	passingScore;
-	private int 	possibleApplicants;
-	private String 	examName;
-	private String 	examStatus;
-	private String 	disclosureStatus;
-	private String 	setExamStatus;
-	private String 	examDescriptionSimple;
-	private String 	examDescriptionDetail;
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject.git
-
+	
 	public String getExamStartTime() {
 		return examStartTime;
 	}
