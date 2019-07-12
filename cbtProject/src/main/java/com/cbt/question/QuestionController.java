@@ -29,12 +29,13 @@ public class QuestionController {
 	public ModelAndView candidateTakeExamList(QuestionVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
-		
-		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
+		mv.addObject("takerId", candiVO.getTakerId());
+		mv.addObject("examId", vo.getExamId());
+		mv.addObject("takeExamId", vo.getTakeExamId());
+		mv.addObject("examName", vo.getExamName());
+		mv.addObject("passingScore", vo.getPassingScore());
+		mv.addObject("examStartTime", vo.getExamStartTime());
 		mv.setViewName("candidate/candidate/candidateTakeExam");
-		
-		System.out.println("1"+mv);
 		
 		return mv;
 	}
@@ -42,11 +43,11 @@ public class QuestionController {
 	
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
-	public List<Map<Object, String>> getTestStart() {
-		QuestionVO vo = new QuestionVO();
-		vo.setExamId(1);
-		vo.setTakeExamId(1);
-		vo.setTakerId("sime00");
+	public List<Map<Object, String>> getTestStart(QuestionVO vo) {
+//		QuestionVO vo = new QuestionVO();
+//		vo.setExamId(1);
+//		vo.setTakeExamId(1);
+//		vo.setTakerId("sime00");
 		
 		int setCount = questionService.getSetCount(vo);
 		int takeCount = questionService.getTakeCount(vo);
@@ -104,11 +105,8 @@ public class QuestionController {
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateTakeExamHistory(QuestionVO vo) {
-		vo.setTakeExamId(1);
-		vo.setTakerId("sime00");
-		
-		
-		System.out.println("ok");
+//		vo.setTakeExamId(1);
+//		vo.setTakerId("sime00");
 		
 		questionService.updateTakeExamHistory(vo);
 		

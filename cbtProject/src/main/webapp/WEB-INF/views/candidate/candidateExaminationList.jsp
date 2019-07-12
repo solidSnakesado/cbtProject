@@ -20,22 +20,49 @@
 	$(document).ready(function(){
 		
 		$("td").click(function(){
-			$("#id").attr("value",$(this).attr('value'));
-			console.log($("#id").val());
-			var takeExamId = $("#id").val();
-			alert(takeExamId);
+			var count = $(this).parent().attr("value");
+			var examId = $("[id ='btn"+count+"']").attr("value");
+			var takeExamId = $("[id ='takeExamId"+count+"']").attr("value");
+			var examName = $("[id ='examName"+count+"']").attr("value");
+			var passingScore = $("[id ='passingScore"+count+"']").attr("value");
+			var examStartTime = $("[id ='examStartTime"+count+"']").attr("value");
+			
+			$("#eId2").attr("value",examId);
+			$("#tId2").attr("value",takeExamId);
+			$("#eName2").attr("value",examName);
+			$("#passScore2").attr("value",passingScore);
+			$("#examTime2").attr("value",examStartTime);
+			
 			detailForm.submit();
+			
 		});
 		
-		$("#btn").click(function(){
-			$("#tekeExam").attr("value",$(this).attr('value'));
-			$("#examId").attr("value",$(this).attr('value'));
-			console.log($("#tekeExam").val());
-			var takeExamId = $("#tekeExam").val();
-			var examId = $('#examId').val();
-			alert(takeExamId);
+		$("[id^='btn']").click(function(){
+			
+			var count = $(this).parent().attr("value");
+			var examId = $(this).val();
+			var takeExamId = $("[id ='takeExamId"+count+"']").attr("value");
+			var examName = $("[id ='examName"+count+"']").attr("value");
+			var passingScore = $("[id ='passingScore"+count+"']").attr("value");
+			var examStartTime = $("[id ='examStartTime"+count+"']").attr("value");
+			
+			$("#eId").attr("value",examId);
+			$("#tId").attr("value",takeExamId);
+			$("#eName").attr("value",examName);
+			$("#passScore").attr("value",passingScore);
+			$("#examTime").attr("value",examStartTime);
+			
+			console.log("count = "+count);
+			console.log("examId = "+examId);
+			console.log("takeExamId = "+takeExamId);
+			console.log("examName = "+examName);
+			console.log("passingScore = "+passingScore);
+			console.log("examStartTime = "+examStartTime);
+			
 			takeExamForm.submit();
+			
 		});
+		
 	})
 	
 </script>
@@ -43,11 +70,18 @@
 <body>
 마이페이지(개인) 응시목록
 	<form id="detailForm" name="detailForm" action="candidateExaminationListDetail.do" method="post">
-		<input type="text" id="id" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
+		<input type="text" id="eId2" name="examId" value="${QuestionVO.examId }" hidden="ture">
+		<input type="text" id="tId2" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
+		<input type="text" id="eName2" name="examName" value="${QuestionVO.examName }" hidden="ture">
+		<input type="text" id="passScore2" name="passingScore" value="${QuestionVO.passingScore }" hidden="ture">
+		<input type="text" id="examTime2" name="examStartTime" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
 	<form id="takeExamForm" name="takeExamForm" action="candidateTakeExam.do" method="post">
-		<input type="text" id="tekeExam" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
-		<input type="text" id="examId" name="examId" value="${QuestionVO.examId }" hidden="ture">
+		<input type="text" id="eId" name="examId" value="${QuestionVO.examId }" hidden="ture">
+		<input type="text" id="tId" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
+		<input type="text" id="eName" name="examName" value="${QuestionVO.examName }" hidden="ture">
+		<input type="text" id="passScore" name="passingScore" value="${QuestionVO.passingScore }" hidden="ture">
+		<input type="text" id="examTime" name="examStartTime" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
 	<table id="table" border="1" align="center">
 		<tr >
@@ -58,12 +92,12 @@
 			<th></th>
 		</tr>
 	<c:forEach items="${candidateExaminationList }" var="list" varStatus="status">
-		<tr class="result" >
+		<tr class="result${status.count }" value="${status.count }">
 			<td id="takeExamId${status.count }" value="${list.takeExamId }">${list.takeExamId }</td>
-			<td id="examName${status.count }" value="${list.takeExamId }">${list.examName }</td>
-			<td id="passScore${status.count }" value="${list.takeExamId }">${list.passingScore }</td>
-			<td id="examDate${status.count }" value="${list.takeExamId }">${list.examStartTime }</td>
-			<th><button type="button" id="btn" value="${list.examId }">응시하기</button></th>
+			<td id="examName${status.count }" value="${list.examName }">${list.examName }</td>
+			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
+			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
+			<th name="th" value="${status.count }" ><button type="button" id="btn${status.count }" value="${list.examId }">응시하기</button></th>
 		</tr>
 	</c:forEach>
 	</table>

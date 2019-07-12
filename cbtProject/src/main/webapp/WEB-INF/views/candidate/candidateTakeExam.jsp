@@ -17,24 +17,34 @@
 	var a = 1;
 	var count = 0;
 	$(document).ready(function() {
-		
+		$('#mainTab').hide();
 		
 		$("#examId").html("시험 응시")
 		$("#question").html("문제")
 		
 		$('#btn').click(function () {  
 			if($("#btn").css("display") == "none"){   
-				jQuery('#btn').show();  
+				$('#btn').show();  
 			} else {  
-				jQuery('#btn').hide();  
+				$('#btn').hide();
+				$('#mainTab').show();
 			}  
 		});
+		
+		var takerId = "${takerId}";
+		var examId = "${examId}";
+		var takeExamId = "${takeExamId}";
+		var examName = "${examName}";
+		var passingScore = "${passingScore}";
+		var examStartTime = "${examStartTime}";
 		
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
 			$.ajax({
 				url : "./getTestStart.do",
 				method : "post",
+				data : {takerId : takerId, examId : examId, takeExamId : takeExamId, examName : examName, 
+					passingScore : passingScore, examStartTime : examStartTime },
 				type : "json",
 				success : function(datas) {
 					
@@ -214,7 +224,7 @@
 </head>
 <body>
 <button id="btn">시험 시작 !</button>
-	<table border="1">
+	<table border="1" id="mainTab">
 		<tr>
 			<td><h2 align="center" id="examId" value=""></h2></td>
 			<td rowspan="3">
