@@ -1,47 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+<script>
+	//페이징처리
+	function goList(p) {
+		searchFrm.page.value = p;
+		searchFrm.submit();
+	}
+	function estimateDetail(estimateId){
+		console.log(estimateId);
+		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
+		var winopen = window.open("managerEstimateDetail.do/"+estimateId,"windowopen",wintype);
+		
+	}
+</script>
 
 </head>
 <body>
+  
+	
+<h2>의뢰목록</h2>	
+<hr/>		
+<div class="container">
 
-<h2>관리자 기업의뢰목록</h2>
-<select>
-	<option>전체보기</option>
-	<option>기업별</option>
-	<option>미결제</option>
-	<option>결제완료</option>
-</select>
-<form>
-<table border="1">
-   <tr>
-   		<th class="text-center">선택</th>
-     	<th class="text-center">순번</th>
-		<th class="text-center">카테고리ID</th>
-		<th class="text-center">의뢰일</th>
-		<th class="text-center">진행상태</th>
-		<th class="text-center">시험일시</th>
-		<th class="text-center">삭제</th>
-   </tr>
-   <c:forEach items="${result }" var="EstimateVO">
-   <tr>
-      <td><input type="checkbox" name="estiList" value="${EstimateVO.estimateId }"></td>
-      <td>아마존</td>
-      <td>아마존 신입 공채 시험</td>
-      <td>2020.06.20 
-		15:00 ~ 18:00</td>
-      <td>완료</td>
-   </tr>
-   </c:forEach>
-</table>
-</form>
-   
+		<form name="searchFrm">
+			<input type="hidden" name="page" value="1">
+		</form>
+		<form action="deleteBoard.do">
+			
+			<table border="1" class="table text-center">
+				<tr>
+					<th class="text-center">순번</th>
+					<th class="text-center">카테고리ID</th>
+					<th class="text-center">의뢰일</th>
+					<th class="text-center">진행상태</th>
+					<th class="text-center">시험일시</th>
+					<th class="text-center">삭제</th>
+				</tr>
+					<c:forEach items="${result.estimateList}" var="estimate">
+					<tr onClick="estimateDetail(${estimate.estimateId})">
+						<td>${estimate.estimateId}</td>
+						<td>${estimate.categoryNm}</td>
+						<td>${estimate.requestDay}</td>
+						<td>${estimate.tradeProgressNm}</td>
+						<td>${estimate.examDate}</td>
+						<td><button type="button">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</form>
+		<my:paging jsFunc="goList" paging="${result.paging}"/>
+		<button type="button"  class="btn btn-primary" value="등록"  id="btnInsert"  onclick="location.href='managerEstimateInsert.do'">의뢰등록</button>
+		
+	</div>	
 </body>
+
 </html>

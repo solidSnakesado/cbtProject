@@ -176,17 +176,17 @@ public class CandidateController {
 	// 2019.07.09 성재민
 		// 경로 수정 
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateExaminationList.do")	
-	public String candidateExaminationList() {
-		return "candidate/candidate/candidateExaminationList";
-	}
+//	@RequestMapping("candidateExaminationList.do")	
+//	public String candidateExaminationList() {
+//		return "candidate/candidate/candidateExaminationList";
+//	}
 	// 2019.07.09 성재민
 		// 경로 수정
 	//2019.06.27 장세준 - *.do & view 등록
-	@RequestMapping("candidateExaminationListDetail.do")	
-	public String candidateExaminationListDetail() {
-		return "candidate/candidate/candidateExaminationListDetail";
-	}
+//	@RequestMapping("candidateExaminationListDetail.do")	
+//	public String candidateExaminationListDetail() {
+//		return "candidate/candidate/candidateExaminationListDetail";
+//	}
 	
 	// 시험목록리스트
 	@RequestMapping("candidateRequestList.do")

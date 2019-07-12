@@ -36,8 +36,8 @@ public class CandidateClient {
 	
 	@Ignore @Test
 	public void getTestResultList() {
-		QuestionVOt vo = new QuestionVOt();
-		vo.setTakeExamId("1");
+		QuestionVO vo = new QuestionVO();
+		vo.setTakeExamId(1);
 		
 		vo = dao.getTestResultList(vo);
 		

@@ -20,14 +20,13 @@
 			$("#header").load("co_header.html")
 		});
 	</script> -->
-	<header id="header"></header>
 	<div align="center">
-		<h1>시험의뢰(견적서)</h1>
+		<h1>시험의뢰서</h1>
 		<hr>
 	</div>
 
 	
-	<form action="companyEstimateInsert.do" method="POST">
+	<form action="managerEstimateInsert.do" method="POST">
 	
 		<table>
 			<!-- <tr>	<td>의뢰ID	</td> 	<td><input type="text" name="estimateId">	</td>	</tr> -->
@@ -66,7 +65,7 @@
 		<div>
 			<button>확인</button>
 			<button type="button"
-				onclick="location.href='companyEstimateList.do'">취소</button>
+				onclick="location.href='managerEstimateList.do'">취소</button>
 
 		</div>
 		

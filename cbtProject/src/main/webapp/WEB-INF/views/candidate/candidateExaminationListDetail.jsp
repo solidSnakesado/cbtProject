@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,47 +9,52 @@
 
 <title>CBT 시험 일정 확인</title>
 
-
 </head>
-
-	
 <body>
 마이페이지(개인) 응시목록 세부목록
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.do")
+			
 		});
 	</script>
-	<header id="header"></header>
+	<c:set var="examName" value="${candidateExaminationListDetail.examName }" />
+	<c:set var="examStartTime" value="${candidateExaminationListDetail.examStartTime }" />
+	<c:set var="takerName" value="${candidateExaminationListDetail.takerName }" />
+	<c:set var="takerInfo" value="${candidateExaminationListDetail.takerInfo }" />
+	<c:set var="takerScore" value="${candidateExaminationListDetail.takerScore }" />
+	<c:set var="passingScore" value="${candidateExaminationListDetail.passingScore }" />
 	<table border = "1" align="center">
+	<%-- <c:forEach items="candidateExaminationListDetail" var="list"> --%>
 		<tr>
 			<th>시험명</th>
-			<td>2019년 제1차 ULACLE 신입공채 시험</td>
+			<td>${examName }</td>
 		</tr>
 		<tr>
 			<th>시험 일시</th>
-			<td>2019/06/17 15:00</td>
+			<td>${examStartTime }</td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td>이승환</td>
+			<td>${takerName }</td>
 		</tr>
 		
 		<tr>
 			<th>주민번호</th>
-			<td>920529-1******</td>
+			<td>${takerInfo }</td>
 		</tr>
 		<tr>
 			<th>점수</th>
-			<td>60</td>
+			<td>${takerScore } / ${passingScore }</td>
 		</tr>
 		
 		<tr>
 			<th>합격여부</th>
-			<td>합격</td>
+			<td>
+				<c:if test="${passingScore lt takerScore }">합격</c:if>
+				<c:if test="${passingScore ge takerScore }">불합격</c:if>
+			</td>
 		</tr>
+	<%-- </c:forEach> --%>
 	</table>
-	
-	<input type = "button" onclick =  'window.close()' value = "확인">
 </body>
 </html>

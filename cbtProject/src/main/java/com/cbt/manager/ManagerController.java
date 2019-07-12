@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateService;
@@ -23,7 +22,6 @@ import com.cbt.condition.ConditionService;
 import com.cbt.consulting.ConsultingService;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.estimate.EstimateService;
-import com.cbt.estimate.EstimateVO;
 
 @Controller
 public class ManagerController {
@@ -130,11 +128,6 @@ public class ManagerController {
 		return "manager/manager/managerConsultingList";
 	}
 
-	@RequestMapping(value = "managerEstimateList.do", method = RequestMethod.GET)
-	public String getManagerEstimateList(Model model, EstimateVO vo) {
-		model.addAttribute("result", estimateService.getEstimateList(vo));
-		return "manager/manager/managerEstimateList";
-	}
 	
 	@RequestMapping(value = "managerAccountList.do", method = RequestMethod.GET)
 	public String getManagerAccountList(Model model, CompanyVO vo) {
@@ -167,7 +160,7 @@ public class ManagerController {
 		return "manager/manager/managerConsultingListDetail";
 	}
 
-	// 관리자 컴퍼니 정보 수정처리
+	// 관리자 상담 정보 수정처리
 	@RequestMapping(value = "managerConsultingListDetail.do", method = RequestMethod.POST)
 	public String managerConsultingListDetail(@ModelAttribute("consulting") ConsultingVO vo) {
 		consultingService.updateConsulting(vo);

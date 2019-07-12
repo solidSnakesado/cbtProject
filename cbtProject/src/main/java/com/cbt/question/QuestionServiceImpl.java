@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 
 
@@ -58,7 +59,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return null;
 	}
 
-	public QuestionVOt getTestResultList(QuestionVOt vo) {
+	public QuestionVO getTestResultList(QuestionVO vo) {
 		vo = questionDAO.getTestResultList(vo);
 		System.out.println(vo.getExamId());
 		System.out.println(vo.getExamName());
@@ -130,7 +131,18 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.getHistoryCount(vo);
 	}
 
+	public List<QuestionVO> candidateExaminationList(QuestionVO vo) {
+		
+		return questionDAO.candidateExaminationList(vo);
+	}
 
+	public QuestionVO candidateExaminationListDetail(QuestionVO vo) {
+		
+		return questionDAO.candidateExaminationListDetail(vo);
+	}
 	
+	public void rightAnswer(QuestionVO vo) {
+		
+	}
 
 }
