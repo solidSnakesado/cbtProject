@@ -16,14 +16,15 @@
 	<input type = "hidden" name = "no" value = "${ dto.no }">
 	<table border = "1" class="table text-center" border="1">
 
-
 		<tr>
 			<th width="150px">시험이름</th>
 			<td>${detailExam.examName}</td>
 		</tr>
-<c:if test="${selectedExam.disclosureStatus == '2'}">
-	<td>본 시험은 비공개 시험입니다. 응시대상자이신지 확인하여 주세요</td>
+		
+<c:if test="${detailExam.disclosureStatus == '2'}">
+		<td colspan="2"><br><br><br><h2> 본 시험은 비공개 시험입니다. <br><br> 응시대상자이신지 확인하여 주세요 </h2> <br><br><br></td>
 </c:if>
+
 <c:if test="${detailExam.disclosureStatus == '1'}">
 		<tr>
 			<th>시험시간</th>
@@ -59,18 +60,17 @@
 		</tr>
 		<tr>
 			<th>시험설명(간략)</th>
-			<td>${selectedExam.examDescriptionSimple}</td>
+			<td>${detailExam.examDescriptionSimple}</td>
 		</tr>
 		<tr>
 			<th>시험설명(상세)</th>
-			<td>${selectedExam.examDescriptionDetail}</td>
+			<td>${detailExam.examDescriptionDetail}</td>
 		</tr>
 </c:if>
 	</table>
 	<br>
 	<button onclick = "location.href = #" >응시하기</button>
-
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateMain.do'" value = "돌아가기">
+	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
 </body>
 </html>
