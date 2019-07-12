@@ -213,6 +213,13 @@ public class CandidateController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "candidateExamDetialView.do/{examId}", method = RequestMethod.GET)
+	public String candidateExamDetialView(@PathVariable("examId") int examId, Model model) {
+		ExamVO vo = new ExamVO();
+		vo.setExamId(examId);
+		model.addAttribute("detailExam", examService.getExam(vo));
+		return "candidate/candidate/candidateExamDetialView";
+	}
 	// 시험일정 가져오기
 //	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
 //	public String candidateScheduleCheck(HttpSession session, Model model, Paging paging) {
