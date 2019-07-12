@@ -10,18 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<nav id="nav2">
-			</nav>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerEstimateList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
-			</ul>
-		</article>
-	</section>
 	<div align="center">
 		<h1 >기업 등록 페이지(관리자 화면)</h1>
 	<hr>	

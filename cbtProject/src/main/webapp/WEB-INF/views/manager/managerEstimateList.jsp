@@ -11,19 +11,7 @@
 
 </head>
 <body>
-<nav id="nav2">
-				<a href="candidateUserMain.jsp">로그아웃</a>
-			</nav>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerEstimateList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
-			</ul>
-		</article>
-	</section>
+
 <h2>관리자 기업의뢰목록</h2>
 <select>
 	<option>전체보기</option>

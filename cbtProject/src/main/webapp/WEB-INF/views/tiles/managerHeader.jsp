@@ -13,15 +13,15 @@
 		    <a href="candidateAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 		</c:if> --%>
 		<c:if test="${not empty sessionScope.manager }">
-		    <div class="w3-dropdown-hover">
+<!-- 		    <div class="w3-dropdown-hover">
 		      	<button class="w3-padding-large w3-button" title="More">마이페이지 <i class="fa fa-caret-down"></i></button>     
-		      	<div class="w3-dropdown-content w3-bar-block w3-card-4">
+		      	<div class="w3-dropdown-content w3-bar-block w3-card-4"> -->
 		        	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
-		        	<a href="${pageContext.request.contextPath }/managerRequestList.do" class="w3-bar-item w3-button">의뢰목록</a>
+		        	<a href="${pageContext.request.contextPath }/managerEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerConsultingList.do" class="w3-bar-item w3-button">상담목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
-		      	</div>
-		    </div>
+		      	<!-- </div>
+		    </div> -->
 	    </c:if>  
 		<c:if test="${empty sessionScope.manager }">    
 		    <a href="${pageContext.request.contextPath }/managerLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>

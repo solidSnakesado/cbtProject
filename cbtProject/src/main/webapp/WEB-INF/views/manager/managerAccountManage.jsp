@@ -13,26 +13,12 @@
 </style>
 </head>
 <body>
-   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#header").load("companyCoHeader.jsp")
 		});
 	</script>
-	<header id="header"></header>
-<section>
-   <article>
-      <ul>
-         <li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='managerEstimateList.do'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='companyConSultingList.do'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='companyTestList.do'">시험목록</button></li>
-         <li><button type="button" onclick="location.href='companyChart.do'">통계</button></li>
-      </ul>
-   </article>
-</section>
+
 <h1>회사 계정 관리</h1>
 <form action="${pageContext.request.contextPath }/managerAccountManage.do" method="post">
 <input type="hidden" name="companyId" value="${result.companyId }">

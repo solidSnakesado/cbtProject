@@ -6,19 +6,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<nav id="nav2">
-				<a href="candidateUserMain.jsp">로그아웃</a>
-			</nav>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='managerEstimateList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='managerChart.do'">통 계</button></li>
-			</ul>
-		</article>
-	</section>
+
 	<h3>개별 시험 상담 목록 (관리자화면)</h3>
 	<table border = "1">
 		<tr>

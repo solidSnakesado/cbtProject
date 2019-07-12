@@ -32,11 +32,11 @@
       <th>제목</th>
       <th>상담희망일</th>
    </tr>
-   <c:forEach items="${result.managerConsultingList}" var="ConsultingVO">
+   <c:forEach items="${result}" var="ConsultingVO">
    <tr>
-      <td><input type="checkbox" name="consultingList" value="${consulting.consultingId }"></td>
-      <td>${consulting.consultingTitle}</td>
-      <td id="consultingDesiredDate_${consulting.consultingId}">${consulting.consultingDesiredDate}</td>
+      <td><input type="checkbox" name="consultingList" value="${ConsultingVO.consultingId }"></td>
+      <td>${ConsultingVO.consultingTitle}</td>
+      <td id="consultingDesiredDate_${ConsultingVO.consultingId}">${ConsultingVO.consultingDesiredDate}</td>
    </tr>
    </c:forEach>
 </table>

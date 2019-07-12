@@ -124,11 +124,9 @@ public class ManagerController {
 		return "manager/manager/managerAccountControl";
 	}
 	// 매니저, 기업 상담 리스트 출력
-	@RequestMapping(value = "managerConsultingList.do/{consultingId}", method = RequestMethod.GET)
-	public String managerConsultingList( @PathVariable("consultingId") int consultingId, Model model, ConsultingVO vo) {
-		
-		vo.setConsultingId(consultingId);
-		model.addAttribute("result", consultingService.getConsultingList(vo));
+	@RequestMapping(value = "managerConsultingList.do", method = RequestMethod.GET)
+	public String managerConsultingList(Model model, ConsultingVO vo) {
+		model.addAttribute("result", consultingService.managerConsultingList(vo));
 		return "manager/manager/managerConsultingList";
 	}
 

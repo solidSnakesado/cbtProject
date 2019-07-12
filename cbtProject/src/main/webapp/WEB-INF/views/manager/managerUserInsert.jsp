@@ -10,19 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<nav id="nav2">
-				<a href="candidateUserMain.jsp">로그아웃</a>
-			</nav>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerEstimateList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
-			</ul>
-		</article>
-	</section>
+
 	<div align="center">
 		<h1 >응시자 등록 페이지(관리자 화면)</h1>
 	<hr>	
