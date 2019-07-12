@@ -35,7 +35,7 @@
 			<input type="hidden" name="page" value="1">
 		</form>
 		
-		<form action="">
+		<form action="companyEstimateDelete.do">
 			
 			<table border="1" class="table text-center">
 				<tr>
@@ -53,7 +53,7 @@
 						<td>${estimate.requestDay}</td>
 						<td>${estimate.tradeProgressNm}</td>
 						<td>${estimate.examDate}</td>
-						<td><button type="button">삭제</button></td>
+						<td><button>삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -101,6 +101,7 @@ public class EstimateController {
 		return mv;
 	}
 	
+	
 	//관리자의뢰 등록		관리자는 상담내역을가지고 의뢰서를 등록한다. manager-insert
 	@RequestMapping(value = "managerEstimateInsert.do", method = RequestMethod.GET)
 	public String managerEstimateInsertForm(Model model) {
@@ -116,7 +117,6 @@ public class EstimateController {
 	@RequestMapping(value = "managerEstimateInsert.do", method = RequestMethod.POST)
 	public String managerEstimateInsert(EstimateVO vo) {
 		estimateService.insertEstimate(vo);	
-		
 		return "redirect:managerEstimateList.do"; 
 	}
 	
@@ -145,8 +145,7 @@ public class EstimateController {
 			out.flush();
 		}
 	
-	
-		//기업은 자기의뢰를 삭제 할 수 있다.  company-delete
+		//관리자는 의뢰를 삭제 할 수 있다.  manager-delete
 		@RequestMapping(value = "managerEstimateDelete.do", method = RequestMethod.GET)
 		public String managerEstimateDelete(EstimateVO vo) {
 			estimateService.deleteEstimate(vo);
@@ -154,4 +153,25 @@ public class EstimateController {
 		}
 	
 	
+		
+		//관리자 의뢰세부내용보기			 manager-select-detail
+		@RequestMapping(value="managerEstimateDetail.do/{estimateId}", method = RequestMethod.GET)
+		
+		public String managerEstimateDetail(@PathVariable("estimateId") int estimateId, //String ->int바꿔야함
+													EstimateVO vo,
+													Model model) {
+			
+			vo.setEstimateId(estimateId); 
+			model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
+			model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
+			model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
+			model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수
+			model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
+			model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
+			model.addAttribute("M", conditionService.getConditionDetailList("M"));	//M-시험분류
+			model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
+			return "empty/manager/managerEstimateDetail";
+		}
+		
+		
 }

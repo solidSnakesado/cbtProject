@@ -35,7 +35,7 @@
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
 		</form>
-		<form action="deleteBoard.do">
+		<form action="managerEstimateDelete.do">
 			
 			<table border="1" class="table text-center">
 				<tr>
@@ -48,12 +48,12 @@
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
 					<tr onClick="estimateDetail(${estimate.estimateId})">
-						<td>${estimate.estimateId}</td>
+						<td >${estimate.estimateId}</td>
 						<td>${estimate.categoryNm}</td>
 						<td>${estimate.requestDay}</td>
 						<td>${estimate.tradeProgressNm}</td>
 						<td>${estimate.examDate}</td>
-						<td><button type="button">삭제</button></td>
+						<td><button>삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

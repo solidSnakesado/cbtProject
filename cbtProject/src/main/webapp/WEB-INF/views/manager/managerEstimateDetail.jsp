@@ -46,7 +46,7 @@
 			
 			function windowClose(){
 				window.opener.top.location.reload();
-				
+				window.close();
 			}
 	</script>
 </body>
