@@ -1,5 +1,6 @@
 package com.cbt.candidate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,5 +63,32 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public List<Map<String, String>> getExamList(CandidateVO vo) {
 		return candidateDAO.getExamList(vo);
+	}
+
+//	@Override
+//	public Map<String, Object> ExamSchedule(CandidateVO vo, Paging paging) {
+//		if(paging != null) {
+//			if(paging.getPage() == null) {
+//				paging.setPage(1);
+//			}
+//			vo.setStart(paging.getFirst());
+//			vo.setEnd(paging.getLast());
+//			paging.setTotalRecord(candidateDAO.getCount(vo));
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("examSchedule", candidateDAO.getExamSchdule(vo));
+//			map.put("paging", paging);
+//			return map;
+//		}
+//		return null;
+//	}
+
+	@Override
+	public int ExamScheduleCount() {
+		return candidateDAO.getCount(null);
+	}
+
+	public List<Map<Object, String>> candidateScheduleCheck() {
+		
+		return candidateDAO.candidateScheduleCheck();
 	}
 }

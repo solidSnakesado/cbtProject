@@ -22,6 +22,13 @@
 		$("#examId").html("시험 응시")
 		$("#question").html("문제")
 		
+		$('#btn').click(function () {  
+			if($("#btn").css("display") == "none"){   
+				jQuery('#btn').show();  
+			} else {  
+				jQuery('#btn').hide();  
+			}  
+		});
 		
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
@@ -35,6 +42,7 @@
 					count = datas.length;
 					
 					
+
 					/*                         문제 난수 만들기        Start          */
 					var numbers = [];
 			        var pickNumbers = data.length;
@@ -129,19 +137,20 @@
 						
 						$("input:radio[name ='rExam']").on("click", function() {
 							var choice = $(this).attr('id');
-				        	var examValue = $(this).attr('value');
+				        	var takerAnswer = $(this).val();
 				        	var setExamQuestionId = data[numbers[i]].setExamQuestionId;
+				        	/* var takeExamHistoryId = data[numbers[i]].takeExamHistoryId; */
 				    		console.log(choice);
-				    		console.log(examValue);
+				    		console.log(takerAnswer);
 				    		
 				    		$.ajax({
 								url : "./updateTakeExamHistory.do",
 								method : "post",
-								data : {examValue : examValue, setExamQuestionId : setExamQuestionId} , 
+								data : {takerAnswer : takerAnswer, setExamQuestionId : setExamQuestionId} , 
 								datatype : "json",
 								success : function(data){
 									
-					    			$("[name ='exam"+a+"']").val([examValue]);
+					    			$("[name ='exam"+a+"']").val([takerAnswer]);
 									
 								}
 				    		})
@@ -166,7 +175,7 @@
 						} else {
 							
 							console.log('없어');
-							
+							alert('마지막이야');
 						}
 						updateAnswer();
 					})
@@ -188,7 +197,7 @@
 						} else {
 							
 							console.log('없어');
-							
+							alert('처음이야');
 						}
 						updateAnswer();
 					})
@@ -197,11 +206,14 @@
 		})
 	});
 	
+	/* function candidateTestResult(){
+		data[0].
+	} */
+	
 </script>
 </head>
 <body>
-<button id="btn">Click</button>
-	<header id="header"></header>
+<button id="btn">시험 시작 !</button>
 	<table border="1">
 		<tr>
 			<td><h2 align="center" id="examId" value=""></h2></td>
@@ -236,7 +248,6 @@
 									<th id="point" align="left"></th>
 									<th></th>
 								</tr>
-								<form name="answerForm">
 								<tr>
 									<td id="exam1"></td>
 									<td align="center" id="td1"></td>
@@ -253,7 +264,6 @@
 									<td id="exam4"></td>
 									<td align="center" id="td4"></td>
 								</tr>
-								</form>
 							</table>
 						</td>
 					</tr>
@@ -267,7 +277,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center" valign="top">
-				<input type='submit'>
+				<button type='button' onclick="location.href='getTestResultList.do'" >제출 하기</button>
 			</td>
 		</tr>
 	</table>

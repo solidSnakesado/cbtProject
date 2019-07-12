@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.candidate.CandidateVO;
+
 
 //    7/2 문제 DAO 작성    -재용
 
@@ -41,7 +43,7 @@ public class QuestionDAO {
 		return mybatis.selectOne("QuestionDAO.getTestList", map);
 	}
 	
-	public QuestionVOt getTestResultList(QuestionVOt vo) {
+	public QuestionVO getTestResultList(QuestionVO vo) {
 		
 		return mybatis.selectOne("QuestionDAO.getTestResultList", vo);
 	}
@@ -75,6 +77,18 @@ public class QuestionDAO {
 		
 		return mybatis.selectOne("QuestionDAO.getHistoryCount", vo);
 	}
-
+	
+	public List<QuestionVO> candidateExaminationList(QuestionVO vo) {
+		
+		return mybatis.selectList("QuestionDAO.candidateExaminationList", vo);
+	}
+	
+	public QuestionVO candidateExaminationListDetail(QuestionVO vo) {
+		return mybatis.selectOne("QuestionDAO.candidateExaminationListDetail", vo);
+	}
+	
+	public void rightAnswer(QuestionVO vo) {
+		mybatis.update("QuestionDAO.rightAnswer", vo);
+	}
 
 }

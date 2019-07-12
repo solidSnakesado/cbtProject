@@ -55,4 +55,10 @@ public class CandidateDAO {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
 	}
 	
+	// 전체 시험 스케쥴 가져옴
+	public List<Map<Object, String>> candidateScheduleCheck() {
+		
+		return mybatis.selectList("candidateDAO.candidateScheduleCheck");
+	}
+	
 }

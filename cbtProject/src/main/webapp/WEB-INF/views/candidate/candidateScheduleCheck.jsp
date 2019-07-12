@@ -86,27 +86,29 @@ function getExamInfoResult(item){
 
 	<table class="table text-center" border="1">
 		<tr>
-			<th>응시코드</th>
-			<th>시험일시</th>
-			<th>점수</th>
 			<th>시험코드</th>
-			<th>응시자</th>
-<!-- 				
-			<th>시험소개</th>
-			<th>시험설명</th> 
+			<th>시험명</th>
+			<th>시험시작시간</th>
+			<th>시험종료시간</th>
+			<th>문항수</th>
+			<th>합격기준</th>
+<!-- 		<th>시험소개</th>
+			<th>시험설명</th>  
 -->
 		</tr>
-   	<c:forEach items="${result.ExamList}" var="examInfo" >
-		<tr onclick="getExamInfo('${examInfo.takeExamId}')">
-			<td>${examInfo.takeExamId}</td>
-			<td>${examInfo.takeExamDate}</td>
-			<td>${examInfo.score}</td>
-			<td>${examInfo.examId}</td>
-			<td>${examInfo.takerId}</td>
-<%-- 					
-				<td>${examInfo.examDescriptionSimple}</td>
-				<td>${examInfo.examDescriptionDetail}</td> 
---%>
+
+   	<c:forEach items="${candidateScheduleCheck}" var="examInfo" >
+		<tr onclick="getExamInfo('${examInfo.EXAM_ID}')">
+			<td>${examInfo.EXAM_ID}</td>
+			<td>${examInfo.EXAM_NAME}</td>
+			<td>${examInfo.EXAM_START_TIME}</td>
+			<td>${examInfo.EXAM_END_TIME}</td>
+			<td>${examInfo.QUESTION_QUANTITY}</td>
+			<td>${examInfo.PASSING_SCORE}</td>
+<%-- 			
+			<td>${examInfo.examDescriptionSimple}</td>
+			<td>${examInfo.examDescriptionDetail}</td> 
+ --%>
 		</tr>
 	</c:forEach>  
 	</table><br>
