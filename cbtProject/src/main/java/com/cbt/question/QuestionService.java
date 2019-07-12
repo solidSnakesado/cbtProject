@@ -3,6 +3,7 @@ package com.cbt.question;
 import java.util.List;
 import java.util.Map;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 
 
@@ -14,6 +15,8 @@ public interface QuestionService {
 	void updateTakeExamHistory(QuestionVO vo);
 	
 	void deleteQuestion(QuestionVO vo);
+	
+	void rightAnswer(QuestionVO vo);
 	
 	int getSetCount(QuestionVO vo);
 	
@@ -27,7 +30,7 @@ public interface QuestionService {
 	
 	List<QuestionVO> candidateRightAnswerList(QuestionVO vo);
 	
-	QuestionVOt getTestResultList(QuestionVOt vo);
+	QuestionVO getTestResultList(QuestionVO vo);
 	
 	List<Map<String, Object>> getTestList(Map<String, Object> map);
 	
@@ -35,6 +38,8 @@ public interface QuestionService {
 	
 	Map<String, Object> getQuestionList(QuestionVO vo, Paging paging);
 	
+	List<QuestionVO> candidateExaminationList(QuestionVO vo);
 	
+	QuestionVO candidateExaminationListDetail(QuestionVO vo);
 
 }

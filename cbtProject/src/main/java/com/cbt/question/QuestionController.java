@@ -4,13 +4,16 @@ package com.cbt.question;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cbt.candidate.CandidateVO;
 
 
 // 7/2 문제 컨트롤러 생성   -재용
@@ -21,13 +24,12 @@ public class QuestionController {
 	@Autowired
 	QuestionService questionService;
 	
-	@RequestMapping("candidateTakeExam.do")	
-	public ModelAndView candidateTakeExamList() {
-		QuestionVO vo = new QuestionVO();
-		vo.setExamId(1);
-		vo.setTakeExamId(1);
-		
+	
+	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
+	public ModelAndView candidateTakeExamList(QuestionVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		vo.setTakerId(candiVO.getTakerId());
 		
 		mv.addObject("takeExamList",questionService.candidateTakeExamList(vo));
 		mv.setViewName("candidate/candidate/candidateTakeExam");
@@ -37,11 +39,6 @@ public class QuestionController {
 		return mv;
 	}
 	
-//	@RequestMapping("candidateTakeExam.do")	
-//	public String candidateTakeExam() {
-//		
-//		return "candidate/candidateTakeExam";
-//	}
 	
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
@@ -82,17 +79,23 @@ public class QuestionController {
 	
 	@RequestMapping("getTestResultList.do")
 	public ModelAndView getTestResultList() {
-		QuestionVOt vo = new QuestionVOt();
-		vo.setTakeExamId("1");
+		QuestionVO vo = new QuestionVO();
+		vo.setTakeExamId(1);
+		vo.setExamId(1);
 		vo = questionService.getTestResultList(vo);
+		int setCount = questionService.getSetCount(vo);
+		
+		questionService.rightAnswer(vo);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("getExamId", vo.getExamId());
 		mv.addObject("getExamName", vo.getExamName());
 		mv.addObject("getPassingScore", vo.getPassingScore());
-		mv.addObject("getPoint", vo.getPoint());
+		mv.addObject("getPoint", vo.getSumPoint());
 		mv.addObject("getTakeExamId", vo.getTakeExamId());
 		mv.addObject("getTakerName", vo.getTakerName());
 		mv.addObject("getCount", vo.getCount());
+		mv.addObject("getExamCount", setCount);
 		mv.setViewName("candidate/candidate/candidateTestResult");
 		
 		return mv;
@@ -100,49 +103,48 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateTakeExamHistory(	@RequestParam(value="examValue")String examValue,
-										@RequestParam(value="setExamQuestionId")String setExamQuestionId) {
-		QuestionVO vo = new QuestionVO();
+	public void updateTakeExamHistory(QuestionVO vo) {
 		vo.setTakeExamId(1);
 		vo.setTakerId("sime00");
-		vo.setTakerAnswer(examValue);
-		vo.setSetExamQuestionId(setExamQuestionId);
 		
-		System.out.println(examValue);
 		
 		System.out.println("ok");
 		
 		questionService.updateTakeExamHistory(vo);
 		
 	}
-
-//	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.GET)
-//	public String candidateTestResult() {
-//		return "candidate/candidateTestResult";
-//	}
 	
-//	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.POST)
-//	public String candidateTestResultForm() {
-//		return "redirect:candidateTestResult.do";
-//	}
+	@RequestMapping("candidateTestResult.do")
+	public String candidateTestResult(QuestionVO vo, HttpSession session) {
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		System.out.println(candiVO.toString());
+		vo.setTakerId(candiVO.getTakerId());
+		System.out.println(candiVO.toString());
+		return "candidate/candidate/candidateTestResult";
+	}
 	
-//	@RequestMapping("/candidateTestResult.do")
-//	public ModelAndView getTestList() {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("takeExamId", 1);
-//		System.out.println("1"+map.get("result"));
-//		
-//		
-//		questionService.getTestList(map);
-//		ModelAndView mv = new ModelAndView();
-//		
-//		System.out.println(map);
-//		
-//		map.get("result");
-//		
-//		mv.addObject("takerName", map.get("result"));
-//		mv.setViewName("candidate/candidateTestResult");
-//		
-//		return mv;
-//	}
+	@RequestMapping("candidateExaminationList.do")
+	public ModelAndView candidateExaminationList(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+		QuestionVO vo = new QuestionVO();
+		vo.setTakerId(candivo.getTakerId());
+		mv.addObject("candidateExaminationList", questionService.candidateExaminationList(vo));
+		
+		mv.setViewName("candidate/candidate/candidateExaminationList");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "candidateExaminationListDetail.do", method = RequestMethod.POST)	
+	public ModelAndView candidateExaminationListDetail(QuestionVO vo, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		vo.setTakerId(candiVO.getTakerId());
+		
+		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
+		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
+		return mv;
+	}
+	
 }

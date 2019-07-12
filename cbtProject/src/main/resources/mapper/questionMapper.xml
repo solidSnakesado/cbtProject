@@ -10,14 +10,15 @@
 		<parameter property="v_check_refcur" jdbcType="CURSOR" mode="OUT" resultMap="resultMap"/>
 	</parameterMap> -->
 	
-	<resultMap type="QuestionVOt" id="beanResult">
-		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="string"/>
+	<resultMap type="QuestionVO" id="beanResult">
+		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="int"/>
 		<result property="examName" column="EXAM_NAME" javaType="string"/>
 		<result property="takerName" column="TAKER_NAME" javaType="string"/>
-		<result property="examId" column="EXAM_ID" javaType="string"/>
+		<result property="examId" column="EXAM_ID" javaType="int"/>
 		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
-		<result property="point" column="sum(s.POINT)" javaType="int" />
+		<result property="sumPoint" column="sum(s.POINT)" javaType="int" />
 		<result property="count" column="count(*)" javaType="int" />
+		<result property="getPoint" column="POINT" javaType="int" />
 	</resultMap>
 	
 	<resultMap type="QuestionVO" id="questionVO">
@@ -35,6 +36,18 @@
 		<result property="examId" column="EXAM_ID" javaType="int" />
 		<result property="count" column="count(*)" javaType="int" />
 	</resultMap>
+	
+	<resultMap type="QuestionVO" id="questionVOs">
+		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="int"/>
+		<result property="examName" column="EXAM_NAME" javaType="string"/>
+		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
+		<result property="examStartTime" column="EXAM_START_TIME" javaType="int"/>
+		<result property="takerScore" column="TAKER_SCORE" javaType="int"/>
+		<result property="takerName" column="TAKER_NAME" javaType="string"/>
+		<result property="takerInfo" column="TAKER_INFO" javaType="string"/>
+		<result property="examId" column="EXAM_ID" javaType="int"/>
+	</resultMap>
+	
 	
 	<!-- <select id="getTestList" statementType="CALLABLE">
 		<![CDATA[
@@ -153,6 +166,52 @@
 		SET		TAKER_ANSWER = #{takerAnswer}
 		WHERE	TAKE_EXAM_ID = #{takeExamId} AND TAKER_ID = #{takerId} AND SET_EXAM_QUESTION_ID = #{setExamQuestionId}
 	</update>
+	
+	<select id="candidateExaminationList" resultMap="questionVOs">
+		SELECT 	e.PASSING_SCORE, 
+				e.EXAM_NAME, 
+				TO_NUMBER(TO_CHAR(e.EXAM_START_TIME, 'YYMMDDHH24MI')) EXAM_START_TIME,
+				t.TAKE_EXAM_ID,
+				e.EXAM_ID
+				
+		FROM 	EXAM e JOIN TAKE_EXAM t
+		ON 		e.EXAM_ID = t.EXAM_ID
+		WHERE 	t.TAKER_ID = #{takerId}
+	</select>
+	
+	<select id="candidateExaminationListDetail" resultMap="questionVOs">
+		SELECT 	SUM(th.TAKER_SCORE) AS TAKER_SCORE, 
+				u.TAKER_NAME, 
+				u.TAKER_INFO, 
+				e.EXAM_NAME, 
+				TO_NUMBER(TO_CHAR(e.EXAM_START_TIME, 'YYMMDDHH24MI')) EXAM_START_TIME,
+				e.PASSING_SCORE
+				
+		FROM 	TAKE_EXAM_HISTORY th 						JOIN 	TAKE_EXAM t
+		ON 		th.TAKE_EXAM_ID 	= 	t.TAKE_EXAM_ID 		JOIN 	EXAM e
+		ON 		e.EXAM_ID 			= 	t.EXAM_ID 			JOIN 	TAKER u
+		ON 		u.TAKER_ID 			= 	th.TAKER_ID
+		WHERE 	th.TAKE_EXAM_ID 	= #{takeExamId} 		AND 	th.TAKER_ID = #{takerId}
+		GROUP 	BY 	u.TAKER_NAME, 
+					u.TAKER_INFO, 
+					e.EXAM_NAME, 
+					e.EXAM_START_TIME, 
+					e.EXAM_START_TIME,
+					e.PASSING_SCORE
+	</select>
+	
+	<update id="rightAnswer" parameterType="QuestionVO">
+		UPDATE	TAKE_EXAM_HISTORY t
+		SET 	TAKER_SCORE 		= 		NVL((	SELECT 	POINT
+        											FROM	SET_EXAM_QUESTION s 
+        											JOIN 	QUESTION q
+        											ON 		q.QUESTION_ID 		= 		s.QUESTION_ID
+       												 WHERE 	s.SET_EXAM_QUESTION_ID 	= 	t.SET_EXAM_QUESTION_ID 
+       												 AND 	t.TAKER_ANSWER 		= 		q.RIGHT_ANSWER),0)
+
+		WHERE 	TAKE_EXAM_ID 		= 	#{takeExamId}
+	</update>
+	
 
 </mapper>
  

@@ -23,7 +23,7 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#header").load("candidateInHeader.do")
+			
 		});
 	</script>
 	<header id="header"></header>
@@ -39,7 +39,7 @@
 		</tr>
 		<tr>
 			<th>출제문항 / 정답</th>
-			<td>10 / ${getCount}</td>
+			<td>${getExamCount} / ${getCount}</td>
 		</tr>
 		<tr>
 			<th>점수</th>
