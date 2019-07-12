@@ -24,7 +24,64 @@ public class QuestionVO {
 	private int takeExamId;
 	private String takerId;
 	private String takerAnswer;
+	private String examName;
+	private int passingScore;
+	private int examStartTime;
+	private int takerScore;
+	private String takerName;
+	private String takerInfo;
+	private int sumPoint;
+	private int getPoint;
 	
+	
+	public int getSumPoint() {
+		return sumPoint;
+	}
+	public void setSumPoint(int sumPoint) {
+		this.sumPoint = sumPoint;
+	}
+	public int getGetPoint() {
+		return getPoint;
+	}
+	public void setGetPoint(int getPoint) {
+		this.getPoint = getPoint;
+	}
+	public int getTakerScore() {
+		return takerScore;
+	}
+	public void setTakerScore(int takerScore) {
+		this.takerScore = takerScore;
+	}
+	public String getTakerName() {
+		return takerName;
+	}
+	public void setTakerName(String takerName) {
+		this.takerName = takerName;
+	}
+	public String getTakerInfo() {
+		return takerInfo;
+	}
+	public void setTakerInfo(String takerInfo) {
+		this.takerInfo = takerInfo;
+	}
+	public String getExamName() {
+		return examName;
+	}
+	public void setExamName(String examName) {
+		this.examName = examName;
+	}
+	public int getPassingScore() {
+		return passingScore;
+	}
+	public void setPassingScore(int passingScore) {
+		this.passingScore = passingScore;
+	}
+	public int getExamStartTime() {
+		return examStartTime;
+	}
+	public void setExamStartTime(int examStartTime) {
+		this.examStartTime = examStartTime;
+	}
 	public String getTakerAnswer() {
 		return takerAnswer;
 	}

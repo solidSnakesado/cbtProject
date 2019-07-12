@@ -3,19 +3,26 @@ package com.cbt.question;
 
 public class QuestionVOt {
 
-	private String takeExamId;
+	private int takeExamId;
 	private String examName;
 	private String takerName;
-	private String examId;
+	private int examId;
 	private int point;
 	private int passingScore;
 	private int count;
+	private int getPoint;
 	
 	
-	public String getTakeExamId() {
+	public int getGetPoint() {
+		return getPoint;
+	}
+	public void setGetPoint(int getPoint) {
+		this.getPoint = getPoint;
+	}
+	public int getTakeExamId() {
 		return takeExamId;
 	}
-	public void setTakeExamId(String takeExamId) {
+	public void setTakeExamId(int takeExamId) {
 		this.takeExamId = takeExamId;
 	}
 	public String getExamName() {
@@ -30,10 +37,10 @@ public class QuestionVOt {
 	public void setTakerName(String takerName) {
 		this.takerName = takerName;
 	}
-	public String getExamId() {
+	public int getExamId() {
 		return examId;
 	}
-	public void setExamId(String examId) {
+	public void setExamId(int examId) {
 		this.examId = examId;
 	}
 	public int getPoint() {
@@ -54,8 +61,5 @@ public class QuestionVOt {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
-	
-	
 	
 }
