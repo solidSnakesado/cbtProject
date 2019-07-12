@@ -14,6 +14,8 @@ public class ConsultingVO {
 	private int		consultingState;	// 2019.07.03 성재민 상담 상태 설정 변수 추가
 	private int 	start;
 	private int 	end;
+	private String[] consultingList;
+	
 
 	public int getStart() {
 		return start;
@@ -100,4 +102,14 @@ public class ConsultingVO {
 	public void setConsultingTitle(String consultingTitle) {
 		this.consultingTitle = consultingTitle;
 	}
+
+	public String[] getConsultingList() {
+		return consultingList;
+	}
+
+	public void setConsultingList(String[] consultingList) {
+		this.consultingList = consultingList;
+	}
+	
+	
 }

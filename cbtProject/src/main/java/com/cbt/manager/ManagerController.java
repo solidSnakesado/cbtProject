@@ -117,21 +117,23 @@ public class ManagerController {
 
 		return "manager/manager/managerRequestListDetail";
 	}
-
+	// 기업계정 or 응시자계정 관리 선택지
 	@RequestMapping("managerAccountControl.do")
 	public String managerAccountControl() {
 
 		return "manager/manager/managerAccountControl";
 	}
-	
-	@RequestMapping(value = "managerConsultingList.do", method = RequestMethod.GET)
-	public String managerConsultingList(Model model, ConsultingVO vo) {
+	// 매니저, 기업 상담 리스트 출력
+	@RequestMapping(value = "managerConsultingList.do/{consultingId}", method = RequestMethod.GET)
+	public String managerConsultingList( @PathVariable("consultingId") int consultingId, Model model, ConsultingVO vo) {
+		
+		vo.setConsultingId(consultingId);
 		model.addAttribute("result", consultingService.getConsultingList(vo));
 		return "manager/manager/managerConsultingList";
 	}
 
 	@RequestMapping(value = "managerEstimateList.do", method = RequestMethod.GET)
-	public String managerEstimateList(Model model, EstimateVO vo) {
+	public String getManagerEstimateList(Model model, EstimateVO vo) {
 		model.addAttribute("result", estimateService.getEstimateList(vo));
 		return "manager/manager/managerEstimateList";
 	}

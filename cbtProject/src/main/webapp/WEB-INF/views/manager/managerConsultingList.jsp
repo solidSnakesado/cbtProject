@@ -10,7 +10,7 @@
 
 </head>
 <body>
-기업상담목록(관리자)
+<h2>기업상담목록(관리자)</h2>
 <nav id="nav2">
 				<a href="candidateUserMain.jsp">로그아웃</a>
 			</nav>
@@ -32,9 +32,9 @@
       <th>제목</th>
       <th>상담희망일</th>
    </tr>
-   <c:forEach items="${result.consultingList }" var="consulting">
+   <c:forEach items="${result.managerConsultingList}" var="ConsultingVO">
    <tr>
-      <td><input type="checkbox" name="cnstList" value="${consulting.consultingId }"></td>
+      <td><input type="checkbox" name="consultingList" value="${consulting.consultingId }"></td>
       <td>${consulting.consultingTitle}</td>
       <td id="consultingDesiredDate_${consulting.consultingId}">${consulting.consultingDesiredDate}</td>
    </tr>

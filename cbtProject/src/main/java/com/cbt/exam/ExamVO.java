@@ -4,10 +4,11 @@ public class ExamVO {
 
 	// 2019.07.08 성재민
 	// examId, estimateId 타입 int 로 변경
-	private int 	examId;
-	
+
 	// 2019.07.11 성재민
 	// 시간 변수들 문자열로 수정
+
+	private int 	examId;
 	private String 	examStartTime;
 	private String 	examEndTime;
 	private int 	questionQuantity;
@@ -21,7 +22,26 @@ public class ExamVO {
 	private String 	setExamStatus;
 	private String 	examDescriptionSimple;
 	private String 	examDescriptionDetail;
+	private int 	start;
+	private int 	end;
 
+	
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	
 	public String getExamStartTime() {
 		return examStartTime;
 	}

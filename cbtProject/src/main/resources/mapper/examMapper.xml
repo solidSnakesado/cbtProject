@@ -101,6 +101,8 @@
 		<where>
 			EXAM_ID = #{examId}
 		</where>
+		ORDER BY EXAM_ID
+		
 	</select>
 	
 	<!-- 2019.07.11 성재민 -->
@@ -127,5 +129,9 @@
 		<where>
 			ESTIMATE.COMPANY_ID = #{companyId}
 		</where>
+	</select>
+	<select id="getExamCount" resultType="int">
+		SELECT COUNT(*)
+		FROM EXAM
 	</select>
 </mapper>

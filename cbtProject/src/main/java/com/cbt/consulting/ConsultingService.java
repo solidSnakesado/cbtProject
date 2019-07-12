@@ -19,5 +19,8 @@ public interface ConsultingService {
 	
 	Map<String, Object> getConsultingList(ConsultingVO vo, Paging paging);
 	
+	//승환추가
+	List<ConsultingVO> managerConsultingList(ConsultingVO vo);
+	
 	int getConsultingCount();
 }

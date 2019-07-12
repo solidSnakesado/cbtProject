@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,44 +34,24 @@
 <form>
 <table border="1">
    <tr>
-      <th>기업 ID</th>
-      <th>기업명</th>
-      <th>시험이름</th>
-      <th>시험일시</th>
-      <th>결제여부</th>
+   		<th class="text-center">선택</th>
+     	<th class="text-center">순번</th>
+		<th class="text-center">카테고리ID</th>
+		<th class="text-center">의뢰일</th>
+		<th class="text-center">진행상태</th>
+		<th class="text-center">시험일시</th>
+		<th class="text-center">삭제</th>
    </tr>
-   <tr onclick="location.href='managerRequestListDetail.jsp'">
-      <td>AMAZON</td>
+   <c:forEach items="${result }" var="EstimateVO">
+   <tr>
+      <td><input type="checkbox" name="estiList" value="${EstimateVO.estimateId }"></td>
       <td>아마존</td>
       <td>아마존 신입 공채 시험</td>
       <td>2020.06.20 
 		15:00 ~ 18:00</td>
       <td>완료</td>
    </tr>
-   <tr onclick="location.href='managerRequestListDetail.jsp'"> 
-      <td>Google</td>
-      <td>구글</td>
-      <td>구글 신입 공채 시험</td>
-      <td>2020.06.20 
-		15:00 ~ 18:00</td>
-      <td>진행전</td>
-   </tr>
-   <tr onclick="location.href='managerRequestListDetail.jsp'">
-      <td>MS</td>
-      <td>마이크로소프트</td>
-      <td>MS 신입 공채 시험</td>
-      <td>2020.06.20 
-		15:00 ~ 18:00</td>
-      <td>완료</td>
-   </tr>
-   <tr onclick="location.href='managerRequestListDetail.jsp'">
-      <td>APPLE</td>
-      <td>애플</td>
-      <td>애플 신입 공채 시험</td>
-      <td>2020.06.20 
-		15:00 ~ 18:00</td>
-      <td>미결</td>
-   </tr>
+   </c:forEach>
 </table>
 </form>
    

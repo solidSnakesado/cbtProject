@@ -11,7 +11,8 @@
     <!-- 2019.07.09 성재민 -->
     <!-- 시험일정 메뉴 연결 -->
 <c:if test="${not empty sessionScope.candidate }"> 
-    <a href="${pageContext.request.contextPath }/candidateScheduleCheck.do/${candidate.takerId}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a>
+    <a href="${pageContext.request.contextPath }/candidateScheduleCheck.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a>
+    <%-- <a href="${pageContext.request.contextPath }/candidateScheduleCheck.do/${candidate.takerId}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a> --%>
 </c:if>
 <c:if test="${empty sessionScope.candidate }"> 
     <a href="${pageContext.request.contextPath }/candidateLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a>
