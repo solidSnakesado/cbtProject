@@ -158,6 +158,21 @@ public class ManagerController {
 		companyService.updateCompany(vo);
 		return "redirect:managerAccountList.do";
 	}
+	
+	// 관리자 상담 상세조회, 수정폼
+	@RequestMapping(value = "managerConsultingListDetail.do/{consultingId}", method = RequestMethod.GET)
+	public String managerConsultingListDetail(@PathVariable int consultingId, Model model, ConsultingVO vo) {
+		vo.setConsultingId(consultingId);;
+		model.addAttribute("result", consultingService.getConsulting(vo));
+		return "manager/manager/managerConsultingListDetail";
+	}
+
+	// 관리자 컴퍼니 정보 수정처리
+	@RequestMapping(value = "managerConsultingListDetail.do", method = RequestMethod.POST)
+	public String managerConsultingListDetail(@ModelAttribute("consulting") ConsultingVO vo) {
+		consultingService.updateConsulting(vo);
+		return "redirect:managerConsultingList.do";
+	}
 
 	// 매니저가 회사 추가폼
 	@RequestMapping(value = "managerAccountInsert.do", method = RequestMethod.GET)

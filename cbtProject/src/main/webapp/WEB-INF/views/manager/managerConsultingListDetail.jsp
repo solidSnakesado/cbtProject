@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,44 +9,33 @@
 <body>
 
 	<h3>개별 시험 상담 목록 (관리자화면)</h3>
+	<form action="${pageContext.request.contextPath }/managerConsultingListDetail.do" method="post">
 	<table border = "1">
 		<tr>
-			<th>기업명</th>
-			<td>구글</td>
+			<th>상담희망일</th><td><input type="datetime-local" name="consultingDesiredDate" id="consultingDesiredDate" value="${consulting.consultingDesiredDate}" readonly></td>
 		</tr>
 		<tr>
-			<th>업종</th>
-			<td>IT</td>
+			<th>제목</th><td><input type="text" name="consultingTitle" id="consultingTitle" 
+					value="${consulting.consultingTitle}" style="width: 100%;" readonly="readonly"></td>
 		</tr>
 		<tr>
-			<th>담당자</th>
-			<td>에릭슈미트</td>
+			<th>상담내용</th><td><textarea name="consultingContents" id="consultingContents" cols="80" rows="8" readonly>${consulting.consultingContents}</textarea></td>
 		</tr>
 		<tr>
-			<th>연락처</th>
-			<td>010-2222-3333</td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>ceo@gmail.com</td>
-		</tr>
-		<tr>
-			<th>상담내용</th>
-			<td><textarea>상반기 정기 채용 시험 문의 입니다.시험 인원은 100 명시험 시간은 100분 정도 생각 하고 있습니다.</textarea></td>
-		</tr>
-		<tr>
-			<th>상담희망일</th>
-			<td>2019/06/17 15:00~18:00</td>
-		</tr>
-		<tr>
-			<th>상담일</th>
-			<td>2019/06/17 15:00~17:30</td>
+			<th>상담일</th><c:if test="${not empty consulting.consultingDate }">
+			<td><input type="datetime-local" name="consultingDate" id="consultingDate" readonly="readonly" value="${consulting.consultingDate}"></td>
+			</c:if>
+			<c:if test="${empty consulting.consultingDate }">
+				<td>상담일이 지정되지 않았습니다.</td>
+			</c:if>
 		</tr>
 	</table>
 	
-	<button onclick = "location.href = 'managerConsultingList.jsp'" >확인</button>
-	<input type = "button" onclick = "location.href = 'managerConsultingList.jsp'" value = "상담	완료">
-
-
+	<c:if test="${consulting.consultingState == 0}">
+		<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
+	</c:if>
+	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
+	<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="확인">
+</form>
 </body>
 </html>

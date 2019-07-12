@@ -23,8 +23,8 @@
    <c:forEach items="${result}" var="ConsultingVO">
    <tr>
       <td><input type="checkbox" name="consultingList" value="${ConsultingVO.consultingId }"></td>
-      <td>${ConsultingVO.consultingTitle}</td>
-      <td id="consultingDesiredDate_${ConsultingVO.consultingId}">${ConsultingVO.consultingDesiredDate}</td>
+      <td><a href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
+      <td>${ConsultingVO.consultingDesiredDate}</td>
    </tr>
    </c:forEach>
 </table>
