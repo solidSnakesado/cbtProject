@@ -30,11 +30,7 @@ public class ConsultingDAO {
 	}
 	
 	public List<ConsultingVO> getConsultingList(ConsultingVO vo) {
-		if(vo == null) {
-			return mybatis.selectList("consultingDAO.getConsultingList");
-		} else {
-			return mybatis.selectList("consultingDAO.getConsultingList", vo);
-		}
+		return mybatis.selectList("consultingDAO.getConsultingList", vo);
 	}
 	
 	public int getConsultingCount(ConsultingVO vo) {
