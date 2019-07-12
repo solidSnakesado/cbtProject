@@ -37,14 +37,17 @@
 			
 			
 		</table>
-		<button>수정하기</button> <button type="button" onclick="window_close()"> 확인 </button> 
+		<button>수정하기</button> <button type="button" onclick="windowClose()"> 확인 </button> 
 	</form>
 	
 	<script>
 			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
-			
-			
 			tradeProgress.readOnly =true;
+			
+			function windowClose(){
+				window.opener.top.location.reload();
+				
+			}
 	</script>
 </body>
 </html>
