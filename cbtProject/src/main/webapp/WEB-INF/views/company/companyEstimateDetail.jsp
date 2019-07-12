@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
-</head>
+</head>  
 <body>
 	<h2 align="center">세부 의뢰목록</h2>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" method="POST">
@@ -46,7 +46,7 @@
 			
 			function windowClose(){
 				window.opener.top.location.reload();
-				
+				window.close();
 			}
 	</script>
 </body>

@@ -42,8 +42,8 @@ public class EstimateController {
 	//기업은 자기의뢰 수정 할수 있다.  company-update
 	@RequestMapping(value = "companyEstimateUpdate.do", method = RequestMethod.GET)
 	public String companyEstimateUpdateForm() {
-		return "company/company/companyDetailEstimateList";
-		//return "company/companyDetailEstimateList";
+		return "company/company/companyEstimateDetail";
+		//return "company/companyEstimateDetail";
 	}
 	
 	
@@ -70,9 +70,9 @@ public class EstimateController {
 	}
 	
 	//의뢰세부내용보기			 company-select-detail
-	@RequestMapping(value="companyDetailEstimateList.do/{estimateId}", method = RequestMethod.GET)
+	@RequestMapping(value="companyEstimateDetail.do/{estimateId}", method = RequestMethod.GET)
 	
-	public String companyDetailEstimateList(@PathVariable("estimateId") int estimateId, //String ->int바꿔야함
+	public String companyEstimateDetail(@PathVariable("estimateId") int estimateId, //String ->int바꿔야함
 												EstimateVO vo,
 												Model model) {
 		
@@ -85,7 +85,7 @@ public class EstimateController {
 		model.addAttribute("L", conditionService.getConditionDetailList("L"));	//L-응시목적
 		model.addAttribute("M", conditionService.getConditionDetailList("M"));	//M-시험분류
 		model.addAttribute("N", conditionService.getConditionDetailList("N"));	//N-시험간격
-		return "empty/company/companyDetailEstimateList";
+		return "empty/company/companyEstimateDetail";
 	}
 	
 	
@@ -126,7 +126,7 @@ public class EstimateController {
 		@RequestMapping(value = "managerEstimateUpdate.do", method = RequestMethod.GET)
 		public String managerEstimateUpdateForm() {
 			return "manager/manager/managerDetailEstimateList";
-			//return "company/companyDetailEstimateList";
+			//return "company/companyEstimateDetail";
 		}
 		
 		
