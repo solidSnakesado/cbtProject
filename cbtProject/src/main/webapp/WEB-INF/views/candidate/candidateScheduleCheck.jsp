@@ -98,7 +98,8 @@ function getExamInfoResult(item){
 		</tr>
 
    	<c:forEach items="${candidateScheduleCheck}" var="examInfo" >
-		<tr onclick="getExamInfo('${examInfo.EXAM_ID}')">
+		<%-- <tr onclick="getExamInfo('${examInfo.EXAM_ID}')"> --%>
+		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
 			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>
 			<td>${examInfo.EXAM_START_TIME}</td>

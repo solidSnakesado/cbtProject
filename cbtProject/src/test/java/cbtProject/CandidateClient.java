@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cbt.question.QuestionDAO;
 import com.cbt.question.QuestionVO;
-import com.cbt.question.QuestionVOt;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
