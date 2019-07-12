@@ -19,34 +19,23 @@
 	function estimateDetail(estimateId){
 		console.log(estimateId);
 		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
-		var winopen = window.open("companyDetailRequestList.do/"+estimateId,"windowopen",wintype);
+		var winopen = window.open("companyDetailEstimateList.do/"+estimateId,"windowopen",wintype);
 		
 	}
 </script>
 
 </head>
 <body>
-  
-	<header id="header"></header>
-<section>
-   <article>
-      <ul>
-         <li><button type="button" onclick="location.href='accountManage.html'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='requestList.html'">의뢰목록</button></li>
-         <li><button type="button" onclick="location.href='conSulting_List.html'">상담목록</button></li>
-         <li><button type="button" onclick="location.href='test_List.html'">시험목록</button></li>
-      </ul>
-   </article>
-</section>
 
-<h2>의뢰목록</h2>	
+<h2>의뢰목록</h2>
 <hr/>		
 <div class="container">
 
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
 		</form>
-		<form action="deleteBoard.do">
+		
+		<form action="">
 			
 			<table border="1" class="table text-center">
 				<tr>
@@ -70,7 +59,6 @@
 			</table>
 		</form>
 		<my:paging jsFunc="goList" paging="${result.paging}"/>
-		<button type="button"  class="btn btn-primary" value="등록"  id="btnInsert"  onclick="location.href='companyEstimateInsert.do'">의뢰등록</button>
 		
 	</div>	
 </body>
