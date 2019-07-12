@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cbt.takeExam.TakeExamVOt;
 
 @Repository
 public class CandidateDAO {
@@ -54,6 +53,12 @@ public class CandidateDAO {
 	// 이승환이 쓰고있음
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
+	}
+	
+	// 전체 시험 스케쥴 가져옴
+	public List<Map<Object, String>> candidateScheduleCheck() {
+		
+		return mybatis.selectList("candidateDAO.candidateScheduleCheck");
 	}
 	
 }

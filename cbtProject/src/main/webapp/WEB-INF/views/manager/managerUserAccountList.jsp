@@ -45,19 +45,7 @@
 </style>
 </head>
 <body>
-<nav id="nav2">
-				<a href="candidateUserMain.jsp">로그아웃</a>
-			</nav>
-	<section>
-		<article>
-			<ul>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerAccountControl.do'">계정관리</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerRequestList.do'">의뢰목록</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerConsultingList.do'">상담목록</button></li>
-				<li><button type="button" onclick="location.href='${pageContext.request.contextPath }/managerChart.do'">통 계</button></li>
-			</ul>
-		</article>
-	</section>
+
 <h2>응시자 계정관리</h2>
 <button type="button" onclick="location.href='managerUserInsert.do'">응시자 추가</button>
 <form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post" 

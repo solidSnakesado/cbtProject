@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>관리자 메인</h2>
 	<nav id="nav2">
 				<a href="candidateUserMain.jsp">로그아웃</a>
 			</nav>

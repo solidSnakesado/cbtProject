@@ -1,6 +1,9 @@
 package com.cbt.estimate;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.common.Paging;
 import com.cbt.condition.ConditionService;
 
 /* @RestController가 @ResponseBody를 포함하고 있기 때문에
@@ -25,18 +29,26 @@ public class EstimateController {
 	
 	//기업은 자기의뢰 내용을 볼수있다.
 	
-	@ResponseBody 
-	@RequestMapping(value= "/Estimate", method = RequestMethod.GET )
-	public List<EstimateVO> companyEstimateList(Model model, EstimateVO vo) {
-		//model.addAttribute("result", estimateService.getEstimateList(vo));
-		
-		return estimateService.getEstimateList(vo); //나중에 request가 Estimate로 바뀌면 바꾸어주어야함
-	}
+	
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value= "/Estimate", method = RequestMethod.GET ) public
+	 * List<EstimateVO> companyEstimateList(Model model, EstimateVO vo) {
+	 * //model.addAttribute("result", estimateService.getEstimateList(vo));
+	 * 
+	 * return estimateService.getEstimateList(vo); //나중에 request가 Estimate로 바뀌면
+	 * 바꾸어주어야함 }
+	 */
 	
 	@RequestMapping(value="companyEstimateList.do", method = RequestMethod.GET)
-	public String companyEstimateListForm() {
-		System.out.println("companyEstimateList GET");
-		return "company/company/companyEstimateList";
+	public ModelAndView companyEstimateListForm(Paging paging,
+												ModelAndView mv,
+												EstimateVO vo) {
+		mv.addObject("result", estimateService.getEstimateList(vo, paging));
+		mv.setViewName("company/company/companyEstimateList");
+		return mv;
 	}
 	
 	//기업의뢰 등록		기업은 의뢰 등록 할수 있다.
@@ -67,11 +79,18 @@ public class EstimateController {
 	
 	
 	@RequestMapping(value = "/companyEstimateUpdate.do", method=RequestMethod.POST)
-	public String companyEstimateUpdate(EstimateVO vo) {
+	public void companyEstimateUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
 		
+		PrintWriter out = response.getWriter();
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
-		return "redirect:companyEstimateList.do"; 
+		
+		//윈도우창 닫기
+		out.print("<script>");
+		out.print("window.opener.top.location.reload();");
+		out.print("window.close();");
+		out.print("</script>");
+		out.flush();
 	}
 	
 	//기업은 자기의뢰를 삭제 할 수 있다.

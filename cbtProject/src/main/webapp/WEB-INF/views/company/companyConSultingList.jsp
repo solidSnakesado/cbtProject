@@ -40,7 +40,7 @@
 	<table border="1" align="center">
 		<tr>
 			<th>제목</th>
-			<th>상담신청일</th>
+			<th>상담희망일</th>
 		</tr>
 		<c:forEach items="${result.consultingList}" var="consulting">
 			<tr onclick="location.href='companyConSultingDetail.do/${consulting.consultingId}'">

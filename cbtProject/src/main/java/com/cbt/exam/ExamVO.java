@@ -1,63 +1,63 @@
 package com.cbt.exam;
 
-import java.sql.Timestamp;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ExamVO {
 
 	// 2019.07.08 성재민
 	// examId, estimateId 타입 int 로 변경
-	private int 		examId;
-	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
-	private Timestamp 	examStartTime;
-	@JsonFormat(pattern ="yyyy-MM-dd HH:mm")
-	private Timestamp 	examEndTime;
-	private int 		questionQuantity;
-	private int 		estimateId;
-	private int 		numberOfTimes;
-	private int 		passingScore;
-	private int 		possibleApplicants;
-	private String 		examName;
-	private int 		examStatus;
-	private int 		disclosureStatus;
-	private int 		setExamStatus;
-	private String 		examDescriptionSimple;
-	private String 		examDescriptionDetail;
+
+	// 2019.07.11 성재민
+	// 시간 변수들 문자열로 수정
+
+	private int 	examId;
+	private String 	examStartTime;
+	private String 	examEndTime;
+	private int 	questionQuantity;
+	private int 	estimateId;
+	private int 	numberOfTimes;
+	private int 	passingScore;
+	private int 	possibleApplicants;
+	private String 	examName;
+	private String 	examStatus;
+	private String 	disclosureStatus;
+	private String 	setExamStatus;
+	private String 	examDescriptionSimple;
+	private String 	examDescriptionDetail;
+	private int 	start;
+	private int 	end;
 
 	
-	public String getExamDescriptionSimple() {
-		return examDescriptionSimple;
+	public int getStart() {
+		return start;
 	}
 
-	public void setExamDescriptionSimple(String examDescriptionSimple) {
-		this.examDescriptionSimple = examDescriptionSimple;
+	public void setStart(int start) {
+		this.start = start;
 	}
 
-	public String getExamDescriptionDetail() {
-		return examDescriptionDetail;
+	public int getEnd() {
+		return end;
 	}
 
-	public void setExamDescriptionDetail(String examDescriptionDetail) {
-		this.examDescriptionDetail = examDescriptionDetail;
+	public void setEnd(int end) {
+		this.end = end;
 	}
 	
-	public Timestamp getExamStartTime() {
+	public String getExamStartTime() {
 		return examStartTime;
 	}
-	
-	public void setExamStartTime(Timestamp examStartTime) {
+
+	public void setExamStartTime(String examStartTime) {
 		this.examStartTime = examStartTime;
 	}
-	
-	public Timestamp getExamEndTime() {
+
+	public String getExamEndTime() {
 		return examEndTime;
 	}
-	
-	public void setExamEndTime(Timestamp examEndTime) {
+
+	public void setExamEndTime(String examEndTime) {
 		this.examEndTime = examEndTime;
 	}
-	
+
 	public int getQuestionQuantity() {
 		return questionQuantity;
 	}
@@ -98,27 +98,27 @@ public class ExamVO {
 		this.examName = examName;
 	}
 	
-	public int getExamStatus() {
+	public String getExamStatus() {
 		return examStatus;
 	}
 	
-	public void setExamStatus(int examStatus) {
+	public void setExamStatus(String examStatus) {
 		this.examStatus = examStatus;
 	}
 	
-	public int getDisclosureStatus() {
+	public String getDisclosureStatus() {
 		return disclosureStatus;
 	}
 	
-	public void setDisclosureStatus(int disclosureStatus) {
+	public void setDisclosureStatus(String disclosureStatus) {
 		this.disclosureStatus = disclosureStatus;
 	}
 	
-	public int getSetExamStatus() {
+	public String getSetExamStatus() {
 		return setExamStatus;
 	}
 	
-	public void setSetExamStatus(int setExamStatus) {
+	public void setSetExamStatus(String setExamStatus) {
 		this.setExamStatus = setExamStatus;
 	}
 	
@@ -138,6 +138,22 @@ public class ExamVO {
 		this.estimateId = estimateId;
 	}
 
+	public String getExamDescriptionSimple() {
+		return examDescriptionSimple;
+	}
+
+	public void setExamDescriptionSimple(String examDescriptionSimple) {
+		this.examDescriptionSimple = examDescriptionSimple;
+	}
+
+	public String getExamDescriptionDetail() {
+		return examDescriptionDetail;
+	}
+
+	public void setExamDescriptionDetail(String examDescriptionDetail) {
+		this.examDescriptionDetail = examDescriptionDetail;
+	}
+
 	@Override
 	public String toString() {
 		return "ExamVO [examId=" + examId + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
@@ -147,6 +163,4 @@ public class ExamVO {
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
 				+ ", examDescriptionDetail=" + examDescriptionDetail + "]";
 	}
-
-	
 }

@@ -1,7 +1,6 @@
 package com.cbt.candidate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.Paging;
-import com.cbt.exam.*;
+import com.cbt.exam.ExamService;
+import com.cbt.exam.ExamVO;
+import com.cbt.takeExam.TakeExamService;
 
 
 //2019.07.01 장세준 - candidate3controller로 이전
@@ -30,6 +31,8 @@ public class CandidateController {
 	CandidateService candidateService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	TakeExamService takeExamService;
 	
 	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
 	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
@@ -200,13 +203,31 @@ public class CandidateController {
 		return "candidate/candidate/candidatePersonalChart";
 	}
 	
-	
-	@RequestMapping(value="candidateScheduleCheck.do", method = RequestMethod.GET)
-	public String candidateScheduleCheck() {
-		return "candidate/candidate/candidateScheduleCheck";
+	// 시험일정 전체 보기(로그인 없이 보기)
+	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
+	public ModelAndView candidateScheduleCheck() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheck());
+		mv.setViewName("candidate/candidate/candidateScheduleCheck");
+			
+		return mv;
 	}
 	
+	// 시험일정 가져오기
+//	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
+//	public String candidateScheduleCheck(HttpSession session, Model model, Paging paging) {
+//		CandidateVO loginCandidate = (CandidateVO) session.getAttribute("candidate");
+//		if(loginCandidate != null) {
+//			CandidateVO vo = new CandidateVO();
+//			vo.setTakerId(loginCandidate.getTakerId());
+//			model.addAttribute("result",candidateService.ExamSchedule(vo, paging));
+//			return "candidate/candidate/candidateScheduleCheck";
+//		} else {
+//			return "candidate/candidate/candidateLogin";
+//		}
+//	}
 	
+		
 	
 	// 2019.07.10 장세준
 	@ResponseBody
@@ -220,15 +241,15 @@ public class CandidateController {
 	// 2019.07.09 성재민
 	// 경로 수정
 	//연간시험일정  --> 응시하기
-	
-	@RequestMapping(value = "candidateScheduleCheck.do/{id}", method = RequestMethod.GET)
-	public String candidateScheduleCheck(Model model, @PathVariable("id") String id) {
-		CandidateVO vo = new CandidateVO();
-		vo.setTakerId(id);
-		CandidateVO taker = candidateService.getCandidate(vo);
-		model.addAttribute("result", candidateService.getExamList(taker));
-		return "candidate/candidate/candidateScheduleCheck";
-	}
+	/*
+	 * //temp
+	 * @RequestMapping(value = "candidateScheduleCheck.do/{id}", method =
+	 * RequestMethod.GET) public String candidateScheduleCheck(Model
+	 * model, @PathVariable("id") String id) { CandidateVO vo = new CandidateVO();
+	 * vo.setTakerId(id); CandidateVO taker = candidateService.getCandidate(vo);
+	 * model.addAttribute("result", candidateService.getExamList(taker)); return
+	 * "candidate/candidate/candidateScheduleCheck"; }
+	 */
 	
 	// 2019.07.09 성재민
 	// 경로 수정

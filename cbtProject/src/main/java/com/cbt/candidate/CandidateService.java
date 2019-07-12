@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.cbt.common.Paging;
-import com.cbt.company.CompanyVO;
-import com.cbt.takeExam.TakeExamVOt;
 
 public interface CandidateService {
 	// 글 등록
@@ -26,11 +24,21 @@ public interface CandidateService {
 	// 응시자 정보 가져올 리스트 -- 이승환
 	List<CandidateVO> getCandidateList(CandidateVO vo);
 	
+		
 	// 2019.07.09
 	// 시험정보
 	List<Map<String, String>> getExamList(CandidateVO vo);
 
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging);
-
+	
+	// ID 중복체크
 	int idcheck(CandidateVO vo);
+	
+	// 전체 시험일정 조회
+	List<Map<Object, String>> candidateScheduleCheck();
+
+	// 전체 시험일정 조회_페이징처리
+	int ExamScheduleCount();
+
+	
 }

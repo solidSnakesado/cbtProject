@@ -9,6 +9,26 @@ public class TakeExamVO {
 	private int 	score;
 	private int 	examId;
 	private String 	takerId;
+	private int 	start;
+	private int 	end;
+	
+	
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
 	
 	public int getTakeExamId() {
 		return takeExamId;
@@ -53,7 +73,8 @@ public class TakeExamVO {
 	@Override
 	public String toString() {
 		return "TakeExamVO [takeExamId=" + takeExamId + ", takeExamDate=" + takeExamDate + ", score=" + score
-				+ ", examId=" + examId + ", takerId=" + takerId + "]";
+				+ ", examId=" + examId + ", takerId=" + takerId + ", start=" + start + ", end=" + end + "]";
 	}
+
 
 }

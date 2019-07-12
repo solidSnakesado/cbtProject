@@ -5,6 +5,10 @@
 	<!-- 시험 등록 -->
 	<!-- 2019.07.09 성재민 -->
 	<!-- #{disclosureStatus} #{setExamStatus} 추가 -->
+	<!-- 2019.07.11 성재민 -->
+	<!-- 입력시 id 값은 시퀀스로 지정 -->
+	<!-- 2019.07.11 성재민 -->
+	<!-- 시험 설명(심플(EXAM_DESCRIPTION_SIMPLE), 디테일(EXAM_DESCRIPTION_DETAIL) ) 추가 -->
 	<insert id="insertExam" parameterType="ExamVO">
 		INSERT INTO EXAM (	
 							EXAM_ID
@@ -19,11 +23,13 @@
 						,	EXAM_STATUS
 						,	DISCLOSURE_STATUS
 						,	SET_EXAM_STATUS
+						,	EXAM_DESCRIPTION_SIMPLE
+						,	EXAM_DESCRIPTION_DETAIL
 					)
 		VALUES ( 
-					#{examId}
-				,	#{examStartTime}
-				,	#{examEndTime}
+					EXAM_ID_SEQ.NEXTVAL
+				,	TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI:SS')
+				,	TO_DATE(#{examEndTime}, 'YYYY-MM-DD HH24:MI:SS')
 				,	#{questionQuantity}
 				,	#{estimateId}
 				,	#{numberOfTimes}
@@ -33,6 +39,8 @@
 				,	#{examStatus} 
 				,	#{disclosureStatus} 
 				,	#{setExamStatus} 
+				,	#{examDescriptionSimple} 
+				,	#{examDescriptionDetail} 
 			)
 	</insert>
 	
@@ -41,17 +49,19 @@
 	<update id="updateExam" parameterType="ExamVO">
 		UPDATE EXAM
 		<set>	
-			EXAM_START_TIME   		= #{examStartTime}
-			, EXAM_END_TIME			= #{examEndTime}
-			, QUESTION_QUANTITY 	= #{questionQuantity}
-			, ESTIMATE_ID  			= #{estimateId}
-			, NUMBER_OF_TIMES 		= #{numberOfTimes}
-			, PASSING_SCORE 		= #{passingScore}
-			, POSSIBLE_APPLICANTS 	= #{possibleApplicants}
-			, EXAM_NAME 			= #{examName}
-			, EXAM_STATUS 			= #{examStatus}
-			, DISCLOSURE_STATUS 	= #{disclosureStatus}
-			, SET_EXAM_STATUS 		= #{setExamStatus}
+			EXAM_START_TIME   			= TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI:SS')
+			, EXAM_END_TIME				= TO_DATE(#{examEndTime}, 'YYYY-MM-DD HH24:MI:SS')
+			, QUESTION_QUANTITY 		= #{questionQuantity}
+			, ESTIMATE_ID  				= #{estimateId}
+			, NUMBER_OF_TIMES 			= #{numberOfTimes}
+			, PASSING_SCORE 			= #{passingScore}
+			, POSSIBLE_APPLICANTS 		= #{possibleApplicants}
+			, EXAM_NAME 				= #{examName}
+			, EXAM_STATUS 				= #{examStatus}
+			, DISCLOSURE_STATUS 		= #{disclosureStatus}
+			, SET_EXAM_STATUS 			= #{setExamStatus}
+			, EXAM_DESCRIPTION_SIMPLE 	= #{examDescriptionSimple}
+			, EXAM_DESCRIPTION_DETAIL 	= #{examDescriptionDetail}
 		</set>
 		<where>
 			EXAM_ID = #{examId}
@@ -69,11 +79,13 @@
 	
 	<!-- 2019.07.09 성재민 -->
 	<!-- select 추가 -->
+	<!-- 2019.07.11 성재민 -->
+	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
 	<select id="getExam" resultType="ExamVO">
 		SELECT 
 				EXAM_ID
-			,	EXAM_START_TIME
-			,	EXAM_END_TIME
+			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+			,	TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
 			,	QUESTION_QUANTITY
 			,	ESTIMATE_ID
 			,	NUMBER_OF_TIMES
@@ -89,15 +101,19 @@
 		<where>
 			EXAM_ID = #{examId}
 		</where>
+		ORDER BY EXAM_ID
+		
 	</select>
 	
-	<select id="getExamList" resultType="ExamVO">
+	<!-- 2019.07.11 성재민 -->
+	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
+	<select id="getExamList" parameterType="CompanyVO" resultType="ExamVO">
 		SELECT 
 				EXAM_ID
-			,	EXAM_START_TIME
-			,	EXAM_END_TIME
+			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+			,	TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
 			,	QUESTION_QUANTITY
-			,	ESTIMATE_ID
+			,	EXAM.ESTIMATE_ID
 			,	NUMBER_OF_TIMES
 			,	PASSING_SCORE
 			,	POSSIBLE_APPLICANTS
@@ -105,6 +121,17 @@
 			,	EXAM_STATUS
 			,	DISCLOSURE_STATUS
 			,	SET_EXAM_STATUS
+			,	EXAM_DESCRIPTION_SIMPLE
+			,	EXAM_DESCRIPTION_DETAIL
+		FROM EXAM
+		JOIN ESTIMATE
+		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		<where>
+			ESTIMATE.COMPANY_ID = #{companyId}
+		</where>
+	</select>
+	<select id="getExamCount" resultType="int">
+		SELECT COUNT(*)
 		FROM EXAM
 	</select>
 </mapper>

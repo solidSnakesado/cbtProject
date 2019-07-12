@@ -42,15 +42,6 @@
 			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
 		</select>
 		
-<!-- 	<resultMap type="TakeExamVOt" id="beanResult">
-		<result property="examName" column="EXAM_NAME" javaType="string"/>
-		<result property="examStartTime" column="EXAM_START_TIME" javaType="date"/>
-		<result property="examEndTime" column="EXAM_END_TIME" javaType="date"/>
-		<result property="questionQuantity" column="QUESTION_QUANTITY" javaType="int"/>
-		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
-		<result property="takerId" column="TAKER_ID" javaType="string" />
-	</resultMap> -->
-	
 		<!-- 7/9 	시험목록조회 	장세준  -->
 		<select id="getExamList" resultType="map">
 			SELECT	EXAM.EXAM_ID									"examId"
@@ -66,6 +57,19 @@
 			WHERE   EXAM.EXAM_ID = TAKE_EXAM.EXAM_ID
 			AND		TAKER_ID = #{takerId}
 			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
+		</select>
+		
+		<!-- 7/12 	시험목록조회 	장세준  -->
+		<select id="candidateScheduleCheck" resultType="map">
+			SELECT	            EXAM_ID											
+								,EXAM_NAME										
+								,TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	EXAM_START_TIME
+							    ,TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	EXAM_END_TIME
+							    ,QUESTION_QUANTITY								
+							    ,PASSING_SCORE									
+							    ,EXAM_DESCRIPTION_SIMPLE						
+							    ,EXAM_DESCRIPTION_DETAIL						
+			FROM    			EXAM
 		</select>
 		
 		<!-- 7/9 	로그인 	장세준  -->
