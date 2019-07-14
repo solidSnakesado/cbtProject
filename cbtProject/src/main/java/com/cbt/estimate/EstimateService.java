@@ -20,5 +20,8 @@ public interface EstimateService {
 	List<EstimateVO> getEstimateList(EstimateVO vo);
 	
 	public Map<String, Object> getEstimateList(EstimateVO vo, Paging paging);
+	
+	int getCateoryId(EstimateVO vo);
+	
 
 }

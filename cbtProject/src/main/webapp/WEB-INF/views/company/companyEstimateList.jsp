@@ -17,7 +17,7 @@
 		searchFrm.submit();
 	}
 	function estimateDetail(estimateId){
-		console.log(estimateId);
+		
 		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
 		

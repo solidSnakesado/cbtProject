@@ -35,10 +35,43 @@ public class EstimateVO {
 	//페이징
 	private int start;
 	private int end;
+	//카테고리 ID
+	private int mainCategoryId;
+	private int middleCategoryId;
+	private int smallCategoryId;
 	
 	
 	
+
 	
+	public int getMainCategoryId() {
+		return mainCategoryId;
+	}
+
+
+	public void setMainCategoryId(int mainCategoryId) {
+		this.mainCategoryId = mainCategoryId;
+	}
+
+
+	public int getMiddleCategoryId() {
+		return middleCategoryId;
+	}
+
+
+	public void setMiddleCategoryId(int middleCategoryId) {
+		this.middleCategoryId = middleCategoryId;
+	}
+
+
+	public int getSmallCategoryId() {
+		return smallCategoryId;
+	}
+
+
+	public void setSmallCategoryId(int smallCategoryId) {
+		this.smallCategoryId = smallCategoryId;
+	}
 
 
 	public String getCategoryNm() {

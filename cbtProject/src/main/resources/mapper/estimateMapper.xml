@@ -138,4 +138,10 @@
 	<select id="getCount" resultType="int">
 			SELECT COUNT(*) FROM ESTIMATE
 		</select>
+		
+	<select id ="getCateoryId" resultType="int">
+		SELECT CATEGORY_ID
+		FROM CATEGORY
+		WHERE CATEGORY_MAIN_ID= #{mainCategoryId} AND CATEGORY_MIDDLE_ID = #{middleCategoryId} AND CATEGORY_SMALL_ID = #{smallCategoryId}
+	</select>
 </mapper>
