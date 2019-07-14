@@ -90,5 +90,9 @@ public class QuestionDAO {
 	public void rightAnswer(QuestionVO vo) {
 		mybatis.update("QuestionDAO.rightAnswer", vo);
 	}
+	
+	public List<QuestionVO> candidateExamList(){
+		return mybatis.selectList("QuestionDAO.candidateExamList");
+	}
 
 }

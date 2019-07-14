@@ -35,6 +35,9 @@
 		<result property="point" column="POINT" javaType="int" />
 		<result property="examId" column="EXAM_ID" javaType="int" />
 		<result property="count" column="count(*)" javaType="int" />
+		<result property="levelOfDifficulty" column="LEVEL_OF_DIFFICULTY" javaType="int" />
+		<result property="categoryId" column="CATEGORY_ID" javaType="int" />
+		<result property="questionType" column="QUESTION_TYPE" javaType="string" />
 	</resultMap>
 	
 	<resultMap type="QuestionVO" id="questionVOs">
@@ -212,6 +215,21 @@
 		WHERE 	TAKE_EXAM_ID 		= 	#{takeExamId}
 	</update>
 	
+	<select id="candidateExamList" resultMap="questionVO">
+		SELECT  QUESTION_ID,
+		        QUESTION_CONTENT,
+		        EXAMPLE_1,
+		        EXAMPLE_2,
+		        EXAMPLE_3,
+		        EXAMPLE_4,
+		        RIGHT_ANSWER,
+		        RIGHT_COMMENTARY,
+		        LEVEL_OF_DIFFICULTY,
+		        CATEGORY_ID,
+		        QUESTION_TYPE
+		
+		FROM 	QUESTION
+	</select>
 
 </mapper>
  
