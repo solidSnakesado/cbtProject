@@ -28,6 +28,8 @@ public interface QuestionService {
 	
 	List<QuestionVO> candidateTakeExamList(QuestionVO vo);
 	
+	List<QuestionVO> candidateExamList();
+	
 	List<QuestionVO> candidateRightAnswerList(QuestionVO vo);
 	
 	QuestionVO getTestResultList(QuestionVO vo);

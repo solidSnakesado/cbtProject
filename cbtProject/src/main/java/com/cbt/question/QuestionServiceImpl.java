@@ -145,4 +145,9 @@ public class QuestionServiceImpl implements QuestionService {
 		
 	}
 
+	public List<QuestionVO> candidateExamList() {
+		
+		return questionDAO.candidateExamList();
+	}
+
 }
