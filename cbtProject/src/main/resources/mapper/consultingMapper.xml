@@ -57,7 +57,7 @@
 			<if test="companyId != null and companyId != '' ">
 				,COMPANY_ID = #{companyId}
 			</if>
-			<if test="consultingState != null and consultingState gte 0"> 
+			<if test="consultingState != null and consultingState != ''"> <!-- String으로 변환되어 수정함 -->
 				,CONSULTING_STATE = #{consultingState}
 			</if>
 		</set>
@@ -123,34 +123,90 @@
 		SELECT 	CONSULTING_ID
 				,CONSULTING_TITLE
 				,CONSULTING_DESIRED_DATE
+				,CONSULTING_STATE
+				,FIND_CODENM(CONSULTING_STATE) AS CONSULTING_STATE_NM
 		FROM CONSULTING
 		ORDER BY CONSULTING_ID DESC
 	</select>
+	
+	<!-- managerConsulting Detail 불러오기 : 승환추가 -->
+	<select id="getManagerConsulting" resultType="ConsultingVO">
+		SELECT CONSULTING_ID
+				, COMPANY_ID
+				, CONSULTING_CONTENTS
+				, REPLACE(TO_CHAR(CONSULTING_DESIRED_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T') 	"consultingDesiredDate"
+				, REPLACE(TO_CHAR(CONSULTING_DATE, 'YYYY-MM-DD HH24:MI'), ' ', 'T')			"consultingDate"
+				, CONSULTING_REMARKS
+				, FIND_CODENM(CONSULTING_STATE) AS CONSULTING_STATE_NM
+				, CONSULTING_TITLE
+		FROM CONSULTING
+		WHERE CONSULTING_ID = #{consultingId}
+
+	</select>
+	<!-- 승환추가 07.15 -->
+	<update id="managerUpdateConsulting" parameterType="ConsultingVO">
+		UPDATE CONSULTING
+		<set>
+			CONSULTING_CONTENTS 	= #{consultingContents}
+			,CONSULTING_TITLE 		= #{consultingTitle}
+			,CONSULTING_STATE		= #{consultingState}
+			,CONSULTING_DESIRED_DATE = TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')	
+			<if test="consultingDate != null and consultingDate != ''">
+				,CONSULTING_DATE = TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
+			</if>  
+			<if test="consultingRemarks != null and consultingRemarks != ''">
+				,CONSULTING_REMARKS = #{consultingRemarks}
+			</if>
+		</set>
+		WHERE CONSULTING_ID = #{consultingId}
+	</update>
+	
+	<insert id="managerConsultingInsert" parameterType="ConsultingVO">
+		INSERT INTO CONSULTING(
+			CONSULTING_ID
+			<if test="companyId != null and companyId != ''">
+				,COMPANY_ID
+			</if>
+			,CONSULTING_CONTENTS
+			,CONSULTING_DESIRED_DATE
+			,CONSULTING_DATE
+			,CONSULTING_REMARKS
+			,CONSULTING_STATE
+			,CONSULTING_TITLE
+			)
+		VALUES (
+			CONSULTING_ID_SEQ.NEXTVAL
+			<if test="companyId != null and companyId != ''">
+			,#{companyId}
+			</if>
+			, #{consultingContents}
+			, TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
+			, TO_DATE(REPLACE(#{consultingDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
+			, #{consultingRemarks}
+			, #{consultingState}
+			, #{consultingTitle}
+		)
+	</insert>
+	
+	<delete id="managerConsultingDelete" parameterType="ConsultingVO">
+		DELETE FROM CONSULTING
+		<where>
+			<choose>
+				<when test="consultingList != null and consultingList.length>0">
+					CONSULTING_ID in
+					<foreach collection="consultingList"
+							 open="(" close=")" separator=","
+							 item="item">
+							 #{item}
+					</foreach>
+				</when>
+				<otherwise>
+					CONSULTING_ID = #{consultingId}
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
+
 </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  

@@ -26,8 +26,8 @@ function openIdChk() {
     	e.preventDefault();
     	return false; 
     }
-     if(takerId == '' || !(takerId.length >= 3 && takerId.length <= 12)) {
-        window.alert("아이디를 입력하시오");
+     if(takerId == '' || !(takerId.length >= 4 && takerId.length <= 12)) {
+        window.alert("아이디 자리수를 확인하시오");
     	e.preventDefault();
         document.fmField.takerId.focus();
         return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
@@ -62,9 +62,14 @@ function openIdChk() {
 		var takerName = document.fmField.takerName;
 		var takerInfo = document.fmField.takerInfo;
 		var takerEmail = document.fmField.takerEmail;
+		
+		var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
+		var email = document.fmField.takerEmail.value;
+
+		
 		// 아이디 입력 유무 체크
 		if (takerId.value == ''
-				|| !(takerId.value.length >= 3 && takerId.value.length <= 12)) {
+				|| !(takerId.value.length >= 4 && takerId.value.length <= 12)) {
 			window.alert("아이디를 입력하시오");
 			e.preventDefault();
 			document.fmField.takerId.focus();
@@ -78,7 +83,7 @@ function openIdChk() {
 		}
 		// 암호 입력 유무 체크
 		if (document.fmField.takerPassword.value == '') {
-			window.alert('암호를 입력하세요.');
+			window.alert('password를 입력하세요.');
 			e.preventDefault();
 			document.fmField.takerPassword.focus()
 			return false;
@@ -102,8 +107,14 @@ function openIdChk() {
 			document.fmField.takerName.focus()
 			return false;
 		}
-		if (document.fmField.takerInfo.value == '') {
-			window.alert('연락처를 입력하세요.');
+		if (document.fmField.takerInfo.value == '' ) {
+			window.alert('생년월일을 입력하세요.');
+			e.preventDefault();
+			document.fmField.takerInfo.focus()
+			return false;
+		}
+		if (takerInfo.value.length != 6) {
+			window.alert('생년월일을 확인하세요.');
 			e.preventDefault();
 			document.fmField.takerInfo.focus()
 			return false;
@@ -114,6 +125,24 @@ function openIdChk() {
 			document.fmField.takerEmail.focus()
 			return false;
 		}
+		if( regEmail.test(email) == false) {
+			window.alert('올바른 이메일형태가 아닙니다');
+			e.preventDefault();
+			document.fmField.takerEmail.focus()
+			return false;
+		}
+		if (document.fmField.takerPhoneNum.value == '') {
+			window.alert('연락처를 입력하세요.');
+			e.preventDefault();
+			document.fmField.takerPhoneNum.focus()
+			return false;
+		}
+		if (takerPhoneNum.value.length < 11 || takerPhoneNum.value.length > 13) {
+		window.alert("연락처를 입력하시오");
+		e.preventDefault();
+		document.fmField.takerPhoneNum.focus();
+		return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
+	}
 		document.fmField.submit();
 	}
 </script>
@@ -128,33 +157,44 @@ function openIdChk() {
 		}); */
 	</script>
 	<header id="header"></header>
+	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
+			<tr>
+				<th colspan="2">
+					<h3>회원가입 페이지</h3>
+				</th>
+			</tr>
 			<tr>
 				<td>응시자ID</td>
-				<td><input type="text" name="takerId" id="takerId"></td>
-				<td><input type="button" value="중복확인" onclick="openIdChk();"/></td>
+				<td><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
+				<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
 			</tr>
 			<tr>
 				<td>응시자PW</td>
-				<td colspan="2"><input type="password" name="takerPassword" id="takerPassword"></td>
+				<td colspan="2"><input type="password" name="takerPassword" id="takerPassword">
+				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
 				<td>PW확인</td>
-				<td colspan="2"><input type="password" name="takerPasswordRe" id="takerPasswordRe"></td>
+				<td colspan="2"><input type="password" name="takerPasswordRe" id="takerPasswordRe">
+				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
 				<td>성명</td>
-				<td colspan="2"><input type="text" name="takerName" id="takerName"></td>
+				<td colspan="2"><input type="text" name="takerName" id="takerName">
+				</td>
 			</tr>
 			<tr>
-				<td>주민등록번호</td>
-				<td colspan="2"><input type="text" name="takerInfo" id="takerInfo"></td>
+				<td>생년월일</td>
+				<td colspan="2"><input type="text" name="takerInfo" id="takerInfo">
+				<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
 			</tr>
 			<tr>
 				<td>E-mail</td>
-				<td colspan="2"><input type="text" name="takerEmail" id="takerEmail"></td>
+				<td colspan="2"><input type="text" name="takerEmail" id="takerEmail">
+				<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
 			</tr>
 			<tr>
 				<td>최종학력</td>
@@ -168,14 +208,14 @@ function openIdChk() {
 				</select></td>
 			</tr>
 			<tr>
-				<td>PHONE NUMBER</td>
-				<td colspan="2"><input type="text" name="takerPhoneNum" id="takerPhoneNum"></td>
+				<td>연락처</td>
+				<td colspan="2"><input type="text" name="takerPhoneNum" id="takerPhoneNum">
+				<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
 			</tr>
 		</table>
 		<br> <br>
 		<div align="center">
-			<button type="button" onclick="checkForm()">가입</button> &nbsp; <input type="reset"
-				value="취소" />
+			<button type="button" onclick="checkForm()">가입</button> &nbsp; <input type="reset" value="취소" /> &nbsp;
 		</div>
 	</form>
 

@@ -3,8 +3,12 @@ package com.cbt.manager;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
+import com.cbt.exam.ExamVO;
 
 public interface ManagerService {
 	// 글 등록
@@ -29,11 +33,19 @@ public interface ManagerService {
 	
 	// 기업목록 조회
 	List<CompanyVO> managerAccountList(CompanyVO vo);
-	
-
-
 
 	// 로그인 처리 (7/9 추가, June)
 	ManagerVO loginManager(ManagerVO vo);
 
+	// 2019.07.15 성재민
+	// 엑셀 업로드
+	public List<CandidateVO> uploadExcelFile(MultipartFile excelFile);
+	
+	// 2019.07.15 성재민
+	// 모든 시험 리턴
+	public List<Map<String, String>> getManagerAllExam();
+	
+	// 2019.07.15 성재민
+	// 시험 id로 하나만 검색
+	public Map<String, String> getManagerExam(ExamVO vo);
 }

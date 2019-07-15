@@ -33,7 +33,7 @@
 					, TAKER_NAME
 					, TAKER_INFO
 					, TAKER_EDUCATION
-					, FIND_CODENM(TAKER_EDUCATION) AS TAKER_EDUCATION_NM
+					, TAKER_EDUCATION 
 					, TAKER_EMAIL
 					, TAKER_PASSWORD
 					, TAKER_PHONENUM
@@ -71,6 +71,30 @@
 							    ,EXAM_DESCRIPTION_DETAIL						
 			FROM    			EXAM
 		</select>
+		
+		
+		
+		<!-- 7/15 	시험목록조회 	장세준  -->
+		<select id="candidateScheduleCheckPage" resultType="map">
+			SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
+				SELECT	            EXAM_ID										
+									,EXAM_NAME										
+									,TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	EXAM_START_TIME
+								    ,TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	EXAM_END_TIME
+								    ,QUESTION_QUANTITY								
+								    ,PASSING_SCORE									
+								    ,EXAM_DESCRIPTION_SIMPLE						
+								    ,EXAM_DESCRIPTION_DETAIL						
+				FROM    			EXAM
+				ORDER BY			EXAM_ID DESC ) A ) B
+				<where>
+					RN BETWEEN #{start} AND #{end}
+				</where>
+		</select>
+		
+		
+		
+		
 		
 		<!-- 7/9 	로그인 	장세준  -->
 		<select id="candidateLogin" resultType="CandidateVO">
@@ -149,14 +173,18 @@
 		</where>
 	</delete>
 		
-		<select id="getCount" resultType="int">
-			SELECT COUNT(*) FROM TAKER
-		</select>
-		
-		<select id="idcheck" parameterType="CandidateVO" resultType="Integer">
-			SELECT	COUNT(*) FROM TAKER
-      		WHERE   TAKER_ID = #{takerId}
-		</select>
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM TAKER
+	</select>
+	
+	<select id="examCount" resultType="int">
+		SELECT COUNT(EXAM_ID) FROM EXAM
+	</select>
+	
+	<select id="idcheck" parameterType="CandidateVO" resultType="Integer">
+		SELECT	COUNT(*) FROM TAKER
+     		WHERE   TAKER_ID = #{takerId}
+	</select>
 		
 </mapper>
  

@@ -11,25 +11,10 @@ public class CompanyVO {
 	private String companyManager;    
 	private String companyManagerTelNum;	// 2019.07.02 성재민 COMPANY_MANAGER_TELNUM 추가
 	private String[] cpnList;
-	private String companyClassificationNm;
-	private String companySectorsNm;
+	private String companyClassificationName;
+	private String companySectorsName;
 	
 	
-	public String getCompanyClassificationNm() {
-		return companyClassificationNm;
-	}
-
-	public void setCompanyClassificationNm(String companyClassificationNm) {
-		this.companyClassificationNm = companyClassificationNm;
-	}
-
-	public String getCompanySectorsNm() {
-		return companySectorsNm;
-	}
-
-	public void setCompanySectorsNm(String companySectorsNm) {
-		this.companySectorsNm = companySectorsNm;
-	}
 
 	public String getCompanyId() {
 		return companyId;
@@ -113,6 +98,23 @@ public class CompanyVO {
 
 	public void setCpnList(String[] cpnList) {
 		this.cpnList = cpnList;
+	}
+	
+
+	public String getCompanyClassificationName() {
+		return companyClassificationName;
+	}
+
+	public void setCompanyClassificationName(String companyClassificationName) {
+		this.companyClassificationName = companyClassificationName;
+	}
+
+	public String getCompanySectorsName() {
+		return companySectorsName;
+	}
+
+	public void setCompanySectorsName(String companySectorsName) {
+		this.companySectorsName = companySectorsName;
 	}
 
 	@Override

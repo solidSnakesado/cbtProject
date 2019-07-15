@@ -83,11 +83,11 @@ public class CandidateController {
 		return "candidate/candidate/candidateAccountManageModify";
 	}
 	
-	//수정처리			장세준(7/3 ver.2)
-	@RequestMapping("updateCandidate.do")
+	//수정처리			장세준(7/3 ver.2)   
+	@RequestMapping(value="updateCandidate.do", method=RequestMethod.POST)
 	public String updateCandidate(CandidateVO vo) {
 		candidateService.updateCandidate(vo);
-		return "candidate/candidateMain";
+		return "redirect:candidateMain.do";
 	}
 	
 	//삭제처리			 장세준 (7/3)
@@ -95,7 +95,8 @@ public class CandidateController {
 	public String deleteBoard(HttpSession session) {
 		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
 		candidateService.deleteCandidate(vo);
-		return "redirect:candidateLogin.do";
+		session.invalidate();
+		return "redirect:candidateMain.do";
 	}
 
 	//단건조회			 장세준 (7/2)
@@ -205,13 +206,24 @@ public class CandidateController {
 	
 	// 시험일정 전체 보기(로그인 없이 보기)
 	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
-	public ModelAndView candidateScheduleCheck() {
+	public ModelAndView candidateScheduleCheck(Model model, Paging paging) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheck());
+		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheckPage(paging));
 		mv.setViewName("candidate/candidate/candidateScheduleCheck");
 			
 		return mv;
 	}
+	
+	// 시험일정 전체 보기(로그인 없이 보기)
+	/*
+	 * @RequestMapping(value = "candidateScheduleCheck.do", method =
+	 * RequestMethod.GET) public ModelAndView candidateScheduleCheck() {
+	 * ModelAndView mv = new ModelAndView(); mv.addObject("candidateScheduleCheck",
+	 * candidateService.candidateScheduleCheck());
+	 * mv.setViewName("candidate/candidate/candidateScheduleCheck");
+	 * 
+	 * return mv; }
+	 */
 	
 	@RequestMapping(value = "candidateExamDetialView.do/{examId}", method = RequestMethod.GET)
 	public String candidateExamDetialView(@PathVariable("examId") int examId, Model model) {

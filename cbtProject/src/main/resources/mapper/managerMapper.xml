@@ -221,5 +221,55 @@
 		WHERE TAKER_ID = #{takerId}	
 	</update>
 	
+	<select id="managerGetAllExam" resultType="map">
+		SELECT 
+		    COMPANY.COMPANY_ID				"companyId"
+		  , EXAM.EXAM_ID					"examId"
+		  , EXAM.EXAM_START_TIME			"examStartTime"
+		  , EXAM.EXAM_END_TIME				"examEndTime"
+		  , EXAM.QUESTION_QUANTITY			"questionQuantity"
+		  , EXAM.ESTIMATE_ID				"estimateId"
+		  , EXAM.NUMBER_OF_TIMES			"numberOfTimes"
+		  , EXAM.PASSING_SCORE				"passingScore"
+		  , EXAM.POSSIBLE_APPLICANTS		"possibleApplicants"
+		  , EXAM.EXAM_NAME					"examName"
+		  , EXAM.EXAM_STATUS				"examStatus"
+		  , EXAM.DISCLOSURE_STATUS			"disclosureStatus"
+		  , EXAM.SET_EXAM_STATUS			"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_SIMPLE	"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_DETAIL	"examDescriptionDetail"
+		FROM EXAM JOIN ESTIMATE
+		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		JOIN COMPANY
+		ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
+		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
+	</select>
+	
+	<select id="managerGetExamForExamVOId" parameterType="ExamVO" resultType="map">
+		SELECT 
+		    COMPANY.COMPANY_ID				"companyId"
+		  , EXAM.EXAM_ID					"examId"
+		  , EXAM.EXAM_START_TIME			"examStartTime"
+		  , EXAM.EXAM_END_TIME				"examEndTime"
+		  , EXAM.QUESTION_QUANTITY			"questionQuantity"
+		  , EXAM.ESTIMATE_ID				"estimateId"
+		  , EXAM.NUMBER_OF_TIMES			"numberOfTimes"
+		  , EXAM.PASSING_SCORE				"passingScore"
+		  , EXAM.POSSIBLE_APPLICANTS		"possibleApplicants"
+		  , EXAM.EXAM_NAME					"examName"
+		  , EXAM.EXAM_STATUS				"examStatus"
+		  , EXAM.DISCLOSURE_STATUS			"disclosureStatus"
+		  , EXAM.SET_EXAM_STATUS			"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_SIMPLE	"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_DETAIL	"examDescriptionDetail"
+		FROM EXAM JOIN ESTIMATE
+		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		JOIN COMPANY
+		ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
+		<where>
+			EXAM.EXAM_ID = #{examId}
+		</where>
+		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
+	</select>
 	
 </mapper>

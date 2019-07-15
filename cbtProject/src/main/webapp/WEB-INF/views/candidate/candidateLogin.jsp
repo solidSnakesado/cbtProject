@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+<div  align="right"><a href="companyLogin.do"><button>기 업 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
+<br>
 	<script type="text/javascript">
 	function checkForm() {
 	    var takerId 		= document.fmField.takerId;
@@ -28,7 +30,7 @@
 	
 	<header id="header"></header>
 	<form id="fmField" name="fmField" action="candidateLogin.do" method="POST">
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>ID :</td>
 				<td><input type="text" name="takerId" value="${candidateVO.takerId}"></td>
@@ -37,24 +39,13 @@
 				<td>PW :</td>
 				<td><input type="password" name="takerPassword"></td>
 			</tr>
-						<!-- 
-				2019.07.02 장세준 - 그림과 라디오 버튼이 겹쳐서 그림을 shadow처리
-				<input type="radio" name="user" value="기업">기업
-				<input type="radio" name="user" value="응시자">응시자
-				<br><br>
-			
-				<a href="companyMain.do"><img src="${pageContext.request.contextPath}/image/login_company.png"></a>
-				<a href="candidateMain.do"><img src="${pageContext.request.contextPath}/image/login_individual.png"></a>
-			-->
 			<tr>
 				<td align="center" colspan="2"><input type="button" value="로그인" onclick="checkForm()"/>&nbsp; <input type="reset" value="취소" /></td>
 			</tr>
 		</table>
 	</form>
-	<div align="center">
-		<br>
+	<div align="right">
 		<a href="candidateInSignUp.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
-		<a href="managerAccount.do"><button>관리자 계정으로 로그인하기</button></a>
 	</div>
 </body>
 </html>

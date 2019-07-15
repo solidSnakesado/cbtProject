@@ -1,14 +1,22 @@
 package com.cbt.company;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.cbt.candidate.CandidateVO;
 
 // 2019.06.27 성재민
 // 컴퍼니 메인 컨트롤러 연결
@@ -110,5 +118,4 @@ public class CompanyController {
 	public String companyChart() {
 		return "company/company/companyChart";
 	}
-
 }
