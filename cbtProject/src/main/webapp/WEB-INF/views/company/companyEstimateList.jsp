@@ -17,10 +17,32 @@
 		searchFrm.submit();
 	}
 	function estimateDetail(estimateId){
-		
+		console.log(estimateId);
 		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
-		
+	}
+	
+	function deleteEstimateId(estimateId){
+		console.log(estimateId);
+		if(confirm("삭제하시겠습니까??")){
+			$(document).ready(function(){
+				$.ajax({
+					type:'GET',
+					dataType : 'number',
+					url:"${pageContext.request.contextPath}/companyEstimateDelete.do/" + estimateId,
+					success : function(data) {
+						alert('삭제되었습니다');
+					}, error : function() {
+						alert('에러발생');
+					}
+				});
+			});
+		}
+		else{
+			alert("취소되었습니다");
+			return false;
+		}
+			
 	}
 </script>
 
@@ -35,7 +57,7 @@
 			<input type="hidden" name="page" value="1">
 		</form>
 		
-		<form action="companyEstimateDelete.do">
+		<form action="companyEstimateList.do">
 			
 			<table border="1" class="table text-center">
 				<tr>
@@ -47,13 +69,13 @@
 					<th class="text-center">삭제</th>
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
-					<tr onClick="estimateDetail(${estimate.estimateId})">
-						<td>${estimate.estimateId}</td>
-						<td>${estimate.categoryNm}</td>
-						<td>${estimate.requestDay}</td>
-						<td>${estimate.tradeProgressNm}</td>
-						<td>${estimate.examDate}</td>
-						<td><button>삭제</button></td>
+					<tr>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
+						<td><button type="button" onClick="deleteEstimateId(${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

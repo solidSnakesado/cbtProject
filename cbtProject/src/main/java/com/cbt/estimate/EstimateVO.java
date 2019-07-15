@@ -12,7 +12,7 @@ public class EstimateVO {
 	private int estimateId; 		//의뢰ID
 	private String estimateName;	//의뢰이름
 	private int categoryId;		//카테고리ID
-	private String categoryNm; //카테고리이름
+	private String categoryName; //카테고리이름
 	private String companyId;		//기업ID
 	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
@@ -29,8 +29,8 @@ public class EstimateVO {
 	private String examCount;			//시험횟수
 	private String examInterval;		//시험간격
 	//코드값에대한 이름을 저장하기위한 변수들
-	private String examCountNm;		// 
-	private String tradeProgressNm; // 
+	private String examCountName;		// 시험횟수 이름(ex 1번,2번)
+	private String tradeProgressName; // 의뢰진행상태 이름 
 	
 	//페이징
 	private int start;
@@ -39,265 +39,167 @@ public class EstimateVO {
 	private int mainCategoryId;
 	private int middleCategoryId;
 	private int smallCategoryId;
-	
-	
-	
-
-	
-	public int getMainCategoryId() {
-		return mainCategoryId;
-	}
-
-
-	public void setMainCategoryId(int mainCategoryId) {
-		this.mainCategoryId = mainCategoryId;
-	}
-
-
-	public int getMiddleCategoryId() {
-		return middleCategoryId;
-	}
-
-
-	public void setMiddleCategoryId(int middleCategoryId) {
-		this.middleCategoryId = middleCategoryId;
-	}
-
-
-	public int getSmallCategoryId() {
-		return smallCategoryId;
-	}
-
-
-	public void setSmallCategoryId(int smallCategoryId) {
-		this.smallCategoryId = smallCategoryId;
-	}
-
-
-	public String getCategoryNm() {
-		return categoryNm;
-	}
-
-
-	public void setCategoryNm(String categoryNm) {
-		this.categoryNm = categoryNm;
-	}
-
-
-	public int getStart() {
-		return start;
-	}
-
-
-	public void setStart(int start) {
-		this.start = start;
-	}
-
-
-	public int getEnd() {
-		return end;
-	}
-
-
-	public void setEnd(int end) {
-		this.end = end;
-	}
-
-
-	public String getExamInterval() {
-		return examInterval;
-	}
-
-
-	public void setExamInterval(String examInterval) {
-		this.examInterval = examInterval;
-	}
-
-
-	public String getTradeProgressNm() {
-		return tradeProgressNm;
-	}
-
-
-	public void setTradeProgressNm(String tradeProgressNm) {
-		this.tradeProgressNm = tradeProgressNm;
-	}
-
-
-	public String getExamCountNm() {
-		return examCountNm;
-	}
-
-
-	public void setExamCountNm(String examCountNm) {
-		this.examCountNm = examCountNm;
-	}
-
-
 	public int getEstimateId() {
 		return estimateId;
 	}
-
-
 	public void setEstimateId(int estimateId) {
 		this.estimateId = estimateId;
 	}
-
-
 	public String getEstimateName() {
 		return estimateName;
 	}
-
-
 	public void setEstimateName(String estimateName) {
 		this.estimateName = estimateName;
 	}
-
-
-	
-
 	public int getCategoryId() {
 		return categoryId;
 	}
-
-
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-
-
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public String getCompanyId() {
 		return companyId;
 	}
-
-
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
-
-
 	public Date getRequestDay() {
 		return requestDay;
 	}
-
-
 	public void setRequestDay(Date requestDay) {
 		this.requestDay = requestDay;
 	}
-
-
 	public int getEstimatePrice() {
 		return estimatePrice;
 	}
-
-
 	public void setEstimatePrice(int estimatePrice) {
 		this.estimatePrice = estimatePrice;
 	}
-
-
 	public String getTradeProgress() {
 		return tradeProgress;
 	}
-
-
 	public void setTradeProgress(String tradeProgress) {
 		this.tradeProgress = tradeProgress;
 	}
-
-
 	public String getCandidate() {
 		return candidate;
 	}
-
-
 	public void setCandidate(String candidate) {
 		this.candidate = candidate;
 	}
-
-
 	public String getApplyPurpose() {
 		return applyPurpose;
 	}
-
-
 	public void setApplyPurpose(String applyPurpose) {
 		this.applyPurpose = applyPurpose;
 	}
-
-
 	public String getApplicants() {
 		return applicants;
 	}
-
-
 	public void setApplicants(String applicants) {
 		this.applicants = applicants;
 	}
-
-
 	public String getExamClassfication() {
 		return examClassfication;
 	}
-
-
 	public void setExamClassfication(String examClassfication) {
 		this.examClassfication = examClassfication;
 	}
-
-
 	public String getLevelOfDifficulty() {
 		return levelOfDifficulty;
 	}
-
-
 	public void setLevelOfDifficulty(String levelOfDifficulty) {
 		this.levelOfDifficulty = levelOfDifficulty;
 	}
-
-
 	public Date getExamDate() {
 		return examDate;
 	}
-
-
 	public void setExamDate(Date examDate) {
 		this.examDate = examDate;
 	}
-
-
 	public String getRemarks() {
 		return remarks;
 	}
-
-
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-
 	public String getExamCount() {
 		return examCount;
 	}
-
-
 	public void setExamCount(String examCount) {
 		this.examCount = examCount;
 	}
-
-
+	public String getExamInterval() {
+		return examInterval;
+	}
+	public void setExamInterval(String examInterval) {
+		this.examInterval = examInterval;
+	}
+	public String getExamCountName() {
+		return examCountName;
+	}
+	public void setExamCountName(String examCountName) {
+		this.examCountName = examCountName;
+	}
+	public String getTradeProgressName() {
+		return tradeProgressName;
+	}
+	public void setTradeProgressName(String tradeProgressName) {
+		this.tradeProgressName = tradeProgressName;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public int getMainCategoryId() {
+		return mainCategoryId;
+	}
+	public void setMainCategoryId(int mainCategoryId) {
+		this.mainCategoryId = mainCategoryId;
+	}
+	public int getMiddleCategoryId() {
+		return middleCategoryId;
+	}
+	public void setMiddleCategoryId(int middleCategoryId) {
+		this.middleCategoryId = middleCategoryId;
+	}
+	public int getSmallCategoryId() {
+		return smallCategoryId;
+	}
+	public void setSmallCategoryId(int smallCategoryId) {
+		this.smallCategoryId = smallCategoryId;
+	}
 	@Override
 	public String toString() {
 		return "EstimateVO [estimateId=" + estimateId + ", estimateName=" + estimateName + ", categoryId=" + categoryId
-				+ ", companyId=" + companyId + ", requestDay=" + requestDay + ", estimatePrice=" + estimatePrice
-				+ ", tradeProgress=" + tradeProgress + ", candidate=" + candidate + ", applyPurpose=" + applyPurpose
-				+ ", applicants=" + applicants + ", examClassfication=" + examClassfication + ", levelOfDifficulty="
-				+ levelOfDifficulty + ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount
-				+ ", examInterval=" + examInterval + ", examCountNm=" + examCountNm + ", tradeProgressNm="
-				+ tradeProgressNm + ", start=" + start + ", end=" + end + "]";
+				+ ", categoryName=" + categoryName + ", companyId=" + companyId + ", requestDay=" + requestDay
+				+ ", estimatePrice=" + estimatePrice + ", tradeProgress=" + tradeProgress + ", candidate=" + candidate
+				+ ", applyPurpose=" + applyPurpose + ", applicants=" + applicants + ", examClassfication="
+				+ examClassfication + ", levelOfDifficulty=" + levelOfDifficulty + ", examDate=" + examDate
+				+ ", remarks=" + remarks + ", examCount=" + examCount + ", examInterval=" + examInterval
+				+ ", examCountName=" + examCountName + ", tradeProgressName=" + tradeProgressName + ", start=" + start
+				+ ", end=" + end + ", mainCategoryId=" + mainCategoryId + ", middleCategoryId=" + middleCategoryId
+				+ ", smallCategoryId=" + smallCategoryId + "]";
 	}
+	
+	
+	
 
-
+	
 
 
 	

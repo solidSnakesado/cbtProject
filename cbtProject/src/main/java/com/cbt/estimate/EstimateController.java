@@ -65,8 +65,10 @@ public class EstimateController {
 	}
 	
 	//기업은 자기의뢰를 삭제 할 수 있다.  company-delete
-	@RequestMapping(value = "companyEstimateDelete.do", method = RequestMethod.GET)
-	public String companyEstimateDelete(EstimateVO vo) {
+	@RequestMapping(value = "companyEstimateDelete.do/{estimateId}", method = RequestMethod.GET)
+	public String companyEstimateDelete(@PathVariable("estimateId") int estimateId,
+										EstimateVO vo) {
+		vo.setEstimateId(estimateId); 
 		estimateService.deleteEstimate(vo);
 		return "redirect:companyEstimateList.do";
 	}
