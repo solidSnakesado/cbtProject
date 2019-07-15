@@ -30,5 +30,12 @@
 		FROM 	TAKE_EXAM
 	</select>
 	
+	<select id="selectTakeExamId" resultType="TakeExamVO">
+		SELECT	TAKE_EXAM_ID TAKE_EXAM_ID
+			FROM	TAKE_EXAM
+		
+		WHERE TAKER_ID = #{takerId} AND EXAM_ID = #{examId}
+	</select>
+	
 	
 </mapper>

@@ -12,6 +12,11 @@ public class TakeExamDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	public TakeExamVO selectTakeExamId(TakeExamVO vo) {
+		
+		return mybatis.selectOne("takeExamDAO.selectTakeExamId", vo);
+	}
+	
 	public void insertTakeExam(TakeExamVO vo) {
 		
 		mybatis.insert("", vo);

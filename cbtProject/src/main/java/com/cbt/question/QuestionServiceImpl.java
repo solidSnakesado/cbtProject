@@ -7,9 +7,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 
 
@@ -23,6 +29,10 @@ public class QuestionServiceImpl implements QuestionService {
 	QuestionDAO questionDAO;
 	
 	public QuestionServiceImpl() {
+	}
+	
+	public void insertQuestion(QuestionVO vo) {
+		questionDAO.insertQuestion(vo);
 	}
 
 	public void insertTakeExamHistory(QuestionVO vo) {
@@ -149,8 +159,99 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.candidateExamList();
 	}
 	
-	public void getExcelUpload(String excelFile) {
-		questionDAO.getExcelUpload(excelFile);
+	public List<QuestionVO> uploadExcelFile(MultipartFile excelFile) {
+		List<QuestionVO> list = new ArrayList<QuestionVO>();
+		try {
+			OPCPackage opcPackage = OPCPackage.open(excelFile.getInputStream());
+			XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
+			// 첫번째 시트 불러오기
+			XSSFSheet sheet = workbook.getSheetAt(0);
+
+			// 한줄씩 반복문
+			for (int i = 1; i < sheet.getLastRowNum() + 1; ++i) {
+				XSSFRow row = sheet.getRow(i);
+				QuestionVO questionVO = new QuestionVO();
+
+				// 행이 존재하기 않으면 패스
+				if (row == null) {
+					continue;
+				}
+			// 엑셀 파일의 각각의 값 읽어 오기
+			// 엑셀 파일과 vo 객체가 타입이 맞지 않는 경우엔 타입을 맞춰서 입력 하여야 함.
+			//for(int j = 0; j < row.getLastCellNum(); ++j) {
+				
+			// 엑셀 파일타이
+				XSSFCell cell = row.getCell(0);
+				if(cell != null) {
+					questionVO.setQuestionId(Integer.parseInt(cell.getStringCellValue()));
+				}
+				
+				cell = row.getCell(1);
+				if(cell != null) {
+					questionVO.setQuestionContent(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(2);
+				if(cell != null) {
+					questionVO.setExample1(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(3);
+				if(cell != null) {
+					questionVO.setExample2(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(4);
+				if(cell != null) {
+					questionVO.setExample3(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(5);
+				if(cell != null) {
+					questionVO.setExample4(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(6);
+				if(cell != null) {
+					questionVO.setRightAnswer(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(7);
+				if(cell != null) {
+					questionVO.setRightCommentary(cell.getStringCellValue());
+				}
+				
+				cell = row.getCell(8);
+				if(cell != null) {
+					questionVO.setLevelOfDifficulty(Integer.parseInt(cell.getStringCellValue()));
+				}
+				
+				cell = row.getCell(9);
+				if(cell != null) {
+					questionVO.setCategoryId(Integer.parseInt(cell.getStringCellValue()));
+				}
+				
+				cell = row.getCell(10);
+				if(cell != null) {
+					questionVO.setQuestionType(cell.getStringCellValue());
+				}
+				
+				list.add(questionVO);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public void insertQuestionList(List<QuestionVO> vo) {
+		questionDAO.insertQuestionList(vo);
+	}
+
+	public QuestionVO selectExamName(int examId) {
+		return questionDAO.selectExamName(examId);
 	}
 
 }

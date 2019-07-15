@@ -1,26 +1,22 @@
 package com.cbt.question;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,16 +25,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.takeExam.TakeExamService;
+import com.cbt.takeExam.TakeExamVO;
 
 // 7/2 문제 컨트롤러 생성   -재용
 
 @Controller
 public class QuestionController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 	
 	@Autowired
 	QuestionService questionService;
+	
+	@Autowired
+	TakeExamService takeExamService;
+	
 	
 	
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
@@ -177,7 +178,7 @@ public class QuestionController {
 		
 		List<QuestionVO> list = questionService.candidateExamList();
 		
-		Workbook wb = new HSSFWorkbook();
+		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet("게시판");
 		Row row = null;
 		Cell cell = null;
@@ -185,22 +186,7 @@ public class QuestionController {
 
 		CellStyle headStyle = wb.createCellStyle();
 
-//		headStyle.setBorderTop(BorderStyle.THIN);
-//		headStyle.setBorderBottom(BorderStyle.THIN);
-//		headStyle.setBorderLeft(BorderStyle.THIN);
-//		headStyle.setBorderRight(BorderStyle.THIN);
-//
-//		headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
-//		headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-//
-//		headStyle.setAlignment(HorizontalAlignment.CENTER);
-		
-
 		CellStyle bodyStyle = wb.createCellStyle();
-//		bodyStyle.setBorderTop(BorderStyle.THIN);
-//		bodyStyle.setBorderBottom(BorderStyle.THIN);
-//		bodyStyle.setBorderLeft(BorderStyle.THIN);
-//		bodyStyle.setBorderRight(BorderStyle.THIN);
 
 
 		row = sheet.createRow(rowNo++);
@@ -276,8 +262,10 @@ public class QuestionController {
 			
 		}
 		
-		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+//		response.setContentType("application/vnd.ms-excel");
+		response.setContentType("application / vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		
+		response.setHeader("Content-Disposition", "attachment;filename=test.xlsx");
 		
 		wb.write(response.getOutputStream());
 		wb.close();
@@ -290,41 +278,22 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "/excelUp.do", method = RequestMethod.POST)
-    public void ExcelUp(HttpServletRequest req, HttpServletResponse rep){
-        logger.info("@@@@@@@@@@@@@@@ExcelUp START@@@@@@@@@@@@@@@");
- 
-        Map returnObject = new HashMap(); 
-        
-        try { // MultipartHttpServletRequest 생성 
-            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req; 
-            Iterator iter = mhsr.getFileNames(); 
-            MultipartFile mfile = null; 
-            String fieldName = ""; 
-            
-            // 값이 나올때까지
-            while (iter.hasNext()) { 
-                fieldName = iter.next().toString(); // 내용을 가져와서 
-                mfile = mhsr.getFile(fieldName); 
-                String origName; 
-                origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8"); //한글꺠짐 방지 // 파일명이 없다면 
-                
-                returnObject.put("params", mhsr.getParameterMap()); 
-                
-                
-                //위치 및 파일
-                questionService.getExcelUpload("D:\\"+origName);
-            }
-            
-            } catch (UnsupportedEncodingException e) { // TODO Auto-generated catch block 
-                e.printStackTrace(); 
-            }catch (IllegalStateException e) { // TODO Auto-generated catch block 
-                e.printStackTrace(); 
-            } catch (IOException e) { // TODO Auto-generated catch block 
-                e.printStackTrace(); 
-            }
+    public String ExcelUp(MultipartHttpServletRequest request, Model model){
  
         
-        logger.info("@@@@@@@@@@@@@@@ExcelUp END@@@@@@@@@@@@@@@");
+		MultipartFile file = null;
+		Iterator<String> iterator = request.getFileNames();
+		if(iterator.hasNext()) {
+			file = request.getFile(iterator.next());
+		}
+		List<QuestionVO> list = questionService.uploadExcelFile(file);
+		//model.addAttribute("list", list);
+		
+		for(QuestionVO vo : list) {
+			questionService.insertQuestion(vo);
+		}	
+		
+		return "redirect:fileUpload.do";
         
     }
 	

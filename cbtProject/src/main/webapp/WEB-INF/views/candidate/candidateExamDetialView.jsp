@@ -69,7 +69,7 @@
 </c:if>
 	</table>
 	<br>
-	<button onclick = "location.href = #" >응시하기</button>
+	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateExaminationList.do'" value = "응시하기">
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
 </body>

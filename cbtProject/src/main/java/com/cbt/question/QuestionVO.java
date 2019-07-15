@@ -4,7 +4,6 @@ package com.cbt.question;
 public class QuestionVO {
 	
 	
-	
 	// 7/2 생성    -재용
 	private int questionId;
 	private String questionContent;
@@ -33,6 +32,9 @@ public class QuestionVO {
 	private int sumPoint;
 	private int getPoint;
 	
+	public QuestionVO() {
+		
+	}
 	
 	public int getSumPoint() {
 		return sumPoint;
@@ -189,6 +191,19 @@ public class QuestionVO {
 	}
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionVO [questionId=" + questionId + ", questionContent=" + questionContent + ", example1="
+				+ example1 + ", example2=" + example2 + ", example3=" + example3 + ", example4=" + example4
+				+ ", rightAnswer=" + rightAnswer + ", rightCommentary=" + rightCommentary + ", levelOfDifficulty="
+				+ levelOfDifficulty + ", categoryId=" + categoryId + ", questionType=" + questionType + ", examId="
+				+ examId + ", setExamQuestionId=" + setExamQuestionId + ", point=" + point + ", count=" + count
+				+ ", takeExamId=" + takeExamId + ", takerId=" + takerId + ", takerAnswer=" + takerAnswer + ", examName="
+				+ examName + ", passingScore=" + passingScore + ", examStartTime=" + examStartTime + ", takerScore="
+				+ takerScore + ", takerName=" + takerName + ", takerInfo=" + takerInfo + ", sumPoint=" + sumPoint
+				+ ", getPoint=" + getPoint + "]";
 	}
 	
 	

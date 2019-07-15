@@ -1,39 +1,37 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Home</title>
-<script type="text/javascript">
-$("#excelUpForm").change(function(){
-    var form = $("#excelUpForm")[0];
-
-    var data = new FormData(form);
-    $.ajax({
-       enctype:"multipart/form-data",
-       method:"POST",
-       url: './excelUp.do',
-       processData: false,   
-       contentType: false,
-       cache: false,
-       data: data,
-       success: function(result){  
-           alert("업로드 성공!!");
-       }
-    });
-});
+<script>
+	$(document).ready(function() {
+		$("#fileInput").change(function() {
+			var form = $("#formUpload")[0];
+			var data = new FormData(form);
+			alert("시작");
+			$.ajax({
+				type: "POST",
+				url: "excelUp.do",
+				processData: false,   
+				contentType: false,
+				cache: false,
+				data: data,
+				success: function(result) {
+					alert("성공");
+				}
+			});
+		})
+	});
 </script>
 </head>
 <body>
-	엑셀업로드 : <br/>
-<form name="excelUpForm" id="excelUpForm" enctype="multipart/form-data" method="POST" action="./excelDown.do">
-    <input type="file" id="excelFile" name="excleFile" value="엑셀 업로드" />
-    <button> G o !</button>
-</form>
-
+	<form id="formUpload" name="formUpload" method="post" enctype="multipart/form-data">
+    	<input type="file" id="fileInput" name="fileInput" value="엑셀업로드 작업" accept=".xlsx">
+	</form>
 </body>
 </html>

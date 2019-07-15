@@ -3,12 +3,17 @@ package com.cbt.question;
 import java.util.List;
 import java.util.Map;
 
-import com.cbt.candidate.CandidateVO;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cbt.common.Paging;
 
 
 //  7/2 문제 서비스 작성    -재용
 public interface QuestionService {
+	
+	void insertQuestion(QuestionVO vo);
+	
+	void insertQuestionList(List<QuestionVO> vo);
 	
 	void insertTakeExamHistory(QuestionVO vo);
 	
@@ -44,6 +49,8 @@ public interface QuestionService {
 	
 	QuestionVO candidateExaminationListDetail(QuestionVO vo);
 	
-	void getExcelUpload(String excelFile);
+	public List<QuestionVO> uploadExcelFile(MultipartFile excelFile);
+	
+	QuestionVO selectExamName(int examId);
 
 }

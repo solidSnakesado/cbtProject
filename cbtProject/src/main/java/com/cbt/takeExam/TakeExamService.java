@@ -6,6 +6,8 @@ import com.cbt.common.Paging;
 
 public interface TakeExamService {
 	
+	TakeExamVO selectTakeExamId(TakeExamVO vo);
+	
 	void insertTakeExam(TakeExamVO vo);
 	
 	void updateTakeExam(TakeExamVO vo);

@@ -17,6 +17,11 @@ public class TakeExamServiceImpl implements TakeExamService {
 	public TakeExamServiceImpl() {
 	}
 	
+	public TakeExamVO selectTakeExamId(TakeExamVO vo) {
+		
+		return dao.selectTakeExamId(vo);
+	}
+	
 	public void insertTakeExam(TakeExamVO vo) {
 		
 		dao.insertTakeExam(vo);

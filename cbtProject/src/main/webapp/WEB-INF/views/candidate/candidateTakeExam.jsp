@@ -38,6 +38,14 @@
 		var passingScore = "${passingScore}";
 		var examStartTime = "${examStartTime}";
 		
+		console.log(takerId);
+		console.log(examId);
+		console.log(takeExamId);
+		console.log(examName);
+		console.log(passingScore);
+		console.log(examStartTime);
+		
+		
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
 			$.ajax({

@@ -1,15 +1,9 @@
 package com.cbt.question;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,13 +13,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class QuestionDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
-	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	public void insertQuestion(QuestionVO vo) {
+		mybatis.insert("QuestionDAO.insertQuestion", vo);
+	}
+	
 	public void insertTakeExamHistory(QuestionVO vo) {
-		System.out.println("insert");
 		mybatis.insert("QuestionDAO.insertTakeExamHistory", vo);
 	}
 	
@@ -66,7 +61,7 @@ public class QuestionDAO {
 	
 	public List<QuestionVO> getTestStart(QuestionVO vo) {
 		
-		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
+		return mybatis.selectList("QuestionDAO.getTestStart", vo);
 	}
 	
 	public int getSetCount(QuestionVO vo) {
@@ -101,51 +96,13 @@ public class QuestionDAO {
 		return mybatis.selectList("QuestionDAO.candidateExamList");
 	}
 	
-	public void getExcelUpload(String excelFile){
-        
-        logger.info("@@@@@@@@@@@@@@@getExcelUpload START@@@@@@@@@@@@@@@ "+excelFile);
-        
-        Map<String, Object> map = new HashMap<String, Object>();
-        
-        try {
-//            Workbook wbs = WorkbookFactory.create(new FileInputStream(excelFile));
-            Workbook wbs = ExcelUtil.getWorkbook(excelFile);
-            
-            Sheet sheet = (Sheet) wbs.getSheetAt(0);
- 
-            //excel file 두번쨰줄부터 시작
-            for (int i = sheet.getFirstRowNum() + 1; i <= sheet.getLastRowNum(); i++) {
-                
-                logger.info("@@@@@@@@map @@@@@@@@@@@@@@@@ i : "+i);
-                
-                Row row = sheet.getRow(i);
-                
-                //map.put("IDCOL", ""+ExcelUtil.cellValue(row.getCell(0)));
-                map.put("questionContent", ExcelUtil.cellValue(row.getCell(1)));
-                map.put("example1", ExcelUtil.cellValue(row.getCell(2)));
-                map.put("example2", ExcelUtil.cellValue(row.getCell(3)));
-                map.put("example3", ExcelUtil.cellValue(row.getCell(4)));
-                map.put("example4", ExcelUtil.cellValue(row.getCell(5)));
-                map.put("rightAnswer", ExcelUtil.cellValue(row.getCell(6)));
-                map.put("rightCommentary", ExcelUtil.cellValue(row.getCell(7)));
-                map.put("levelOfDifficulty", ExcelUtil.cellValue(row.getCell(8)));
-                map.put("categoryId", ExcelUtil.cellValue(row.getCell(9)));
-                map.put("questionType", ExcelUtil.cellValue(row.getCell(10)));
-                
-                //신규삽입
-                mybatis.insert("QuestionDAO.insertFileUpload", map);
-            }
- 
-            logger.info("@@@@@@@@map @@@@@@@@@@@@@@@@"+map.toString());
-            //데이터가져옵니다.
-            
-        }catch(Exception e){
-            logger.error("error : "+e.getMessage());
-            logger.error("error : "+e);
-        }
-        
-        logger.info("@@@@@@@@@@@@@@@getExcelUpload END@@@@@@@@@@@@@@@");
-        
-    }
-
+	public void insertQuestionList(List<QuestionVO> vo) {
+		mybatis.insert("QuestionDAO.insertQuestion", vo);
+	}
+	
+	public QuestionVO selectExamName(int examId) {
+		QuestionVO vo = mybatis.selectOne("QuestionDAO.selectExamName", examId);
+		return vo;
+	}
+	
 }
