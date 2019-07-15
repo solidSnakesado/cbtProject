@@ -1,12 +1,14 @@
 package com.cbt.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.exam.ExamVO;
 
 @Repository
 public class ManagerDAO {
@@ -53,6 +55,15 @@ public class ManagerDAO {
 		return mybatis.selectOne("ManagerDAO.managerLogin", vo);
 	}
 	
+	// 2019.07.15 성재민
+	// 모든 시험 가져오는 메소드
+	public List<Map<String, String>> getManagerAllExam() {
+		return mybatis.selectList("ManagerDAO.managerGetAllExam");
+	}
 	
-	
+	// 2019.07.15 성재민
+	// 시험 id로 하나만 검색
+	public Map<String, String> getManagerExam(ExamVO vo) {
+		return mybatis.selectOne("ManagerDAO.managerGetExamForExamVOId", vo);
+	}
 }

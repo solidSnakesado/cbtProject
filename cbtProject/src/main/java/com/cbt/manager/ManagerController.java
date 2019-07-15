@@ -27,6 +27,8 @@ import com.cbt.condition.ConditionService;
 import com.cbt.consulting.ConsultingService;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.estimate.EstimateService;
+import com.cbt.exam.ExamService;
+import com.cbt.exam.ExamVO;
 
 @Controller
 public class ManagerController {
@@ -43,6 +45,8 @@ public class ManagerController {
 	ConsultingService consultingService;
 	@Autowired
 	EstimateService estimateService;
+	@Autowired
+	ExamService examService;
 
 	// 메인
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
@@ -280,13 +284,28 @@ public class ManagerController {
 		if(iterator.hasNext()) {
 			file = request.getFile(iterator.next());
 		}
-		List<CandidateVO> list = managerService.uploadExcelFile(file);
-		//model.addAttribute("list", list);
 		
+		List<CandidateVO> list = managerService.uploadExcelFile(file);	
 		for(CandidateVO vo : list) {
 			candidateService.insertCandidate(vo);
 		}	
 		
 		return "redirect:managerUserAccountList.do";
+	}
+	
+	// 2019.07.15 성재민
+	// 시험 목록 전시
+	@RequestMapping(value="managerExamList.do", method=RequestMethod.GET)
+	public String managerExamList(Model model) {
+		model.addAttribute("ExamList", managerService.getManagerAllExam());
+		return "manager/manager/managerExamList";
+	}
+	
+	@RequestMapping(value="managerExamListDetail.do/{examId}", method=RequestMethod.GET)
+	public String managerExamListDetail(@PathVariable("examId") int examId, Model model) {
+		ExamVO vo = new ExamVO();
+		vo.setExamId(examId);
+		model.addAttribute("selectedExam", managerService.getManagerExam(examService.getExam(vo)));
+		return "manager/manager/managerExamListDetail";
 	}
 }

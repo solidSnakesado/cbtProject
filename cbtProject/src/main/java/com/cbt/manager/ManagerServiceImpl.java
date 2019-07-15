@@ -18,6 +18,7 @@ import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyDAO;
 import com.cbt.company.CompanyVO;
+import com.cbt.exam.ExamVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
@@ -122,5 +123,19 @@ public class ManagerServiceImpl implements ManagerService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	// 2019.07.15 성재민
+	// 모든 시험 리턴
+	@Override
+	public List<Map<String, String>> getManagerAllExam() {
+		return managerDAO.getManagerAllExam();
+	}
+
+	// 2019.07.15 성재민
+	// 시험 id로 하나만 검색
+	@Override
+	public Map<String, String> getManagerExam(ExamVO vo) {
+		return managerDAO.getManagerExam(vo);
 	}
 }

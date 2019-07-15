@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/main.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#I1SetExam").click(function() {
+			console.log("send");
+			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+		});
+	});
+</script>
 </head>
 <body>
 	<!-- 2019.07.11 성재민 -->
@@ -16,6 +24,10 @@
 	<h3>개별 시험 의뢰 목록 (기업화면)</h3>
 	<input type = "hidden" name = "no" value = "${ dto.no }">
 	<table border = "1" align="center">
+		<tr>
+			<th width="150px">의뢰기업</th>
+			<td>${selectedExam.companyId}</td>
+		</tr>
 		<tr>
 			<th width="150px">시험이름</th>
 			<td>${selectedExam.examName}</td>
@@ -64,10 +76,10 @@
 		<tr>
 			<th>출제상태</th>
 			<c:if test="${selectedExam.setExamStatus == 'I1'}">
-				<td>출제전</td>
+				<td>출제전 <input type="button" id="I1SetExam" value="출제하기"></td>
 			</c:if>
 			<c:if test="${selectedExam.setExamStatus == 'I2'}">
-				<td>출제중</td>
+				<td>출제중 <input type="button" id="I2SetExam" value="출제하기"></td>
 			</c:if>
 			<c:if test="${selectedExam.setExamStatus == 'I3'}">
 				<td>출제완료</td>
@@ -83,7 +95,7 @@
 		</tr>
 	</table>
 	<br>
-	<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do'" >통계보기</button>
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기">
+	<button onclick = "location.href = '${pageContext.request.contextPath }/'" >통계보기</button>
+	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
 </body>
 </html>
