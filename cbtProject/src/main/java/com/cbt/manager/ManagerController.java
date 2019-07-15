@@ -1,6 +1,9 @@
 package com.cbt.manager;
 
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateService;
@@ -283,5 +288,28 @@ public class ManagerController {
 	}
 
 	
-
+	// 2019.07.15 성재민
+	// 엑셀 업로드 처리
+	@RequestMapping(value="excelUploadForm.do", method=RequestMethod.GET)
+	public String ExcelForm() {
+		return "manager/manager/excelUpload";
+	}
+		
+	@RequestMapping(value="excelUpload.do", method=RequestMethod.POST)
+	public String ExcelUplod(MultipartHttpServletRequest request, Model model) {
+		
+		MultipartFile file = null;
+		Iterator<String> iterator = request.getFileNames();
+		if(iterator.hasNext()) {
+			file = request.getFile(iterator.next());
+		}
+		List<CandidateVO> list = managerService.uploadExcelFile(file);
+		//model.addAttribute("list", list);
+		
+		for(CandidateVO vo : list) {
+			candidateService.insertCandidate(vo);
+		}	
+		
+		return "redirect:managerUserAccountList.do";
+	}
 }

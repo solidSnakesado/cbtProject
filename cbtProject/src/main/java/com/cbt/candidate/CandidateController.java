@@ -87,7 +87,7 @@ public class CandidateController {
 	@RequestMapping("updateCandidate.do")
 	public String updateCandidate(CandidateVO vo) {
 		candidateService.updateCandidate(vo);
-		return "candidate/candidateMain";
+		return "candidate/candidate/candidateMain";
 	}
 	
 	//삭제처리			 장세준 (7/3)
@@ -95,7 +95,8 @@ public class CandidateController {
 	public String deleteBoard(HttpSession session) {
 		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
 		candidateService.deleteCandidate(vo);
-		return "redirect:candidateLogin.do";
+		session.invalidate();
+		return "candidate/candidate/candidateMain";
 	}
 
 	//단건조회			 장세준 (7/2)
