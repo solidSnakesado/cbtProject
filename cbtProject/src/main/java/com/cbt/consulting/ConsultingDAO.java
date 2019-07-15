@@ -40,4 +40,23 @@ public class ConsultingDAO {
 	public List<ConsultingVO> managerConsultingList(ConsultingVO vo) {
 		return mybatis.selectList("consultingDAO.managerConsultingList", vo);
 	}
+	//승환추가 07.15
+	public ConsultingVO getManagerConsulting(ConsultingVO vo) {
+		return mybatis.selectOne("consultingDAO.getManagerConsulting", vo);
+	} 
+	
+	//승환추가 07.15
+	public void managerUpdateConsulting(ConsultingVO vo) {
+		mybatis.update("consultingDAO.managerUpdateConsulting", vo);
+	}
+	
+	//승환추가 07.15
+	public void managerConsultingDelete(ConsultingVO vo) {
+		mybatis.delete("consultingDAO.managerConsultingDelete", vo);
+	}
+	//승환추가 07.15
+	public void managerConsultingInsert(ConsultingVO vo) {
+		mybatis.insert("consultingDAO.managerConsultingInsert", vo);
+	}
+	
 }

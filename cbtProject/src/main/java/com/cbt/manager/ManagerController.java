@@ -50,7 +50,8 @@ public class ManagerController {
 
 	// 메인
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
-	public String managerMain() {
+	public String managerMain(Model model, CandidateVO vo) {
+		model.addAttribute("candidate", candidateService.getCandidateList(vo));
 		return "manager/manager/managerMain";
 	}
 
@@ -164,15 +165,17 @@ public class ManagerController {
 	// 관리자 상담 상세조회, 수정폼
 	@RequestMapping(value = "managerConsultingListDetail.do/{consultingId}", method = RequestMethod.GET)
 	public String managerConsultingListDetail(@PathVariable int consultingId, Model model, ConsultingVO vo) {
-		vo.setConsultingId(consultingId);;
-		model.addAttribute("result", consultingService.getConsulting(vo));
+		vo.setConsultingId(consultingId);
+		model.addAttribute("result", consultingService.getManagerConsulting(vo));
+		model.addAttribute("C", conditionService.getConditionDetailList("C"));
 		return "manager/manager/managerConsultingListDetail";
 	}
 
 	// 관리자 상담 정보 수정처리
 	@RequestMapping(value = "managerConsultingListDetail.do", method = RequestMethod.POST)
 	public String managerConsultingListDetail(@ModelAttribute("consulting") ConsultingVO vo) {
-		consultingService.updateConsulting(vo);
+		System.out.println(vo);
+		consultingService.managerUpdateConsulting(vo);
 		return "redirect:managerConsultingList.do";
 	}
 
@@ -189,6 +192,20 @@ public class ManagerController {
 	public String managerAccountInsert(CompanyVO vo) {
 		companyService.insertCompany(vo);
 		return "redirect:managerAccountList.do";
+	}
+	
+	// 매니저가 상담추가 폼
+	@RequestMapping(value = "managerConsultingInsert.do", method = RequestMethod.GET)
+	public String managerConsultingInsertForm(ConsultingVO vo, Model model) {
+		model.addAttribute("C", conditionService.getConditionDetailList("C"));
+		return "manager/manager/managerConsultingInsert";
+	}
+
+	// 매니저가 상담 추가
+	@RequestMapping(value = "managerConsultingInsert.do", method = RequestMethod.POST)
+	public String managerConsultingInsert(ConsultingVO vo) {
+		consultingService.managerConsultingInsert(vo);
+		return "redirect:managerConsultingList.do";
 	}
 
 	// 매니저가 회사 삭제처리
@@ -225,7 +242,6 @@ public class ManagerController {
 	@RequestMapping(value = "managerUserInsert.do", method = RequestMethod.GET)
 	public String managerUserInsertForm(CandidateVO vo, Model model) {
 		model.addAttribute("J", conditionService.getConditionDetailList("J"));
-
 		return "manager/manager/managerUserInsert";
 	}
 
@@ -241,6 +257,13 @@ public class ManagerController {
 	public String managerUserDelete(CandidateVO vo) {
 		candidateService.deleteCandidate(vo);
 		return "redirect:managerUserAccountList.do";
+	}
+	
+	// 매니저가 유저 삭제
+	@RequestMapping("managerConsultingDelete.do")
+	public String managerConsultingDelete(ConsultingVO vo) {
+		consultingService.managerConsultingDelete(vo);
+		return "redirect:managerConsultingList.do";
 	}
 
 	// 로그인 폼 (7/9 생성, JUNE)

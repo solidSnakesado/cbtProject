@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,15 +39,6 @@
 				<td>PW :</td>
 				<td><input type="password" name="takerPassword"></td>
 			</tr>
-						<!-- 
-				2019.07.02 장세준 - 그림과 라디오 버튼이 겹쳐서 그림을 shadow처리
-				<input type="radio" name="user" value="기업">기업
-				<input type="radio" name="user" value="응시자">응시자
-				<br><br>
-			
-				<a href="companyMain.do"><img src="${pageContext.request.contextPath}/image/login_company.png"></a>
-				<a href="candidateMain.do"><img src="${pageContext.request.contextPath}/image/login_individual.png"></a>
-			-->
 			<tr>
 				<td align="center" colspan="2"><input type="button" value="로그인" onclick="checkForm()"/>&nbsp; <input type="reset" value="취소" /></td>
 			</tr>
