@@ -18,6 +18,8 @@ import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.question.QuestionService;
+import com.cbt.question.QuestionVO;
 
 //  7/2 출제 컨트롤러 생성     -재용
 @Controller
@@ -27,6 +29,8 @@ public class SetExamQuestionController {
 	SetExamQuestionService setExamQuestionService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	QuestionService questionService;
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> conditionMap() {
@@ -58,22 +62,37 @@ public class SetExamQuestionController {
 		return mv;
 	}
 	
+	// 2019.07.16 성재민
+	// 출제 하기 버튼을 누르면 연결
+	// 이전에 출제된 문제를 삭제후 다시 출제
 	@RequestMapping("/getQuestionList.do/{examId}")
 	public String getQuestionList(@PathVariable("examId") int examId, SetExamQuestionVO vo, Model model) {
+		SetExamQuestionVO deleteVO = new SetExamQuestionVO();
+		deleteVO.setExamId(examId);
+		setExamQuestionService.deleteSetExamQuestionForExamId(deleteVO);
 		ExamVO examVo = new ExamVO();
 		examVo.setExamId(examId);
 		examVo = examService.getExam(examVo);
 		List<Map<String, String>> tempMapList = setExamQuestionService.getQuestionList(examVo);
-		List<SetExamQuestionVO> setExamvoList = new ArrayList<SetExamQuestionVO>();
+		List<SetExamQuestionVO> setExamvoList 	= new ArrayList<SetExamQuestionVO>();
+		List<QuestionVO> 		questionVOList 	= new ArrayList<QuestionVO>();
 		
 		for (Map<String, String> item : tempMapList) {
 			SetExamQuestionVO setExamvo = new SetExamQuestionVO();
 			setExamvo.setExamId(Integer.parseInt(String.valueOf(item.get("examId"))));
 			setExamvo.setQuestionId(Integer.parseInt(String.valueOf(item.get("questionId"))));
-			setExamvo.setPoint(10);
+			
+			// 2019.07.16 성재민
+			// 총합이 늘 100 점이 될수 있게 로직을 조정 해야 함
+			setExamvo.setPoint((int)(100 / tempMapList.size()));
+			
+			QuestionVO questionVo = new QuestionVO();
+			questionVo.setQuestionId(setExamvo.getQuestionId());
+			questionVo = questionService.getQuestion(questionVo);
 			
 			setExamQuestionService.insertSetExamQuestion(setExamvo);
 			setExamvoList.add(setExamvo);
+			questionVOList.add(questionVo);
 		}
 		
 		// 2019.07.11 성재민
@@ -82,10 +101,14 @@ public class SetExamQuestionController {
 		examVo.setSetExamStatus("I2");
 		examService.updateExam(examVo);
 		
-		model.addAttribute("setExamResult", setExamvoList);
+		model.addAttribute("questionVOList", questionVOList);
+		model.addAttribute("examId", setExamvoList.get(0).getExamId());
+		
+		//QuestionVO vo = new QuestionVO();
+		
 		
 		// 2019.07.11 성재민
 		// 출제된 문제 볼수 있는 화면으로 연결이 되어야 함.
-		return "";
+		return "manager/manager/managerExamQuestionList";
 	}
 }

@@ -13,8 +13,12 @@
 <body>
 <h2>기업상담목록(관리자)</h2>
 
-<h2>관리자 상담목록</h2>
-<form>
+<br>
+<button type="button" onclick="location.href='managerConsultingInsert.do'">상담내역 추가</button>
+
+<br><br>
+<form action="managerConsultingDelete.do">
+<button id="">삭제</button>
 <table border="1" align="center">
    <tr>
    	  <th>선택</th>
@@ -27,7 +31,7 @@
       <td><input type="checkbox" name="consultingList" value="${ConsultingVO.consultingId }"></td>
       <td><a href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
       <td>${ConsultingVO.consultingDesiredDate}</td>
-      <td><my:select items="${C}" name="consultingList" value="${ConsultingVO.consultingState }"></my:select></td>
+      <td>${ConsultingVO.consultingStateNm }</td>
    </tr>
    </c:forEach>
 </table>

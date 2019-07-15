@@ -43,6 +43,15 @@
 		</where>
 	</delete>
 	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 시험 ID 로 여러건 삭제 추가 -->
+	<delete id="deleteSetExamQuestionForExamId" parameterType="SetExamQuestionVO">
+		DELETE FROM SET_EXAM_QUESTION
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</delete>
+	
 	<!-- 2019.07.09 성재민 -->
 	<!-- 단건 조회 -->
 	<select id="getSetExamQuestion" resultType="SetExamQuestionVO">
@@ -54,6 +63,20 @@
 		FROM SET_EXAM_QUESTION
 		<where>
 			SET_EXAM_QUESTION_ID = #{setExamQuestionId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.15 성재민 -->
+	<!-- 여러건 조회 -->
+	<select id="getSetExamQuestionListForExamId" resultType="SetExamQuestionVO">
+		SELECT 	
+			EXAM_ID					"examId"
+			,QUESTION_ID			"questionId"
+			,SET_EXAM_QUESTION_ID	"setExamQuestionId"
+			,POINT
+		FROM SET_EXAM_QUESTION
+		<where>
+			EXAM_ID = #{examId}
 		</where>
 	</select>
 	

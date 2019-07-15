@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.common.Paging;
+
 
 @Repository
 public class CandidateDAO {
@@ -54,11 +56,27 @@ public class CandidateDAO {
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
 	}
+	public int getCount() {
+		return mybatis.selectOne("candidateDAO.getCount");
+	}
 	
 	// 전체 시험 스케쥴 가져옴
 	public List<Map<Object, String>> candidateScheduleCheck() {
 		
 		return mybatis.selectList("candidateDAO.candidateScheduleCheck");
+	}
+
+	
+	
+	
+	// TEMP
+
+	public List<Map<Object, Object>> candidateScheduleCheckPage(CandidateVO vo){
+		return mybatis.selectList("candidateDAO.candidateScheduleCheckPage", vo);
+	}
+
+	public int examCount() {
+		return mybatis.selectOne("candidateDAO.examCount");
 	}
 	
 }

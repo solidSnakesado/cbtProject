@@ -22,5 +22,17 @@ public interface ConsultingService {
 	//승환추가
 	List<ConsultingVO> managerConsultingList(ConsultingVO vo);
 	
+	//2019.07.15 승환추가
+	ConsultingVO getManagerConsulting(ConsultingVO vo);
+	
+	//2019.07.15 승환추가
+	void managerUpdateConsulting(ConsultingVO vo);
+	
+	//2019.07.15 승환추가
+	void managerConsultingDelete(ConsultingVO vo);
+	
+	//2019.07.15 승환추가
+	void managerConsultingInsert(ConsultingVO vo);
+	
 	int getConsultingCount();
 }

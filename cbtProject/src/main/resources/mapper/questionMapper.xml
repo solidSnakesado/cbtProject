@@ -297,6 +297,27 @@
 		FROM	EXAM 
 		WHERE	EXAM_ID = #{examId}
 	</select>
+	
+	<!-- 2019.07.15 성재민 -->
+	<!-- 문제 id 로 문제 찾는 쿼리 -->
+	<select id="getQuestion" resultType="questionVO">
+		SELECT  QUESTION_ID,
+			        QUESTION_CONTENT,
+			        EXAMPLE_1,
+			        EXAMPLE_2,
+			        EXAMPLE_3,
+			        EXAMPLE_4,
+			        RIGHT_ANSWER,
+			        RIGHT_COMMENTARY,
+			        LEVEL_OF_DIFFICULTY,
+			        CATEGORY_ID,
+			        QUESTION_TYPE
+			
+			FROM 	QUESTION
+			<where>
+				QUESTION_ID = #{questionId}
+			</where>
+	</select>
 
 </mapper>
  

@@ -34,7 +34,7 @@ public class QuestionDAO {
 	
 	public QuestionVO getQuestion(QuestionVO vo) {
 		
-		return mybatis.selectOne("", vo);
+		return mybatis.selectOne("QuestionDAO.getQuestion", vo);
 	}
 	
 	public List<Map<String, Object>> getTestList(Map<String, Object> map){

@@ -14,7 +14,7 @@ function checkForm() {
 	var takerPasswordRe = document.fmField.takerPasswordRe;
 	
 	if (document.fmField.takerPassword.value != document.fmField.takerPasswordRe.value) {
-		window.alert('암호를 확인 하세요.');
+		window.alert('password가 일치하지 않습니다');
 		e.preventDefault();
 		document.fmField.takerPassword.focus()
 		return false;
@@ -35,7 +35,7 @@ function checkForm() {
 			</tr>
  			<tr>
 				<th>패스워드</th>
-				<td><input type="password" name="takerPassword" value="${candidate.takerPassword}"/></td>
+				<td><input type="password" name="takerPassword"/></td>
 			</tr> 
  			<tr>
 				<th>패스워드확인</th>
