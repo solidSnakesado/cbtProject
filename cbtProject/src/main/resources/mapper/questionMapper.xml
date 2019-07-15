@@ -230,6 +230,34 @@
 		
 		FROM 	QUESTION
 	</select>
+	
+	<insert id="insertFileUpload" parameterType="QuestionVO">
+
+		insert into QUESTION (			QUESTION_ID				,
+										QUESTION_CONTENT		"questionContent",
+										EXAMPLE_1				"example1",
+										EXAMPLE_2				"example2",
+										EXAMPLE_3				"example3",
+										EXAMPLE_4				"example4",
+										RIGHT_ANSWER			"rightAnswer",
+										RIGHT_COMMENTARY		"rightCommentary",
+										LEVEL_OF_DIFFICULTY		"levelOfDifficulty",
+										CATEGORY_ID				"categoryId",
+										QUESTION_TYPE			"questionType"	)
+
+		values		((SELECT MAX(QUESTION_ID)+1 FROM QUESTION),
+					#{questionContent},
+					#{example1},
+					#{example2},
+					#{example3},
+					#{example4},
+					#{rightAnswer},
+					#{rightCommentary},
+					#{levelOfDifficulty},
+					#{categoryId},
+					#{questionType})
+				
+	</insert>
 
 </mapper>
  

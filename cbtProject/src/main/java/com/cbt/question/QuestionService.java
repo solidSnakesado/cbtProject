@@ -43,5 +43,7 @@ public interface QuestionService {
 	List<QuestionVO> candidateExaminationList(QuestionVO vo);
 	
 	QuestionVO candidateExaminationListDetail(QuestionVO vo);
+	
+	void getExcelUpload(String excelFile);
 
 }

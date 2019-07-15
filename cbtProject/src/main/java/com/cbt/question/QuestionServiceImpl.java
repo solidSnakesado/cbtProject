@@ -146,8 +146,11 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	public List<QuestionVO> candidateExamList() {
-		
 		return questionDAO.candidateExamList();
+	}
+	
+	public void getExcelUpload(String excelFile) {
+		questionDAO.getExcelUpload(excelFile);
 	}
 
 }
