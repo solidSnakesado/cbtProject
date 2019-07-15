@@ -1,5 +1,7 @@
 package com.cbt.question;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +16,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.setExamQuestion.SetExamQuestionService;
+import com.cbt.setExamQuestion.SetExamQuestionVO;
 
 // 7/2 문제 컨트롤러 생성   -재용
 
@@ -28,6 +33,8 @@ public class QuestionController {
 	
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	SetExamQuestionService setExamQuestionService;
 	
 	
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
@@ -273,4 +280,92 @@ public class QuestionController {
 		
 	}
 	
+	@RequestMapping(value = "/managerExamQuestionExcelDown.do/{examId}")
+	public void managerExamQuestionExcelDown(@PathVariable("examId") int examId, HttpServletResponse response) {
+		SetExamQuestionVO vo = new SetExamQuestionVO();
+		vo.setExamId(examId);
+		List<SetExamQuestionVO> setExamList 	= setExamQuestionService.getSetExamQuestionListForExamId(vo);
+		List<QuestionVO> 		questionList 	= new ArrayList<QuestionVO>();
+		
+		for(SetExamQuestionVO setExam : setExamList) {
+			QuestionVO questionVO = new QuestionVO();
+			questionVO.setQuestionId(setExam.getQuestionId());
+			questionList.add(questionService.getQuestion(questionVO));
+		}
+		
+		Workbook 	wb 		= new HSSFWorkbook();
+		Sheet 		sheet 	= wb.createSheet("출제 문제");
+		Row 		row 	= null;
+		Cell 		cell 	= null;
+		int 		rowNo 	= 0;
+
+		CellStyle headStyle = wb.createCellStyle();
+		CellStyle bodyStyle = wb.createCellStyle();
+		
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("questionId");
+		cell = row.createCell(1);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("questionContent");
+		cell = row.createCell(2);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("example1");
+		cell = row.createCell(3);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("example2");
+		cell = row.createCell(4);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("example3");
+		cell = row.createCell(5);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("example4");
+		cell = row.createCell(6);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("rightAnswer");
+		cell = row.createCell(7);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("rightCommentary");
+		
+		for(QuestionVO qvo : questionList) {
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(vo.getQuestionId());
+			cell = row.createCell(1);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getQuestionContent());
+			cell = row.createCell(2);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getExample1());
+			cell = row.createCell(3);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getExample2());
+			cell = row.createCell(4);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getExample3());
+			cell = row.createCell(5);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getExample4());
+			cell = row.createCell(6);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getRightAnswer());
+			cell = row.createCell(7);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue(qvo.getRightCommentary());			
+		}
+		
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("Content-Disposition", "Attachment;Filename=test1.xls");
+		
+		try {
+			wb.write(response.getOutputStream());
+			wb.close();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

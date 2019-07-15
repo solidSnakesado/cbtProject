@@ -14,6 +14,11 @@
 			console.log("send");
 			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
 		});
+		
+		$("#I2SetExam").click(function() {
+			console.log("send");
+			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+		});
 	});
 </script>
 </head>

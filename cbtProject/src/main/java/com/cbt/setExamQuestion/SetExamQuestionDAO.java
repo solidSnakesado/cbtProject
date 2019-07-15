@@ -30,6 +30,12 @@ public class SetExamQuestionDAO {
 		mybatis.delete("setExamQuestionDAO.deleteSetExamQuestion", vo);
 	}
 	
+	// 2019.07.16 성재민
+	// 시험 id로 출제된 문제 삭제 구문 추가
+	public void deleteSetExamQuestionForExamId(SetExamQuestionVO vo) {
+		mybatis.delete("setExamQuestionDAO.deleteSetExamQuestionForExamId", vo);
+	}
+	
 	public SetExamQuestionVO getSetExamQuestion(SetExamQuestionVO vo) {
 		return mybatis.selectOne("setExamQuestionDAO.getSetExamQuestion", vo);
 	}
@@ -43,6 +49,10 @@ public class SetExamQuestionDAO {
 		} else {
 			return mybatis.selectList("setExamQuestionDAO.getSetExamQuestionList");
 		}
+	}
+	
+	public List<SetExamQuestionVO> getSetExamQuestionListForExamId(SetExamQuestionVO vo) {
+		return mybatis.selectList("setExamQuestionDAO.getSetExamQuestionListForExamId", vo);
 	}
 	
 	public List<Map<String, String>> getQuestionList(ExamVO vo) {

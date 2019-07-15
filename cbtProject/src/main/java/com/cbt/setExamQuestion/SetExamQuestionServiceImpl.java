@@ -49,4 +49,16 @@ public class SetExamQuestionServiceImpl implements SetExamQuestionService {
 	public List<Map<String, String>> getQuestionList(ExamVO vo) {
 		return dao.getQuestionList(vo);
 	}
+
+	@Override
+	public List<SetExamQuestionVO> getSetExamQuestionListForExamId(SetExamQuestionVO vo) {
+		return dao.getSetExamQuestionListForExamId(vo);
+	}
+
+	// 2019.07.16 성재민
+	// 시험 id 로 출제된 문제 삭제
+	@Override
+	public void deleteSetExamQuestionForExamId(SetExamQuestionVO vo) {
+		dao.deleteSetExamQuestionForExamId(vo);
+	}
 }
