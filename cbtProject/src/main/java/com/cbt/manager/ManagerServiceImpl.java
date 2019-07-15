@@ -1,49 +1,55 @@
 package com.cbt.manager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyDAO;
 import com.cbt.company.CompanyVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
-	
+
 	@Autowired
 	ManagerDAO managerDAO;
-	
+
 	@Override
 	public void insertManager(ManagerVO vo) {
 		managerDAO.insertManager(vo);
-		
+
 	}
 
 	@Override
 	public void updateManager(ManagerVO vo) {
 		managerDAO.updateManager(vo);
-		
+
 	}
 
 	@Override
 	public void deleteManager(ManagerVO vo) {
 		managerDAO.deleteManager(vo);
-		
+
 	}
 
 	@Override
-	public ManagerVO getManager(ManagerVO vo) {		
+	public ManagerVO getManager(ManagerVO vo) {
 		return managerDAO.getManager(vo);
 	}
 
 	@Override
-	public List<ManagerVO> getManagerList(ManagerVO vo) {		 
+	public List<ManagerVO> getManagerList(ManagerVO vo) {
 		return managerDAO.getManagerList(vo);
 	}
 
@@ -53,13 +59,12 @@ public class ManagerServiceImpl implements ManagerService {
 		map.put("managerList", managerDAO.getManagerList(vo));
 		return map;
 	}
-	
-	
+
 	// 7/5 재용 추가
-	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {		
+	public ManagerTakerVO getManagerUserAccountView(ManagerTakerVO vo) {
 		return managerDAO.getManagerUserAccountView(vo);
 	}
-	
+
 	public List<CompanyVO> managerAccountList(CompanyDAO dao, CompanyVO vo) {
 		return dao.getCompanyList(vo);
 	}
@@ -75,4 +80,47 @@ public class ManagerServiceImpl implements ManagerService {
 		return managerDAO.loginManager(vo);
 	}
 
+	// 2019.07.15 성재민
+	// 엑셀 업로드
+	@Override
+	public List<CandidateVO> uploadExcelFile(MultipartFile excelFile) {
+		List<CandidateVO> list = new ArrayList<CandidateVO>();
+		try {
+			OPCPackage opcPackage = OPCPackage.open(excelFile.getInputStream());
+			XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
+
+			// 첫번째 시트 불러오기
+			XSSFSheet sheet = workbook.getSheetAt(0);
+
+			// 한줄씩 반복문
+			for (int i = 1; i < sheet.getLastRowNum() + 1; ++i) {
+				XSSFRow row = sheet.getRow(i);
+
+				// 행이 존재하기 않으면 패스
+				if (row == null) {
+					continue;
+				}
+
+				List<String> candidateVOValues = new ArrayList<String>();
+				
+				// 엑셀 파일의 각각의 값 읽어 오기
+				// 엑셀 파일과 vo 객체가 타입이 맞지 않는 경우엔 타입을 맞춰서 입력 하여야 함.
+				for(int j = 0; j < row.getLastCellNum(); ++j) {
+					XSSFCell cell = row.getCell(j);
+					if(cell != null) {
+						candidateVOValues.add(cell.getStringCellValue());
+					}
+				}
+				
+				// vo 객체 변수 갯수 체크 하여 매칭
+				if(candidateVOValues.size() == 8) {
+					CandidateVO candidateVO = new CandidateVO(candidateVOValues);
+					list.add(candidateVO);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
