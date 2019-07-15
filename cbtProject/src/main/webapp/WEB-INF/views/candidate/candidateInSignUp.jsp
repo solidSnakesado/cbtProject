@@ -128,13 +128,13 @@ function openIdChk() {
 		}); */
 	</script>
 	<header id="header"></header>
+	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>응시자ID</td>
-				<td><input type="text" name="takerId" id="takerId"></td>
-				<td><input type="button" value="중복확인" onclick="openIdChk();"/></td>
+				<td><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/></td>
 			</tr>
 			<tr>
 				<td>응시자PW</td>
@@ -149,7 +149,7 @@ function openIdChk() {
 				<td colspan="2"><input type="text" name="takerName" id="takerName"></td>
 			</tr>
 			<tr>
-				<td>주민등록번호</td>
+				<td>생년월일</td>
 				<td colspan="2"><input type="text" name="takerInfo" id="takerInfo"></td>
 			</tr>
 			<tr>
@@ -168,14 +168,13 @@ function openIdChk() {
 				</select></td>
 			</tr>
 			<tr>
-				<td>PHONE NUMBER</td>
+				<td>연락처</td>
 				<td colspan="2"><input type="text" name="takerPhoneNum" id="takerPhoneNum"></td>
 			</tr>
 		</table>
 		<br> <br>
 		<div align="center">
-			<button type="button" onclick="checkForm()">가입</button> &nbsp; <input type="reset"
-				value="취소" />
+			<button type="button" onclick="checkForm()">가입</button> &nbsp; <input type="reset" value="취소" /> &nbsp;
 		</div>
 	</form>
 

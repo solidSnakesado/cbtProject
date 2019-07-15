@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+<div  align="right"><a href="companyLogin.do"><button>기 업 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
+<br>
 	<script type="text/javascript">
 	function checkForm() {
 	    var takerId 		= document.fmField.takerId;
@@ -28,7 +29,7 @@
 	
 	<header id="header"></header>
 	<form id="fmField" name="fmField" action="candidateLogin.do" method="POST">
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>ID :</td>
 				<td><input type="text" name="takerId" value="${candidateVO.takerId}"></td>
@@ -51,10 +52,8 @@
 			</tr>
 		</table>
 	</form>
-	<div align="center">
-		<br>
+	<div align="right">
 		<a href="candidateInSignUp.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
-		<a href="managerAccount.do"><button>관리자 계정으로 로그인하기</button></a>
 	</div>
 </body>
 </html>
