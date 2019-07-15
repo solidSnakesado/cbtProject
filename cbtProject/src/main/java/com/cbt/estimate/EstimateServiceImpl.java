@@ -61,6 +61,12 @@ public class EstimateServiceImpl implements EstimateService {
 				map.put("paging", paging);
 				return map;
 	}
+	
+	@Override
+	public int getCateoryId(EstimateVO vo) {
+		
+		return estimateDAO.getCateoryId(vo);
+	}
 
 	
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.categoryMain.CategoryMainService;
 import com.cbt.common.Paging;
 import com.cbt.condition.ConditionService;
 
@@ -21,7 +22,8 @@ import com.cbt.condition.ConditionService;
  */
 @Controller
 public class EstimateController {
-	
+	@Autowired
+	CategoryMainService categoryMainService;// 카테고리 대, 중, 소 값을 가져오기 위함
 	@Autowired
 	ConditionService conditionService;
 	@Autowired
@@ -63,8 +65,10 @@ public class EstimateController {
 	}
 	
 	//기업은 자기의뢰를 삭제 할 수 있다.  company-delete
-	@RequestMapping(value = "companyEstimateDelete.do", method = RequestMethod.GET)
-	public String companyEstimateDelete(EstimateVO vo) {
+	@RequestMapping(value = "companyEstimateDelete.do/{estimateId}", method = RequestMethod.GET)
+	public String companyEstimateDelete(@PathVariable("estimateId") int estimateId,
+										EstimateVO vo) {
+		vo.setEstimateId(estimateId); 
 		estimateService.deleteEstimate(vo);
 		return "redirect:companyEstimateList.do";
 	}
@@ -77,6 +81,9 @@ public class EstimateController {
 												Model model) {
 		
 		vo.setEstimateId(estimateId); 
+		/* 
+		 * model.addAttribute("cateoryMain", categoryMainService.getAllCategoryMain());
+		 */
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
@@ -173,5 +180,16 @@ public class EstimateController {
 			return "empty/manager/managerEstimateDetail";
 		}
 		
+		@RequestMapping(value="getCateoryId.do/{mainCategoryId}/{middleCategoryId}/{smallCategoryId}", method = RequestMethod.GET)
 		
+		public int cateoryIdFind(@PathVariable("estimateId") int mainCategoryId,
+								@PathVariable("estimateId") int middleCategoryId,
+								@PathVariable("estimateId") int smallCategoryId,
+								EstimateVO vo) 
+		{
+			vo.setMainCategoryId(mainCategoryId);
+			vo.setMiddleCategoryId(middleCategoryId);
+			vo.setSmallCategoryId(smallCategoryId);
+			return estimateService.getCateoryId(vo);
+		}
 }

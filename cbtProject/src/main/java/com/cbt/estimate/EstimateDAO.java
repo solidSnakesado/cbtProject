@@ -40,4 +40,8 @@ public class EstimateDAO {
     public int getCount(EstimateVO vo) {
     	return mybatis.selectOne("EstimateDAO.getCount", vo);
     }
+    
+    public int getCateoryId(EstimateVO vo) {
+    	return mybatis.selectOne("EstimateDAO.getCateoryId",vo);
+    }
 }
