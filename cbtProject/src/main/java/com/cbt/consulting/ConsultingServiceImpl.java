@@ -78,4 +78,29 @@ public class ConsultingServiceImpl implements ConsultingService {
 	public List<ConsultingVO> managerConsultingList(ConsultingVO vo) {
 		return dao.managerConsultingList(vo);
 	}
+
+	//07.15 승환추가
+	@Override
+	public ConsultingVO getManagerConsulting(ConsultingVO vo) {
+		return dao.getManagerConsulting(vo);
+	}
+
+	//07.15 승환추가
+	@Override
+	public void managerUpdateConsulting(ConsultingVO vo) {
+		dao.managerUpdateConsulting(vo);
+	}
+
+	//07.15 승환추가
+	@Override
+	public void managerConsultingDelete(ConsultingVO vo) {
+		dao.managerConsultingDelete(vo);
+		
+	}
+
+	@Override
+	public void managerConsultingInsert(ConsultingVO vo) {
+		dao.managerConsultingInsert(vo);
+		
+	}
 }

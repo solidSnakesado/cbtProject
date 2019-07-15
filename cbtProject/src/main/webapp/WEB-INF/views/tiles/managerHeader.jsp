@@ -16,6 +16,7 @@
 <!-- 		    <div class="w3-dropdown-hover">
 		      	<button class="w3-padding-large w3-button" title="More">마이페이지 <i class="fa fa-caret-down"></i></button>     
 		      	<div class="w3-dropdown-content w3-bar-block w3-card-4"> -->
+		      		<a href="${pageContext.request.contextPath }/managerMain.do" class="class=w3-bar-item w3-button">메인</a>
 		        	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
 		        	<a href="${pageContext.request.contextPath }/managerEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerConsultingList.do" class="w3-bar-item w3-button">상담목록</a>

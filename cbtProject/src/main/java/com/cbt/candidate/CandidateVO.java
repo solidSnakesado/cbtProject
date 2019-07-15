@@ -1,6 +1,7 @@
 package com.cbt.candidate;
 
 import java.util.Arrays;
+import java.util.List;
 
 //2019.07.01 장세준 - VO 생성
 public class CandidateVO {
@@ -12,6 +13,21 @@ public class CandidateVO {
 	private String takerPassword;
 	private String takerPhoneNum; 
 	private String takerEducationNm;
+	
+	public CandidateVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public CandidateVO(List<String> valueList) {
+		takerId 			= valueList.get(0);
+		takerName 			= valueList.get(1);
+		takerInfo 			= valueList.get(2);
+		takerEducation 		= valueList.get(3);
+		takerEmail 			= valueList.get(4);
+		takerPassword 		= valueList.get(5);
+		takerPhoneNum 		= valueList.get(6); 
+		takerEducationNm 	= valueList.get(7);
+	}
 	
 	public String getTakerEducationNm() {
 		return takerEducationNm;

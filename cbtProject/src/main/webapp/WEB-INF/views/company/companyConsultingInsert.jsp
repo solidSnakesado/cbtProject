@@ -31,7 +31,7 @@
 			<tr>
 				<th>상담내용</th>
 				<td><textarea name="consultingContents" cols="80" rows="8"
-						placeholder="상담하고자 하시는 시허므이 종류와 예상인원을 작성하여 주세요. 세부적으로 작성하실수록 상담이 쉬워집니다."></textarea>
+						placeholder="상담하고자 하시는 시험의 종류와 예상인원을 작성하여 주세요. 세부적으로 작성하실수록 상담이 쉬워집니다."></textarea>
 				<td>
 			</tr>
 		</table>

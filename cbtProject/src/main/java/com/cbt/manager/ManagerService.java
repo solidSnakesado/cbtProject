@@ -3,6 +3,9 @@ package com.cbt.manager;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
 
@@ -36,4 +39,7 @@ public interface ManagerService {
 	// 로그인 처리 (7/9 추가, June)
 	ManagerVO loginManager(ManagerVO vo);
 
+	// 2019.07.15 성재민
+	// 엑셀 업로드
+	public List<CandidateVO> uploadExcelFile(MultipartFile excelFile);
 }

@@ -3,6 +3,9 @@ package com.cbt.company;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 
 public interface CompanyService {
