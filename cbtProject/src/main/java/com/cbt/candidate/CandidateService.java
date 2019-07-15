@@ -40,5 +40,8 @@ public interface CandidateService {
 	// 전체 시험일정 조회_페이징처리
 	int ExamScheduleCount();
 
+	//temp
+	Map<Object, Object> candidateScheduleCheckPage(Paging paging);
+
 	
 }
