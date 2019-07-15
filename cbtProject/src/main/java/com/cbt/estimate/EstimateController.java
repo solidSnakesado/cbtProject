@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.categoryMain.CategoryMainService;
@@ -180,16 +181,10 @@ public class EstimateController {
 			return "empty/manager/managerEstimateDetail";
 		}
 		
-		@RequestMapping(value="getCateoryId.do/{mainCategoryId}/{middleCategoryId}/{smallCategoryId}", method = RequestMethod.GET)
-		
-		public int cateoryIdFind(@PathVariable("estimateId") int mainCategoryId,
-								@PathVariable("estimateId") int middleCategoryId,
-								@PathVariable("estimateId") int smallCategoryId,
-								EstimateVO vo) 
-		{
-			vo.setMainCategoryId(mainCategoryId);
-			vo.setMiddleCategoryId(middleCategoryId);
-			vo.setSmallCategoryId(smallCategoryId);
+		@RequestMapping(value="getCateoryId.do", method = RequestMethod.GET)
+		@ResponseBody
+		public int cateoryIdFind(EstimateVO vo) {
+			System.out.println("메인 카테고리: "+vo.getMainCategoryId());
 			return estimateService.getCateoryId(vo);
 		}
 }

@@ -14,10 +14,10 @@
 	
 	
 	<script>
+	//의뢰서
 	$(document).ready(function() {
-		//의뢰 진행상태
 		
-		
+
 		
 		$("#mainCategory option").remove();
 		$("#middleCategory option").remove();
@@ -134,17 +134,19 @@
 			}
 			
 			var mainCategoryId = $("#mainCategory option:selected").val(); //대분류 값
+			console.log("mainCategoryId :"+mainCategoryId);
 			 if(mainCategoryId == -1){
 			 	alert("대분류를 입력해 주세요.");
 				return false;
 			}
 			
-			 middleCategoryId = $("#middleCategory option:selected").val();	//중분류 값
+			 var middleCategoryId = $("#middleCategory option:selected").val();	//중분류 값
 			 if(middleCategoryId == -1){
 					alert("중분류를 입력해 주세요.");
 					return false;
 				}
-			 smallCategoryId = $("#smallCategory option:selected").val(); //소분류 값
+			 var smallCategoryId = $("#smallCategory option:selected").val(); //소분류 값
+			 console.log("smallCategoryId :"+smallCategoryId);
 			 if(smallCategoryId == -1){
 					alert("소분류를 입력해 주세요.");
 					return false;
@@ -192,10 +194,10 @@
 					type: "GET",
 					dataType:"json",
 					data :{mainCategoryId: mainCategoryId, middleCategoryId : middleCategoryId, smallCategoryId :smallCategoryId},
-					url:"${pageContext.request.contextPath}/getCateoryId.do"+"/"+mainCategoryId+"/"+middleCategoryId+"/"+smallCategoryId,
+					url:"${pageContext.request.contextPath}/getCateoryId.do",
 					success : function(data) {
-						$('input[name=categoryId]').attr('value',data); 
 						console.log(data);
+						$('input[name=categoryId]').attr('value',data); 
 					}, error : function() {
 						alert('에러발생');
 					}
