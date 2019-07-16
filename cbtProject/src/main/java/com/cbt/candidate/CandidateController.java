@@ -20,8 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cbt.common.Paging;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.question.QuestionService;
+import com.cbt.question.QuestionVO;
 import com.cbt.takeExam.TakeExamService;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.cbt.takeExam.TakeExamVO;
 
 
 //2019.07.01 장세준 - candidate3controller로 이전
@@ -34,6 +37,8 @@ public class CandidateController {
 	ExamService examService;
 	@Autowired
 	TakeExamService takeExamService;
+	@Autowired
+	QuestionService questionService;
 	
 	//카카오 로그인 - 7/16생성 .June
 	private kakao_restapi kakao_restapi = new kakao_restapi();
@@ -231,11 +236,20 @@ public class CandidateController {
 	 */
 	
 	@RequestMapping(value = "candidateExamDetialView.do/{examId}", method = RequestMethod.GET)
-	public String candidateExamDetialView(@PathVariable("examId") int examId, Model model) {
-		ExamVO vo = new ExamVO();
+	public ModelAndView candidateExamDetialView(@PathVariable("examId") int examId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		ExamVO examVO = new ExamVO();
+		examVO.setExamId(examId);
+		
+		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+		TakeExamVO vo = new TakeExamVO();
+		vo.setTakerId(candivo.getTakerId()); 
 		vo.setExamId(examId);
-		model.addAttribute("detailExam", examService.getExam(vo));
-		return "candidate/candidate/candidateExamDetialView";
+		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
+		
+		mv.addObject("detailExam", examService.getExam(examVO));
+		mv.setViewName("candidate/candidate/candidateExamDetialView");
+		return mv;
 	}
 	// 시험일정 가져오기
 //	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)

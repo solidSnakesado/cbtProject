@@ -17,6 +17,7 @@
 	//의뢰서
 	$(document).ready(function() {
 		
+		
 
 		
 		$("#mainCategory option").remove();
@@ -64,7 +65,7 @@
 			
 			// 대분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#mainCategory option:selected").val();
-			console.log(selectedIdx);
+			console.log("mainCategory: " +selectedIdx);
 			
 			$.ajax({
 				type: "POST",
@@ -91,7 +92,7 @@
 			
 			// 중분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#middleCategory option:selected").val();
-			console.log(selectedIdx);
+			console.log("middleCategory :" + selectedIdx);
 			
 			$.ajax({
 				type: "POST",
