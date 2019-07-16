@@ -16,9 +16,7 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
-		
 
-		
 		$("#mainCategory option").remove();
 		$("#middleCategory option").remove();
 		$("#smallCategory option").remove();
@@ -64,7 +62,7 @@
 			
 			// 대분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#mainCategory option:selected").val();
-			console.log(selectedIdx);
+			console.log("mainCategory: " +selectedIdx);
 			
 			$.ajax({
 				type: "POST",
@@ -91,7 +89,7 @@
 			
 			// 중분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#middleCategory option:selected").val();
-			console.log(selectedIdx);
+			console.log("middleCategory :" + selectedIdx);
 			
 			$.ajax({
 				type: "POST",
@@ -114,9 +112,10 @@
 		
 		
 		
-		//예외처리 부분
+		//수정버튼 눌렀을때 처리 로직
 		$("#submitBtn").click(function() {
 			
+			///////////////////////예외처리부분////////////////////
 			var form = document.form;
 			
 			var estimateId = $("#estimateId").val(); //estimateId의 값
@@ -134,19 +133,21 @@
 			}
 			
 			var mainCategoryId = $("#mainCategory option:selected").val(); //대분류 값
-			console.log("mainCategoryId :"+mainCategoryId);
+			console.log("mainCategoryId체크 :"+mainCategoryId);
 			 if(mainCategoryId == -1){
 			 	alert("대분류를 입력해 주세요.");
 				return false;
 			}
 			
 			 var middleCategoryId = $("#middleCategory option:selected").val();	//중분류 값
+			 console.log("middleCategory체크 :"+middleCategoryId);
 			 if(middleCategoryId == -1){
 					alert("중분류를 입력해 주세요.");
 					return false;
 				}
 			 var smallCategoryId = $("#smallCategory option:selected").val(); //소분류 값
-			 console.log("smallCategoryId :"+smallCategoryId);
+			 console.log("smallCategoryId체크 :"+smallCategoryId);
+			
 			 if(smallCategoryId == -1){
 					alert("소분류를 입력해 주세요.");
 					return false;
@@ -190,14 +191,20 @@
 					return false;
 				}
 			 
+			///////////////////////예외처리부분////////////////////
+			 
+
+			
+			 //입력한 3개의 id(main, middle, small)들을 가지고 CategoryId 값 가지고 온후 submit
 			 $.ajax({
 					type: "GET",
 					dataType:"json",
 					data :{mainCategoryId: mainCategoryId, middleCategoryId : middleCategoryId, smallCategoryId :smallCategoryId},
 					url:"${pageContext.request.contextPath}/getCateoryId.do",
-					success : function(data) {
-						console.log(data);
-						$('input[name=categoryId]').attr('value',data); 
+					success : function(data) { //data에는 입력한 3개의 id(main, middle, small) => CategoryId 값
+						 console.log("data :"+data);
+						 $('input[name=categoryId]').val(data); // input태그에 name이 categoryId에 다가 data값을 넣어줌
+						 document.form.submit();				// 모든 속성값이 입력이되면 form name을 이용해 companyEstimateUpdate.do 이동 
 					}, error : function() {
 						alert('에러발생');
 					}
@@ -213,12 +220,12 @@
 </head>  
 <body>
 	<h2 align="center">세부 의뢰목록</h2>
-	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST">
+	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
 		<table>
 			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>
- 							<input type="hidden" name ="categoryId">
+ 							<input type="hidden" name ="categoryId"> <!-- DB에 값을 넣기위해 categoryId  -->
  							대분류
 								<select name="categoryMainId" id="mainCategory"></select>
 							중분류
@@ -236,16 +243,16 @@
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
 			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
 			<tr>	<td>난이도</td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td>시험일시</td>		<td>	<!-- "datetime-local" --><input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
+			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
 	 		<tr>	<td>비고</td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
-			<tr>	<td>시험횟수</td>		<td>	<my:radio items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:radio></td></tr>  
+			<tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr>  
 			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 			
 			
 			
 			
 		</table>
-		<button id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> 
+		<button type="button"  id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> 
 	</form>
 	
 	<script>

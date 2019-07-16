@@ -157,5 +157,6 @@
 		<input type="reset" value="값 초기화">
 		<input type="button" id="backPageBtn" value="카테고리 메인으로">
 	</form>
+	<div id="testDiv"></div>
 </body>
 </html>
