@@ -1,6 +1,7 @@
 package com.cbt.takeExam;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -65,6 +66,13 @@ public class TakeExamServiceImpl implements TakeExamService {
 	@Override
 	public int getExamCount() {
 		return dao.getExamCount(null);
+	}
+
+	// 2019.07.16 성재민
+	// 시험 iD 로 검색
+	@Override
+	public List<TakeExamVO> getTakeExamForExamId(TakeExamVO vo) {
+		return dao.getTakeExamForExamId(vo);
 	}
 
 }

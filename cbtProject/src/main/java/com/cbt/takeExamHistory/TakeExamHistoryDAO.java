@@ -49,7 +49,14 @@ public class TakeExamHistoryDAO {
 	
 	// 2019.07.16 성재민
 	// 응시자 ID 와 시험 ID로 해당 응시자의 해당 시험 조회
-	public List<Map<String, String>> getTakeExamHistoryForTakerIdAndExamIdList(TakeExamVO vo) {
+	public List<Map<String, Object>> getTakeExamHistoryForTakerIdAndExamIdList(TakeExamVO vo) {
 		return mybatis.selectList("TakeExamHistoryDAO.getTakeExamHistoryForTakerIdAndExamIdList", vo);
+	}
+	
+	
+	// 2019.07.16 성재민
+	// 시험 ID로 해당 시험 조회
+	public List<Map<String, Object>> getTakeExamHistoryForExamIdList(TakeExamVO vo) {
+		return mybatis.selectList("TakeExamHistoryDAO.getTakeExamHistoryForExamIdList", vo);
 	}
 }

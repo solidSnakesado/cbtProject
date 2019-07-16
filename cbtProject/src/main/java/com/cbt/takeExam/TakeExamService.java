@@ -1,5 +1,6 @@
 package com.cbt.takeExam;
 
+import java.util.List;
 import java.util.Map;
 
 import com.cbt.common.Paging;
@@ -19,5 +20,9 @@ public interface TakeExamService {
 	Map<String, Object> getExamList(TakeExamVO vo, Paging paging);
 	
 	int getExamCount();
+	
+	// 2019.07.16 성재민
+	// 시험 iD 로 검색
+	public List<TakeExamVO> getTakeExamForExamId(TakeExamVO vo);
 
 }

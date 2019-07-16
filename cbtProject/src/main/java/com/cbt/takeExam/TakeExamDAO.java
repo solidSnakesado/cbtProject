@@ -32,9 +32,10 @@ public class TakeExamDAO {
 		mybatis.delete("", vo);
 	}
 	
+	// 2019.07.16 성재민
+	// ID 로 단건 조회 추가
 	public TakeExamVO getTakeExam(TakeExamVO vo) {
-		
-		return mybatis.selectOne("", vo);
+		return mybatis.selectOne("takeExamDAO.getTakeExam", vo);
 	}
 	
 	public int getExamCount(TakeExamVO vo) {
@@ -47,5 +48,11 @@ public class TakeExamDAO {
 		} else {
 			return mybatis.selectList("takeExamDAO.getExamList", vo);
 		}
+	}
+	
+	// 2019.07.16 성재민
+	// 시험 iD 로 검색
+	public List<TakeExamVO> getTakeExamForExamId(TakeExamVO vo) {
+		return mybatis.selectList("takeExamDAO.getTakeExamForExamId", vo);
 	}
 }

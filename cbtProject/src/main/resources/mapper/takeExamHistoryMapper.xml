@@ -74,19 +74,42 @@
 	
 	<!-- 2019.07.16 성재민 -->
 	<!-- 응시자 ID 와 시험 ID로 해당 응시자의 해당 시험 조회 -->
+	<!-- #{} 의 경우 안의 값을 ''으로 감싸고 전달 -->
+	<!-- ${} 의 경우 그냥 값을 ''없이 전달 -->
 	<select id="getTakeExamHistoryForTakerIdAndExamIdList" parameterType="TakeExamVO" resultType="map">
 		SELECT 
-		    	E.EXAM_NAME
-		  	,	TEH.TAKER_ID
-			,	SET_EXAM_QUESTION_ID
-			,	TAKER_SCORE
+				EXAM_NAME				"examName"
+		  	,	TEH.TAKER_ID			"takerId"
+			,	SET_EXAM_QUESTION_ID	"setExamQuestionId"
+			, 	PASSING_SCORE			"passingScore"
+			,	TAKER_SCORE				"takerScore"
 		FROM TAKE_EXAM_HISTORY TEH JOIN TAKE_EXAM TE
 		ON TEH.TAKE_EXAM_ID = TE.TAKE_EXAM_ID
 		JOIN EXAM E
 		ON E.EXAM_ID = TE.EXAM_ID
 		<where>
-			TEH.TAKER_ID 	= ${takerId}
+			TEH.TAKER_ID 	= #{takerId}
 			AND TE.EXAM_ID 	= ${examId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 응시자 ID 와 시험 ID로 해당 응시자의 해당 시험 조회 -->
+	<!-- #{} 의 경우 안의 값을 ''으로 감싸고 전달 -->
+	<!-- ${} 의 경우 그냥 값을 ''없이 전달 -->
+	<select id="getTakeExamHistoryForExamIdList" parameterType="TakeExamVO" resultType="map">
+		SELECT 
+				EXAM_NAME				"examName"
+		  	,	TEH.TAKER_ID			"takerId"
+			,	SET_EXAM_QUESTION_ID	"setExamQuestionId"
+			, 	PASSING_SCORE			"passingScore"
+			,	TAKER_SCORE				"takerScore"
+		FROM TAKE_EXAM_HISTORY TEH JOIN TAKE_EXAM TE
+		ON TEH.TAKE_EXAM_ID = TE.TAKE_EXAM_ID
+		JOIN EXAM E
+		ON E.EXAM_ID = TE.EXAM_ID
+		<where>
+			TE.EXAM_ID 	= ${examId}
 		</where>
 	</select>
 </mapper>
