@@ -225,7 +225,7 @@
 			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>
- 							<input type="hidden" name ="categoryId"> <!-- DB에 값을 넣기위해 categoryId  -->
+ 							<input type="hidden" name ="categoryId"> <!-- 대,중,소 분류를 조합해서 만들어진 categoryId를 DB에 넣기위해    -->
  							대분류
 								<select name="categoryMainId" id="mainCategory"></select>
 							중분류
@@ -243,9 +243,9 @@
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
 			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
 			<tr>	<td>난이도</td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td>시험일시</td>		<td>	<!-- "datetime-local" --><input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
+			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
 	 		<tr>	<td>비고</td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
-			<tr>	<td>시험횟수</td>		<td>	<my:radio items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:radio></td></tr>  
+			<tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr>  
 			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 			
 			
