@@ -25,7 +25,7 @@ public class QuestionVO {
 	private String takerAnswer;
 	private String examName;
 	private int passingScore;
-	private int examStartTime;
+	private String examStartTime;
 	private int takerScore;
 	private String takerName;
 	private String takerInfo;
@@ -78,10 +78,10 @@ public class QuestionVO {
 	public void setPassingScore(int passingScore) {
 		this.passingScore = passingScore;
 	}
-	public int getExamStartTime() {
+	public String getExamStartTime() {
 		return examStartTime;
 	}
-	public void setExamStartTime(int examStartTime) {
+	public void setExamStartTime(String examStartTime) {
 		this.examStartTime = examStartTime;
 	}
 	public String getTakerAnswer() {
