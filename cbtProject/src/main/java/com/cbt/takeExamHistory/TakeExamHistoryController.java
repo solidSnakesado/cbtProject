@@ -1,5 +1,10 @@
 package com.cbt.takeExamHistory;
 
-public class TakeExamHistoryController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class TakeExamHistoryController {
+	@Autowired
+	TakeExamHistoryService takeExamHistoryService;
 }

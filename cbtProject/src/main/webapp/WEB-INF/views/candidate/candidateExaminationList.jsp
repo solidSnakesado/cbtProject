@@ -21,7 +21,7 @@
 		
 		$("td").click(function(){
 			var count = $(this).parent().attr("value");
-			var examId = $("[id ='btn"+count+"']").attr("value");
+			var examId = $("[id ='examId"+count+"']").attr("value");
 			var takeExamId = $("[id ='takeExamId"+count+"']").attr("value");
 			var examName = $("[id ='examName"+count+"']").attr("value");
 			var passingScore = $("[id ='passingScore"+count+"']").attr("value");
@@ -37,7 +37,7 @@
 			
 		});
 		
-		$("[id^='btn']").click(function(){
+		/* $("[id^='btn']").click(function(){
 			
 			var count = $(this).parent().attr("value");
 			var examId = $(this).val();
@@ -61,7 +61,7 @@
 			
 			takeExamForm.submit();
 			
-		});
+		}); */
 		
 	})
 	
@@ -85,19 +85,19 @@
 	</form>
 	<table id="table" border="1" align="center">
 		<tr >
+			<th>시험코드</th>
 			<th>수험번호</th>
 			<th>시험명</th>
 			<th>커트라인</th>
 			<th>시험일시</th>
-			<th></th>
 		</tr>
 	<c:forEach items="${candidateExaminationList }" var="list" varStatus="status">
 		<tr class="result${status.count }" value="${status.count }">
+			<td id="examId${status.count }" value="${list.examId }" >${list.examId }</td>
 			<td id="takeExamId${status.count }" value="${list.takeExamId }">${list.takeExamId }</td>
 			<td id="examName${status.count }" value="${list.examName }">${list.examName }</td>
 			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
 			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
-			<th name="th" value="${status.count }" ><button type="button" id="btn${status.count }" value="${list.examId }">응시하기</button></th>
 		</tr>
 	</c:forEach>
 	</table>
