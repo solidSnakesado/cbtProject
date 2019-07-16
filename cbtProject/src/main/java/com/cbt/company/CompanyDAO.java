@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.consulting.ConsultingVO;
 
 @Repository
 public class CompanyDAO {
@@ -29,7 +30,6 @@ public class CompanyDAO {
 	}
 
 	
-	
 	public CompanyVO getCompany(CompanyVO vo) {
 		return mybatis.selectOne("companyDAO.getCompanyID", vo);
 	}
@@ -40,6 +40,15 @@ public class CompanyDAO {
 	
 	// 이승환 추가
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
-		return mybatis.selectList("ManagerDAO.getCompanyList", vo);
+		return mybatis.selectList("managerDAO.getCompanyList", vo);
+	}
+
+	public List<CompanyVO> managerCompanyList(CompanyVO vo) {
+		return mybatis.selectList("companyDAO.managerAccountList", vo);
+	}
+	
+	//승환추가 07.16 페이지 글수 가져오는 메소드
+	public int getManagerCompanyCount(CompanyVO vo) {
+		return mybatis.selectOne("companyDAO.getManagerCompanyCount", vo);
 	}
 }

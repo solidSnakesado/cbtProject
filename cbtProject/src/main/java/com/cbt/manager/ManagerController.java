@@ -1,8 +1,10 @@
 package com.cbt.manager;
 
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -133,16 +135,18 @@ public class ManagerController {
 	}
 	// 매니저, 기업 상담 리스트 출력
 	@RequestMapping(value = "managerConsultingList.do", method = RequestMethod.GET)
-	public String managerConsultingList(Model model, ConsultingVO vo) {
-		model.addAttribute("result", consultingService.managerConsultingList(vo));
-		return "manager/manager/managerConsultingList";
+	public ModelAndView managerConsultingList(Paging paging, ModelAndView mv, ConsultingVO vo) {
+		mv.addObject("result", consultingService.managerConsultingList(vo, paging));
+		mv.setViewName("manager/manager/managerConsultingList");
+		return mv;
 	}
 
-	
+	// 매니저 기업 리스트 출력
 	@RequestMapping(value = "managerAccountList.do", method = RequestMethod.GET)
-	public String getManagerAccountList(Model model, CompanyVO vo) {
-		model.addAttribute("result", companyService.getCompanyList(vo));
-		return "manager/manager/managerAccountList";
+	public ModelAndView getManagerAccountList(Paging paging, ModelAndView mv, CompanyVO vo) {
+		mv.addObject("result", companyService.managerAccountList(vo, paging));
+		mv.setViewName("manager/manager/managerAccountList");
+		return mv;
 	}
 
 	// 관리자 컴퍼니 상세조회, 수정폼
@@ -331,4 +335,23 @@ public class ManagerController {
 		model.addAttribute("selectedExam", managerService.getManagerExam(examService.getExam(vo)));
 		return "manager/manager/managerExamListDetail";
 	}
+	
+	@ModelAttribute("consultingMap")
+	public Map<String, String> consultingMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("제목", "CONSULTING_TITLE");
+		map.put("상담희망일", "CONSULTING_DESIRED_DATE");
+		map.put("상담진행상태", "CONSULTING_STATE_NM");
+		return map;
+	}
+	
+	@ModelAttribute("companyMap")
+	public Map<String, String> companyMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("기업ID", "COMPANY_ID");
+		map.put("기업이름", "COMPANY_NAME");
+		map.put("담당자", "COMPANY_MANAGER");
+		return map;
+	}
+	
 }

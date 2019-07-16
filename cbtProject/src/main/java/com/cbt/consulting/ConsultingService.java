@@ -23,6 +23,9 @@ public interface ConsultingService {
 	List<ConsultingVO> managerConsultingList(ConsultingVO vo);
 	
 	//2019.07.15 승환추가
+	public Map<String, Object> managerConsultingList(ConsultingVO vo, Paging paging);
+	
+	//2019.07.15 승환추가
 	ConsultingVO getManagerConsulting(ConsultingVO vo);
 	
 	//2019.07.15 승환추가

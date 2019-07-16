@@ -256,6 +256,23 @@
 			<version>${org.springframework.security-version}</version>
 		</dependency>
 		
+		<!-- 2019.07.16 장세준 -->
+		<!-- httpcore(카카오) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.6</version>
+        </dependency>
+ 
+ 		<!-- 2019.07.16 장세준 -->
+        <!-- httpclient(카카오) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>

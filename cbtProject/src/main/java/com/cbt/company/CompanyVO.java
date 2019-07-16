@@ -13,6 +13,11 @@ public class CompanyVO {
 	private String[] cpnList;
 	private String companyClassificationName;
 	private String companySectorsName;
+	private int    start;
+	private int    end;
+	private String sort;
+	private String searchCompany;
+	private String searchKeyword;
 	
 	
 
@@ -115,6 +120,46 @@ public class CompanyVO {
 
 	public void setCompanySectorsName(String companySectorsName) {
 		this.companySectorsName = companySectorsName;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public String getSearchCompany() {
+		return searchCompany;
+	}
+
+	public void setSearchCompany(String searchCompany) {
+		this.searchCompany = searchCompany;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
 
 	@Override

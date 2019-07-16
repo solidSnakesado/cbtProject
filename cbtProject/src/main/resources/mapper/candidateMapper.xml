@@ -86,6 +86,7 @@
 								    ,EXAM_DESCRIPTION_SIMPLE						
 								    ,EXAM_DESCRIPTION_DETAIL						
 				FROM    			EXAM
+				WHERE				EXAM_START_TIME > SYSDATE
 				ORDER BY			EXAM_ID DESC ) A ) B
 				<where>
 					RN BETWEEN #{start} AND #{end}
