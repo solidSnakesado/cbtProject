@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
+import com.cbt.consulting.ConsultingVO;
 
 public interface CompanyService {
 	// 글 등록
@@ -26,6 +27,14 @@ public interface CompanyService {
 
 	// 글 목록 조회 
 	List<CompanyVO> getCompanyList(CompanyVO vo);
+	
+	
 
 	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging);
+	
+	// 07.16 승환추가
+	public Map<String, Object> managerAccountList(CompanyVO vo, Paging paging);
+	
+	Map<String, Object> managerCompanyList(CompanyVO vo);
+
 }

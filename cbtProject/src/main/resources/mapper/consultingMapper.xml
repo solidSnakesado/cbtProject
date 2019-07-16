@@ -120,13 +120,34 @@
 	<!-- 2019.07.12 이승환 -->
 	<!--  managerConsulting 리스트 불러오기 -->
 	<select id="managerConsultingList" resultType="ConsultingVO">
-		SELECT 	CONSULTING_ID
-				,CONSULTING_TITLE
-				,CONSULTING_DESIRED_DATE
+		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
+			SELECT 	CONSULTING_ID
+				,CONSULTING_TITLE				
+				,CONSULTING_DESIRED_DATE		"consultingDesiredDate"
 				,CONSULTING_STATE
-				,FIND_CODENM(CONSULTING_STATE) AS CONSULTING_STATE_NM
+				,FIND_CODENM(CONSULTING_STATE) AS CONSULTING_STATE_NAME
 		FROM CONSULTING
-		ORDER BY CONSULTING_ID DESC
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				${searchConsulting} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+		<if test="sort == null or sort==''">
+			ORDER BY CONSULTING_ID DESC
+		</if>
+		<if test="sort != null and sort != ''">
+			ORDER BY ${sort}
+		</if>
+		<![CDATA[
+			) A ) B WHERE RN >=#{start} AND RN <=#{end}
+		]]>
+	</select>
+	
+	<!-- 07.16 승환추가 -->
+	<!-- count 불러오기 -->
+	<select id="getManagerConsultingCount" resultType="int">
+		SELECT COUNT(*)
+		FROM CONSULTING
 	</select>
 	
 	<!-- managerConsulting Detail 불러오기 : 승환추가 -->
