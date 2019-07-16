@@ -44,7 +44,7 @@
 		<result property="takeExamId" column="TAKE_EXAM_ID" javaType="int"/>
 		<result property="examName" column="EXAM_NAME" javaType="string"/>
 		<result property="passingScore" column="PASSING_SCORE" javaType="int"/>
-		<result property="examStartTime" column="EXAM_START_TIME" javaType="int"/>
+		<result property="examStartTime" column="EXAM_START_TIME" javaType="String"/>
 		<result property="takerScore" column="TAKER_SCORE" javaType="int"/>
 		<result property="takerName" column="TAKER_NAME" javaType="string"/>
 		<result property="takerInfo" column="TAKER_INFO" javaType="string"/>
@@ -173,7 +173,7 @@
 	<select id="candidateExaminationList" resultMap="questionVOs">
 		SELECT 	e.PASSING_SCORE, 
 				e.EXAM_NAME, 
-				TO_NUMBER(TO_CHAR(e.EXAM_START_TIME, 'YYMMDDHH24MI')) EXAM_START_TIME,
+				TO_CHAR(e.EXAM_START_TIME) EXAM_START_TIME,
 				t.TAKE_EXAM_ID,
 				e.EXAM_ID
 				
@@ -187,7 +187,7 @@
 				u.TAKER_NAME, 
 				u.TAKER_INFO, 
 				e.EXAM_NAME, 
-				TO_NUMBER(TO_CHAR(e.EXAM_START_TIME, 'YYMMDDHH24MI')) EXAM_START_TIME,
+				TO_CHAR(e.EXAM_START_TIME) EXAM_START_TIME,
 				e.PASSING_SCORE
 				
 		FROM 	TAKE_EXAM_HISTORY th 						JOIN 	TAKE_EXAM t
