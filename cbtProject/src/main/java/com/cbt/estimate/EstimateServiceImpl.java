@@ -62,9 +62,9 @@ public class EstimateServiceImpl implements EstimateService {
 				return map;
 	}
 	
+	
 	@Override
 	public int getCateoryId(EstimateVO vo) {
-		
 		return estimateDAO.getCateoryId(vo);
 	}
 

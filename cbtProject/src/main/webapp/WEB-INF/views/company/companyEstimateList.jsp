@@ -17,7 +17,7 @@
 		searchFrm.submit();
 	}
 	function estimateDetail(estimateId){
-		console.log(estimateId);
+		console.log("estimateId :" + estimateId);
 		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
@@ -28,7 +28,7 @@
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					dataType : 'number',
+					dataType : 'json',
 					url:"${pageContext.request.contextPath}/companyEstimateDelete.do/" + estimateId,
 					success : function(data) {
 						alert('삭제되었습니다');
