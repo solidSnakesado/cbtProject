@@ -154,6 +154,14 @@ public class QuestionServiceImpl implements QuestionService {
 	public void rightAnswer(QuestionVO vo) {
 		
 	}
+	
+	public int takeExamScoreNullCheck(QuestionVO vo) {
+		return questionDAO.takeExamScoreNullCheck(vo);
+	}
+	
+	public void rightLastAnswer(QuestionVO vo) {
+		questionDAO.rightLastAnswer(vo);
+	}
 
 	public List<QuestionVO> candidateExamList() {
 		return questionDAO.candidateExamList();
@@ -252,6 +260,11 @@ public class QuestionServiceImpl implements QuestionService {
 
 	public QuestionVO selectExamName(int examId) {
 		return questionDAO.selectExamName(examId);
+	}
+
+	public QuestionVO candidateTestResult(QuestionVO vo) {
+		
+		return questionDAO.candidateTestResult(vo);
 	}
 
 }

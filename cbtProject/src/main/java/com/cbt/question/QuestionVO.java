@@ -31,11 +31,21 @@ public class QuestionVO {
 	private String takerInfo;
 	private int sumPoint;
 	private int getPoint;
+	private int score;
+	
+	
 	
 	public QuestionVO() {
 		
 	}
-	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public int getSumPoint() {
 		return sumPoint;
 	}

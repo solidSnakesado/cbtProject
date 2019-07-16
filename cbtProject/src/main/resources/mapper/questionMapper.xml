@@ -37,6 +37,7 @@
 		<result property="count" column="count(*)" javaType="int" />
 		<result property="levelOfDifficulty" column="LEVEL_OF_DIFFICULTY" javaType="int" />
 		<result property="categoryId" column="CATEGORY_ID" javaType="int" />
+		<result property="score" column="SCORE" javaType="int" />
 		<result property="questionType" column="QUESTION_TYPE" javaType="string" />
 	</resultMap>
 	
@@ -49,6 +50,8 @@
 		<result property="takerName" column="TAKER_NAME" javaType="string"/>
 		<result property="takerInfo" column="TAKER_INFO" javaType="string"/>
 		<result property="examId" column="EXAM_ID" javaType="int"/>
+		<result property="score" column="SCORE" javaType="int"/>
+		<result property="takerId" column="TAKER_ID" javaType="string"/>
 	</resultMap>
 	
 	
@@ -104,7 +107,7 @@
            and q.QUESTION_ID = s.QUESTION_ID
 	</select>
 	
-	<select id="getTestStart" resultMap="questionVO">
+	<select id="candidateTestResult" resultMap="questionVO">
 		SELECT q.QUESTION_ID,
 				s.SET_EXAM_QUESTION_ID,
 				q.EXAMPLE_1, 
@@ -141,9 +144,9 @@
 	
 	<select id="getHistoryCount" resultType="int">
 		SELECT COUNT(*)
-				FROM SET_EXAM_QUESTION s join TAKE_EXAM_HISTORY t
+				FROM SET_EXAM_QUESTION s JOIN TAKE_EXAM_HISTORY t
 				ON t.SET_EXAM_QUESTION_ID = s.SET_EXAM_QUESTION_ID
-				WHERE s.EXAM_ID = #{examId}
+				WHERE t.TAKE_EXAM_ID = #{takeExamId}
 	</select>
 	
 	<insert id="insertTakeExamHistory" parameterType="QuestionVO">
@@ -183,7 +186,8 @@
 	</select>
 	
 	<select id="candidateExaminationListDetail" resultMap="questionVOs">
-		SELECT 	SUM(th.TAKER_SCORE) AS TAKER_SCORE, 
+		SELECT 	DISTINCT
+        		t.SCORE, 
 				u.TAKER_NAME, 
 				u.TAKER_INFO, 
 				e.EXAM_NAME, 
@@ -194,13 +198,7 @@
 		ON 		th.TAKE_EXAM_ID 	= 	t.TAKE_EXAM_ID 		JOIN 	EXAM e
 		ON 		e.EXAM_ID 			= 	t.EXAM_ID 			JOIN 	TAKER u
 		ON 		u.TAKER_ID 			= 	th.TAKER_ID
-		WHERE 	th.TAKE_EXAM_ID 	= #{takeExamId} 		AND 	th.TAKER_ID = #{takerId}
-		GROUP 	BY 	u.TAKER_NAME, 
-					u.TAKER_INFO, 
-					e.EXAM_NAME, 
-					e.EXAM_START_TIME, 
-					e.EXAM_START_TIME,
-					e.PASSING_SCORE
+		WHERE 	t.TAKE_EXAM_ID 	= #{takeExamId} 		AND 	t.TAKER_ID = #{takerId}
 	</select>
 	
 	<update id="rightAnswer" parameterType="QuestionVO">
@@ -214,6 +212,30 @@
 
 		WHERE 	TAKE_EXAM_ID 		= 	#{takeExamId}
 	</update>
+	
+	<update id="rightLastAnswer" parameterType="QuestionVO">
+		UPDATE	TAKE_EXAM
+		
+	    SET		SCORE		=	(SELECT 	sum(POINT)
+	    
+							    FROM	SET_EXAM_QUESTION s							JOIN	QUESTION q
+							    
+							    ON 		q.QUESTION_ID			=	s.QUESTION_ID	JOIN	TAKE_EXAM_HISTORY t
+							    
+							    ON		s.SET_EXAM_QUESTION_ID	=	t.SET_EXAM_QUESTION_ID
+							    
+							    WHERE	q.RIGHT_ANSWER			=	t.TAKER_ANSWER
+							    
+								AND		TAKE_EXAM_ID = #{takeExamId})
+		
+	    WHERE   TAKE_EXAM_ID = #{takeExamId}
+	</update>
+	
+	<select id="takeExamScoreNullCheck" resultType="int">
+		SELECT  NVL((SCORE),9999) SCORE
+		FROM    TAKE_EXAM
+		WHERE   TAKE_EXAM_ID = #{takeExamId}
+	</select>
 	
 	<select id="candidateExamList" resultMap="questionVO">
 		SELECT  QUESTION_ID,

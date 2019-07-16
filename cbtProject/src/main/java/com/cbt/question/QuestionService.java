@@ -23,11 +23,17 @@ public interface QuestionService {
 	
 	void rightAnswer(QuestionVO vo);
 	
+	void rightLastAnswer(QuestionVO vo);
+	
+	int takeExamScoreNullCheck(QuestionVO vo);
+	
 	int getSetCount(QuestionVO vo);
 	
 	int getTakeCount(QuestionVO vo);
 	
 	int getHistoryCount(QuestionVO vo);
+	
+	QuestionVO candidateTestResult(QuestionVO vo);
 	
 	List<Map<Object, String>> getTestStart(QuestionVO vo);
 	

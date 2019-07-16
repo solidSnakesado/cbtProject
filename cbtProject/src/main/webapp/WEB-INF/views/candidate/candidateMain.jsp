@@ -9,8 +9,6 @@
 </style>
 </head>
 <body>
-
-	${takerId} 
 	<table>
 		<tr>
 			<td colspan="2"><p align="center">

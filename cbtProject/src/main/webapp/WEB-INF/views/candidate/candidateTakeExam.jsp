@@ -164,7 +164,8 @@
 				    		$.ajax({
 								url : "./updateTakeExamHistory.do",
 								method : "post",
-								data : {takerAnswer : takerAnswer, setExamQuestionId : setExamQuestionId} , 
+								data : {takerAnswer : takerAnswer, setExamQuestionId : setExamQuestionId,
+									takeExamId:takeExamId} , 
 								datatype : "json",
 								success : function(data){
 									
@@ -224,13 +225,21 @@
 		})
 	});
 	
-	/* function candidateTestResult(){
-		data[0].
-	} */
+	function candidateExaminationList(){
+		if(confirm("제출하시겠습니까?? \n 번복불가.") == true) {
+			takeExamForm.submit();
+		} else {
+			return false;
+		}
+	}
 	
 </script>
 </head>
 <body>
+	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateExaminationList.do" method="post">
+		<input type="text" id="eId" name="examId" value="${examId }" hidden="ture">
+		<input type="text" id="tId" name="takeExamId" value="${takeExamId }" hidden="ture">
+	</form>
 <button id="btn">시험 시작 !</button>
 	<table border="1" id="mainTab">
 		<tr>
@@ -295,7 +304,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center" valign="top">
-				<button type='button' onclick="location.href='getTestResultList.do'" >제출 하기</button>
+				<button type='button' onclick="candidateExaminationList()" >제출 하기</button>
 			</td>
 		</tr>
 	</table>

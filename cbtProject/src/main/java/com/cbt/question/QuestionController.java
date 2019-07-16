@@ -3,6 +3,7 @@ package com.cbt.question;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.exam.ExamService;
+import com.cbt.exam.ExamVO;
 import com.cbt.setExamQuestion.SetExamQuestionService;
 import com.cbt.setExamQuestion.SetExamQuestionVO;
 
@@ -40,6 +43,8 @@ public class QuestionController {
 	QuestionService questionService;
 	@Autowired
 	SetExamQuestionService setExamQuestionService;
+	@Autowired
+	ExamService examService;
 	
 	
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
@@ -52,7 +57,15 @@ public class QuestionController {
 		mv.addObject("examName", vo.getExamName());
 		mv.addObject("passingScore", vo.getPassingScore());
 		mv.addObject("examStartTime", vo.getExamStartTime());
-		mv.setViewName("candidate/candidate/candidateTakeExam");
+		
+		
+		int check = questionService.takeExamScoreNullCheck(vo);
+		if( check != 9999 ) {
+			mv.setViewName("redirect:getTestResultList.do");
+		} else {
+			mv.setViewName("candidate/candidate/candidateTakeExam");
+		}
+		
 		
 		return mv;
 	}
@@ -96,10 +109,7 @@ public class QuestionController {
 	}
 	
 	@RequestMapping("getTestResultList.do")
-	public ModelAndView getTestResultList() {
-		QuestionVO vo = new QuestionVO();
-		vo.setTakeExamId(1);
-		vo.setExamId(1);
+	public ModelAndView getTestResultList(QuestionVO vo) {
 		vo = questionService.getTestResultList(vo);
 		int setCount = questionService.getSetCount(vo);
 		
@@ -121,29 +131,46 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateTakeExamHistory(QuestionVO vo) {
-//		vo.setTakeExamId(1);
-//		vo.setTakerId("sime00");
-		
+	public void updateTakeExamHistory(QuestionVO vo, HttpSession session) {
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		vo.setTakerId(candiVO.getTakerId());
 		questionService.updateTakeExamHistory(vo);
 		
 	}
 	
 	@RequestMapping("candidateTestResult.do")
-	public String candidateTestResult(QuestionVO vo, HttpSession session) {
+	public ModelAndView candidateTestResult(QuestionVO vo, HttpSession session) {
+		
+		questionService.rightAnswer(vo);
+		
+		ModelAndView mv = new ModelAndView();
+		ExamVO examVO = new ExamVO();
+		examVO.setExamId(vo.getExamId());
+		examVO = examService.getExam(examVO);
+				
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		System.out.println(candiVO.toString());
 		vo.setTakerId(candiVO.getTakerId());
-		System.out.println(candiVO.toString());
-		return "candidate/candidate/candidateTestResult";
+		vo.setTakerName(candiVO.getTakerName());
+		
+		
+		
+		mv.addObject("examName", examVO.getExamName());
+		mv.addObject("takerName", candiVO.getTakerName());
+		mv.addObject("questionQuantity", examVO.getQuestionQuantity());
+//		mv.addObject("examName", attributeValue);
+//		mv.addObject("examName", attributeValue);
+		mv.addObject("passingScore", examVO.getPassingScore());
+		mv.setViewName("candidate/candidate/candidateTestResult");
+		
+		return mv;
 	}
 	
 	@RequestMapping("candidateExaminationList.do")
-	public ModelAndView candidateExaminationList(HttpSession session) {
+	public ModelAndView candidateExaminationList(QuestionVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
-		QuestionVO vo = new QuestionVO();
 		vo.setTakerId(candivo.getTakerId());
+		
 		mv.addObject("candidateExaminationList", questionService.candidateExaminationList(vo));
 		
 		mv.setViewName("candidate/candidate/candidateExaminationList");
@@ -156,7 +183,8 @@ public class QuestionController {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
 		vo.setTakerId(candiVO.getTakerId());
-		
+		QuestionVO qwqw = questionService.candidateExaminationListDetail(vo);
+		System.out.println(" Miss KIM e ne    "+qwqw.getScore());
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;

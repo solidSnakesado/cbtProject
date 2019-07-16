@@ -38,10 +38,11 @@ public class QuestionDAO {
 	}
 	
 	public List<Map<String, Object>> getTestList(Map<String, Object> map){
-		System.out.println("3+go");
-		
-		
 		return mybatis.selectOne("QuestionDAO.getTestList", map);
+	}
+	
+	public QuestionVO candidateTestResult(QuestionVO vo) {
+		return mybatis.selectOne("QuestionDAO.candidateTestResult", vo);
 	}
 	
 	public QuestionVO getTestResultList(QuestionVO vo) {
@@ -61,7 +62,7 @@ public class QuestionDAO {
 	
 	public List<QuestionVO> getTestStart(QuestionVO vo) {
 		
-		return mybatis.selectList("QuestionDAO.getTestStart", vo);
+		return mybatis.selectList("QuestionDAO.candidateTestResult", vo);
 	}
 	
 	public int getSetCount(QuestionVO vo) {
@@ -90,6 +91,14 @@ public class QuestionDAO {
 	
 	public void rightAnswer(QuestionVO vo) {
 		mybatis.update("QuestionDAO.rightAnswer", vo);
+	}
+	
+	public int takeExamScoreNullCheck(QuestionVO vo) {
+		return mybatis.selectOne("QuestionDAO.takeExamScoreNullCheck", vo);
+	}
+	
+	public void rightLastAnswer(QuestionVO vo) {
+		mybatis.update("QuestionDAO.rightLastAnswer", vo);
 	}
 	
 	public List<QuestionVO> candidateExamList(){

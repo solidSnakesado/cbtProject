@@ -76,13 +76,13 @@
 		<input type="text" id="passScore2" name="passingScore" value="${QuestionVO.passingScore }" hidden="ture">
 		<input type="text" id="examTime2" name="examStartTime" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
-	<form id="takeExamForm" name="takeExamForm" action="candidateTakeExam.do" method="post">
+	<%-- <form id="takeExamForm" name="takeExamForm" action="candidateTakeExam.do" method="post">
 		<input type="text" id="eId" name="examId" value="${QuestionVO.examId }" hidden="ture">
 		<input type="text" id="tId" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
 		<input type="text" id="eName" name="examName" value="${QuestionVO.examName }" hidden="ture">
 		<input type="text" id="passScore" name="passingScore" value="${QuestionVO.passingScore }" hidden="ture">
 		<input type="text" id="examTime" name="examStartTime" value="${QuestionVO.examStartTime }" hidden="ture">
-	</form>
+	</form> --%>
 	<table id="table" border="1" align="center">
 		<tr >
 			<th>시험코드</th>
@@ -96,7 +96,7 @@
 			<td id="examId${status.count }" value="${list.examId }" >${list.examId }</td>
 			<td id="takeExamId${status.count }" value="${list.takeExamId }">${list.takeExamId }</td>
 			<td id="examName${status.count }" value="${list.examName }">${list.examName }</td>
-			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
+			<td id="passingScore${status.count }" value="${list.passingScore }">${list.score}:${list.passingScore }</td>
 			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
 		</tr>
 	</c:forEach>

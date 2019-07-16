@@ -21,7 +21,7 @@
 	<c:set var="examStartTime" value="${candidateExaminationListDetail.examStartTime }" />
 	<c:set var="takerName" value="${candidateExaminationListDetail.takerName }" />
 	<c:set var="takerInfo" value="${candidateExaminationListDetail.takerInfo }" />
-	<c:set var="takerScore" value="${candidateExaminationListDetail.takerScore }" />
+	<c:set var="score" value="${candidateExaminationListDetail.score }" />
 	<c:set var="passingScore" value="${candidateExaminationListDetail.passingScore }" />
 	<table border = "1" align="center">
 	<%-- <c:forEach items="candidateExaminationListDetail" var="list"> --%>
@@ -44,14 +44,14 @@
 		</tr>
 		<tr>
 			<th>점수</th>
-			<td>${takerScore } / ${passingScore }</td>
+			<td>${score } / ${passingScore }</td>
 		</tr>
 		
 		<tr>
 			<th>합격여부</th>
 			<td>
-				<c:if test="${passingScore lt takerScore }">합격</c:if>
-				<c:if test="${passingScore ge takerScore }">불합격</c:if>
+				<c:if test="${passingScore lt score }">합격</c:if>
+				<c:if test="${passingScore ge score }">불합격</c:if>
 			</td>
 		</tr>
 	<%-- </c:forEach> --%>
