@@ -114,22 +114,57 @@
 		
 		<!-- 0708 이승환 추가  // 기업리스트 출력 -->
 	<select id="managerAccountList" resultType="CompanyVO">
-		SELECT 
-			COMPANY_ID
-			,COMPANY_NAME
-			,COMPANY_PASSWORD
-			,COMPANY_CLASSIFICATION
-			,COMPANY_MANAGER
-			,COMPANY_MANAGER_TELNUM
+		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM(
+			SELECT 
+				COMPANY_ID
+				,COMPANY_NAME
+				,COMPANY_CLASSIFICATION
+				,FIND_CODENM(COMPANY_CLASSIFICATION) AS COMPANY_CLASSIFICATION_NAME
+				,COMPANY_MANAGER
+				,COMPANY_MANAGER_TELNUM
+		FROM COMPANY
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				${searchCompany} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+		<if test="sort == null or sort == ''">
+			ORDER BY COMPANY_ID DESC
+		</if>
+		<if test="sort != null and sort != ''">
+			ORDER BY ${sort}
+		</if>
+		<![CDATA[
+			) A ) B WHERE RN >=#{start} AND RN <=#{end}
+		]]>
+	</select>
+	
+	<!-- 07.16 이승환 추가  // 매니저가 회사목록 카운팅-->
+	<select id="getManagerCompanyCount" resultType="int">
+		SELECT COUNT(*)
 		FROM COMPANY
 	</select>
 	
 		<!-- 매니저, 상담리스트 출력 -->
 	<select id="managerConsultingList" resultType="ConsultingVO">
-		SELECT	CONSULTING_TITLE
-				, CONSULTING_DESIRED_DATE
-		
+		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
+			SELECT CONSULTING_TITLE "title"
+				, CONSULTING_DESIRED_DATE "consultingDesiredDate"
 		FROM CONSULTING
+		<where>
+			<if test="searchKeyword != null and searchKeyword != '' ">
+				${searchConsulting} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+		<if test="sort == null or sort=='' ">
+			ORDER BY CONSULTING_ID
+		</if> 
+		<if test="sort != null and sort != ''">
+			ORDER BY ${sort}
+		</if>
+		<![CDATA[
+			) A ) B WHERE RN >= #{start} AND RN <=#{end}
+		]]>
 	</select>
 	
 	<!-- 0708 이승환 추가  // 매니저 기업 수정-->

@@ -3,76 +3,73 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta charset="UTF-8">
+<title>시험 통계</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#chartBtn").click(function() {
+			google.load("visualization", "1", {packages : ["corechart"]});
+			google.setOnLoadCallback(loadPageData);
 
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
+			function loadPageData() {
+				$.ajax({
+					type: "POST",
+					url : "${pageContext.request.contextPath }/getTakeExamHistoryForTakerIdAndExamIdList.do/1",
+					success: function(data) {
+						var chartData 	= new google.visualization.DataTable();
+						var takeScore 	= 0;
+						var testName 	= data[0].examName;
+						var passScore	= data[0].passingScore;		
+						
+						chartData.addColumn('string', '점수');
+						chartData.addColumn('number', '점수');		
+						
+						data.forEach(function (row) {
+							takeScore += row.takerScore;
+						});
+						
+						chartData.addRow([
+							'총점',
+							100
+					    ]);
+						
+						chartData.addRow([
+							'합격점수',
+							passScore
+					    ]);
+						
+						chartData.addRow([
+							'획득점수',
+							takeScore
+					    ]);
+						
+						var options = {
+					            title : testName,
+					            chartArea : {
+					                width : '80%'
+					            },
+					            hAxis : {
+					                title : '점수',
+					                minValue : 0
+					            },
+					            animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+					                 startup: true,
+					                 duration: 1000,
+					                 easing: 'linear' }
+					        };
+						
+						var chart = new google.visualization.BarChart(document.getElementById('chartDiv'));
+						chart.draw(chartData, options);
+					    window.addEventListener('resize', function() { chart.draw(chartData, options); }, false);
+					}
+				});
+			}
+		})
+	});
+</script>
 </head>
 <body>
-<div id="wrapper"> 
-	<div id="content">
-		<h2>재직자 테스트 통계</h2>
-		<ul id="bar">
-			<li id="iphone">
-				<div class="top">
-					<img src="image/iphone.png" alt="iPhone" />
-				</div>
-				<div class="bottom">
-					<div class="infobox">
-						<h3>합격자</h3>
-						<p>80,1</p>
-					</div>
-				</div>
-			</li>
-			<li id="macbook">
-				<div class="top">
-					<img src="image/macbook.png" alt="MacBook" />
-				</div>
-				<div class="bottom">
-					<div class="infobox">
-						<h3>불합격자</h3>
-						<p>102,6</p>
-					</div>
-				</div>
-			</li>
-			<li id="ipod">
-				<div class="top">
-					<img src="image/ipod.png" alt="iPod" />
-				</div>
-				<div class="bottom">
-					<div class="infobox">
-						<h3>중도탈락자</h3>
-						<p>198,4</p>
-					</div>
-				</div>
-			</li>
-			<li id="cinema">
-				<div class="top">
-					<img src="image/cinema.png" alt="Cinema Display" />
-				</div>
-				<div class="bottom">
-					<div class="infobox">
-						<h3>미참석자</h3>
-						<p>38,2</p>
-					</div>
-				</div>
-			</li>
-			<li id="macmini">
-				<div class="top">
-					<img src="image/macmini.png" alt="Mac Mini" />
-				</div>
-				<div class="bottom">
-					<div class="infobox">
-						<h3>기타</h3>
-						<p>55,6</p>
-					</div>
-				</div>
-			</li>
-		</ul>
-		<div id="apple">
-			<img src="image/apple.png" alt="Apple Inc" />
-			<p>Numbers in millions sold<br />*Numbers are fictional</p>
-		</div>
-	</div>
-</div>
+
 </body>
 </html>

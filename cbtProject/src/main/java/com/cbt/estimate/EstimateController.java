@@ -66,12 +66,11 @@ public class EstimateController {
 	}
 	
 	//기업은 자기의뢰를 삭제 할 수 있다.  company-delete
-	@RequestMapping(value = "companyEstimateDelete.do/{estimateId}", method = RequestMethod.GET)
-	public String companyEstimateDelete(@PathVariable("estimateId") int estimateId,
-										EstimateVO vo) {
-		vo.setEstimateId(estimateId); 
+	@RequestMapping(value = "companyEstimateDelete.do" )
+	@ResponseBody
+	public void companyEstimateDelete(EstimateVO vo) { 
 		estimateService.deleteEstimate(vo);
-		return "redirect:companyEstimateList.do";
+		
 	}
 	
 	//의뢰세부내용보기			 company-select-detail
@@ -113,6 +112,8 @@ public class EstimateController {
 	//관리자의뢰 등록		관리자는 상담내역을가지고 의뢰서를 등록한다. manager-insert
 	@RequestMapping(value = "managerEstimateInsert.do", method = RequestMethod.GET)
 	public String managerEstimateInsertForm(Model model) {
+		
+		model.addAttribute("B", conditionService.getConditionDetailList("B"));	//K-응시대상자
 		model.addAttribute("K", conditionService.getConditionDetailList("K"));	//K-응시대상자
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
 		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수

@@ -3,6 +3,8 @@
 <mapper namespace="TakeExamHistoryDAO">
 	<!-- 190703 재홍 CRUD 쿼리 입력 -->
 	<!-- 설문조사 등록 -->
+	<!-- 2019.07.16 성재민 -->
+	<!-- ID 부분 시퀀스로 처리 -->
 	<insert id = "insertTakeExamHistory" parameterType="TakeExamHistoryVO">
 		INSERT INTO TAKE_EXAM_HISTORY (  
 					TAKER_ID
@@ -14,11 +16,100 @@
 			)
 		VALUES ( 
 					#{takerId}
-				,	#{takeExamHistoryId}
+				,	TAKE_EXAM_HISTORY_ID_SEQ.NEXTVAL
 				,	#{setExamQuestionId} 
 				,	#{takerAnswer}
 				,	#{takerScore}
 				,	#{takeExamId} 
 			)
 	</insert>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 업데이브 추가 -->
+	<!-- ID 로 점수 수정 -->
+	<update id="updateTakeExamHistory" parameterType="TakeExamHistoryVO">
+		UPDATE TAKE_EXAM_HISTORY
+		<set>
+			TAKER_SCORE = #{takerScore}
+		</set>
+		<where>
+			TAKE_EXAM_HISTORY_ID = #{takeExamHistoryId}
+		</where>
+	</update>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- ID 단일 건수 삭제 -->
+	<delete id="deleteTakeExamHistory" parameterType="TakeExamHistoryVO">
+		DELETE FORM TAKE_EXAM_HISTORY
+		<where>
+			TAKE_EXAM_HISTORY_ID = #{takeExamHistoryId}
+		</where>
+	</delete>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 응시자 ID 로 해당 응시자의 결과 삭제 -->
+	<!-- 회원 탈퇴시 해당 쿼리로 삭제 -->
+	<delete id="deleteTakeExamHistoryForTakerId" parameterType="TakeExamHistoryVO">
+		DELETE FORM TAKE_EXAM_HISTORY
+		<where>
+			TAKER_ID = #{takerId}
+		</where>
+	</delete>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 단건 조회 -->
+	<select id="getTakeExamHistory">
+		SELECT 
+					TAKER_ID
+				,	TAKE_EXAM_HISTORY_ID
+				,	SET_EXAM_QUESTION_ID
+				,	TAKER_ANSWER
+				,	TAKER_SCORE
+				,	TAKE_EXAM_ID
+		FROM TAKE_EXAM_HISTORY
+		<where>
+			TAKE_EXAM_HISTORY_ID = ${takeExamHistoryId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 응시자 ID 와 시험 ID로 해당 응시자의 해당 시험 조회 -->
+	<!-- #{} 의 경우 안의 값을 ''으로 감싸고 전달 -->
+	<!-- ${} 의 경우 그냥 값을 ''없이 전달 -->
+	<select id="getTakeExamHistoryForTakerIdAndExamIdList" parameterType="TakeExamVO" resultType="map">
+		SELECT 
+				EXAM_NAME				"examName"
+		  	,	TEH.TAKER_ID			"takerId"
+			,	SET_EXAM_QUESTION_ID	"setExamQuestionId"
+			, 	PASSING_SCORE			"passingScore"
+			,	TAKER_SCORE				"takerScore"
+		FROM TAKE_EXAM_HISTORY TEH JOIN TAKE_EXAM TE
+		ON TEH.TAKE_EXAM_ID = TE.TAKE_EXAM_ID
+		JOIN EXAM E
+		ON E.EXAM_ID = TE.EXAM_ID
+		<where>
+			TEH.TAKER_ID 	= #{takerId}
+			AND TE.EXAM_ID 	= ${examId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.16 성재민 -->
+	<!-- 응시자 ID 와 시험 ID로 해당 응시자의 해당 시험 조회 -->
+	<!-- #{} 의 경우 안의 값을 ''으로 감싸고 전달 -->
+	<!-- ${} 의 경우 그냥 값을 ''없이 전달 -->
+	<select id="getTakeExamHistoryForExamIdList" parameterType="TakeExamVO" resultType="map">
+		SELECT 
+				EXAM_NAME				"examName"
+		  	,	TEH.TAKER_ID			"takerId"
+			,	SET_EXAM_QUESTION_ID	"setExamQuestionId"
+			, 	PASSING_SCORE			"passingScore"
+			,	TAKER_SCORE				"takerScore"
+		FROM TAKE_EXAM_HISTORY TEH JOIN TAKE_EXAM TE
+		ON TEH.TAKE_EXAM_ID = TE.TAKE_EXAM_ID
+		JOIN EXAM E
+		ON E.EXAM_ID = TE.EXAM_ID
+		<where>
+			TE.EXAM_ID 	= ${examId}
+		</where>
+	</select>
 </mapper>

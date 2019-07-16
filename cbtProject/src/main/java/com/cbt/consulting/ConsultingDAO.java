@@ -54,9 +54,15 @@ public class ConsultingDAO {
 	public void managerConsultingDelete(ConsultingVO vo) {
 		mybatis.delete("consultingDAO.managerConsultingDelete", vo);
 	}
+	
 	//승환추가 07.15
 	public void managerConsultingInsert(ConsultingVO vo) {
 		mybatis.insert("consultingDAO.managerConsultingInsert", vo);
+	}
+	
+	//승환추가 07.16 페이지 글수 가져오는 메소드
+	public int getManagerConsultingCount(ConsultingVO vo) {
+		return mybatis.selectOne("consultingDAO.getManagerConsultingCount", vo);
 	}
 	
 }

@@ -1,37 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+<head>
+<title>column chart</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	google.load("visualization", "1", {packages : ["corechart"]});
+	google.setOnLoadCallback(loadPageData);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
+	function loadPageData() {
+		$.ajax({
+			type: "POST",
+			url : "${pageContext.request.contextPath }/getTakeExamHistoryForTakerIdAndExamIdList.do/1",
+			success: function(data) {
+				var chartData 	= new google.visualization.DataTable();
+				var takeScore 	= 0;
+				var testName 	= data[0].examName;
+				var passScore	= data[0].passingScore;		
+				
+				chartData.addColumn('string', '점수');
+				chartData.addColumn('number', '점수');		
+				
+				data.forEach(function (row) {
+					takeScore += row.takerScore;
+				});
+				
+				chartData.addRow([
+					'총점',
+					100
+			    ]);
+				
+				chartData.addRow([
+					'합격점수',
+					passScore
+			    ]);
+				
+				chartData.addRow([
+					'획득점수',
+					takeScore
+			    ]);
+				
+				var options = {
+			            title : testName,
+			            chartArea : {
+			                width : '80%'
+			            },
+			            hAxis : {
+			                title : '점수',
+			                minValue : 0
+			            },
+			            animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+			                 startup: true,
+			                 duration: 1000,
+			                 easing: 'linear' }
+			        };
+				
+				var chart = new google.visualization.BarChart(document.getElementById('chartDiv'));
+				chart.draw(chartData, options);
+			    window.addEventListener('resize', function() { chart.draw(chartData, options); }, false);
+			}
+		});
+	}
+	
+</script>
+</head>
 
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          },
-          bars: 'horizontal' // Required for Material Bar Charts.
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
-  </head>
-  <body>
-    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
-  </body>
+<body>
+	<!-- chart가 생성될 공간 -->
+	<div id="chartDiv"></div>
+</body>
 </html>
