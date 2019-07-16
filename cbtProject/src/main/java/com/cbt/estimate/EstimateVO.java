@@ -11,8 +11,7 @@ public class EstimateVO {
 
 	private int estimateId; 		//의뢰ID
 	private String estimateName;	//의뢰이름
-	private int categoryId;		//카테고리ID
-	private String categoryName; //카테고리이름
+	private int categoryId;			//카테고리ID
 	private String companyId;		//기업ID
 	@JsonFormat(pattern="yyyy-MM-dd", timezone ="Asia/Seoul")
 	private Date   requestDay;		//의뢰일ID
@@ -28,10 +27,14 @@ public class EstimateVO {
 	private String remarks;			//비고
 	private String examCount;			//시험횟수
 	private String examInterval;		//시험간격
+	
+	
+	
+	////////////////DB 사용하지 않는 변수들/////////////////
 	//코드값에대한 이름을 저장하기위한 변수들
+	private String categoryName; //카테고리이름
 	private String examCountName;		// 시험횟수 이름(ex 1번,2번)
 	private String tradeProgressName; // 의뢰진행상태 이름 
-	
 	//페이징
 	private int start;
 	private int end;
@@ -39,6 +42,10 @@ public class EstimateVO {
 	private int mainCategoryId;
 	private int middleCategoryId;
 	private int smallCategoryId;
+	////////////////DB 사용하지 않는 변수들/////////////////
+	
+	
+	
 	public int getEstimateId() {
 		return estimateId;
 	}
