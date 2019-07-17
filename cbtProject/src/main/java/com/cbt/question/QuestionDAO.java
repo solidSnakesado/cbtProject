@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.takeExam.TakeExamVO;
+
 
 //    7/2 문제 DAO 작성    -재용
 
@@ -89,8 +91,8 @@ public class QuestionDAO {
 		return mybatis.selectOne("QuestionDAO.candidateExaminationListDetail", vo);
 	}
 	
-	public void rightAnswer(QuestionVO vo) {
-		mybatis.update("QuestionDAO.rightAnswer", vo);
+	public void rightAnswer(int tId) {
+		mybatis.update("QuestionDAO.rightAnswer", tId);
 	}
 	
 	public int takeExamScoreNullCheck(QuestionVO vo) {

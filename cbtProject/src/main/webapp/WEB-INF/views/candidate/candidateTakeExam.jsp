@@ -157,7 +157,6 @@
 							var choice = $(this).attr('id');
 				        	var takerAnswer = $(this).val();
 				        	var setExamQuestionId = data[numbers[i]].setExamQuestionId;
-				        	/* var takeExamHistoryId = data[numbers[i]].takeExamHistoryId; */
 				    		console.log(choice);
 				    		console.log(takerAnswer);
 				    		
@@ -225,7 +224,7 @@
 		})
 	});
 	
-	function candidateExaminationList(){
+	function candidateTestResult(){
 		if(confirm("제출하시겠습니까?? \n 번복불가.") == true) {
 			takeExamForm.submit();
 		} else {
@@ -236,9 +235,9 @@
 </script>
 </head>
 <body>
-	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateExaminationList.do" method="post">
-		<input type="text" id="eId" name="examId" value="${examId }" hidden="ture">
-		<input type="text" id="tId" name="takeExamId" value="${takeExamId }" hidden="ture">
+	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestResult.do" method="post">
+		<input type="text" id="eId" name="eId" value="${examId }" hidden="ture">
+		<input type="text" id="tId" name="tId" value="${takeExamId }" hidden="ture">
 	</form>
 <button id="btn">시험 시작 !</button>
 	<table border="1" id="mainTab">
@@ -253,12 +252,10 @@
 						<td>3.</td>
 						<td>4.</td>
 					</tr>
-					<form action=""> 
 					<tr>
 						<td colspan="5" align="center" valign="top">
 						</td>
 					</tr>
-					</form>
 				</table>
 			</td>
 		</tr>
@@ -304,7 +301,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center" valign="top">
-				<button type='button' onclick="candidateExaminationList()" >제출 하기</button>
+				<button type='button' onclick="candidateTestResult()" >제출 하기</button>
 			</td>
 		</tr>
 	</table>

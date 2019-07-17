@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -33,6 +34,10 @@ import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 import com.cbt.setExamQuestion.SetExamQuestionService;
 import com.cbt.setExamQuestion.SetExamQuestionVO;
+import com.cbt.takeExam.TakeExamService;
+import com.cbt.takeExam.TakeExamVO;
+import com.cbt.takeExamHistory.TakeExamHistoryService;
+import com.cbt.takeExamHistory.TakeExamHistoryVO;
 
 // 7/2 문제 컨트롤러 생성   -재용
 
@@ -45,6 +50,8 @@ public class QuestionController {
 	SetExamQuestionService setExamQuestionService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	TakeExamHistoryService takeExamHistoryService;
 	
 	
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
@@ -113,7 +120,7 @@ public class QuestionController {
 		vo = questionService.getTestResultList(vo);
 		int setCount = questionService.getSetCount(vo);
 		
-		questionService.rightAnswer(vo);
+//		questionService.rightAnswer(vo);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("getExamId", vo.getExamId());
@@ -138,28 +145,33 @@ public class QuestionController {
 		
 	}
 	
-	@RequestMapping("candidateTestResult.do")
-	public ModelAndView candidateTestResult(QuestionVO vo, HttpSession session) {
+	@RequestMapping(value = "candidateTestResult.do" , method = RequestMethod.POST)
+	public ModelAndView candidateTestResult(	@RequestParam( value = "tId" , required = false ) int tId,
+												@RequestParam( value = "eId" , required = false ) int eId,
+												HttpSession session ) {
 		
-		questionService.rightAnswer(vo);
-		
-		ModelAndView mv = new ModelAndView();
-		ExamVO examVO = new ExamVO();
-		examVO.setExamId(vo.getExamId());
-		examVO = examService.getExam(examVO);
-				
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
-		vo.setTakerName(candiVO.getTakerName());
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("candiVO", candiVO);
 		
 		
+		ExamVO examVO = new ExamVO();
+		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
+		examVO.setExamId(eId);
+		mv.addObject("examVO", examService.getExam(examVO));
 		
-		mv.addObject("examName", examVO.getExamName());
-		mv.addObject("takerName", candiVO.getTakerName());
-		mv.addObject("questionQuantity", examVO.getQuestionQuantity());
-//		mv.addObject("examName", attributeValue);
-//		mv.addObject("examName", attributeValue);
-		mv.addObject("passingScore", examVO.getPassingScore());
+		// 응시자ID를 가지고 제출 정답을 문제정답과 비교해 채점하여 히스토리에 점수 UPDATE
+		questionService.rightAnswer(tId);
+		
+		TakeExamVO takeExamVO = new TakeExamVO();
+		// 시험 ID 와 응시자 ID 를 가지고
+		// 맞힌 문제 수 answerCount , 맞힌 문제 합계점수 sumTakerScore 담기
+		takeExamVO.setTakeExamId(tId);
+		takeExamVO.setExamId(eId);
+		mv.addObject("takeExamVO", takeExamHistoryService.getTakeExamHistoryForSumPointAndCount(takeExamVO));
+		
+		
 		mv.setViewName("candidate/candidate/candidateTestResult");
 		
 		return mv;
@@ -183,8 +195,6 @@ public class QuestionController {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
 		vo.setTakerId(candiVO.getTakerId());
-		QuestionVO qwqw = questionService.candidateExaminationListDetail(vo);
-		System.out.println(" Miss KIM e ne    "+qwqw.getScore());
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;

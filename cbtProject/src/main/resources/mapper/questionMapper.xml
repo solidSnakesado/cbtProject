@@ -178,7 +178,8 @@
 				e.EXAM_NAME, 
 				TO_CHAR(e.EXAM_START_TIME) EXAM_START_TIME,
 				t.TAKE_EXAM_ID,
-				e.EXAM_ID
+				e.EXAM_ID,
+				t.SCORE
 				
 		FROM 	EXAM e JOIN TAKE_EXAM t
 		ON 		e.EXAM_ID = t.EXAM_ID
@@ -201,7 +202,7 @@
 		WHERE 	t.TAKE_EXAM_ID 	= #{takeExamId} 		AND 	t.TAKER_ID = #{takerId}
 	</select>
 	
-	<update id="rightAnswer" parameterType="QuestionVO">
+	<update id="rightAnswer" parameterType="int">
 		UPDATE	TAKE_EXAM_HISTORY t
 		SET 	TAKER_SCORE 		= 		NVL((	SELECT 	POINT
         											FROM	SET_EXAM_QUESTION s 
