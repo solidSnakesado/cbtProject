@@ -40,15 +40,15 @@ public class CompanyDAO {
 	
 	// 이승환 추가
 	public List<CompanyVO> getCompanyList(CompanyVO vo) {
-		return mybatis.selectList("managerDAO.getCompanyList", vo);
+		return mybatis.selectList("ManagerDAO.getCompanyList", vo);
 	}
 
-	public List<CompanyVO> managerCompanyList(CompanyVO vo) {
-		return mybatis.selectList("companyDAO.managerAccountList", vo);
+	public List<CompanyVO> managerAccountList(CompanyVO vo) {
+		return mybatis.selectList("ManagerDAO.managerAccountList", vo);
 	}
 	
 	//승환추가 07.16 페이지 글수 가져오는 메소드
 	public int getManagerCompanyCount(CompanyVO vo) {
-		return mybatis.selectOne("companyDAO.getManagerCompanyCount", vo);
+		return mybatis.selectOne("ManagerDAO.getManagerCompanyCount", vo);
 	}
 }

@@ -143,7 +143,7 @@ public class ManagerController {
 
 	// 매니저 기업 리스트 출력
 	@RequestMapping(value = "managerAccountList.do", method = RequestMethod.GET)
-	public ModelAndView getManagerAccountList(Paging paging, ModelAndView mv, CompanyVO vo) {
+	public ModelAndView managerAccountList(Paging paging, ModelAndView mv, CompanyVO vo) {
 		mv.addObject("result", companyService.managerAccountList(vo, paging));
 		mv.setViewName("manager/manager/managerAccountList");
 		return mv;
