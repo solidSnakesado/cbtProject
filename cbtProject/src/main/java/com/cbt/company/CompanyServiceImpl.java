@@ -82,9 +82,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return map;	
 	}
 
-	@Override
-	public Map<String, Object> managerCompanyList(CompanyVO vo) {
-		return null;
-	}
+	
 
 }

@@ -203,12 +203,28 @@
 	</update>
 	
 	<!-- 응시자 목록 조회 -->
-	<select id="getCandidateList" resultType="CandidateVO">
-		SELECT    TAKER_ID
-				, TAKER_NAME
-				, TAKER_EMAIL
+	<select id="managerCandidateList" resultType="CandidateVO">
+		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
+			SELECT  TAKER_ID
+					, TAKER_NAME
+					, TAKER_EMAIL
 		FROM TAKER
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				${searchTaker} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+		<if test="sort == null or sort=='' ">
+			ORDER BY TAKER_ID
+		</if>
+		<if test="sort != null and sort != ''">
+			ORDER BY ${sort}
+		</if>
+		<![CDATA[
+			) A ) B WHERE RN >= #{start} AND RN <=#{end}
+		]]>
 	</select>
+	
 	
 	<!-- 응시자 목록 상세조회 -->
 	

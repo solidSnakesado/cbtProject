@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyVO;
 
 
 @Repository
@@ -67,8 +68,6 @@ public class CandidateDAO {
 	}
 
 	
-	
-	
 	// TEMP
 
 	public List<Map<Object, Object>> candidateScheduleCheckPage(CandidateVO vo){
@@ -77,6 +76,15 @@ public class CandidateDAO {
 
 	public int examCount() {
 		return mybatis.selectOne("candidateDAO.examCount");
+	}
+	
+	public List<CandidateVO> managerCandidateList(CandidateVO vo) {
+		return mybatis.selectList("ManagerDAO.managerCandidateList", vo);
+	}
+	
+	//승환추가 07.17 페이지 글수 가져오는 메소드
+	public int getManagerCandidateCount(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.getManagerCandidateCount", vo);
 	}
 	
 }

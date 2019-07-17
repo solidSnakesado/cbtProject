@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 <body>
 	<div align="center">
 		<h1 >기업 등록 페이지(관리자 화면)</h1>
-	<hr>	
+	<hr />	
 	</div>
 <form action="${pageContext.request.contextPath }/managerAccountInsert.do" method="post" enctype="application/x-www-form-urlencoded">
 <table align="center" border="1">

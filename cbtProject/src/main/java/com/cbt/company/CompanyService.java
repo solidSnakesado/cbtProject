@@ -29,12 +29,11 @@ public interface CompanyService {
 	List<CompanyVO> getCompanyList(CompanyVO vo);
 	
 	
-
 	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging);
 	
 	// 07.16 승환추가
 	public Map<String, Object> managerAccountList(CompanyVO vo, Paging paging);
 	
-	Map<String, Object> managerCompanyList(CompanyVO vo);
+
 
 }

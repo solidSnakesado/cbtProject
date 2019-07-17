@@ -27,6 +27,8 @@
 	<!-- 시험 정보 상세 보기 수정 -->
 	<header id="header"></header>
 	<h3>개별 시험 의뢰 목록 (기업화면)</h3>
+	<button type="button"
+			onclick="location.href='managerExamInsert.do'">시험내역 추가</button>
 	<input type = "hidden" name = "no" value = "${ dto.no }">
 	<table border = "1" align="center">
 		<tr>

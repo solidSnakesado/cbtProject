@@ -110,8 +110,7 @@
 			
 		});
 		
-		
-		
+	
 		//수정버튼 눌렀을때 처리 로직
 		$("#submitBtn").click(function() {
 			
