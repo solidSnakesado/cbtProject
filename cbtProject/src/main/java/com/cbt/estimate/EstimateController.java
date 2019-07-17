@@ -85,8 +85,7 @@ public class EstimateController {
 		/* 
 		 * model.addAttribute("cateoryMain", categoryMainService.getAllCategoryMain());
 		 */
-		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
-		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
+		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));  //기업별 디테일 의뢰 조회
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
 		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수

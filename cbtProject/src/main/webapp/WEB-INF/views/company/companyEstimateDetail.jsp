@@ -268,7 +268,7 @@
 	 		<tr>	<td>의뢰이름</td>		<td>	<input type="text" name="estimateName" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
 			<tr>	<td>의뢰일</td>		<td>	<input type="text" name="requestDay" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
 			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" id ="estimatePrice" readonly></td></tr>
-			<tr>	<td>의뢰진행상태</td>	<td>	<input type="text" name="tradeProgress" value="" id ="estimatePrice" readonly></td></tr>
+			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="candidate" value="${myEstimateList.candidate}"  ></my:select><!-- <input type="text" name="tradeProgress" value="" id ="estimatePrice" readonly> --></td></tr>
  			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
 			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
