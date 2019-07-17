@@ -77,7 +77,7 @@ public class CompanyServiceImpl implements CompanyService {
 		paging.setTotalRecord(companyDAO.getManagerCompanyCount(vo));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("companyList", companyDAO.managerCompanyList(vo));
+		map.put("companyList", companyDAO.managerAccountList(vo));
 		map.put("paging", paging);
 		return map;	
 	}

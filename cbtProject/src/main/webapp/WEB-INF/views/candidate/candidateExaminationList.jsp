@@ -96,7 +96,7 @@
 			<td id="examId${status.count }" value="${list.examId }" >${list.examId }</td>
 			<td id="takeExamId${status.count }" value="${list.takeExamId }">${list.takeExamId }</td>
 			<td id="examName${status.count }" value="${list.examName }">${list.examName }</td>
-			<td id="passingScore${status.count }" value="${list.passingScore }">${list.score}:${list.passingScore }</td>
+			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
 			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
 		</tr>
 	</c:forEach>

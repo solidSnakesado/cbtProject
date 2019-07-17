@@ -31,29 +31,29 @@
 	<table border="1" align="center">
 		<tr>
 			<th>시험명</th>
-			<td>${getExamName}</td>
+			<td>${examVO.examName}</td>
 		</tr>
 		<tr>
 			<th>응시자명</th>
-			<td>${getTakerName}</td>
+			<td>${candiVO.takerName}</td>
 		</tr>
 		<tr>
 			<th>출제문항 / 정답</th>
-			<td>${getExamCount} / ${getCount}</td>
+			<td>${examVO.questionQuantity} / ${takeExamVO.answerCount}</td>
 		</tr>
 		<tr>
 			<th>점수</th>
-			<td>${getPoint}</td>
+			<td>${takeExamVO.sumTakerScore}</td>
 		</tr>
 		<tr>
 			<th>합격점수</th>
-			<td>${getPassingScore}</td>
+			<td>${examVO.passingScore}</td>
 		</tr>
 		<tr>
 			<th>합격 여부</th>
 			<td>
-				<c:set var="point" value="${getPoint}"/>
-				<c:set var="passingScore" value="${getPassingScore}" />
+				<c:set var="point" value="${takeExamVO.sumTakerScore}"/>
+				<c:set var="passingScore" value="${examVO.passingScore}" />
 				<c:if test="${passingScore lt point}">합격</c:if>
 				<c:if test="${passingScore ge point}">불합격</c:if>
 			</td>

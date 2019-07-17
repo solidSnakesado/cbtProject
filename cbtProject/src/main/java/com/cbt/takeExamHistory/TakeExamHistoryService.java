@@ -26,4 +26,8 @@ public interface TakeExamHistoryService {
 	// 2019.07.16 성재민
 	// 시험 ID로 해당 시험 조회
 	public List<Map<String, Object>> getTakeExamHistoryForExamIdList(TakeExamVO vo);
+	
+	// 2019.07.17 김재용
+	// 응시자 ID로 총점 과 정답수 조회
+	Map<String, Object> getTakeExamHistoryForSumPointAndCount(TakeExamVO vo);
 }
