@@ -117,4 +117,16 @@
 			TE.EXAM_ID 	= ${examId}
 		</where>
 	</select>
+	
+	
+	<!-- 2019.07.17 김재용 -->
+	<!-- 응시자 ID로 정답수와 총점 조회  -->
+	<select id="getTakeExamHistoryForSumPointAndCount" parameterType="TakeExamVO" resultType="map">
+		SELECT  SUM(TAKER_SCORE)		"sumTakerScore"
+				, COUNT(*)				"answerCount"
+		FROM    TAKE_EXAM_HISTORY
+		WHERE   TAKER_SCORE != 0 AND TAKE_EXAM_ID = #{takeExamId}
+	</select>
+	
+	
 </mapper>

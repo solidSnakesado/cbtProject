@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cbt.common.Paging;
+import com.cbt.takeExam.TakeExamVO;
 
 
 //  7/2 문제 서비스 작성    -재용
@@ -21,7 +22,7 @@ public interface QuestionService {
 	
 	void deleteQuestion(QuestionVO vo);
 	
-	void rightAnswer(QuestionVO vo);
+	void rightAnswer(int tId);
 	
 	void rightLastAnswer(QuestionVO vo);
 	

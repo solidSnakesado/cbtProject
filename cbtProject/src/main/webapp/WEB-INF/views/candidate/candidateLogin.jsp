@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,8 +65,12 @@
 	</form>
 	<div align="right">
 		<a href="candidateInSignUp.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
-	</div>
+	</div>	
+	<c:if test="${empty sessionScope.candidate}">
 		<a href = "https://kauth.kakao.com/oauth/authorize?client_id=69907cd9d071e81c5215c21beccec7ee&redirect_uri=http://localhost/project/oauth&response_type=code">
 			<img src="${pageContext.request.contextPath}/image/kakaoLogin.jpg"></a>
+	</c:if>
+	<c:if test="${not empty sessionScope.candidate}"><a href = "kakaoLogout">로그아웃</a><br></c:if>
+	
 </body>
 </html>

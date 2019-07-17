@@ -143,7 +143,7 @@ public class ManagerController {
 
 	// 매니저 기업 리스트 출력
 	@RequestMapping(value = "managerAccountList.do", method = RequestMethod.GET)
-	public ModelAndView getManagerAccountList(Paging paging, ModelAndView mv, CompanyVO vo) {
+	public ModelAndView managerAccountList(Paging paging, ModelAndView mv, CompanyVO vo) {
 		mv.addObject("result", companyService.managerAccountList(vo, paging));
 		mv.setViewName("manager/manager/managerAccountList");
 		return mv;
@@ -221,10 +221,12 @@ public class ManagerController {
 
 	// 관리자 유저 리스트 출력
 	@RequestMapping(value = "managerUserAccountList.do", method = RequestMethod.GET)
-	public String managerUserAccountList(Model model, CandidateVO vo) {
-		model.addAttribute("result", candidateService.getCandidateList(vo));
-		return "manager/manager/managerUserAccountList";
+	public ModelAndView managerUserAccountList(Paging paging, ModelAndView mv, CandidateVO vo) {
+		mv.addObject("result", candidateService.managerCandidateList(vo, paging));
+		mv.setViewName("manager/manager/managerUserAccountList");
+		return mv;
 	}
+	
 
 	// 관리자 응시자 상세조회, 수정폼
 	@RequestMapping(value = "managerUserAccountEdit.do/{takerId}", method = RequestMethod.GET)
@@ -336,6 +338,22 @@ public class ManagerController {
 		return "manager/manager/managerExamListDetail";
 	}
 	
+	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.GET)
+	public String managerExamInsertForm(ExamVO vo, Model model) {
+		model.addAttribute("O", conditionService.getConditionDetailList("O"));
+		model.addAttribute("D", conditionService.getConditionDetailList("D"));
+		model.addAttribute("I", conditionService.getConditionDetailList("I"));
+		return "manager/manager/managerExamInsert";
+	}
+	
+	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.POST)
+	public String managerExamInsert(ExamVO vo) {
+		examService.insertExam(vo);
+		return "redirect:managerExamList.do";
+	}
+
+	
+	
 	@ModelAttribute("consultingMap")
 	public Map<String, String> consultingMap() {
 		Map<String, String> map = new HashMap<String, String>();
@@ -351,6 +369,15 @@ public class ManagerController {
 		map.put("기업ID", "COMPANY_ID");
 		map.put("기업이름", "COMPANY_NAME");
 		map.put("담당자", "COMPANY_MANAGER");
+		return map;
+	}
+	
+	@ModelAttribute("takerMap")
+	public Map<String, String> takerMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("응시자ID", "TAKER_ID");
+		map.put("이름", "TAKER_NAME");
+		map.put("EMAIL", "TAKER_EMAIL");
 		return map;
 	}
 	

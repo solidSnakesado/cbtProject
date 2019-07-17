@@ -59,4 +59,11 @@ public class TakeExamHistoryDAO {
 	public List<Map<String, Object>> getTakeExamHistoryForExamIdList(TakeExamVO vo) {
 		return mybatis.selectList("TakeExamHistoryDAO.getTakeExamHistoryForExamIdList", vo);
 	}
+	
+	// 2019.07.17 김재용
+	// 응시자 ID로 총점 과 정답수 조회
+	public Map<String, Object> getTakeExamHistoryForSumPointAndCount(TakeExamVO vo) {
+		return mybatis.selectOne("TakeExamHistoryDAO.getTakeExamHistoryForSumPointAndCount", vo);
+	}
+	
 }

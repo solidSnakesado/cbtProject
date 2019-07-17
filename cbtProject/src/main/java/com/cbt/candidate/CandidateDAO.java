@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.cbt.common.Paging;
@@ -12,12 +13,14 @@ import com.cbt.common.Paging;
 
 @Repository
 public class CandidateDAO {
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
 	//2019.07.01 장세준 - insert
 	public void insertCandidate(CandidateVO vo) {
+		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
 		mybatis.insert("candidateDAO.insertCandidate", vo);
 	}
 
@@ -35,9 +38,24 @@ public class CandidateDAO {
 		return mybatis.selectList("candidateDAO.getExamList", vo);
 	}	
 	
-	public CandidateVO loginCandidate(CandidateVO vo) {
-		return mybatis.selectOne("candidateDAO.candidateLogin", vo);
+	// 암호화 로그인 전
+	
+	  public CandidateVO loginCandidate(CandidateVO vo) {
+		  return mybatis.selectOne("candidateDAO.candidateLogin", vo); 
 	}
+	 
+	
+	// 암호화 로그인 -- 테스트 기간
+	/*
+	 * public CandidateVO loginCandidate(CandidateVO vo) { String pw =
+	 * mybatis.selectOne("candidateDAO.getTakerPassword",vo); String rawPw =
+	 * vo.getTakerPassword(); if (scpwd.matches(rawPw, pw)) {
+	 * System.out.println("비밀번호 일치"); System.out.println(pw + rawPw);
+	 * vo.setTakerPassword(pw); } else { System.out.println("비밀번호 불일치");
+	 * System.out.println(pw + rawPw); return null; } return
+	 * mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	 */
+	
 	
 	public int getCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getCandidate", vo);
@@ -78,5 +96,15 @@ public class CandidateDAO {
 	public int examCount() {
 		return mybatis.selectOne("candidateDAO.examCount");
 	}
+	
+	public List<CandidateVO> managerCandidateList(CandidateVO vo) {
+		return mybatis.selectList("ManagerDAO.managerCandidateList", vo);
+	}
+	
+	//승환추가 07.17 페이지 글수 가져오는 메소드
+	public int getManagerCandidateCount(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.getManagerCandidateCount", vo);
+	}
+	
 	
 }

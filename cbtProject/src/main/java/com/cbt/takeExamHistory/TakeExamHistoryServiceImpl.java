@@ -61,4 +61,11 @@ public class TakeExamHistoryServiceImpl implements TakeExamHistoryService {
 	public List<Map<String, Object>> getTakeExamHistoryForExamIdList(TakeExamVO vo) {
 		return dao.getTakeExamHistoryForExamIdList(vo);
 	}
+
+	// 2019.07.17 김재용
+		// 응시자 ID로 총점 과 정답수 조회
+	@Override
+	public Map<String, Object> getTakeExamHistoryForSumPointAndCount(TakeExamVO vo) {
+		return dao.getTakeExamHistoryForSumPointAndCount(vo);
+	}
 }
