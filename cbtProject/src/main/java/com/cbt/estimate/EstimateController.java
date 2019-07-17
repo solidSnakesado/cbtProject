@@ -53,10 +53,10 @@ public class EstimateController {
 	@RequestMapping(value = "/companyEstimateUpdate.do", method=RequestMethod.POST)
 	public void companyEstimateUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
 		
-		PrintWriter out = response.getWriter();
+		
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
-		
+		PrintWriter out = response.getWriter();
 		//윈도우창 닫기
 		out.print("<script>");
 		out.print("window.opener.top.location.reload();");
@@ -81,10 +81,12 @@ public class EstimateController {
 												Model model) {
 		
 		vo.setEstimateId(estimateId); 
+		
 		/* 
 		 * model.addAttribute("cateoryMain", categoryMainService.getAllCategoryMain());
 		 */
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));
+		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
 		model.addAttribute("H", conditionService.getConditionDetailList("H"));	//H-시험횟수

@@ -18,25 +18,27 @@
 	}
 	function estimateDetail(estimateId){
 		console.log("estimateId :" + estimateId);
-		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
-		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
+		var wintype = "toolbar=no,width=700,height=700,top=200,left=400,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+		var winopen = window.open("managerEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
 	
-	function deleteEstimateId(estimateId){
+	function deleteEstimateId(e,estimateId){ //해당 estimateId 가진 튜플 삭제함수
 		console.log(estimateId);
-		if(confirm("삭제하시겠습니까??")){
-			$(document).ready(function(){
-				$.ajax({
-					type:'GET',
-					dataType : 'json',
-					url:"${pageContext.request.contextPath}/companyEstimateDelete.do/" + estimateId,
-					success : function(data) {
+		e.preventDefault(); //<form action="companyEstimateList.do">이 실행되지않도록 막음
+		
+		//예외처리
+		if(confirm("삭제하시겠습니까??")){		
+				//해당 estimateId 가진 튜플 삭제
+				 $.ajax({
+					url:"${pageContext.request.contextPath}/managerEstimateDelete.do",
+					data: { estimateId:  estimateId},
+					success : function() {
 						alert('삭제되었습니다');
+						location.reload();
 					}, error : function() {
 						alert('에러발생');
 					}
-				});
-			});
+				});		 
 		}
 		else{
 			alert("취소되었습니다");
@@ -75,7 +77,7 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onClick="deleteEstimateId(${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" onclick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
