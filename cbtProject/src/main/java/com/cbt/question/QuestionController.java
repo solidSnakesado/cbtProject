@@ -195,12 +195,6 @@ public class QuestionController {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
 		vo.setTakerId(candiVO.getTakerId());
-<<<<<<< HEAD
-		QuestionVO qwqw = questionService.candidateExaminationListDetail(vo);
-		System.out.println(" Miss KIM e ne    "+qwqw.getScore());
-		QuestionVO test = questionService.candidateExaminationListDetail(vo);
-=======
->>>>>>> branch 'master' of https://github.com/solidSnakesado/cbtProject
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;
