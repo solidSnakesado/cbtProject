@@ -17,7 +17,7 @@
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
-					url : "${pageContext.request.contextPath }/getTakeExamHistoryForTakerIdAndExamIdList.do/1",
+					url : "${pageContext.request.contextPath }/getTakeExamHistoryForTakerIdAndExamIdList.do/${candidateExaminationListDetail.takeExamId}",
 					success: function(data) {
 						var chartData 	= new google.visualization.DataTable();
 						var takeScore 	= 0;

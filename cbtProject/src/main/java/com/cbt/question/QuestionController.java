@@ -185,6 +185,7 @@ public class QuestionController {
 		vo.setTakerId(candiVO.getTakerId());
 		QuestionVO qwqw = questionService.candidateExaminationListDetail(vo);
 		System.out.println(" Miss KIM e ne    "+qwqw.getScore());
+		QuestionVO test = questionService.candidateExaminationListDetail(vo);
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;

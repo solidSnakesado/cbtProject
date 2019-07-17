@@ -41,8 +41,9 @@ public class ExamController {
 		return "company/company/companyExamListDetail";
 	}
 	
-	@RequestMapping(value = "companyExamListDetailGraph.do", method = RequestMethod.GET)
-	public String companyExamListDetailGraph() {
+	@RequestMapping(value = "companyExamListDetailGraph.do/{examId}", method = RequestMethod.GET)
+	public String companyExamListDetailGraph(@PathVariable("examId") int examId, Model model) {
+		model.addAttribute("examId", examId);
 		return "company/company/companyExamListDetailGraph";
 	}
 }
