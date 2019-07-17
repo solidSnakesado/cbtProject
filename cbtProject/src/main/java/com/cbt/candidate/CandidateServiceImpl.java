@@ -115,5 +115,25 @@ public class CandidateServiceImpl implements CandidateService {
 		return map;
 		}
 		return null;
+	}
+
+	@Override
+	public Map<String, Object> managerCandidateList(CandidateVO vo, Paging paging) {
+		//출력건수
+			paging.setPageUnit(5);
+			//페이지번호 파라미터
+			if(paging.getPage() == null) {
+				paging.setPage(1);
+			}
+			//시작/마지막 레코드 번호
+			vo.setStart(paging.getFirst());
+			vo.setEnd(paging.getLast());
+			//전체 건수
+			paging.setTotalRecord(candidateDAO.getManagerCandidateCount(vo));
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("takerList", candidateDAO.managerCandidateList(vo));
+			map.put("paging", paging);
+			return map;	
 	} 
 }

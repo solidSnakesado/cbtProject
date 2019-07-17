@@ -18,7 +18,6 @@ public class CandidateDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	//     07.17 - 패스워드 암호화
 	//2019.07.01 장세준 - insert
 	public void insertCandidate(CandidateVO vo) {
 		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
