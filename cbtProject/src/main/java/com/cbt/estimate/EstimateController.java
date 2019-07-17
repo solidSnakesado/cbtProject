@@ -165,7 +165,6 @@ public class EstimateController {
 		
 		//관리자 의뢰세부내용보기			 manager-select-detail
 		@RequestMapping(value="managerEstimateDetail.do/{estimateId}", method = RequestMethod.GET)
-		
 		public String managerEstimateDetail(@PathVariable("estimateId") int estimateId, //String ->int바꿔야함
 													EstimateVO vo,
 													Model model) {

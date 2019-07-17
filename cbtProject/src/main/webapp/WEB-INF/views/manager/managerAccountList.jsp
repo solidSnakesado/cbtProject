@@ -21,8 +21,8 @@
 	</script>
 	<hr />
 	<form name="searchFrm">
-		정렬기준 <input type="hidden" name="page" value="1"> <select
-			name="sort">
+		정렬기준 <input type="hidden" name="page" value="1"> 
+		<select name="sort">
 			<option value="COMPANY_ID">기업ID
 			<option value="COMPANY_NAME">기업이름
 			<option value="COMPANY_MANAGER">담당자

@@ -42,12 +42,34 @@ public class EstimateVO {
 	private int mainCategoryId;
 	private int middleCategoryId;
 	private int smallCategoryId;
+	
+	private String categoryMainName;
+	private String categoryMiddleName;
+	private String categorySmallName;
 	////////////////DB 사용하지 않는 변수들/////////////////
 	
 	
 	
 	public int getEstimateId() {
 		return estimateId;
+	}
+	public String getCategoryMainName() {
+		return categoryMainName;
+	}
+	public void setCategoryMainName(String categoryMainName) {
+		this.categoryMainName = categoryMainName;
+	}
+	public String getCategoryMiddleName() {
+		return categoryMiddleName;
+	}
+	public void setCategoryMiddleName(String categoryMiddleName) {
+		this.categoryMiddleName = categoryMiddleName;
+	}
+	public String getCategorySmallName() {
+		return categorySmallName;
+	}
+	public void setCategorySmallName(String categorySmallName) {
+		this.categorySmallName = categorySmallName;
 	}
 	public void setEstimateId(int estimateId) {
 		this.estimateId = estimateId;
@@ -193,15 +215,18 @@ public class EstimateVO {
 	@Override
 	public String toString() {
 		return "EstimateVO [estimateId=" + estimateId + ", estimateName=" + estimateName + ", categoryId=" + categoryId
-				+ ", categoryName=" + categoryName + ", companyId=" + companyId + ", requestDay=" + requestDay
-				+ ", estimatePrice=" + estimatePrice + ", tradeProgress=" + tradeProgress + ", candidate=" + candidate
-				+ ", applyPurpose=" + applyPurpose + ", applicants=" + applicants + ", examClassfication="
-				+ examClassfication + ", levelOfDifficulty=" + levelOfDifficulty + ", examDate=" + examDate
-				+ ", remarks=" + remarks + ", examCount=" + examCount + ", examInterval=" + examInterval
-				+ ", examCountName=" + examCountName + ", tradeProgressName=" + tradeProgressName + ", start=" + start
-				+ ", end=" + end + ", mainCategoryId=" + mainCategoryId + ", middleCategoryId=" + middleCategoryId
-				+ ", smallCategoryId=" + smallCategoryId + "]";
+				+ ", companyId=" + companyId + ", requestDay=" + requestDay + ", estimatePrice=" + estimatePrice
+				+ ", tradeProgress=" + tradeProgress + ", candidate=" + candidate + ", applyPurpose=" + applyPurpose
+				+ ", applicants=" + applicants + ", examClassfication=" + examClassfication + ", levelOfDifficulty="
+				+ levelOfDifficulty + ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount
+				+ ", examInterval=" + examInterval + ", categoryName=" + categoryName + ", examCountName="
+				+ examCountName + ", tradeProgressName=" + tradeProgressName + ", start=" + start + ", end=" + end
+				+ ", mainCategoryId=" + mainCategoryId + ", middleCategoryId=" + middleCategoryId + ", smallCategoryId="
+				+ smallCategoryId + ", categoryMainName=" + categoryMainName + ", categoryMiddleName="
+				+ categoryMiddleName + ", categorySmallName=" + categorySmallName + "]";
 	}
+	
+	
 	
 	
 	

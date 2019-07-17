@@ -40,14 +40,13 @@ public class RestfulTakeExamHistoryController {
 	// 차트에서 사용하기 위해 생성
 	@RequestMapping(value="getTakeExamHistoryForExamIdList.do/{examId}", method=RequestMethod.POST)
 	public List<Map<String, Object>> getTakeExamHistoryForExamIdList(@PathVariable("examId") int examId) {
-		/*
-		 * takeExamVO = new TakeExamVO(); takeExamVO.setExamId(examId); takeExamVO =
-		 * takeExamService.getTakeExam(takeExamVO);
-		 * 
-		 * // 값이 null 이 아닐때만 넘김. if(takeExamVO != null) { return
-		 * takeExamHistoryService.getTakeExamHistoryForTakerIdAndExamIdList(takeExamVO);
-		 * }
-		 */
+		TakeExamVO takeExamVO = new TakeExamVO();
+		takeExamVO.setExamId(examId);
+		
+		// 값이 있을 때만 처리.
+		if(takeExamService.getTakeExamForExamId(takeExamVO).size() > 0) {
+			return takeExamHistoryService.getTakeExamHistoryForExamIdList(takeExamVO);
+		}
 			
 		return null;
 	}

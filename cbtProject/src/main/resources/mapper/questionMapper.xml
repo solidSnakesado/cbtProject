@@ -170,12 +170,15 @@
 		WHERE 	t.TAKER_ID = #{takerId}
 	</select>
 	
+	<!-- 2019.07.17 성재민 -->
+	<!-- 검색에 th.TAKE_EXAM_ID 추가 -->
 	<select id="candidateExaminationListDetail" resultMap="questionVOs">
 		SELECT 	DISTINCT
         		t.SCORE, 
 				u.TAKER_NAME, 
 				u.TAKER_INFO, 
 				e.EXAM_NAME, 
+				th.TAKE_EXAM_ID,
 				TO_CHAR(e.EXAM_START_TIME) EXAM_START_TIME,
 				e.PASSING_SCORE
 				

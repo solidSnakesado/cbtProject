@@ -17,10 +17,10 @@
 		searchFrm.submit();
 	}
 	
-	//페이지
+	// 윈도우 function 처리 함수
 	function estimateDetail(estimateId){
 		console.log("estimateId :" + estimateId);
-		var wintype = "toolbar=no,width=500,height=1000,top=150,left=150,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+		var wintype = "toolbar=no,width=700,height=700,top=200,left=400,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
 	

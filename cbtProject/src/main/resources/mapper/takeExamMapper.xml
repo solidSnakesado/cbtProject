@@ -53,7 +53,23 @@
 			,	EXAM_ID
 			,	TAKER_ID
 		FROM	TAKE_EXAM
-		
-		WHERE EXAM_ID = #{examId}
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.17 성재민 -->
+	<!-- 단건 조회 -->
+	<select id="getTakeExam" resultType="TakeExamVO">
+		SELECT	
+				TAKE_EXAM_ID
+			, 	TAKE_EXAM_DATE
+			,	SCORE
+			,	EXAM_ID
+			,	TAKER_ID
+		FROM	TAKE_EXAM
+		<where>
+			TAKE_EXAM_ID = #{takeExamId}
+		</where>
 	</select>
 </mapper>

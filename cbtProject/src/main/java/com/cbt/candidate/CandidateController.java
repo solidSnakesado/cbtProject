@@ -331,6 +331,7 @@ public class CandidateController {
         kakao_restapi kr = new kakao_restapi();
         //노드에 로그아웃한 결과값음 담아줌 매개변수는 세션에 잇는 token을 가져와 문자열로 변환
         JsonNode node = kr.Logout(session.getAttribute("token").toString());
+        session.invalidate();
         //결과 값 출력
         System.out.println("로그인 후 반환되는 아이디 : " + node.get("id"));
         return "redirect:/";

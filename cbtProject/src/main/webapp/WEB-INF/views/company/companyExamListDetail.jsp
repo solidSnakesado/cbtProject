@@ -83,7 +83,7 @@
 		</tr>
 	</table>
 	<br>
-	<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do'" >통계보기</button>
+	<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" >통계보기</button>
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기">
 </body>
 </html>
