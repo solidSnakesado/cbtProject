@@ -16,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.takeExam.TakeExamVO;
 
@@ -36,7 +37,7 @@ public class QuestionServiceImpl implements QuestionService {
 		questionDAO.insertQuestion(vo);
 	}
 
-	public void insertTakeExamHistory(QuestionVO vo) {
+	public void insertTakeExamHistory(TakeExamVO vo) {
 		questionDAO.insertTakeExamHistory(vo);
 	}
 
@@ -95,54 +96,27 @@ public class QuestionServiceImpl implements QuestionService {
 		return list;
 	}
 
-	public List<Map<Object, String>> getTestStart(QuestionVO vo) {
-		List<Map<Object, String>> list = new ArrayList<Map<Object,String>>();
-		Map<Object, String> map = new HashMap<Object, String>();
-		List<QuestionVO> daoList = questionDAO.getTestStart(vo);
-		
-		System.out.println(daoList);
-		
-		for(QuestionVO dto : daoList) {
-			map = new HashMap<Object, String>();
-			map.put("questionId", Integer.toString(dto.getQuestionId()));
-			map.put("questionContent", dto.getQuestionContent());
-			map.put("example1", dto.getExample1());
-			map.put("example2", dto.getExample2());
-			map.put("example3", dto.getExample3());
-			map.put("example4", dto.getExample4());
-			map.put("rightAnswer", dto.getRightAnswer());
-			map.put("rightCommentary", dto.getRightCommentary());
-			map.put("levelOfDifficulty", Integer.toString(dto.getLevelOfDifficulty()));
-			map.put("categoryId", Integer.toString(dto.getCategoryId()));
-			map.put("questionType", dto.getQuestionType());
-			map.put("examId", Integer.toString(dto.getExamId()));
-			map.put("setExamQuestionId", dto.getSetExamQuestionId());
-			map.put("point", Integer.toString(dto.getPoint()));
-			map.put("takerAnswer", dto.getTakerAnswer());
-			
-			list.add(map);
-			
-		}
-		
+	public List<Map<String, Object>> getTestStart(TakeExamVO vo) {
+		List<Map<String, Object>> list = questionDAO.getTestStart(vo);
 		return list;
 	}
 
-	public int getSetCount(QuestionVO vo) {
+	public int getSetCount(TakeExamVO vo) {
 		
 		return questionDAO.getSetCount(vo);
 	}
 	
-	public int getTakeCount(QuestionVO vo) {
+	public int getTakeCount(TakeExamVO vo) {
 		
 		return questionDAO.getTakeCount(vo);
 	}
 	
-	public int getHistoryCount(QuestionVO vo) {
+	public int getHistoryCount(TakeExamVO vo) {
 		
 		return questionDAO.getHistoryCount(vo);
 	}
 
-	public List<QuestionVO> candidateExaminationList(QuestionVO vo) {
+	public List<Map<String, Object>> candidateExaminationList(CandidateVO vo) {
 		
 		return questionDAO.candidateExaminationList(vo);
 	}
@@ -156,11 +130,11 @@ public class QuestionServiceImpl implements QuestionService {
 		questionDAO.rightAnswer(tId);
 	}
 	
-	public int takeExamScoreNullCheck(QuestionVO vo) {
+	public int takeExamScoreNullCheck(TakeExamVO vo) {
 		return questionDAO.takeExamScoreNullCheck(vo);
 	}
 	
-	public void rightLastAnswer(QuestionVO vo) {
+	public void rightLastAnswer(TakeExamVO vo) {
 		questionDAO.rightLastAnswer(vo);
 	}
 

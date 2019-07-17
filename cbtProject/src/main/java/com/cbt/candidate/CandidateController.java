@@ -242,9 +242,16 @@ public class CandidateController {
 		
 		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
 		TakeExamVO vo = new TakeExamVO();
+		
+		
+		// 2019.07.17 김재용 추가
+		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
+		// 응시하기 버튼 바꾸기
 		vo.setTakerId(candivo.getTakerId()); 
 		vo.setExamId(examId);
-		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
+		vo = takeExamService.selectTakeExamId(vo);
+		mv.addObject("takeExamId", vo);
+
 		
 		mv.addObject("detailExam", examService.getExam(examVO));
 		mv.setViewName("candidate/candidate/candidateExamDetialView");

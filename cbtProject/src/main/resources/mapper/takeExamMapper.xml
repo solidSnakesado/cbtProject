@@ -30,8 +30,14 @@
 		FROM 	TAKE_EXAM
 	</select>
 	
+	<!-- 2019.07.17 김재용 -->
+	<!-- 유저 ID 와 시험 ID 로 TAKE_EXAM 값가져오기 -->
 	<select id="selectTakeExamId" resultType="TakeExamVO">
-		SELECT	TAKE_EXAM_ID TAKE_EXAM_ID
+		SELECT	TAKE_EXAM_ID
+				,EXAM_ID
+				,TAKER_ID
+				,NVL(SCORE,9999) SCORE
+				,TAKE_EXAM_DATE
 			FROM	TAKE_EXAM
 		
 		WHERE TAKER_ID = #{takerId} AND EXAM_ID = #{examId}

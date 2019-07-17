@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.takeExam.TakeExamVO;
 
 
@@ -22,7 +23,7 @@ public class QuestionDAO {
 		mybatis.insert("QuestionDAO.insertQuestion", vo);
 	}
 	
-	public void insertTakeExamHistory(QuestionVO vo) {
+	public void insertTakeExamHistory(TakeExamVO vo) {
 		mybatis.insert("QuestionDAO.insertTakeExamHistory", vo);
 	}
 	
@@ -62,27 +63,27 @@ public class QuestionDAO {
 		return mybatis.selectList("QuestionDAO.candidateTakeExamList", vo);
 	}
 	
-	public List<QuestionVO> getTestStart(QuestionVO vo) {
+	public List<Map<String, Object>> getTestStart(TakeExamVO vo) {
 		
-		return mybatis.selectList("QuestionDAO.candidateTestResult", vo);
+		return mybatis.selectList("QuestionDAO.getTestStart", vo);
 	}
 	
-	public int getSetCount(QuestionVO vo) {
+	public int getSetCount(TakeExamVO vo) {
 		
 		return mybatis.selectOne("QuestionDAO.getSetCount", vo);
 	}
 	
-	public int getTakeCount(QuestionVO vo) {
+	public int getTakeCount(TakeExamVO vo) {
 		
 		return mybatis.selectOne("QuestionDAO.getTakeCount", vo);
 	}
 	
-	public int getHistoryCount(QuestionVO vo) {
+	public int getHistoryCount(TakeExamVO vo) {
 		
 		return mybatis.selectOne("QuestionDAO.getHistoryCount", vo);
 	}
 	
-	public List<QuestionVO> candidateExaminationList(QuestionVO vo) {
+	public List<Map<String, Object>> candidateExaminationList(CandidateVO vo) {
 		
 		return mybatis.selectList("QuestionDAO.candidateExaminationList", vo);
 	}
@@ -95,11 +96,11 @@ public class QuestionDAO {
 		mybatis.update("QuestionDAO.rightAnswer", tId);
 	}
 	
-	public int takeExamScoreNullCheck(QuestionVO vo) {
+	public int takeExamScoreNullCheck(TakeExamVO vo) {
 		return mybatis.selectOne("QuestionDAO.takeExamScoreNullCheck", vo);
 	}
 	
-	public void rightLastAnswer(QuestionVO vo) {
+	public void rightLastAnswer(TakeExamVO vo) {
 		mybatis.update("QuestionDAO.rightLastAnswer", vo);
 	}
 	
