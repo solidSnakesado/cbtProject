@@ -19,7 +19,6 @@
 					success: function(data) {
 						console.log(data);
 						
-						
 						var examPossibleApplicants 	= 0;			// 2019.07.17 성재민 // 응시가능 인원
 						var examQuestionQuantity	= 0;			// 2019,07,17 성재민 // 출제 문항 수
 						var examPassingScore		= 0
@@ -69,7 +68,7 @@
 						});
 						
 						data.forEach(function (row) {
-							console.log(row.takerId);
+							// console.log(row.takerId);
 							for(var i = 0; i < takerIdArr.length; ++i) {
 								if(takerIdArr[i] == row.takerId){
 									takerTotalscoreArr[i] += row.takerScore;
@@ -83,13 +82,13 @@
 							}
 						});
 					
-						console.log("응시자 id 목록" + takerIdArr);
+/* 						console.log("응시자 id 목록" + takerIdArr);
 						console.log("응시자 점수 목록" + takerTotalscoreArr);
 						console.log("응시 가능 인원 수" + examPossibleApplicants);
 						console.log("응시 인원 수" + takerIdArr.length);
 						console.log("문항별 획득 점수" + takerScoreQuestionArr);
 						console.log("문항별 총점 점수" + totalScroeQuestionArr);
-						console.log("합격 커트라인 점수 " + examPassingScore);
+						console.log("합격 커트라인 점수 " + examPassingScore); */
 						
 						var chartAttendanceRateData = new google.visualization.DataTable();
 						
