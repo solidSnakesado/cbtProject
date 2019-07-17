@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cbt.common.Paging;
+import com.cbt.takeExam.TakeExamVO;
 
 
 
@@ -151,8 +152,8 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.candidateExaminationListDetail(vo);
 	}
 	
-	public void rightAnswer(QuestionVO vo) {
-		
+	public void rightAnswer(int tId) {
+		questionDAO.rightAnswer(tId);
 	}
 	
 	public int takeExamScoreNullCheck(QuestionVO vo) {
