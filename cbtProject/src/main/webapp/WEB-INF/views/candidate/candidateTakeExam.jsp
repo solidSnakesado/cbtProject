@@ -32,11 +32,11 @@
 		});
 		
 		var takerId = "${takerId}";
-		var examId = "${examId}";
+		var examId = "${examVO.examId}";
 		var takeExamId = "${takeExamId}";
-		var examName = "${examName}";
-		var passingScore = "${passingScore}";
-		var examStartTime = "${examStartTime}";
+		var examName = "${examVO.examName}";
+		var passingScore = "${examVO.passingScore}";
+		var examStartTime = "${examVO.examStartTime}";
 		
 		console.log(takerId);
 		console.log(examId);
@@ -48,6 +48,7 @@
 		
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
+			
 			$.ajax({
 				url : "./getTestStart.do",
 				method : "post",
@@ -236,7 +237,7 @@
 </head>
 <body>
 	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestResult.do" method="post">
-		<input type="text" id="eId" name="eId" value="${examId }" hidden="ture">
+		<input type="text" id="eId" name="eId" value="${examVO.examId }" hidden="ture">
 		<input type="text" id="tId" name="tId" value="${takeExamId }" hidden="ture">
 	</form>
 <button id="btn">시험 시작 !</button>

@@ -9,14 +9,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var score = ${takeExamId.score};
 		
-		$("[id^='btn']").click(function(){
-			
-			console.log("examId = "+"${detailExam.examId }");
-			console.log("takeExamId = "+"${takeExamId.takeExamId }");
-			console.log("examName = "+"${detailExam.examName }");
-			console.log("passingScore = "+"${detailExam.passingScore }");
-			console.log("examStartTime = "+"${detailExam.examStartTime }");
+		if(score != 9999){
+			$("[id ='btn']").html('응시결과 확인');
+			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
+			alert('응시 완료한 시험입니다.');
+		}
+		$("[id ='btn']").click(function(){
 			
 			takeExamForm.submit();
 			
@@ -29,9 +29,6 @@
 	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTakeExam.do" method="post">
 		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="ture">
 		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="ture">
-		<input type="text" id="eName" name="examName" value="${detailExam.examName }" hidden="ture">
-		<input type="text" id="passScore" name="passingScore" value="${detailExam.passingScore }" hidden="ture">
-		<input type="text" id="examTime" name="examStartTime" value="${detailExam.examStartTime }" hidden="ture">
 	</form>
 
 	<header id="header"></header>
@@ -42,7 +39,7 @@
 
 		<tr>
 			<th width="150px">시험이름</th>
-			<td>${detailExam.examName}</td>
+			<td id="mainExamName">${detailExam.examName}</td>
 		</tr>
 		
 <c:if test="${detailExam.disclosureStatus == '2'}">
@@ -93,7 +90,6 @@
 </c:if>
 	</table>
 	<br>
-	<%-- <input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateExaminationList.do'" value = "응시하기"> --%>
 	<button type="button" id="btn" value="${detailExam.examId }">응시하기</button>
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
