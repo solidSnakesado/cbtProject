@@ -16,7 +16,7 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
-
+		var isInit = false;
 		$("#mainCategory option").remove();
 		$("#middleCategory option").remove();
 		$("#smallCategory option").remove();
@@ -42,6 +42,10 @@
 				for(var i = 0; i < data.length; ++i){
 					var optionMain = $("<option value=" + data[i].categoryMainId + ">" + data[i].categoryMainName + "</option>");
 					$("#mainCategory").append(optionMain);
+					// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+					// 중분류 의 셀렉트 옵션 값을 채운다.
+					var mainId = "${myEstimateList.mainCategoryId}";
+					$("#mainCategory").val(mainId).trigger("change");
 				}
 			}, error : function() {
 				alert('에러발생');
@@ -73,6 +77,16 @@
 					for(var i = 0; i < data.length; ++i){
 						var optionMain = $("<option value=" + data[i].categoryMiddleId + ">" + data[i].categoryMiddleName + "</option>");
 						$("#middleCategory").append(optionMain);
+						
+						// 중분류 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+						// 소분류 의 셀렉트 옵션 값을 채운다.
+						// 처음에 한번만 시행하도록 isInit 변수값 지정
+						if(isInit == false){
+							var middleId = "${myEstimateList.middleCategoryId}";		
+							$("#middleCategory").val(middleId).trigger("change");
+						} else{
+							$("#middleCategory").val(-1).trigger("change");
+						}
 					}
 				}, error : function() {
 					alert('에러발생');
@@ -100,6 +114,15 @@
 					for(var i = 0; i < data.length; ++i){
 						var optionMain = $("<option value=" + data[i].categorySmallId + ">" + data[i].categorySmallName + "</option>");
 						$("#smallCategory").append(optionMain);
+					}
+					// 소분류 값을 전달받은 값으로 지정한다.
+					if(isInit == false){
+						var samllId = "${myEstimateList.smallCategoryId}";	
+						$("#smallCategory").val(samllId).trigger("change");
+						
+						isInit = true;
+					} else{
+						$("#smallCategory").val(-1).trigger("change");
 					}
 				}, error : function() {
 					alert('에러발생');
