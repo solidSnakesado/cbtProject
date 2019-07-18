@@ -19,7 +19,15 @@
 		<table style="padding: 5px 0 5px 0;" align = "center">
 			<tr>
 				<th width="150px">시험ID</th>
-				<td><input type="hidden" name="examId" readonly></td>
+				<td><input type="hidden" name="examId">${exam.examId }</td>
+			</tr>
+			<tr>
+				<th>의뢰기업</th>
+				<td><input type="hidden" name="companyId"></td>
+			</tr>
+			<tr>
+				<th>시험이름</th>
+				<td><input type="text" name="examName">
 			</tr>
 			<tr>
 				<th width="150px">시작일</th>
@@ -30,20 +38,12 @@
 				<td><input type="datetime-local" name="examEndTime"></td>
 			</tr>
 			<tr>
-				<th>의뢰기업</th>
-				<td><input type="hidden" name="companyId"></td>
-			</tr>
-			<tr>
-				<th width="150px">시험이름</th>
-				<td><input type="text" name="examName"></td>
-			</tr>
-			<tr>
-				<th>시험시간</th>
-				<td><input type="datetime-local" name="examStartTime" size="80"></td>
-			</tr>
-			<tr>
-				<th>문항수</th>
+				<th width="150px">문항수</th>
 				<td><input type="text" name="questionQuantity"></td>
+			</tr>
+			<tr>
+				<th width="150px">의뢰ID</th>
+				<td><input type="hidden" name="estimateId"></td>
 			</tr>
 			<tr>
 				<th>응시가능 횟수</th>

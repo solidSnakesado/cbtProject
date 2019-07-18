@@ -16,7 +16,8 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
-
+		
+		var isInit = false;
 		$("#mainCategory option").remove();
 		$("#middleCategory option").remove();
 		$("#smallCategory option").remove();
@@ -31,6 +32,7 @@
 		var optionBasicSmall = $("<option value=-1>" + "소분류" + "</option>");
 		$("#smallCategory").append(optionBasicSmall);
 		
+		
 		// 대분류의 값을 채운다.
 		$.ajax({
 			type:"POST",
@@ -42,7 +44,12 @@
 				for(var i = 0; i < data.length; ++i){
 					var optionMain = $("<option value=" + data[i].categoryMainId + ">" + data[i].categoryMainName + "</option>");
 					$("#mainCategory").append(optionMain);
+					// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+					// 중분류 의 셀렉트 옵션 값을 채운다.
+					
 				}
+				var mainId = "${myEstimateList.mainCategoryId}";
+				$("#mainCategory").val(mainId).trigger("change");
 			}, error : function() {
 				alert('에러발생');
 			}
@@ -52,6 +59,7 @@
 		
 		// 대분류가 변경이 되면 중, 소분류는 일단 값을 다 지우로 기본값을 채움
 		$("#mainCategory").change(function() {
+			console.log("33333");
 			$("#middleCategory option").remove();
 			var optionBasicMiddle = $("<option value=-1>" + "중분류" + "</option>");
 			$("#middleCategory").append(optionBasicMiddle);
@@ -62,8 +70,12 @@
 			
 			// 대분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#mainCategory option:selected").val();
-			console.log("mainCategory: " +selectedIdx);
-			
+			if(selectedIdx == null){
+				selectedIdx = "${myEstimateList.mainCategoryId}"
+			}
+				
+		
+			console.log("mainCategory =" + selectedIdx);
 			$.ajax({
 				type: "POST",
 				dataType: "json",
@@ -73,9 +85,21 @@
 					for(var i = 0; i < data.length; ++i){
 						var optionMain = $("<option value=" + data[i].categoryMiddleId + ">" + data[i].categoryMiddleName + "</option>");
 						$("#middleCategory").append(optionMain);
+						
+						// 중분류 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+						// 소분류 의 셀렉트 옵션 값을 채운다.
+						// 처음에 한번만 시행하도록 isInit 변수값 지정
+						
+					}
+					
+					if(isInit == false){
+						var middleId = "${myEstimateList.middleCategoryId}";		
+						$("#middleCategory").val(middleId).trigger("change");
+					} else{
+						$("#middleCategory").val(-1).trigger("change");
 					}
 				}, error : function() {
-					alert('에러발생');
+					alert('에러발생2');
 				}
 			});
 		});
@@ -85,8 +109,6 @@
 			$("#smallCategory option").remove();
 			var optionBasicSmall = $("<option value=-1>" + "소분류" + "</option>");
 			$("#smallCategory").append(optionBasicSmall);
-			
-			
 			// 중분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#middleCategory option:selected").val();
 			console.log("middleCategory :" + selectedIdx);
@@ -101,8 +123,17 @@
 						var optionMain = $("<option value=" + data[i].categorySmallId + ">" + data[i].categorySmallName + "</option>");
 						$("#smallCategory").append(optionMain);
 					}
+					// 소분류 값을 전달받은 값으로 지정한다.
+					if(isInit == false){
+						var samllId = "${myEstimateList.smallCategoryId}";	
+						$("#smallCategory").val(samllId).trigger("change");
+						
+						isInit = true;
+					} else{
+						$("#smallCategory").val(-1).trigger("change");
+					}
 				}, error : function() {
-					alert('에러발생');
+					alert('에러발생3');
 				}
 			});
 			
@@ -225,7 +256,7 @@
 			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>
- 							<input type="hidden" name ="categoryId"> <!-- 대,중,소 분류를 조합해서 만들어진 categoryId를 DB에 넣기위해    -->
+ 							<input type="hidden" name ="categoryId"> <!-- DB에 값을 넣기위해 categoryId  -->
  							대분류
 								<select name="categoryMainId" id="mainCategory"></select>
 							중분류

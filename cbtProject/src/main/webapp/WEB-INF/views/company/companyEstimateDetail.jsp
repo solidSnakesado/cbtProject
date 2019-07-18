@@ -16,6 +16,7 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
+		
 		var isInit = false;
 		$("#mainCategory option").remove();
 		$("#middleCategory option").remove();
@@ -31,6 +32,7 @@
 		var optionBasicSmall = $("<option value=-1>" + "소분류" + "</option>");
 		$("#smallCategory").append(optionBasicSmall);
 		
+		
 		// 대분류의 값을 채운다.
 		$.ajax({
 			type:"POST",
@@ -44,9 +46,10 @@
 					$("#mainCategory").append(optionMain);
 					// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
 					// 중분류 의 셀렉트 옵션 값을 채운다.
-					var mainId = "${myEstimateList.mainCategoryId}";
-					$("#mainCategory").val(mainId).trigger("change");
+					
 				}
+				var mainId = "${myEstimateList.mainCategoryId}";
+				$("#mainCategory").val(mainId).trigger("change");
 			}, error : function() {
 				alert('에러발생');
 			}
@@ -56,6 +59,7 @@
 		
 		// 대분류가 변경이 되면 중, 소분류는 일단 값을 다 지우로 기본값을 채움
 		$("#mainCategory").change(function() {
+			console.log("33333");
 			$("#middleCategory option").remove();
 			var optionBasicMiddle = $("<option value=-1>" + "중분류" + "</option>");
 			$("#middleCategory").append(optionBasicMiddle);
@@ -66,8 +70,12 @@
 			
 			// 대분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#mainCategory option:selected").val();
-			console.log("mainCategory: " +selectedIdx);
-			
+			if(selectedIdx == null){
+				selectedIdx = "${myEstimateList.mainCategoryId}"
+			}
+				
+		
+			console.log("mainCategory =" + selectedIdx);
 			$.ajax({
 				type: "POST",
 				dataType: "json",
@@ -81,15 +89,17 @@
 						// 중분류 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
 						// 소분류 의 셀렉트 옵션 값을 채운다.
 						// 처음에 한번만 시행하도록 isInit 변수값 지정
-						if(isInit == false){
-							var middleId = "${myEstimateList.middleCategoryId}";		
-							$("#middleCategory").val(middleId).trigger("change");
-						} else{
-							$("#middleCategory").val(-1).trigger("change");
-						}
+						
+					}
+					
+					if(isInit == false){
+						var middleId = "${myEstimateList.middleCategoryId}";		
+						$("#middleCategory").val(middleId).trigger("change");
+					} else{
+						$("#middleCategory").val(-1).trigger("change");
 					}
 				}, error : function() {
-					alert('에러발생');
+					alert('에러발생2');
 				}
 			});
 		});
@@ -99,8 +109,6 @@
 			$("#smallCategory option").remove();
 			var optionBasicSmall = $("<option value=-1>" + "소분류" + "</option>");
 			$("#smallCategory").append(optionBasicSmall);
-			
-			
 			// 중분류에서 선택된 값을 가져와서 selectedIdx 에 넣음
 			var selectedIdx = $("#middleCategory option:selected").val();
 			console.log("middleCategory :" + selectedIdx);
@@ -125,7 +133,7 @@
 						$("#smallCategory").val(-1).trigger("change");
 					}
 				}, error : function() {
-					alert('에러발생');
+					alert('에러발생3');
 				}
 			});
 			
@@ -254,13 +262,13 @@
 							중분류
 								<select name="categoryMiddleId" id="middleCategory"></select>
 							소분류
-								<select name="categorySamllId" id="smallCategory"> </select>
- 			</td></tr>
+								<select name="categorySamllId" id="smallCategory"> </select></td></tr>
+ 			
 	 		<tr>	<td>기업ID</td>		<td>	<input type="text" name="companyId" value="${myEstimateList.companyId}" id = "companyId" ></td></tr>
 	 		<tr>	<td>의뢰이름</td>		<td>	<input type="text" name="estimateName" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
 			<tr>	<td>의뢰일</td>		<td>	<input type="text" name="requestDay" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
 			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" id ="estimatePrice" readonly></td></tr>
-			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
+			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="candidate" value="${myEstimateList.candidate}"  ></my:select><!-- <input type="text" name="tradeProgress" value="" id ="estimatePrice" readonly> --></td></tr>
  			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
 			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
