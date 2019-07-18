@@ -19,7 +19,9 @@
 	    <a href="${pageContext.request.contextPath }/candidateLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시험일정</a>
 	</c:if> 
 --%>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">문의하기</a>
+	<!-- 2019.07.18 성재민 -->
+	<!-- 문의하기 버튼 클릭시 채팅 창으로 연결 -->
+    <a href="${pageContext.request.contextPath }/chat.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">문의하기</a>
     
 <!-- 2019.07.09 성재민 -->
 <!-- 마이페이지 수정 -->
