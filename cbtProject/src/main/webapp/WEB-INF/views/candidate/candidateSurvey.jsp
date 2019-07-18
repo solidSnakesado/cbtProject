@@ -13,13 +13,68 @@
 $(document).ready(function() {
 	
 }
-
-
-
-
-
-
 </script>
+<script type="text/javascript">
+	function checkForm() {
+	    var q1 		= document.fmField.q1;
+	    var q2 		= document.fmField.q2;
+	    var q3 		= document.fmField.q3;
+	    var q4 		= document.fmField.q4;
+	    var q5 		= document.fmField.q5;
+	    var q6 		= document.fmField.q6;
+	    var q7 		= document.fmField.q7;
+	    var q8 		= document.fmField.q8;
+	    var q9 		= document.fmField.q9;
+	     
+	    // 입력 유무 체크
+	    if(q1.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q2.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q3.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q4.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q5.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q6.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q7.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q8.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    if(q9.value == '') {
+	        window.alert("응답이 완료되지 않았습니다");
+	        e.preventDefault();
+	        return false;
+	    }
+	    document.fmField.submit();
+	}
+	</script>
 </head>
 <body>
 <!--
@@ -37,18 +92,125 @@ $(document).ready(function() {
 	<header id="header"></header>
 	<h1>설문조사</h1>
 	<br><br><br><br>
-	<h2 align="center">2. 이 시험으로 인해 얻고자하는 기대효과는 무엇입니까?</h2>
-	<br><br><br>
-	<p align="center"><input type="radio" name="select" value="promote">진급 성공&nbsp;&nbsp;
-	<input type="radio" name="select" value="certification">자격증 취득&nbsp;&nbsp;
-	<input type="radio" name="select" value="enter">기업 입사&nbsp;&nbsp;
-	<input type="radio" name="select" value="work">직무 평가</p>
-	<br><br><br><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button">preview</button><button type="button">next</button>
-	<div align="center"><input type="submit" value="제출" onclick="location.href='candidateTestResult.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="reset" value="초기화"></div>
-	
-
+	<form id="fmField" name="fmField" action="candidateSurvey.do" method="POST">
+		<table border="1" align="center" class="table text-center">
+			<tr>
+				<td>
+					<h4 align="center">1. 본 시험의 난이도는 적당했습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q1" value="1">상당히 어려웠다&nbsp;&nbsp; 
+						<input type="radio" name="Q1" value="2">어려운 편이다&nbsp;&nbsp; 
+						<input type="radio" name="Q1" value="3">적절한 편이다&nbsp;&nbsp; 
+						<input type="radio" name="Q1" value="4">쉬운 편이다&nbsp;&nbsp;
+						<input type="radio" name="Q1" value="5">상당히 쉬웠다
+					</p>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4 align="center">2. 본 시험의 출제 방향은 적절했습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q2" value="1">매우 적절하다&nbsp;&nbsp; 
+						<input type="radio" name="Q2" value="2">대체로 적절한 편이다&nbsp;&nbsp; 
+						<input type="radio" name="Q2" value="3">일부는 적절하지 않았다&nbsp;&nbsp;
+						<input type="radio" name="Q2" value="4">대체로 적절하지 않았다
+					</p>
+					<br>
+				</td>
+			</tr>
+						<tr>
+				<td>
+					<h4 align="center">3. 본 시험의 시험시간은 적당했습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q3" value="1">매우 적절하다&nbsp;&nbsp; 
+						<input type="radio" name="Q4" value="2">대체로 적절한 편이다&nbsp;&nbsp; 
+						<input type="radio" name="Q5" value="3">일부는 적절하지 않았다&nbsp;&nbsp;
+						<input type="radio" name="Q6" value="4">대체로 적절하지 않았다
+					</p>
+					<br>
+				</td>
+			</tr>
+						<tr>
+				<td>
+					<h4 align="center">4. 서버는 안정적이었습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q4" value="1">매우 안정적이었다&nbsp;&nbsp; 
+						<input type="radio" name="Q4" value="2">안정적인 편이다&nbsp;&nbsp; 
+						<input type="radio" name="Q4" value="3">불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;
+						<input type="radio" name="Q4" value="4">불안정하여 시험에 영향을 받은 적이 있다
+					</p>
+					<br>
+				</td>
+			</tr>
+						<tr>
+				<td>
+					<h4 align="center">5. 본 서비스를 다시 사용하실 의향은 있습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q5" value="1">그렇다&nbsp;&nbsp; 
+						<input type="radio" name="Q5" value="2">생각해보겠다&nbsp;&nbsp; 
+						<input type="radio" name="Q5" value="3">사용하지 않겠다&nbsp;&nbsp;
+					</p>
+					<br>
+				</td>
+			</tr>
+						<tr>
+				<td>
+					<h4 align="center">6. 본 서비스를 주변에 알리실 의향은 있습니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q6" value="1">그렇다&nbsp;&nbsp; 
+						<input type="radio" name="Q6" value="2">생각해보겠다&nbsp;&nbsp; 
+						<input type="radio" name="Q6" value="3">사용하지 않겠다&nbsp;&nbsp;
+					</p>
+					<br>
+				</td>
+			</tr>
+						<tr>
+				<td>
+					<h4 align="center">7. 이 시험으로 인해 얻고자하는 기대효과는 무엇입니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q7" value="1">진급&nbsp;&nbsp; 
+						<input type="radio" name="Q7" value="2">자격증 취득&nbsp;&nbsp; 
+						<input type="radio" name="Q7" value="3">기업 입사&nbsp;&nbsp;
+						<input type="radio" name="Q7" value="4">직무 평가
+					</p>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4 align="center">8. 이 시험을 준비하신 시간은 어느 정도입니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q8" value="1">1주일&nbsp;&nbsp; 
+						<input type="radio" name="Q8" value="2">1개월 이내 &nbsp;&nbsp; 
+						<input type="radio" name="Q8" value="3">3개월 이내 &nbsp;&nbsp;
+						<input type="radio" name="Q8" value="4">3개월 이상 &nbsp;&nbsp;
+						<input type="radio" name="Q8" value="5">전혀 준비하지 않았다
+					</p>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4 align="center">9. 이 시험을 알게 된 경로는 어디입니까?</h4><br>
+					<p align="center">
+						<input type="radio" name="Q9" value="1">인터넷 광고 &nbsp;&nbsp; 
+						<input type="radio" name="Q9" value="2">지인의 소개 &nbsp;&nbsp; 
+						<input type="radio" name="Q9" value="3">기업의 안내 &nbsp;&nbsp;
+						<input type="radio" name="Q9" value="4">잡지나 신문 등 일간지 &nbsp;&nbsp;
+						<input type="radio" name="Q9" value="5">기타
+					</p>
+					<br>
+				</td>
+			</tr>
+<!--
+ 			<button type="button">preview</button>
+			<button type="button">next</button> 
+-->
+			</table>
+			<div align="center">
+				<input type="BUTTON" value="제출" onclick="location.href='candidateMain.jsp'" onclick="checkForm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="초기화">
+			</div>
 </body>
 </html>
