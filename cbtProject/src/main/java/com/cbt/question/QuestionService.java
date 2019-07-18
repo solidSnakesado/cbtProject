@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
 import com.cbt.takeExam.TakeExamVO;
 
@@ -16,7 +17,7 @@ public interface QuestionService {
 	
 	void insertQuestionList(List<QuestionVO> vo);
 	
-	void insertTakeExamHistory(QuestionVO vo);
+	void insertTakeExamHistory(TakeExamVO vo);
 	
 	void updateTakeExamHistory(QuestionVO vo);
 	
@@ -24,19 +25,19 @@ public interface QuestionService {
 	
 	void rightAnswer(int tId);
 	
-	void rightLastAnswer(QuestionVO vo);
+	void rightLastAnswer(TakeExamVO vo);
 	
-	int takeExamScoreNullCheck(QuestionVO vo);
+	int takeExamScoreNullCheck(TakeExamVO vo);
 	
-	int getSetCount(QuestionVO vo);
+	int getSetCount(TakeExamVO vo);
 	
-	int getTakeCount(QuestionVO vo);
+	int getTakeCount(TakeExamVO vo);
 	
-	int getHistoryCount(QuestionVO vo);
+	int getHistoryCount(TakeExamVO vo);
 	
 	QuestionVO candidateTestResult(QuestionVO vo);
 	
-	List<Map<Object, String>> getTestStart(QuestionVO vo);
+	List<Map<String, Object>> getTestStart(TakeExamVO vo);
 	
 	List<QuestionVO> candidateTakeExamList(QuestionVO vo);
 	
@@ -52,7 +53,7 @@ public interface QuestionService {
 	
 	Map<String, Object> getQuestionList(QuestionVO vo, Paging paging);
 	
-	List<QuestionVO> candidateExaminationList(QuestionVO vo);
+	List<Map<String, Object>> candidateExaminationList(CandidateVO vo);
 	
 	QuestionVO candidateExaminationListDetail(QuestionVO vo);
 	

@@ -53,51 +53,60 @@ public class QuestionController {
 	@Autowired
 	TakeExamHistoryService takeExamHistoryService;
 	
-	
+	// 2019.07.17 김재용
+	// 시험 시작 화면으로 가기
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
-	public ModelAndView candidateTakeExamList(QuestionVO vo, HttpSession session) {
+	public ModelAndView candidateTakeExamList(TakeExamVO vo, HttpServletResponse response) throws IOException {
 		ModelAndView mv = new ModelAndView();
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		mv.addObject("takerId", candiVO.getTakerId());
-		mv.addObject("examId", vo.getExamId());
-		mv.addObject("takeExamId", vo.getTakeExamId());
-		mv.addObject("examName", vo.getExamName());
-		mv.addObject("passingScore", vo.getPassingScore());
-		mv.addObject("examStartTime", vo.getExamStartTime());
 		
-		
+		// 응시자ID 가지고 해당 시험을 제출한 사람 가리기 제출하지 않은사람은 9999 리턴
 		int check = questionService.takeExamScoreNullCheck(vo);
 		if( check != 9999 ) {
-			mv.setViewName("redirect:getTestResultList.do");
+			
+			// 이미 제출한 응시자면 alert
+			response.setContentType("text/html charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('이미 응시 완료한 시험입니다.'); history.go(-1);</script>");
+			out.flush();
+			
 		} else {
-			mv.setViewName("candidate/candidate/candidateTakeExam");
+			ExamVO examVO = new ExamVO();
+			examVO.setExamId(vo.getExamId());
+			
+			// 시험 디테일 불러오기
+			mv.addObject("examVO", examService.getExam(examVO));
+			
+			mv.addObject("takerId", vo.getTakerId());
+			mv.addObject("takeExamId", vo.getTakeExamId());
+			
 		}
 		
+		mv.setViewName("candidate/candidate/candidateTakeExam");
 		
 		return mv;
 	}
 	
-	
+	// 2019.07.17 김재용
+	// 시험 시작 이벤트
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
-	public List<Map<Object, String>> getTestStart(QuestionVO vo) {
-//		QuestionVO vo = new QuestionVO();
-//		vo.setExamId(1);
-//		vo.setTakeExamId(1);
-//		vo.setTakerId("sime00");
+	public List<Map<String, Object>> getTestStart(TakeExamVO vo, HttpSession session) {
 		
-		int setCount = questionService.getSetCount(vo);
-		int takeCount = questionService.getTakeCount(vo);
+		// 세션에서 아이디 담기
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		vo.setTakerId(candiVO.getTakerId());
 		
-		int count = setCount*takeCount;
+		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
+		// 시험 제출하지 않은 응시자 가리기
 		int history = questionService.getHistoryCount(vo);
-		System.out.println(count + history);
-		if(count > history) {
+		if(history == 0) {
+
+			// 시험 시작시 HISTORY에 내역 미리 insert
 			questionService.insertTakeExamHistory(vo);
 		}
-		List<Map<Object, String>> list = questionService.getTestStart(vo);
 		
-		System.out.println(list);
+		// 문제 담기
+		List<Map<String, Object>> list = questionService.getTestStart(vo);
 		
 		return list;
 	}
@@ -115,26 +124,26 @@ public class QuestionController {
 		return mv;
 	}
 	
-	@RequestMapping("getTestResultList.do")
-	public ModelAndView getTestResultList(QuestionVO vo) {
-		vo = questionService.getTestResultList(vo);
-		int setCount = questionService.getSetCount(vo);
-		
+//	@RequestMapping("getTestResultList.do")
+//	public ModelAndView getTestResultList(QuestionVO vo) {
+//		vo = questionService.getTestResultList(vo);
+//		int setCount = questionService.getSetCount(vo);
+//		
 //		questionService.rightAnswer(vo);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("getExamId", vo.getExamId());
-		mv.addObject("getExamName", vo.getExamName());
-		mv.addObject("getPassingScore", vo.getPassingScore());
-		mv.addObject("getPoint", vo.getSumPoint());
-		mv.addObject("getTakeExamId", vo.getTakeExamId());
-		mv.addObject("getTakerName", vo.getTakerName());
-		mv.addObject("getCount", vo.getCount());
-		mv.addObject("getExamCount", setCount);
-		mv.setViewName("candidate/candidate/candidateTestResult");
-		
-		return mv;
-	}
+//		
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("getExamId", vo.getExamId());
+//		mv.addObject("getExamName", vo.getExamName());
+//		mv.addObject("getPassingScore", vo.getPassingScore());
+//		mv.addObject("getPoint", vo.getSumPoint());
+//		mv.addObject("getTakeExamId", vo.getTakeExamId());
+//		mv.addObject("getTakerName", vo.getTakerName());
+//		mv.addObject("getCount", vo.getCount());
+//		mv.addObject("getExamCount", setCount);
+//		mv.setViewName("candidate/candidate/candidateTestResult");
+//		
+//		return mv;
+//	}
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -146,8 +155,8 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "candidateTestResult.do" , method = RequestMethod.POST)
-	public ModelAndView candidateTestResult(	@RequestParam( value = "tId" , required = false ) int tId,
-												@RequestParam( value = "eId" , required = false ) int eId,
+	public ModelAndView candidateTestResult(	@RequestParam( value = "takeExamId" , required = false ) int takeExamId,
+												@RequestParam( value = "examId" , required = false ) int examId,
 												HttpSession session ) {
 		
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
@@ -158,19 +167,21 @@ public class QuestionController {
 		
 		ExamVO examVO = new ExamVO();
 		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
-		examVO.setExamId(eId);
+		examVO.setExamId(examId);
 		mv.addObject("examVO", examService.getExam(examVO));
 		
 		// 응시자ID를 가지고 제출 정답을 문제정답과 비교해 채점하여 히스토리에 점수 UPDATE
-		questionService.rightAnswer(tId);
+		questionService.rightAnswer(takeExamId);
 		
 		TakeExamVO takeExamVO = new TakeExamVO();
 		// 시험 ID 와 응시자 ID 를 가지고
 		// 맞힌 문제 수 answerCount , 맞힌 문제 합계점수 sumTakerScore 담기
-		takeExamVO.setTakeExamId(tId);
-		takeExamVO.setExamId(eId);
+		takeExamVO.setTakeExamId(takeExamId);
+		takeExamVO.setExamId(examId);
 		mv.addObject("takeExamVO", takeExamHistoryService.getTakeExamHistoryForSumPointAndCount(takeExamVO));
 		
+		// 제출한 응시자 총점 기록
+		questionService.rightLastAnswer(takeExamVO);
 		
 		mv.setViewName("candidate/candidate/candidateTestResult");
 		
@@ -178,10 +189,9 @@ public class QuestionController {
 	}
 	
 	@RequestMapping("candidateExaminationList.do")
-	public ModelAndView candidateExaminationList(QuestionVO vo, HttpSession session) {
+	public ModelAndView candidateExaminationList(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candivo.getTakerId());
+		CandidateVO vo = (CandidateVO)session.getAttribute("candidate");
 		
 		mv.addObject("candidateExaminationList", questionService.candidateExaminationList(vo));
 		

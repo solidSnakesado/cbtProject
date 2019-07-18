@@ -192,5 +192,11 @@
 		SELECT	COUNT(*) FROM TAKER
      		WHERE   TAKER_ID = #{takerId}
 	</select>
+	
+	<!-- 07.17 이승환 추가 // 매니저 응시자목록 카운팅 -->
+	<select id="getManagerCandidateCount" resultType="int">
+		SELECT COUNT(*)
+		FROM TAKER
+	</select>
 		
 </mapper>

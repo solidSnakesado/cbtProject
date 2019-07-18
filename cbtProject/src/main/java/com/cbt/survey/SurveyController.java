@@ -1,9 +1,13 @@
 package com.cbt.survey;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class SurveyController {
@@ -36,5 +40,13 @@ public class SurveyController {
 	public String deleteSurvey(SurveyVO vo) {
 		surveyService.deleteSurvey(vo);
 		return "";
+	}
+	
+	// 7/17 june.
+	// 설문 조사에 응함
+	@RequestMapping(value = "candidateTakeSuvey.do", method = RequestMethod.POST)	
+	public ModelAndView candidateTakeSuvey(SurveyVO vo, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		return mv;
 	}
 }

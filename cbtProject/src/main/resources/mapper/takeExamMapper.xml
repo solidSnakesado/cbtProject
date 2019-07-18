@@ -30,8 +30,14 @@
 		FROM 	TAKE_EXAM
 	</select>
 	
+	<!-- 2019.07.17 김재용 -->
+	<!-- 유저 ID 와 시험 ID 로 TAKE_EXAM 값가져오기 -->
 	<select id="selectTakeExamId" resultType="TakeExamVO">
-		SELECT	TAKE_EXAM_ID TAKE_EXAM_ID
+		SELECT	TAKE_EXAM_ID
+				,EXAM_ID
+				,TAKER_ID
+				,NVL(SCORE,9999) SCORE
+				,TAKE_EXAM_DATE
 			FROM	TAKE_EXAM
 		
 		WHERE TAKER_ID = #{takerId} AND EXAM_ID = #{examId}
@@ -47,7 +53,23 @@
 			,	EXAM_ID
 			,	TAKER_ID
 		FROM	TAKE_EXAM
-		
-		WHERE EXAM_ID = #{examId}
+		<where>
+			EXAM_ID = #{examId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.17 성재민 -->
+	<!-- 단건 조회 -->
+	<select id="getTakeExam" resultType="TakeExamVO">
+		SELECT	
+				TAKE_EXAM_ID
+			, 	TAKE_EXAM_DATE
+			,	SCORE
+			,	EXAM_ID
+			,	TAKER_ID
+		FROM	TAKE_EXAM
+		<where>
+			TAKE_EXAM_ID = #{takeExamId}
+		</where>
 	</select>
 </mapper>
