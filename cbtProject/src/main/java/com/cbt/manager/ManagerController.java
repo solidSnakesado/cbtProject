@@ -338,8 +338,8 @@ public class ManagerController {
 		return "manager/manager/managerExamListDetail";
 	}
 	
-	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.GET)
-	public String managerExamInsertForm(ExamVO vo, Model model) {
+	@RequestMapping(value = "managerExamInsert.do/{estimateId}", method = RequestMethod.GET)
+	public String managerExamInsertForm(@PathVariable("estimateId") int estimateId, ExamVO vo, Model model) {
 		model.addAttribute("O", conditionService.getConditionDetailList("O"));
 		model.addAttribute("D", conditionService.getConditionDetailList("D"));
 		model.addAttribute("I", conditionService.getConditionDetailList("I"));
