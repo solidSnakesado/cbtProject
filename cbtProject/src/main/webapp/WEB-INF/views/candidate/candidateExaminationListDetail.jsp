@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>응시 세부 목록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -72,19 +74,23 @@
 </script>
 </head>
 <body>
-마이페이지(개인) 응시목록 세부목록
+
+	<h1>마이페이지(개인) 응시목록 세부목록</h1>
+	<br>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
 		});
 	</script>
 	<c:set var="examName" value="${candidateExaminationListDetail.examName }" />
+	<c:set var="examId" value="${candidateExaminationListDetail.examId }" />
 	<c:set var="examStartTime" value="${candidateExaminationListDetail.examStartTime }" />
 	<c:set var="takerName" value="${candidateExaminationListDetail.takerName }" />
+	<c:set var="takeExamId" value="${candidateExaminationListDetail.takeExamId }" />
 	<c:set var="takerInfo" value="${candidateExaminationListDetail.takerInfo }" />
 	<c:set var="score" value="${candidateExaminationListDetail.score }" />
 	<c:set var="passingScore" value="${candidateExaminationListDetail.passingScore }" />
-	<table border = "1" align="center">
+	<table border = "1" class="table text-center">
 	<%-- <c:forEach items="candidateExaminationListDetail" var="list"> --%>
 		<tr>
 			<th>시험명</th>
@@ -120,7 +126,10 @@
 	<!-- 2019.07.16 성재민 -->
 	<!-- 통계보기 버튼 추가 -->
 	<br>
-	<button id="chartBtn">통계보기</button>
+	<div>
+		<button id="chartBtn">통계보기</button>
+		<a href="${pageContext.request.contextPath }/candidateRightAnswer.do/${examId}"><button>풀이보기</button></a>
+	</div>
 	<!-- chart가 생성될 공간 -->
 	<div id="chartDiv"></div>
 </body>

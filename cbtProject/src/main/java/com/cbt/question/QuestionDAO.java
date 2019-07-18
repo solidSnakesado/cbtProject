@@ -88,7 +88,8 @@ public class QuestionDAO {
 		return mybatis.selectList("QuestionDAO.candidateExaminationList", vo);
 	}
 	
-	public QuestionVO candidateExaminationListDetail(QuestionVO vo) {
+	public Map<String, Object> candidateExaminationListDetail(TakeExamVO vo) {
+		System.out.println(vo);
 		return mybatis.selectOne("QuestionDAO.candidateExaminationListDetail", vo);
 	}
 	

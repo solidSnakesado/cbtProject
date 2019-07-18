@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>candidateTestResult.jsp</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -28,7 +30,7 @@
 	</script>
 	<header id="header"></header>
 	<h2 align="center">수고하셨습니다.</h2>
-	<table border="1" align="center">
+	<table border="1" align="center" class="table text-center">
 		<tr>
 			<th>시험명</th>
 			<td>${examVO.examName}</td>
@@ -60,6 +62,6 @@
 		</tr>
 	</table>
 	<br>
-	<div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
+	<div><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
 </body>
 </html>

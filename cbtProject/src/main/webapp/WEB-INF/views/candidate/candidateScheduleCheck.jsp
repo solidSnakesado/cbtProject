@@ -20,7 +20,7 @@ function goList(p){
 	searchFrm.page.value = p;
 	searchFrm.submit();
 }
-
+onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'"
 </script>
 <title>CBT 시험 일정 확인</title>
 </head>
@@ -40,9 +40,14 @@ function goList(p){
 			<th>문항수</th>
 			<th>합격기준</th>
 		</tr>
-
+	<c:set var="takerId" value="${takerId}"></c:set>
    	<c:forEach items="${candidateScheduleCheck.schedulePage}" var="examInfo" >
+   	<c:if test="${takerId != null}">
 		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
+	</c:if>
+	<c:if test="${takerId == null}">
+		<tr onclick="alert('로그인이 필요한 서비스입니다.')">
+	</c:if>
 			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>
 			<td>${examInfo.EXAM_START_TIME}</td>
