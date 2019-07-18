@@ -11,7 +11,9 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+	 <!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 start@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 	
 	<script>
 	//의뢰서
@@ -245,11 +247,44 @@
 		
 	});
 	
-	
-	
-	</script>
+	// @@@@@@@@@@@@@@@@@@@@@@@ 결제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+	function payment() {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp01620829'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		IMP.request_pay({
+			pg : 'inicis', // version 1.1.0부터 지원.
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + new Date().getTime(),
+			name : '${myEstimateList.estimateName}',	//상품명
+			amount : '${myEstimateList.estimatePrice}',	//가격
+			buyer_email : 'iamport@siot.do',
+			buyer_name : '${myEstimateList.companyId}', //구매자이름
+			buyer_tel : '010-1234-5678',
+			buyer_addr : '서울특별시 강남구 삼성동',
+			buyer_postcode : '123-456',
+			m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '고유ID : ' + rsp.imp_uid;
+				msg += '상점 거래ID : ' + rsp.merchant_uid;
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				msg += '카드 승인번호 : ' + rsp.apply_num;
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	}
+</script>
+
+
+
+
 </head>  
 <body>
+<div align="center">
 	<h2 align="center">세부 의뢰목록</h2>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
 		<table>
@@ -268,7 +303,7 @@
 	 		<tr>	<td>의뢰이름</td>		<td>	<input type="text" name="estimateName" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
 			<tr>	<td>의뢰일</td>		<td>	<input type="text" name="requestDay" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
 			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" id ="estimatePrice" readonly></td></tr>
-			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="candidate" value="${myEstimateList.candidate}"  ></my:select><!-- <input type="text" name="tradeProgress" value="" id ="estimatePrice" readonly> --></td></tr>
+			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}"  ></my:select><!-- <input type="text" name="tradeProgress" value="" id ="estimatePrice" readonly> --></td></tr>
  			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
 			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
@@ -279,21 +314,24 @@
 			<tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr>  
 			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 			
-			
-			
-			
+
 		</table>
-		<button type="button"  id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> 
+		<button type="button"  id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> <button type="button" onclick="payment()">결제</button>
 	</form>
 	
+</div>
+
+
+	<!-- 시험일시 날짜 api -->
 	<script>
-			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
-		
-			
-			function windowClose(){
-				window.opener.top.location.reload();
-				window.close();
-			}
+	$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
+
+	
+	function windowClose(){
+		window.opener.top.location.reload();
+		window.close();
+	}
+	
 	</script>
 </body>
 </html>
