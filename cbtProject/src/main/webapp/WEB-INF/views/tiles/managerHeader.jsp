@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="w3-top">
 	<div class="w3-bar w3-black w3-card">
@@ -13,12 +14,18 @@
 		    <a href="candidateAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 		</c:if> --%>
 		<c:if test="${not empty sessionScope.manager }">
-<!-- 		    <div class="w3-dropdown-hover">
+		<!-- <div class="w3-dropdown-hover">
 		      	<button class="w3-padding-large w3-button" title="More">마이페이지 <i class="fa fa-caret-down"></i></button>     
 		      	<div class="w3-dropdown-content w3-bar-block w3-card-4"> -->
 		      		<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button">메인</a>
 		        	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
 		        	<a href="${pageContext.request.contextPath }/managerConsultingList.do" class="w3-bar-item w3-button">상담목록</a>
+		        	<!-- 2019.07.19 성재민 -->
+		        	<!-- 응시자의 문의를 확인 할수 있는 메뉴 추가 -->
+		        	<!-- 응시자가 문의를 요청하면 해당 문의가 db 에 저장이 되고  -->
+		        	<!-- 저장된 문의의 상태가 처리전 이라면 해당 상태의 문의 갯수를 읽어봐서  -->
+		        	<!-- 문의목록 글자 옆에 표시 하는 기능이 추가 되어야 함 -->
+		        	<a href="#" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger">1</span></a>
 		        	<a href="${pageContext.request.contextPath }/managerEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerExamList.do" class="w3-bar-item w3-button">시험목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
