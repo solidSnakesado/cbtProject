@@ -29,6 +29,7 @@ import com.cbt.condition.ConditionService;
 import com.cbt.consulting.ConsultingService;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.estimate.EstimateService;
+import com.cbt.estimate.EstimateVO;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 
@@ -340,6 +341,9 @@ public class ManagerController {
 	
 	@RequestMapping(value = "managerExamInsert.do/{estimateId}", method = RequestMethod.GET)
 	public String managerExamInsertForm(@PathVariable("estimateId") int estimateId, ExamVO vo, Model model) {
+		EstimateVO estimateVO = new EstimateVO();
+		estimateVO.setEstimateId(estimateId);
+		model.addAttribute("estimate", estimateService.getEstimate(estimateVO));
 		model.addAttribute("O", conditionService.getConditionDetailList("O"));
 		model.addAttribute("D", conditionService.getConditionDetailList("D"));
 		model.addAttribute("I", conditionService.getConditionDetailList("I"));
@@ -348,6 +352,8 @@ public class ManagerController {
 	
 	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.POST)
 	public String managerExamInsert(ExamVO vo) {
+		System.out.println(vo);
+		
 		examService.insertExam(vo);
 		return "redirect:managerExamList.do";
 	}

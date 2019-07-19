@@ -150,6 +150,7 @@
 		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
 			SELECT CONSULTING_TITLE "title"
 				, CONSULTING_DESIRED_DATE "consultingDesiredDate"
+				, CONSULTING_STATE "consultingState"
 		FROM CONSULTING
 		<where>
 			<if test="searchKeyword != null and searchKeyword != '' ">
@@ -322,5 +323,40 @@
 		</where>
 		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
 	</select>
+	
+	<insert id="managerExamInsert" parameterType="ExamVO">
+		<selectKey keyProperty="examId" resultType="int" order="BEFORE">
+			SELECT MAX(EXAM_ID)+1 FROM EXAM
+		</selectKey>
+		INSERT INTO EXAM (
+							  EXAM_ID
+							, EXAM_START_TIME
+							, EXAM_END_TIME
+							, QUESTION_QUANTITY
+							, ESTIMATE_ID
+							, NUMBER_OF_TIMES
+							, PASSING_SCORE
+							, POSSIBLE_APPLICANTS
+							, EXAM_NAME
+							, EXAM_STATUS
+							, DISCLOSURE_STATUS
+							, SET_EXAM_STATUS
+							, EXAM_DESCRIPTION_SIMPLE
+							, EXAM_DESCRIPTION_DETAIL	)
+		VALUE ( EXAM_ID_SEQ.NEXTVAL
+				,#{examStartTime}
+				,#{examEndTime}
+				,#{questionQuantity}
+				,#{estimateId}
+				,#{numberOfTimes}
+				,#{passingScore}
+				,#{possibleApplicants}
+				,#{examName}
+				,#{examStatus}
+				,#{disclosureStatus}
+				,#{setExamStatus}
+				,#{examDescriptionSimple}
+				,#{examDescriptionDetail} )
+	</insert>
 	
 </mapper>
