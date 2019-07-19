@@ -52,8 +52,6 @@ public class EstimateController {
 	
 	@RequestMapping(value = "/companyEstimateUpdate.do", method=RequestMethod.POST)
 	public void companyEstimateUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
-		
-		
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
 		PrintWriter out = response.getWriter();

@@ -9,6 +9,9 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+ 
+ 
+
 
 <script>
 	//페이징처리
@@ -19,13 +22,11 @@
 	
 	// 윈도우 function 처리 함수
 	function estimateDetail(estimateId){
-		console.log("estimateId :" + estimateId);
-		var wintype = "toolbar=no,width=700,height=700,top=200,left=400,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+		var wintype = "toolbar=no,width=1100px,height=900px,top=50,left=420,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
 	
 	function deleteEstimateId(e,estimateId){ //해당 estimateId 가진 튜플 삭제함수
-		console.log(estimateId);
 		e.preventDefault(); //<form action="companyEstimateList.do">이 실행되지않도록 막음
 		
 		//예외처리
@@ -66,7 +67,7 @@
 			<table border="1" class="table text-center">
 				<tr>
 					<th class="text-center">순번</th>
-					<th class="text-center">카테고리ID</th>
+					<th class="text-center">카테고리</th>
 					<th class="text-center">의뢰일</th>
 					<th class="text-center">진행상태</th>
 					<th class="text-center">시험일시</th>
@@ -79,7 +80,7 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onclick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td> <!--  -->
+						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td> <!--  -->
 					</tr>
 				</c:forEach>
 			</table>
