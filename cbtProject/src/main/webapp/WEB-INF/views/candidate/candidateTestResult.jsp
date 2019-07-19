@@ -58,8 +58,9 @@
 				<c:if test="${passingScore ge point}">불합격</c:if>
 			</td>
 		</tr>
-	</table>
+	</table> 
 	<br>
-	<div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
+	<!-- 경로 수정 (7/19) june -->
+	<div align="right"><button onclick="location.href='insertSurvey.do'">설문작성</button>&nbsp;&nbsp;&nbsp;<button onclick="location.href='candidateMain.do'">메인으로</button></div>
 </body>
 </html>

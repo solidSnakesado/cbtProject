@@ -297,10 +297,10 @@ public class CandidateController {
 	
 	// 2019.07.09 성재민
 	// 경로 수정
-	@RequestMapping("candidateSurvey.do")	
-	public String candidateSurvey() {
-		return "candidate/candidate/candidateSurvey";
-	}
+	/*
+	 * @RequestMapping("candidateSurvey.do") public String candidateSurvey() {
+	 * return "candidate/candidate/candidateSurvey"; }
+	 */
 	//메인화면
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
