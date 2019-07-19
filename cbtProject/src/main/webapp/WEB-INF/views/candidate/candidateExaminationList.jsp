@@ -84,10 +84,11 @@
 			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
 			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
 		<c:if test="${list.score == 9999 }">
-			<td id="score${status.count }" value="${list.score}">응시 대기</td>
+			<td id="score${status.count }" value="${list.score}">응시 대기
 		</c:if>
 		<c:if test="${list.score != 9999 }">
-			<td id="score${status.count }" value="${list.score}">응시 완료</td>
+			<td id="score${status.count }" value="${list.score}">응시 완료 &nbsp;&nbsp;
+			</td>
 		</c:if>
 		</tr>
 	</c:forEach>
