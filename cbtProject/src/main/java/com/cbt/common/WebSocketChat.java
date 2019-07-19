@@ -57,7 +57,7 @@ public class WebSocketChat {
 	private void sendAllSessionToMessage(Session self, String message) {
 		try {
 			for(Session session : WebSocketChat.sessionList) {
-				if(!self.getId().equals(session.getId())) {
+				if((self.getId().compareTo(session.getId()) != 0)) {
 					session.getBasicRemote().sendText(message);
 				}
 			}
