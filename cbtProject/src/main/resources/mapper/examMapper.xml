@@ -48,20 +48,41 @@
 	<!-- 업데이트 추가 -->
 	<update id="updateExam" parameterType="ExamVO">
 		UPDATE EXAM
-		<set>	
-			EXAM_START_TIME   			= TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI:SS')
+		<set>
+			<if test="examStartTime != null and examStartTime != '' ">	
+			 EXAM_START_TIME   			= TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+			<if test="examEndTime != null and examEndTime != '' ">	
 			, EXAM_END_TIME				= TO_DATE(#{examEndTime}, 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+			<if test="questionQuantity != null and questionQuantity != '' ">
 			, QUESTION_QUANTITY 		= #{questionQuantity}
-			, ESTIMATE_ID  				= #{estimateId}
+			</if>
+			<if test="numberOfTimes != null and numberOfTimes != '' ">
 			, NUMBER_OF_TIMES 			= #{numberOfTimes}
+			</if>
+			<if test="passingScore != null and passingScore != '' ">
 			, PASSING_SCORE 			= #{passingScore}
+			</if>
+			<if test="possibleApplicants != null and possibleApplicants != '' ">
 			, POSSIBLE_APPLICANTS 		= #{possibleApplicants}
-			, EXAM_NAME 				= #{examName}
+			</if>
+			<if test="examStatus != null and examStatus != '' ">
 			, EXAM_STATUS 				= #{examStatus}
+			</if>
+			<if test="disclosureStatus != null and disclosureStatus != '' ">
 			, DISCLOSURE_STATUS 		= #{disclosureStatus}
+			</if>
+			<if test="setExamStatus != null and setExamStatus != '' ">
 			, SET_EXAM_STATUS 			= #{setExamStatus}
+			</if>
+			<if test="examDescriptionSimple != null and examDescriptionSimple != '' ">
 			, EXAM_DESCRIPTION_SIMPLE 	= #{examDescriptionSimple}
+			</if>
+			<if test="examDescriptionDetail != null and examDescriptionDetail != '' ">
 			, EXAM_DESCRIPTION_DETAIL 	= #{examDescriptionDetail}
+			</if>
+			
 		</set>
 		<where>
 			EXAM_ID = #{examId}

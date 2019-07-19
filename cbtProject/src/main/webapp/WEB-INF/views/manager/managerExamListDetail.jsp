@@ -109,5 +109,6 @@
 	<br>
 	<button onclick = "location.href = '${pageContext.request.contextPath }/'" >통계보기</button>
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
+	<button type="button" onclick = "location.href = '${pageContext.request.contextPath}/managerExamUpdate.do/${examId }'">수정하기</button>
 </body>
 </html>

@@ -63,18 +63,20 @@
 			
 			<table border="1" class="table text-center">
 				<tr>
-					<th class="text-center">순번</th>
-					<th class="text-center">카테고리ID</th>
-					<th class="text-center">의뢰일</th>
-					<th class="text-center">진행상태</th>
-					<th class="text-center">시험일시</th>
-					<th class="text-center">시험출제</th>
-					<th class="text-center">삭제</th>
+					<th>순번</th>
+					<th>카테고리ID</th>
+					<th>의뢰이름</th>
+					<th>의뢰일</th>
+					<th>진행상태</th>
+					<th>시험일시</th>
+					<th>시험출제</th>
+					<th>삭제</th>
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>

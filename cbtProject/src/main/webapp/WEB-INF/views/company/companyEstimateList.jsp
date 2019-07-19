@@ -68,6 +68,7 @@
 				<tr>
 					<th class="text-center">순번</th>
 					<th class="text-center">카테고리</th>
+					<th class="text-center">의뢰이름</th>
 					<th class="text-center">의뢰일</th>
 					<th class="text-center">진행상태</th>
 					<th class="text-center">시험일시</th>
@@ -77,6 +78,7 @@
 					<tr>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>

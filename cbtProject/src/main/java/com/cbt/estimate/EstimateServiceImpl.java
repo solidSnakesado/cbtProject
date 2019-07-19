@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.cbt.category.CategoryVO;
 import com.cbt.common.Paging;
 
 @Service
@@ -66,6 +67,15 @@ public class EstimateServiceImpl implements EstimateService {
 	@Override
 	public int getCateoryId(EstimateVO vo) {
 		return estimateDAO.getCateoryId(vo);
+	}
+	@Override
+	public List<EstimateVO> getCateoryNameList(CategoryVO vo) {
+		return estimateDAO.getCateoryNameList(vo);
+	}
+	@Override
+	public void updatesTradeProgressExchange5(EstimateVO vo) {
+		estimateDAO.updatesTradeProgressExchange5(vo);;
+		
 	}
 
 	

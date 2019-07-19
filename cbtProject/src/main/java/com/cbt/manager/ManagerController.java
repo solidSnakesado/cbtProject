@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -358,6 +359,23 @@ public class ManagerController {
 		return "redirect:managerExamList.do";
 	}
 
+	
+	
+	@RequestMapping(value="managerExamUpdate.do/{examId}", method=RequestMethod.GET)
+	public String managerExamUpdateForm(@PathVariable("examId") int examId, Model model, ExamVO vo ) {
+		vo.setExamId(examId);
+		model.addAttribute("selectedExam", managerService.getManagerExam(examService.getExam(vo)));
+		model.addAttribute("O", conditionService.getConditionDetailList("O"));
+		model.addAttribute("D", conditionService.getConditionDetailList("D"));
+		model.addAttribute("I", conditionService.getConditionDetailList("I"));
+		return "manager/manager/managerExamUpdate";
+	}
+	
+	@RequestMapping(value = "managerExamUpdate.do", method = RequestMethod.POST)
+	public String updateExam(@ModelAttribute("exam") ExamVO vo) {
+		examService.updateExam(vo);
+		return "redirect:managerExamList.do";
+	}
 	
 	
 	@ModelAttribute("consultingMap")

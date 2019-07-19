@@ -83,14 +83,14 @@
 					, E.ESTIMATE_PRICE
 					, E.REQUEST_DAY
 					, E.TRADE_PROGRESS
-					, FIND_CODENM(TRADE_PROGRESS) AS TRADE_PROGRESS_NAME
+					, FIND_CODENM(TRADE_PROGRESS) "tradeProgressName"
 					, E.REMARKS
 					, E.APPLICANTS
 					, E.LEVEL_OF_DIFFICULTY
 					, E.CANDIDATE
 					, E.APPLY_PURPOSE
 					, E.EXAM_DATE
-					, E.CATEGORY_ID
+					, E.CATEGORY_ID									"categoryId"
 					, E.EXAM_CLASSFICATION
 					, E.COMPANY_ID
 					, E.EXAM_COUNT
@@ -124,7 +124,7 @@
 					, E.ESTIMATE_PRICE
 					, E.REQUEST_DAY
 					, E.TRADE_PROGRESS
-					, FIND_CODENM(TRADE_PROGRESS) AS TRADE_PROGRESS_NAME
+					, FIND_CODENM(TRADE_PROGRESS) "tradeProgressName"
 					, E.REMARKS
 					, E.APPLICANTS
 					, E.LEVEL_OF_DIFFICULTY
@@ -160,4 +160,21 @@
 		FROM CATEGORY
 		WHERE CATEGORY_MAIN_ID= #{mainCategoryId} AND CATEGORY_MIDDLE_ID = #{middleCategoryId} AND CATEGORY_SMALL_ID = #{smallCategoryId}
 	</select>
+	
+	
+	<!-- 전체 카테고리 이름 가져옴 -->
+	<select id ="getCateoryNameList" resultType="CategoryVO">
+		SELECT 	 CATEGORY_ID	"categoryId"
+				,CATEGORY_NAME	"categoryName"
+		FROM CATEGORY
+	</select>
+	
+	<update id="updatesTradeProgressExchange5">
+		UPDATE ESTIMATE
+		SET	 
+			 TRADE_PROGRESS 	=  'B5'
+		WHERE ESTIMATE_ID = #{estimateId}
+	</update>
+	
+	
 </mapper>
