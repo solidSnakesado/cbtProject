@@ -132,7 +132,6 @@
 			<h2 class="logo"></h2>
 		</div>
 		<div class="tmBody" style="width: 60%; height: 750px; margin-left: auto; margin-right: auto;">
-		
 			<!-- 2019.07.19 성재민 -->
 			<!-- 채팅 메시지 목록 -->
 			<div id="tmMessageList" style="height: 91%;">
@@ -155,6 +154,5 @@
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>
