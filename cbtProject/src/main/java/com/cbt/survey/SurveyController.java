@@ -1,7 +1,11 @@
 package com.cbt.survey;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,6 +43,15 @@ public class SurveyController {
 	public String deleteSurvey(SurveyVO vo) {
 		surveyService.deleteSurvey(vo);
 		return "";
+	}
+	
+	//차트에서 사용하기 위한 생성(7/19), june
+	@RequestMapping(value = "getSurveyResult.do/{id}", method = RequestMethod.POST)
+	public List<Map<String, Object>> getSurveyList(@PathVariable("examId") int examId) {
+		SurveyVO surveyVO = new SurveyVO();
+		surveyVO.setExamId(examId);
+		
+		return null;
 	}
 	
 }

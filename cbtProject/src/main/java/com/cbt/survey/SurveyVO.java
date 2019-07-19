@@ -5,11 +5,13 @@ public class SurveyVO {
 	private int surveyId;
 	private int surveyType;
 	private int takeExamId;
+	private int examId;
 	
-	// 설문조사 문제
-	private int surveyQuestionNumber;
-	private int contents;
-	private int value;
+
+	// 설문조사 문제 -> 항목 고정하여 테이블에 넣음 (7/19) june
+	/*
+	 * private int surveyQuestionNumber; private int contents; private int value;
+	 */
 	
 
 	private int q1;
@@ -30,30 +32,22 @@ public class SurveyVO {
 	public void setSurveyId(int surveyId) {
 		this.surveyId = surveyId;
 	}
-
-	public int getSurveyQuestionNumber() {
-		return surveyQuestionNumber;
-	}
-
-	public void setSurveyQuestionNumber(int surveyQuestionNumber) {
-		this.surveyQuestionNumber = surveyQuestionNumber;
-	}
-
-	public int getContents() {
-		return contents;
-	}
-
-	public void setContents(int contents) {
-		this.contents = contents;
-	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
+	
+	// 설문조사 문제 -> 항목 고정하여 테이블에 넣음 (7/19) june
+	/*
+	 * public int getSurveyQuestionNumber() { return surveyQuestionNumber; }
+	 * 
+	 * public void setSurveyQuestionNumber(int surveyQuestionNumber) {
+	 * this.surveyQuestionNumber = surveyQuestionNumber; }
+	 * 
+	 * public int getContents() { return contents; }
+	 * 
+	 * public void setContents(int contents) { this.contents = contents; }
+	 * 
+	 * public int getValue() { return value; }
+	 * 
+	 * public void setValue(int value) { this.value = value; }
+	 */
 
 	public int getSurveyType() {
 		return surveyType;
@@ -141,6 +135,14 @@ public class SurveyVO {
 
 	public void setQ9(int q9) {
 		this.q9 = q9;
+	}
+	
+	public int getExamId() {
+		return examId;
+	}
+
+	public void setExamId(int examId) {
+		this.examId = examId;
 	}
 	
 	@Override
