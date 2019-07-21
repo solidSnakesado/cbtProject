@@ -53,7 +53,7 @@ public class QuestionDAO {
 		return mybatis.selectOne("QuestionDAO.getTestResultList", vo);
 	}
 	
-	public List<QuestionVO> candidateRightAnswerList(QuestionVO vo) {
+	public List<Map<String, Object>> candidateRightAnswerList(TakeExamVO vo) {
 		
 		return mybatis.selectList("QuestionDAO.candidateRightAnswerList", vo);
 	}

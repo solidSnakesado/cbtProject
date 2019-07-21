@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cbt.question.QuestionDAO;
 import com.cbt.question.QuestionVO;
+import com.cbt.takeExam.TakeExamVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -61,11 +62,9 @@ public class CandidateClient {
 	
 	@Ignore @Test
 	public void getcandidateTakeExamList() {
-		QuestionVO vo = new QuestionVO();
+		TakeExamVO vo = new TakeExamVO();
 		vo.setExamId(1);
-		List<QuestionVO> list = dao.candidateRightAnswerList(vo);
 		
-		System.out.println(list);
 	}
 	
 	@Test

@@ -43,7 +43,7 @@ public interface QuestionService {
 	
 	List<QuestionVO> candidateExamList();
 	
-	List<QuestionVO> candidateRightAnswerList(QuestionVO vo);
+	List<Map<String, Object>> candidateRightAnswerList(TakeExamVO vo);
 	
 	QuestionVO getTestResultList(QuestionVO vo);
 	

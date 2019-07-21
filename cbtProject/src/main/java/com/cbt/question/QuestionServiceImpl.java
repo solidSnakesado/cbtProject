@@ -83,11 +83,8 @@ public class QuestionServiceImpl implements QuestionService {
 		return vo;
 	}
 	
-	public List<QuestionVO> candidateRightAnswerList(QuestionVO vo) {
-		List<QuestionVO> list = questionDAO.candidateRightAnswerList(vo);
-		
-		System.out.println("Impl + "+list);
-		return list;
+	public List<Map<String, Object>> candidateRightAnswerList(TakeExamVO vo) {
+		return questionDAO.candidateRightAnswerList(vo);
 	}
 	
 	public List<QuestionVO> candidateTakeExamList(QuestionVO vo) {

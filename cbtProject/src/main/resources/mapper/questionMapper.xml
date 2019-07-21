@@ -83,28 +83,24 @@
                         GROUP BY t.TAKE_EXAM_ID, e.EXAM_NAME, c.TAKER_NAME, e.EXAM_ID, e.PASSING_SCORE
 	</select>
 	
-	<select id="candidateRightAnswerList" resultMap="questionVO">
-		SELECT 	q.QUESTION_CONTENT,
-				q.QUESTION_ID,
-				q.EXAMPLE_1, 
-				q.EXAMPLE_2, 
-				q.EXAMPLE_3, 
-				q.EXAMPLE_4, 
-				q.RIGHT_ANSWER, 
-				q.RIGHT_COMMENTARY, 
-				s.SET_EXAM_QUESTION_ID, 
-				s.POINT, 
-				s.EXAM_ID
-				
-		  FROM  EXAM e JOIN SET_EXAM_QUESTION s
-                   
-                    ON e.EXAM_ID = s.EXAM_ID JOIN TAKE_EXAM_HISTORY t
-                    ON s.SET_EXAM_QUESTION_ID = t.SET_EXAM_QUESTION_ID JOIN TAKER c
-                    ON t.TAKER_ID = c.TAKER_ID JOIN QUESTION q
-                    ON s.QUESTION_ID = q.QUESTION_ID
-                    
-           WHERE e.EXAM_ID = #{examId} 
-           and q.QUESTION_ID = s.QUESTION_ID
+	<select id="candidateRightAnswerList" resultType="map">
+		SELECT 	q.QUESTION_CONTENT					"questionContent"
+				,q.QUESTION_ID						"questionId"
+				,q.EXAMPLE_1						"example1"
+				,q.EXAMPLE_2						"example2"
+				,q.EXAMPLE_3						"example3"
+				,q.EXAMPLE_4						"example4"
+				,q.RIGHT_ANSWER						"rightAnswer"
+				,q.RIGHT_COMMENTARY					"rightCommentary"
+				,s.SET_EXAM_QUESTION_ID				"setExamQuestionId"
+				,s.POINT							"point"
+				,s.EXAM_ID							"examId"
+				,th.TAKER_ANSWER					"takerAnswer"
+		FROM    QUESTION q JOIN SET_EXAM_QUESTION s
+		ON      q.QUESTION_ID 				= 	s.QUESTION_ID JOIN TAKE_EXAM_HISTORY th
+		ON      th.SET_EXAM_QUESTION_ID 	= 	s.SET_EXAM_QUESTION_ID
+		WHERE   th.TAKER_ID					=	#{takerId}
+		AND     s.EXAM_ID					=	#{examId}
 	</select>
 	
 	<select id="getTestStart" resultType="map">

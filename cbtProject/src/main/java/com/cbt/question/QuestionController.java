@@ -112,8 +112,10 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "candidateRightAnswer.do/{examId}", method = RequestMethod.GET)
-	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId) {
-		QuestionVO vo = new QuestionVO();
+	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId, HttpSession session) {
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		TakeExamVO vo = new TakeExamVO();
+		vo.setTakerId(candiVO.getTakerId());
 		vo.setExamId(examId);
 		
 		ModelAndView mv = new ModelAndView();
