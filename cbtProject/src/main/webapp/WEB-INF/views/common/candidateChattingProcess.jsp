@@ -30,18 +30,15 @@
 			// 2019.07.20 성재민
 			// 받아온 방 번호가 있으면 해당 방 번호를
 			// 없으면 방 번호를 새로 지정 
-			console.log("체크" + ${not empty roomId} == false);
+			console.log("체크" + "${not empty roomId}" == "false");
 			
-			if(${not empty roomId} == false){
+			if("${not empty roomId}" == "false"){
 				roomId = tempId + Now.getTime();
 			} else {
 				roomId = "${roomId}";
 				console.log("지정");
 			}
 		}
-		console.log("방 :" + (${not empty roomId} == true));
-		console.log("방 번호 :" + "${roomId}");
-		console.log("방 지정 :" + roomId);
 
 		// 웹소켓 객채 생성
 		ws = new WebSocket("ws://192.168.232.1:8090/project/echo.do");
