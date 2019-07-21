@@ -2,8 +2,10 @@ package com.cbt.estimate;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -216,5 +218,12 @@ public class EstimateController {
 			return estimateService.getCateoryNameList(vo);
 		}
 		
+		//매니저가 확인메일보냄 의뢰진행상태 출제완료
 		
+		@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
+		@ResponseBody
+		public void managerSendEmail() throws UnsupportedEncodingException, MessagingException {
+			SpringMailSener2 managerSendEmail = new SpringMailSener2();
+			managerSendEmail.mailTest();
+		}
 }
