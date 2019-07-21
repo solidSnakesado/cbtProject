@@ -15,7 +15,10 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 // 2019.07.18 성재민
@@ -30,9 +33,17 @@ public class WebSocketChat {
 		System.out.println("웹소켓(서버) 객체 생성");
 	}
 	
-	@RequestMapping(value = "/chat.do")
+	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
 	public String chatViewPage() {
-		return "candidate/candidate/chat";
+		return "empty/common/candidateChattingProcess";
+	}
+	
+	// 2019.07.20 성재민
+	// 방번호 전달 받아서 해당 방에서 대화 할수 있는 채팅 연결
+	@RequestMapping(value = "/chatRoomId.do/{roomId}", method = RequestMethod.GET)
+	public String chatView(@PathVariable("roomId") String roomId, Model model) {
+		model.addAttribute("roomId", roomId);
+		return "empty/common/managerChattingProcess";
 	}
 	
 	// 2019.07.18 성재민

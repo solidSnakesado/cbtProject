@@ -4,6 +4,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="w3-top">
+<script type="text/javascript">
+	// 2019.07.22 성재민
+	// 3초마다  poll() 실행
+	// 답변이 되지 않은 문의의 갯수를 받아온다.
+	(function poll() {
+	    $.ajax({
+	        url: 'getBeforeReplyCount.do',
+	        type: 'post',
+	        success: function(data) {
+	            console.log('success' + data);
+	            $("#inquiry").text(data);
+	        },
+	        timeout: 3000,	
+	        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
+	    })
+	})();
+</script>
+
+
 	<div class="w3-bar w3-black w3-card">
     	<%-- <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">CBT</a>
@@ -25,7 +44,14 @@
 		        	<!-- 응시자가 문의를 요청하면 해당 문의가 db 에 저장이 되고  -->
 		        	<!-- 저장된 문의의 상태가 처리전 이라면 해당 상태의 문의 갯수를 읽어봐서  -->
 		        	<!-- 문의목록 글자 옆에 표시 하는 기능이 추가 되어야 함 -->
-		        	<a href="#" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger">1</span></a>
+		        	<!-- 2019.07.20 성재민 -->
+		        	<!-- 문의하기 버튼 클릭 시 기능 추가 -->
+		        	<c:if test="${not empty sessionScope.beforeReplyCount }">
+		        		<a href="${pageContext.request.contextPath }/managerInquiryList.do" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger" id="inquiry">${beforeReplyCount}</span></a>
+		        	</c:if>
+		        	<c:if test="${empty sessionScope.beforeReplyCount }">
+		        		<a href="${pageContext.request.contextPath }/managerInquiryList.do" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger" id="inquiry"></span></a>
+		        	</c:if>
 		        	<a href="${pageContext.request.contextPath }/managerEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerExamList.do" class="w3-bar-item w3-button">시험목록</a>
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>

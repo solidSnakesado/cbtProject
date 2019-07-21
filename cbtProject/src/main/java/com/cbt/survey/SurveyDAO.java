@@ -33,8 +33,9 @@ public class SurveyDAO {
 		return mybatis.selectOne("SurveyDAO.getSurveyID", vo);
 	}
 
-	public List<Map<String, Object>> getSurveyResult(SurveyVO vo) {
-		return mybatis.selectList("SurveyDAO.getSurveyResult",vo);
+	// examId로 조회하여 난이도 등 조회 (7/21, june)
+	public List<Map<String, Object>> getSurveyList(SurveyVO vo) {
+		return mybatis.selectList("SurveyDAO.getSurveyList",vo);
 	}
 	
 }
