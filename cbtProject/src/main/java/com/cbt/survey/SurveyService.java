@@ -1,5 +1,7 @@
 package com.cbt.survey;
 
+import java.util.List;
+
 public interface SurveyService {
 
 	void insertSurvey(SurveyVO vo);

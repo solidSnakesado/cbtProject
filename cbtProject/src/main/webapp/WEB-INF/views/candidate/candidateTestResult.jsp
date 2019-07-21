@@ -62,6 +62,14 @@
 		</tr>
 	</table>
 	<br>
+	
 	<div><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
+	<!-- 수정 (7/19) june -->
+	<!-- <div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div> -->
+	<form id="survey" name="survey" action="${pageContext.request.contextPath }/insertSurvey.do" method="GET">
+		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="ture">
+		<input type="text" id="eId" name="examId" value="${examId.examId}" hidden="ture">
+	</form>
+	<button onclick="mainDo()">메인으로</button>
 </body>
 </html>

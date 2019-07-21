@@ -40,9 +40,35 @@ public class CandidateController {
 	@Autowired
 	QuestionService questionService;
 	
-	//카카오 로그인 - 7/16생성 .June
-	private kakao_restapi kakao_restapi = new kakao_restapi();
+	// 카카오 추가 -7/19 생성, june
+	@Autowired
+    private KakaoAPI kakao;
+	
+    // 카카오 로그인   -7/19 변경, june
+    @RequestMapping(value="/oauth")
+    public String login(@RequestParam("code") String code, HttpSession session) {
+        String access_Token = kakao.getAccessToken(code);
+        HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+        System.out.println("login Controller : " + userInfo);
+        
+        // 클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (userInfo.get("email") != null) {
+            session.setAttribute("userId", userInfo.get("email"));
+            session.setAttribute("access_Token", access_Token);
+        }
+        return "candidate/candidate/candidateMain";
+    }
+    
+    // 카카오 로그아웃   -7/19 변경, june
+    @RequestMapping(value="kakaoLogout.do")
+    public String logout(HttpSession session) {
+        kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+        session.removeAttribute("access_Token");
+        session.removeAttribute("userId");
+        return "candidate/candidate/candidateMain";
+    }
 
+    
 	
 	//등록form 생성 - 7/1 생성 		, 	 *.do 명칭변경(CRUD기준) -  7/2
 	@RequestMapping(value="insertCandidate.do", method=RequestMethod.GET)
@@ -318,45 +344,17 @@ public class CandidateController {
 	
 	// 2019.07.09 성재민
 	// 경로 수정
-	@RequestMapping("candidateSurvey.do")	
-	public String candidateSurvey() {
-		return "candidate/candidate/candidateSurvey";
-	}
+	/*
+	 * @RequestMapping("candidateSurvey.do") public String candidateSurvey() {
+	 * return "candidate/candidate/candidateSurvey"; }
+	 */
 	//메인화면
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
 		return "candidate/candidate/candidateMain";
 	}
 	
-	//카카오로그인
-	@RequestMapping(value = "oauth", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
-    public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
-		
-		 //카카오 rest api 객체 선언
-        kakao_restapi kr = new kakao_restapi();
-        //결과값을 node에 담아줌
-        JsonNode node = kr.getAccessToken(code);
-        //결과값 출력
-        System.out.println(node);
-        //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-        String token = node.get("access_token").toString();
-        //세션에 담아준다.
-        session.setAttribute("token", token);
-        
-        return "candidate/candidate/candidateMain";
-    }
-	//카카오 로그아웃
-	@RequestMapping(value = "kakaoLogout", produces = "application/json")
-    public String Logout(HttpSession session) {
-        //kakao restapi 객체 선언
-        kakao_restapi kr = new kakao_restapi();
-        //노드에 로그아웃한 결과값음 담아줌 매개변수는 세션에 잇는 token을 가져와 문자열로 변환
-        JsonNode node = kr.Logout(session.getAttribute("token").toString());
-        session.invalidate();
-        //결과 값 출력
-        System.out.println("로그인 후 반환되는 아이디 : " + node.get("id"));
-        return "redirect:/";
-    }   
+	
 
 	
 	

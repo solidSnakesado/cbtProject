@@ -2,6 +2,7 @@ package com.cbt.estimate;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.category.CategoryVO;
 import com.cbt.categoryMain.CategoryMainService;
+import com.cbt.categoryMain.CategoryMainVO;
 import com.cbt.common.Paging;
 import com.cbt.condition.ConditionService;
 
@@ -52,8 +55,6 @@ public class EstimateController {
 	
 	@RequestMapping(value = "/companyEstimateUpdate.do", method=RequestMethod.POST)
 	public void companyEstimateUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
-		
-		
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
 		PrintWriter out = response.getWriter();
@@ -70,7 +71,6 @@ public class EstimateController {
 	@ResponseBody
 	public void companyEstimateDelete(EstimateVO vo) { 
 		estimateService.deleteEstimate(vo);
-		
 	}
 	
 	//의뢰세부내용보기			 company-select-detail
@@ -96,8 +96,27 @@ public class EstimateController {
 		return "empty/company/companyEstimateDetail";
 	}
 	
+	//기업 의뢰상태
 	
+	//4.결제대기 -> 결제완료
+	
+	@RequestMapping(value = "companyPaymentUpdate.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void companyPaymentUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
+		//vo.setEstimateId(estimateId);
+		estimateService.updatesTradeProgressExchange5(vo);
+		
+		  PrintWriter out = response.getWriter(); //윈도우창 닫기 out.print("<script>");
+		  out.print("window.opener.top.location.reload();");
+		  out.print("window.close();"); out.print("</script>"); out.flush();
+		 
+	}
+	
+	
+	//////////////////////////////////////////////////////////
 	////////////////////////////관리자///////////////////////
+	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓//
+	
 	
 	//관리자는 기업의 의뢰서를 조회할수있다. manager-select
 	@RequestMapping(value="managerEstimateList.do", method = RequestMethod.GET)
@@ -188,4 +207,14 @@ public class EstimateController {
 			System.out.println("메인 카테고리: "+vo.getMainCategoryId());
 			return estimateService.getCateoryId(vo);
 		}
+		
+		
+		//카테고리 id와 이름을 가져옴
+		@RequestMapping(value = "getCateoryNameList.do", method = RequestMethod.GET)
+		@ResponseBody
+		public List<EstimateVO> categoryMain(CategoryVO vo) {
+			return estimateService.getCateoryNameList(vo);
+		}
+		
+		
 }

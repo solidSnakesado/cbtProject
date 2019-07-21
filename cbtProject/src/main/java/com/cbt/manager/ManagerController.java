@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ import com.cbt.condition.ConditionService;
 import com.cbt.consulting.ConsultingService;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.estimate.EstimateService;
+import com.cbt.estimate.EstimateVO;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 
@@ -340,6 +342,9 @@ public class ManagerController {
 	
 	@RequestMapping(value = "managerExamInsert.do/{estimateId}", method = RequestMethod.GET)
 	public String managerExamInsertForm(@PathVariable("estimateId") int estimateId, ExamVO vo, Model model) {
+		EstimateVO estimateVO = new EstimateVO();
+		estimateVO.setEstimateId(estimateId);
+		model.addAttribute("estimate", estimateService.getEstimate(estimateVO));
 		model.addAttribute("O", conditionService.getConditionDetailList("O"));
 		model.addAttribute("D", conditionService.getConditionDetailList("D"));
 		model.addAttribute("I", conditionService.getConditionDetailList("I"));
@@ -348,10 +353,29 @@ public class ManagerController {
 	
 	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.POST)
 	public String managerExamInsert(ExamVO vo) {
+		System.out.println(vo);
+		
 		examService.insertExam(vo);
 		return "redirect:managerExamList.do";
 	}
 
+	
+	
+	@RequestMapping(value="managerExamUpdate.do/{examId}", method=RequestMethod.GET)
+	public String managerExamUpdateForm(@PathVariable("examId") int examId, Model model, ExamVO vo ) {
+		vo.setExamId(examId);
+		model.addAttribute("selectedExam", managerService.getManagerExam(examService.getExam(vo)));
+		model.addAttribute("O", conditionService.getConditionDetailList("O"));
+		model.addAttribute("D", conditionService.getConditionDetailList("D"));
+		model.addAttribute("I", conditionService.getConditionDetailList("I"));
+		return "manager/manager/managerExamUpdate";
+	}
+	
+	@RequestMapping(value = "managerExamUpdate.do", method = RequestMethod.POST)
+	public String updateExam(@ModelAttribute("exam") ExamVO vo) {
+		examService.updateExam(vo);
+		return "redirect:managerExamList.do";
+	}
 	
 	
 	@ModelAttribute("consultingMap")

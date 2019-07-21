@@ -1,5 +1,8 @@
 package com.cbt.survey;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +31,10 @@ public class SurveyDAO {
 	public SurveyVO getSurvey(SurveyVO vo) {
 		
 		return mybatis.selectOne("SurveyDAO.getSurveyID", vo);
+	}
+
+	public List<Map<String, Object>> getSurveyResult(SurveyVO vo) {
+		return mybatis.selectList("SurveyDAO.getSurveyResult",vo);
 	}
 	
 }

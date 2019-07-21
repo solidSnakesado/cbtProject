@@ -150,6 +150,7 @@
 		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
 			SELECT CONSULTING_TITLE "title"
 				, CONSULTING_DESIRED_DATE "consultingDesiredDate"
+				, CONSULTING_STATE "consultingState"
 		FROM CONSULTING
 		<where>
 			<if test="searchKeyword != null and searchKeyword != '' ">
@@ -298,21 +299,21 @@
 	
 	<select id="managerGetExamForExamVOId" parameterType="ExamVO" resultType="map">
 		SELECT 
-		    COMPANY.COMPANY_ID				"companyId"
-		  , EXAM.EXAM_ID					"examId"
-		  , EXAM.EXAM_START_TIME			"examStartTime"
-		  , EXAM.EXAM_END_TIME				"examEndTime"
-		  , EXAM.QUESTION_QUANTITY			"questionQuantity"
-		  , EXAM.ESTIMATE_ID				"estimateId"
-		  , EXAM.NUMBER_OF_TIMES			"numberOfTimes"
-		  , EXAM.PASSING_SCORE				"passingScore"
-		  , EXAM.POSSIBLE_APPLICANTS		"possibleApplicants"
-		  , EXAM.EXAM_NAME					"examName"
-		  , EXAM.EXAM_STATUS				"examStatus"
-		  , EXAM.DISCLOSURE_STATUS			"disclosureStatus"
-		  , EXAM.SET_EXAM_STATUS			"setExamStatus"
-		  , EXAM.EXAM_DESCRIPTION_SIMPLE	"setExamStatus"
-		  , EXAM.EXAM_DESCRIPTION_DETAIL	"examDescriptionDetail"
+		    COMPANY.COMPANY_ID									"companyId"
+		  , EXAM.EXAM_ID										"examId"
+		  , TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI:SS') 	"examStartTime"
+		  , TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI:SS')		"examEndTime"
+		  , EXAM.QUESTION_QUANTITY								"questionQuantity"
+		  , EXAM.ESTIMATE_ID									"estimateId"
+		  , EXAM.NUMBER_OF_TIMES								"numberOfTimes"
+		  , EXAM.PASSING_SCORE									"passingScore"
+		  , EXAM.POSSIBLE_APPLICANTS							"possibleApplicants"
+		  , EXAM.EXAM_NAME										"examName"
+		  , EXAM.EXAM_STATUS									"examStatus"
+		  , EXAM.DISCLOSURE_STATUS								"disclosureStatus"
+		  , EXAM.SET_EXAM_STATUS								"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_SIMPLE						"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_DETAIL						"examDescriptionDetail"
 		FROM EXAM JOIN ESTIMATE
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
 		JOIN COMPANY
@@ -322,5 +323,40 @@
 		</where>
 		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
 	</select>
+	
+	<insert id="managerExamInsert" parameterType="ExamVO">
+		<selectKey keyProperty="examId" resultType="int" order="BEFORE">
+			SELECT MAX(EXAM_ID)+1 FROM EXAM
+		</selectKey>
+		INSERT INTO EXAM (
+							  EXAM_ID
+							, EXAM_START_TIME
+							, EXAM_END_TIME
+							, QUESTION_QUANTITY
+							, ESTIMATE_ID
+							, NUMBER_OF_TIMES
+							, PASSING_SCORE
+							, POSSIBLE_APPLICANTS
+							, EXAM_NAME
+							, EXAM_STATUS
+							, DISCLOSURE_STATUS
+							, SET_EXAM_STATUS
+							, EXAM_DESCRIPTION_SIMPLE
+							, EXAM_DESCRIPTION_DETAIL	)
+		VALUE ( EXAM_ID_SEQ.NEXTVAL
+				,#{examStartTime}
+				,#{examEndTime}
+				,#{questionQuantity}
+				,#{estimateId}
+				,#{numberOfTimes}
+				,#{passingScore}
+				,#{possibleApplicants}
+				,#{examName}
+				,#{examStatus}
+				,#{disclosureStatus}
+				,#{setExamStatus}
+				,#{examDescriptionSimple}
+				,#{examDescriptionDetail} )
+	</insert>
 	
 </mapper>

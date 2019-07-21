@@ -107,7 +107,7 @@
 					, TAKER_PASSWORD
 			FROM 	TAKER
 			WHERE	TAKER_ID = #{takerId} 
-			<!-- AND TAKER_PASSWORD= #{takerPassword} -->
+					AND TAKER_PASSWORD= #{takerPassword}
 		</select>
 		
 		<select id="getTakerPassword" resultType="String">
