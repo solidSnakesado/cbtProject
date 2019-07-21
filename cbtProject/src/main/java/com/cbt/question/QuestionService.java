@@ -55,7 +55,7 @@ public interface QuestionService {
 	
 	List<Map<String, Object>> candidateExaminationList(CandidateVO vo);
 	
-	QuestionVO candidateExaminationListDetail(QuestionVO vo);
+	Map<String, Object> candidateExaminationListDetail(TakeExamVO vo);
 	
 	public List<QuestionVO> uploadExcelFile(MultipartFile excelFile);
 	

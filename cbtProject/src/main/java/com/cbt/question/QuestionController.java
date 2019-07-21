@@ -111,10 +111,10 @@ public class QuestionController {
 		return list;
 	}
 	
-	@RequestMapping("candidateRightAnswer.do")
-	public ModelAndView candidateRightAnswerList() {
+	@RequestMapping(value = "candidateRightAnswer.do/{examId}", method = RequestMethod.GET)
+	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId) {
 		QuestionVO vo = new QuestionVO();
-		vo.setExamId(1);
+		vo.setExamId(examId);
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -123,27 +123,6 @@ public class QuestionController {
 		
 		return mv;
 	}
-	
-//	@RequestMapping("getTestResultList.do")
-//	public ModelAndView getTestResultList(QuestionVO vo) {
-//		vo = questionService.getTestResultList(vo);
-//		int setCount = questionService.getSetCount(vo);
-//		
-//		questionService.rightAnswer(vo);
-//		
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("getExamId", vo.getExamId());
-//		mv.addObject("getExamName", vo.getExamName());
-//		mv.addObject("getPassingScore", vo.getPassingScore());
-//		mv.addObject("getPoint", vo.getSumPoint());
-//		mv.addObject("getTakeExamId", vo.getTakeExamId());
-//		mv.addObject("getTakerName", vo.getTakerName());
-//		mv.addObject("getCount", vo.getCount());
-//		mv.addObject("getExamCount", setCount);
-//		mv.setViewName("candidate/candidate/candidateTestResult");
-//		
-//		return mv;
-//	}
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -201,7 +180,7 @@ public class QuestionController {
 	
 	
 	@RequestMapping(value = "candidateExaminationListDetail.do", method = RequestMethod.POST)	
-	public ModelAndView candidateExaminationListDetail(QuestionVO vo, HttpSession session) {
+	public ModelAndView candidateExaminationListDetail(TakeExamVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
 		vo.setTakerId(candiVO.getTakerId());
@@ -210,7 +189,8 @@ public class QuestionController {
 		return mv;
 	}
 	
-	
+	// 2019.07.18 김재용
+	// 문제테이블 ALL 리스트 불러오기
 	@RequestMapping(value = "candidateExamList.do", method = RequestMethod.GET)
 	public ModelAndView candidateExamList() {
 		ModelAndView mv = new ModelAndView();
@@ -234,22 +214,7 @@ public class QuestionController {
 
 		CellStyle headStyle = wb.createCellStyle();
 
-//		headStyle.setBorderTop(BorderStyle.THIN);
-//		headStyle.setBorderBottom(BorderStyle.THIN);
-//		headStyle.setBorderLeft(BorderStyle.THIN);
-//		headStyle.setBorderRight(BorderStyle.THIN);
-//
-//		headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
-//		headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-//
-//		headStyle.setAlignment(HorizontalAlignment.CENTER);
-		
-
 		CellStyle bodyStyle = wb.createCellStyle();
-//		bodyStyle.setBorderTop(BorderStyle.THIN);
-//		bodyStyle.setBorderBottom(BorderStyle.THIN);
-//		bodyStyle.setBorderLeft(BorderStyle.THIN);
-//		bodyStyle.setBorderRight(BorderStyle.THIN);
 
 
 		row = sheet.createRow(rowNo++);

@@ -1,6 +1,7 @@
 package com.cbt.candidate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -240,9 +241,19 @@ public class CandidateController {
 	}
 	
 	// 시험일정 전체 보기(로그인 없이 보기)
+	// 세션에 takerId 가져와 로그인 체크기능추가   - 2019.07.18  재용
 	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
-	public ModelAndView candidateScheduleCheck(Model model, Paging paging) {
+	public ModelAndView candidateScheduleCheck(Model model, Paging paging, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
+		// 로그인 체크
+		if(session.getAttribute("candidate") == null) {
+			mv.addObject("takerId", null);
+		} else {
+			CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+			mv.addObject("takerId", candivo.getTakerId());
+		}
+		
 		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheckPage(paging));
 		mv.setViewName("candidate/candidate/candidateScheduleCheck");
 			
@@ -268,21 +279,31 @@ public class CandidateController {
 		
 		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
 		TakeExamVO vo = new TakeExamVO();
-		
+		TakeExamVO vovo = new TakeExamVO();
 		
 		// 2019.07.17 김재용 추가
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 응시하기 버튼 바꾸기
 		vo.setTakerId(candivo.getTakerId()); 
 		vo.setExamId(examId);
-		vo = takeExamService.selectTakeExamId(vo);
-		mv.addObject("takeExamId", vo);
-
+		try {
+			vovo = takeExamService.selectTakeExamId(vo);
+			if(vovo == null) {
+				takeExamService.insertTakeExam(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
+		mv.addObject("takerId", candivo.getTakerId());
 		
 		mv.addObject("detailExam", examService.getExam(examVO));
 		mv.setViewName("candidate/candidate/candidateExamDetialView");
 		return mv;
 	}
+	
 	// 시험일정 가져오기
 //	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
 //	public String candidateScheduleCheck(HttpSession session, Model model, Paging paging) {

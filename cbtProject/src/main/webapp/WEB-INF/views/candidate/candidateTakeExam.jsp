@@ -50,7 +50,7 @@
 		$('#btn').on("click", function() {
 			
 			$.ajax({
-				url : "./getTestStart.do",
+				url : "${pageContext.request.contextPath}/getTestStart.do",
 				method : "post",
 				data : {takerId : takerId, examId : examId, takeExamId : takeExamId, examName : examName, 
 					passingScore : passingScore, examStartTime : examStartTime },
@@ -162,7 +162,7 @@
 				    		console.log(takerAnswer);
 				    		
 				    		$.ajax({
-								url : "./updateTakeExamHistory.do",
+								url : "${pageContext.request.contextPath}/updateTakeExamHistory.do",
 								method : "post",
 								data : {takerAnswer : takerAnswer, setExamQuestionId : setExamQuestionId,
 									takeExamId:takeExamId} , 
@@ -237,8 +237,8 @@
 </head>
 <body>
 	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestResult.do" method="post">
-		<input type="text" id="eId" name="eId" value="${examVO.examId }" hidden="ture">
-		<input type="text" id="tId" name="tId" value="${takeExamId }" hidden="ture">
+		<input type="text" id="eId" name="examId" value="${examVO.examId }" hidden="ture">
+		<input type="text" id="tId" name="takeExamId" value="${takeExamId }" hidden="ture">
 	</form>
 <button id="btn">시험 시작 !</button>
 	<table border="1" id="mainTab">

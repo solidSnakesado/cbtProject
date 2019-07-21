@@ -121,7 +121,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.candidateExaminationList(vo);
 	}
 
-	public QuestionVO candidateExaminationListDetail(QuestionVO vo) {
+	public Map<String, Object> candidateExaminationListDetail(TakeExamVO vo) {
 		
 		return questionDAO.candidateExaminationListDetail(vo);
 	}

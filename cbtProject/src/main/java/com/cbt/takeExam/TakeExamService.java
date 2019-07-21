@@ -24,5 +24,5 @@ public interface TakeExamService {
 	// 2019.07.16 성재민
 	// 시험 iD 로 검색
 	public List<TakeExamVO> getTakeExamForExamId(TakeExamVO vo);
-
+	
 }

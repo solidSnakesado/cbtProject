@@ -16,9 +16,16 @@ $(document).ready(function(){
 		$(arrTD[i]).text($(arrTD[i]).text().replace("T"," "))
 	}
 });
+
 function goList(p){
 	searchFrm.page.value = p;
 	searchFrm.submit();
+}
+
+// 로그인체크후 로그인하러가기     2019.07.20 김재용
+function goLogin(){
+	alert('로그인이 필요한 서비스입니다.');
+	location.href="${pageContext.request.contextPath }/candidateLogin.do";
 }
 
 </script>
@@ -40,9 +47,14 @@ function goList(p){
 			<th>문항수</th>
 			<th>합격기준</th>
 		</tr>
-
+	<c:set var="takerId" value="${takerId}"></c:set>
    	<c:forEach items="${candidateScheduleCheck.schedulePage}" var="examInfo" >
+   	<c:if test="${takerId != null}">
 		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
+	</c:if>
+	<c:if test="${takerId == null}">
+		<tr onclick="goLogin();">
+	</c:if>
 			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>
 			<td>${examInfo.EXAM_START_TIME}</td>
