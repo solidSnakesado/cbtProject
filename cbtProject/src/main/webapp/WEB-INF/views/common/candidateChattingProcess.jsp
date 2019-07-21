@@ -13,16 +13,38 @@
 <title>채팅하기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var Now = new Date();
-		var tempId = "test" + Now.getSeconds();
+		var isStart = false;
+		var Now 	= new Date();
+		var tempId 	= "Guest" + Now.getTime();
+		var roomId 	= tempId;
 		var ws;
+		
 		if (ws != undefined && ws.readyState != WebSocket.CLOSED) {
 			$("#messages").append("<br>" + "WebSocket is already opened.");
 			return;
 		}
+		
+		if("${not empty sessionScope.candidate }" != "false"){
+			tempId = '${sessionScope.candidate.takerId}';
+			
+			// 2019.07.20 성재민
+			// 받아온 방 번호가 있으면 해당 방 번호를
+			// 없으면 방 번호를 새로 지정 
+			console.log("체크" + ${not empty roomId} == false);
+			
+			if(${not empty roomId} == false){
+				roomId = tempId + Now.getTime();
+			} else {
+				roomId = "${roomId}";
+				console.log("지정");
+			}
+		}
+		console.log("방 :" + (${not empty roomId} == true));
+		console.log("방 번호 :" + "${roomId}");
+		console.log("방 지정 :" + roomId);
 
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
+		ws = new WebSocket("ws://192.168.232.1:8090/project/echo.do");
 		ws.onopen = function(event) {
 			/* if (event.data === undefined)
 				return; */
@@ -42,7 +64,7 @@
 			
 			console.log(message.id + " : " + tempId);
 
-			if (message.id == tempId) {
+			if (message.id == tempId || message.rid != roomId) {
 				return;
 			}
 			
@@ -75,7 +97,7 @@
 				type : "system",
 				msg : tempId + "님이 입장 하셨습니다.",
 				id : tempId,
-				rid : tempId
+				rid : roomId
 			};
 			
 			ws.send(JSON.stringify(sendMessage));
@@ -107,7 +129,7 @@
 				type : "message",
 				msg : $("#tmInputMessage").val(),
 				id : tempId,
-				rid : tempId
+				rid : roomId
 			};
 
 			ws.send(JSON.stringify(sendMessage));
@@ -122,6 +144,25 @@
 			$("#tmInputMessage").val('').focus();
 			
 			$("#tmMessageList .tmInner").scrollTop($("#tmMessageList .tmInner")[0].scrollHeight);
+			
+			// 2019.07.20 성재민
+			// 메시지 입력이 시작 되면 db 문의 테이블에 인서트
+			if(isStart == false){
+				isStart = true;
+				
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					data: JSON.stringify(sendMessage),
+					contentType: "application/json",
+					url:"${pageContext.request.contextPath }/insertInquiry.do",
+					success : function(data){
+						console.log(data);
+					}, error : function(){
+						alert('에러발생');
+					}
+				});
+			}
 		}
 	});
 </script>
