@@ -20,5 +20,4 @@ public class CommonController {
 	public String commonDetailRequestList() {
 		return "common/commonDetailRequestList";
 	}
-	
 }

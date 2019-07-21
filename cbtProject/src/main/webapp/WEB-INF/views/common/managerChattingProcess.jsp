@@ -13,16 +13,33 @@
 <title>채팅하기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var Now = new Date();
-		var tempId = "test" + Now.getSeconds();
+		var isStart = false;
+		var Now 	= new Date();
+		var tempId 	= "";
+		var roomId 	= "";
 		var ws;
+		
 		if (ws != undefined && ws.readyState != WebSocket.CLOSED) {
 			$("#messages").append("<br>" + "WebSocket is already opened.");
 			return;
 		}
+		
+		if("${not empty sessionScope.manager }" != "false"){
+			tempId = '${sessionScope.manager.managerId}';
+			
+			// 2019.07.20 성재민
+			// 받아온 방 번호가 있으면 해당 방 번호를
+			// 없으면 방 번호를 새로 지정 		
+			if("${not empty roomId}" == "false"){
+				roomId = tempId + Now.getTime();
+			} else {
+				roomId = "${roomId}";
+				console.log("지정");
+			}
+		}
 
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
+		ws = new WebSocket("ws://192.168.232.1:8090/project/echo.do");
 		ws.onopen = function(event) {
 			/* if (event.data === undefined)
 				return; */
@@ -42,7 +59,7 @@
 			
 			console.log(message.id + " : " + tempId);
 
-			if (message.id == tempId) {
+			if (message.id == tempId || message.rid != roomId) {
 				return;
 			}
 			
@@ -75,10 +92,29 @@
 				type : "system",
 				msg : tempId + "님이 입장 하셨습니다.",
 				id : tempId,
-				rid : tempId
+				rid : roomId
 			};
 			
 			ws.send(JSON.stringify(sendMessage));
+			
+			// 2019.07.20 성재민
+			// 메시지 입력이 시작 되면 db 문의 테이블에 인서트
+			if(isStart == false){
+				isStart = true;
+				
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					data: JSON.stringify(sendMessage),
+					contentType: "application/json",
+					url:"${pageContext.request.contextPath }/updateInquiry.do",
+					success : function(data){
+						console.log(data);
+					}, error : function(){
+						alert('에러발생');
+					}
+				});
+			}
 		}
 
 		// 2019.07.19 성재민
@@ -94,6 +130,31 @@
 				sendMessage();
 			}
 		});
+		
+		// 2019.07.22 성재민
+		// 답변완료 버튼 클릭
+		$("#tmBtnCloseChat").click(function() {
+			var sendMessage = {
+					type : "system",
+					msg : "처리완료",
+					id : tempId,
+					rid : roomId
+				};
+			
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				data: JSON.stringify(sendMessage),
+				contentType: "application/json",
+				url:"${pageContext.request.contextPath }/deleteInquiry.do",
+				success : function(data){
+					console.log(data);
+					window.close();
+				}, error : function(){
+					alert('에러발생');
+				}
+			});
+		});
 
 		function sendMessage() {
 			// 2019.07.19 성재민
@@ -107,7 +168,7 @@
 				type : "message",
 				msg : $("#tmInputMessage").val(),
 				id : tempId,
-				rid : tempId
+				rid : roomId
 			};
 
 			ws.send(JSON.stringify(sendMessage));
@@ -128,11 +189,13 @@
 </head>
 <body>
 	<section id="tmLayerChat">
+		<button type="button" id="tmBtnCloseChat" title="답변완료">
+			<span class="icon_quit hidden">나가기</span>
+		</button>
 		<div class="tmHead" style="width: 60%; margin-left: 20%;">
 			<h2 class="logo"></h2>
 		</div>
 		<div class="tmBody" style="width: 60%; height: 750px; margin-left: auto; margin-right: auto;">
-		
 			<!-- 2019.07.19 성재민 -->
 			<!-- 채팅 메시지 목록 -->
 			<div id="tmMessageList" style="height: 91%;">
@@ -155,6 +218,5 @@
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>

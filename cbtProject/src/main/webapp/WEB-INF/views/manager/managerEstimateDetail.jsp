@@ -16,7 +16,21 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
+		$("#editButton").css('display', 'none');	//수정 버튼 숨김
+		$("#sendEmail").css('display', 'none');		//메일전송 버튼 숨김
 		
+		var tradeProgress = '${myEstimateList.tradeProgress}'; //의뢰진행상태
+		
+		if(tradeProgress == 'B1' || tradeProgress == 'B2'){ // 의뢰진행상태가  출제전 (B1), 출제중(B2) 일때 
+			$("#editButton").css('display', 'inline');//수정버튼 보여줌
+		}
+		else if(tradeProgress =='B3'){  //의뢰진행상태가 출제완료(B3) 일때
+			$("#sendEmail").css('display', 'inline');	//이메일 전송버튼 나옴
+		}
+		else if(tradeProgress =='B5'){	//결제완료
+			var row = "<tr>	<td>결제날짜</td>	  <td>	<input type='text'  value='${myEstimateList.paymentDate}' readonly> </td></tr>	"
+			$("#table").append(row);
+		}
 		//카테고리ID 값을 채운다
 		$.ajax({
 			type:"GET",
@@ -25,7 +39,6 @@
 			success : function(data) {
 				// db에서 읽어온 값으로 대분류 설정
 				for(var i = 0; i < data.length; ++i){
-					console.log("33");
 					var optionMain = $("<option value=" + data[i].categoryId + ">" + data[i].categoryName + "</option>");
 					$("#categoryName").append(optionMain);
 					// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
@@ -47,7 +60,7 @@
 		
 		
 		//수정버튼 눌렀을때 처리 로직
-		$("#submitBtn").click(function() {
+		$("#editButton").click(function() {
 			
 			///////////////////////예외처리부분////////////////////
 			var form = document.form;
@@ -121,7 +134,7 @@
 <body>
 	<h2 align="center">세부 의뢰목록</h2>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
-		<table>
+		<table id="table">
 			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
@@ -144,7 +157,7 @@
 			
 			
 		</table>
-		<button type="button"  id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> 
+		<button type="button"  id="editButton">수정하기</button> <button type="button"  id="sendEmail">확인메일보내기</button> <button type="button" onclick="windowClose()"> 취소 </button> 
 	</form>
 	
 	<script>

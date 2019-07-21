@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.Inquiry.InquiryService;
 import com.cbt.candidate.CandidateService;
 import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
@@ -51,11 +52,23 @@ public class ManagerController {
 	EstimateService estimateService;
 	@Autowired
 	ExamService examService;
+	
+	// 2019.07.20 성재민
+	// 문의 처리를 위해 추가
+	@Autowired
+	InquiryService inquiryService;
 
 	// 메인
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
-	public String managerMain(Model model, CandidateVO vo) {
+	public String managerMain(Model model, CandidateVO vo, HttpSession session) {
 		model.addAttribute("candidate", candidateService.getCandidateList(vo));
+		// 2019.07.20 성재민
+		// 로그인시 답변이 안된 문의 의 갯수를 받아온다.
+		int count = inquiryService.getBeforeReplyCount();
+		if(count > 0) {
+			session.setAttribute("beforeReplyCount", count);
+		}
+		
 		return "manager/manager/managerMain";
 	}
 
@@ -405,4 +418,14 @@ public class ManagerController {
 		return map;
 	}
 	
+	// 2019.07.20 성재민
+	// 문의관련 화면 추가
+	@RequestMapping(value="managerInquiryList.do", method=RequestMethod.GET)
+	public String managerInquiryList(Model model) {
+		if(inquiryService.getBeforeReplyList().size() > 0) {
+			model.addAttribute("InquiryList", inquiryService.getBeforeReplyList());
+		}
+		
+		return "manager/manager/managerInquiryList";
+	}
 }

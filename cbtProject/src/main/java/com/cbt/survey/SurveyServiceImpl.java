@@ -1,6 +1,7 @@
 package com.cbt.survey;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -26,6 +27,12 @@ public class SurveyServiceImpl implements SurveyService {
 
 	public SurveyVO getSurvey(SurveyVO vo) {
 		return dao.getSurvey(vo);
+	}
+
+	// examId로 조회하여 난이도 등 조회 (7/21, june)
+	@Override
+	public List<Map<String, Object>> getSurveyList(SurveyVO vo) {
+		return dao.getSurveyList(vo);
 	}
 
 }
