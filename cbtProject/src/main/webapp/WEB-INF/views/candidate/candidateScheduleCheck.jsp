@@ -16,11 +16,18 @@ $(document).ready(function(){
 		$(arrTD[i]).text($(arrTD[i]).text().replace("T"," "))
 	}
 });
+
 function goList(p){
 	searchFrm.page.value = p;
 	searchFrm.submit();
 }
-onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'"
+
+// 로그인체크후 로그인하러가기     2019.07.20 김재용
+function goLogin(){
+	alert('로그인이 필요한 서비스입니다.');
+	location.href="${pageContext.request.contextPath }/candidateLogin.do";
+}
+
 </script>
 <title>CBT 시험 일정 확인</title>
 </head>
@@ -46,7 +53,7 @@ onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'"
 		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
 	</c:if>
 	<c:if test="${takerId == null}">
-		<tr onclick="alert('로그인이 필요한 서비스입니다.')">
+		<tr onclick="goLogin();">
 	</c:if>
 			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>

@@ -50,7 +50,7 @@
 		$('#btn').on("click", function() {
 			
 			$.ajax({
-				url : "./getTestStart.do",
+				url : "${pageContext.request.contextPath}/getTestStart.do",
 				method : "post",
 				data : {takerId : takerId, examId : examId, takeExamId : takeExamId, examName : examName, 
 					passingScore : passingScore, examStartTime : examStartTime },
@@ -162,7 +162,7 @@
 				    		console.log(takerAnswer);
 				    		
 				    		$.ajax({
-								url : "./updateTakeExamHistory.do",
+								url : "${pageContext.request.contextPath}/updateTakeExamHistory.do",
 								method : "post",
 								data : {takerAnswer : takerAnswer, setExamQuestionId : setExamQuestionId,
 									takeExamId:takeExamId} , 

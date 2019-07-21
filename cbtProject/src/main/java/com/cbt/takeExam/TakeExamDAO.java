@@ -19,7 +19,7 @@ public class TakeExamDAO {
 	
 	public void insertTakeExam(TakeExamVO vo) {
 		
-		mybatis.insert("", vo);
+		mybatis.insert("takeExamDAO.insertTakeExam", vo);
 	}
 	
 	public void updateTakeExam(TakeExamVO vo) {

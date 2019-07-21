@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/main.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
 	$(document).ready(function(){
 		var score = ${takeExamId.score};
 		
@@ -15,7 +16,18 @@
 			$("[id ='btn']").html('응시결과 확인');
 			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
 			alert('응시 완료한 시험입니다.');
+		} else if(nowDate <= sDate) {
+			$("[id ='btn']").hide();
+		} else if(nowDate >= eDate) {
+			$("[id ='btn']").hide();
+			alert('종료된 시험입니다.');
 		}
+		
+		console.log(serverDate);
+		console.log("서버시간 : "+nowDate);
+		console.log("시험시작 : "+sDate);
+		console.log("시험종료 : "+eDate);
+		
 		$("[id ='btn']").click(function(){
 			
 			takeExamForm.submit();
@@ -23,6 +35,71 @@
 		});
 		
 	})
+	
+	/* 시간비교를 위한 치환 펑션  */
+	function parse(str) {
+	    var y = str.substr(0, 4);
+	    var mon = str.substr(5, 2);
+	    var d = str.substr(8, 2);
+	    var h = str.substr(11,2);
+	    var min = str.substr(14,2);
+	    
+	    return new Date(y,mon-1,d,h,min);
+	}
+	
+	
+	let xmlHttp;
+	
+	if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+	} else if (window.ActiveXObject){
+		xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+	}
+	xmlHttp.open('HEAD', window.location.href.toString(), false);
+	xmlHttp.setRequestHeader("Content-Type", "text/html");
+	xmlHttp.send('');
+	
+	let serverDate = xmlHttp.getResponseHeader("Date");
+	
+	/* 서버의 현재 시간 */
+	let nowDate = new Date(serverDate);
+	
+	/* 시험시작시간 */
+	let sDate = parse("${detailExam.examStartTime}");
+	/* 시험종료시간 */
+	let eDate = parse("${detailExam.examEndTime}");
+	
+
+	/* function getTimeStamp() {
+		var d = new Date(serverDate);
+		var s =
+			leadingZeros(d.getFullYear(), 4) + '-' +
+			leadingZeros(d.getMonth() + 1, 2) + '-' +
+			leadingZeros(d.getDate(), 2) + ' ' +
+			
+			leadingZeros(d.getHours(), 2) + ':' +
+			leadingZeros(d.getMinutes(), 2);
+	
+		alert(s);
+		var date = parse(s);
+		alert(date);
+		alert(d);
+		alert(sDate);
+		alert(eDate);
+	}
+	
+	function leadingZeros(n, digits) {
+		var zero = '';
+		n = n.toString();
+		
+		if (n.length < digits) {
+			for (i = 0; i < digits - n.length; i++)
+			zero += '0';
+		}
+		return zero + n;
+	} */
+
+
 </script>
 </head>
 <body>
