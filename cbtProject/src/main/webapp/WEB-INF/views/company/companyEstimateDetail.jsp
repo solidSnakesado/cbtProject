@@ -11,29 +11,38 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	 <!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 start@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	 <!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	
 	<script>
 	//의뢰서
 	$(document).ready(function() {
-		
+		var tradeProgress = '${myEstimateList.tradeProgress}'; //의뢰진행상태
+		$("#Payment").css('display', 'none');		//결제 버튼 숨김
+		$("#editButton").css('display', 'none');	//수정 버튼 숨김
+		console.log(tradeProgress);
+		if(tradeProgress == 'B1' || tradeProgress == 'B2'){ // 의뢰진행상태가  출제전 (B1), 출제중(B2) 일때 수정가능
+			$("#editButton").css('display', 'inline');//수정버튼 보여줌
+		}
+		if(tradeProgress == 'B4'){ // 의뢰진행상태가 결제대기일때
+			$("#Payment").css('display', 'inline');// 결제버튼 보임
+		}
 		//카테고리ID 값을 채운다
 		$.ajax({
 			type:"GET",
 			dataType: "json",
 			url:"${pageContext.request.contextPath }/getCateoryNameList.do",
 			success : function(data) {
-				// db에서 읽어온 값으로 대분류 설정
+				// db에서 읽어온 값으로  select 채움
 				for(var i = 0; i < data.length; ++i){
 					var optionMain = $("<option value=" + data[i].categoryId + ">" + data[i].categoryName + "</option>");
 					$("#categoryName").append(optionMain);
-					// 메인 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
-					// 중분류 의 셀렉트 옵션 값을 채운다.					
+					// 카테고리 값을 전달받은 값으로 지정하고 체인지 트리거를 발동하여 
+					// 카테고리Id 의 셀렉트 옵션 값을 채운다.					
 				}
-				var mainId = "${myEstimateList.categoryId}";
-				$("#categoryName").val(mainId).trigger("change");
+				var categoryId = "${myEstimateList.categoryId}";
+				$("#categoryName").val(categoryId).trigger("change");
 			}, error : function() {
 				alert('에러발생');
 			}
@@ -42,7 +51,7 @@
 		
 		
 		//수정버튼 눌렀을때 처리 로직
-		$("#submitBtn").click(function() {
+		$("#editButton").click(function() {
 			
 			///////////////////////예외처리부분////////////////////
 			var form = document.form;
@@ -193,7 +202,7 @@
 
 		</table>
 		<div>
-			<button type="button"  id="submitBtn">수정하기</button> <button type="button" onclick="windowClose()"> 취소 </button> <button type="button" onclick="payment(${myEstimateList.estimateId})">결제</button>
+			<button type="button"  id="editButton">수정하기</button>  <button type="button" id="Payment" onclick="payment(${myEstimateList.estimateId})">결제</button> <button type="button" onclick="windowClose()"> 취소 </button>
 		</div>
 	</form>
 	

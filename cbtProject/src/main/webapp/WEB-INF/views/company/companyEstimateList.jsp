@@ -14,6 +14,9 @@
 
 
 <script>
+
+	var estimate="${result.estimateList}";
+	
 	//페이징처리
 	function goList(p) {
 		searchFrm.page.value = p;
@@ -27,28 +30,30 @@
 	}
 	
 	function deleteEstimateId(e,estimateId){ //해당 estimateId 가진 튜플 삭제함수
-		e.preventDefault(); //<form action="companyEstimateList.do">이 실행되지않도록 막음
 		
-		//예외처리
-		if(confirm("삭제하시겠습니까??")){		
-				//해당 estimateId 가진 튜플 삭제
-				 $.ajax({
-					url:"${pageContext.request.contextPath}/companyEstimateDelete.do",
-					data: { estimateId:  estimateId},
-					success : function() {
-						alert('삭제되었습니다');
-						location.reload();
-					}, error : function() {
-						alert('에러발생');
-					}
-				});		 
-		}
-		else{
-			alert("취소되었습니다");
-			return false;
-		}
+			e.preventDefault(); //<form action="companyEstimateList.do">이 실행되지않도록 막음
 			
-	}
+			//예외처리
+			if(confirm("삭제하시겠습니까??")){		
+					//해당 estimateId 가진 튜플 삭제
+					 $.ajax({
+						url:"${pageContext.request.contextPath}/companyEstimateDelete.do",
+						data: { estimateId:  estimateId},
+						success : function() {
+							alert('삭제되었습니다');
+							location.reload();
+						}, error : function() {
+							alert('에러발생');
+						}
+					});		 
+			}
+			else{
+				alert("취소되었습니다");
+				return false;
+			}
+		}
+		
+			
 </script>
 
 </head>
@@ -82,7 +87,7 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td> <!--  -->
+						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

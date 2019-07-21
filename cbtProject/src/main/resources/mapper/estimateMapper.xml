@@ -97,6 +97,7 @@
 					, FIND_CODENM(EXAM_COUNT) AS EXAM_COUNT_NAME
 					, E.EXAM_INTERVAL								"examInterval"
 					, E.ESTIMATE_NAME								"estimateName"
+					, E.PAYMENT_DATE								"paymentDate"
                     , C_MAIN.CATEGORY_MAIN_ID						"mainCategoryId"
 			        , C_MAIN.CATEGORY_MAIN_NAME						"categoryMainName"
                     , C_MID.CATEGORY_MIDDLE_ID						"middleCategoryId"
@@ -173,6 +174,7 @@
 		UPDATE ESTIMATE
 		SET	 
 			 TRADE_PROGRESS 	=  'B5'
+			 PAYMENT_DATE		=  SYSDATE
 		WHERE ESTIMATE_ID = #{estimateId}
 	</update>
 	

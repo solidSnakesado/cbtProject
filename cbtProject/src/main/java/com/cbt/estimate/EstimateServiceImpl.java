@@ -45,7 +45,6 @@ public class EstimateServiceImpl implements EstimateService {
 	@Override
 	public Map<String, Object> getEstimateList(EstimateVO vo, Paging paging) {
 		//출력건수
-				String nM;
 				paging.setPageUnit(5);
 				//페이지번호 파라미터
 				if(paging.getPage() == null) {
