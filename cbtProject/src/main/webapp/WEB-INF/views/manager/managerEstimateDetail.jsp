@@ -22,16 +22,17 @@
 		$("#sendEmail").css('display', 'none');		//메일전송 버튼 숨김
 		
 		var tradeProgress = '${myEstimateList.tradeProgress}'; //의뢰진행상태
+		var estimateId = '${myEstimateList.estimateId}';		//의뢰 id
 		
 		if(tradeProgress == 'B1' || tradeProgress == 'B2'){ // 의뢰진행상태가  출제전 (B1), 출제중(B2) 일때 
 			$("#editButton").css('display', 'inline');//수정버튼 보여줌
 		}
 		else if(tradeProgress =='B3'){  //의뢰진행상태가 출제완료(B3) 일때
 			$("#sendEmail").css('display', 'inline');	//이메일 전송버튼 나옴
-			$("#sendEmail").click(function(){
+			$("#sendEmail").click(function(){ //메일 보내기 및 출제완료-> 결제전으로 상태변경
 				$.ajax({
 					url:"${pageContext.request.contextPath}/managerSendEmail.do",
-					/* data: { estimateId:  estimateId}, */
+					data: { estimateId:  estimateId},
 					success : function() {
 						alert('성공');
 						location.reload();

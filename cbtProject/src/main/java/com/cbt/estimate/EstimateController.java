@@ -49,16 +49,29 @@ public class EstimateController {
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
 	
+	
 	//기업은 자기의뢰 내용을 볼수있다. company-select
 	@RequestMapping(value="companyEstimateList.do", method = RequestMethod.GET)
 	public ModelAndView companyEstimateListForm(Paging paging,
 												ModelAndView mv,
 												HttpSession session,
-												EstimateVO vo) {
-		vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId()); //세션에 저장된아이디값읽어옴
-		mv.addObject("result", estimateService.getEstimateList(vo, paging));
-		mv.setViewName("company/company/companyEstimateList");
-		return mv;
+												EstimateVO vo,
+												HttpServletResponse response) throws IOException {
+	
+		PrintWriter out = response.getWriter();
+		 
+		if((session.getAttribute("company")) == null) {
+			out.print("<script>alert('로그인 정보를 확인해주세요.');</script>");
+			mv.setViewName("company/company/companyLogin");
+			return mv;
+		}
+		else {
+			vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId()); //세션에 저장된아이디값읽어옴
+			mv.addObject("result", estimateService.getEstimateList(vo, paging));
+			mv.setViewName("company/company/companyEstimateList");
+			return mv;
+		}
+		
 	}
 	
 
@@ -93,7 +106,6 @@ public class EstimateController {
 	
 	//의뢰세부내용보기			 company-select-detail
 	@RequestMapping(value="companyEstimateDetail.do/{estimateId}", method = RequestMethod.GET)
-	
 	public String companyEstimateDetail(@PathVariable("estimateId") int estimateId, //String ->int바꿔야함
 												EstimateVO vo,
 												Model model) {
@@ -123,7 +135,6 @@ public class EstimateController {
 	public void companyPaymentUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
 		//vo.setEstimateId(estimateId);
 		estimateService.updatesTradeProgressExchange5(vo);
-		 
 	}
 	
 	
@@ -136,10 +147,21 @@ public class EstimateController {
 	@RequestMapping(value="managerEstimateList.do", method = RequestMethod.GET)
 	public ModelAndView managerEstimateListForm(Paging paging,
 												ModelAndView mv,
-												EstimateVO vo) {
-		mv.addObject("result", estimateService.getEstimateList(vo, paging));
-		mv.setViewName("manager/manager/managerEstimateList");
-		return mv;
+												HttpSession session,
+												EstimateVO vo,
+												HttpServletResponse response) throws IOException {
+		
+		PrintWriter out = response.getWriter();
+		if ((session.getAttribute("manager")) == null) {
+			out.print("<script>alert('로그인 정보를 확인해주세요.');</script>");
+			mv.setViewName("manager/manager/managerLogin");
+			return mv;
+		} else {
+			mv.addObject("result", estimateService.getEstimateList(vo, paging));
+			mv.setViewName("manager/manager/managerEstimateList");
+			return mv;
+		}
+
 	}
 	
 	
@@ -234,20 +256,30 @@ public class EstimateController {
 		
 		@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
 		@ResponseBody
-		public void managerSendEmail() throws UnsupportedEncodingException, MessagingException {
+		public void managerSendEmail(EstimateVO vo,
+									HttpServletResponse response) throws MessagingException, IOException   {
+			 
+			PrintWriter out = response.getWriter();
 			 MimeMessage message = mailSender.createMimeMessage();
 		     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 		      
-		      messageHelper.setSubject("[공지] 파일첨부테스트2");
-		      messageHelper.setText("회원 가입을 축하합니다.");
+		      messageHelper.setSubject("결제사항 및 시험확인");
+		      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
 		      messageHelper.setFrom("dtg3431@gmail.com");
 		      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 
-		      DataSource dataSource = new FileDataSource("C:\\Users\\User\\git\\cbtProject\\cbtProject\\src\\main\\webapp\\Folder\\결제방법.pdf");
+		      DataSource dataSource = new FileDataSource("C:\\Users\\dtg34\\git\\cbtProject\\cbtProject\\src\\main\\webapp\\Folder\\결제방법.pdf");
 		       messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
 		       
 		       //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));
 		       System.out.println("mail send ok");
+		       //의뢰진행상태 출제 완료 -> 결제대기
+		       estimateService.updatesTradeProgressExchange4(vo);
+		       out.print("<script>");
+				out.print("window.opener.top.location.reload();");
+				out.print("window.close();");
+				out.print("</script>");
+				out.flush();
 		      try {
 		         mailSender.send(message); //messageHelper.getMimeMessage()
 		      } catch (MailException e) {

@@ -28,6 +28,9 @@ public interface EstimateService {
 	List<EstimateVO> getCateoryNameList(CategoryVO vo);
 	
 	//////////////////////결제 상태/////////////////////////////
+	
+	//3.출제완료 -> 4.결제 결제대기
+	void updatesTradeProgressExchange4(EstimateVO vo);
 	//4.결제 대기 -> 5.결제 완료
 	void updatesTradeProgressExchange5(EstimateVO vo);
 

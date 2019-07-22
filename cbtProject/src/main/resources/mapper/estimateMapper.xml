@@ -117,7 +117,7 @@
 		
 	</select>
 	
-	<!-- 의뢰목록 전체 조회 -->
+	<!-- 의뢰목록 전체 or 단건 조회 -->
 		<select id="getEstimateList" resultType="EstimateVO">
 		   SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
 			 SELECT 	  E.ESTIMATE_ID
@@ -155,9 +155,12 @@
 	</select>
 	
 	
-	
+	<!-- 페이징처리를 위한 의뢰 행 갯수를 가지고옴 특정기업으로 -->
 	<select id="getCount" resultType="int">
 			SELECT COUNT(*) FROM ESTIMATE
+			<where>
+      			<if test = "companyId != null and companyId != ''">COMPANY_ID = #{companyId}</if> <!-- 접속한 기업의 정보만 가져올수있도록 세션처리를 위함 -->
+     		</where>
 		</select>
 		
 	<select id ="getCateoryId" resultType="int">
@@ -173,6 +176,14 @@
 				,CATEGORY_NAME	"categoryName"
 		FROM CATEGORY
 	</select>
+	
+	
+	<update id="updatesTradeProgressExchange4">
+		UPDATE ESTIMATE
+		SET	 
+			 TRADE_PROGRESS 	=  'B4'
+		WHERE ESTIMATE_ID = #{estimateId}
+	</update>
 	
 	<update id="updatesTradeProgressExchange5">
 		UPDATE ESTIMATE

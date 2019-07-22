@@ -159,9 +159,8 @@
 					data: {estimateId : estimateId},
 					dataType: "json",
 					url:"${pageContext.request.contextPath }/companyPaymentUpdate.do",
-					success : function() {
-						consolg.log("결제완료");
-						location.reload();
+					success : function(){
+						alert('성공');
 					}, error : function() {
 						alert('에러발생');
 					}
