@@ -24,11 +24,12 @@ function checkForm() {
     document.fmField.submit();
 }
 </script>
-	
-	
+
+<div  align="right"><a href="candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="companyLogin.do"><button>기 업 계 정</button></a></div>	
+<br>	
 	<header id="header"></header>
 	<form id="fmField" name="fmField" action="managerLogin.do" method="POST">
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>ID :</td>
 				<td><input type="text" name="managerId"></td>
@@ -42,7 +43,7 @@ function checkForm() {
 			</tr>
 		</table>
 	</form>
-	<div align="center">
+	<div align="right">
 		<br>
 		<a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
 	</div>
