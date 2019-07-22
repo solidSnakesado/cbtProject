@@ -50,4 +50,11 @@ public class ExamServiceImpl implements ExamService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	// temp(7/22) --> 삭제예정
+	@Override
+	public List<ExamVO> getExamList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

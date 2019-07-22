@@ -428,4 +428,10 @@ public class ManagerController {
 		
 		return "manager/manager/managerInquiryList";
 	}
+	
+	// 차트 조회하기 전에 먼저 종류를 선택하게 한다 (7/22 june) 
+	@RequestMapping(value="managerChart.do", method=RequestMethod.GET)
+	public String  managerChart() {
+		return "manager/manager/simpleChart";
+	}
 }

@@ -33,7 +33,7 @@
 					url:"${pageContext.request.contextPath}/managerSendEmail.do",
 					/* data: { estimateId:  estimateId}, */
 					success : function() {
-						alert('삭제되었습니다');
+						alert('성공');
 						location.reload();
 					}, error : function() {
 						alert('에러발생');

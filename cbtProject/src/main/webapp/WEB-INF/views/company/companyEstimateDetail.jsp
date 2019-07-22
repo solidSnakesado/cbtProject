@@ -184,8 +184,7 @@
 	<h2 align="center">세부 의뢰목록</h2>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
 		<table id="table">
-			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
-			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
+			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}" id="estimateId" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
  			
 	 		<tr>	<td>기업ID</td>		<td>	<input type="text" name="companyId" value="${myEstimateList.companyId}" id = "companyId" readonly></td></tr>
