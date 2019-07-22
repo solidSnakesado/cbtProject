@@ -103,7 +103,6 @@
 		
 		
 		$(".rightAnswer").click(function(){
-			console.log("1");
 			var count = $(this).attr("value");
 			
 			
@@ -116,9 +115,6 @@
 			
 			var rightAnswer = $("#rightAnswerHide"+count).attr('value');
 			var takerAnswer = $("#takerAnswer"+count).attr('value');
-			console.log("1 "+rightAnswer);
-			console.log("2 "+takerAnswer);
-			console.log("3 "+takerAnswer+":"+rightAnswer);
 			
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
@@ -126,7 +122,6 @@
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
-					console.log(exam);
 					if(exam == takerAnswer){
 						$("#exam"+count+i).css('background-color','#F8A5A6');
 						break;
@@ -175,12 +170,9 @@
 	function allView(){
 		
 		var v = $("[id^='floatMenu']").length;
-		console.log(v);
 		var max = v-1;
 		
-		console.log(max);
 		for(var count=1; count<=max; count++){
-		console.log("1 : "+count);
 			$("#rightAnswerView"+count).hide();
 			$("#rightAnswerHide"+count).show();
 			
@@ -190,9 +182,6 @@
 			
 			var rightAnswer = $("#rightAnswerHide"+count).attr('value');
 			var takerAnswer = $("#takerAnswer"+count).attr('value');
-			console.log("1 "+rightAnswer);
-			console.log("2 "+takerAnswer);
-			console.log("3 "+takerAnswer+":"+rightAnswer);
 			
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
@@ -200,7 +189,6 @@
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
-					console.log(exam);
 					if(exam == takerAnswer){
 						
 						$("#exam"+count+i).css('background-color','#F8A5A6');

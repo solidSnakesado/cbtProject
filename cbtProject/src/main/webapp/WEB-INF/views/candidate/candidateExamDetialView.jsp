@@ -18,6 +18,7 @@
 			alert('응시 완료한 시험입니다.');
 		} else if(nowDate <= sDate) {
 			$("[id ='btn']").hide();
+			alert('시간 확인.');
 		} else if(nowDate >= eDate) {
 			$("[id ='btn']").hide();
 			alert('종료된 시험입니다.');
