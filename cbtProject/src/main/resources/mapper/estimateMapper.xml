@@ -141,6 +141,10 @@
 					, E.ESTIMATE_NAME
 			FROM ESTIMATE  E JOIN  CATEGORY C
       ON C.CATEGORY_ID = E.CATEGORY_ID
+      <where>
+      	<if test = "companyId != null and companyId != ''">COMPANY_ID = #{companyId}</if> <!-- 접속한 기업의 정보만 가져올수있도록 세션처리를 위함 -->
+      </where>
+      
 			ORDER BY E.ESTIMATE_ID DESC
 		) A ) B 
 		<where>

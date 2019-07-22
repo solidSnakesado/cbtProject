@@ -5,11 +5,21 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +31,13 @@ import com.cbt.category.CategoryVO;
 import com.cbt.categoryMain.CategoryMainService;
 import com.cbt.categoryMain.CategoryMainVO;
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyVO;
 import com.cbt.condition.ConditionService;
 
 /* @RestController가 @ResponseBody를 포함하고 있기 때문에
  * view가 필요하고 restfulAPI와 묶고 싶을 경우 클래스에 @Controller로 지정해주고, restfulAPI에는 일일이 @ResponseBody를 붙여야된다.
  */
+@ContextConfiguration(locations = "classpath:config/applicationContext.xml")
 @Controller
 public class EstimateController {
 	@Autowired
@@ -34,12 +46,16 @@ public class EstimateController {
 	ConditionService conditionService;
 	@Autowired
 	EstimateService estimateService;
+	@Autowired 
+	private JavaMailSenderImpl mailSender;
 	
 	//기업은 자기의뢰 내용을 볼수있다. company-select
 	@RequestMapping(value="companyEstimateList.do", method = RequestMethod.GET)
 	public ModelAndView companyEstimateListForm(Paging paging,
 												ModelAndView mv,
+												HttpSession session,
 												EstimateVO vo) {
+		vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId()); //세션에 저장된아이디값읽어옴
 		mv.addObject("result", estimateService.getEstimateList(vo, paging));
 		mv.setViewName("company/company/companyEstimateList");
 		return mv;
@@ -223,7 +239,23 @@ public class EstimateController {
 		@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
 		@ResponseBody
 		public void managerSendEmail() throws UnsupportedEncodingException, MessagingException {
-			SpringMailSener2 managerSendEmail = new SpringMailSener2();
-			managerSendEmail.mailTest();
+			 MimeMessage message = mailSender.createMimeMessage();
+		     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+		      
+		      messageHelper.setSubject("[공지] 파일첨부테스트2");
+		      messageHelper.setText("회원 가입을 축하합니다.");
+		      messageHelper.setFrom("dtg3431@gmail.com");
+		      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
+
+		      DataSource dataSource = new FileDataSource("C:\\Users\\User\\git\\cbtProject\\cbtProject\\src\\main\\webapp\\Folder\\결제방법.pdf");
+		       messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
+		       
+		       //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));
+		       System.out.println("mail send ok");
+		      try {
+		         mailSender.send(message); //messageHelper.getMimeMessage()
+		      } catch (MailException e) {
+		         e.printStackTrace();
+		      }
 		}
 }
