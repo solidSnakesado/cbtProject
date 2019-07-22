@@ -178,7 +178,7 @@
 		UPDATE ESTIMATE
 		SET	 
 			 TRADE_PROGRESS 	=  'B5'
-			 PAYMENT_DATE		=  SYSDATE
+			,PAYMENT_DATE		=  SYSDATE
 		WHERE ESTIMATE_ID = #{estimateId}
 	</update>
 	

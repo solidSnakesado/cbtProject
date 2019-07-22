@@ -160,7 +160,8 @@
 					dataType: "json",
 					url:"${pageContext.request.contextPath }/companyPaymentUpdate.do",
 					success : function() {
-						alert('결제완료로 변경');
+						consolg.log("결제완료");
+						location.reload();
 					}, error : function() {
 						alert('에러발생');
 					}

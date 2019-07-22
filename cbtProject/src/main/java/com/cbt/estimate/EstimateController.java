@@ -123,10 +123,6 @@ public class EstimateController {
 	public void companyPaymentUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
 		//vo.setEstimateId(estimateId);
 		estimateService.updatesTradeProgressExchange5(vo);
-		
-		  PrintWriter out = response.getWriter(); //윈도우창 닫기 out.print("<script>");
-		  out.print("window.opener.top.location.reload();");
-		  out.print("window.close();"); out.print("</script>"); out.flush();
 		 
 	}
 	
