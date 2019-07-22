@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.takeExam.TakeExamVO;
+
 @Repository
 public class SurveyDAO {
 	//190703  재홍  mapper와 연결

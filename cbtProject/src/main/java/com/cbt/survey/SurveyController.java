@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.exam.ExamService;
 import com.cbt.manager.ManagerVO;
+import com.cbt.takeExam.TakeExamVO;
 
 
 @Controller
@@ -24,16 +26,21 @@ public class SurveyController {
 	ExamService examService;
 	
 	// 설문조사 insert form
-	@RequestMapping(value = "insertSurvey.do", method = RequestMethod.GET)
-	public String insertSurveyFrom() {
+	@RequestMapping(value = "candidateSurvey.do", method = RequestMethod.GET)
+	public String candidateSurveyFrom() {
 		return "candidate/candidate/candidateSurvey";
 	}
 
 	// 설문조사 insert 처리
-	@RequestMapping(value = "insertSurvey.do", method = RequestMethod.POST)
-	public String insertSurvey(SurveyVO vo) {
+	@RequestMapping(value = "candidateSurvey.do/{examId}", method = RequestMethod.POST)
+	public ModelAndView candidateSurvey(@PathVariable("examId") int examId,SurveyVO vo) {
+		ModelAndView mv = new ModelAndView();
 		surveyService.insertSurvey(vo);
-		return "redirect:candidateMain.do";
+		
+		mv.addObject("examId", examId);
+		mv.setViewName("candidate/candidate/candidateRightAnswer.do");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value = "updateSurvey.do/{id}", method = RequestMethod.GET)

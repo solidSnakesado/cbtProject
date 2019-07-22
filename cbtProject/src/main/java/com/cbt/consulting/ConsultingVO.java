@@ -17,12 +17,20 @@ public class ConsultingVO {
 	private int 	start;
 	private int 	end;
 	private String[] consultingList;
-	private String  consultingStateNm;	// 2019.07.05 이승환 코드불러오기위한 변수 추가
+	private String  consultingStateName;	// 2019.07.05 이승환 코드불러오기위한 변수 추가
 	private String 	sort;				// 2019.07.16 이승환 페이징처리, searching 기능위한 변수 추가
 	private String 	searchConsulting;	// 2019.07.16 이승환 페이징처리, searching 기능위한 변수 추가
 	private String 	searchKeyword;		// 2019.07.16 이승환 페이징처리, searching 기능위한 변수 추가
 	
 	
+
+	public String getConsultingStateName() {
+		return consultingStateName;
+	}
+
+	public void setConsultingStateName(String consultingStateName) {
+		this.consultingStateName = consultingStateName;
+	}
 
 	public int getStart() {
 		return start;
@@ -118,14 +126,6 @@ public class ConsultingVO {
 		this.consultingList = consultingList;
 	}
 
-	public String getConsultingStateNm() {
-		return consultingStateNm;
-	}
-
-	public void setConsultingStateNm(String consultingStateNm) {
-		this.consultingStateNm = consultingStateNm;
-	}
-
 	public String getSort() {
 		return sort;
 	}
@@ -156,9 +156,11 @@ public class ConsultingVO {
 				+ consultingTitle + ", consultingContents=" + consultingContents + ", consultingDesiredDate="
 				+ consultingDesiredDate + ", consultingDate=" + consultingDate + ", consultingRemarks="
 				+ consultingRemarks + ", consultingState=" + consultingState + ", start=" + start + ", end=" + end
-				+ ", consultingList=" + Arrays.toString(consultingList) + ", consultingStateNm=" + consultingStateNm
+				+ ", consultingList=" + Arrays.toString(consultingList) + ", consultingStateName=" + consultingStateName
+				+ ", sort=" + sort + ", searchConsulting=" + searchConsulting + ", searchKeyword=" + searchKeyword
 				+ "]";
 	}
+
 	
 	
 	

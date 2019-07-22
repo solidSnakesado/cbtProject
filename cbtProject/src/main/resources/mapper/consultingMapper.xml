@@ -125,7 +125,7 @@
 				,CONSULTING_TITLE				
 				,CONSULTING_DESIRED_DATE		"consultingDesiredDate"
 				,CONSULTING_STATE
-				,FIND_CODENM(CONSULTING_STATE) AS CONSULTING_STATE_NAME
+				,FIND_CODENM(CONSULTING_STATE) AS consultingStateName
 		FROM CONSULTING
 		<where>
 			<if test="searchKeyword != null and searchKeyword != ''">

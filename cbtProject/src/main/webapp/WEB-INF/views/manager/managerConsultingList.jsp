@@ -63,7 +63,7 @@
 						<td><a
 							href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
 						<td>${ConsultingVO.consultingDesiredDate}</td>
-						<td>${ConsultingVO.consultingStateNm }</td>
+						<td>${ConsultingVO.consultingStateName}</td>
 					</tr>
 				</c:forEach>
 			</table>

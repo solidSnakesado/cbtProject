@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.cbt.takeExam.TakeExamVO;
+
 @Service
 public class SurveyServiceImpl implements SurveyService {
 

@@ -3,6 +3,8 @@ package com.cbt.survey;
 import java.util.List;
 import java.util.Map;
 
+import com.cbt.takeExam.TakeExamVO;
+
 public interface SurveyService {
 
 	void insertSurvey(SurveyVO vo);

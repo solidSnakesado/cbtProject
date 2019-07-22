@@ -10,6 +10,7 @@
 <script>
 
 	$(document).ready(function(){
+		
 		var score = ${takeExamId.score};
 		
 		if(score != 9999){
@@ -17,10 +18,10 @@
 			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
 			alert('응시 완료한 시험입니다.');
 		} else if(nowDate <= sDate) {
-			/* $("[id ='btn']").hide(); */
+			$("[id ='btn']").hide();
 			alert('시간 확인.');
 		} else if(nowDate >= eDate) {
-			/* $("[id ='btn']").hide(); */
+			$("[id ='btn']").hide();
 			alert('종료된 시험입니다.');
 		}
 		
@@ -99,20 +100,20 @@
 		}
 		return zero + n;
 	} */
-
+	
 
 </script>
 </head>
 <body>
 	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTakeExam.do" method="post">
-		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="ture">
-		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="ture">
+		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="true">
+		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="true">
 	</form>
 
 	<header id="header"></header>
 	<h3>시험 상세 보기</h3>
 	<div class="container">
-	<input type = "hidden" name = "no" value = "${ dto.no }">
+	<input type = "hidden" name = "no" value = "">
 	<table border = "1" class="table text-center" border="1">
 
 		<tr>
@@ -120,11 +121,11 @@
 			<td id="mainExamName">${detailExam.examName}</td>
 		</tr>
 		
-<c:if test="${detailExam.disclosureStatus == '2'}">
+<c:if test="${detailExam.disclosureStatus == 'O2'}">
 		<td colspan="2"><br><br><br><h2> 본 시험은 비공개 시험입니다. <br><br> 응시대상자이신지 확인하여 주세요 </h2> <br><br><br></td>
 </c:if>
 
-<c:if test="${detailExam.disclosureStatus == '1'}">
+<c:if test="${detailExam.disclosureStatus == 'O1'}">
 		<tr>
 			<th>시험시간</th>
 			<td>${detailExam.examStartTime} ~ ${detailExam.examEndTime}</td>
@@ -168,7 +169,7 @@
 </c:if>
 	</table>
 	<br>
-	<button type="button" id="btn" value="${detailExam.examId }">응시하기</button>
+	<button type="button" id="btn" value="${detailExam.examId}">응시하기</button>
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
 </body>

@@ -58,7 +58,7 @@ public class QuestionController {
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
 	public ModelAndView candidateTakeExamList(TakeExamVO vo, HttpServletResponse response) throws IOException {
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println(vo);
 		// 응시자ID 가지고 해당 시험을 제출한 사람 가리기 제출하지 않은사람은 9999 리턴
 		int check = questionService.takeExamScoreNullCheck(vo);
 		if( check != 9999 ) {

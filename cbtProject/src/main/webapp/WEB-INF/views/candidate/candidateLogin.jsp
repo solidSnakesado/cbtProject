@@ -49,7 +49,7 @@
 		</table>
 	</form>
 	<div align="right">
-		<a href="candidateInSignUp.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
+		<a href="${pageContext.request.contextPath }/insertCandidate.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
 	</div>	
 
  	<c:if test="${userId == null}">

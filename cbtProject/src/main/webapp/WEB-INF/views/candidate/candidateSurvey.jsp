@@ -95,10 +95,10 @@ $(document).ready(function() {
 	<br><br><br><br>
 	
 	<!-- 7/19 june 설문지는 고정형식이라 문제은행식으로 할 필요가 없음 -> 추후 응시ID 불러오기 확인 필요 -->
-	<form id="fmField" name="fmField" action="insertSurvey.do" method="POST">
+	<form id="fmField" name="fmField" action="candidateSurvey.do" method="POST">
 	<input type="hidden" name="surveyType" value="1"/>
-	<input type="text" name="takeExamId" value="${param.takeExamId}"/>
-	<input type="text" name="examId" value="${param.examId}"/>
+	<input type="text" name="takeExamId" value="${param.takeExamId}" hidden="true"/>
+	<input type="text" name="examId" value="${param.examId}" hidden="true"/>
 		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>

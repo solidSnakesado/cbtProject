@@ -62,7 +62,7 @@
 		    <a href="${pageContext.request.contextPath }/managerLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
 		</c:if>  
 		<c:if test="${not empty sessionScope.manager }">    
-		    <a href="${pageContext.request.contextPath }/managerLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${manager.managerId} 로그아웃</a>
+		    <a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${manager.managerId} 로그아웃</a>
 		    <a href="${pageContext.request.contextPath }/insertManager.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">매니저등록</a>
 		</c:if>
     	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>

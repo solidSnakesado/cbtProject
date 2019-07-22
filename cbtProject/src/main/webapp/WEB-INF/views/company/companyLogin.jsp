@@ -20,7 +20,8 @@
 		pw : <input type="password" name="companyPassword"><br>
 		<button>로그인</button>
 	</form>
+	<a href="${pageContext.request.contextPath }/companySignUp.do">가입하기</a>
 	
-	<a href="companySignUp.do">가입하기</a>
+	<a href="${pageContext.request.contextPath }/candidateMain.do">돌아가기</a>
 </body>
 </html>
