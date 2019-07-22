@@ -15,26 +15,13 @@
 </c:if>
 </head>
 <body>
-<div  align="right"><a href="candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
-<br>
-	<form id="fmField" name="fmField"  action="companyLogin.do" method="post">
-		<table border="1" align="center" class="table text-center">
-			<tr>
-				<td>ID :</td>
-				<td><input type="text" name="companyId" value="${companyVO.companyId}"></td>
-			</tr>
-			<tr>
-				<td>PW :</td>
-				<td><input type="password" name="companyPassword"></td>
-			</tr>
-			<tr>
-				<td align="center" colspan="2"><input type="button" value="기업로그인"/>&nbsp; <input type="reset" value="취소" /></td>
-			</tr>
-		</table>
+	<form action="companyLogin.do" method="post">
+		id : <input type="text" name="companyId" value="${companyVO.companyId}"><br>
+		pw : <input type="password" name="companyPassword"><br>
+		<button>로그인</button>
 	</form>
-	<div align="right">
-		<a href="${pageContext.request.contextPath }/companySignUp.do"><button>회원가입</button></a>
-		<a href="${pageContext.request.contextPath }/candidateMain.do"><button>돌아가기</button></a>
-	</div>
+	<a href="${pageContext.request.contextPath }/companySignUp.do">가입하기</a>
+	
+	<a href="${pageContext.request.contextPath }/candidateMain.do">돌아가기</a>
 </body>
 </html>
