@@ -292,13 +292,12 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
-		<!-- email 2019.07.22 이재홍-->
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
-		</dependency> 
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
