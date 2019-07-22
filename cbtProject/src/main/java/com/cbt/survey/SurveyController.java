@@ -3,17 +3,25 @@ package com.cbt.survey;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.cbt.exam.ExamService;
+import com.cbt.manager.ManagerVO;
 
 
 @Controller
 public class SurveyController {
 	@Autowired
 	SurveyService surveyService;
+	@Autowired
+	ExamService examService;
 	
 	// 설문조사 insert form
 	@RequestMapping(value = "insertSurvey.do", method = RequestMethod.GET)
@@ -43,6 +51,13 @@ public class SurveyController {
 	public String deleteSurvey(SurveyVO vo) {
 		surveyService.deleteSurvey(vo);
 		return "";
+	}
+	
+	//temp 차트용 (7/22), june --> 추후 삭제예정
+	@RequestMapping(value = "simpleExamList.do", method = RequestMethod.GET)
+	public String simpleExamList(Model model) {
+		model.addAttribute("simpleExamList",examService.getExamList());
+		return "manager/manager/simpleChart";
 	}
 	
 	//차트에서 사용하기 위한 생성(7/19), june

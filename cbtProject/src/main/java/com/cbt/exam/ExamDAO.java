@@ -39,4 +39,10 @@ public class ExamDAO {
 			return mybatis.selectList("ExamDAO.getExamList", vo);
 		}
 	}
+	
+	// temp (7/22, june) --> 삭제예정
+	public List<ExamVO> getExamList() {
+		return mybatis.selectList("ExamDAO.getExamList");
+	}
+	
 }
