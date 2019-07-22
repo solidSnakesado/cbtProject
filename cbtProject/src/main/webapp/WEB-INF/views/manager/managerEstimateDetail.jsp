@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +28,20 @@
 		}
 		else if(tradeProgress =='B3'){  //의뢰진행상태가 출제완료(B3) 일때
 			$("#sendEmail").css('display', 'inline');	//이메일 전송버튼 나옴
+			$("#sendEmail").click(function(){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/managerSendEmail.do",
+					/* data: { estimateId:  estimateId}, */
+					success : function() {
+						alert('삭제되었습니다');
+						location.reload();
+					}, error : function() {
+						alert('에러발생');
+					}
+				});	
+			});
 		}
-		else if(tradeProgress =='B5'){	//결제완료
+		else if(tradeProgress =='B5'){	//결제완료(B5)
 			var row = "<tr>	<td>결제날짜</td>	  <td>	<input type='text'  value='${myEstimateList.paymentDate}' readonly> </td></tr>	"
 			$("#table").append(row);
 		}

@@ -25,9 +25,14 @@
 		if(tradeProgress == 'B1' || tradeProgress == 'B2'){ // 의뢰진행상태가  출제전 (B1), 출제중(B2) 일때 수정가능
 			$("#editButton").css('display', 'inline');//수정버튼 보여줌
 		}
-		if(tradeProgress == 'B4'){ // 의뢰진행상태가 결제대기일때
+		else if(tradeProgress == 'B4'){ // 의뢰진행상태가 결제대기일때
 			$("#Payment").css('display', 'inline');// 결제버튼 보임
 		}
+		else if(tradeProgress =='B5'){	//결제완료(B5)
+			var row = "<tr>	<td>결제날짜</td>	  <td>	<input type='text'  value='${myEstimateList.paymentDate}' readonly> </td></tr>	"
+			$("#table").append(row);
+		}
+		
 		//카테고리ID 값을 채운다
 		$.ajax({
 			type:"GET",
@@ -178,7 +183,7 @@
 <div align="center">
 	<h2 align="center">세부 의뢰목록</h2>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
-		<table>
+		<table id="table">
 			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
  			<tr>	<td>카테고리ID</td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
