@@ -156,7 +156,7 @@
 	<select id="candidateExaminationList" resultType="map">
 		SELECT 	e.PASSING_SCORE									"passingScore"
 				,e.EXAM_NAME									"examName"
-				,TO_CHAR(e.EXAM_START_TIME)						"examStartTime"
+				,TO_CHAR(e.EXAM_START_TIME,'yyyy/mm/dd hh:mi')	"examStartTime"
 				,t.TAKE_EXAM_ID									"takeExamId"
 				,e.EXAM_ID										"examId"
 				,NVL(t.SCORE,9999)								"score"
@@ -170,14 +170,14 @@
 	<!-- 검색에 th.TAKE_EXAM_ID 추가 -->
 	<select id="candidateExaminationListDetail" resultType="map">
 		SELECT 	DISTINCT
-        		t.SCORE						"score"
-        		,e.EXAM_ID					"examId"
-				,u.TAKER_NAME				"takerName"
-				,u.TAKER_INFO				"takerInfo"
-				,e.EXAM_NAME				"examName"
-				,th.TAKE_EXAM_ID			"takeExamId"
-				,TO_CHAR(e.EXAM_START_TIME)	"examStartTime"
-				,e.PASSING_SCORE			"passingScore"
+        		t.SCORE											"score"
+        		,e.EXAM_ID										"examId"
+				,u.TAKER_NAME									"takerName"
+				,u.TAKER_INFO									"takerInfo"
+				,e.EXAM_NAME									"examName"
+				,th.TAKE_EXAM_ID								"takeExamId"
+				,TO_CHAR(e.EXAM_START_TIME,'yyyy/mm/dd hh:mi')	"examStartTime"
+				,e.PASSING_SCORE								"passingScore"
 				
 		FROM 	TAKE_EXAM_HISTORY th 						JOIN 	TAKE_EXAM t
 		ON 		th.TAKE_EXAM_ID 	= 	t.TAKE_EXAM_ID 		JOIN 	EXAM e

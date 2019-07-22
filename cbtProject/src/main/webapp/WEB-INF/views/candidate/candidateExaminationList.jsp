@@ -85,18 +85,18 @@
 			<th>시험일시</th>
 			<th>응시 상태</th>
 		</tr>
-	<c:forEach items="${candidateExaminationList }" var="list" varStatus="status">
-		<tr id="result${status.count}" class="result" value="${status.count }">
-			<td id="examId${status.count }" value="${list.examId }" >${list.examId }</td>
-			<td id="takeExamId${status.count }" value="${list.takeExamId }">${list.takeExamId }</td>
-			<td id="examName${status.count }" value="${list.examName }">${list.examName }</td>
-			<td id="passingScore${status.count }" value="${list.passingScore }">${list.passingScore }</td>
-			<td id="examStartTime${status.count }" value="${list.examStartTime }">${list.examStartTime }</td>
+	<c:forEach items="${candidateExaminationList}" var="list" varStatus="status">
+		<tr id="result${status.count}" class="result" value="${status.count}">
+			<td id="examId${status.count}" value="${list.examId}" >${list.examId}</td>
+			<td id="takeExamId${status.count}" value="${list.takeExamId }">${list.takeExamId}</td>
+			<td id="examName${status.count}" value="${list.examName}">${list.examName}</td>
+			<td id="passingScore${status.count}" value="${list.passingScore}">${list.passingScore}</td>
+			<td id="examStartTime${status.count}" value="${list.examStartTime}">${list.examStartTime}</td>
 		<c:if test="${list.score == 9999 }">
-			<td id="score${status.count }" value="${list.score}">응시 대기
+			<td id="score${status.count}" value="${list.score}">응시 대기
 		</c:if>
 		<c:if test="${list.score != 9999 }">
-			<td id="score${status.count }" value="${list.score}">응시 완료 &nbsp;&nbsp;
+			<td id="score${status.count}" value="${list.score}">응시 완료 &nbsp;&nbsp;
 			</td>
 		</c:if>
 		</tr>
