@@ -9,6 +9,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -18,12 +19,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:root-context.xml")
+@ContextConfiguration(locations = "classpath:config/applicationContext.xml")
 public class SpringMailSener2 {
    
    @Autowired private JavaMailSenderImpl mailSender;
    
-   
+   @Test
    public void mailTest() throws MessagingException, UnsupportedEncodingException {
       MimeMessage message = mailSender.createMimeMessage();
       MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -33,7 +34,7 @@ public class SpringMailSener2 {
       messageHelper.setFrom("dtg3431@gmail.com");
       messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 
-      DataSource dataSource = new FileDataSource("C:\\Users\\dtg34\\eclipse-workspace\\springSecurity\\src\\main\\webapp\\Folder\\결제방법.pdf");
+      DataSource dataSource = new FileDataSource("C:\\Users\\User\\git\\cbtProject\\cbtProject\\src\\main\\webapp\\Folder\\결제방법.pdf");
        messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
        
        //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));
