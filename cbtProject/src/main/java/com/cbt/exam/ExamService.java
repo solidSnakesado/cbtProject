@@ -21,4 +21,7 @@ public interface ExamService {
 	List<ExamVO> getExamList(ExamVO vo);
 	
 	List<ExamVO> getExamList(CompanyVO vo);
+
+	// temp(7/22) --> 삭제예정
+	List<ExamVO> getExamList();
 }

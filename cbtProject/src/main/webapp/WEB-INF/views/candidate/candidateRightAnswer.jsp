@@ -31,13 +31,16 @@
 		background-color: white;
 	}
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
 <script type="text/javascript">
 
 	$(document).ready(function(){
 		
+		var defaultBGColor	=	'';
+		
+		var inputBGColor	=	'rgba(0, 0, 0, 0)';
+		var outputBGColor	=	'';
 		
 		// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 		var floatPosition = parseInt($("#floatMenu").css('top'));
@@ -51,25 +54,55 @@
 			$("#floatMenu").stop().animate({"top" : newPosition}, 500);
 		
 		}).scroll();
-	
 		
+		// 바로가기 탭 마우스오버 이벤트
 		$(function (){
-			
+			// 마우스 올렸을때 색상변환
 			$(".floatMenu").mouseenter(function(){
+				// 위치 값 가져오기
 				var count = $(this).children().attr("value");
-				$("#floatMenu"+count+"").css('background-color','#E7F5FA');
+				// 해당위치 색상 변수 저장
+				inputBGColor	=	$("#floatMenu"+count+"").css('background-color');
+				// input변수에 저장된 값 비교후 output변수에 담기    -- 색상바뀐값 적용위해
+				if(inputBGColor == 'rgba(0, 0, 0, 0)'){
+					outputBGColor	=	'rgba(0, 0, 0, 0)';
+					$("#floatMenu"+count+"").css('background-color','#A0ACFC');
+					
+				} else if(inputBGColor == 'rgb(248, 165, 166)'){
+					
+					outputBGColor	=	'rgb(248, 165, 166)';
+					$("#floatMenu"+count+"").css('background-color','#A0ACFC');
+					
+				} else if(inputBGColor == '#A0ACFC'){
+					
+					outputBGColor	=	'#A0ACFC';
+					$("#floatMenu"+count+"").css('background-color','#A0ACFC');
+					
+				}
 			})
-			
+			// 마우스 뗏을때 색상변환
 			$(".floatMenu").mouseleave(function(){
 				var count = $(this).children().attr("value");
-				$("#floatMenu"+count+"").css('background-color','white');
+				
+				if(inputBGColor == 'rgba(0, 0, 0, 0)'){
+					
+					$("#floatMenu"+count+"").css('background-color','rgba(0, 0, 0, 0)');
+					
+				} else if(inputBGColor == 'rgb(248, 165, 166)'){
+					
+					$("#floatMenu"+count+"").css('background-color',outputBGColor);
+					
+				} else if(inputBGColor == '#A0ACFC'){
+					
+					$("#floatMenu"+count+"").css('background-color',outputBGColor);
+					
+				}
 			})
 			
 		})
 		
 		
 		$(".rightAnswer").click(function(){
-			console.log("1");
 			var count = $(this).attr("value");
 			
 			
@@ -82,9 +115,6 @@
 			
 			var rightAnswer = $("#rightAnswerHide"+count).attr('value');
 			var takerAnswer = $("#takerAnswer"+count).attr('value');
-			console.log("1 "+rightAnswer);
-			console.log("2 "+takerAnswer);
-			console.log("3 "+takerAnswer+":"+rightAnswer);
 			
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
@@ -92,7 +122,6 @@
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
-					console.log(exam);
 					if(exam == takerAnswer){
 						$("#exam"+count+i).css('background-color','#F8A5A6');
 						break;
@@ -101,7 +130,7 @@
 				}
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
-				$("#floatMenu"+count).css('background-color','#E7F5FA');
+				$("#floatMenu"+count).css('background-color','#A0ACFC');
 			}
 			
 			for(var i=1; i<=4; i++){
@@ -109,7 +138,7 @@
 				var exam = $("#exam"+count+i).attr('value');
 				
 				if(exam == rightAnswer){
-					$("#exam"+count+i).css('background-color','#E7F5FA');
+					$("#exam"+count+i).css('background-color','#A0ACFC');
 					break;
 				}
 				
@@ -141,12 +170,9 @@
 	function allView(){
 		
 		var v = $("[id^='floatMenu']").length;
-		console.log(v);
 		var max = v-1;
 		
-		console.log(max);
 		for(var count=1; count<=max; count++){
-		console.log("1 : "+count);
 			$("#rightAnswerView"+count).hide();
 			$("#rightAnswerHide"+count).show();
 			
@@ -156,9 +182,6 @@
 			
 			var rightAnswer = $("#rightAnswerHide"+count).attr('value');
 			var takerAnswer = $("#takerAnswer"+count).attr('value');
-			console.log("1 "+rightAnswer);
-			console.log("2 "+takerAnswer);
-			console.log("3 "+takerAnswer+":"+rightAnswer);
 			
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
@@ -166,7 +189,6 @@
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
-					console.log(exam);
 					if(exam == takerAnswer){
 						
 						$("#exam"+count+i).css('background-color','#F8A5A6');
@@ -177,7 +199,7 @@
 				
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
-				$("#floatMenu"+count).css('background-color','#E7F5FA');
+				$("#floatMenu"+count).css('background-color','#A0ACFC');
 			}
 			
 			for(var i=1; i<=4; i++){
@@ -185,7 +207,7 @@
 				var exam = $("#exam"+count+i).attr('value');
 				
 				if(exam == rightAnswer){
-					$("#exam"+count+i).css('background-color','#E7F5FA');
+					$("#exam"+count+i).css('background-color','#A0ACFC');
 					break;
 				}
 				
@@ -227,7 +249,7 @@
 		
 		<tr>
 			<th valign="top" id="questuin${status.count}">${status.count} . ${list.questionContent}</th>
-			<th style="width: 20%;"><p id="point${status.count}" value="" hidden="true">배점 : ${list.point}</p></th>
+			<th style="width: 20%;"><p id="point${status.count}" value="" hidden="true">+ ${list.point} point</p></th>
 		</tr>
 		
 		<tr>
