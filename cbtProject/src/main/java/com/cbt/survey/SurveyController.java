@@ -11,10 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.candidate.CandidateVO;
 import com.cbt.exam.ExamService;
-import com.cbt.manager.ManagerVO;
+import com.cbt.question.QuestionService;
 import com.cbt.takeExam.TakeExamVO;
 
 
@@ -24,6 +26,8 @@ public class SurveyController {
 	SurveyService surveyService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	QuestionService questionService;
 	
 	// 설문조사 insert form
 	@RequestMapping(value = "candidateSurvey.do", method = RequestMethod.GET)
@@ -32,13 +36,18 @@ public class SurveyController {
 	}
 
 	// 설문조사 insert 처리
-	@RequestMapping(value = "candidateSurvey.do/{examId}", method = RequestMethod.POST)
-	public ModelAndView candidateSurvey(@PathVariable("examId") int examId,SurveyVO vo) {
+	@RequestMapping(value = "candidateSurvey.do", method = RequestMethod.POST)
+	public ModelAndView candidateSurvey(@RequestParam( value = "examId" , required = false ) int examId,SurveyVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		surveyService.insertSurvey(vo);
 		
-		mv.addObject("examId", examId);
-		mv.setViewName("candidate/candidate/candidateRightAnswer.do");
+		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		TakeExamVO takeExamvo = new TakeExamVO();
+		takeExamvo.setTakerId(candiVO.getTakerId());
+		takeExamvo.setExamId(examId);
+		
+		mv.addObject("rightAnswer",questionService.candidateRightAnswerList(takeExamvo));
+		mv.setViewName("candidate/candidate/candidateRightAnswer");
 		
 		return mv;
 	}
