@@ -7,7 +7,6 @@
 		INSERT INTO SURVEY (  SURVEY_ID
 							, SURVEY_TYPE
 							, TAKE_EXAM_ID
-							, EXAM_ID
 							,Q1
 							,Q2
 							,Q3
@@ -17,10 +16,9 @@
 							,Q7
 							,Q8
 							,Q9 )
-		VALUES ( (SELECT MAX(SURVEY_ID)+1 from SURVEY)
+		VALUES ( SURVEY_ID_SEQ.NEXTVAL
 				,#{surveyType}
 				,#{takeExamId}
-				,#{examId}
 				,#{q1}
 				,#{q2}
 				,#{q3}
