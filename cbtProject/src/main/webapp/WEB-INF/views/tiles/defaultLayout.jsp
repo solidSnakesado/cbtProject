@@ -112,7 +112,7 @@ div.content {
   </div> -->
 
   <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:1200px" id="band">
+  <div class="w3-container w3-content w3-center w3-padding-64" id="band">
 	<tiles:insertAttribute name="body" />
   </div>
 
