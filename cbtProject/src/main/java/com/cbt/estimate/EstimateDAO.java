@@ -51,6 +51,11 @@ public class EstimateDAO {
     public List<EstimateVO> getCateoryNameList(CategoryVO vo){
     	return mybatis.selectList("EstimateDAO.getCateoryNameList");
     }
+   
+  //상태 1. -> 2. 변경
+    public void updatesTradeProgressExchange2(int estimateId) {
+		mybatis.update("EstimateDAO.updatesTradeProgressExchange2", estimateId);
+	}
     
     //상태 3. -> 4. 변경
     public void updatesTradeProgressExchange4(EstimateVO vo) {

@@ -33,9 +33,11 @@ public class EstimateVO {
 	
 	////////////////DB 사용하지 않는 변수들/////////////////
 	//코드값에대한 이름을 저장하기위한 변수들
-	private String categoryName; //카테고리이름
-	private String examCountName;		// 시험횟수 이름(ex 1번,2번)
-	private String tradeProgressName; // 의뢰진행상태 이름 
+	private String categoryName;     //카테고리이름
+	private String examCountName;	 // 시험횟수 이름(ex 1번,2번)
+	private String tradeProgressName;// 의뢰진행상태 이름
+	private String applyPurposeName; // 응시목적이름
+	private String candidateName;		//응시대상자이름
 	//페이징
 	private int start;	//페이징시작번호
 	private int end;	//페이징끝번호
@@ -48,8 +50,23 @@ public class EstimateVO {
 	private String categoryMiddleName;
 	private String categorySmallName;
 	////////////////DB 사용하지 않는 변수들/////////////////
+	
+	
+	
 	public int getEstimateId() {
 		return estimateId;
+	}
+	public String getCandidateName() {
+		return candidateName;
+	}
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+	public String getApplyPurposeName() {
+		return applyPurposeName;
+	}
+	public void setApplyPurposeName(String applyPurposeName) {
+		this.applyPurposeName = applyPurposeName;
 	}
 	public void setEstimateId(int estimateId) {
 		this.estimateId = estimateId;
@@ -225,24 +242,13 @@ public class EstimateVO {
 				+ ", applicants=" + applicants + ", examClassfication=" + examClassfication + ", levelOfDifficulty="
 				+ levelOfDifficulty + ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount
 				+ ", examInterval=" + examInterval + ", paymentDate=" + paymentDate + ", categoryName=" + categoryName
-				+ ", examCountName=" + examCountName + ", tradeProgressName=" + tradeProgressName + ", start=" + start
+				+ ", examCountName=" + examCountName + ", tradeProgressName=" + tradeProgressName
+				+ ", applyPurposeName=" + applyPurposeName + ", candidateName=" + candidateName + ", start=" + start
 				+ ", end=" + end + ", mainCategoryId=" + mainCategoryId + ", middleCategoryId=" + middleCategoryId
 				+ ", smallCategoryId=" + smallCategoryId + ", categoryMainName=" + categoryMainName
 				+ ", categoryMiddleName=" + categoryMiddleName + ", categorySmallName=" + categorySmallName + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-
 	
 	
 	

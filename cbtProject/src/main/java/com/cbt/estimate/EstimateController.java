@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -128,7 +129,7 @@ public class EstimateController {
 	
 	//기업 의뢰상태
 	
-	//4.결제대기 -> 결제완료
+	//4.결제대기 -> 5.결제완료
 	
 	@RequestMapping(value = "companyPaymentUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -257,8 +258,9 @@ public class EstimateController {
 		@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
 		@ResponseBody
 		public void managerSendEmail(EstimateVO vo,
+									HttpServletRequest request,
 									HttpServletResponse response) throws MessagingException, IOException   {
-			 
+			
 			PrintWriter out = response.getWriter();
 			 MimeMessage message = mailSender.createMimeMessage();
 		     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -268,7 +270,7 @@ public class EstimateController {
 		      messageHelper.setFrom("dtg3431@gmail.com");
 		      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 
-		      DataSource dataSource = new FileDataSource("C:\\Users\\dtg34\\git\\cbtProject\\cbtProject\\src\\main\\webapp\\Folder\\결제방법.pdf");
+		      DataSource dataSource = new FileDataSource(request.getSession().getServletContext().getRealPath("/DocumentForm/결제방법.pdf"));
 		       messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
 		       
 		       //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));

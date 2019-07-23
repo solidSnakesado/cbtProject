@@ -71,6 +71,12 @@ public class EstimateServiceImpl implements EstimateService {
 	public List<EstimateVO> getCateoryNameList(CategoryVO vo) {
 		return estimateDAO.getCateoryNameList(vo);
 	}
+	
+	@Override
+	public void updatesTradeProgressExchange2(int estimateId) {
+		estimateDAO.updatesTradeProgressExchange2(estimateId);
+		
+	}
 	@Override
 	public void updatesTradeProgressExchange4(EstimateVO vo) {
 		estimateDAO.updatesTradeProgressExchange4(vo);
@@ -81,6 +87,7 @@ public class EstimateServiceImpl implements EstimateService {
 		estimateDAO.updatesTradeProgressExchange5(vo);
 		
 	}
+	
 
 	
 
