@@ -15,7 +15,7 @@ public class ExamVO {
 	private int 	estimateId;
 	private int 	numberOfTimes;
 	private int 	passingScore;
-	private int 	possibleApplicants;
+	private int 	applicants;
 	private String 	examName;
 	private String 	examStatus;
 	private String 	disclosureStatus;
@@ -82,14 +82,16 @@ public class ExamVO {
 		this.passingScore = passingScore;
 	}
 	
-	public int getPossibleApplicants() {
-		return possibleApplicants;
-	}
 	
-	public void setPossibleApplicants(int possibleApplicants) {
-		this.possibleApplicants = possibleApplicants;
-	}
 	
+	public int getApplicants() {
+		return applicants;
+	}
+
+	public void setApplicants(int applicants) {
+		this.applicants = applicants;
+	}
+
 	public String getExamName() {
 		return examName;
 	}
@@ -158,9 +160,11 @@ public class ExamVO {
 	public String toString() {
 		return "ExamVO [examId=" + examId + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
 				+ ", questionQuantity=" + questionQuantity + ", estimateId=" + estimateId + ", numberOfTimes="
-				+ numberOfTimes + ", passingScore=" + passingScore + ", possibleApplicants=" + possibleApplicants
-				+ ", examName=" + examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
+				+ numberOfTimes + ", passingScore=" + passingScore + ", applicants=" + applicants + ", examName="
+				+ examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
-				+ ", examDescriptionDetail=" + examDescriptionDetail + "]";
+				+ ", examDescriptionDetail=" + examDescriptionDetail + ", start=" + start + ", end=" + end + "]";
 	}
+
+	
 }

@@ -109,11 +109,11 @@ $(document).ready(function() {
 				<td><input type="text" name="questionQuantity"></td>
 			</tr>
 			<tr>
-				<th width="150px">의뢰ID</th>
-				<td><input id="estimateId" name="estimateId" value="${estimate.estimateId }" readonly></td>
+				<!-- 의뢰ID -->
+				<td><input type="hidden" id="estimateId" name="estimateId" value="${estimate.estimateId }" readonly></td>
 			</tr>
 			<tr>
-				<th>응시가능 횟수</th>
+				<th>시험횟수</th>
 				<td><input type="text" name="numberOfTimes"></td>
 			</tr>
 			<tr>
@@ -121,28 +121,28 @@ $(document).ready(function() {
 				<td><input type="text" name="passingScore"></td>
 			</tr>
 			<tr>
-				<th>응시가능 인원</th>
-				<td><input type="text" name="possibleApplicants"></td>
+				<th>응시자 수</th>
+				<td><input type="text" name="applicants" id="applicants" value="${estimate.applicants }"></td>
 			</tr>
 			<tr>
 				<th>공개여부</th><td>
 				<my:select items="${O}" name="disclosureStatus" value="${result.disclosureStatus }"></my:select></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<th>시험상태</th><td>
 				<my:select items="${D}" name="examStatus" value="${result.examStatus }"></my:select></td>
 			</tr>
 			<tr>
 				<th>출제상태</th><td>
 				<my:select items="${I}" name="setExamStatus" value="${result.setExamStatus }"></my:select></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th>시험설명(간략)</th>
-				<td><input type="text" name="examDescriptionSimple"></td>
+				<td><textarea name="examDescriptionSimple" cols="50" rows="5"></textarea></td>
 			</tr>
 			<tr>
 				<th>시험설명(상세)</th>
-				<td><input type="text" name="examDescriptionDetail"></td>
+				<td><textarea name="examDescriptionDetail" cols="50" rows="5"></textarea></td>
 			</tr>
 		</table>
 		<hr />

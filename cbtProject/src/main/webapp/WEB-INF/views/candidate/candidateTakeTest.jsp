@@ -65,7 +65,7 @@
 		</tr>
 		<tr>
 			<th>응시가능 인원</th>
-			<td>${detailExam.possibleApplicants}</td>
+			<td>${detailExam.applicants}</td>
 		</tr>
 		<tr>
 			<th>시험상태</th>
