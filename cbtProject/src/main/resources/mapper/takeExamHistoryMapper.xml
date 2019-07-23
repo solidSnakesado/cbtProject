@@ -103,7 +103,7 @@
 		  	,	TEH.TAKER_ID			"takerId"
 			,	TEH.SET_EXAM_QUESTION_ID	"setExamQuestionId"
 			, 	PASSING_SCORE			"passingScore"
-			, 	POSSIBLE_APPLICANTS		"possibleApplicants"
+			, 	APPLICANTS				"applicants"
 			, 	QUESTION_QUANTITY		"questionQuantity"
 			,	TAKER_SCORE				"takerScore"
 			, 	POINT					"point"

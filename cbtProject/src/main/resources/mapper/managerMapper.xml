@@ -283,7 +283,7 @@
 		  , EXAM.ESTIMATE_ID				"estimateId"
 		  , EXAM.NUMBER_OF_TIMES			"numberOfTimes"
 		  , EXAM.PASSING_SCORE				"passingScore"
-		  , EXAM.POSSIBLE_APPLICANTS		"possibleApplicants"
+		  , EXAM.APPLICANTS					"applicants"
 		  , EXAM.EXAM_NAME					"examName"
 		  , EXAM.EXAM_STATUS				"examStatus"
 		  , EXAM.DISCLOSURE_STATUS			"disclosureStatus"
@@ -307,7 +307,7 @@
 		  , EXAM.ESTIMATE_ID									"estimateId"
 		  , EXAM.NUMBER_OF_TIMES								"numberOfTimes"
 		  , EXAM.PASSING_SCORE									"passingScore"
-		  , EXAM.POSSIBLE_APPLICANTS							"possibleApplicants"
+		  , EXAM.APPLICANTS										"applicants"
 		  , EXAM.EXAM_NAME										"examName"
 		  , EXAM.EXAM_STATUS									"examStatus"
 		  , EXAM.DISCLOSURE_STATUS								"disclosureStatus"
@@ -336,7 +336,7 @@
 							, ESTIMATE_ID
 							, NUMBER_OF_TIMES
 							, PASSING_SCORE
-							, POSSIBLE_APPLICANTS
+							, APPLICANTS
 							, EXAM_NAME
 							, EXAM_STATUS
 							, DISCLOSURE_STATUS
@@ -350,7 +350,7 @@
 				,#{estimateId}
 				,#{numberOfTimes}
 				,#{passingScore}
-				,#{possibleApplicants}
+				,#{applicants}
 				,#{examName}
 				,#{examStatus}
 				,#{disclosureStatus}

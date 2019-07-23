@@ -116,7 +116,7 @@
 		</tr>
 		<tr>
 			<th>응시가능 인원</th>
-			<td><input type="text" name="possibleApplicants" value="${selectedExam.possibleApplicants}" id="possibleApplicants"></td>
+			<td><input type="text" name="applicants" value="${selectedExam.applicants}" id="applicants"></td>
 		</tr>
 		<tr>
 			<th>공개여부</th>

@@ -18,11 +18,11 @@
 						,	ESTIMATE_ID
 						,	NUMBER_OF_TIMES
 						,	PASSING_SCORE
-						,	POSSIBLE_APPLICANTS
+						,	APPLICANTS
 						,	EXAM_NAME
-						,	EXAM_STATUS
-						,	DISCLOSURE_STATUS
-						,	SET_EXAM_STATUS
+						,	EXAM_STATUS				<!-- 시험상태 -->
+						,	DISCLOSURE_STATUS		<!-- 공개여부 -->
+						,	SET_EXAM_STATUS			<!-- 응시상태 -->
 						,	EXAM_DESCRIPTION_SIMPLE
 						,	EXAM_DESCRIPTION_DETAIL
 					)
@@ -34,11 +34,11 @@
 				,	#{estimateId}
 				,	#{numberOfTimes}
 				,	#{passingScore}
-				,	#{possibleApplicants}
+				,	#{applicants}
 				,	#{examName}
-				,	#{examStatus} 
+				,	'D1'
 				,	#{disclosureStatus} 
-				,	#{setExamStatus} 
+				,	'I1'
 				,	#{examDescriptionSimple} 
 				,	#{examDescriptionDetail} 
 			)
@@ -64,8 +64,8 @@
 			<if test="passingScore != null and passingScore != '' ">
 			, PASSING_SCORE 			= #{passingScore}
 			</if>
-			<if test="possibleApplicants != null and possibleApplicants != '' ">
-			, POSSIBLE_APPLICANTS 		= #{possibleApplicants}
+			<if test="applicants != null and applicants != '' ">
+			, APPLICANTS 		= #{applicants}
 			</if>
 			<if test="examStatus != null and examStatus != '' ">
 			, EXAM_STATUS 				= #{examStatus}
@@ -111,7 +111,7 @@
 			,	ESTIMATE_ID
 			,	NUMBER_OF_TIMES
 			,	PASSING_SCORE
-			,	POSSIBLE_APPLICANTS
+			,	APPLICANTS
 			,	EXAM_NAME
 			,	EXAM_STATUS
 			,	DISCLOSURE_STATUS
@@ -137,7 +137,7 @@
 			,	EXAM.ESTIMATE_ID
 			,	NUMBER_OF_TIMES
 			,	PASSING_SCORE
-			,	POSSIBLE_APPLICANTS
+			,	APPLICANTS
 			,	EXAM_NAME
 			,	EXAM_STATUS
 			,	DISCLOSURE_STATUS
