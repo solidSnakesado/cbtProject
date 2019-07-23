@@ -26,21 +26,18 @@ public class SurveyController {
 	ExamService examService;
 	
 	// 설문조사 insert form
-	@RequestMapping(value = "candidateSurvey.do", method = RequestMethod.GET)
-	public String candidateSurveyFrom() {
+	@RequestMapping(value = "candidateSurvey.do/{takeExamId}/{examId}", method = RequestMethod.GET)
+	public String candidateSurveyFrom(@PathVariable("takeExamId") int takeExamId,@PathVariable("examId") int examId, Model model ) {
+		model.addAttribute("takeExamId", takeExamId);
+		model.addAttribute("examId", examId);
 		return "candidate/candidate/candidateSurvey";
 	}
 
 	// 설문조사 insert 처리
-	@RequestMapping(value = "candidateSurvey.do/{examId}", method = RequestMethod.POST)
-	public ModelAndView candidateSurvey(@PathVariable("examId") int examId,SurveyVO vo) {
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value = "candidateSurvey.do", method = RequestMethod.POST)
+	public String candidateSurvey(SurveyVO vo) {
 		surveyService.insertSurvey(vo);
-		
-		mv.addObject("examId", examId);
-		mv.setViewName("candidate/candidate/candidateRightAnswer.do");
-		
-		return mv;
+		return "redirect:/candidateRightAnswer.do/"+vo.getExamId();
 	}
 	
 	@RequestMapping(value = "updateSurvey.do/{id}", method = RequestMethod.GET)
@@ -48,7 +45,7 @@ public class SurveyController {
 		return "";
 	}
 	
-	@RequestMapping(value = "updateSurvey.do/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "updateSurvey.do", method = RequestMethod.POST)
 	public String updateSurvey(SurveyVO vo) {
 		surveyService.updateSurvey(vo);
 		return "";
@@ -62,16 +59,17 @@ public class SurveyController {
 	
 	//temp 차트용 (7/22), june --> 추후 삭제예정
 	@RequestMapping(value = "simpleExamList.do", method = RequestMethod.GET)
-	public String simpleExamList(Model model) {
-		model.addAttribute("simpleExamList",examService.getExamList());
+	public String simpleExamList(Model model, HttpSession session) {
+		ManagerVO vo = (ManagerVO) session.getAttribute("manager");
+		model.addAttribute("simpleExamList",examService.getExamSurveyList(vo));
 		return "manager/manager/simpleChart";
 	}
 	
 	//차트에서 사용하기 위한 생성(7/19), june
 	@RequestMapping(value = "getSurveyResult.do/{id}", method = RequestMethod.POST)
-	public List<Map<String, Object>> getSurveyList(@PathVariable("examId") int examId) {
+	public List<Map<String, Object>> getSurveyList(@PathVariable("takeExamId") int takeExamId) {
 		SurveyVO vo = new SurveyVO();
-		vo.setExamId(examId);
+		vo.setExamId(takeExamId);
 		return surveyService.getSurveyList(vo);
 	}
 	

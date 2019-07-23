@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
+import com.cbt.manager.ManagerVO;
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -53,8 +54,7 @@ public class ExamServiceImpl implements ExamService {
 	
 	// temp(7/22) --> 삭제예정
 	@Override
-	public List<ExamVO> getExamList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ExamVO> getExamSurveyList(ManagerVO vo) {
+		return dao.getExamSurveyList(vo);
 	}
 }
