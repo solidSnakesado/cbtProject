@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +28,19 @@
 	
 	<div>
 		<form action = "managerExamList.do">
-			기업ID<input type="text" id="companyId" name="companyId"><br>
+			정렬기준
+			<br>기업ID<input type="text" id="companyId" name="companyId"><br>
 			시험일자<input type="text" id="examStartTime" name="examStartTime"><br>
-			시험상태<input type="text" id="examStatus" name="examStatus"><br>
+			시험상태<my:select items="${D}" name="examStatus" value="${exam.examStatus }"></my:select><br>
 			<button>검색</button>
 		</form>
+		<script>
+		searchFrm.sort.value="${ConsultingVO.sort}"==""?searchFrm.sort.options[0].value
+							:"${ConsultingVO.sort}";
+		searchFrm.searchConsulting.value="${ConsultingVO.searchConsulting}"==""
+									?searchFrm.searchConsulting.options[0].value
+									:"${ConsultingVO.searchConsulting}";
+	</script>
 	</div>
 	<table border="1" align="center">
 		<tr >
@@ -71,5 +80,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<my:paging jsFunc="goList" paging="${result.paging }" />
 </body>
 </html>
