@@ -81,9 +81,16 @@ $(document).ready(function() {
 
 	<div align="center">
 		<h2>관리자 시험 등록 페이지</h2>
-	<hr />
-		</div>
-		<form action="${pageContext.request.contextPath }/managerExamInsert.do" method="post" >
+		<hr />
+	</div>
+
+	<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      	<form action="${pageContext.request.contextPath }/managerExamInsert.do" method="post" >
 		<table style="padding: 5px 0 5px 0;" align = "center">
 			<tr>
 				<td hidden="true"><input  id="examName" name="examName" hidden="true"></td>
@@ -150,6 +157,10 @@ $(document).ready(function() {
 		<input type="submit" id="submit" value="시험등록">
 		<input type="reset" id="reset" onclick="location.href='${pageContext.request.contextPath }/managerExamList.do'" value="돌아가기">	
 	</form>
+    </div>
+  </div>
+</div>
+		
 </body>
 </html>
 
