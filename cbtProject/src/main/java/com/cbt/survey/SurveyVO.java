@@ -24,7 +24,17 @@ public class SurveyVO {
 	private int q8;
 	private int q9;
 	
+	private String q0;
 	
+	
+	public String getQ0() {
+		return q0;
+	}
+
+	public void setQ0(String q0) {
+		this.q0 = q0;
+	}
+
 	public int getSurveyId() {
 		return surveyId;
 	}

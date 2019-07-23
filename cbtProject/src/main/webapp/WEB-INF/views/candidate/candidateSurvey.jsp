@@ -104,11 +104,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">1. 본 시험의 난이도는 적당했습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q1" value="5">상당히 어려웠다&nbsp;&nbsp; 
-						<input type="radio" name="q1" value="4">어려운 편이다&nbsp;&nbsp; 
+						<input type="radio" name="q1" value="1">상당히 어려웠다&nbsp;&nbsp; 
+						<input type="radio" name="q1" value="2">어려운 편이다&nbsp;&nbsp; 
 						<input type="radio" name="q1" value="3">적절한 편이다&nbsp;&nbsp; 
-						<input type="radio" name="q1" value="2">쉬운 편이다&nbsp;&nbsp;
-						<input type="radio" name="q1" value="1">상당히 쉬웠다
+						<input type="radio" name="q1" value="4">쉬운 편이다&nbsp;&nbsp;
+						<input type="radio" name="q1" value="5">상당히 쉬웠다
 					</p>
 					<br>
 				</td>
@@ -143,7 +143,7 @@ $(document).ready(function() {
 					<p align="Left">
 						<input type="radio" name="q4" value="1">매우 안정적이었다&nbsp;&nbsp; 
 						<input type="radio" name="q4" value="2">안정적인 편이다&nbsp;&nbsp; 
-						<input type="radio" name="q4" value="3">불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;
+						<input type="radio" name="q4" value="3">잠깐불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;
 						<input type="radio" name="q4" value="4">불안정하여 시험에 영향을 받은 적이 있다
 					</p>
 					<br>

@@ -6,6 +6,8 @@
 <title>설문 통계</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 			google.load("visualization", "1", {packages : ["corechart"]});
@@ -14,51 +16,34 @@
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
-					url : "${pageContext.request.contextPath }/getSurveyResult.do/${examId}",
+					url : "${pageContext.request.contextPath}/surveyStatistics.do",
+					dataType:"json",
+			        async: false,
 					success: function(data) {
 						console.log(data);
-						
-						var q1 	= 0;			
-						var q2	= 0;			
-						var q3	= 0;
-						var q4	= 0;
-						var q5	= 0;
-						var q6	= 0;
-						var q7	= 0;
-						var q8	= 0;
-						var q9	= 0;
-						
+
+						q0 	= data[0].q0;
 						q1 	= data[0].q1;
 						q2 	= data[0].q2;
 						q3 	= data[0].q3;
 						q4 	= data[0].q4;
 						q5 	= data[0].q5;
-						q6 	= data[0].q6;
-						q7 	= data[0].q7;
-						q8 	= data[0].q8;
-						q9 	= data[0].q9;
-						
-						$("#pageTitle").text(examName + " 통계");
-						
-						var surveyIdArr 	= new Array();
-						var takeExamIdArr 	= new Array();	
-						var newId 			= true;	
 
+						
+						$("#pageTitle").text(examName + " 설문통계");
+						
 						data.forEach(function (row) {
-							for(var i = 0; i < surveyIdArr.length; ++i) {
-								if(surveyIdArr[i] == row.surveyId){
-									newId = false;
-									break;
-								} else {
-									newId = true;
-								}
-							}
-							if(newId == true){
-								takeExamIdArr.push(row.takeExamId);
+							for(var i = 0; i < 9; ++i) { //항목이 9개 이므로 9회 반복
+								q0 	= data[i].q0;
+								q1 	= data[i].q1;
+								q2 	= data[i].q2;
+								q3 	= data[i].q3;
+								q4 	= data[i].q4;
+								q5 	= data[i].q5;
 							}
 						});
-							
-							
+
+						
 						//q1 항목(난이도)
 						//데이터 처리
 						var chartDifficultyData = new google.visualization.DataTable();
@@ -316,12 +301,12 @@
 						chartPathData.addColumn('number', '점수');	
 						
 						chartPathData.addRow([
-							'경로',
+							'정보취득경로',
 							q9.length
 					    ]);
 						//옵션설정
 						var chartPathOptions = {
-					            title : "경로",
+					            title : "정보취득경로",
 					            chartArea : {
 					                width : '80%'
 					            },
