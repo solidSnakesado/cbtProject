@@ -23,8 +23,8 @@
 		<level value="ERROR" /> <!-- DEGUG->INFO 19-07-11 -->
 		<appender-ref ref="console" />
 	</logger>
-	<logger name="jdbc.resultsettable" additivity="false">
-		<level value="DEBUG" />
+ 	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="ERROR" />
 		<appender-ref ref="console" />
 	</logger>
 

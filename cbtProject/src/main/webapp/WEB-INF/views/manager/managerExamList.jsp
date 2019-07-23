@@ -24,6 +24,15 @@
 		crossorigin="anonymous"></script>
 	<header id="header"></header>
 	<h3>시험목록확인(기업)</h3>
+	
+	<div>
+		<form action = "managerExamList.do">
+			기업ID<input type="text" id="companyId" name="companyId"><br>
+			시험일자<input type="text" id="examStartTime" name="examStartTime"><br>
+			시험상태<input type="text" id="examStatus" name="examStatus"><br>
+			<button>검색</button>
+		</form>
+	</div>
 	<table border="1" align="center">
 		<tr >
 			<th>의뢰기업</th>

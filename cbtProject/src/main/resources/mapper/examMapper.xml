@@ -122,7 +122,7 @@
 		<where>
 			EXAM_ID = #{examId}
 		</where>
-		ORDER BY EXAM_ID
+		ORDER BY EXAM_ID DESC
 		
 	</select>
 	
@@ -150,6 +150,7 @@
 		<where>
 			ESTIMATE.COMPANY_ID = #{companyId}
 		</where>
+		ORDER BY EXAM_START_TIME DESC
 	</select>
 	<select id="getExamCount" resultType="int">
 		SELECT COUNT(*)
