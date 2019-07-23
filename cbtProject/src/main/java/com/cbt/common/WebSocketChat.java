@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // /echo.do 라는 url 요청을 통해 웹소켓에 들어가겠다 라는 어노테이션.
 @ServerEndpoint(value = "/echo.do")	
 public class WebSocketChat {
-	private static final List<Session> sessionList = new ArrayList<Session>();
-	private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
+	private static final List<Session> 	SESSION_LIST 	= new ArrayList<Session>();
+	private static final Logger 		LOGGER 			= LoggerFactory.getLogger(WebSocketChat.class);
 	
 	public WebSocketChat() {
 		System.out.println("웹소켓(서버) 객체 생성");
@@ -50,7 +50,7 @@ public class WebSocketChat {
 	// @OnOpen 는 클라이언트가 웹소켓에 들어오고 서버에 아무런 문제 없이 들어 왔을때 실행하는 메소드
 	@OnOpen
 	public void onOpen(Session session) {
-		logger.info("Open session id : " + session.getId());
+		LOGGER.info("Open session id : " + session.getId());
 		
 		/*
 		 * final Basic basic = session.getBasicRemote(); try {
@@ -58,7 +58,7 @@ public class WebSocketChat {
 		 * e.printStackTrace(); }
 		 */
 		
-		sessionList.add(session);
+		SESSION_LIST.add(session);
 	}
 	
 	// 2019.07.18 성재민
@@ -67,7 +67,7 @@ public class WebSocketChat {
 	// 연결된 세션(클라이언트)에게 메시지를 보내는 메소드
 	private void sendAllSessionToMessage(Session self, String message) {
 		try {
-			for(Session session : WebSocketChat.sessionList) {
+			for(Session session : WebSocketChat.SESSION_LIST) {
 				if((self.getId().compareTo(session.getId()) != 0)) {
 					session.getBasicRemote().sendText(message);
 				}
@@ -81,7 +81,7 @@ public class WebSocketChat {
 	// 클라이언트에서 메시지가 들어왔을 때, 실행되는 메소드
 	@OnMessage
 	public void onMessage(String message, Session session) {
-		logger.info("Message From " + message);
+		LOGGER.info("Message From " + message);
 		try {
 			final Basic basic = session.getBasicRemote();
 			basic.sendText(message);
@@ -101,7 +101,7 @@ public class WebSocketChat {
 	// 클라이언트와 웹소켓과의 연결이 끊기면 실행되는 메소드
 	@OnClose
 	public void onClose(Session session) {
-		logger.info("Session " + session.getId() + " has ended");
-		sessionList.remove(session);
+		LOGGER.info("Session " + session.getId() + " has ended");
+		SESSION_LIST.remove(session);
 	}
 }
