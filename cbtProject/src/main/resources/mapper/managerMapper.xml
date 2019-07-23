@@ -295,20 +295,33 @@
 		JOIN COMPANY
 		ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
 		<where>
-			<if test="companyId != null and companyId != ''">
-			exists(select *
+			<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchExam == 'EXAM_START_TIME'">
+					TRUNC(EXAM_START_TIME) = #{searchKeyword}
+				</when>
+				<when test="searchExam == 'COMPANY_NAME'">
+					company.company_id in (select company_id
            			 from company
-            		where (company_name = #{companyId} or company_id = #{companyId})
+            		where (company_name = #{searchKeyword} or company_id = #{searchKeyword})
             		  and COMPANY_ID = COMPANY.COMPANY_ID )
-			</if>
-			<if test="examStartTime != null and examStartTime != ''">
-				TRUNC(EXAM_START_TIME) = #{examStartTime}
+				</when>
+			</choose>				
 			</if>
 			<if test="examStatus != null and examStatus != ''">
-				EXAM_STATUS = #{examStatus}
+				and EXAM_STATUS = #{examStatus}
 			</if>
 		</where>
-		ORDER BY EXAM.EXAM_START_TIME DESC, EXAM.EXAM_ID ASC
+			<choose>
+				<when test="sort != null and sort !=''">
+					ORDER BY ${sort}
+				</when>
+				<otherwise>
+					ORDER BY EXAM.EXAM_START_TIME DESC, EXAM.EXAM_ID ASC		
+				</otherwise>
+			</choose>
+	
+		
 	</select>
 	
 	<select id="managerGetExamForExamVOId" parameterType="ExamVO" resultType="map">
