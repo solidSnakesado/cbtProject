@@ -60,5 +60,6 @@
 		<where>
 			REPLY_STATUS = '처리전'
 		</where>
+		ORDER BY INQUIRY_ID
 	</select>
 </mapper>
