@@ -395,7 +395,7 @@ public class QuestionController {
 	
 	@RequestMapping(value = "fileUpload.do", method = RequestMethod.GET)
 	public String fileUpload() {
-		return "candidate/candidate/fileUpload";
+		return "manager/manager/fileUpload";
 	}
 	
 	@RequestMapping(value = "/excelUp.do", method = RequestMethod.POST)

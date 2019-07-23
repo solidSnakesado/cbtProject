@@ -364,12 +364,11 @@ public class ManagerController {
 		return "manager/manager/managerExamInsert";
 	}
 	
-	@RequestMapping(value = "managerExamInsert.do", method = RequestMethod.POST)
-	public String managerExamInsert(ExamVO vo) {
-		System.out.println(vo);
-		
+	@RequestMapping(value = "managerExamInsert.do/{estimateId}", method = RequestMethod.POST)
+	public String managerExamInsert(@PathVariable("estimateId") int estimateId, ExamVO vo) {
+		estimateService.updatesTradeProgressExchange2(estimateId);
 		examService.insertExam(vo);
-		return "redirect:managerExamList.do";
+		return "redirect:/managerExamList.do";
 	}
 
 	

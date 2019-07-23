@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<header id="header"></header>
@@ -32,17 +32,20 @@
 		}
 	</script>
 	<div>
-		<form action = "searchFrm">
-			정렬기준
-			<input type="hidden" id="page" value="1">
-			<select name="sort">
-				<option value="COMPANY_NAME">회사명
+		<form name="searchFrm">
+			정렬기준 <input type="hidden" id="page" value="1"> 
+			<select	name="sort">
+				<option value="COMPANY.COMPANY_ID">회사명
 				<option value="EXAM_STATUS">시험상태
 				<option value="EXAM_START_TIME">시험일
+			</select> <br> 검색조건
+			<my:examListSelect items="${examMap }" />
+			<br> <input type="text" name="searchKeyword" value="${ExamVO.searchKeyword }">
+			시험상태<select	name="examStatus">
+				<option value="D1">시험전
+				<option value="D2">시험중
+				<option value="D3">시험종료
 			</select>
-			<br>
-			검색조건<my:examListSelect items="${examMap }"/><br>
-			<input type="text" name="searchKeyword" value="${ExamVO.searchKeyword }">
 			<button>검색</button>
 		</form>
 		<script>
@@ -52,9 +55,9 @@
 									?searchFrm.searchExam.options[0].value
 									:"${ExamVO.searchExam}";
 	</script>
-	</div>
+	
 	<table border="1" align="center">
-		<tr >
+		<tr>
 			<th>의뢰기업</th>
 			<th>시험이름</th>
 			<th>시험일시</th>
@@ -91,7 +94,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+
 	<my:paging jsFunc="goList" paging="${result.paging }" />
+	</div>
 </body>
 </html>

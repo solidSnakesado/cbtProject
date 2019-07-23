@@ -34,9 +34,9 @@
 	</form>
 	<script>
 		searchFrm.sort.value = "${CompanyVO.sort}" == "" ? searchFrm.sort.options[0].value
-				: "${CompanyVO.sort}";
+							 : "${CompanyVO.sort}";
 		searchFrm.searchCompany.value = "${CompanyVO.searchConsulting}" == "" ? searchFrm.searchCompany.options[0].value
-				: "${CompanyVO.searchCompany}";
+						 	 : "${CompanyVO.searchCompany}";
 	</script>
 	<div class="container">
 		<br>
