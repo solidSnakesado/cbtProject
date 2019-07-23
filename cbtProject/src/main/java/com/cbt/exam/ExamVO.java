@@ -25,8 +25,35 @@ public class ExamVO {
 	private int 	start;
 	private int 	end;
 	private String  companyId;
+	private String  sort;
+	private String  searchExam;
+	private String  searchKeyword;
 	
 	
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public String getSearchExam() {
+		return searchExam;
+	}
+
+	public void setSearchExam(String searchExam) {
+		this.searchExam = searchExam;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
 	public String getCompanyId() {
 		return companyId;
 	}
