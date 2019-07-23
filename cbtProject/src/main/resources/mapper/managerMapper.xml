@@ -359,4 +359,21 @@
 				,#{examDescriptionDetail} )
 	</insert>
 	
+	<!-- 2019.07.23 성재민 -->
+	<!-- 비공개 시험(E.DISCLOSURE_STATUS = 'O2') 리스트 가져오기 -->
+	<select id="getManagerAllPrivateExamList" resultType="map">
+		SELECT 
+		      C.COMPANY_ID	"companyId"
+		    , COMPANY_NAME	"companyName"
+		    , EXAM_ID		"examId"
+		    , EXAM_NAME		"examName"
+		FROM EXAM E JOIN ESTIMATE ES
+		ON E.ESTIMATE_ID = ES.ESTIMATE_ID
+		JOIN COMPANY C
+		ON ES.COMPANY_ID = C.COMPANY_ID
+		<where>
+			E.DISCLOSURE_STATUS = 'O2'
+		</where>
+		ORDER BY C.COMPANY_ID, EXAM_ID
+	</select>
 </mapper>

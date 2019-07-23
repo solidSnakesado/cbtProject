@@ -66,4 +66,10 @@ public class ManagerDAO {
 	public Map<String, String> getManagerExam(ExamVO vo) {
 		return mybatis.selectOne("ManagerDAO.managerGetExamForExamVOId", vo);
 	}
+	
+	// 2019.07.23 성재민
+	// 모든 비공개 시험 정보 가져오기
+	public List<Map<String, Object>> getManagerAllPrivateExamList() {
+		return mybatis.selectList("ManagerDAO.getManagerAllPrivateExamList");
+	}
 }

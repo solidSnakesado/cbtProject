@@ -26,7 +26,8 @@
 		<typeAlias type="com.cbt.survey.SurveyVO" 					alias="SurveyVO" />
 		<typeAlias type="com.cbt.takeExam.TakeExamVO" 				alias="TakeExamVO" />
 		<typeAlias type="com.cbt.takeExamHistory.TakeExamHistoryVO" alias="TakeExamHistoryVO" />
-		<typeAlias type="com.cbt.Inquiry.InquiryVO" 				alias="InquiryVO" /> <!-- 2019.07.20 성재민 문의 관련 기능 추가 -->
+		<typeAlias type="com.cbt.Inquiry.InquiryVO" 				alias="InquiryVO" /> 		<!-- 2019.07.20 성재민 문의 관련 기능 추가 -->
+		<typeAlias type="com.cbt.privateExam.PrivateExamVO" 		alias="PrivateExamVO" /> 	<!-- 2019.07.23 성재민 비공개 시험 관련 기능 추가 -->
 	</typeAliases>
 </configuration>
 
