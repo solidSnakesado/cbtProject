@@ -6,6 +6,7 @@ import java.util.Map;
 import com.cbt.common.Paging;
 
 import com.cbt.company.CompanyVO;
+import com.cbt.manager.ManagerVO;
 
 public interface ExamService {
 	
@@ -23,5 +24,5 @@ public interface ExamService {
 	List<ExamVO> getExamList(CompanyVO vo);
 
 	// temp(7/22) --> 삭제예정
-	List<ExamVO> getExamList();
+	List<ExamVO> getExamSurveyList(ManagerVO vo);
 }

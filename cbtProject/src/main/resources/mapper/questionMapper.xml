@@ -201,7 +201,7 @@
 	<update id="rightLastAnswer" parameterType="TakeExamVO">
 		UPDATE	TAKE_EXAM
 		
-	    SET		SCORE		=	(SELECT 	sum(POINT)
+	    SET		SCORE		=	(SELECT 	NVL(sum(POINT),0)  
 	    
 							    FROM		SET_EXAM_QUESTION s							JOIN	QUESTION q
 							    
@@ -211,7 +211,7 @@
 							    
 							    WHERE		q.RIGHT_ANSWER			=	t.TAKER_ANSWER
 							    
-								AND			TAKE_EXAM_ID 			= 	#{takeExamId})
+								AND			TAKE_EXAM_ID 			= 	#{takeExamId})   
 		
 	    WHERE   TAKE_EXAM_ID = #{takeExamId}
 	</update>

@@ -95,20 +95,20 @@ $(document).ready(function() {
 	<br><br><br><br>
 	
 	<!-- 7/19 june 설문지는 고정형식이라 문제은행식으로 할 필요가 없음 -> 추후 응시ID 불러오기 확인 필요 -->
-	<form id="fmField" name="fmField" action="candidateSurvey.do" method="POST">
+	<form id="fmField" name="fmField" action="${pageContext.request.contextPath }/candidateSurvey.do" method="POST">
 	<input type="hidden" name="surveyType" value="1"/>
-	<input type="text" name="takeExamId" value="${param.takeExamId}" hidden="true"/>
-	<input type="text" name="examId" value="${param.examId}" hidden="true"/>
+	<input type="text" name="takeExamId" value="${takeExamId}" hidden="true"/>
+	<input type="text" name="examId" value="${examId}" hidden="true"/>
 		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>
 					<h4 align="Left">1. 본 시험의 난이도는 적당했습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q1" value="5">상당히 어려웠다&nbsp;&nbsp; 
-						<input type="radio" name="q1" value="4">어려운 편이다&nbsp;&nbsp; 
+						<input type="radio" name="q1" value="1">상당히 어려웠다&nbsp;&nbsp; 
+						<input type="radio" name="q1" value="2">어려운 편이다&nbsp;&nbsp; 
 						<input type="radio" name="q1" value="3">적절한 편이다&nbsp;&nbsp; 
-						<input type="radio" name="q1" value="2">쉬운 편이다&nbsp;&nbsp;
-						<input type="radio" name="q1" value="1">상당히 쉬웠다
+						<input type="radio" name="q1" value="4">쉬운 편이다&nbsp;&nbsp;
+						<input type="radio" name="q1" value="5">상당히 쉬웠다
 					</p>
 					<br>
 				</td>
@@ -143,7 +143,7 @@ $(document).ready(function() {
 					<p align="Left">
 						<input type="radio" name="q4" value="1">매우 안정적이었다&nbsp;&nbsp; 
 						<input type="radio" name="q4" value="2">안정적인 편이다&nbsp;&nbsp; 
-						<input type="radio" name="q4" value="3">불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;
+						<input type="radio" name="q4" value="3">잠깐불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;
 						<input type="radio" name="q4" value="4">불안정하여 시험에 영향을 받은 적이 있다
 					</p>
 					<br>

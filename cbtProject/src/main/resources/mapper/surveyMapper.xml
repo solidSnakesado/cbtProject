@@ -7,7 +7,6 @@
 		INSERT INTO SURVEY (  SURVEY_ID
 							, SURVEY_TYPE
 							, TAKE_EXAM_ID
-							, EXAM_ID
 							,Q1
 							,Q2
 							,Q3
@@ -17,10 +16,9 @@
 							,Q7
 							,Q8
 							,Q9 )
-		VALUES ( (SELECT MAX(SURVEY_ID)+1 from SURVEY)
+		VALUES ( SURVEY_ID_SEQ.NEXTVAL
 				,#{surveyType}
 				,#{takeExamId}
-				,#{examId}
 				,#{q1}
 				,#{q2}
 				,#{q3}
@@ -56,7 +54,8 @@
 	
 	<!-- 설문조사를 examId로 조회하여 난이도 등 조회 (7/21, june) -->
 	<select id="getSurveyList" parameterType="SurveyVO" resultType="map">
-		SELECT	SURVEY_ID
+
+ 		SELECT	SURVEY_ID
 			   , SURVEY_TYPE
 			   , TAKE_EXAM_ID
 			   , EXAM_ID
@@ -69,8 +68,9 @@
 			   ,Q7
 			   ,Q8
 			   ,Q9 
-		FROM SURVEY
-		WHERE EXAM_ID = #{examId}
+		FROM SURVEY JOIN EXAM
+		WHERE EXAM_ID = #{examId} 
+
 	</select>
 	
 </mapper>

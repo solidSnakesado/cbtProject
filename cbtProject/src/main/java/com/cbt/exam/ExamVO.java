@@ -24,8 +24,44 @@ public class ExamVO {
 	private String 	examDescriptionDetail;
 	private int 	start;
 	private int 	end;
-
+	private String  companyId;
+	private String  sort;
+	private String  searchExam;
+	private String  searchKeyword;
 	
+	
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public String getSearchExam() {
+		return searchExam;
+	}
+
+	public void setSearchExam(String searchExam) {
+		this.searchExam = searchExam;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	public int getStart() {
 		return start;
 	}
@@ -163,7 +199,8 @@ public class ExamVO {
 				+ numberOfTimes + ", passingScore=" + passingScore + ", applicants=" + applicants + ", examName="
 				+ examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
-				+ ", examDescriptionDetail=" + examDescriptionDetail + ", start=" + start + ", end=" + end + "]";
+				+ ", examDescriptionDetail=" + examDescriptionDetail + ", start=" + start + ", end=" + end
+				+ ", companyId=" + companyId + "]";
 	}
 
 	

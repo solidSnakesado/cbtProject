@@ -22,7 +22,6 @@
 								
 								, EXAM_CLASSFICATION
 								, COMPANY_ID
-								, EXAM_COUNT
 								, EXAM_INTERVAL
 								, ESTIMATE_NAME )
 		VALUES ( #{estimateId}
@@ -40,7 +39,6 @@
 				
 				,#{examClassfication}
 				,#{companyId}
-				,#{examCount}
 				,#{examInterval}
 				,#{estimateName})
 	</insert>
@@ -63,7 +61,6 @@
 			
 			, EXAM_CLASSFICATION= #{examClassfication}
 			, COMPANY_ID		= #{companyId}
-			, EXAM_COUNT		= #{examCount}
 			, EXAM_INTERVAL		= #{examInterval}
 			, ESTIMATE_NAME		= #{estimateName}
 			
@@ -83,7 +80,7 @@
 					, E.ESTIMATE_PRICE
 					, E.REQUEST_DAY
 					, E.TRADE_PROGRESS
-					, FIND_CODENM(TRADE_PROGRESS) "tradeProgressName"
+					, FIND_CODENM(TRADE_PROGRESS)					"tradeProgressName"
 					, E.REMARKS
 					, E.APPLICANTS
 					, E.LEVEL_OF_DIFFICULTY
@@ -94,7 +91,9 @@
 					, E.EXAM_CLASSFICATION
 					, E.COMPANY_ID
 					, E.EXAM_COUNT
-					, FIND_CODENM(EXAM_COUNT) AS EXAM_COUNT_NAME
+					, FIND_CODENM(APPLY_PURPOSE)					"applyPurposeName"
+					, FIND_CODENM(CANDIDATE)						"candidateName"
+					, FIND_CODENM(EXAM_COUNT)						"examCountName"
 					, E.EXAM_INTERVAL								"examInterval"
 					, E.ESTIMATE_NAME								"estimateName"
 					, E.PAYMENT_DATE								"paymentDate"
@@ -177,6 +176,13 @@
 		FROM CATEGORY
 	</select>
 	
+	
+	<update id="updatesTradeProgressExchange2" >
+		UPDATE ESTIMATE
+		SET	 
+			 TRADE_PROGRESS 	=  'B2'
+		WHERE ESTIMATE_ID       =  #{value}
+	</update>
 	
 	<update id="updatesTradeProgressExchange4">
 		UPDATE ESTIMATE

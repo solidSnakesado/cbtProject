@@ -57,8 +57,8 @@ public class ManagerDAO {
 	
 	// 2019.07.15 성재민
 	// 모든 시험 가져오는 메소드
-	public List<Map<String, String>> getManagerAllExam() {
-		return mybatis.selectList("ManagerDAO.managerGetAllExam");
+	public List<Map<String, String>> getManagerAllExam(ExamVO vo) {
+		return mybatis.selectList("ManagerDAO.managerGetAllExam", vo);
 	}
 	
 	// 2019.07.15 성재민

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cbt.company.CompanyVO;
+import com.cbt.manager.ManagerVO;
 
 @Repository
 public class ExamDAO {
@@ -41,8 +42,9 @@ public class ExamDAO {
 	}
 	
 	// temp (7/22, june) --> 삭제예정
-	public List<ExamVO> getExamList() {
-		return mybatis.selectList("ExamDAO.getExamList");
+	public List<ExamVO> getExamSurveyList(ManagerVO vo) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("ExamDAO.getExamSurveyList", vo);
 	}
 	
 }

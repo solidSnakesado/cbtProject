@@ -294,7 +294,34 @@
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
 		JOIN COMPANY
 		ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
-		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchExam == 'EXAM_START_TIME'">
+					TRUNC(EXAM_START_TIME) = #{searchKeyword}
+				</when>
+				<when test="searchExam == 'COMPANY_NAME'">
+					company.company_id in (select company_id
+           			 from company
+            		where (company_name = #{searchKeyword} or company_id = #{searchKeyword})
+            		  and COMPANY_ID = COMPANY.COMPANY_ID )
+				</when>
+			</choose>				
+			</if>
+			<if test="examStatus != null and examStatus != ''">
+				and EXAM_STATUS = #{examStatus}
+			</if>
+		</where>
+			<choose>
+				<when test="sort != null and sort !=''">
+					ORDER BY ${sort}
+				</when>
+				<otherwise>
+					ORDER BY EXAM.EXAM_START_TIME DESC, EXAM.EXAM_ID ASC		
+				</otherwise>
+			</choose>
+	
+		
 	</select>
 	
 	<select id="managerGetExamForExamVOId" parameterType="ExamVO" resultType="map">

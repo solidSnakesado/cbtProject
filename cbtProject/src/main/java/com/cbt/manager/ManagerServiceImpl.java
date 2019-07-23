@@ -128,8 +128,8 @@ public class ManagerServiceImpl implements ManagerService {
 	// 2019.07.15 성재민
 	// 모든 시험 리턴
 	@Override
-	public List<Map<String, String>> getManagerAllExam() {
-		return managerDAO.getManagerAllExam();
+	public List<Map<String, String>> getManagerAllExam(ExamVO vo) {
+		return managerDAO.getManagerAllExam(vo);
 	}
 
 	// 2019.07.15 성재민
