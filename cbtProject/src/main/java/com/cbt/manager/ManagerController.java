@@ -418,6 +418,15 @@ public class ManagerController {
 		return map;
 	}
 	
+	@ModelAttribute("examMap")
+	public Map<String, String> examMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("회사명", "COMPANY_NAME");
+		map.put("시험상태", "EXAM_STATUS");
+		map.put("시험일", "EXAM_START_TIME");
+		return map;
+	}
+	
 	// 2019.07.20 성재민
 	// 문의관련 화면 추가
 	@RequestMapping(value="managerInquiryList.do", method=RequestMethod.GET)
