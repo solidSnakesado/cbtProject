@@ -340,8 +340,8 @@ public class ManagerController {
 	// 2019.07.15 성재민
 	// 시험 목록 전시
 	@RequestMapping(value="managerExamList.do", method=RequestMethod.GET)
-	public String managerExamList(Model model) {
-		model.addAttribute("ExamList", managerService.getManagerAllExam());
+	public String managerExamList(Model model, ExamVO vo) {
+		model.addAttribute("ExamList", managerService.getManagerAllExam(vo));
 		return "manager/manager/managerExamList";
 	}
 	
@@ -415,6 +415,15 @@ public class ManagerController {
 		map.put("응시자ID", "TAKER_ID");
 		map.put("이름", "TAKER_NAME");
 		map.put("EMAIL", "TAKER_EMAIL");
+		return map;
+	}
+	
+	@ModelAttribute("examMap")
+	public Map<String, String> examMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("회사명", "COMPANY_NAME");
+		map.put("시험상태", "EXAM_STATUS");
+		map.put("시험일", "EXAM_START_TIME");
 		return map;
 	}
 	

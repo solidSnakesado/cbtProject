@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<th>응시가능 인원</th>
-			<td>${selectedExam.possibleApplicants}</td>
+			<td>${selectedExam.applicants}</td>
 		</tr>
 		<tr>
 			<th>공개여부</th>

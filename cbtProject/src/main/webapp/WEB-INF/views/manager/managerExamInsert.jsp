@@ -81,9 +81,16 @@ $(document).ready(function() {
 
 	<div align="center">
 		<h2>관리자 시험 등록 페이지</h2>
-	<hr />
-		</div>
-		<form action="${pageContext.request.contextPath }/managerExamInsert.do" method="post" >
+		<hr />
+	</div>
+
+	<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      	<form action="${pageContext.request.contextPath }/managerExamInsert.do" method="post" >
 		<table style="padding: 5px 0 5px 0;" align = "center">
 			<tr>
 				<td hidden="true"><input  id="examName" name="examName" hidden="true"></td>
@@ -109,11 +116,11 @@ $(document).ready(function() {
 				<td><input type="text" name="questionQuantity"></td>
 			</tr>
 			<tr>
-				<th width="150px">의뢰ID</th>
-				<td><input id="estimateId" name="estimateId" value="${estimate.estimateId }" readonly></td>
+				<!-- 의뢰ID -->
+				<td><input type="hidden" id="estimateId" name="estimateId" value="${estimate.estimateId }" readonly></td>
 			</tr>
 			<tr>
-				<th>응시가능 횟수</th>
+				<th>시험횟수</th>
 				<td><input type="text" name="numberOfTimes"></td>
 			</tr>
 			<tr>
@@ -121,28 +128,28 @@ $(document).ready(function() {
 				<td><input type="text" name="passingScore"></td>
 			</tr>
 			<tr>
-				<th>응시가능 인원</th>
-				<td><input type="text" name="possibleApplicants"></td>
+				<th>응시자 수</th>
+				<td><input type="text" name="applicants" id="applicants" value="${estimate.applicants }"></td>
 			</tr>
 			<tr>
 				<th>공개여부</th><td>
 				<my:select items="${O}" name="disclosureStatus" value="${result.disclosureStatus }"></my:select></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<th>시험상태</th><td>
 				<my:select items="${D}" name="examStatus" value="${result.examStatus }"></my:select></td>
 			</tr>
 			<tr>
 				<th>출제상태</th><td>
 				<my:select items="${I}" name="setExamStatus" value="${result.setExamStatus }"></my:select></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th>시험설명(간략)</th>
-				<td><input type="text" name="examDescriptionSimple"></td>
+				<td><textarea name="examDescriptionSimple" cols="50" rows="5"></textarea></td>
 			</tr>
 			<tr>
 				<th>시험설명(상세)</th>
-				<td><input type="text" name="examDescriptionDetail"></td>
+				<td><textarea name="examDescriptionDetail" cols="50" rows="5"></textarea></td>
 			</tr>
 		</table>
 		<hr />
@@ -150,6 +157,10 @@ $(document).ready(function() {
 		<input type="submit" id="submit" value="시험등록">
 		<input type="reset" id="reset" onclick="location.href='${pageContext.request.contextPath }/managerExamList.do'" value="돌아가기">	
 	</form>
+    </div>
+  </div>
+</div>
+		
 </body>
 </html>
 

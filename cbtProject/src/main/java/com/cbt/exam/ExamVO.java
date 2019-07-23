@@ -15,7 +15,7 @@ public class ExamVO {
 	private int 	estimateId;
 	private int 	numberOfTimes;
 	private int 	passingScore;
-	private int 	possibleApplicants;
+	private int 	applicants;
 	private String 	examName;
 	private String 	examStatus;
 	private String 	disclosureStatus;
@@ -24,8 +24,44 @@ public class ExamVO {
 	private String 	examDescriptionDetail;
 	private int 	start;
 	private int 	end;
-
+	private String  companyId;
+	private String  sort;
+	private String  searchExam;
+	private String  searchKeyword;
 	
+	
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public String getSearchExam() {
+		return searchExam;
+	}
+
+	public void setSearchExam(String searchExam) {
+		this.searchExam = searchExam;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	public int getStart() {
 		return start;
 	}
@@ -82,14 +118,16 @@ public class ExamVO {
 		this.passingScore = passingScore;
 	}
 	
-	public int getPossibleApplicants() {
-		return possibleApplicants;
-	}
 	
-	public void setPossibleApplicants(int possibleApplicants) {
-		this.possibleApplicants = possibleApplicants;
-	}
 	
+	public int getApplicants() {
+		return applicants;
+	}
+
+	public void setApplicants(int applicants) {
+		this.applicants = applicants;
+	}
+
 	public String getExamName() {
 		return examName;
 	}
@@ -158,9 +196,12 @@ public class ExamVO {
 	public String toString() {
 		return "ExamVO [examId=" + examId + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
 				+ ", questionQuantity=" + questionQuantity + ", estimateId=" + estimateId + ", numberOfTimes="
-				+ numberOfTimes + ", passingScore=" + passingScore + ", possibleApplicants=" + possibleApplicants
-				+ ", examName=" + examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
+				+ numberOfTimes + ", passingScore=" + passingScore + ", applicants=" + applicants + ", examName="
+				+ examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
-				+ ", examDescriptionDetail=" + examDescriptionDetail + "]";
+				+ ", examDescriptionDetail=" + examDescriptionDetail + ", start=" + start + ", end=" + end
+				+ ", companyId=" + companyId + "]";
 	}
+
+	
 }

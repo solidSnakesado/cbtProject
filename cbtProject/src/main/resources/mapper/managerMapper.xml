@@ -283,7 +283,7 @@
 		  , EXAM.ESTIMATE_ID				"estimateId"
 		  , EXAM.NUMBER_OF_TIMES			"numberOfTimes"
 		  , EXAM.PASSING_SCORE				"passingScore"
-		  , EXAM.POSSIBLE_APPLICANTS		"possibleApplicants"
+		  , EXAM.APPLICANTS					"applicants"
 		  , EXAM.EXAM_NAME					"examName"
 		  , EXAM.EXAM_STATUS				"examStatus"
 		  , EXAM.DISCLOSURE_STATUS			"disclosureStatus"
@@ -294,7 +294,21 @@
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
 		JOIN COMPANY
 		ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
-		ORDER BY COMPANY.COMPANY_ID DESC, EXAM.EXAM_ID ASC
+		<where>
+			<if test="companyId != null and companyId != ''">
+			exists(select *
+           			 from company
+            		where (company_name = #{companyId} or company_id = #{companyId})
+            		  and COMPANY_ID = COMPANY.COMPANY_ID )
+			</if>
+			<if test="examStartTime != null and examStartTime != ''">
+				TRUNC(EXAM_START_TIME) = #{examStartTime}
+			</if>
+			<if test="examStatus != null and examStatus != ''">
+				EXAM_STATUS = #{examStatus}
+			</if>
+		</where>
+		ORDER BY EXAM.EXAM_START_TIME DESC, EXAM.EXAM_ID ASC
 	</select>
 	
 	<select id="managerGetExamForExamVOId" parameterType="ExamVO" resultType="map">
@@ -307,7 +321,7 @@
 		  , EXAM.ESTIMATE_ID									"estimateId"
 		  , EXAM.NUMBER_OF_TIMES								"numberOfTimes"
 		  , EXAM.PASSING_SCORE									"passingScore"
-		  , EXAM.POSSIBLE_APPLICANTS							"possibleApplicants"
+		  , EXAM.APPLICANTS										"applicants"
 		  , EXAM.EXAM_NAME										"examName"
 		  , EXAM.EXAM_STATUS									"examStatus"
 		  , EXAM.DISCLOSURE_STATUS								"disclosureStatus"
@@ -336,7 +350,7 @@
 							, ESTIMATE_ID
 							, NUMBER_OF_TIMES
 							, PASSING_SCORE
-							, POSSIBLE_APPLICANTS
+							, APPLICANTS
 							, EXAM_NAME
 							, EXAM_STATUS
 							, DISCLOSURE_STATUS
@@ -350,7 +364,7 @@
 				,#{estimateId}
 				,#{numberOfTimes}
 				,#{passingScore}
-				,#{possibleApplicants}
+				,#{applicants}
 				,#{examName}
 				,#{examStatus}
 				,#{disclosureStatus}

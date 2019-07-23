@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,34 @@
 		crossorigin="anonymous"></script>
 	<header id="header"></header>
 	<h3>시험목록확인(기업)</h3>
+	<script>
+		function goList(p) {
+			searchFrm.page.value=p;
+			searchFrm.submit();
+		}
+	</script>
+	<div>
+		<form action = "searchFrm">
+			정렬기준
+			<input type="hidden" id="page" value="1">
+			<select name="sort">
+				<option value="COMPANY_NAME">회사명
+				<option value="EXAM_STATUS">시험상태
+				<option value="EXAM_START_TIME">시험일
+			</select>
+			<br>
+			검색조건<my:examListSelect items="${examMap }"/><br>
+			<input type="text" name="searchKeyword" value="${ExamVO.searchKeyword }">
+			<button>검색</button>
+		</form>
+		<script>
+		searchFrm.sort.value="${ExamVO.sort}"==""?searchFrm.sort.options[0].value
+							:"${ExamVO.sort}";
+		searchFrm.searchExam.value="${ExamVO.searchExam}"==""
+									?searchFrm.searchExam.options[0].value
+									:"${ExamVO.searchExam}";
+	</script>
+	</div>
 	<table border="1" align="center">
 		<tr >
 			<th>의뢰기업</th>
@@ -62,5 +91,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<my:paging jsFunc="goList" paging="${result.paging }" />
 </body>
 </html>

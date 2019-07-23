@@ -41,7 +41,7 @@
 		}
 
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://192.168.232.1:8090/project/echo.do");
+		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
 		ws.onopen = function(event) {
 			/* if (event.data === undefined)
 				return; */

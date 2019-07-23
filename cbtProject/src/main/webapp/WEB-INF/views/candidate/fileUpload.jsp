@@ -10,7 +10,7 @@
 <title>Home</title>
 <script>
 	$(document).ready(function() {
-		$("#fileInput").change(function() {
+		$("#btn").click(function() {
 			var form = $("#formUpload")[0];
 			var data = new FormData(form);
 			alert("시작");
@@ -33,5 +33,8 @@
 	<form id="formUpload" name="formUpload" method="post" enctype="multipart/form-data">
     	<input type="file" id="fileInput" name="fileInput" value="엑셀업로드 작업" accept=".xlsx">
 	</form>
+	<br>
+	<br>
+   	<button id="btn">등록 하기</button>
 </body>
 </html>
