@@ -64,8 +64,7 @@
   </bean>
   
   <!-- 190722 재홍 -->
-  <bean id="javaMailSenderImpl"
-      class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  <bean id="javaMailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
       <property name="username" value="dtg3431@gmail.com" />

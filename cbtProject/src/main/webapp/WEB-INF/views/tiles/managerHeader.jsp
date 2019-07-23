@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="w3-top">
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	// 2019.07.22 성재민
 	// 3초마다  poll() 실행
 	// 답변이 되지 않은 문의의 갯수를 받아온다.
@@ -20,7 +20,7 @@
 	        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
 	    })
 	})();
-</script>
+</script> -->
 
 
 	<div class="w3-bar w3-black w3-card">
