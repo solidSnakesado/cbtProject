@@ -123,12 +123,12 @@
 	<!-- 응시자 ID로 정답수와 총점 조회  -->
 	<select id="getTakeExamHistoryForSumPointAndCount" parameterType="TakeExamVO" resultType="map">
 		SELECT  SUM(th.TAKER_SCORE)		"sumTakerScore"
-				, COUNT(*)				"answerCount"
+				, sum(case when taker_score>0 then 1 else 0 end)		"answerCount"
 				,t.TAKE_EXAM_ID			"takeExamId"
 				,t.EXAM_ID				"examId"
 		FROM    TAKE_EXAM_HISTORY th JOIN TAKE_EXAM t
     	ON     th.TAKE_EXAM_ID = t.TAKE_EXAM_ID
-		WHERE   th.TAKER_SCORE != 0 AND t.TAKE_EXAM_ID = #{takeExamId}
+		WHERE   th.TAKER_SCORE IS NOT NULL AND t.TAKE_EXAM_ID = #{takeExamId}
     	GROUP BY t.TAKE_EXAM_ID , t.EXAM_ID
 	</select>
 	
