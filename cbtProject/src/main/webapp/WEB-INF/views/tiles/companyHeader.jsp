@@ -40,7 +40,7 @@
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
 		<%-- <c:if test="${not empty sessionScope.company }"> --%>    
-    		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${company.companyId }로그아웃</a>
+    		<a href="${pageContext.request.contextPath }/logout" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${company.companyId }로그아웃</a>
 		<%-- </c:if> --%>
 		</sec:authorize>
     	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>

@@ -36,7 +36,7 @@
     <a href="candidateAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 </c:if> --%>
 <%-- 	<c:if test="${not empty sessionScope.candidate }"> --%>
-<sec:authorize access="isAuthenticated()"> 
+<sec:authorize access="hasRole('ROLE_USER')">
 		<!-- 2019.07.09 성재민-->
 		<!-- <div class="w3-dropdown-hover w3-hide-small"> 를  -->
 		<!-- <div class="w3-dropdown-hover"> 로 수정하여-->
@@ -49,26 +49,53 @@
 	      </div>
 	    </div>
 </sec:authorize>
-<%-- <c:if test="${empty sessionScope.candidate }">    --%>
-<sec:authorize access="isAnonymous()"> 
-    <a href="${pageContext.request.contextPath }/candidateLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
-    <a href="${pageContext.request.contextPath }/insertCandidate.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">회원가입</a>
-</sec:authorize> 
-
 <sec:authorize access="hasRole('ROLE_MANAGER')">
-<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">메니저</a>
+	<div class="w3-dropdown-hover">
+    	<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button">관리자메인</a>
+      	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
+      	<a href="${pageContext.request.contextPath }/managerConsultingList.do" class="w3-bar-item w3-button">상담목록</a>
+
+      	<c:if test="${not empty sessionScope.beforeReplyCount }">
+      		<a href="${pageContext.request.contextPath }/managerInquiryList.do" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger" id="inquiry">${beforeReplyCount}</span></a>
+      	</c:if>
+      	<c:if test="${empty sessionScope.beforeReplyCount }">
+      		<a href="${pageContext.request.contextPath }/managerInquiryList.do" class="w3-bar-item w3-button">문의목록<span class="badge badge-danger" id="inquiry"></span></a>
+      	</c:if>
+      	
+      	<a href="${pageContext.request.contextPath }/managerEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
+      	<a href="${pageContext.request.contextPath }/managerExamList.do" class="w3-bar-item w3-button">시험목록</a>
+      	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
+      	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
+    </div>
+<%-- 		<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">MANAGER메뉴</a> --%>
 </sec:authorize>
+
+
 
 <sec:authorize access="hasRole('ROLE_COMPANY')">
-<a href="${pageContext.request.contextPath }/companyMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">COMPANY</a>
+	    	<div class="w3-dropdown-hover">
+	      		<button class="w3-padding-large w3-button" title="More">마이페이지<i class="fa fa-caret-down"></i></button>     
+	     		 <div class="w3-dropdown-content w3-bar-block w3-card-4">
+	        		<a href="${pageContext.request.contextPath }/companyAccount.do" class="w3-bar-item w3-button">계정관리</a>
+	       	 		<a href="${pageContext.request.contextPath }/companyEstimateList.do" class="w3-bar-item w3-button">의뢰목록</a>
+	        		<a href="${pageContext.request.contextPath }/companyConSultingList.do" class="w3-bar-item w3-button">상담목록</a>
+	        		<a href="${pageContext.request.contextPath }/companyExamList.do" class="w3-bar-item w3-button">시험목록</a>
+	        		<a href="${pageContext.request.contextPath }/companyChart.do" class="w3-bar-item w3-button">통계</a>
+	      		</div>
+	    	</div>
+<%-- <a href="${pageContext.request.contextPath }/companyMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">COMPANY메뉴</a> --%>
 </sec:authorize>
 
-<%-- <c:if test="${not empty sessionScope.candidate }">   --%>
 <sec:authorize access="isAuthenticated()">  
 	<sec:authentication property="principal.username" var="user_id" />${user_id}  
     <a href="${pageContext.request.contextPath }/logout" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${candidate.takerName } 로그아웃</a>
 </sec:authorize> 
     <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+
+	<sec:authorize access="isAnonymous()"> 
+	    <a href="${pageContext.request.contextPath }/candidateLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
+	    <%-- <a href="${pageContext.request.contextPath }/insertCandidate.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">회원가입</a> --%>
+	</sec:authorize> 
   </div>
 </div>
 
