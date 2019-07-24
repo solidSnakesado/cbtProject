@@ -19,13 +19,17 @@
 					success: function(data) {
 						console.log(data);
 						
-						var examPossibleApplicants 	= 0;			// 2019.07.17 성재민 // 응시가능 인원
+						if(data.length <= 0){
+							return;
+						}
+						
+						var examApplicants 			= 0;			// 2019.07.17 성재민 // 응시가능 인원
 						var examQuestionQuantity	= 0;			// 2019,07,17 성재민 // 출제 문항 수
 						var examPassingScore		= 0
 						var examName = "";
 						var passTakerCount 			= 0;
 						
-						examPossibleApplicants 	= data[0].possibleApplicants;
+						examApplicants 			= data[0].applicants;
 						examQuestionQuantity 	= data[0].questionQuantity;
 						examPassingScore		= data[0].passingScore;
 						examName 				= data[0].examName;
@@ -97,7 +101,7 @@
 						
 						chartAttendanceRateData.addRow([
 							'미응시',
-							examPossibleApplicants - takerIdArr.length
+							examApplicants - takerIdArr.length
 					    ]);
 						
 						chartAttendanceRateData.addRow([
@@ -130,7 +134,7 @@
 						
 					    chartPassExamRateData.addRow([
 							'불합격인원',
-							examPossibleApplicants - passTakerCount
+							examApplicants - passTakerCount
 					    ]);
 						
 					    chartPassExamRateData.addRow([
@@ -199,7 +203,7 @@
 </script>
 </head>
 <body>
-	<h1 id="pageTitle">s</h1>
+	<h1 id="pageTitle">시험 통계</h1>
 	<br>
 	<!-- chart가 생성될 공간 -->
 	<div id="chartDiv" style="float:left; width: 50%; height: 450px;"></div>

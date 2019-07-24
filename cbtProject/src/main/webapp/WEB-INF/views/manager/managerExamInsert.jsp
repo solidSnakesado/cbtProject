@@ -2,18 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
 <script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-
-<title>managerExamInsert.jsp</title>
-</head>
-<body>
 <script>
 $(document).ready(function() {
 	var examName = "${estimate.estimateName }";
@@ -91,79 +81,68 @@ $(document).ready(function() {
 		});
 </script>
 
-	<div align="center">
-		<h2>관리자 시험 등록 페이지</h2>
-		<hr />
-	</div>
+	<h4 class="mx-auto pb-2">관리자 시험 등록 페이지</h4>
 
-	<div class="container">
   <div class="row">
     <div class="col-sm">
-    	<h1>의뢰 내용</h1>
-      	<table style="padding: 5px 0 5px 0;" align = "center">
+    	<h5>의뢰 내용</h5>
+      	<table style="padding: 5px 0 5px 0;" align = "center" class="table">
 			<tr>
 				<th>기업Id</th>
-				<td><input  value="${estimate.companyId }" readonly></td>
+				<td>${estimate.companyId }</td>
 			</tr>
 			<tr>
 				<th>시험이름</th>
-				<td><input value="${estimate.estimateName }" readonly></td>
+				<td>${estimate.estimateName }</td>
 			</tr>
 			<tr>
 				<th>시험일시</th>
-				<td><input value="${estimate.examDate }" readonly></td>
+				<td>${estimate.examDate }</td>
 			</tr>
 			<tr>
 				<th>카테고리 이름</th>
-				<td><input value="${estimate.categoryName }" readonly></td>
+				<td>${estimate.categoryName }</td>
 			</tr>
 			<tr>
 				<th>응시자 수</th>
-				<td><input type="text" value="${estimate.applicants }" readonly></td>
+				<td>${estimate.applicants }</td>
 			</tr>
 			<tr>
 				<th>응시 대상자</th>
-				<td><input type="text" value="${estimate.candidateName }" readonly></td>
+				<td>${estimate.candidateName }</td>
 			</tr>
 			<tr>
 				<th>응시 목적</th>
-				<td><input type="text" value="${estimate.applyPurposeName }" readonly></td>
+				<td>${estimate.applyPurposeName }</td>
 			</tr>
 			
 		</table>
     </div>
     <div class="col-sm">
-    	<h1>시험 등록</h1>
+    	<h5>시험 등록</h5>
       	<form action="${pageContext.request.contextPath }/managerExamInsert.do/${estimate.estimateId}" method="post" >
-		<table style="padding: 5px 0 5px 0;" align = "center">
-			
+		<input  id="examName" name="examName" hidden="true">
+		<input type="hidden" id="estimateId"  name="estimateId" value="${estimate.estimateId }">
+		<table  style="width:100%">
 			<tr>
-				<td hidden="true"><input  id="examName" name="examName" hidden="true"></td>
+				<th><label>기업Id</label></th>
+				<td><input id="companyId" name="companyId" class="form-control" value="${estimate.companyId }" readonly></td>
 			</tr>
 			<tr>
-				<th>기업Id</th>
-				<td><input id="companyId" name="companyId" value="${estimate.companyId }" readonly></td>
+				<th><label>시험이름</label></th>
+				<td><input id="estimateName" name="estimateName" class="form-control" value="${estimate.estimateName }" readonly></td>
 			</tr>
 			<tr>
-				<th>시험이름</th>
-				<td><input id="estimateName" name="estimateName" value="${estimate.estimateName }" readonly></td>
+				<th><label>시작일</label></th>
+				<td><input type="text" id="date_timepicker_start" class="form-control"  name="examStartTime"></td>
 			</tr>
 			<tr>
-				<th width="150px">시작일</th>
-				<td><input type="text" id="date_timepicker_start" name="examStartTime"></td>
+				<th><label>종료일</label></th>
+				<td><input type="text" id="date_timepicker_end"  class="form-control"  name="examEndTime"></td>
 			</tr>
 			<tr>
-				<th>종료일</th>
-				<td><input type="text" id="date_timepicker_end" name="examEndTime"></td>
-			</tr>
-			<tr>
-				<!-- 의뢰ID -->
-				<td><input type="hidden" id="estimateId" name="estimateId" value="${estimate.estimateId }" readonly></td>
-			</tr>
-			
-			<tr>
-				<th>응시자 수</th>
-				<td><input type="text" name="applicants" id="applicants" value="${estimate.applicants }"></td>
+				<th><label>응시자 수</label></th>
+				<td><input type="text" name="applicants" class="form-control"  id="applicants" value="${estimate.applicants }"></td>
 			</tr>
 			
 			
@@ -176,36 +155,33 @@ $(document).ready(function() {
 				<my:select items="${I}" name="setExamStatus" value="${result.setExamStatus }"></my:select></td>
 			</tr> --%>
 			<tr>
-				<th width="150px">문항수</th>
-				<td><input type="text" name="questionQuantity"></td>
+				<th><label>문항수</label></th>
+				<td><input type="text" class="form-control"   name="questionQuantity"></td>
 			</tr>
 			<tr>
-				<th>합격 점수</th>
-				<td><input type="text" name="passingScore"></td>
+				<th><label>합격 점수</label></th>
+				<td><input type="text" class="form-control"  name="passingScore"></td>
 			</tr>
 			<tr>
-				<th>공개여부</th><td>
+				<th><label>공개여부</label></th><td>
 				<my:select items="${O}" name="disclosureStatus" value="${result.disclosureStatus }"></my:select></td>
 			</tr>
 			<tr>
-				<th>시험설명(간략)</th>
-				<td><textarea name="examDescriptionSimple" cols="50" rows="5"></textarea></td>
+				<th><label>시험설명(간략)</label></th>
+				<td><textarea name="examDescriptionSimple" class="form-control"  cols="50" rows="5"></textarea></td>
 			</tr>
 			<tr>
-				<th>시험설명(상세)</th>
-				<td><textarea name="examDescriptionDetail" cols="50" rows="5"></textarea></td>
+				<th><label>시험설명(상세)</label></th>
+				<td><textarea name="examDescriptionDetail" class="form-control"  cols="50" rows="5"></textarea></td>
 			</tr>
 		</table>
 		<hr />
-		<br><br>
-		<input type="submit" value="시험등록">
-		<input type="reset" id="reset" onclick="location.href='${pageContext.request.contextPath }/managerEstimateList.do'" value="돌아가기">	
+		<input type="submit" value="시험등록" class="btn btn-primary m-3 p-3">
+		<input type="reset" id="reset" class="btn btn-warning m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/managerEstimateList.do'" value="돌아가기">	
 	</form>
     </div>
   </div>
-</div>
-		
-</body>
-</html>
+
+
 
 
