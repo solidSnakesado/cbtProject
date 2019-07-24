@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -35,7 +35,8 @@
 <%-- <c:if test="${not empty sessionScope.candidate }">  
     <a href="candidateAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 </c:if> --%>
-	<c:if test="${not empty sessionScope.candidate }">
+<%-- 	<c:if test="${not empty sessionScope.candidate }"> --%>
+<sec:authorize access="isAuthenticated()"> 
 		<!-- 2019.07.09 성재민-->
 		<!-- <div class="w3-dropdown-hover w3-hide-small"> 를  -->
 		<!-- <div class="w3-dropdown-hover"> 로 수정하여-->
@@ -47,14 +48,26 @@
 	        <a href="${pageContext.request.contextPath }/candidateExaminationList.do" class="w3-bar-item w3-button">응시목록</a>
 	      </div>
 	    </div>
-    </c:if>
-<c:if test="${empty sessionScope.candidate }">    
+</sec:authorize>
+<%-- <c:if test="${empty sessionScope.candidate }">    --%>
+<sec:authorize access="isAnonymous()"> 
     <a href="${pageContext.request.contextPath }/candidateLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
     <a href="${pageContext.request.contextPath }/insertCandidate.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">회원가입</a>
-</c:if>  
-<c:if test="${not empty sessionScope.candidate }">    
-    <a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${candidate.takerName } 로그아웃</a>
-</c:if>
+</sec:authorize> 
+
+<sec:authorize access="hasRole('ROLE_MANAGER')">
+<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">메니저</a>
+</sec:authorize>
+
+<sec:authorize access="hasRole('ROLE_COMPANY')">
+<a href="${pageContext.request.contextPath }/companyMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">COMPANY</a>
+</sec:authorize>
+
+<%-- <c:if test="${not empty sessionScope.candidate }">   --%>
+<sec:authorize access="isAuthenticated()">  
+	<sec:authentication property="principal.username" var="user_id" />${user_id}  
+    <a href="${pageContext.request.contextPath }/logout" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${candidate.takerName } 로그아웃</a>
+</sec:authorize> 
     <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 </div>
@@ -66,6 +79,6 @@
   		<a href="${pageContext.request.contextPath }/insertCandidate.do" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">회원가입</a>
   	</c:if>
 	<c:if test="${not empty sessionScope.candidate }">
-  		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그아웃</a>
+  		<a href="${pageContext.request.contextPath }/logout" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그아웃</a>
   	</c:if>
 </div>

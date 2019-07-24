@@ -13,7 +13,16 @@ public class CandidateVO {
 	private String takerPassword;
 	private String takerPhoneNum; 
 	private String takerEducationNm;
+	private String RoleName;
 	
+	public String getRoleName() {
+		return RoleName;
+	}
+
+	public void setRoleName(String roleName) {
+		RoleName = roleName;
+	}
+
 	public CandidateVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -148,15 +157,17 @@ public class CandidateVO {
 	public void setTakerPassword(String takerPassword) {
 		this.takerPassword = takerPassword;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "CandidateVO [takerId=" + takerId + ", takerName=" + takerName + ", takerInfo=" + takerInfo
 				+ ", takerEducation=" + takerEducation + ", takerEmail=" + takerEmail + ", takerPassword="
-				+ takerPassword + ", takerPhoneNum=" + takerPhoneNum + ", cnt=" + cnt + ", sort=" + sort
-				+ ", searchKeyword=" + searchKeyword + ", searchCondition=" + searchCondition + ", start=" + start
-				+ ", end=" + end + ", seqList=" + Arrays.toString(seqList) + ", outMsg=" + outMsg + "]";
+				+ takerPassword + ", takerPhoneNum=" + takerPhoneNum + ", takerEducationNm=" + takerEducationNm
+				+ ", RoleName=" + RoleName + ", cnt=" + cnt + ", sort=" + sort + ", searchKeyword=" + searchKeyword
+				+ ", searchCondition=" + searchCondition + ", start=" + start + ", end=" + end + ", seqList="
+				+ Arrays.toString(seqList) + ", takerList=" + Arrays.toString(takerList) + ", outMsg=" + outMsg + "]";
 	}
 	
+
 	
 }

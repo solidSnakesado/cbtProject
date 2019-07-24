@@ -29,8 +29,8 @@
 		<option value="CONSULTING_DESIRED_DATE">상담희망일
 		<option value="CONSULTING_STATE">상담상태
 	</select>
-	<br>
-		검색조건 <my:consultingListSelect items="${consultingMap }"/><br>
+	&nbsp; &nbsp;
+		검색조건 <my:consultingListSelect items="${consultingMap }"/>&nbsp;&nbsp;
 		<input type="text" name="searchKeyword" value="${ConsultingVO.searchKeyword }">
 		<button>검색</button>
 	</form>
@@ -48,8 +48,7 @@
 		<br>
 		<br>
 		<form action="managerConsultingDelete.do">
-			<button id="">삭제</button>
-			<table border="1" align="center">
+			<table border="1" align="center" class="table text-center">
 				<tr>
 					<th>선택</th>
 					<th>제목</th>
@@ -67,6 +66,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<button id="" align="right">삭제</button>
 		</form>
 		<br>
 		<hr />

@@ -65,7 +65,7 @@ function goLogin(){
 	</c:forEach>  
 	</table><br>
 
-	<div align="center"><my:paging jsFunc="goList" paging="${result.paging}"/></div><br>
+	<div align="center"><my:paging jsFunc="goList" paging="${candidateScheduleCheckPage.paging}"/></div><br>
 	
 	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 </body>

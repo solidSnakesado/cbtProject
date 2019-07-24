@@ -42,6 +42,16 @@ public class SurveyController {
 		return "redirect:/candidateRightAnswer.do/"+vo.getExamId();
 	}
 	
+	/*
+	 * // 설문조사 insert시 중복답변처리
+	 * 
+	 * @RequestMapping(value = "candidateSurvey.do", method = RequestMethod.POST)
+	 * public String checkSurvey(SurveyVO vo) { SurveyVO checkSurvey =
+	 * surveyService.getSurvey(vo); return
+	 * "redirect:/candidateRightAnswer.do/"+vo.getExamId(); }
+	 */
+	
+	
 	@RequestMapping(value = "updateSurvey.do/{id}", method = RequestMethod.GET)
 	public String updateSurveyFrom() {
 		return "";
@@ -68,13 +78,15 @@ public class SurveyController {
 	}
 	
 	
-	/*
-	 * //temp 차트로 이동 (7/23), june --> 추후 삭제예정
-	 * 
-	 * @RequestMapping(value = "surveyDetailGraph.do", method = RequestMethod.GET)
-	 * public String surveyDetailGraph() { return
-	 * "manager/manager/surveyDetailGraph"; }
-	 */
+	// temp 차트로 이동 (7/23), june --> 추후 삭제예정
+
+	@RequestMapping(value = "surveyDetailGraph.do", method = RequestMethod.GET)
+	public String surveyDetailGraph(Model model, HttpSession session) {
+		ManagerVO vo = (ManagerVO) session.getAttribute("manager");
+		model.addAttribute("simpleExamList",examService.getExamSurveyList(vo));
+		return "manager/manager/surveyDetailGraph";
+	}
+	
 	
 	//temp 차트처리 (7/23), june --> 추후 삭제예정
 	@RequestMapping(value = "surveyStatistics.do", method = RequestMethod.GET)
@@ -86,12 +98,14 @@ public class SurveyController {
 		
 	}
 	
-	//차트에서 사용하기 위한 생성(7/19), june --> 추후삭제 예정
-	@RequestMapping(value = "getSurveyResult.do/{id}", method = RequestMethod.POST)
-	public List<Map<String, Object>> getSurveyList(@PathVariable("takeExamId") int takeExamId) {
-		SurveyVO vo = new SurveyVO();
-		vo.setExamId(takeExamId);
-		return surveyService.getSurveyList(vo);
-	}
+	/*
+	 * //차트에서 사용하기 위한 생성(7/19), june --> 추후삭제 예정
+	 * 
+	 * @RequestMapping(value = "getSurveyResult.do/{id}", method =
+	 * RequestMethod.POST) public List<Map<String, Object>>
+	 * getSurveyList(@PathVariable("takeExamId") int takeExamId) { SurveyVO vo = new
+	 * SurveyVO(); vo.setExamId(takeExamId); return surveyService.getSurveyList(vo);
+	 * }
+	 */
 	
 }
