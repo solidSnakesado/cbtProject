@@ -50,8 +50,6 @@
 	    </div>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_MANAGER')">
-	<div class="w3-dropdown-hover">
-    	<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button">관리자메인</a>
       	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
       	<a href="${pageContext.request.contextPath }/managerConsultingList.do" class="w3-bar-item w3-button">상담목록</a>
 
@@ -66,7 +64,6 @@
       	<a href="${pageContext.request.contextPath }/managerExamList.do" class="w3-bar-item w3-button">시험목록</a>
       	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
       	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
-    </div>
 <%-- 		<a href="${pageContext.request.contextPath }/managerMain.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">MANAGER메뉴</a> --%>
 </sec:authorize>
 
