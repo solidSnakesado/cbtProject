@@ -19,16 +19,6 @@
 		});
 	</script>
 	<header id="header"></header>
-<section>
-   <article>
-      <ul>
-         <li><button type="button" onclick="location.href='managerUserAccountEdit.do'">계정관리</button></li>
-         <li><button type="button" onclick="location.href='candidateRequestList.do'">응시목록</button></li>
-         <li><button type="button" onclick="location.href='managerChart.do'">통계</button></li>
-      </ul>
-   </article>
-</section>
-	<header id="header"></header>
 	<h3>매니저 목록</h3>
 	<form>
 		검색조건<select name="searchManager">
@@ -40,7 +30,7 @@
 	</form>
 	<form action="deleteManager.do">
 	<button id="">삭제</button>
-	<table>
+	<table align="center">
 		<tr>
 			<th>선택</th>
 			<th>관리자 아이디</th>
@@ -55,6 +45,7 @@
 		</c:forEach>
 	</table>
 	</form>
+	<br>
 	<a href="insertManager.do">매니저 등록</a>
 </body>
 </html>
