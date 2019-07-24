@@ -42,6 +42,16 @@ public class SurveyController {
 		return "redirect:/candidateRightAnswer.do/"+vo.getExamId();
 	}
 	
+	/*
+	 * // 설문조사 insert시 중복답변처리
+	 * 
+	 * @RequestMapping(value = "candidateSurvey.do", method = RequestMethod.POST)
+	 * public String checkSurvey(SurveyVO vo) { SurveyVO checkSurvey =
+	 * surveyService.getSurvey(vo); return
+	 * "redirect:/candidateRightAnswer.do/"+vo.getExamId(); }
+	 */
+	
+	
 	@RequestMapping(value = "updateSurvey.do/{id}", method = RequestMethod.GET)
 	public String updateSurveyFrom() {
 		return "";

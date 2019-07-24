@@ -31,6 +31,9 @@ function checkForm() {
 	<form id="fmField" name="fmField" action="managerLogin.do" method="POST">
 		<table border="1" align="center" class="table text-center">
 			<tr>
+				<td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/manager.png"/></td>
+			</tr>
+			<tr>
 				<td>ID :</td>
 				<td><input type="text" name="managerId"></td>
 			</tr>

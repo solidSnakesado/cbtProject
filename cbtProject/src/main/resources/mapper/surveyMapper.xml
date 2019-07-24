@@ -49,7 +49,8 @@
 			   , SURVEY_TYPE
 			   , TAKE_EXAM_ID
 		FROM SURVEY
-		WHERE SURVEY_ID = #{surveyId}
+		WHERE TAKE_EXAM_ID= #{takeExamId}
+		<!-- WHERE SURVEY_ID = #{surveyId} -->
 	</select>
 	
 	<!-- 설문조사를 examId로 조회하여 난이도 등 조회 (7/21, june) -->
