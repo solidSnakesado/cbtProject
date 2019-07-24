@@ -54,6 +54,6 @@
   	<a href="${pageContext.request.contextPath }/companySignUp.do" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">회원가입</a>
   </c:if>
   <c:if test="${not empty sessionScope.company }">
-  	<a href="${pageContext.request.contextPath }/companyLogout.do" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그아웃</a>
+  	<a href="${pageContext.request.contextPath }/logout" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그아웃</a>
   </c:if>
 </div>

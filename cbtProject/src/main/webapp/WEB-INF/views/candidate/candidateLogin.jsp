@@ -52,7 +52,7 @@
 				<td><input type="password" name="takerPassword"></td>
 			</tr>
 			<tr>
-				<td align="center" colspan="2"><input type="button" value="개인로그인" onclick="checkForm()"/>&nbsp; <input type="reset" value="취소" /></td>
+				<td align="center" colspan="2"><input type="button" value="로그인" onclick="checkForm()"/>&nbsp; <input type="reset" value="취소" /></td>
 			</tr>
 		</table>
 	</form>

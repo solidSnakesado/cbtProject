@@ -15,6 +15,7 @@
 <body>
 
 <h1>나의 정보</h1>
+-- ${user_id}
 <form action="deleteCandidate.do" method="POST">
 <input type="hidden" name="takerId" value="${candidate.takerId}"/>
 	<table width="940" style="padding:5px 0 5px 0;">

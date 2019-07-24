@@ -136,14 +136,23 @@ public class CandidateController {
 	}
 	
 	//삭제처리			 장세준 (7/3)
-	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
-	public String deleteBoard(HttpSession session) {
-		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
-		candidateService.deleteCandidate(vo);
-		session.invalidate();
-		return "redirect:candidateMain.do";
+//	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
+//	public String deleteBoard(Authentication authentication) {
+//		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+//		System.out.println("dd");
+//		candidateService.deleteCandidate(user);
+//		authentication.isAuthenticated();
+//		return "redirect:candidateMain.do";
+//	}
+	
+	//삭제처리			 장세준 (7/2)
+	@RequestMapping("deleteCandidate.do")
+	public String candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo) {
+		candidateService.deleteCandidate(vo); 
+		return "candidate/candidate/candidateAccountManage";
 	}
-
+	
+	
 	//단건조회			 장세준 (7/2)
 	@RequestMapping("/getCandidate/{takerId}")
 	public String getCandidate(@PathVariable("takerId") String takerId, CandidateVO vo, Model model) {
@@ -212,7 +221,8 @@ public class CandidateController {
 	public String candidateAccountManage() {
 		return "candidate/candidate/candidateAccountManage";
 	}
-	
+
+	 
 	//원서접수 
 	@RequestMapping("candidateApplication.do")	
 	public String candidateApplication() {
@@ -403,11 +413,7 @@ public class CandidateController {
 	 * { return "candidate/candidateTestResult"; }
 	 */
 	
-	/* //삭제처리			 장세준 (7/2)
-	 * @RequestMapping("deleteCandidate.do") public String
-	 * deleteBoard(@ModelAttribute("candidate")CandidateVO vo) {
-	 * candidateService.deleteCandidate(vo); return "candidate/candidateMain"; }
-	 */
+
 	/*
 	 * //2019.06.27 장세준 - *.do & view 등록
 	 * 
