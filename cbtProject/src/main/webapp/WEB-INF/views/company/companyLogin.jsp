@@ -15,13 +15,23 @@
 </c:if>
 </head>
 <body>
+<div  align="right"><a href="candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
+<br>
 	<form action="companyLogin.do" method="post">
-		id : <input type="text" name="companyId" value="${companyVO.companyId}"><br>
-		pw : <input type="password" name="companyPassword"><br>
-		<button>로그인</button>
+		<table border="1" align="center" class="table text-center">
+			<tr>
+				<td>ID</td>
+				<td><input type="text" name="companyId"value="${companyVO.companyId}"></td>
+			</tr>
+			<tr>
+				<td>PW</td>
+				<td><input type="password" name="companyPassword"></td>
+			</tr>
+			<tr><td colspan="2"><button>기업로그인</button></td></tr>
+		</table>
 	</form>
-	<a href="${pageContext.request.contextPath }/companySignUp.do">가입하기</a>
+	<a href="${pageContext.request.contextPath }/companySignUp.do"><button>가입하기</button></a>
 	
-	<a href="${pageContext.request.contextPath }/candidateMain.do">돌아가기</a>
+	<a href="${pageContext.request.contextPath }/candidateMain.do"><button>돌아가기</button></a>
 </body>
 </html>

@@ -34,7 +34,7 @@
     		<a href="${pageContext.request.contextPath }/companySignUp.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">회원가입</a>
 		</c:if>  
 		<c:if test="${not empty sessionScope.company }">    
-    		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">로그아웃</a>
+    		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${company.companyId }로그아웃</a>
 		</c:if>
     	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   	</div>

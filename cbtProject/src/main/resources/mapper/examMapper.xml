@@ -163,7 +163,7 @@
 		SELECT '난이도' "q0", SUM(DECODE(Q1, '1', 1, 0)) "q1", SUM(DECODE(Q1, '2', 1, 0)) "q2", SUM(DECODE(Q1, '3', 1, 0)) "q3" , SUM(DECODE(Q1, '4', 1, 0)) "q4",SUM(DECODE(Q1, '5', 1, 0)) "q5"
 		FROM SURVEY
 		UNION ALL
-		SELECT '출제방향' "q0",SUM(DECODE(Q2, '1', 1, 0)) "q1", SUM(DECODE(Q2, '2', 1, 0)) "q2", SUM(DECODE(Q2, '3', 1, 0)) "q3" , SUM(DECODE(Q2, '4', 1, 0)) "q4",SUM(DECODE(Q2, '5', 1, 0)) "q5"
+		SELECT '출제방향성' "q0",SUM(DECODE(Q2, '1', 1, 0)) "q1", SUM(DECODE(Q2, '2', 1, 0)) "q2", SUM(DECODE(Q2, '3', 1, 0)) "q3" , SUM(DECODE(Q2, '4', 1, 0)) "q4",SUM(DECODE(Q2, '5', 1, 0)) "q5"
 		FROM SURVEY
 		UNION ALL
 		SELECT '시험시간' "q0",SUM(DECODE(Q3, '1', 1, 0)) "q1", SUM(DECODE(Q3, '2', 1, 0)) "q2", SUM(DECODE(Q3, '3', 1, 0)) "q3" , SUM(DECODE(Q3, '4', 1, 0)) "q4",SUM(DECODE(Q3, '5', 1, 0)) "q5"
@@ -178,13 +178,13 @@
 		SELECT '주변홍보' "q0",SUM(DECODE(Q6, '1', 1, 0)) "q1", SUM(DECODE(Q6, '2', 1, 0)) "q2", SUM(DECODE(Q6, '3', 1, 0)) "q3" , SUM(DECODE(Q6, '4', 1, 0)) "q4",SUM(DECODE(Q3, '5', 1, 0)) "q5"
 		FROM SURVEY
 		UNION ALL
-		SELECT '기대효과' "q0",SUM(DECODE(Q7, '1', 1, 0)) "q1", SUM(DECODE(Q7, '2', 1, 0)) "q2", SUM(DECODE(Q7, '3', 1, 0)) "q3" , SUM(DECODE(Q7, '4', 1, 0)) "q4",SUM(DECODE(Q7, '5', 1, 0)) "q5"
+		SELECT '목표성취도' "q0",SUM(DECODE(Q7, '1', 1, 0)) "q1", SUM(DECODE(Q7, '2', 1, 0)) "q2", SUM(DECODE(Q7, '3', 1, 0)) "q3" , SUM(DECODE(Q7, '4', 1, 0)) "q4",SUM(DECODE(Q7, '5', 1, 0)) "q5"
 		FROM SURVEY
 		UNION ALL
 		SELECT '준비기간' "q0",SUM(DECODE(Q8, '1', 1, 0)) "q1", SUM(DECODE(Q8, '2', 1, 0)) "q2", SUM(DECODE(Q8, '3', 1, 0)) "q3" , SUM(DECODE(Q8, '4', 1, 0)) "q4",SUM(DECODE(Q8, '5', 1, 0)) "q5"
 		FROM SURVEY
 		UNION ALL
-		SELECT '정보취득경로' "q0",SUM(DECODE(Q9, '1', 1, 0)) "q1", SUM(DECODE(Q9, '2', 1, 0)) "q2", SUM(DECODE(Q9, '3', 1, 0)) "q3" , SUM(DECODE(Q9, '4', 1, 0)) "q4",SUM(DECODE(Q9, '5', 1, 0)) "q5"
+		SELECT '지출금액' "q0",SUM(DECODE(Q9, '1', 1, 0)) "q1", SUM(DECODE(Q9, '2', 1, 0)) "q2", SUM(DECODE(Q9, '3', 1, 0)) "q3" , SUM(DECODE(Q9, '4', 1, 0)) "q4",SUM(DECODE(Q9, '5', 1, 0)) "q5"
 		FROM SURVEY
 		
 	</select>

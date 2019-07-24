@@ -168,37 +168,37 @@ function openIdChk() {
 			</tr>
 			<tr>
 				<td>응시자ID</td>
-				<td><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
+				<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
 				<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
 			</tr>
 			<tr>
 				<td>응시자PW</td>
-				<td colspan="2"><input type="password" name="takerPassword" id="takerPassword">
+				<td colspan="2" align="left"><input type="password" name="takerPassword" id="takerPassword">
 				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
 				<td>PW확인</td>
-				<td colspan="2"><input type="password" name="takerPasswordRe" id="takerPasswordRe">
+				<td colspan="2" align="left"><input type="password" name="takerPasswordRe" id="takerPasswordRe">
 				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
 				<td>성명</td>
-				<td colspan="2"><input type="text" name="takerName" id="takerName">
+				<td colspan="2" align="left"><input type="text" name="takerName" id="takerName">
 				</td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
-				<td colspan="2"><input type="text" name="takerInfo" id="takerInfo">
+				<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo">
 				<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
 			</tr>
 			<tr>
 				<td>E-mail</td>
-				<td colspan="2"><input type="text" name="takerEmail" id="takerEmail">
+				<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail">
 				<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
 			</tr>
 			<tr>
 				<td>최종학력</td>
-				<td colspan="2"><select name="takerEducation">
+				<td colspan="2" align="left"><select name="takerEducation">
 						<option value="J1">중졸</option>
 						<option value="J2">고졸</option>
 						<option value="J3">초대졸</option>
@@ -209,7 +209,7 @@ function openIdChk() {
 			</tr>
 			<tr>
 				<td>연락처</td>
-				<td colspan="2"><input type="text" name="takerPhoneNum" id="takerPhoneNum">
+				<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum">
 				<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
 			</tr>
 		</table>
