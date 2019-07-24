@@ -30,6 +30,7 @@
 			<th>시험일시</th>
 			<th>시험상태</th>
 			<th>시험출제상태</th>
+			<th>시험공개여부</th>	<!-- 2019.07.23 성재민 항목 추가 -->
 		</tr>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->
@@ -56,6 +57,13 @@
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I3'}">
 					<td>출제완료</td>
+				</c:if>
+				<!-- 2019.07.23 성재민 공개/비공개 항목 추가 -->
+				<c:if test="${exam.disclosureStatus == 'O1'}">
+					<td>공개</td>
+				</c:if>
+				<c:if test="${exam.disclosureStatus == 'O2'}">
+					<td>비공개</td>
 				</c:if>
 			</tr>
 		</c:forEach>

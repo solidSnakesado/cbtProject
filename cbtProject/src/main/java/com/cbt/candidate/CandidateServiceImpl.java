@@ -47,9 +47,12 @@ public class CandidateServiceImpl implements CandidateService {
 		return null;
 	}
 
-	public CandidateVO loginCandidate(CandidateVO vo) {
-		return candidateDAO.loginCandidate(vo);
+	// 통합 로그인 사용 전 구현
+	
+	public CandidateVO commonLogin(CandidateVO vo) {
+		return candidateDAO.commonLogin(vo);
 	}
+	 
 
 	public int idcheck(CandidateVO vo) {
 		return candidateDAO.idcheck(vo);

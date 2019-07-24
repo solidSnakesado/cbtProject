@@ -1,5 +1,6 @@
 package com.cbt.candidate;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
@@ -87,34 +90,40 @@ public class CandidateController {
 		return "candidate/candidate/candidateAccount";
 	}
 	//로그아웃 폼
-	@RequestMapping(value="candidateLogout.do", method=RequestMethod.GET)
-	public String candidateLogout(HttpSession session) {
-		session.invalidate();
-		return "redirect:candidateMain.do";
-	}
-	//로그인 폼  2019.07.03 생성 ver.2
-	@RequestMapping(value="candidateLogin.do", method=RequestMethod.GET)
+	/*
+	 * @RequestMapping(value="candidateLogout.do", method=RequestMethod.GET) public
+	 * String candidateLogout(HttpSession session) { session.invalidate(); return
+	 * "redirect:candidateMain.do"; }
+	 */
+	//로그인 폼  2019.07.03 생성 ver.2 --> 통합로그인 사용
+	
+	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.GET)
 	public String candidateLoginForm() {
 		return "candidate/candidate/candidateLogin";
 	}
+
+	//로그인 처리  2019.07.03 생성 ver.2 --> 통합로그인 사용
 	
-	//로그인 처리  2019.07.03 생성 ver.2
-	@RequestMapping(value="candidateLogin.do", method=RequestMethod.POST)
-	public String candidateLogin(CandidateVO vo, HttpSession session) {
+	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	public String candidateLogin(CandidateVO vo, HttpSession session, Model model) {
 		String targetPage = "candidate/candidate/candidateLogin";
-		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
-		
-		if(loginCandidate != null) {
+		CandidateVO loginCandidate = candidateService.commonLogin(vo);
+
+		if (loginCandidate != null) {
 			session.setAttribute("candidate", loginCandidate);
 			targetPage = "redirect:candidateMain.do";
+		} else {
+			model.addAttribute("loginFail", true);
 		}
 		return targetPage;
 	}
-
+	  
 	//계정수정 form		 장세준 (7/3 ver.2)
 	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
-	public String updateCandidateForm(CandidateVO vo, Model model, HttpSession session) {
-		vo.setTakerId(((CandidateVO)session.getAttribute("candidate")).getTakerId());
+	public String updateCandidateForm(CandidateVO vo, Model model, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+
+		vo.setTakerId(user.getUsername());
 		model.addAttribute("candidate", candidateService.getCandidate(vo));
 		return "candidate/candidate/candidateAccountManageModify";
 	}

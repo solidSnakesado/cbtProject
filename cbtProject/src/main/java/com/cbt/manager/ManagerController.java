@@ -235,9 +235,15 @@ public class ManagerController {
 	}
 
 	// 관리자 유저 리스트 출력
+	// 2019.07.23 성재민
+	// 응시자 정보를 받아올때 
+	// 비공개 시험 정보도 같이 받아옴.
 	@RequestMapping(value = "managerUserAccountList.do", method = RequestMethod.GET)
 	public ModelAndView managerUserAccountList(Paging paging, ModelAndView mv, CandidateVO vo) {
 		mv.addObject("result", candidateService.managerCandidateList(vo, paging));
+		// 2019.07.23 성재민
+		// 비공개 시험 정보 가져와서 처리.
+		mv.addObject("privateExamList", managerService.getManagerAllPrivateExamList());
 		mv.setViewName("manager/manager/managerUserAccountList");
 		return mv;
 	}
