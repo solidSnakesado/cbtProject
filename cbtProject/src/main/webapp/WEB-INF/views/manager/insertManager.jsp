@@ -28,13 +28,13 @@
       </ul>
    </article>
 </section>
-	<h1>매니저 등록</h1>
+	<h4 class="mx-auto pb-2">매니저 등록</h4>
 	<form action="insertManager.do" method="post" enctype="application/x-www-form-urlencoded">
-		매니저 ID : <input type="text" name="managerId"><br>
-		매니저 PW : <input type="password" name="managerPassword"><br>
-		매니저 이름 : <input type="text" name="managerName"><br>
+		매니저 ID : <input type="text" name="managerId" class="form-control"><br>
+		매니저 PW : <input type="password" name="managerPassword" class="form-control"><br>
+		매니저 이름 : <input type="text" name="managerName" class="form-control"><br>
 		
-		<input type="submit" id="submit" value="등록">
+		<input type="submit" id="submit" value="등록" class="btn btn-primary m-3 p-3">
 		
 	</form>
 </body>

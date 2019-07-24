@@ -33,27 +33,27 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<h3>상담 수정</h3>
+	<h4 class="mx-auto pb-2">상담 수정</h4>
 	<form action="${pageContext.request.contextPath}/companyConSultingUpdate.do" method="post" id="updateForm" name="updateForm">
 		<input type="hidden" name="consultingId" value="${consulting.consultingId}">
 		<table style="padding: 5px 0 5px 0;">
 			<tr>
-				<th>상담희망일</th>
-				<td style="text-align: left;"><input type="datetime-local" name="consultingDesiredDate" id="consultingDesiredDate" value="${consulting.consultingDesiredDate}"></td>
+				<th><label>상담희망일</label></th>
+				<td style="text-align: left;"><input type="datetime-local" name="consultingDesiredDate" id="consultingDesiredDate" class="form-control" value="${consulting.consultingDesiredDate}"></td>
 			</tr>
 			<tr>
-				<th>제목</th>
-				<td><input type="text" name="consultingTitle" id="consultingTitle" value="${consulting.consultingTitle}" style="width: 100%;"></td>
+				<th><label>제목</label></th>
+				<td><input type="text" name="consultingTitle" id="consultingTitle" class="form-control" value="${consulting.consultingTitle}" style="width: 100%;"></td>
 			</tr>
 			<tr>
-				<th>상담내용</th>
-				<td><textarea name="consultingContents" id="consultingContents" cols="80" rows="8">${consulting.consultingContents}</textarea><td>
+				<th><label>상담내용</label></th>
+				<td><textarea name="consultingContents" id="consultingContents" cols="80" rows="8" class="form-control">${consulting.consultingContents}</textarea><td>
 			</tr>
 		</table>
 		<br>
-		<input type="button" id="updateBtn" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do'" value="수정하기">
-		<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
-		<input type="button" onclick='window.close()' value="목록으로">
+		<input type="button" class="btn btn-primary m-3 p-3" id="updateBtn" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do'" value="수정하기">
+		<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
+		<input type="button" class="btn btn-primary m-3 p-3" onclick='window.close()' value="목록으로">
 	</form>
 </body>
 </html>

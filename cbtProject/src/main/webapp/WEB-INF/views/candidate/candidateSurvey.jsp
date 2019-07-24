@@ -97,18 +97,18 @@ $(document).ready(function() {
 	<!-- 7/19 june 설문지는 고정형식이라 문제은행식으로 할 필요가 없음 -> 추후 응시ID 불러오기 확인 필요 -->
 	<form id="fmField" name="fmField" action="${pageContext.request.contextPath }/candidateSurvey.do" method="POST">
 	<input type="hidden" name="surveyType" value="1"/>
-	<input type="text" name="takeExamId" value="${takeExamId}" hidden="true"/>
-	<input type="text" name="examId" value="${examId}" hidden="true"/>
+	<input type="text" name="takeExamId" class="form-control" value="${takeExamId}" hidden="true"/>
+	<input type="text" name="examId" class="form-control" value="${examId}" hidden="true"/>
 		<table border="1" align="center" class="table text-center">
 			<tr>
 				<td>
 					<h4 align="Left">1. 본 시험의 난이도는 적당했습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q1" value="5">&nbsp;&nbsp;상당히 어려웠다&nbsp;&nbsp; <br>
-						<input type="radio" name="q1" value="4">&nbsp;&nbsp;어려운 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q1" value="3">&nbsp;&nbsp;적절한 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q1" value="2">&nbsp;&nbsp;쉬운 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q1" value="1">&nbsp;&nbsp;상당히 쉬웠다
+						<input type="radio" class="form-control" name="q1" value="5">&nbsp;&nbsp;상당히 어려웠다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q1" value="4">&nbsp;&nbsp;어려운 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q1" value="3">&nbsp;&nbsp;적절한 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q1" value="2">&nbsp;&nbsp;쉬운 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q1" value="1">&nbsp;&nbsp;상당히 쉬웠다
 					</p>
 					<br>
 				</td>
@@ -117,11 +117,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">2. 본 시험의 출제 방향은 적절했습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q2" value="5">&nbsp;&nbsp;매우 적절하다&nbsp;&nbsp; <br>
-						<input type="radio" name="q2" value="4">&nbsp;&nbsp;대체로 적절한 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q2" value="3">&nbsp;&nbsp;일부는 적절하지 않았다&nbsp;&nbsp; <br>
-						<input type="radio" name="q2" value="2">&nbsp;&nbsp;대체로 적절하지 않았다&nbsp;&nbsp; <br>
-						<input type="radio" name="q2" value="1">&nbsp;&nbsp;방향성이 적절하지 않았다 
+						<input type="radio" class="form-control" name="q2" value="5">&nbsp;&nbsp;매우 적절하다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q2" value="4">&nbsp;&nbsp;대체로 적절한 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q2" value="3">&nbsp;&nbsp;일부는 적절하지 않았다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q2" value="2">&nbsp;&nbsp;대체로 적절하지 않았다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q2" value="1">&nbsp;&nbsp;방향성이 적절하지 않았다 
 					</p>
 					<br>
 				</td>
@@ -130,11 +130,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">3. 본 시험의 시험시간은 적당했습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q3" value="5">&nbsp;&nbsp;충분했다&nbsp;&nbsp; <br>
-						<input type="radio" name="q3" value="4">&nbsp;&nbsp;충분한 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q3" value="3">&nbsp;&nbsp;적절하다&nbsp;&nbsp; <br>
-						<input type="radio" name="q3" value="2">&nbsp;&nbsp;조금 부족하다&nbsp;&nbsp; <br>
-						<input type="radio" name="q3" value="1">&nbsp;&nbsp;매우부족하다&nbsp;&nbsp; 
+						<input type="radio" class="form-control" name="q3" value="5">&nbsp;&nbsp;충분했다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q3" value="4">&nbsp;&nbsp;충분한 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q3" value="3">&nbsp;&nbsp;적절하다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q3" value="2">&nbsp;&nbsp;조금 부족하다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q3" value="1">&nbsp;&nbsp;매우부족하다&nbsp;&nbsp; 
 					</p>
 					<br>
 				</td>
@@ -143,11 +143,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">4. 서버는 안정적이었습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q4" value="5">&nbsp;&nbsp;매우 안정적이었다&nbsp;&nbsp; <br>
-						<input type="radio" name="q4" value="4">&nbsp;&nbsp;안정적인 편이다&nbsp;&nbsp; <br>
-						<input type="radio" name="q4" value="3">&nbsp;&nbsp;잠깐불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;<br>
-						<input type="radio" name="q4" value="2">&nbsp;&nbsp;불안정하여 시험에 영향을 받은 적이 있다&nbsp;&nbsp;<br>
-						<input type="radio" name="q4" value="1">&nbsp;&nbsp;불안정하여 시험을 제대로 볼 수 없었다 
+						<input type="radio" class="form-control" name="q4" value="5">&nbsp;&nbsp;매우 안정적이었다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q4" value="4">&nbsp;&nbsp;안정적인 편이다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q4" value="3">&nbsp;&nbsp;잠깐불안정하지만 시험에는 지장이 없는 수준이었다&nbsp;&nbsp;<br>
+						<input type="radio" class="form-control" name="q4" value="2">&nbsp;&nbsp;불안정하여 시험에 영향을 받은 적이 있다&nbsp;&nbsp;<br>
+						<input type="radio" class="form-control" name="q4" value="1">&nbsp;&nbsp;불안정하여 시험을 제대로 볼 수 없었다 
 					</p>
 					<br>
 				</td>
@@ -156,11 +156,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">5. 본 서비스를 다시 사용하실 의향은 있습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q5" value="5">&nbsp;&nbsp;자주 방문할 것이다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q5" value="4">&nbsp;&nbsp;가끔씩 방문할 것이다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q5" value="3">&nbsp;&nbsp;생각해보겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q5" value="2">&nbsp;&nbsp;어쩔수 없다면 방문하겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q5" value="1">&nbsp;&nbsp;절대 사용하지 않겠다&nbsp;&nbsp; 
+						<input type="radio" class="form-control" name="q5" value="5">&nbsp;&nbsp;자주 방문할 것이다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q5" value="4">&nbsp;&nbsp;가끔씩 방문할 것이다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q5" value="3">&nbsp;&nbsp;생각해보겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q5" value="2">&nbsp;&nbsp;어쩔수 없다면 방문하겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q5" value="1">&nbsp;&nbsp;절대 사용하지 않겠다&nbsp;&nbsp; 
 					</p>
 					<br>
 				</td>
@@ -169,11 +169,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">6. 본 서비스를 주변에 알리실 의향은 있습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q6" value="5">&nbsp;&nbsp;적극적으로 알리겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q6" value="4">&nbsp;&nbsp;필요시 알리겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q6" value="3">&nbsp;&nbsp;굳이 알리지는 않겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q6" value="2">&nbsp;&nbsp;알리지 않겠다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q6" value="1">&nbsp;&nbsp;사용하지 말라고 알리겠다&nbsp;&nbsp; 
+						<input type="radio" class="form-control" name="q6" value="5">&nbsp;&nbsp;적극적으로 알리겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q6" value="4">&nbsp;&nbsp;필요시 알리겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q6" value="3">&nbsp;&nbsp;굳이 알리지는 않겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q6" value="2">&nbsp;&nbsp;알리지 않겠다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q6" value="1">&nbsp;&nbsp;사용하지 말라고 알리겠다&nbsp;&nbsp; 
 					</p>
 					<br>
 				</td>
@@ -182,11 +182,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">7. 이 시험으로 인해 얻고자하는 목표는 이루었습니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q7" value="1">&nbsp;&nbsp;전혀아니다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q7" value="2">&nbsp;&nbsp;아니지만 일부는 이루었다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q7" value="3">&nbsp;&nbsp;적당히 이루었다&nbsp;&nbsp; <br>
-						<input type="radio" name="q7" value="4">&nbsp;&nbsp;목표를 조금 초과달성하였다&nbsp;&nbsp; <br>
-						<input type="radio" name="q7" value="5">&nbsp;&nbsp;기대이상의 쾌거를 달성했다&nbsp;&nbsp; 
+						<input type="radio" class="form-control" name="q7" value="1">&nbsp;&nbsp;전혀아니다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q7" value="2">&nbsp;&nbsp;아니지만 일부는 이루었다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q7" value="3">&nbsp;&nbsp;적당히 이루었다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q7" value="4">&nbsp;&nbsp;목표를 조금 초과달성하였다&nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q7" value="5">&nbsp;&nbsp;기대이상의 쾌거를 달성했다&nbsp;&nbsp; 
 					</p>
 					<br>
 				</td>
@@ -195,11 +195,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">8. 이 시험을 준비하신 시간은 어느 정도입니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q8" value="1">&nbsp;&nbsp;전혀 준비하지 않았다&nbsp;&nbsp;  <br>
-						<input type="radio" name="q8" value="2">&nbsp;&nbsp;1주일&nbsp;&nbsp;  <br>
-						<input type="radio" name="q8" value="3">&nbsp;&nbsp;1개월 이내 &nbsp;&nbsp; <br>
-						<input type="radio" name="q8" value="4">&nbsp;&nbsp;3개월 이내 &nbsp;&nbsp; <br>
-						<input type="radio" name="q8" value="5">&nbsp;&nbsp;3개월 이상 &nbsp;&nbsp;
+						<input type="radio" class="form-control" name="q8" value="1">&nbsp;&nbsp;전혀 준비하지 않았다&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q8" value="2">&nbsp;&nbsp;1주일&nbsp;&nbsp;  <br>
+						<input type="radio" class="form-control" name="q8" value="3">&nbsp;&nbsp;1개월 이내 &nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q8" value="4">&nbsp;&nbsp;3개월 이내 &nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q8" value="5">&nbsp;&nbsp;3개월 이상 &nbsp;&nbsp;
 					</p>
 					<br>
 				</td>
@@ -208,11 +208,11 @@ $(document).ready(function() {
 				<td>
 					<h4 align="Left">9. 이 시험을 준비하면서 지출한 금액은 얼마입니까?</h4><br>
 					<p align="Left">
-						<input type="radio" name="q9" value="1"> &nbsp; &nbsp; 전혀 없음 &nbsp;&nbsp; <br>
-						<input type="radio" name="q9" value="2"> &nbsp; &nbsp; 2만원 이하 &nbsp;&nbsp; <br>
-						<input type="radio" name="q9" value="3"> &nbsp; &nbsp; 10만원 이하 &nbsp;&nbsp;<br>
-						<input type="radio" name="q9" value="4"> &nbsp; &nbsp; 100만원 이하 &nbsp;&nbsp;<br>
-						<input type="radio" name="q9" value="5"> &nbsp; &nbsp; 100만원 이상
+						<input type="radio" class="form-control" name="q9" value="1"> &nbsp; &nbsp; 전혀 없음 &nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q9" value="2"> &nbsp; &nbsp; 2만원 이하 &nbsp;&nbsp; <br>
+						<input type="radio" class="form-control" name="q9" value="3"> &nbsp; &nbsp; 10만원 이하 &nbsp;&nbsp;<br>
+						<input type="radio" class="form-control" name="q9" value="4"> &nbsp; &nbsp; 100만원 이하 &nbsp;&nbsp;<br>
+						<input type="radio" class="form-control" name="q9" value="5"> &nbsp; &nbsp; 100만원 이상
 					</p>
 					<br>
 				</td>
@@ -223,8 +223,8 @@ $(document).ready(function() {
 -->
 			</table>
 			<div align="center">
-				<input type="BUTTON" value="제출" onclick="checkForm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="reset" value="초기화">
+				<input type="BUTTON" value="제출" class="btn btn-primary m-3 p-3" onclick="checkForm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="초기화" class="btn btn-warning m-3 p-3">
 			</div>
 		</form>
 </body>

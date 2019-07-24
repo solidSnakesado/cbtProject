@@ -90,7 +90,7 @@
 </c:if>
 	</table>
 	<br>
-	<button type="button" id="btn" value="${detailExam.examId }">응시하기</button>
+	<button type="button" class="btn btn-primary m-3 p-3" id="btn" value="${detailExam.examId }">응시하기</button>
 	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
 </body>

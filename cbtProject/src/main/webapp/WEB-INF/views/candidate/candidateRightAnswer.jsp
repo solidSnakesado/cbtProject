@@ -231,7 +231,7 @@
 			</c:forEach>
 		</table>
 	</div>
-<h2 align="center">풀이 및 해설</h2>
+<h4 class="mx-auto pb-2" align="center">풀이 및 해설</h4>
 <br><br>
 	
 	<table class="mainTab">

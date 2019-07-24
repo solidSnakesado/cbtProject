@@ -9,16 +9,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<h1>상태정보 수정</h1>	
+	<h4 class="mx-auto pb-2">상태정보 수정</h4>	
 		
 		<form action="${pageContext.request.contextPath }/updateCondition.do" method="post">
 			<input type="hidden" name="conditionSeq" value="${condition.conditionSeq }"/>
-			마스터 코드  : <input type="text" name="masterCd" value="${condition.masterCd }"><br>
-			마스터 이름  : <input type="text" name="masterNm" value="${condition.masterNm }"><br>
-			상세 코드 : <input type="text" name="detailCd" value="${condition.detailCd }"><br>
-			상세 이름 : <input type="text" name="detailNm" value="${condition.detailNm }"><br>
-			사용 여부 : <input type="text" name="useYn" value="${condition.useYn }"><br>
-			<input type="submit" value="수정">
+			<label>마스터 코드  : </label><input type="text" name="masterCd" value="${condition.masterCd }" class="form-control"><br>
+			<label>마스터 이름  : </label><input type="text" name="masterNm" value="${condition.masterNm }" class="form-control"><br>
+			<label>상세 코드 : </label><input type="text" name="detailCd" value="${condition.detailCd }" class="form-control"><br>
+			<label>상세 이름 : </label><input type="text" name="detailNm" value="${condition.detailNm }" class="form-control"><br>
+			<label>사용 여부 : </label><input type="text" name="useYn" value="${condition.useYn }" class="form-control">
+			<input type="submit" value="수정" class="btn btn-primary m-3 p-3">
 			<a href="${pageContext.request.contextPath }/deleteCondition.do?conditionSeq=${condition.conditionSeq }">삭제</a>
 			
 		</form>

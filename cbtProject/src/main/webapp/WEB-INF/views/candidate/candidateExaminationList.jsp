@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-<title>Insert title here</title>
-
-<title>CBT 시험 일정 확인</title>
-
 <script>
 	$(document).ready(function(){
 		
@@ -64,17 +54,15 @@
 	})
 	
 </script>
-</head>
-<body>
 
-	<h1>마이페이지(개인) 응시목록</h1>
+	<h4 class="mx-auto pb-2">마이페이지(개인) 응시목록</h4>
 	<br>
 	<form id="detailForm" name="detailForm" action="candidateExaminationListDetail.do" method="post">
-		<input type="text" id="eId2" name="examId" value="${QuestionVO.examId }" hidden="ture">
-		<input type="text" id="tId2" name="takeExamId" value="${QuestionVO.takeExamId }" hidden="ture">
-		<input type="text" id="eName2" name="examName" value="${QuestionVO.examName }" hidden="ture">
-		<input type="text" id="passScore2" name="passingScore" value="${QuestionVO.passingScore }" hidden="ture">
-		<input type="text" id="examTime2" name="examStartTime" value="${QuestionVO.examStartTime }" hidden="ture">
+		<input type="text" id="eId2" name="examId" class="form-control" value="${QuestionVO.examId }" hidden="ture">
+		<input type="text" id="tId2" name="takeExamId" class="form-control" value="${QuestionVO.takeExamId }" hidden="ture">
+		<input type="text" id="eName2" name="examName" class="form-control" value="${QuestionVO.examName }" hidden="ture">
+		<input type="text" id="passScore2" name="passingScore" class="form-control" value="${QuestionVO.passingScore }" hidden="ture">
+		<input type="text" id="examTime2" name="examStartTime" class="form-control" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
 	<table id="table" border="1" class="table text-center">
 		<tr >
@@ -106,5 +94,4 @@
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging}"/></div><br>
 	
 	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
-</body>
-</html>
+

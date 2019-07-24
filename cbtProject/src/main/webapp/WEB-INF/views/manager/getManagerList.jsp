@@ -19,22 +19,22 @@
 		});
 	</script>
 	<header id="header"></header>
-	<h3>매니저 목록</h3>
+	<h4 class="mx-auto pb-2">매니저 목록</h4>
 	<form>
-		검색조건<select name="searchManager">
+		검색조건<select name="searchManager" class="form-control">
 			<option value="managerId">관리자 아이디
 			<option value="managerName">관리자 이름
 		</select><br>
-		<input type="text" name="searchManager">
+		<input type="text" name="searchManager" class="form-control">
 		<button>검색</button>
 	</form>
 	<form action="deleteManager.do">
 	<button id="">삭제</button>
 	<table align="center">
 		<tr>
-			<th>선택</th>
-			<th>관리자 아이디</th>
-			<th>관리자 이름</th>
+			<th><label>선택</label></th>
+			<th><label>관리자 아이디</label></th>
+			<th><label>관리자 이름</label></th>
 		</tr>
 		<c:forEach items="${result.managerList }" var="manager">
 		<tr>

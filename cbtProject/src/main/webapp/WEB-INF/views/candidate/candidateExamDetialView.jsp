@@ -111,7 +111,7 @@
 	</form>
 
 	<header id="header"></header>
-	<h3>시험 상세 보기</h3>
+	<h4 class="mx-auto pb-2">시험 상세 보기</h4>
 	<div class="container">
 	<input type = "hidden" name = "no" value = "">
 	<table border = "1" class="table text-center" border="1">
@@ -170,7 +170,7 @@
 	</table>
 	<br>
 	<button type="button" id="btn" value="${detailExam.examId}">응시하기</button>
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
+	<input type = "button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
 	</div>
 </body>
 </html>

@@ -20,25 +20,25 @@
 	<form action="insertSetExamQuestion.do" method="post">
 		<table border="1" align="center">
 			<tr>
-				<td>EXAM_ID</td>
-				<td><input type="text" name="examId" id="examId"></td>
+				<td><label>EXAM_ID</label></td>
+				<td><input type="text" name="examId" id="examId" class="form-control"></td>
 			</tr>
 			<tr>
-				<td>QUESTION_ID</td>
-				<td><input type="text" name="questionId" id="questionId"></td>
+				<td><label>QUESTION_ID</label></td>
+				<td><input type="text" name="questionId" id="questionId" class="form-control"></td>
 			</tr>
 			<tr>
-				<td>SET_EXAM_QUESTION_ID</td>
-				<td><input type="hidden" name="setExamQuestionId" id="setExamQuestionId"></td>
+				<td><label>SET_EXAM_QUESTION_ID</label></td>
+				<td><input type="hidden" name="setExamQuestionId" id="setExamQuestionId" class="form-control"></td>
 			</tr>
 			<tr>
-				<td>POINT</td>
-				<td><input type="text" name="point" id="point"></td>
+				<td><label>POINT</label></td>
+				<td><input type="text" name="point" id="point" class="form-control"></td>
 			</tr>
 		</table>
 		<div align="center">
-			<input type="submit" value="등록">
-			<input type="reset" value="취소">
+			<input type="submit" value="등록" class="btn btn-primary m-3 p-3">
+			<input type="reset" value="취소" class="btn btn-primary m-3 p-3">
 		</div>
 	</form>
 	<br>

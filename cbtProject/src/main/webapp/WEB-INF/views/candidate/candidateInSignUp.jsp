@@ -163,42 +163,42 @@ function openIdChk() {
 		<table border="1" align="center" class="table text-center">
 			<tr>
 				<th colspan="2">
-					<h3>회원가입 페이지</h3>
+					<h4 class="mx-auto pb-2">회원가입 페이지</h4>
 				</th>
 			</tr>
 			<tr>
-				<td>응시자ID</td>
+				<td><label>응시자ID</label></td>
 				<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
 				<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
 			</tr>
 			<tr>
-				<td>응시자PW</td>
-				<td colspan="2" align="left"><input type="password" name="takerPassword" id="takerPassword">
+				<td><label>응시자PW</label></td>
+				<td colspan="2" align="left"><input type="password" name="takerPassword" class="form-control" id="takerPassword">
 				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
-				<td>PW확인</td>
-				<td colspan="2" align="left"><input type="password" name="takerPasswordRe" id="takerPasswordRe">
+				<td><label>PW확인</label></td>
+				<td colspan="2" align="left"><input type="password" name="takerPasswordRe" class="form-control" id="takerPasswordRe">
 				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 			</tr>
 			<tr>
-				<td>성명</td>
-				<td colspan="2" align="left"><input type="text" name="takerName" id="takerName">
+				<td><label>성명</label></td>
+				<td colspan="2" align="left"><input type="text" name="takerName" id="takerName" class="form-control">
 				</td>
 			</tr>
 			<tr>
-				<td>생년월일</td>
-				<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo">
+				<td><label>생년월일</label></td>
+				<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo" class="form-control">
 				<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
 			</tr>
 			<tr>
-				<td>E-mail</td>
-				<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail">
+				<td><label>E-mail</label></td>
+				<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail" class="form-control">
 				<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
 			</tr>
 			<tr>
-				<td>최종학력</td>
-				<td colspan="2" align="left"><select name="takerEducation">
+				<td><label>최종학력</label></td>
+				<td colspan="2" align="left"><select name="takerEducation" class="form-control">
 						<option value="J1">중졸</option>
 						<option value="J2">고졸</option>
 						<option value="J3">초대졸</option>
@@ -208,8 +208,8 @@ function openIdChk() {
 				</select></td>
 			</tr>
 			<tr>
-				<td>연락처</td>
-				<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum">
+				<td><label>연락처</label></td>
+				<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum" class="form-control">
 				<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
 			</tr>
 		</table>

@@ -75,7 +75,7 @@
 </head>
 <body>
 
-	<h1>마이페이지(개인) 응시목록 세부목록</h1>
+	<h4 class="mx-auto pb-2">마이페이지(개인) 응시목록 세부목록</h4>
 	<br>
 	<script type="text/javascript">
 		$(document).ready(function() {
