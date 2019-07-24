@@ -72,7 +72,9 @@
 <body>
 	<h3>카테고리 목록</h3>
 	<button id="insertCategoryBtn" name="insertCategoryBtn" onclick="categoryInsert()">카테고리 생성</button><br><br>
-	<table border="1">
+	<!-- 2019.07.24 성재민 -->
+	<!-- style="margin: auto;" 추가 -->
+	<table border="1" style="margin: auto;">
 		<tr>
 			<th>카테고리 ID</th>
 			<th>카테고리 이름</th>
@@ -95,7 +97,9 @@
 				<td><button id="updateBtn" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
 				<td><button id="deleteBtn" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
 			</tr>
-			<script>setCategoryName("${category.categoryMainId}", "${category.categoryMiddleId}", "${category.categorySamllId}")</script>
+			<!-- 2019.07.24 성재민 -->
+			<!-- setCategoryName() 함수 부분 주석 추리 -->
+			<!-- <script>setCategoryName("${category.categoryMainId}", "${category.categoryMiddleId}", "${category.categorySamllId}")</script> -->
 		</c:forEach>
 	</table>
 </body>

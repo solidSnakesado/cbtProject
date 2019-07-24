@@ -4,23 +4,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="w3-top">
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	// 2019.07.22 성재민
 	// 3초마다  poll() 실행
 	// 답변이 되지 않은 문의의 갯수를 받아온다.
-	(function poll() {
-	    $.ajax({
-	        url: 'getBeforeReplyCount.do',
-	        type: 'post',
-	        success: function(data) {
-	            console.log('success' + data);
-	            $("#inquiry").text(data);
-	        },
-	        timeout: 3000,	
-	        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
-	    })
-	})();
-</script> -->
+	if("${not empty sessionScope.manager }" == "true"){
+		(function poll() {
+		    $.ajax({
+		        url: 'getBeforeReplyCount.do',
+		        type: 'post',
+		        success: function(data) {
+		            console.log('success' + data);
+		            $("#inquiry").text(data);
+		        },
+		        timeout: 3000,	
+		        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
+		    })
+		})();	
+	}
+</script>
 
 
 	<div class="w3-bar w3-black w3-card">

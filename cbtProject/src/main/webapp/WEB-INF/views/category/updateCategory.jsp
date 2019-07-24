@@ -170,6 +170,8 @@
 </script>
 </head>
 <body>
+	<h3>카테고리 수정</h3>
+	<br>
 	<form action="${pageContext.request.contextPath }/updateCategory.do" method="post" id="updateCategoryForm">
 		<input type="hidden" name="categoryId" value="${updateTargetCategory.categoryId}">
 		카테고리 이름 : <input type="text" name="categoryName" id="categoryName" value="${updateTargetCategory.categoryName}">

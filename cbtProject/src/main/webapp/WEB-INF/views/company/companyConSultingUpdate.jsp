@@ -53,7 +53,7 @@
 		<br>
 		<input type="button" id="updateBtn" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do'" value="수정하기">
 		<input type="button" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
-		<input type="button" onclick='window.close()' value="확인">
+		<input type="button" onclick='window.close()' value="목록으로">
 	</form>
 </body>
 </html>
