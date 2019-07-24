@@ -18,32 +18,31 @@ public interface CandidateService {
 	// 글 상세 조회
 	CandidateVO getCandidate(CandidateVO vo);
 
-	// 로그인
-	CandidateVO loginCandidate(CandidateVO vo);
-	
+	// 로그인 --> 통합로그인 활용하게 됨으로써 주석처리
+	CandidateVO commonLogin(CandidateVO vo);
+
 	// 응시자 정보 가져올 리스트 -- 이승환
 	List<CandidateVO> getCandidateList(CandidateVO vo);
-	
+
 	// 응시자 정보 가져올 리스트, 페이징추가
 	public Map<String, Object> managerCandidateList(CandidateVO vo, Paging paging);
-		
+
 	// 2019.07.09
 	// 시험정보
 	List<Map<String, String>> getExamList(CandidateVO vo);
 
 	public Map<String, Object> getCandidateList(CandidateVO vo, Paging paging);
-	
+
 	// ID 중복체크
 	int idcheck(CandidateVO vo);
-	
+
 	// 전체 시험일정 조회
 	List<Map<Object, String>> candidateScheduleCheck();
 
 	// 전체 시험일정 조회_페이징처리
 	int ExamScheduleCount();
 
-	//temp
+	// temp
 	Map<Object, Object> candidateScheduleCheckPage(Paging paging);
 
-	
 }

@@ -16,7 +16,7 @@
 	<script>
 	//의뢰서
 	$(document).ready(function() {
-
+		
 		//카테고리ID 값을 채운다
 		$.ajax({
 			type:"GET",
@@ -40,6 +40,8 @@
 				alert('에러발생');
 			}
 		});
+		
+		
 		
 		
 	
@@ -115,7 +117,8 @@
 	</script>
 </head>  
 <body>
-	<h2 align="center">세부 의뢰목록</h2>
+	<div align="center">
+	<h2 >의뢰 등록</h2>
 	<form action="managerEstimateInsert.do" method="POST" name="form">
 		<table>
 			<%-- <tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
@@ -130,14 +133,14 @@
 			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
 			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
 			<tr>	<td>난이도</td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
+			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" readonly></td></tr>
 	 		<tr>	<td>비고</td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
 			<%-- <tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr> --%>  
 			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 		</table>
 		<button type="button" id="submitBtn">등록하기</button> <button type="button" onclick="location.href='managerEstimateList.do'"> 취소 </button> 
 	</form>
-	
+	</div>
 	<script>
 			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
 		

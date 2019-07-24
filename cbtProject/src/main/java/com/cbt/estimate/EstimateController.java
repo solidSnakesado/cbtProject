@@ -288,4 +288,18 @@ public class EstimateController {
 		         e.printStackTrace();
 		      }
 		}
+		
+	/*
+	 * @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public void getcompanyNameList(EstimateVO vo,
+	 * HttpServletRequest request, HttpServletResponse response) {
+	 * 
+	 * 
+	 * return estimateService.updatesTradeProgressExchange4(vo);
+	 * 
+	 * }
+	 */
+		
+		
 }

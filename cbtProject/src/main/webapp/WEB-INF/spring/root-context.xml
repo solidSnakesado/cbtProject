@@ -9,6 +9,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- Root Context: defines shared resources visible to all other web components -->
+<!--  
 	<security:http>
 	<security:intercept-url method="GET" pattern="/login.jsp" access="permitAll()" />
 	<security:intercept-url pattern="/top.jsp" access="permitAll()" />
@@ -35,6 +36,7 @@
 		</security:authentication-manager>
 
 	<context:property-placeholder location="classpath:database.properties"/>
+-->
 	
 	<!-- datasource 설정 -->
 	<bean id="authDataSource" class="org.apache.commons.dbcp.BasicDataSource">

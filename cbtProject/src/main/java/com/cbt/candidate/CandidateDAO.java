@@ -38,15 +38,23 @@ public class CandidateDAO {
 		return mybatis.selectList("candidateDAO.getExamList", vo);
 	}	
 	
-	// 암호화 로그인 전
-	
-	
-	  public CandidateVO loginCandidate(CandidateVO vo) { return
-	  mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	//SECURITY 통합로그인
+	  public CandidateVO commonLogin(CandidateVO vo) { 
+		  return  mybatis.selectOne("candidateDAO.commonLogin", vo); 
+	  }
+	  
+	  
+	// 암호화 로그인 전 --> 통합로그인 사용
+	  
+	/*
+	 * public CandidateVO loginCandidate(CandidateVO vo) { return
+	 * mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	 */
 	 
 	 
 	
 	// 암호화 로그인 -- 테스트 기간
+	
 	
 	/*
 	 * public CandidateVO loginCandidate(CandidateVO vo) { String pw =

@@ -140,6 +140,8 @@
 </script>
 </head>
 <body>
+	<h3>카테고리 생성</h3>
+	<br>
 	<form action="${pageContext.request.contextPath }/insertCategory.do" method="post" id="insertCategoryForm">
 		카테고리 이름 : <input type="text" name="categoryName" id="categoryName">
 		<br><br>

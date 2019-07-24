@@ -1,26 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="w3-top">
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	// 2019.07.22 성재민
 	// 3초마다  poll() 실행
 	// 답변이 되지 않은 문의의 갯수를 받아온다.
-	(function poll() {
-	    $.ajax({
-	        url: 'getBeforeReplyCount.do',
-	        type: 'post',
-	        success: function(data) {
-	            console.log('success' + data);
-	            $("#inquiry").text(data);
-	        },
-	        timeout: 3000,	
-	        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
-	    })
-	})();
-</script> -->
+	if("${not empty sessionScope.manager }" == "true"){
+		(function poll() {
+		    $.ajax({
+		        url: 'getBeforeReplyCount.do',
+		        type: 'post',
+		        success: function(data) {
+		            console.log('success' + data);
+		            $("#inquiry").text(data);
+		        },
+		        timeout: 3000,	
+		        complete: setTimeout(function() { poll(); }, 3000)	// 3초 대기 후 poll()함수 실행
+		    })
+		})();	
+	}
+</script>
 
 
 	<div class="w3-bar w3-black w3-card">
@@ -32,7 +35,8 @@
 		<c:if test="${not empty sessionScope.candidate }">  
 		    <a href="candidateAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 		</c:if> --%>
-		<c:if test="${not empty sessionScope.manager }">
+		<sec:authorize access="hasRole('ROLE_MANAGER')">
+		<%-- <c:if test="${not empty sessionScope.manager }"> --%>
 		<!-- <div class="w3-dropdown-hover">
 		      	<button class="w3-padding-large w3-button" title="More">마이페이지 <i class="fa fa-caret-down"></i></button>     
 		      	<div class="w3-dropdown-content w3-bar-block w3-card-4"> -->
@@ -58,14 +62,19 @@
 		        	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
 		      	<!-- </div>
 		    </div> -->
-	    </c:if>  
-		<c:if test="${empty sessionScope.manager }">    
+	    <%-- </c:if> --%>
+	    </sec:authorize>
+	    <sec:authorize access="isAnonymous()">  
+		<%-- <c:if test="${empty sessionScope.manager }"> --%>    
 		    <a href="${pageContext.request.contextPath }/managerLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
-		</c:if>  
-		<c:if test="${not empty sessionScope.manager }">    
+		<%-- </c:if> --%> 
+		</sec:authorize> 
+		<sec:authorize access="isAuthenticated()">
+		<%-- <c:if test="${not empty sessionScope.manager }"> --%>    
 		    <a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${manager.managerId} 로그아웃</a>
 		    <a href="${pageContext.request.contextPath }/insertManager.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">매니저등록</a>
-		</c:if>
+		<%-- </c:if> --%>
+		</sec:authorize>
     	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   	</div>
 </div>

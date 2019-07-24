@@ -38,16 +38,17 @@
 				<option value="COMPANY.COMPANY_ID">회사명
 				<option value="EXAM_STATUS">시험상태
 				<option value="EXAM_START_TIME">시험일
-			</select> <br> 검색조건
+			</select> &nbsp;&nbsp; 검색조건
 			<my:examListSelect items="${examMap }" />
-			<br> <input type="text" name="searchKeyword" value="${ExamVO.searchKeyword }">
-			시험상태<select	name="examStatus">
+			&nbsp;&nbsp; <input type="text" name="searchKeyword" value="${ExamVO.searchKeyword }">
+			&nbsp;&nbsp; 시험상태<select	name="examStatus">
 				<option value="D1">시험전
 				<option value="D2">시험중
 				<option value="D3">시험종료
-			</select>
+			</select>&nbsp;&nbsp;
 			<button>검색</button>
 		</form>
+		
 		<script>
 		searchFrm.sort.value="${ExamVO.sort}"==""?searchFrm.sort.options[0].value
 							:"${ExamVO.sort}";
@@ -56,7 +57,8 @@
 									:"${ExamVO.searchExam}";
 	</script>
 	
-	<table border="1" align="center">
+	<br>
+	<table border="1" align="center" class="table text-center">
 		<tr>
 			<th>의뢰기업</th>
 			<th>시험이름</th>

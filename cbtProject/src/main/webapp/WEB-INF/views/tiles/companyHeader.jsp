@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="w3-top">
 	<div class="w3-bar w3-black w3-card">
     	<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -11,7 +12,8 @@
 <%-- 		<c:if test="${not empty sessionScope.candidate }">  
    	 		<a href="companyAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 		</c:if> --%>
-		<c:if test="${not empty sessionScope.company }">
+		<sec:authorize access="hasRole('ROLE_COMPANY')">
+		<%-- <c:if test="${not empty sessionScope.company }"> --%>
 			<!-- 2019.07.09 성재민-->
 			<!-- <div class="w3-dropdown-hover w3-hide-small"> 를  -->
 			<!-- <div class="w3-dropdown-hover"> 로 수정하여-->
@@ -26,16 +28,21 @@
 	        		<a href="${pageContext.request.contextPath }/companyChart.do" class="w3-bar-item w3-button">통계</a>
 	      		</div>
 	    	</div>
-    	</c:if>
+    	<%-- </c:if> --%>
+    	</sec:authorize>
     	<!-- 2019.07.09 성재민 -->
     	<!-- 로그인 여부에 따라 로그인/로그아웃이 표시 -->
-    	<c:if test="${empty sessionScope.company }">    
+    	<sec:authorize access="isAnonymous()"> 
+    	<%-- <c:if test="${empty sessionScope.company }">   --%>  
     		<a href="${pageContext.request.contextPath }/companyLogin.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">로그인</a>
     		<a href="${pageContext.request.contextPath }/companySignUp.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">회원가입</a>
-		</c:if>  
-		<c:if test="${not empty sessionScope.company }">    
-    		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">로그아웃</a>
-		</c:if>
+		<%-- </c:if>  --%> 
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+		<%-- <c:if test="${not empty sessionScope.company }"> --%>    
+    		<a href="${pageContext.request.contextPath }/candidateLogout.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${company.companyId }로그아웃</a>
+		<%-- </c:if> --%>
+		</sec:authorize>
     	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   	</div>
 </div>

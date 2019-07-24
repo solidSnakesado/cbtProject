@@ -24,7 +24,7 @@
 		<h3>문의 사항이 없습니다.</h3>
 	</c:if>
 	<c:if test="${not empty InquiryList}">
-		<table border="1" align="center">
+		<table border="1" align="center" class="table text-center">
 			<tr >
 				<th>문의번호</th>
 				<th>문의자</th>
