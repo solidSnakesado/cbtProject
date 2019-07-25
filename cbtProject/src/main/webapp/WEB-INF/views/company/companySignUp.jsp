@@ -11,9 +11,9 @@
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+/* 		$(document).ready(function() {
 			$("#header").load("in_header.html")
-		});
+		}); */
 	</script>
 	<header id="header"></header>
 	<h4 class="mx-auto pb-2">기업 회원 가입 페이지</h4>

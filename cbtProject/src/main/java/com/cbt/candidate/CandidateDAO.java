@@ -14,14 +14,12 @@ import com.cbt.common.Paging;
 
 @Repository
 public class CandidateDAO {
-	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
 	//2019.07.01 장세준 - insert
 	public void insertCandidate(CandidateVO vo) {
-		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
 		mybatis.insert("candidateDAO.insertCandidate", vo);
 	}
 
@@ -41,6 +39,7 @@ public class CandidateDAO {
 	
 	//SECURITY 통합로그인
 	  public CandidateVO commonLogin(CandidateVO vo) { 
+		 
 		  return  mybatis.selectOne("candidateDAO.commonLogin", vo); 
 	  }
 	  
@@ -56,7 +55,6 @@ public class CandidateDAO {
 	
 	// 암호화 로그인 -- 테스트 기간
 	
-	
 	/*
 	 * public CandidateVO loginCandidate(CandidateVO vo) { String pw =
 	 * mybatis.selectOne("candidateDAO.getTakerPassword", vo); String rawPw =
@@ -66,7 +64,6 @@ public class CandidateDAO {
 	 * System.out.println(pw + rawPw); return null; } return
 	 * mybatis.selectOne("candidateDAO.candidateLogin", vo); }
 	 */
-	 
 	
 	
 	public int getCount(CandidateVO vo) {
