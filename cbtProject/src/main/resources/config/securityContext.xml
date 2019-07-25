@@ -12,7 +12,6 @@
 	<security:http pattern="/image/*" security="none"/>
 	<security:http pattern="/css/*" security="none"/>
 	<security:http pattern="/insertCandidate.do" security="none"/>
-	<security:http pattern="/candidateScheduleCheck.do" security="none"/>
 	<security:http>
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
@@ -26,7 +25,7 @@
 			access="isAuthenticated()" />
 		<security:form-login
 			login-page="/candidateLogin.do" login-processing-url="/processLogin.do"
-			default-target-url="/candidateMain.do"
+				default-target-url="/candidateMain.do"
 			authentication-failure-url="/candidateLogin.do"
 			username-parameter="takerId" password-parameter="takerPassword" />
 		<security:logout logout-url="/logout"

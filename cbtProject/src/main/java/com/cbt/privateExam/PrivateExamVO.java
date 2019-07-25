@@ -5,10 +5,18 @@ package com.cbt.privateExam;
 public class PrivateExamVO {
 	private int 	privateExamId;
 	private int 	examId;
-	private String 	takerEmail;
+	private String 	takerId;
 	
 	public PrivateExamVO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getTakerId() {
+		return takerId;
+	}
+
+	public void setTakerId(String takerId) {
+		this.takerId = takerId;
 	}
 
 	public int getPrivateExamId() {
@@ -25,13 +33,5 @@ public class PrivateExamVO {
 
 	public void setExamId(int examId) {
 		this.examId = examId;
-	}
-
-	public String getTakerEmail() {
-		return takerEmail;
-	}
-
-	public void setTakerEmail(String takerEmail) {
-		this.takerEmail = takerEmail;
 	}
 }

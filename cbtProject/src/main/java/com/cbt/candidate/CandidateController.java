@@ -1,14 +1,14 @@
 package com.cbt.candidate;
 
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,9 +24,10 @@ import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.privateExam.PrivateExamService;
+import com.cbt.privateExam.PrivateExamVO;
 import com.cbt.question.QuestionService;
 import com.cbt.takeExam.TakeExamService;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.cbt.takeExam.TakeExamVO;
 
 
@@ -35,13 +36,15 @@ import com.cbt.takeExam.TakeExamVO;
 public class CandidateController {
 	
 	@Autowired
-	CandidateService candidateService;
+	CandidateService 	candidateService;
 	@Autowired
-	ExamService examService;
+	ExamService 		examService;
 	@Autowired
-	TakeExamService takeExamService;
+	TakeExamService 	takeExamService;
 	@Autowired
-	QuestionService questionService;
+	QuestionService 	questionService;
+	@Autowired
+	PrivateExamService	privateExamService;
 	
 	// 카카오 추가 -7/19 생성, june
 	@Autowired
@@ -106,12 +109,23 @@ public class CandidateController {
 	
 	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
 	public String candidateLogin(CandidateVO vo, HttpSession session, Model model) {
-		String targetPage = "candidate/candidate/candidateLogin";
-		CandidateVO loginCandidate = candidateService.commonLogin(vo);
+		String 		targetPage 		= "candidate/candidate/candidateLogin";
+		CandidateVO loginCandidate 	= candidateService.commonLogin(vo);
 
 		if (loginCandidate != null) {
 			session.setAttribute("candidate", loginCandidate);
 			targetPage = "redirect:candidateMain.do";
+			
+			// 2019.07.25 성재민
+			// 비공개 시험 응시자라면 비공개 시험 테이블에 시험 ID 와 응시자 ID를 저장해야 한다.
+			String privateExamId = (String) session.getAttribute("privateExamId");
+			if(privateExamId != null) {
+				PrivateExamVO privateExamVO = new PrivateExamVO();
+				privateExamVO.setExamId(Integer.parseInt(privateExamId));
+				privateExamVO.setTakerId(loginCandidate.getTakerId());
+				
+				privateExamService.insertPrivateExam(privateExamVO);
+			}
 		} else {
 			model.addAttribute("loginFail", true);
 		}
@@ -345,6 +359,13 @@ public class CandidateController {
 			e.printStackTrace();
 		}
 		
+		try {
+			PrivateExamVO privateExamVO = new PrivateExamVO();
+			privateExamVO.setTakerId(candivo.getUsername());
+			mv.addObject("privateExamList", privateExamService.getPrivateExamListForTakerId(privateExamVO));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
 		mv.addObject("takerId", candivo.getUsername());
@@ -424,9 +445,59 @@ public class CandidateController {
 	 * return "candidate/candidate/candidateSurvey"; }
 	 */
 	//메인화면
+	// 2019.07.25 성재민
+	// 유저/매니저/기업 별로 로그인시 연결되는 메인 페이지 구분하여 연결
+	// 2019.07.25 성재민
+	// 비공개 시험 응시자가 이메일의 링크를 눌러 화면에 접근한 경우
+	// examId가 GET 방식으로 전달된다.
 	@RequestMapping("candidateMain.do")
-	public String candidateMain() {
-		return "candidate/candidate/candidateMain";
+	public String candidateMain(Authentication authentication, HttpServletRequest request, HttpSession session) {
+		String targetPage 	= "candidate/candidate/candidateMain";
+		String examId 		= request.getParameter("examId");
+		// 2019.07.25 성재민
+		// 이메일로 링크를 받아 접근한 유저라면 examId 를 가지고 있기 때문에
+		// 해당 examId 를 세션에 담아 둔다.
+		if(examId != null && examId != "") {
+			session.setAttribute("privateExamId", examId);
+		}
+		
+		if(authentication != null) {
+			CustomerUser user = (CustomerUser)authentication.getPrincipal();
+			
+			for(GrantedAuthority item : user.getAuthorities()) {
+				String roleName = item.getAuthority();
+				
+				switch (roleName) {
+				case "ROLE_USER":
+					// 2019.07.25 성재민
+					// 비공개 시험 응시자라면 비공개 시험 테이블에 시험 ID 와 응시자 ID를 저장해야 한다.
+					String privateExamId = (String) session.getAttribute("privateExamId");
+					if(privateExamId != null) {
+						PrivateExamVO privateExamVO = new PrivateExamVO();
+						privateExamVO.setExamId(Integer.parseInt(privateExamId));
+						privateExamVO.setTakerId(user.getUsername());
+						session.removeAttribute("privateExamId");
+						
+						privateExamService.insertPrivateExam(privateExamVO);
+					}
+					targetPage = "candidate/candidate/candidateMain";
+					break;
+					
+				case "ROLE_MANAGER":
+					targetPage = "redirect:managerMain.do";
+					break;
+					
+				case "ROLE_COMPANY":
+					targetPage = "redirect:companyMain.do";
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+		
+		return targetPage;
 	}
 	
 	

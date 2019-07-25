@@ -7,21 +7,21 @@
 		INSERT INTO PRIVATE_EXAM(
 				PRIVATE_EXAM_ID
 			,	EXAM_ID
-			,	TAKER_EMAIL
+			,	TAKER_ID
 		) 
 		VALUES (
 				PRIVATE_EXAM_ID_SEQ.NEXTVAL
 			, 	#{examId}
-			, 	#{takerEmail}
+			, 	#{takerId}
 		)
 	</insert>
 	
 	<!-- 2019.07.23 성재민 -->
-	<!-- 비공개 시험 삭제 -->
+	<!-- 비공개 시험 삭제 응시자 id 로 -->
 	<delete id="deletePrivateExam" parameterType="PrivateExamVO">
 		DELETE FROM PRIVATE_EXAM
 		<where>
-			TAKER_EMAIL = #{takerEmail}
+			TAKER_ID = #{takerId}
 		</where>
 	</delete>
 	
@@ -34,14 +34,29 @@
 		</where>
 	</delete>
 	
+	<!-- 2019.07.25 성재민 -->
+	<!-- 시험 id 로 검색 -->
 	<select id="getPrivateExamListForExamId" resultType="PrivateExamVO">
 		SELECT 
 				PRIVATE_EXAM_ID
 			,	EXAM_ID
-			,	TAKER_EMAIL
+			,	TAKER_ID
 		FROM PRIVATE_EXAM
 		<where>
 			EXAM_ID = #{examId}
+		</where>
+	</select>
+	
+	<!-- 2019.07.25 성재민 -->
+	<!-- 응시자 id 로 검색 -->
+	<select id="getPrivateExamListForTakerId" resultType="PrivateExamVO">
+		SELECT 
+				PRIVATE_EXAM_ID
+			,	EXAM_ID
+			,	TAKER_ID
+		FROM PRIVATE_EXAM
+		<where>
+			TAKER_ID = #{takerId}
 		</where>
 	</select>
 	
@@ -49,7 +64,7 @@
 		SELECT 
 				PRIVATE_EXAM_ID
 			,	EXAM_ID
-			,	TAKER_EMAIL
+			,	TAKER_ID
 		FROM PRIVATE_EXAM
 	</select>
 </mapper>

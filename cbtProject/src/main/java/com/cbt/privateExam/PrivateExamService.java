@@ -16,4 +16,8 @@ public interface PrivateExamService {
 	public List<PrivateExamVO> getPrivateExamListForExamId(PrivateExamVO vo);
 	
 	public List<PrivateExamVO> getAllPrivateExamList();
+	
+	// 2019.07.25 성재민
+	// 응시자 id 로 검색
+	public List<PrivateExamVO> getPrivateExamListForTakerId(PrivateExamVO vo);
 }

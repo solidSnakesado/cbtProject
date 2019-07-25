@@ -1,76 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/main.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	$(document)
+			.ready(
+					function() {
 
-	$(document).ready(function(){
-		
-		var score = ${takeExamId.score};
-		
-		if(score != 9999){
-			$("[id ='btn']").html('응시결과 확인');
-			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
-			alert('응시 완료한 시험입니다.');
-		} else if(nowDate <= sDate) {
-			$("[id ='btn']").hide();
-			alert('시간 확인.');
-		} else if(nowDate >= eDate) {
-			$("[id ='btn']").hide();
-			alert('종료된 시험입니다.');
-		}
-		
-		console.log(serverDate);
-		console.log("서버시간 : "+nowDate);
-		console.log("시험시작 : "+sDate);
-		console.log("시험종료 : "+eDate);
-		
-		$("[id ='btn']").click(function(){
-			
-			takeExamForm.submit();
-			
-		});
-		
-	})
-	
+						var score = $
+						{
+							takeExamId.score
+						}
+						;
+
+						if (score != 9999) {
+							$("[id ='btn']").html('응시결과 확인');
+							$("[id ='takeExamForm']")
+									.attr('action',
+											'${pageContext.request.contextPath }/candidateTestResult.do');
+							alert('응시 완료한 시험입니다.');
+						} else if (nowDate <= sDate) {
+							$("[id ='btn']").hide();
+							alert('시간 확인.');
+						} else if (nowDate >= eDate) {
+							$("[id ='btn']").hide();
+							alert('종료된 시험입니다.');
+						}
+
+						console.log(serverDate);
+						console.log("서버시간 : " + nowDate);
+						console.log("시험시작 : " + sDate);
+						console.log("시험종료 : " + eDate);
+
+						$("[id ='btn']").click(function() {
+
+							takeExamForm.submit();
+
+						});
+
+					})
+
 	/* 시간비교를 위한 치환 펑션  */
 	function parse(str) {
-	    var y = str.substr(0, 4);
-	    var mon = str.substr(5, 2);
-	    var d = str.substr(8, 2);
-	    var h = str.substr(11,2);
-	    var min = str.substr(14,2);
-	    
-	    return new Date(y,mon-1,d,h,min);
+		var y = str.substr(0, 4);
+		var mon = str.substr(5, 2);
+		var d = str.substr(8, 2);
+		var h = str.substr(11, 2);
+		var min = str.substr(14, 2);
+
+		return new Date(y, mon - 1, d, h, min);
 	}
-	
-	
+
 	let xmlHttp;
-	
+
 	if (window.XMLHttpRequest) {
 		xmlHttp = new XMLHttpRequest();
-	} else if (window.ActiveXObject){
+	} else if (window.ActiveXObject) {
 		xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
 	}
 	xmlHttp.open('HEAD', window.location.href.toString(), false);
 	xmlHttp.setRequestHeader("Content-Type", "text/html");
 	xmlHttp.send('');
-	
+
 	let serverDate = xmlHttp.getResponseHeader("Date");
-	
+
 	/* 서버의 현재 시간 */
 	let nowDate = new Date(serverDate);
-	
+
 	/* 시험시작시간 */
 	let sDate = parse("${detailExam.examStartTime}");
 	/* 시험종료시간 */
 	let eDate = parse("${detailExam.examEndTime}");
-	
 
 	/* function getTimeStamp() {
 		var d = new Date(serverDate);
@@ -100,77 +106,149 @@
 		}
 		return zero + n;
 	} */
-	
-
 </script>
 </head>
 <body>
-	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTakeExam.do" method="post">
-		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="true">
-		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="true">
+	<form id="takeExamForm" name="takeExamForm"
+		action="${pageContext.request.contextPath }/candidateTakeExam.do"
+		method="post">
+		<input type="text" id="eId" name="examId"
+			value="${detailExam.examId }" hidden="true"> <input
+			type="text" id="tId" name="takeExamId"
+			value="${takeExamId.takeExamId }" hidden="true">
 	</form>
 
 	<header id="header"></header>
 	<h4 class="mx-auto pb-2">시험 상세 보기</h4>
 	<div class="container">
-	<input type = "hidden" name = "no" value = "">
-	<table border = "1" class="table text-center" border="1">
+		<input type="hidden" name="no" value="">
+		<table border="1" class="table text-center" border="1">
 
-		<tr>
-			<th width="150px">시험이름</th>
-			<td id="mainExamName">${detailExam.examName}</td>
-		</tr>
-		
-<c:if test="${detailExam.disclosureStatus == 'O2'}">
-		<td colspan="2"><br><br><br><h2> 본 시험은 비공개 시험입니다. <br><br> 응시대상자이신지 확인하여 주세요 </h2> <br><br><br></td>
-</c:if>
+			<tr>
+				<th width="150px">시험이름</th>
+				<td id="mainExamName">${detailExam.examName}</td>
+			</tr>
+			<!-- 2019.07.25 성재민 -->
+			<!-- 비공개 시험 일때 해당 응시자가 응시 가능 한 시험이면-->
+			<!-- 시험 디테일이 나오고 -->
+			<!-- 응시 할수 없는 시험이라면 -->
+			<!-- 비공개 시험이라는 메시지 출력 -->
+			<c:if test="${detailExam.disclosureStatus == 'O2'}">
+				<!-- 값 비교 체크를 위한 변수 isMatch 를 <c:set 으로 선언 -->
+				<c:set var="isMatch" value="N"></c:set>
+				<!-- 응시자가 응시 할수 있는 비공개 시험 LIST 를 가져와서 -->
+				<!-- 리스트 안의 값과 현재 시험의 시험 ID 를 비교하여 -->
+				<!-- 같은 값이 있으면 isMatch를 Y 로 변경 -->
+				<c:forEach items="${privateExamList}" var="privateExam">
+					<c:if test="${detailExam.examId == privateExam.examId}">
+						<c:set var="isMatch" value="Y"></c:set>
+					</c:if>
+				</c:forEach>
+				<!-- isMatch가 Y 라면 응시 가능 하므로 시험 정보 표시 -->
+				<c:if test="${isMatch == 'Y'}">
+					<tr>
+						<th>시험시간</th>
+						<td>${detailExam.examStartTime}~ ${detailExam.examEndTime}</td>
+					</tr>
+					<tr>
+						<th>문항수</th>
+						<td>${detailExam.questionQuantity}</td>
+					</tr>
+					<tr>
+						<th>응시가능 횟수</th>
+						<td>${detailExam.numberOfTimes}</td>
+					</tr>
+					<tr>
+						<th>합격 점수</th>
+						<td>${detailExam.passingScore}</td>
+					</tr>
+					<tr>
+						<th>응시가능 인원</th>
+						<td>${detailExam.applicants}</td>
+					</tr>
+					<tr>
+						<th>시험상태</th>
+						<c:if test="${detailExam.examStatus == 'D1'}">
+							<td>시험전</td>
+						</c:if>
+						<c:if test="${detailExam.examStatus == 'D2'}">
+							<td>시험중</td>
+						</c:if>
+						<c:if test="${detailExam.examStatus == 'D3'}">
+							<td>시험완료</td>
+						</c:if>
+					</tr>
+					<tr>
+						<th>시험설명(간략)</th>
+						<td>${detailExam.examDescriptionSimple}</td>
+					</tr>
+					<tr>
+						<th>시험설명(상세)</th>
+						<td>${detailExam.examDescriptionDetail}</td>
+					</tr>
+				</c:if>
+				<!-- isMatch가 N 라면 응시 가능 하므로 비공개 시험이라 응시가 되지 않는 다는 정보 표시 -->
+				<c:if test="${isMatch == 'N'}">
+					<td colspan="2"><br>
+					<br>
+					<br>
+						<h2>
+							본 시험은 비공개 시험입니다. <br>
+							<br> 응시대상자이신지 확인하여 주세요
+						</h2> <br>
+					<br>
+					<br></td>
+				</c:if>
+			</c:if>
 
-<c:if test="${detailExam.disclosureStatus == 'O1'}">
-		<tr>
-			<th>시험시간</th>
-			<td>${detailExam.examStartTime} ~ ${detailExam.examEndTime}</td>
-		</tr>
-		<tr>
-			<th>문항수</th>
-			<td>${detailExam.questionQuantity}</td>
-		</tr>
-		<tr>
-			<th>응시가능 횟수</th>
-			<td>${detailExam.numberOfTimes}</td>
-		</tr>
-		<tr>
-			<th>합격 점수</th>
-			<td>${detailExam.passingScore}</td>
-		</tr>
-		<tr>
-			<th>응시가능 인원</th>
-			<td>${detailExam.applicants}</td>
-		</tr>
-		<tr>
-			<th>시험상태</th>
-			<c:if test="${detailExam.examStatus == 'D1'}">
-				<td>시험전</td>
+			<c:if test="${detailExam.disclosureStatus == 'O1'}">
+				<tr>
+					<th>시험시간</th>
+					<td>${detailExam.examStartTime}~ ${detailExam.examEndTime}</td>
+				</tr>
+				<tr>
+					<th>문항수</th>
+					<td>${detailExam.questionQuantity}</td>
+				</tr>
+				<tr>
+					<th>응시가능 횟수</th>
+					<td>${detailExam.numberOfTimes}</td>
+				</tr>
+				<tr>
+					<th>합격 점수</th>
+					<td>${detailExam.passingScore}</td>
+				</tr>
+				<tr>
+					<th>응시가능 인원</th>
+					<td>${detailExam.applicants}</td>
+				</tr>
+				<tr>
+					<th>시험상태</th>
+					<c:if test="${detailExam.examStatus == 'D1'}">
+						<td>시험전</td>
+					</c:if>
+					<c:if test="${detailExam.examStatus == 'D2'}">
+						<td>시험중</td>
+					</c:if>
+					<c:if test="${detailExam.examStatus == 'D3'}">
+						<td>시험완료</td>
+					</c:if>
+				</tr>
+				<tr>
+					<th>시험설명(간략)</th>
+					<td>${detailExam.examDescriptionSimple}</td>
+				</tr>
+				<tr>
+					<th>시험설명(상세)</th>
+					<td>${detailExam.examDescriptionDetail}</td>
+				</tr>
 			</c:if>
-			<c:if test="${detailExam.examStatus == 'D2'}">
-				<td>시험중</td>
-			</c:if>
-			<c:if test="${detailExam.examStatus == 'D3'}">
-				<td>시험완료</td>
-			</c:if>
-		</tr>
-		<tr>
-			<th>시험설명(간략)</th>
-			<td>${detailExam.examDescriptionSimple}</td>
-		</tr>
-		<tr>
-			<th>시험설명(상세)</th>
-			<td>${detailExam.examDescriptionDetail}</td>
-		</tr>
-</c:if>
-	</table>
-	<br>
-	<button type="button" id="btn" value="${detailExam.examId}">응시하기</button>
-	<input type = "button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value = "돌아가기">
+		</table>
+		<br>
+		<button type="button" id="btn" value="${detailExam.examId}">응시하기</button>
+		<input type="button" class="btn btn-primary m-3 p-3"
+			onclick="location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'"
+			value="돌아가기">
 	</div>
 </body>
 </html>
