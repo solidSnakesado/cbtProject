@@ -82,10 +82,11 @@
 	
 	<!-- 기업 목록 조회 -->
 	<select id="getCompanyList" resultType="CompanyVO">
-		SELECT COMPANY_ID
-			,COMPANY_NAME
+		SELECT COMPANY_ID "companyId"
+			,COMPANY_NAME "companyName"
 			,COMPANY_MANAGER
-		FROM COMPANY			
+		FROM COMPANY
+		ORDER BY COMPANY_ID		
 	</select>
 	
 		<!-- 관리자 회사 등록 -->

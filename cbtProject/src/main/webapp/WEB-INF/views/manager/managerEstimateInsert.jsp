@@ -11,11 +11,13 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	
 	<script>
 	//의뢰서
 	$(document).ready(function() {
+		
+		
 		
 		//카테고리ID 값을 채운다
 		$.ajax({
@@ -23,7 +25,7 @@
 			dataType: "json",
 			url:"${pageContext.request.contextPath }/getCateoryNameList.do",
 			success : function(data) {
-				// db에서 읽어온 값으로 대분류 설정
+				// db에서 읽어온 값으로 카테고리 ID 설정
 				for(var i = 0; i < data.length; ++i){
 					if(i==0){
 						var optionMain = $("<option value=" + data[i].categoryId + " selected= \"selected\" >" + data[i].categoryName + "</option>");
@@ -40,11 +42,41 @@
 				alert('에러발생');
 			}
 		});
+		//미리생길 이벤트를 건다.
+		$('#tbodyCompany').on('click','.companyNameVal', function (){
+			
+			$('#companyId').val($(this).parent().parent().find('td').eq(0).text());
+			$('#companyName').val($(this).parent().parent().find('td').eq(1).text());
+			$('#exampleModal').modal('hide');
+		});
+		
+		
+		$('#btnCompanyId').on('click', function (e) {
+
+			$('#exampleModal').modal('show');
+			$.ajax({
+				type:"GET",
+				dataType: "json",
+				url:"${pageContext.request.contextPath }/getcompanyNameList.do",
+				success : function(data) {
+					$('#tbodyCompany').empty();
+					// company ID, Name 출력
+					for(var i = 0; i < data.length; ++i){
+							
+							var tag = "<tr><td onclick='companyNameInsert()'>" + data[i].companyId + "</td> <td>" 
+									+ data[i].companyName + "</td>"
+									+ "<td><button class='companyNameVal'>선택</button></td></tr>";
+							$('#tbodyCompany').append(tag); //tbody밑에 값채워줌
+						}
+						
+					} , error : function() {
+					alert('에러발생');
+				}
+			});
+		});
 		
 		
 		
-		
-	
 		//확인버튼 눌렀을때 처리 로직
 		$("#submitBtn").click(function() {
 			
@@ -111,9 +143,7 @@
 		
 		
 	});
-	
-	
-	
+
 	</script>
 </head>  
 <body>
@@ -123,20 +153,24 @@
 		<table>
 			<%-- <tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr> --%>
- 			<tr>	<td>카테고리ID</td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
-	 		<tr>	<td>기업ID</td>		<td>	<input type="text" name="companyId" id = "companyId" ></td></tr>
-	 		<tr>	<td>의뢰이름</td>		<td>	<input type="text" name="estimateName"  id="estimateName"></td></tr>
-			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" id ="estimatePrice" ></td></tr>
-			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
- 			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
-			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
-			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
-			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
-			<tr>	<td>난이도</td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" readonly></td></tr>
-	 		<tr>	<td>비고</td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
+ 			<tr>	<td>카테고리종류 </td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
+	 		<tr>	<td>기업 이름 </td>		<td>	<input type="text" name="companyId" id = "companyId" >
+	 											<input type="text" id = "companyName" >
+	 		<button type="button" class="btn btn-primary" id="btnCompanyId" data-toggle="modal" >
+  기업 찾기
+</button></td></tr>
+	 		<tr>	<td>의뢰이름 </td>		<td>	<input type="text" name="estimateName"  id="estimateName"></td></tr>
+			<tr>	<td>금액 </td>		<td>	<input type="text" name="estimatePrice" id ="estimatePrice" ></td></tr>
+			<tr>	<td>의뢰진행상태 </td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
+ 			<tr>	<td>응시대상자 </td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
+			<tr>	<td>응시목적 </td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
+			<tr>	<td>응시자 수 </td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
+			<tr>	<td>시험분류 </td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
+			<tr>	<td>난이도 </td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
+			<tr>	<td>시험일시 </td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" readonly></td></tr>
+	 		<tr>	<td>비고 </td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
 			<%-- <tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr> --%>  
-			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
+			<tr>	<td>시험간격 </td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 		</table>
 		<button type="button" id="submitBtn">등록하기</button> <button type="button" onclick="location.href='managerEstimateList.do'"> 취소 </button> 
 	</form>
@@ -145,10 +179,39 @@
 			$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
 		
 			
-			function windowClose(){
+			/* function windowClose(){
 				window.opener.top.location.reload();
 				window.close();
-			}
+			} */
 	</script>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">기업 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table >
+			<tr>
+				<th>기업 ID</th>
+				<th>기업 이름</th>
+			</tr>
+			<tbody id='tbodyCompany'>
+			
+			</tbody>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  data-dismiss="modal">Close</button> <!-- class="btn btn-secondary" -->
+        <button type="button" class="btn btn-primary" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

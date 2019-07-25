@@ -32,6 +32,7 @@ import com.cbt.category.CategoryVO;
 import com.cbt.categoryMain.CategoryMainService;
 import com.cbt.categoryMain.CategoryMainVO;
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
 import com.cbt.condition.ConditionService;
 
@@ -49,6 +50,8 @@ public class EstimateController {
 	EstimateService estimateService;
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
+	@Autowired
+	CompanyService companyService;
 	
 	
 	//기업은 자기의뢰 내용을 볼수있다. company-select
@@ -289,17 +292,15 @@ public class EstimateController {
 		      }
 		}
 		
-	/*
-	 * @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.POST)
-	 * 
-	 * @ResponseBody public void getcompanyNameList(EstimateVO vo,
-	 * HttpServletRequest request, HttpServletResponse response) {
-	 * 
-	 * 
-	 * return estimateService.updatesTradeProgressExchange4(vo);
-	 * 
-	 * }
-	 */
+	  //companyID와 NAME을 가져오기위함
+	  @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.GET)
+	  @ResponseBody public List<CompanyVO> getcompanyNameList(CompanyVO vo,HttpServletRequest request, HttpServletResponse response) {
+	  
+	  
+	  return companyService.getCompanyList(vo);
+	  
+	  }
+	 
 		
 		
 }
