@@ -22,17 +22,17 @@ function goList(p){
 	searchFrm.submit();
 }
 
-// 로그인체크후 로그인하러가기     2019.07.20 김재용
-function goLogin(){
+// 로그인체크후 로그인하러가기     2019.07.20 김재용 --> 통합화 이후 미사용
+/* function goLogin(){
 	alert('로그인이 필요한 서비스입니다.');
 	location.href="${pageContext.request.contextPath }/candidateLogin.do";
-}
+} */
 
 </script>
 <title>CBT 시험 일정 확인</title>
 </head>
 <body>
-	<h1>응시가능한 시험</h1>
+	<h4 class="mx-auto pb-2">응시가능한 시험</h4>
 	<br>
 	<form name="searchFrm">
 		<input type = "hidden" name="page" value="1">
@@ -49,12 +49,12 @@ function goLogin(){
 		</tr>
 	<c:set var="takerId" value="${takerId}"></c:set>
    	<c:forEach items="${candidateScheduleCheck.schedulePage}" var="examInfo" >
-   	<c:if test="${takerId != null}">
+<%--    	<c:if test="${takerId != null}"> --%>
 		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
-	</c:if>
+<%-- 	</c:if>
 	<c:if test="${takerId == null}">
 		<tr onclick="goLogin();">
-	</c:if>
+	</c:if> --%>
 			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>
 			<td>${examInfo.EXAM_START_TIME}</td>

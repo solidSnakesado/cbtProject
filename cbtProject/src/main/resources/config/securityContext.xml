@@ -12,6 +12,7 @@
 	<security:http pattern="/image/*" security="none"/>
 	<security:http pattern="/css/*" security="none"/>
 	<security:http pattern="/insertCandidate.do" security="none"/>
+	<security:http pattern="/candidateScheduleCheck.do" security="none"/>
 	<security:http>
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />

@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="w3-top">
 	<div class="w3-bar w3-black w3-card">
+	<sec:authorize access="hasRole('ROLE_COMPANY')">
     	<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     	<a href="${pageContext.request.contextPath }/companyMain.do" class="w3-bar-item w3-button w3-padding-large">CBT</a>
     	<a href="${pageContext.request.contextPath }/companyIntroduce.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">회사소개</a>
@@ -12,7 +13,6 @@
 <%-- 		<c:if test="${not empty sessionScope.candidate }">  
    	 		<a href="companyAccount.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
 		</c:if> --%>
-		<sec:authorize access="hasRole('ROLE_COMPANY')">
 		<%-- <c:if test="${not empty sessionScope.company }"> --%>
 			<!-- 2019.07.09 성재민-->
 			<!-- <div class="w3-dropdown-hover w3-hide-small"> 를  -->
