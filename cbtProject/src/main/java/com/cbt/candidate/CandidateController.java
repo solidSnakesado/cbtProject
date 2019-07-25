@@ -279,11 +279,14 @@ public class CandidateController {
 	// 시험일정 전체 보기(로그인 없이 보기)
 	// 세션에 takerId 가져와 로그인 체크기능추가   - 2019.07.18  재용
 	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
-	public ModelAndView candidateScheduleCheck(Model model, Paging paging, Authentication authentication) {
+	public ModelAndView candidateScheduleCheck(Model model, Paging paging //Authentication authentication <-- 필요시
+																			) {
 		ModelAndView mv = new ModelAndView();
 
-		CustomerUser candivo = (CustomerUser) authentication.getPrincipal();
-			mv.addObject("takerId", candivo.getUsername());
+		/*
+		 * CustomerUser candivo = (CustomerUser) authentication.getPrincipal();
+		 * mv.addObject("takerId", candivo.getUsername());
+		 */
 
 		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheckPage(paging));
 		mv.setViewName("candidate/candidate/candidateScheduleCheck");

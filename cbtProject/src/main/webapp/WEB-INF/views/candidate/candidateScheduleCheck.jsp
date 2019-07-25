@@ -32,7 +32,7 @@ function goList(p){
 <title>CBT 시험 일정 확인</title>
 </head>
 <body>
-	<h1>응시가능한 시험</h1>
+	<h4 class="mx-auto pb-2">응시가능한 시험</h4>
 	<br>
 	<form name="searchFrm">
 		<input type = "hidden" name="page" value="1">
