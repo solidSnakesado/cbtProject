@@ -135,23 +135,30 @@ public class CandidateController {
 		return "redirect:candidateMain.do";
 	}
 	
+	
 	//삭제처리			 장세준 (7/3)
-//	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
-//	public String deleteBoard(Authentication authentication) {
-//		CustomerUser user = (CustomerUser) authentication.getPrincipal();
-//		System.out.println("dd");
-//		candidateService.deleteCandidate(user);
-//		authentication.isAuthenticated();
-//		return "redirect:candidateMain.do";
-//	}
+	/*
+	 * @RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST) public
+	 * String deleteBoard(Authentication authentication) { CustomerUser user =
+	 * (CustomerUser) authentication.getPrincipal();
+	 * candidateService.deleteCandidate(user); authentication.isAuthenticated();
+	 * return "redirect:candidateMain.do"; }
+	 */
 	
 	//삭제처리			 장세준 (7/2)
-	@RequestMapping("deleteCandidate.do")
-	public String candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo) {
-		candidateService.deleteCandidate(vo); 
-		return "candidate/candidate/candidateAccountManage";
-	}
+	/*
+	 * @RequestMapping("deleteCandidate.do") public String
+	 * candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo) {
+	 * candidateService.deleteCandidate(vo); return
+	 * "candidate/candidate/candidateAccountManage"; }
+	 */
 	
+	//삭제처리 --> 통합로그인 이후 수정	june (7/25)
+	@RequestMapping("deleteCandidate.do")
+	public String candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo, Authentication authentication) {
+		candidateService.deleteCandidate(vo); 
+		return "redirect:/logout";
+	}
 	
 	//단건조회			 장세준 (7/2)
 	@RequestMapping("/getCandidate/{takerId}")
@@ -216,11 +223,21 @@ public class CandidateController {
 	}
 	
 	
-	//2019.06.27 장세준 - 응시자 정보 조회(단건) --> 탈퇴 가능
+	//응시자 정보 조회(단건)--> 통합로그인 이후 수정	june (7/25)
+	//응시자 정보 조회(단건) --> 탈퇴 가능 june (6/27) 
 	@RequestMapping("candidateAccountManage.do")	
-	public String candidateAccountManage() {
+	public String candidateAccountManage(CandidateVO vo, Model model, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+
+		vo.setTakerId(user.getUsername());
+		model.addAttribute("candidate", candidateService.getCandidate(vo));
 		return "candidate/candidate/candidateAccountManage";
 	}
+	/*
+	 * @RequestMapping("candidateAccountManage.do") public String
+	 * candidateAccountManage() { return
+	 * "candidate/candidate/candidateAccountManage"; }
+	 */
 
 	 
 	//원서접수 
@@ -262,24 +279,38 @@ public class CandidateController {
 	// 시험일정 전체 보기(로그인 없이 보기)
 	// 세션에 takerId 가져와 로그인 체크기능추가   - 2019.07.18  재용
 	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
-	public ModelAndView candidateScheduleCheck(Model model, Paging paging, HttpSession session) {
+	public ModelAndView candidateScheduleCheck(Model model, Paging paging //Authentication authentication <-- 필요시
+																			) {
 		ModelAndView mv = new ModelAndView();
-		
-		// 로그인 체크
-		if(session.getAttribute("candidate") == null) {
-			mv.addObject("takerId", null);
-		} else {
-			CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
-			mv.addObject("takerId", candivo.getTakerId());
-		}
-		
+
+		/*
+		 * CustomerUser candivo = (CustomerUser) authentication.getPrincipal();
+		 * mv.addObject("takerId", candivo.getUsername());
+		 */
+
 		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheckPage(paging));
 		mv.setViewName("candidate/candidate/candidateScheduleCheck");
-			
+
 		return mv;
 	}
-	
+	/*
+	 * @RequestMapping(value = "candidateScheduleCheck.do", method =
+	 * RequestMethod.GET) public ModelAndView candidateScheduleCheck(Model model,
+	 * Paging paging, HttpSession session) { ModelAndView mv = new ModelAndView();
+	 * 
+	 * // 로그인 체크 if(session.getAttribute("candidate") == null) {
+	 * mv.addObject("takerId", null); } else { CandidateVO candivo =
+	 * (CandidateVO)session.getAttribute("candidate"); mv.addObject("takerId",
+	 * candivo.getTakerId()); }
+	 * 
+	 * mv.addObject("candidateScheduleCheck",
+	 * candidateService.candidateScheduleCheckPage(paging));
+	 * mv.setViewName("candidate/candidate/candidateScheduleCheck");
+	 * 
+	 * return mv; }
+	 */
 	// 시험일정 전체 보기(로그인 없이 보기)
+	
 	/*
 	 * @RequestMapping(value = "candidateScheduleCheck.do", method =
 	 * RequestMethod.GET) public ModelAndView candidateScheduleCheck() {
@@ -289,21 +320,21 @@ public class CandidateController {
 	 * 
 	 * return mv; }
 	 */
-	
+	 
+	// 로그인 통합화 이후 수정
 	@RequestMapping(value = "candidateExamDetialView.do/{examId}", method = RequestMethod.GET)
-	public ModelAndView candidateExamDetialView(@PathVariable("examId") int examId, HttpSession session) {
+	public ModelAndView candidateExamDetialView(@PathVariable("examId") int examId, Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
 		ExamVO examVO = new ExamVO();
 		examVO.setExamId(examId);
 		
-		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+		CustomerUser candivo = (CustomerUser)authentication.getPrincipal();
 		TakeExamVO vo = new TakeExamVO();
 		TakeExamVO vovo = new TakeExamVO();
-		
 		// 2019.07.17 김재용 추가
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 응시하기 버튼 바꾸기
-		vo.setTakerId(candivo.getTakerId()); 
+		vo.setTakerId(candivo.getUsername()); 
 		vo.setExamId(examId);
 		try {
 			vovo = takeExamService.selectTakeExamId(vo);
@@ -316,12 +347,37 @@ public class CandidateController {
 		
 		
 		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
-		mv.addObject("takerId", candivo.getTakerId());
+		mv.addObject("takerId", candivo.getUsername());
 		
 		mv.addObject("detailExam", examService.getExam(examVO));
 		mv.setViewName("candidate/candidate/candidateExamDetialView");
 		return mv;
 	}
+	
+	/*
+	 * @RequestMapping(value = "candidateExamDetialView.do/{examId}", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * candidateExamDetialView(@PathVariable("examId") int examId, HttpSession
+	 * session) { ModelAndView mv = new ModelAndView(); ExamVO examVO = new
+	 * ExamVO(); examVO.setExamId(examId);
+	 * 
+	 * CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+	 * TakeExamVO vo = new TakeExamVO(); TakeExamVO vovo = new TakeExamVO();
+	 * 
+	 * // 2019.07.17 김재용 추가 // 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서 // 응시하기 버튼 바꾸기
+	 * vo.setTakerId(candivo.getTakerId()); vo.setExamId(examId); try { vovo =
+	 * takeExamService.selectTakeExamId(vo); if(vovo == null) {
+	 * takeExamService.insertTakeExam(vo); } } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * 
+	 * mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
+	 * mv.addObject("takerId", candivo.getTakerId());
+	 * 
+	 * mv.addObject("detailExam", examService.getExam(examVO));
+	 * mv.setViewName("candidate/candidate/candidateExamDetialView"); return mv; }
+	 */
+	
 	
 	// 시험일정 가져오기
 //	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)

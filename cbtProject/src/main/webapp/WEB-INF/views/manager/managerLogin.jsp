@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	
 <script type="text/javascript">
 function checkForm() {
     var managerId 		= document.fmField.managerId;
@@ -27,7 +19,7 @@ function checkForm() {
 
 <div  align="right"><a href="candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="companyLogin.do"><button>기 업 계 정</button></a></div>	
 <br>	
-	<header id="header"></header>
+
 	<form id="fmField" name="fmField" action="managerLogin.do" method="POST">
 		<table border="1" align="center" class="table text-center">
 			<tr>
@@ -48,7 +40,7 @@ function checkForm() {
 	</form>
 	<div align="right">
 		<br>
-		<a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
+		<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a><br> <br>
 	</div>
 </body>
 </html>

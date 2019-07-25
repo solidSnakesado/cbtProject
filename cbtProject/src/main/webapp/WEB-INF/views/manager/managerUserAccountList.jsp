@@ -2,12 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+
 <script>
 	$(document).ready(function() {
 		function checkFileType(filePath) {
@@ -104,9 +99,7 @@
 	}
 </script>
 
-</head>
-<body>
-	<h2>응시자 계정관리</h2>
+	<h4 class="mx-auto pb-2">응시자 계정관리</h4>
 	<script>
 		function goList(p) {
 			searchFrm.page.value = p;
@@ -150,10 +143,10 @@
 		<br>
 		<table border="1" align="center">
 			<tr>
-				<th>선택</th>
-				<th>응시자ID</th>
-				<th>이름</th>
-				<th>E-Mail</th>
+				<th><label>선택</label></th>
+				<th><label>응시자ID</label></th>
+				<th><label>이름</label></th>
+				<th><label>E-Mail</label></th>
 			</tr>
 			<c:forEach items="${result.takerList }" var="CandidateVO">
 				<tr>
@@ -179,5 +172,3 @@
 	<hr />
 	<my:paging jsFunc="goList" paging="${result.paging }" />
 	</div>
-</body>
-</html>

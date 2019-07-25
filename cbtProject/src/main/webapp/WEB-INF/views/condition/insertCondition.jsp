@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>insertCondition.jsp</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
+
 <body>
 	<h4 class="mx-auto pb-2">상태 등록</h4>
 	<form action="insertCondition.do" method="post" enctype="application/x-www-form-urlencoded">
@@ -19,5 +13,3 @@
 		<input type="submit" id="submit" value="등록" class="btn btn-primary m-3 p-3">
 		
 	</form>
-</body>
-</html>

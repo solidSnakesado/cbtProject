@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td><label>회사분류</label></td>
-				<td><select name="companyClassification" id="companyClassification">
+				<td><select name="companyClassification" id="companyClassification" class="form-control">
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
@@ -57,7 +57,7 @@
 			</tr>
 			<tr>
 				<td><label>세부업종</label></td>
-				<td><select name="companySectors" id="companySectors">
+				<td><select name="companySectors" id="companySectors" class="form-control">
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>

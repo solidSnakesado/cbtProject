@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script>
 	//페이징처리
@@ -51,26 +44,26 @@
 </head>
 <body>
 
-<h2>의뢰목록</h2>
+<h4 class="mx-auto pb-2">의뢰목록</h4>
 <hr/>		
 <div class="container">
 
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
 		</form>
-		
+		<button type="button" class="btn btn-primary btn-ml-1" value="등록"  id="btnInsert"  onclick="location.href='managerEstimateInsert.do'">의뢰등록</button>
 		<form action="companyEstimateList.do">
 			
-			<table border="1" class="table text-center">
+			<table border="1" class="table table-striped">
 				<tr>
-					<th>순번</th>
-					<th>카테고리ID</th>
-					<th>의뢰이름</th>
-					<th>의뢰일</th>
-					<th>진행상태</th>
-					<th>시험일시</th>
-					<th>시험출제</th>
-					<th>삭제</th>
+					<th><label>순번</label></th>
+					<th><label>카테고리ID</label></th>
+					<th><label>의뢰이름</label></th>
+					<th><label>의뢰일</label></th>
+					<th><label>진행상태</label></th>
+					<th><label>시험일시</label></th>
+					<th><label>시험출제</label></th>
+					<th><label>삭제</label></th>
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
@@ -87,9 +80,6 @@
 			</table>
 		</form>
 		<my:paging jsFunc="goList" paging="${result.paging}"/>
-		<button type="button"  class="btn btn-primary" value="등록"  id="btnInsert"  onclick="location.href='managerEstimateInsert.do'">의뢰등록</button>
+		
 		
 	</div>	
-</body>
-
-</html>

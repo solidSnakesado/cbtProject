@@ -58,5 +58,5 @@ function checkForm() {
 		</table>
 		<!--테이블 끝-->
 	</form>
-	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div><br>
+	<div align="right"><a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a></div><br>
 </body>
