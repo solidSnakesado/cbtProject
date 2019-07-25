@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,42 +8,34 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	$(document)
-			.ready(
-					function() {
-
-						var score = $
-						{
-							takeExamId.score
-						}
-						;
-
-						if (score != 9999) {
-							$("[id ='btn']").html('응시결과 확인');
-							$("[id ='takeExamForm']")
-									.attr('action',
-											'${pageContext.request.contextPath }/candidateTestResult.do');
-							alert('응시 완료한 시험입니다.');
-						} else if (nowDate <= sDate) {
-							$("[id ='btn']").hide();
-							alert('시간 확인.');
-						} else if (nowDate >= eDate) {
-							$("[id ='btn']").hide();
-							alert('종료된 시험입니다.');
-						}
-
-						console.log(serverDate);
-						console.log("서버시간 : " + nowDate);
-						console.log("시험시작 : " + sDate);
-						console.log("시험종료 : " + eDate);
-
-						$("[id ='btn']").click(function() {
-
-							takeExamForm.submit();
-
-						});
-
-					})
+	$(document).ready(function() {
+	
+		var score = ${takeExamId.score};
+		
+		if (score != 9999) {
+			$("[id ='btn']").html('응시결과 확인');
+			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
+			alert('응시 완료한 시험입니다.');
+		} else if (nowDate <= sDate) {
+			$("[id ='btn']").hide();
+			alert('시간 확인.');
+		} else if (nowDate >= eDate) {
+			$("[id ='btn']").hide();
+			alert('종료된 시험입니다.');
+		}
+		
+		console.log(serverDate);
+		console.log("서버시간 : " + nowDate);
+		console.log("시험시작 : " + sDate);
+		console.log("시험종료 : " + eDate);
+		
+		$("[id ='btn']").click(function() {
+		
+			takeExamForm.submit();
+		
+		});
+	
+	})
 
 	/* 시간비교를 위한 치환 펑션  */
 	function parse(str) {
@@ -109,13 +100,9 @@
 </script>
 </head>
 <body>
-	<form id="takeExamForm" name="takeExamForm"
-		action="${pageContext.request.contextPath }/candidateTakeExam.do"
-		method="post">
-		<input type="text" id="eId" name="examId"
-			value="${detailExam.examId }" hidden="true"> <input
-			type="text" id="tId" name="takeExamId"
-			value="${takeExamId.takeExamId }" hidden="true">
+	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTakeExam.do" method="post">
+		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="true">
+		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="true">
 	</form>
 
 	<header id="header"></header>
@@ -133,7 +120,7 @@
 			<!-- 시험 디테일이 나오고 -->
 			<!-- 응시 할수 없는 시험이라면 -->
 			<!-- 비공개 시험이라는 메시지 출력 -->
-			<c:if test="${detailExam.disclosureStatus == 'O2'}">
+			<%-- <c:if test="${detailExam.disclosureStatus == 'O2'}">
 				<!-- 값 비교 체크를 위한 변수 isMatch 를 <c:set 으로 선언 -->
 				<c:set var="isMatch" value="N"></c:set>
 				<!-- 응시자가 응시 할수 있는 비공개 시험 LIST 를 가져와서 -->
@@ -199,7 +186,7 @@
 					<br>
 					<br></td>
 				</c:if>
-			</c:if>
+			</c:if> --%>
 
 			<c:if test="${detailExam.disclosureStatus == 'O1'}">
 				<tr>
@@ -245,10 +232,8 @@
 			</c:if>
 		</table>
 		<br>
-		<button type="button" id="btn" value="${detailExam.examId}">응시하기</button>
-		<input type="button" class="btn btn-primary m-3 p-3"
-			onclick="location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'"
-			value="돌아가기">
+		<button type="button" class="btn btn-primary m-3 p-3" id="btn" value="${detailExam.examId}">응시하기</button>
+		<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value="돌아가기">
 	</div>
 </body>
 </html>

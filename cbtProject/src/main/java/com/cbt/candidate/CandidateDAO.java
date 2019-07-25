@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.cbt.common.CustomerUser;
-import com.cbt.common.Paging;
-
-
 @Repository
 public class CandidateDAO {
+	
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
@@ -37,11 +35,6 @@ public class CandidateDAO {
 		return mybatis.selectList("candidateDAO.getExamList", vo);
 	}	
 	
-	// 암호화 로그인 전
-	
-	
-//	  public CandidateVO loginCandidate(CandidateVO vo) { return
-//	  mybatis.selectOne("candidateDAO.candidateLogin", vo); }
 	//SECURITY 통합로그인
 	  public CandidateVO commonLogin(CandidateVO vo) { 
 		 

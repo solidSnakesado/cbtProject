@@ -24,6 +24,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.candidate.CandidateVO;
+import com.cbt.common.CustomerUser;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 import com.cbt.setExamQuestion.SetExamQuestionService;
@@ -121,10 +123,12 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "candidateRightAnswer.do/{examId}", method = RequestMethod.GET)
-	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId, HttpSession session) {
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		
 		TakeExamVO vo = new TakeExamVO();
-		vo.setTakerId(candiVO.getTakerId());
+		
+		vo.setTakerId(user.getUsername());
 		vo.setExamId(examId);
 		
 		ModelAndView mv = new ModelAndView();
@@ -149,7 +153,11 @@ public class QuestionController {
 												@RequestParam( value = "examId" , required = false ) int examId,
 												HttpSession session ) {
 		
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
+		CustomerUser user = (CustomerUser)session.getAttribute("candidate");
+		
+		CandidateVO candiVO = new CandidateVO();
+		candiVO.setTakerId(user.getUsername());
+		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("candiVO", candiVO);
@@ -179,9 +187,12 @@ public class QuestionController {
 	}
 	
 	@RequestMapping("candidateExaminationList.do")
-	public ModelAndView candidateExaminationList(HttpSession session) {
+	public ModelAndView candidateExaminationList(Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
-		CandidateVO vo = (CandidateVO)session.getAttribute("candidate");
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		
+		CandidateVO vo = new CandidateVO();
+		vo.setTakerId(user.getUsername());
 		
 		mv.addObject("candidateExaminationList", questionService.candidateExaminationList(vo));
 		
@@ -191,10 +202,12 @@ public class QuestionController {
 	
 	
 	@RequestMapping(value = "candidateExaminationListDetail.do", method = RequestMethod.POST)	
-	public ModelAndView candidateExaminationListDetail(TakeExamVO vo, HttpSession session) {
+	public ModelAndView candidateExaminationListDetail(TakeExamVO vo, Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		
+		vo.setTakerId(user.getUsername());
+		
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;
