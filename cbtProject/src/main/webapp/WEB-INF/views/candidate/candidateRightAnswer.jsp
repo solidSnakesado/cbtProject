@@ -30,6 +30,27 @@
 		top: 200px;
 		background-color: white;
 	}
+	
+	#falseLine {
+		position: absolute;
+		width: 150px;
+		height: 150px;
+		right: 900px;
+		top: 200px;
+		background-color: rgba( 255, 255, 255, 0 );
+	}
+	
+	@keyframes dash {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+	
+	#svg {
+		stroke-dasharray: 200;
+		stroke-dashoffset: 200;
+		animation: dash 0.4s 1s linear forwards;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
@@ -44,6 +65,8 @@
 		
 		// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 		var floatPosition = parseInt($("#floatMenu").css('top'));
+		
+		var falseLine = parseInt($("#falseLine").css('top'));
 		// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
 		
 		$(window).scroll(function() {
@@ -218,6 +241,13 @@
 </script>
 </head>
 <body>
+
+<div id="falseLine">
+	<svg id="svg">
+		<path stroke-width='6' fill='transparent' stroke="red" d="M 120,0 C 80,10 40,50 10,90 " />
+	</svg>
+</div>
+
 	<div id="floatMenu">
 		<p style="font-size: 10px; padding-bottom: 0;" onclick="allView()" >모든 정답 보기</p>
 		<table class="scroll">
@@ -295,7 +325,10 @@
 			<th></th>
 		</tr>
 		<tr>
-			<td colspan="2"><button>이의제기</button><a href="${pageContext.request.contextPath }/candidateMain.do"><button>메인으로</button></a></td>
+			<td colspan="2">
+				<a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a>
+				<a href="${pageContext.request.contextPath }/candidateMain.do"><button>메인으로</button></a>
+			</td>
 			<td></td>
 		</tr>
 		

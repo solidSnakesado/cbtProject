@@ -62,7 +62,6 @@
 		</tr>
 	</table>
 	<br>
-	${takeExamVO}----${examVO}
 	<div><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
 	<!-- 수정 (7/19) june -->
 	<!-- <div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div> -->
