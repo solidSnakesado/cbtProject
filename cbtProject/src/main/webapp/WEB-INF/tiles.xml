@@ -10,6 +10,7 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/tiles/defaultFooter.jsp" />			
 	</definition>
+
 	<!-- 추가  -->
 	<definition name="company/*/*" extends="base-definition">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/companyHeader.jsp" />
@@ -19,8 +20,7 @@
 		<put-attribute name="header" value="/WEB-INF/views/tiles/candidateHeader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition> 
-	<definition name="manager/*/*" extends="base-definition">
-		<put-attribute name="header" value="/WEB-INF/views/tiles/managerHeader.jsp" />
+	<definition name="manager/*/*" template="/WEB-INF/views/tiles/managerLayout.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition> 
 	<definition name="empty/*/*" template="/WEB-INF/views/tiles/emptyLayout.jsp">

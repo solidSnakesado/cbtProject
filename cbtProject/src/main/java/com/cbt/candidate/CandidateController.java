@@ -36,15 +36,15 @@ import com.cbt.takeExam.TakeExamVO;
 public class CandidateController {
 	
 	@Autowired
-	CandidateService 	candidateService;
+	CandidateService candidateService;
 	@Autowired
-	ExamService 		examService;
+	ExamService examService;
 	@Autowired
-	TakeExamService 	takeExamService;
+	TakeExamService takeExamService;
 	@Autowired
-	QuestionService 	questionService;
+	QuestionService questionService;
 	@Autowired
-	PrivateExamService	privateExamService;
+	PrivateExamService privateExamService;
 	
 	// 카카오 추가 -7/19 생성, june
 	@Autowired
@@ -131,6 +131,86 @@ public class CandidateController {
 		}
 		return targetPage;
 	}
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
 	  
 	//계정수정 form		 장세준 (7/3 ver.2)
 	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)

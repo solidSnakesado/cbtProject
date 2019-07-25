@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
-	 <!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- @@@@@@@@@@@@@@@@@@@@@@지우지마세요@@@@@@@@@@@@@@@@@@@@-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-	<script>
+<script>
 	//의뢰서
 	$(document).ready(function() {
 		var tradeProgress = '${myEstimateList.tradeProgress}'; //의뢰진행상태
@@ -20,7 +26,7 @@
 			$("#Payment").css('display', 'inline');// 결제버튼 보임
 		}
 		else if(tradeProgress =='B5'){	//결제완료(B5)
-			var row = "<tr>	<td>결제날짜</td>	  <td>	<input type='text'  value='${myEstimateList.paymentDate}' readonly> </td></tr>	"
+			var row = "<tr>	<td >결제날짜</td>	  <td>	<input type='text' class='form-control' value='${myEstimateList.paymentDate}'   readonly> </td></tr>	"
 			$("#table").append(row);
 		}
 		
@@ -168,43 +174,117 @@
 
 <div align="center">
 	<h4 class="mx-auto pb-2" align="center">세부 의뢰목록</h4>
-	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
+	<form
+		action="${pageContext.request.contextPath}/companyEstimateUpdate.do"
+		name="form" method="POST">
+		<!-- form name으로 submit처리 -->
 		<table id="table" class="table text-center">
-			<tr>	<td><label>의뢰ID</label></td>		<td align="center">	<input type="text" name="estimateId" class="form-control" value="${myEstimateList.estimateId}" id="estimateId" readonly></td></tr>
- 			<tr>	<td><label>카테고리ID</label></td>	<td align="center">	<select name="categoryId" id="categoryName" class="form-control"></select></td></tr>
- 			
-	 		<tr>	<td><label>기업ID</label></td>		<td align="center">	<input type="text" name="companyId" class="form-control" value="${myEstimateList.companyId}" id = "companyId" readonly></td></tr>
-	 		<tr>	<td><label>의뢰이름</label></td>		<td align="center">	<input type="text" name="estimateName" class="form-control" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
-			<tr>	<td><label>의뢰일</label></td>		<td align="center">	<input type="text" name="requestDay" class="form-control" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
-			<tr>	<td><label>금액</label></td>		<td align="center">	<input type="text" name="estimatePrice" class="form-control" value="${myEstimateList.estimatePrice}" id ="estimatePrice" readonly></td></tr>
-			<tr>	<td><label>의뢰진행상태</label></td>	<td align="center">	<input type="text" class="form-control" value="${myEstimateList.tradeProgressName}" readonly> <!-- 단순히 값을 보여주기위함 -->
-												<input type="hidden" name="tradeProgress" class="form-control" value="${myEstimateList.tradeProgress}" id ="tradeProgressName"><!-- 실질적인 tradeProgress가 저장됨--></td></tr>
+			<tr>
+				<td><label>의뢰ID</label></td>
+				<td align="center"><input type="text" name="estimateId"
+					class="form-control" value="${myEstimateList.estimateId}"
+					id="estimateId" readonly></td>
+			</tr>
+			<tr>
+				<td><label>카테고리 이름</label></td>
+				<td align="center"><select name="categoryId" id="categoryName"
+					class="form-control"></select></td>
+			</tr>
 
- 			<tr>	<td><label>응시대상자</label></td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
-			<tr>	<td><label>응시목적</label></td>		<td>	<my:select items="${L}" name="applyPurpose"  value="${myEstimateList.applyPurpose}"></my:select></td></tr>
-			<tr>	<td><label>응시자 수</label></td>		<td>	<input type="text" name="applicants" class="form-control" value="${myEstimateList.applicants}" id="applicants">명</td></tr>
-			<tr>	<td><label>시험분류</label></td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
-			<tr>	<td><label>난이도</label></td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td><label>시험일시</label></td>		<td>	<input type="text" id="datepicker" name="examDate" class="form-control" value="${myEstimateList.examDate}" ></td></tr>
-	 		<tr>	<td><label>비고</label></td>		<td>	<input type="text" name="remarks" class="form-control" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
+			<tr>
+				<td><label>기업ID</label></td>
+				<td align="center"><input type="text" name="companyId"
+					class="form-control" value="${myEstimateList.companyId}"
+					id="companyId" readonly></td>
+			</tr>
+			<tr>
+				<td><label>의뢰이름</label></td>
+				<td align="center"><input type="text" name="estimateName"
+					class="form-control" value="${myEstimateList.estimateName}"
+					id="estimateName"></td>
+			</tr>
+			<tr>
+				<td><label>의뢰일</label></td>
+				<td align="center"><input type="text" name="requestDay"
+					class="form-control" value="${myEstimateList.requestDay}"
+					id="requestDay" readonly></td>
+			</tr>
+			<tr>
+				<td><label>금액</label></td>
+				<td align="center"><input type="text" name="estimatePrice"
+					class="form-control" value="${myEstimateList.estimatePrice}"
+					id="estimatePrice" readonly></td>
+			</tr>
+			<tr>
+				<td><label>의뢰진행상태</label></td>
+				<td align="center"><input type="text" class="form-control"
+					value="${myEstimateList.tradeProgressName}" readonly> <!-- 단순히 값을 보여주기위함 -->
+					<input type="hidden" name="tradeProgress" class="form-control"
+					value="${myEstimateList.tradeProgress}" id="tradeProgressName">
+				<!-- 실질적인 tradeProgress가 저장됨--></td>
+			</tr>
+
+			<tr>
+				<td><label>응시대상자</label></td>
+				<td><my:select items="${K}" name="candidate"
+						value="${myEstimateList.candidate}"></my:select></td>
+			</tr>
+			<tr>
+				<td><label>응시목적</label></td>
+				<td><my:select items="${L}" name="applyPurpose"
+						value="${myEstimateList.applyPurpose}"></my:select></td>
+			</tr>
+			<tr>
+				<td><label>응시자 수</label></td>
+				<td><input type="text" name="applicants"
+					class="form-control col-9" value="${myEstimateList.applicants}"
+					id="applicants" placeholder="ex)숫자로 인원을 입력해주세요"></td>
+			</tr>
+			<tr>
+				<td><label>시험분류</label></td>
+				<td><my:select items="${M}" name="examClassfication"
+						value="${myEstimateList.examClassfication}"></my:select></td>
+			</tr>
+			<tr>
+				<td><label>난이도</label></td>
+				<td><my:select items="${G}" name="levelOfDifficulty"
+						value="${myEstimateList.levelOfDifficulty}"></my:select></td>
+			</tr>
+			<tr>
+				<td><label>시험일시</label></td>
+				<td><input type="text" id="datepicker" name="examDate"
+					class="form-control" value="${myEstimateList.examDate}"></td>
+			</tr>
+			<tr>
+				<td><label>비고</label></td>
+				<td><input type="text" name="remarks" class="form-control"
+					value="${myEstimateList.remarks}" id="remakrs"></td>
+			</tr>
 			<%-- <tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr>   --%>
-			<tr>	<td><label>시험간격</label></td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
-			
+			<tr>
+				<td><label>시험간격</label></td>
+				<td><my:select items="${N}" name="examInterval"
+						value="${myEstimateList.examInterval}"></my:select></td>
+			</tr>
+
 
 		</table>
 		<div>
-			<button type="button"  id="editButton">수정하기</button>  <button type="button" id="Payment" onclick="payment(${myEstimateList.estimateId})">결제</button> <button type="button" onclick="windowClose()"> 취소 </button>
+			<button type="button" id="editButton">수정하기</button>
+			<button type="button" id="Payment"
+				onclick="payment(${myEstimateList.estimateId})">결제</button>
+			<button type="button" onclick="windowClose()">취소</button>
 		</div>
 	</form>
-	
+
 </div>
 
 
-	<!-- 시험일시 날짜 api -->
-	<script>
-	$("#datepicker").datepicker({dateFormat : "yy-mm-dd"});	  	
+<!-- 시험일시 날짜 api -->
+<script>
+	$("#datepicker").datepicker({dateFormat : "yy-mm-dd", "minDate" : new Date()});	  	 	
 
-	
+	//취소버튼 클릭시 실행 함수
 	function windowClose(){
 		window.opener.top.location.reload();
 		window.close();
