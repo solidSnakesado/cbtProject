@@ -46,6 +46,10 @@
 			
 </script>
 
+<style>
+	tr:hover td {background:#ABCDEF !important};  /*마우스 hover 색상  */
+</style>
+
 <h4 class="mx-auto pb-2">의뢰목록</h4>
 <hr/>		
 <div class="container">
@@ -56,7 +60,7 @@
 		
 		<form action="companyEstimateList.do">
 			
-			<table border="1" class="table text-center">
+			<table border="1" class="table table-striped">
 				<tr>
 					<th><label>순번</label></th>
 					<th><label>카테고리</label></th>
@@ -74,7 +78,7 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" class="btn btn-primary m-3 p-3" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

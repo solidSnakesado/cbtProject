@@ -42,14 +42,11 @@
 </script>
 
 <style>
-	#table: hover tr:hover td{
-		background: red;
-		color: black;
-	}
+	tr:hover td {background:#ABCDEF !important}; /*마우스 hover 색상  */
 </style>
 </head>
 <body>
-	<h4 class="mx-auto pb-2">의뢰목록</h4>
+	<h4 class="mx-auto pb-2">의뢰목록1</h4>
 	<hr/>
 	<div class="container">
 
@@ -63,7 +60,7 @@
 		<br>
 		<form action="companyEstimateList.do">
 
-			<table border="1" id="table1" class="table">
+			<table border="1" class="table table-striped">
 				<tr>
 					<th><label>순번</label></th>
 					<th><label>카테고리ID</label></th>
