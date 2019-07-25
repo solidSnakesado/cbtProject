@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>updateManager.jsp</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-<body>
+
 	<h4 class="mx-auto pb-2">상태정보 수정</h4>	
 		
 		<form action="${pageContext.request.contextPath }/updateCondition.do" method="post">
@@ -22,5 +15,3 @@
 			<a href="${pageContext.request.contextPath }/deleteCondition.do?conditionSeq=${condition.conditionSeq }">삭제</a>
 			
 		</form>
-</body>
-</html>

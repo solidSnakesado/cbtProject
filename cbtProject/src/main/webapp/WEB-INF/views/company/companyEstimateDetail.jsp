@@ -2,19 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 	 <!-- @@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-	
 	<script>
 	//의뢰서
 	$(document).ready(function() {
@@ -175,11 +166,6 @@
 	}
 </script>
 
-
-
-
-</head>  
-<body>
 <div align="center">
 	<h4 class="mx-auto pb-2" align="center">세부 의뢰목록</h4>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
@@ -225,5 +211,3 @@
 	}
 	
 	</script>
-</body>
-</html>

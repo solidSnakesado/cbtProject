@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-</head>
-<body>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<<h4 class="mx-auto pb-2">>상담 세부 항목</h4>
+	<h4 class="mx-auto pb-2">상담 세부 항목</h4>
 	<table align="center">
 		<tr>
 			<th><label>상담희망일</label></th>
@@ -45,5 +36,3 @@
 	</c:if>
 	<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
 	<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
-</body>
-</html>

@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#I1SetExam").click(function() {
@@ -76,75 +71,72 @@
 	      });
 	   
 </script>
-</head>
-<body>
+
 
 	<!-- 2019.07.11 성재민 -->
 	<!-- 시험 정보 상세 보기 수정 -->
-	<header id="header"></header>
-	<h3>개별 시험 의뢰 목록 (기업화면)</h3>
+	<h4 class="mx-auto pb-2">개별 시험 의뢰 목록 (기업화면)</h4>
 	<form action="${pageContext.request.contextPath }/managerExamUpdate.do" method="post">
 	<input type = "hidden" name = "examId" value = "${selectedExam.examId}">
 	<table border = "1" align="center">
 		<tr>
-			<th width="150px">의뢰ID</th>
-			<td><input type="text" name="companyId" value="${selectedExam.companyId}" id = "companyId" ></td>
+			<th><label>의뢰ID</label></th>
+			<td><input type="text" name="companyId" class="form-control" value="${selectedExam.companyId}" id = "companyId" ></td>
 		</tr>
 		<tr>
-			<th width="150px">시험이름</th>
-			<td><input type="text" name="estimateName" value="${selectedExam.examName}" id="estimateName"></td>
+			<th><label>시험이름</label></th>
+			<td><input type="text" name="estimateName" class="form-control" value="${selectedExam.examName}" id="estimateName"></td>
 		</tr>
 		<tr>
-			<th>시험시작시간</th>
-			<td><input type="text" name="examStartTime" value="${selectedExam.examStartTime}" id="examStartTime"></td>
+			<th><label>시험시작시간</label></th>
+			<td><input type="text" name="examStartTime" class="form-control" value="${selectedExam.examStartTime}" id="examStartTime"></td>
 		</tr>
 		<tr>
-			<th>시험종료시간</th>
-			<td><input type="text" name="examEndTime" value="${selectedExam.examEndTime}" id="examEndTime"></td>
+			<th><label>시험종료시간</label></th>
+			<td><input type="text" name="examEndTime" class="form-control" value="${selectedExam.examEndTime}" id="examEndTime"></td>
 		</tr>
 		<tr>
-			<th>문항수</th>
-			<td><input type="text" name="questionQuantity" value="${selectedExam.questionQuantity}" id="questionQuantity"></td>
+			<th><label>문항수</label></th>
+			<td><input type="text" name="questionQuantity" class="form-control" value="${selectedExam.questionQuantity}" id="questionQuantity"></td>
 		</tr>
 		<tr>
-			<th>응시가능 횟수</th>
-			<td><input type="text" name="numberOfTimes" value="${selectedExam.numberOfTimes}" id="numberOfTimes"></td>
+			<th><label>응시가능 횟수</label></th>
+			<td><input type="text" name="numberOfTimes" class="form-control" value="${selectedExam.numberOfTimes}" id="numberOfTimes"></td>
 		</tr>
 		<tr>
-			<th>합격 점수</th>
-			<td><input type="text" name="passingScore" value="${selectedExam.passingScore}" id="passingScore"></td>
+			<th><label>합격 점수</label></th>
+			<td><input type="text" name="passingScore" class="form-control" value="${selectedExam.passingScore}" id="passingScore"></td>
 		</tr>
 		<tr>
-			<th>응시가능 인원</th>
-			<td><input type="text" name="applicants" value="${selectedExam.applicants}" id="applicants"></td>
+			<th><label>응시가능 인원</label></th>
+			<td><input type="text" name="applicants" class="form-control" value="${selectedExam.applicants}" id="applicants"></td>
 		</tr>
 		<tr>
-			<th>공개여부</th>
+			<th><label>공개여부</label></th>
 			<td><my:select items="${O}" name="disclosureStatus" value="${selectedExam.disclosureStatus }"></my:select></td>
 		</tr>
 		<tr>
-			<th>시험상태</th>
+			<th><label>시험상태</label></th>
 			<td><my:select items="${D}" name="examStatus" value="${selectedExam.examStatus }"></my:select></td>
 		</tr>
 		<tr>
-			<th>출제상태</th>
+			<th><label>출제상태</label></th>
 			<td><my:select items="${I}" name="setExamStatus" value="${selectedExam.setExamStatus }"></my:select></td>
 		</tr>
 		<tr>
-			<th>시험설명(간략)</th>
-			<td><input type="text" name="examDescriptionSimple" value="${selectedExam.examDescriptionSimple}" id="examDescriptionSimple"></td>
+			<th><label>시험설명(간략)</label></th>
+			<td><input type="text" name="examDescriptionSimple" class="form-control" value="${selectedExam.examDescriptionSimple}" id="examDescriptionSimple"></td>
 		</tr>
 		<tr>
-			<th>시험설명(상세)</th>
-			<td><input type="text" name="examDescriptionDetail" value="${selectedExam.examDescriptionDetail}" id="examDescriptionDetail"></td>
+			<th><label>시험설명(상세)</label></th>
+			<td><input type="text" name="examDescriptionDetail" class="form-control" value="${selectedExam.examDescriptionDetail}" id="examDescriptionDetail"></td>
 		</tr>
 	</table>
 	<br>
-	<input type= "submit" value="수정하기">
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
+	<input type= "submit" value="수정하기" class="btn btn-primary m-3 p-3">
+	<input type = "button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
 	</form>
-</body>
-</html>
+
 
 
 

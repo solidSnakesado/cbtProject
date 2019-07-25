@@ -2,17 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<style>
-</style>
-</head>
-<body>
-	<h2>기업회원 관리</h2>
+
+	<h4 class="mx-auto pb-2">기업회원 관리</h4>
 	<script>
 		function goList(p) {
 			searchFrm.page.value = p;
@@ -22,14 +13,14 @@
 	<hr />
 	<form name="searchFrm">
 		정렬기준 <input type="hidden" name="page" value="1"> 
-		<select name="sort">
+		<select name="sort" class="form-control">
 			<option value="COMPANY_ID">기업ID
 			<option value="COMPANY_NAME">기업이름
 			<option value="COMPANY_MANAGER">담당자
 		</select> 
 		<br> 
 		검색조건 <my:companyListSelect items="${companyMap }" /><br>
-		 <input type="text" name="searchKeyword" value="${CompanyVO.searchKeyword }">
+		 <input type="text" name="searchKeyword" class="form-control" value="${CompanyVO.searchKeyword }">
 		<button>검색</button>
 	</form>
 	<script>
@@ -68,5 +59,3 @@
 		<hr />
 		<my:paging jsFunc="goList" paging="${result.paging }" />
 	</div>
-</body>
-</html>

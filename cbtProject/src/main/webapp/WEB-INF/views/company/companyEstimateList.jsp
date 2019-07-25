@@ -2,17 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
  
- 
-
-
 <script>
 
 	var estimate="${result.estimateList}";
@@ -56,10 +46,7 @@
 			
 </script>
 
-</head>
-<body>
-
-<h2>의뢰목록</h2>
+<h4 class="mx-auto pb-2">의뢰목록</h4>
 <hr/>		
 <div class="container">
 
@@ -71,13 +58,13 @@
 			
 			<table border="1" class="table text-center">
 				<tr>
-					<th class="text-center">순번</th>
-					<th class="text-center">카테고리</th>
-					<th class="text-center">의뢰이름</th>
-					<th class="text-center">의뢰일</th>
-					<th class="text-center">진행상태</th>
-					<th class="text-center">시험일시</th>
-					<th class="text-center">삭제</th>
+					<th><label>순번</label></th>
+					<th><label>카테고리</label></th>
+					<th><label>의뢰이름</label></th>
+					<th><label>의뢰일</label></th>
+					<th><label>진행상태</label></th>
+					<th><label>시험일시</label></th>
+					<th><label>삭제</label></th>
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
@@ -87,7 +74,7 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" class="btn btn-primary m-3 p-3" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -96,6 +83,3 @@
 		<my:paging jsFunc="goList" paging="${result.paging}"/>
 		
 	</div>	
-</body>
-
-</html>

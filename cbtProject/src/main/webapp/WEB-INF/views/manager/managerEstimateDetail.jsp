@@ -3,18 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
-	
 	<script>
 	//의뢰서
 	$(document).ready(function() {
@@ -141,26 +129,26 @@
 	</script>
 </head>  
 <body>
-	<h2 align="center">세부 의뢰목록</h2>
+	<h4 class="mx-auto pb-2">세부 의뢰목록</h4>
 	<form action="${pageContext.request.contextPath}/companyEstimateUpdate.do" name ="form" method="POST"> <!-- form name으로 submit처리 -->
 		<table id="table">
-			<tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
+			<tr>	<td><label>의뢰ID</label></td>		<td>	<input type="text" name="estimateId" class="form-control"value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr>
- 			<tr>	<td>카테고리ID</td>	<td>	<select name="categoryId" id="categoryName"></select></td></tr>
-	 		<tr>	<td>기업ID</td>		<td>	<input type="text" name="companyId" value="${myEstimateList.companyId}" id = "companyId" ></td></tr>
-	 		<tr>	<td>의뢰이름</td>		<td>	<input type="text" name="estimateName" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
-			<tr>	<td>의뢰일</td>		<td>	<input type="text" name="requestDay" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
-			<tr>	<td>금액</td>		<td>	<input type="text" name="estimatePrice" value="${myEstimateList.estimatePrice}" id ="estimatePrice" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"></td></tr>
-			<tr>	<td>의뢰진행상태</td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
- 			<tr>	<td>응시대상자</td>	<td>	<my:select items="${K}" name="candidate" value="${myEstimateList.candidate}"  ></my:select></td></tr>
-			<tr>	<td>응시목적</td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
-			<tr>	<td>응시자 수</td>		<td>	<input type="text" name="applicants" value="${myEstimateList.applicants}" id="applicants" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">명</td></tr>
-			<tr>	<td>시험분류</td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
-			<tr>	<td>난이도</td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
-			<tr>	<td>시험일시</td>		<td>	<input type="text" id="datepicker" name="examDate" value="${myEstimateList.examDate}" ></td></tr>
-	 		<tr>	<td>비고</td>		<td>	<input type="text" name="remarks" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
+ 			<tr>	<td><label>카테고리ID</label></td>	<td>	<select name="categoryId" id="categoryName" class="form-control"></select></td></tr>
+	 		<tr>	<td><label>기업ID</label></td>		<td>	<input type="text" name="companyId" class="form-control" value="${myEstimateList.companyId}" id = "companyId" ></td></tr>
+	 		<tr>	<td><label>의뢰이름</label></td>		<td>	<input type="text" name="estimateName" class="form-control" value="${myEstimateList.estimateName}" id="estimateName"></td></tr>
+			<tr>	<td><label>의뢰일</label></td>		<td>	<input type="text" name="requestDay" class="form-control" value="${myEstimateList.requestDay}" id ="requestDay" readonly></td></tr>
+			<tr>	<td><label>금액</label></td>		<td>	<input type="text" name="estimatePrice" class="form-control" value="${myEstimateList.estimatePrice}" id ="estimatePrice" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"></td></tr>
+			<tr>	<td><label>의뢰진행상태</label></td>	<td>	<my:select items="${B}" name="tradeProgress" value="${myEstimateList.tradeProgress}" ></my:select></td></tr>
+ 			<tr>	<td><label>응시대상자</label></td>	<td>	<my:select items="${K}" name="candidate" class="form-control" value="${myEstimateList.candidate}"  ></my:select></td></tr>
+			<tr>	<td><label>응시목적</label></td>		<td>	<my:select items="${L}" name="applyPurpose" value="${myEstimateList.applyPurpose}"></my:select></td></tr>
+			<tr>	<td><label>응시자 수</label></td>		<td>	<input type="text" name="applicants" class="form-control" value="${myEstimateList.applicants}" id="applicants" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">명</td></tr>
+			<tr>	<td><label>시험분류</label></td>		<td>	<my:select items="${M}" name="examClassfication" value="${myEstimateList.examClassfication}"></my:select></td></tr>
+			<tr>	<td><label>난이도</label></td>		<td>	<my:select items="${G}" name="levelOfDifficulty" value="${myEstimateList.levelOfDifficulty}"></my:select></td></tr>
+			<tr>	<td><label>시험일시</label></td>		<td>	<input type="text" id="datepicker" name="examDate" class="form-control" value="${myEstimateList.examDate}" ></td></tr>
+	 		<tr>	<td><label>비고</label></td>		<td>	<input type="text" name="remarks" class="form-control" value="${myEstimateList.remarks}" id="remakrs"></td></tr>
 			<%-- <tr>	<td>시험횟수</td>		<td>	<my:select items="${H}" name="examCount" value="${myEstimateList.examCount}"></my:select></td></tr> --%>  
-			<tr>	<td>시험간격</td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
+			<tr>	<td><label>시험간격</label></td>		<td>	<my:select items="${N}" name="examInterval" value="${myEstimateList.examInterval}"></my:select></td></tr>
 			
 			
 			
@@ -178,5 +166,3 @@
 				window.close();
 			}
 	</script>
-</body>
-</html>

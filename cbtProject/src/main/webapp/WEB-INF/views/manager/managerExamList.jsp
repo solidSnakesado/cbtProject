@@ -2,13 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<title>전체 시험 일정 확인</title>
-
 
 <script>
 	// 2019.07.09 성재민 
@@ -18,12 +11,7 @@
 		location.href = "managerExamListDetail.do/" + examId;
 	}
 </script>
-</head>
-<body>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<header id="header"></header>
+
 	<h3>시험목록확인(기업)</h3>
 	<script>
 		function goList(p) {
@@ -58,13 +46,13 @@
 	</script>
 	
 	<br>
-	<table border="1" align="center" class="table text-center">
+	<table border="1" align="center" class="table table-striped">
 		<tr>
-			<th>의뢰기업</th>
-			<th>시험이름</th>
-			<th>시험일시</th>
-			<th>시험상태</th>
-			<th>시험출제상태</th>
+			<th><label>의뢰기업</label></th>
+			<th><label>시험이름</label></th>
+			<th><label>시험일시</label></th>
+			<th><label>시험상태</label></th>
+			<th><label>시험출제상태</label></th>
 		</tr>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->
@@ -99,5 +87,3 @@
 
 	<my:paging jsFunc="goList" paging="${result.paging }" />
 	</div>
-</body>
-</html>

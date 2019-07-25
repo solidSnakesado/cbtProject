@@ -1,33 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="css/main.css" />
-<style>
 
-</style>
-</head>
-<body>
-	<header id="header">
-      <div class="inner">
-         <a href="userMain.html" class="logo">CBT</a>
-         <nav id="nav">
-            <a href="#"></a> 
-            <a href="introduce.html">회사소개</a> 
-            <a href="scheduleCheck.html">시험일정</a> 
-            <a href="consulting.html">문의하기</a> 
-            <a href="#">마이페이지</a>
-         </nav>
-         <nav id="nav2">
-            <a href="login.html">로그인</a>
-            <a href="signUp.html">회원가입</a>
-         </nav>
-      </div>
-   </header>
       <h1>YEDAM은?</h1>
    <hr />
    <h3>기업의 가장 중요한 자산은 사람입니다.</h3>
