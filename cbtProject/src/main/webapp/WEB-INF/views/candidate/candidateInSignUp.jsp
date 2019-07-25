@@ -157,7 +157,8 @@ function openIdChk() {
 		}); */
 	</script>
 	<header id="header"></header>
-	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div><br>
+	<div align="right"><a href="companySignUp.do"><button>법인회원가입</button></a>&nbsp;&nbsp;
+	<a href="candidateMain.do"><button>돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
 		<table border="1" align="center" class="table text-center">

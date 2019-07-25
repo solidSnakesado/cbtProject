@@ -11,8 +11,10 @@
 	<security:http pattern="/js/**" security="none"/>
 	<security:http pattern="/image/*" security="none"/>
 	<security:http pattern="/css/*" security="none"/>
+	<security:http pattern="/idcheck.do" security="none"/>
 	<security:http pattern="/insertCandidate.do" security="none"/>
 	<security:http pattern="/candidateScheduleCheck.do" security="none"/>
+	<security:http pattern="/companySignUp.do" security="none"/>
 	<security:http>
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
@@ -40,7 +42,7 @@
 	<security:authentication-manager>
 		<security:authentication-provider
 			user-service-ref="customerUserService">
-			<!-- <security:password-encoder hash="bcrypt" /> -->
+			<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
