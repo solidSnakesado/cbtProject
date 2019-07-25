@@ -51,8 +51,7 @@ public class CandidateServiceImpl implements CandidateService {
 		return null;
 	}
 
-	// 통합 로그인 사용 전 구현
-	
+	// 통합 로그인 구현
 	public CandidateVO commonLogin(CandidateVO vo) {
 		CandidateVO user = candidateDAO.commonLogin(vo);
 		String rawPw = vo.getTakerPassword();
