@@ -76,6 +76,8 @@ div.content {
     float: none;
   }
 }
+
+
 </style>
 <body>
 
@@ -112,7 +114,7 @@ div.content {
   </div> -->
 
   <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" id="band">
+  <div class="w3-container w3-auto w3-center w3-padding-64" style="min-height:600px" id="band">
 	<tiles:insertAttribute name="body" />
   </div>
 

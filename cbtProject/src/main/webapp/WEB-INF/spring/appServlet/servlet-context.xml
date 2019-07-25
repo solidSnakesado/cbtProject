@@ -17,6 +17,7 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/image/**" location="/image/" />
 	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/BootstrapAdminTheme/**" location="/BootstrapAdminTheme/" />
 	<!-- 2019.07.19 성재민 -->
 	<!-- 이미지 폴더 추가 -->
 	<resources mapping="/chatImages/**" location="/chatImages/" />

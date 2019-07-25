@@ -20,13 +20,13 @@
 	</script>
 	<header id="header"></header>
 	<div align="center">
-		<h1 >원서접수</h1>
+		<h4 class="mx-auto pb-2" >원서접수</h4>
 	<hr>	
 	</div>
 	
 	<br>
 	<div align="center">
-		<h2>시험 안내</h2>
+		<h4 class="mx-auto pb-2">시험 안내</h4>
 			<img src="${pageContext.request.contextPath}/image/시험안내.PNG" alt="시험 안내">
 		<br><br><br><br><br>
 		<h2>시험 유의사항</h2>

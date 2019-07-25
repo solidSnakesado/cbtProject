@@ -9,6 +9,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- Root Context: defines shared resources visible to all other web components -->
+<!--  
 	<security:http>
 	<security:intercept-url method="GET" pattern="/login.jsp" access="permitAll()" />
 	<security:intercept-url pattern="/top.jsp" access="permitAll()" />
@@ -35,6 +36,7 @@
 		</security:authentication-manager>
 
 	<context:property-placeholder location="classpath:database.properties"/>
+-->
 	
 	<!-- datasource 설정 -->
 	<bean id="authDataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -45,5 +47,22 @@
 		<property name="maxActive" value="3"></property>
 		<property name="maxWait" value="2000"></property>
 	</bean>	
+	
+	<!-- 메일보내기 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="freehwans@gmail.com" />
+      <property name="password" value="ghksTm12" />
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+ 
+   </bean>
 	
 </beans>

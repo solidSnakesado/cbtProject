@@ -140,22 +140,24 @@
 </script>
 </head>
 <body>
+	<h3>카테고리 생성</h3>
+	<br>
 	<form action="${pageContext.request.contextPath }/insertCategory.do" method="post" id="insertCategoryForm">
-		카테고리 이름 : <input type="text" name="categoryName" id="categoryName">
+		카테고리 이름 : <input type="text" name="categoryName" id="categoryName" class="form-control">
 		<br><br>
 		대분류
-		<select name="categoryMainId" id="mainCategory">
+		<select name="categoryMainId" id="mainCategory" class="form-control">
 		</select>
 		중분류
-		<select name="categoryMiddleId" id="middleCategory">
+		<select name="categoryMiddleId" id="middleCategory" class="form-control">
 		</select>
 		소분류
-		<select name="categorySamllId" id="smallCategory">
+		<select name="categorySamllId" id="smallCategory" class="form-control">
 		</select>
 		<br><br>
-		<input type="button" id="submitBtn" value="카테고리 생성">
-		<input type="reset" value="값 초기화">
-		<input type="button" id="backPageBtn" value="카테고리 메인으로">
+		<input type="button" id="submitBtn" value="카테고리 생성" class="btn btn-primary m-3 p-3">
+		<input type="reset" value="값 초기화" class="btn btn-primary m-3 p-3">
+		<input type="button" id="backPageBtn" value="카테고리 메인으로" class="btn btn-primary m-3 p-3">
 	</form>
 	<div id="testDiv"></div>
 </body>

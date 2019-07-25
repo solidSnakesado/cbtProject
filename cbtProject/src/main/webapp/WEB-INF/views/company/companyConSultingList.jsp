@@ -3,12 +3,7 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>CBT 상담 목록</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 2019.07.10 성재민
@@ -25,15 +20,9 @@
 		searchFrm.submit();
 	}
 </script>
-</head>
 
-<body>
-	상담목록확인(기업)
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<header id="header"></header>
-	
+	<h4 class="mx-auto pb-2">상담목록확인(기업)</h4>
+
 	<form name="searchFrm">
 		<input type = "hidden" name="page" value="1">
 	</form>
@@ -54,6 +43,4 @@
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging }"/></div>
 	
 	<br>
-	<button onclick="location.href='companyMain.do'">돌아가기</button>
-</body>
-</html>
+	<button onclick="location.href='companyMain.do'" class="btn btn-primary m-3 p-3" >돌아가기</button>

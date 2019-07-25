@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/main.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#I1SetExam").click(function() {
@@ -21,45 +15,44 @@
 		});
 	});
 </script>
-</head>
-<body>
+
 	<!-- 2019.07.11 성재민 -->
 	<!-- 시험 정보 상세 보기 수정 -->
-	<header id="header"></header>
-	<h3>개별 시험 의뢰 목록 (기업화면)</h3>
+
+	<h4 class="mx-auto pb-2">개별 시험 의뢰 목록 (기업화면)</h4>
 
 	<input type = "hidden" name = "no" value = "${ dto.no }">
-	<table border = "1" align="center">
+	<table align="center" class="table">
 		<tr>
-			<th width="150px">의뢰기업</th>
+			<th><label>의뢰기업</label></th>
 			<td>${selectedExam.companyId}</td>
 		</tr>
 		<tr>
-			<th width="150px">시험이름</th>
+			<th><label>시험이름</label></th>
 			<td>${selectedExam.examName}</td>
 		</tr>
 		<tr>
-			<th>시험시간</th>
+			<th><label>시험시간</label></th>
 			<td>${selectedExam.examStartTime} ~ ${selectedExam.examEndTime}</td>
 		</tr>
 		<tr>
-			<th>문항수</th>
+			<th><label>문항수</label></th>
 			<td>${selectedExam.questionQuantity}</td>
 		</tr>
 		<tr>
-			<th>응시가능 횟수</th>
+			<th><label>응시가능 횟수</label></th>
 			<td>${selectedExam.numberOfTimes}</td>
 		</tr>
 		<tr>
-			<th>합격 점수</th>
+			<th><label>합격 점수</label></th>
 			<td>${selectedExam.passingScore}</td>
 		</tr>
 		<tr>
-			<th>응시가능 인원</th>
+			<th><label>응시가능 인원</label></th>
 			<td>${selectedExam.applicants}</td>
 		</tr>
 		<tr>
-			<th>공개여부</th>
+			<th><label>공개여부</label></th>
 			<c:if test="${selectedExam.disclosureStatus == '1'}">
 				<td>공개</td>
 			</c:if>
@@ -68,7 +61,7 @@
 			</c:if>
 		</tr>
 		<tr>
-			<th>시험상태</th>
+			<th><label>시험상태</label></th>
 			<c:if test="${selectedExam.examStatus == 'D1'}">
 				<td>시험전</td>
 			</c:if>
@@ -80,7 +73,7 @@
 			</c:if>
 		</tr>
 		<tr>
-			<th>출제상태</th>
+			<th><label>출제상태</label></th>
 			<c:if test="${selectedExam.setExamStatus == 'I1'}">
 				<td>출제전 <input type="button" id="I1SetExam" value="출제하기"></td>
 			</c:if>
@@ -98,17 +91,15 @@
 			</c:if>
 		</tr>
 		<tr>
-			<th>시험설명(간략)</th>
+			<th><label>시험설명(간략)</label></th>
 			<td>${selectedExam.examDescriptionSimple}</td>
 		</tr>
 		<tr>
-			<th>시험설명(상세)</th>
+			<th><label>시험설명(상세)</label></th>
 			<td>${selectedExam.examDescriptionDetail}</td>
 		</tr>
 	</table>
 	<br>
-	<button onclick = "location.href = '${pageContext.request.contextPath }/'" >통계보기</button>
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
-	<button type="button" onclick = "location.href = '${pageContext.request.contextPath}/managerExamUpdate.do/${examId }'">수정하기</button>
-</body>
-</html>
+	<button onclick = "location.href = '${pageContext.request.contextPath }/'" class="btn btn-primary m-3 p-3" >통계보기</button>
+	<input type = "button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
+	<button type="button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath}/managerExamUpdate.do/${examId }'">수정하기</button>

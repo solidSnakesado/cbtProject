@@ -13,7 +13,7 @@
 	<!-- 2019.07.11 성재민 -->
 	<!-- 시험 정보 상세 보기 수정 -->
 	<header id="header"></header>
-	<h3>개별 시험 의뢰 목록 (기업화면)</h3>
+	<h3>시험 상세</h3>
 	<input type = "hidden" name = "no" value = "${ dto.no }">
 	<table border = "1" align="center">
 		<tr>

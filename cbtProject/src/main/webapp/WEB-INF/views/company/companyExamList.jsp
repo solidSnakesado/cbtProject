@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<title>CBT 시험 일정 확인</title>
-
-
 <script>
 	// 2019.07.09 성재민 
 	// showPopup() 메소드 변수 하나 받게 수정
@@ -17,20 +9,15 @@
 		location.href = "companyExamListDetail.do/" + examId;
 	}
 </script>
-</head>
-<body>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-	<header id="header"></header>
-	<h3>시험목록확인(기업)</h3>
+
+	<h4 class="mx-auto pb-2">시험목록확인(기업)</h4>
 	<table border="1" align="center">
 		<tr >
-			<th>시험이름</th>
-			<th>시험일시</th>
-			<th>시험상태</th>
-			<th>시험출제상태</th>
-			<th>시험공개여부</th>	<!-- 2019.07.23 성재민 항목 추가 -->
+			<th><label>시험이름</label></th>
+			<th><label>시험일시</label></th>
+			<th><label>시험상태</label></th>
+			<th><label>시험출제상태</label></th>
+			<th><label>시험공개여부</label></th>	<!-- 2019.07.23 성재민 항목 추가 -->
 		</tr>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->

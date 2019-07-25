@@ -20,6 +20,9 @@
 	<form action="companyLogin.do" method="post">
 		<table border="1" align="center" class="table text-center">
 			<tr>
+				<br><td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/company.jpg"/><br></td>
+			</tr>
+			<tr>
 				<td>ID</td>
 				<td><input type="text" name="companyId"value="${companyVO.companyId}"></td>
 			</tr>

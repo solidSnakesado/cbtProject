@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
@@ -31,7 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cbt.category.CategoryVO;
 import com.cbt.categoryMain.CategoryMainService;
 import com.cbt.categoryMain.CategoryMainVO;
+import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
+import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
 import com.cbt.condition.ConditionService;
 
@@ -49,29 +52,26 @@ public class EstimateController {
 	EstimateService estimateService;
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
+	@Autowired
+	CompanyService companyService;
 	
 	
 	//기업은 자기의뢰 내용을 볼수있다. company-select
 	@RequestMapping(value="companyEstimateList.do", method = RequestMethod.GET)
 	public ModelAndView companyEstimateListForm(Paging paging,
 												ModelAndView mv,
-												HttpSession session,
 												EstimateVO vo,
-												HttpServletResponse response) throws IOException {
-	
-		PrintWriter out = response.getWriter();
-		 
-		if((session.getAttribute("company")) == null) {
-			out.print("<script>alert('로그인 정보를 확인해주세요.');</script>");
-			mv.setViewName("company/company/companyLogin");
-			return mv;
-		}
-		else {
-			vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId()); //세션에 저장된아이디값읽어옴
+												Authentication authentication) throws IOException {
+			//해당 기업의 ID값으로 세션처리 
+			CustomerUser user = (CustomerUser)authentication.getPrincipal();
+
+			vo.setCompanyId(user.getUsername());
+			//vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId()); //세션에 저장된아이디값읽어옴
+			
 			mv.addObject("result", estimateService.getEstimateList(vo, paging));
 			mv.setViewName("company/company/companyEstimateList");
 			return mv;
-		}
+		
 		
 	}
 	
@@ -148,20 +148,12 @@ public class EstimateController {
 	@RequestMapping(value="managerEstimateList.do", method = RequestMethod.GET)
 	public ModelAndView managerEstimateListForm(Paging paging,
 												ModelAndView mv,
-												HttpSession session,
-												EstimateVO vo,
-												HttpServletResponse response) throws IOException {
-		
-		PrintWriter out = response.getWriter();
-		if ((session.getAttribute("manager")) == null) {
-			out.print("<script>alert('로그인 정보를 확인해주세요.');</script>");
-			mv.setViewName("manager/manager/managerLogin");
-			return mv;
-		} else {
+												EstimateVO vo) throws IOException {
+			
+			
 			mv.addObject("result", estimateService.getEstimateList(vo, paging));
 			mv.setViewName("manager/manager/managerEstimateList");
 			return mv;
-		}
 
 	}
 	
@@ -288,4 +280,18 @@ public class EstimateController {
 		         e.printStackTrace();
 		      }
 		}
+		
+		
+		
+	  //companyID와 NAME을 가져오기위함
+	  @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.GET)
+	  @ResponseBody public List<CompanyVO> getcompanyNameList(CompanyVO vo,HttpServletRequest request, HttpServletResponse response) {
+	  
+	  
+	  return companyService.getCompanyList(vo);
+	  
+	  }
+	 
+		
+		
 }

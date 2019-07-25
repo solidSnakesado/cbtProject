@@ -1,12 +1,14 @@
 package com.cbt.candidate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.privateExam.PrivateExamService;
+import com.cbt.privateExam.PrivateExamVO;
 import com.cbt.question.QuestionService;
 import com.cbt.takeExam.TakeExamService;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.cbt.takeExam.TakeExamVO;
 
 
@@ -39,6 +43,8 @@ public class CandidateController {
 	TakeExamService takeExamService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	PrivateExamService privateExamService;
 	
 	// 카카오 추가 -7/19 생성, june
 	@Autowired
@@ -87,34 +93,131 @@ public class CandidateController {
 		return "candidate/candidate/candidateAccount";
 	}
 	//로그아웃 폼
-	@RequestMapping(value="candidateLogout.do", method=RequestMethod.GET)
-	public String candidateLogout(HttpSession session) {
-		session.invalidate();
-		return "redirect:candidateMain.do";
-	}
-	//로그인 폼  2019.07.03 생성 ver.2
-	@RequestMapping(value="candidateLogin.do", method=RequestMethod.GET)
+	/*
+	 * @RequestMapping(value="candidateLogout.do", method=RequestMethod.GET) public
+	 * String candidateLogout(HttpSession session) { session.invalidate(); return
+	 * "redirect:candidateMain.do"; }
+	 */
+	//로그인 폼  2019.07.03 생성 ver.2 --> 통합로그인 사용
+	
+	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.GET)
 	public String candidateLoginForm() {
 		return "candidate/candidate/candidateLogin";
 	}
+
+	//로그인 처리  2019.07.03 생성 ver.2 --> 통합로그인 사용
 	
-	//로그인 처리  2019.07.03 생성 ver.2
-	@RequestMapping(value="candidateLogin.do", method=RequestMethod.POST)
-	public String candidateLogin(CandidateVO vo, HttpSession session) {
-		String targetPage = "candidate/candidate/candidateLogin";
-		CandidateVO loginCandidate = candidateService.loginCandidate(vo);
-		
-		if(loginCandidate != null) {
+	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	public String candidateLogin(CandidateVO vo, HttpSession session, Model model) {
+		String 		targetPage 		= "candidate/candidate/candidateLogin";
+		CandidateVO loginCandidate 	= candidateService.commonLogin(vo);
+
+		if (loginCandidate != null) {
 			session.setAttribute("candidate", loginCandidate);
 			targetPage = "redirect:candidateMain.do";
+			
+			// 2019.07.25 성재민
+			// 비공개 시험 응시자라면 비공개 시험 테이블에 시험 ID 와 응시자 ID를 저장해야 한다.
+			String privateExamId = (String) session.getAttribute("privateExamId");
+			if(privateExamId != null) {
+				PrivateExamVO privateExamVO = new PrivateExamVO();
+				privateExamVO.setExamId(Integer.parseInt(privateExamId));
+				privateExamVO.setTakerId(loginCandidate.getTakerId());
+				
+				privateExamService.insertPrivateExam(privateExamVO);
+			}
+		} else {
+			model.addAttribute("loginFail", true);
 		}
 		return targetPage;
 	}
-
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
+	  
 	//계정수정 form		 장세준 (7/3 ver.2)
 	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
-	public String updateCandidateForm(CandidateVO vo, Model model, HttpSession session) {
-		vo.setTakerId(((CandidateVO)session.getAttribute("candidate")).getTakerId());
+	public String updateCandidateForm(CandidateVO vo, Model model, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+
+		vo.setTakerId(user.getUsername());
 		model.addAttribute("candidate", candidateService.getCandidate(vo));
 		return "candidate/candidate/candidateAccountManageModify";
 	}
@@ -126,15 +229,31 @@ public class CandidateController {
 		return "redirect:candidateMain.do";
 	}
 	
+	
 	//삭제처리			 장세준 (7/3)
-	@RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST)
-	public String deleteBoard(HttpSession session) {
-		CandidateVO vo=(CandidateVO) session.getAttribute("candidate");
-		candidateService.deleteCandidate(vo);
-		session.invalidate();
-		return "redirect:candidateMain.do";
+	/*
+	 * @RequestMapping(value="deleteCandidate.do", method=RequestMethod.POST) public
+	 * String deleteBoard(Authentication authentication) { CustomerUser user =
+	 * (CustomerUser) authentication.getPrincipal();
+	 * candidateService.deleteCandidate(user); authentication.isAuthenticated();
+	 * return "redirect:candidateMain.do"; }
+	 */
+	
+	//삭제처리			 장세준 (7/2)
+	/*
+	 * @RequestMapping("deleteCandidate.do") public String
+	 * candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo) {
+	 * candidateService.deleteCandidate(vo); return
+	 * "candidate/candidate/candidateAccountManage"; }
+	 */
+	
+	//삭제처리 --> 통합로그인 이후 수정	june (7/25)
+	@RequestMapping("deleteCandidate.do")
+	public String candidateAccountManage(@ModelAttribute("candidate") CandidateVO vo, Authentication authentication) {
+		candidateService.deleteCandidate(vo); 
+		return "redirect:/logout";
 	}
-
+	
 	//단건조회			 장세준 (7/2)
 	@RequestMapping("/getCandidate/{takerId}")
 	public String getCandidate(@PathVariable("takerId") String takerId, CandidateVO vo, Model model) {
@@ -198,12 +317,23 @@ public class CandidateController {
 	}
 	
 	
-	//2019.06.27 장세준 - 응시자 정보 조회(단건) --> 탈퇴 가능
+	//응시자 정보 조회(단건)--> 통합로그인 이후 수정	june (7/25)
+	//응시자 정보 조회(단건) --> 탈퇴 가능 june (6/27) 
 	@RequestMapping("candidateAccountManage.do")	
-	public String candidateAccountManage() {
+	public String candidateAccountManage(CandidateVO vo, Model model, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+
+		vo.setTakerId(user.getUsername());
+		model.addAttribute("candidate", candidateService.getCandidate(vo));
 		return "candidate/candidate/candidateAccountManage";
 	}
-	
+	/*
+	 * @RequestMapping("candidateAccountManage.do") public String
+	 * candidateAccountManage() { return
+	 * "candidate/candidate/candidateAccountManage"; }
+	 */
+
+	 
 	//원서접수 
 	@RequestMapping("candidateApplication.do")	
 	public String candidateApplication() {
@@ -243,24 +373,38 @@ public class CandidateController {
 	// 시험일정 전체 보기(로그인 없이 보기)
 	// 세션에 takerId 가져와 로그인 체크기능추가   - 2019.07.18  재용
 	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
-	public ModelAndView candidateScheduleCheck(Model model, Paging paging, HttpSession session) {
+	public ModelAndView candidateScheduleCheck(Model model, Paging paging //Authentication authentication <-- 필요시
+																			) {
 		ModelAndView mv = new ModelAndView();
-		
-		// 로그인 체크
-		if(session.getAttribute("candidate") == null) {
-			mv.addObject("takerId", null);
-		} else {
-			CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
-			mv.addObject("takerId", candivo.getTakerId());
-		}
-		
+
+		/*
+		 * CustomerUser candivo = (CustomerUser) authentication.getPrincipal();
+		 * mv.addObject("takerId", candivo.getUsername());
+		 */
+
 		mv.addObject("candidateScheduleCheck", candidateService.candidateScheduleCheckPage(paging));
 		mv.setViewName("candidate/candidate/candidateScheduleCheck");
-			
+
 		return mv;
 	}
-	
+	/*
+	 * @RequestMapping(value = "candidateScheduleCheck.do", method =
+	 * RequestMethod.GET) public ModelAndView candidateScheduleCheck(Model model,
+	 * Paging paging, HttpSession session) { ModelAndView mv = new ModelAndView();
+	 * 
+	 * // 로그인 체크 if(session.getAttribute("candidate") == null) {
+	 * mv.addObject("takerId", null); } else { CandidateVO candivo =
+	 * (CandidateVO)session.getAttribute("candidate"); mv.addObject("takerId",
+	 * candivo.getTakerId()); }
+	 * 
+	 * mv.addObject("candidateScheduleCheck",
+	 * candidateService.candidateScheduleCheckPage(paging));
+	 * mv.setViewName("candidate/candidate/candidateScheduleCheck");
+	 * 
+	 * return mv; }
+	 */
 	// 시험일정 전체 보기(로그인 없이 보기)
+	
 	/*
 	 * @RequestMapping(value = "candidateScheduleCheck.do", method =
 	 * RequestMethod.GET) public ModelAndView candidateScheduleCheck() {
@@ -270,21 +414,21 @@ public class CandidateController {
 	 * 
 	 * return mv; }
 	 */
-	
+	 
+	// 로그인 통합화 이후 수정
 	@RequestMapping(value = "candidateExamDetialView.do/{examId}", method = RequestMethod.GET)
-	public ModelAndView candidateExamDetialView(@PathVariable("examId") int examId, HttpSession session) {
+	public ModelAndView candidateExamDetialView(@PathVariable("examId") int examId, Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
 		ExamVO examVO = new ExamVO();
 		examVO.setExamId(examId);
 		
-		CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+		CustomerUser candivo = (CustomerUser)authentication.getPrincipal();
 		TakeExamVO vo = new TakeExamVO();
 		TakeExamVO vovo = new TakeExamVO();
-		
 		// 2019.07.17 김재용 추가
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 응시하기 버튼 바꾸기
-		vo.setTakerId(candivo.getTakerId()); 
+		vo.setTakerId(candivo.getUsername()); 
 		vo.setExamId(examId);
 		try {
 			vovo = takeExamService.selectTakeExamId(vo);
@@ -295,14 +439,46 @@ public class CandidateController {
 			e.printStackTrace();
 		}
 		
+		try {
+			PrivateExamVO privateExamVO = new PrivateExamVO();
+			privateExamVO.setTakerId(candivo.getUsername());
+			mv.addObject("privateExamList", privateExamService.getPrivateExamListForTakerId(privateExamVO));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
-		mv.addObject("takerId", candivo.getTakerId());
+		mv.addObject("takerId", candivo.getUsername());
 		
 		mv.addObject("detailExam", examService.getExam(examVO));
 		mv.setViewName("candidate/candidate/candidateExamDetialView");
 		return mv;
 	}
+	
+	/*
+	 * @RequestMapping(value = "candidateExamDetialView.do/{examId}", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * candidateExamDetialView(@PathVariable("examId") int examId, HttpSession
+	 * session) { ModelAndView mv = new ModelAndView(); ExamVO examVO = new
+	 * ExamVO(); examVO.setExamId(examId);
+	 * 
+	 * CandidateVO candivo = (CandidateVO)session.getAttribute("candidate");
+	 * TakeExamVO vo = new TakeExamVO(); TakeExamVO vovo = new TakeExamVO();
+	 * 
+	 * // 2019.07.17 김재용 추가 // 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서 // 응시하기 버튼 바꾸기
+	 * vo.setTakerId(candivo.getTakerId()); vo.setExamId(examId); try { vovo =
+	 * takeExamService.selectTakeExamId(vo); if(vovo == null) {
+	 * takeExamService.insertTakeExam(vo); } } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * 
+	 * mv.addObject("takeExamId", takeExamService.selectTakeExamId(vo));
+	 * mv.addObject("takerId", candivo.getTakerId());
+	 * 
+	 * mv.addObject("detailExam", examService.getExam(examVO));
+	 * mv.setViewName("candidate/candidate/candidateExamDetialView"); return mv; }
+	 */
+	
 	
 	// 시험일정 가져오기
 //	@RequestMapping(value = "candidateScheduleCheck.do", method = RequestMethod.GET)
@@ -349,9 +525,59 @@ public class CandidateController {
 	 * return "candidate/candidate/candidateSurvey"; }
 	 */
 	//메인화면
+	// 2019.07.25 성재민
+	// 유저/매니저/기업 별로 로그인시 연결되는 메인 페이지 구분하여 연결
+	// 2019.07.25 성재민
+	// 비공개 시험 응시자가 이메일의 링크를 눌러 화면에 접근한 경우
+	// examId가 GET 방식으로 전달된다.
 	@RequestMapping("candidateMain.do")
-	public String candidateMain() {
-		return "candidate/candidate/candidateMain";
+	public String candidateMain(Authentication authentication, HttpServletRequest request, HttpSession session) {
+		String targetPage 	= "candidate/candidate/candidateMain";
+		String examId 		= request.getParameter("examId");
+		// 2019.07.25 성재민
+		// 이메일로 링크를 받아 접근한 유저라면 examId 를 가지고 있기 때문에
+		// 해당 examId 를 세션에 담아 둔다.
+		if(examId != null && examId != "") {
+			session.setAttribute("privateExamId", examId);
+		}
+		
+		if(authentication != null) {
+			CustomerUser user = (CustomerUser)authentication.getPrincipal();
+			
+			for(GrantedAuthority item : user.getAuthorities()) {
+				String roleName = item.getAuthority();
+				
+				switch (roleName) {
+				case "ROLE_USER":
+					// 2019.07.25 성재민
+					// 비공개 시험 응시자라면 비공개 시험 테이블에 시험 ID 와 응시자 ID를 저장해야 한다.
+					String privateExamId = (String) session.getAttribute("privateExamId");
+					if(privateExamId != null) {
+						PrivateExamVO privateExamVO = new PrivateExamVO();
+						privateExamVO.setExamId(Integer.parseInt(privateExamId));
+						privateExamVO.setTakerId(user.getUsername());
+						session.removeAttribute("privateExamId");
+						
+						privateExamService.insertPrivateExam(privateExamVO);
+					}
+					targetPage = "candidate/candidate/candidateMain";
+					break;
+					
+				case "ROLE_MANAGER":
+					targetPage = "redirect:managerMain.do";
+					break;
+					
+				case "ROLE_COMPANY":
+					targetPage = "redirect:companyMain.do";
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+		
+		return targetPage;
 	}
 	
 	
@@ -394,11 +620,7 @@ public class CandidateController {
 	 * { return "candidate/candidateTestResult"; }
 	 */
 	
-	/* //삭제처리			 장세준 (7/2)
-	 * @RequestMapping("deleteCandidate.do") public String
-	 * deleteBoard(@ModelAttribute("candidate")CandidateVO vo) {
-	 * candidateService.deleteCandidate(vo); return "candidate/candidateMain"; }
-	 */
+
 	/*
 	 * //2019.06.27 장세준 - *.do & view 등록
 	 * 

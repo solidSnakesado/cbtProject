@@ -14,26 +14,32 @@ public class PrivateExamDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertPrivateExam(PrivateExamVO vo) {
-		mybatis.insert("", vo);
+		mybatis.insert("privateExamDAO.insertPrivateExam", vo);
 	}
 	
 	public void updatePrivateExam(PrivateExamVO vo) {
-		mybatis.update("", vo);
+		mybatis.update("privateExamDAO.", vo);
 	}
 	
 	public void deletePrivateExam(PrivateExamVO vo) {
-		mybatis.delete("", vo);
+		mybatis.delete("privateExamDAO.", vo);
 	}
 	
 	public PrivateExamVO getPrivateExam(PrivateExamVO vo) {
-		return mybatis.selectOne("", vo);
+		return mybatis.selectOne("privateExamDAO.", vo);
+	}
+	
+	// 2019.07.25 성재민
+	// 응시자 id 로 검색
+	public List<PrivateExamVO> getPrivateExamListForTakerId(PrivateExamVO vo){
+		return mybatis.selectList("privateExamDAO.getPrivateExamListForTakerId", vo);
 	}
 	
 	public List<PrivateExamVO> getPrivateExamListForExamId(PrivateExamVO vo) {
-		return mybatis.selectList("", vo);
+		return mybatis.selectList("privateExamDAO.", vo);
 	}
 	
 	public List<PrivateExamVO> getAllPrivateExamList() {
-		return mybatis.selectList("");
+		return mybatis.selectList("privateExamDAO.");
 	}
 }

@@ -11,7 +11,7 @@
 </script>
 </head>
 <body>
-	<h1>Board List</h1>
+	<h4 class="mx-auto pb-2">Board List</h4>
 	<div align="right">
 		[<a href="<c:url value='/excelDown.do' />">엑셀 다운</a>]
 	</div>

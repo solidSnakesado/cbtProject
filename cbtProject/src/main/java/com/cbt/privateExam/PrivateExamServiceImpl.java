@@ -43,4 +43,9 @@ public class PrivateExamServiceImpl implements PrivateExamService {
 		return dao.getAllPrivateExamList();
 	}
 
+	@Override
+	public List<PrivateExamVO> getPrivateExamListForTakerId(PrivateExamVO vo) {
+		return dao.getPrivateExamListForTakerId(vo);
+	}
+
 }

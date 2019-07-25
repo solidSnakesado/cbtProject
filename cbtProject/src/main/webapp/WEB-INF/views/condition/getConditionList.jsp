@@ -2,26 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>getConditionList.jsp</title>
-</head>
-<body>
-	<h3>상태 목록</h3>
+
+	<h4 class="mx-auto pb-2">상태 목록</h4>
 	
 	
 	<form action="deleteCondition.do">
 	<table>
 		<tr>
-			<th>선택</th>
-			<th>번호</th>
-			<th>마스터코드</th>
-			<th>마스터이름</th>
-			<th>상세코드</th>
-			<th>상세이름</th>
-			<th>사용여부</th>
+			<th><label>선택</label></th>
+			<th><label>번호</label></th>
+			<th><label>마스터코드</label></th>
+			<th><label>마스터이름</label></th>
+			<th><label>상세코드</label></th>
+			<th><label>상세이름</label></th>
+			<th><label>사용여부</label></th>
 		</tr>
 		<c:forEach items="${result}" var="condition">
 		<tr>
@@ -39,5 +33,3 @@
 	<button>삭제</button>
 	</form>
 	<a href="insertCondition.do">상태 등록</a>
-</body>
-</html>

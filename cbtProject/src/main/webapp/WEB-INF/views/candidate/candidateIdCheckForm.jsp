@@ -119,13 +119,13 @@
     <br>
     <div id="chk">
         <form id="checkForm">
-            <input type="text" name="idinput" id="takerId">
-            <input type="button" value="중복확인" onclick="idCheck()">
+            <input type="text" name="idinput" id="takerId" class="form-control">
+            <input type="button" class="form-control" value="중복확인" onclick="idCheck()">
         </form>
         <div id="msg"></div>
         <br>
-        <input id="cancelBtn" type="button" value="취소" onclick="window.close()"><br>
-        <input id="useBtn" type="button" value="사용하기" onclick="sendCheckValue()">
+        <input id="cancelBtn" type="button"  class="btn btn-primary m-3 p-3" value="취소" onclick="window.close()"><br>
+        <input id="useBtn" type="button"  class="btn btn-primary m-3 p-3" value="사용하기" onclick="sendCheckValue()">
     </div>
 </div>    
 </body>

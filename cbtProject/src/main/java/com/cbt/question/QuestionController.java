@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +58,9 @@ public class QuestionController {
 	ExamService examService;
 	@Autowired
 	TakeExamHistoryService takeExamHistoryService;
+	@Autowired
+	private JavaMailSender mailSender;
+	 
 	
 	// 2019.07.17 김재용
 	// 시험 시작 화면으로 가기
@@ -392,6 +401,44 @@ public class QuestionController {
 			e.printStackTrace();
 		}
 	}
+	
+	 // mailForm
+	  @RequestMapping(value = "/mail/mailForm")
+	  public String mailForm() {
+	    return "/mail/mailForm";
+	  }
+	
+	//mailSending 코드
+		@RequestMapping(value="mail/mailSending")
+		public String mailSending(HttpServletRequest request) {
+			
+			String setfrom = "freehwans@gmail.com";
+			String tomail = request.getParameter("tomail");		//받는사람 이메일
+			String title = request.getParameter("title"); 		//제목
+			String content = request.getParameter("content"); 	//내용
+			String fileName = "";
+			
+			try {
+				// MimeMessage message = mailSender.createMimeMessage();
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setFrom(setfrom);
+				messageHelper.setTo(tomail);
+				messageHelper.setSubject(title);
+				messageHelper.setText(content);
+				
+				//파일첨부
+				FileSystemResource fsr = new FileSystemResource(fileName);
+				messageHelper.addAttachment("test2.txt", fsr);
+				mailSender.send(message);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect :/mail/mailForm";
+		}
+	
+	
 	
 	@RequestMapping(value = "fileUpload.do", method = RequestMethod.GET)
 	public String fileUpload() {

@@ -8,19 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 
 
 @Repository
 public class CandidateDAO {
-	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
 	//2019.07.01 장세준 - insert
 	public void insertCandidate(CandidateVO vo) {
-		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
 		mybatis.insert("candidateDAO.insertCandidate", vo);
 	}
 
@@ -43,6 +42,19 @@ public class CandidateDAO {
 	
 //	  public CandidateVO loginCandidate(CandidateVO vo) { return
 //	  mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	//SECURITY 통합로그인
+	  public CandidateVO commonLogin(CandidateVO vo) { 
+		 
+		  return  mybatis.selectOne("candidateDAO.commonLogin", vo); 
+	  }
+	  
+	  
+	// 암호화 로그인 전 --> 통합로그인 사용
+	  
+	/*
+	 * public CandidateVO loginCandidate(CandidateVO vo) { return
+	 * mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	 */
 	 
 	 
 	
@@ -65,6 +77,15 @@ public class CandidateDAO {
 	}
 	 
 	 
+	/*
+	 * public CandidateVO loginCandidate(CandidateVO vo) { String pw =
+	 * mybatis.selectOne("candidateDAO.getTakerPassword", vo); String rawPw =
+	 * vo.getTakerPassword(); if (scpwd.matches(rawPw, pw)) {
+	 * System.out.println("비밀번호 일치"); System.out.println(pw + rawPw);
+	 * vo.setTakerPassword(pw); } else { System.out.println("비밀번호 불일치");
+	 * System.out.println(pw + rawPw); return null; } return
+	 * mybatis.selectOne("candidateDAO.candidateLogin", vo); }
+	 */
 	
 	
 	public int getCount(CandidateVO vo) {
