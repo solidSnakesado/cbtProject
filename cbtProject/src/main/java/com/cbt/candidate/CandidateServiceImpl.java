@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.CustomerUser;
@@ -15,12 +16,14 @@ import com.cbt.company.CompanyVO;
 
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 
 	@Resource
 	private CandidateDAO candidateDAO;
 	
 	//2019.07.01 장세준 insert method 
 	public void insertCandidate(CandidateVO vo) {
+		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
 		candidateDAO.insertCandidate(vo);
 	}
 
@@ -51,7 +54,13 @@ public class CandidateServiceImpl implements CandidateService {
 	// 통합 로그인 사용 전 구현
 	
 	public CandidateVO commonLogin(CandidateVO vo) {
-		return candidateDAO.commonLogin(vo);
+		CandidateVO user = candidateDAO.commonLogin(vo);
+		String rawPw = vo.getTakerPassword();
+		if (scpwd.matches(rawPw, user.getTakerPassword())) {
+			return user;
+		} else {
+			return null;
+		}
 	}
 	 
 

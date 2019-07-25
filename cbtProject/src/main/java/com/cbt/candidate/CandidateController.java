@@ -103,20 +103,16 @@ public class CandidateController {
 	}
 
 	//로그인 처리  2019.07.03 생성 ver.2 --> 통합로그인 사용
-	
-	@RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
-	public String candidateLogin(CandidateVO vo, HttpSession session, Model model) {
-		String targetPage = "candidate/candidate/candidateLogin";
-		CandidateVO loginCandidate = candidateService.commonLogin(vo);
-
-		if (loginCandidate != null) {
-			session.setAttribute("candidate", loginCandidate);
-			targetPage = "redirect:candidateMain.do";
-		} else {
-			model.addAttribute("loginFail", true);
-		}
-		return targetPage;
-	}
+	/*
+	 * @RequestMapping(value = "candidateLogin.do", method = RequestMethod.POST)
+	 * public String candidateLogin(CandidateVO vo, Authentication authentication,
+	 * Model model) { String targetPage = "candidate/candidate/candidateLogin";
+	 * CandidateVO loginCandidate = candidateService.commonLogin(vo);
+	 * 
+	 * if (loginCandidate != null) { model.addAttribute("candidate",
+	 * loginCandidate); targetPage = "redirect:candidateMain.do"; } else {
+	 * model.addAttribute("loginFail", true); } return targetPage; }
+	 */
 	  
 	//계정수정 form		 장세준 (7/3 ver.2)
 	@RequestMapping(value="updateCandidate.do", method=RequestMethod.GET)
@@ -426,6 +422,8 @@ public class CandidateController {
 	//메인화면
 	@RequestMapping("candidateMain.do")
 	public String candidateMain() {
+		
+		
 		return "candidate/candidate/candidateMain";
 	}
 	

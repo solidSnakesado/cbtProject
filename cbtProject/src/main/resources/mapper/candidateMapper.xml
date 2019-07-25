@@ -128,7 +128,15 @@
 		
 		<select id="getTakerPassword" resultType="String">
 			SELECT	TAKER_PASSWORD
-			FROM 	TAKER
+			FROM 	(	SELECT TAKER_ID , TAKER_PASSWORD , 'ROLE_USER' ROLE_NAME
+					  FROM TAKER
+					 UNION ALL
+					SELECT MANAGER_ID, MANAGER_PASSWORD, 'ROLE_MANAGER' ROLE_NAME
+					  FROM MANAGER
+					 UNION ALL
+					SELECT COMPANY_ID , COMPANY_PASSWORD, 'ROLE_COMPANY' ROLE_NAME
+					  FROM COMPANY
+			   		 )
 			WHERE	TAKER_ID = #{takerId} 
 		</select>
 		
@@ -206,8 +214,17 @@
 	</select>
 	
 	<select id="idcheck" parameterType="CandidateVO" resultType="Integer">
-		SELECT	COUNT(*) FROM TAKER
-     		WHERE   TAKER_ID = #{takerId}
+		SELECT 		COUNT(*)
+		  FROM (	SELECT TAKER_ID , TAKER_PASSWORD , 'ROLE_USER' ROLE_NAME
+					  FROM TAKER
+					 UNION ALL
+					SELECT MANAGER_ID, MANAGER_PASSWORD, 'ROLE_MANAGER' ROLE_NAME
+					  FROM MANAGER
+					 UNION ALL
+					SELECT COMPANY_ID , COMPANY_PASSWORD, 'ROLE_COMPANY' ROLE_NAME
+					  FROM COMPANY
+			    )
+		WHERE 		TAKER_ID = #{takerId} 
 	</select>
 	
 	<!-- 07.17 이승환 추가 // 매니저 응시자목록 카운팅 -->
