@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.candidate.CandidateService;
 import com.cbt.candidate.CandidateVO;
 import com.cbt.common.CustomerUser;
 import com.cbt.exam.ExamService;
@@ -60,6 +61,8 @@ public class QuestionController {
 	ExamService examService;
 	@Autowired
 	TakeExamHistoryService takeExamHistoryService;
+	@Autowired
+	CandidateService candidateService;
 	@Autowired
 	private JavaMailSender mailSender;
 	 
@@ -101,11 +104,11 @@ public class QuestionController {
 	// 시험 시작 이벤트
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
-	public List<Map<String, Object>> getTestStart(TakeExamVO vo, HttpSession session) {
+	public List<Map<String, Object>> getTestStart(TakeExamVO vo, Authentication authentication) {
 		
 		// 세션에서 아이디 담기
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		vo.setTakerId(user.getUsername());
 		
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 시험 제출하지 않은 응시자 가리기
@@ -141,9 +144,9 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateTakeExamHistory(QuestionVO vo, HttpSession session) {
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
+	public void updateTakeExamHistory(QuestionVO vo, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		vo.setTakerId(user.getUsername());
 		questionService.updateTakeExamHistory(vo);
 		
 	}
@@ -151,17 +154,16 @@ public class QuestionController {
 	@RequestMapping(value = "candidateTestResult.do" , method = RequestMethod.POST)
 	public ModelAndView candidateTestResult(	@RequestParam( value = "takeExamId" , required = false ) int takeExamId,
 												@RequestParam( value = "examId" , required = false ) int examId,
-												HttpSession session ) {
+												Authentication authentication ) {
 		
-		CustomerUser user = (CustomerUser)session.getAttribute("candidate");
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		
 		CandidateVO candiVO = new CandidateVO();
 		candiVO.setTakerId(user.getUsername());
-		
+		candiVO.setTakerName(user.getFullName());
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("candiVO", candiVO);
-		
+		mv.addObject("candiVO", candidateService.getCandidate(candiVO));
 		
 		ExamVO examVO = new ExamVO();
 		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
