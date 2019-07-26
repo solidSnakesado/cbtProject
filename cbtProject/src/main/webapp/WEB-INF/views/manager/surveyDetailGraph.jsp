@@ -105,7 +105,7 @@ $(document).ready(function() {
 		
 	</form>
 	<br><br>
-	<button id="chartBtn">통계보기</button>
+	<button id="chartBtn" class="btn btn-primary btn-lg p-5 " style="font-size:1em">통계보기</button>
 	
 	<div id="chartDiv">
 	</div>

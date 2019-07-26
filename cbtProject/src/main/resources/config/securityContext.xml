@@ -11,15 +11,20 @@
 	<security:http pattern="/js/**" security="none"/>
 	<security:http pattern="/image/*" security="none"/>
 	<security:http pattern="/css/*" security="none"/>
-	<security:http pattern="/idcheck.do" security="none"/>
-	<security:http pattern="/insertCandidate.do" security="none"/>
-	<security:http pattern="/candidateScheduleCheck.do" security="none"/>
-	<security:http pattern="/companySignUp.do" security="none"/>
+	
 	<security:http>
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/candidateMain.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/idcheck.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/insertCandidate.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/candidateScheduleCheck.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/companySignUp.do" access="permitAll()" />
 		<security:intercept-url pattern="/manager*"
 			access="hasAuthority('ROLE_MANAGER')" />
 		<security:intercept-url pattern="/company*"
