@@ -135,8 +135,8 @@ public class QuestionServiceImpl implements QuestionService {
 		questionDAO.rightLastAnswer(vo);
 	}
 
-	public List<QuestionVO> candidateExamList() {
-		return questionDAO.candidateExamList();
+	public List<QuestionVO> managerAllQuestionList() {
+		return questionDAO.managerAllQuestionList();
 	}
 	
 	public List<QuestionVO> uploadExcelFile(MultipartFile excelFile) {

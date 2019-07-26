@@ -13,6 +13,7 @@
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/styles.css" rel="stylesheet" media="screen">
+        <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">  
@@ -68,7 +69,7 @@
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
 		        	</li>
 		        	<li>
-		        	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
+		        	<a href="${pageContext.request.contextPath }/managerAllQuestionList.do" class="w3-bar-item w3-button">문제관리</a>
 		        	</li>
 		     
 
@@ -99,7 +100,7 @@
             </footer>
         </div>
         <!--/.fluid-container-->
- 		<script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
+ 		
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/bootstrap/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/scripts.js"></script>

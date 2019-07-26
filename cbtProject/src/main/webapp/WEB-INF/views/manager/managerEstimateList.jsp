@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
+<style>
+	
+    
+    
+    tr:hover td {background:#ABCDEF !important}; /*마우스 hover 색상  */
+</style>
+
 <script>
 	//페이징처리
 	function goList(p) {
@@ -41,15 +48,17 @@
 	}
 </script>
 
-<style>
-	tr:hover td {background:#ABCDEF !important}; /*마우스 hover 색상  */
-</style>
 </head>
 <body>
-	<h4 class="mx-auto pb-2">의뢰목록1</h4>
+	<div style="text-align:center">
+		<h4 class="mx-auto pb-2">의뢰목록</h4>
+	</div>
 	<hr/>
-	<div class="container">
-
+	
+	
+	
+	<div class="container" >
+		<!-- 페이징 처리폼 -->
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
 		</form>
@@ -79,10 +88,8 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button"
-								onClick="location.href ='managerExamInsert.do/${estimate.estimateId}'">시험출제</button></td>
-						<td><button type="button"
-								onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" onClick="location.href ='managerExamInsert.do/${estimate.estimateId}'">시험출제</button></td>
+						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

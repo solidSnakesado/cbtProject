@@ -55,6 +55,7 @@
 	} else if (window.ActiveXObject) {
 		xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
 	}
+	
 	xmlHttp.open('HEAD', window.location.href.toString(), false);
 	xmlHttp.setRequestHeader("Content-Type", "text/html");
 	xmlHttp.send('');

@@ -105,8 +105,8 @@ public class QuestionDAO {
 		mybatis.update("QuestionDAO.rightLastAnswer", vo);
 	}
 	
-	public List<QuestionVO> candidateExamList(){
-		return mybatis.selectList("QuestionDAO.candidateExamList");
+	public List<QuestionVO> managerAllQuestionList(){
+		return mybatis.selectList("QuestionDAO.managerAllQuestionList");
 	}
 	
 	public void insertQuestionList(List<QuestionVO> vo) {
