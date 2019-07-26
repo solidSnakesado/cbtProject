@@ -543,7 +543,7 @@ public class CandidateController {
 		
 		if(authentication != null) {
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
-			
+
 			for(GrantedAuthority item : user.getAuthorities()) {
 				String roleName = item.getAuthority();
 				
