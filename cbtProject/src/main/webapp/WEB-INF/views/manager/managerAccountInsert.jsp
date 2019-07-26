@@ -42,8 +42,10 @@
 			</tr>
 			</table>
 			<br>
-	<input type="submit" id="submit" value="등록">&nbsp;&nbsp;&nbsp;
-	<input type="reset" id="reset" onclick="location.href='managerAccountList.do'" value="돌아가기">
+			<div align="center">
+	<input type="submit" id="submit" class="btn btn-primary" align="middle" value="등록" >&nbsp;&nbsp;&nbsp;
+	<input type="reset" id="reset" class="btn btn-danger" onclick="location.href='managerAccountList.do'" value="돌아가기">
+	</div>
 		</form>
 
     

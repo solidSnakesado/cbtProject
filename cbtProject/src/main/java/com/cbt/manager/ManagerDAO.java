@@ -72,4 +72,9 @@ public class ManagerDAO {
 	public List<Map<String, Object>> getManagerAllPrivateExamList() {
 		return mybatis.selectList("ManagerDAO.getManagerAllPrivateExamList");
 	}
+	
+	public List<ManagerVO> managerTakerListMain(ManagerTakerVO vo) {
+		return mybatis.selectList("ManagerDAO.getManagerList", vo);
+	}
+	
 }

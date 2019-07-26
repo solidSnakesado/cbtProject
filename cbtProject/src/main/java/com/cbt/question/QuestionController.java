@@ -453,9 +453,9 @@ public class QuestionController {
 	
 	
 	
-	@RequestMapping(value = "fileUpload.do", method = RequestMethod.GET)
+	@RequestMapping(value = "managerFileUpload.do", method = RequestMethod.GET)
 	public String fileUpload() {
-		return "manager/manager/fileUpload";
+		return "manager/manager/managerFileUpload";
 	}
 	
 	@RequestMapping(value = "/excelUp.do", method = RequestMethod.POST)
@@ -474,7 +474,7 @@ public class QuestionController {
 			questionService.insertQuestion(vo);
 		}	
 		
-		return "redirect:fileUpload.do";
+		return "redirect:managerFileUpload.do";
         
     }
 	

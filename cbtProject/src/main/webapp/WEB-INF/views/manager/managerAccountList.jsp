@@ -2,8 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
 
 	<h4 class="mx-auto pb-2">기업회원 관리</h4>
+	
 	<script>
 		function goList(p) {
 			searchFrm.page.value = p;
@@ -21,7 +27,7 @@
 		<br> 
 		검색조건 <my:companyListSelect items="${companyMap }" /><br>
 		 <input type="text" name="searchKeyword" class="form-control" value="${CompanyVO.searchKeyword }">
-		<button>검색</button>
+		<button class="btn btn-primary">검색</button>
 	</form>
 	<script>
 		searchFrm.sort.value = "${CompanyVO.sort}" == "" ? searchFrm.sort.options[0].value
@@ -31,21 +37,24 @@
 	</script>
 	<div class="container">
 		<br>
-		<button type="button"
+		<button type="button" class="btn btn-primary"
 			onclick="location.href='managerAccountInsert.do'">기업 추가</button>
 		<br>
 		<br>
 		<form action="managerAccountDelete.do">
-			<button id="">삭제</button>
-			<table border="1" align="center">
+			<button id="" class="btn btn-danger">삭제</button>
+			<table border="1" align="center" class="table table-striped">
+				<thead>
 				<tr>
 					<th>선택</th>
 					<th>기업ID</th>
 					<th>기업명</th>
 					<th>기업 담당자</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach items="${result.companyList }" var="CompanyVO">
-					<tr>
+					<tr class="trexam">
 						<td><input type="checkbox" name="companyList"
 							value="${CompanyVO.companyId }"></td>
 						<td>${CompanyVO.companyId }</td>
@@ -53,6 +62,7 @@
 						<td>${CompanyVO.companyManager }</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 		</form>
 		<br>

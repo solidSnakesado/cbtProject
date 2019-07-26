@@ -9,7 +9,7 @@
 
 	<h4 class="mx-auto pb-2">매니저 정보 수정</h4>	
 		
-		<form action="${pageContext.request.contextPath }/updateManager.do" method="post">
+		<form action="${pageContext.request.contextPath }/managerUpdateManager.do" method="post">
 			매니저 ID  : <input type="text" name="managerId" class="form-control" value="${manager.managerId }" readonly><br>
 			매니저 PW  : <input type="password" name="managerPassword" class="form-control" value="${manager.managerPassword }"><br>
 			매니저 이름 : <input type="text" name="managerName" class="form-control" value="${manager.managerName }"><br>

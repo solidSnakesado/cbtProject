@@ -98,6 +98,7 @@ public class CandidateDAO {
 	public List<CandidateVO> getCandidateList(CandidateVO vo) {
 		return mybatis.selectList("candidateDAO.getCandidateList", vo);
 	}
+	
 	public int getCount() {
 		return mybatis.selectOne("candidateDAO.getCount");
 	}
@@ -129,6 +130,5 @@ public class CandidateDAO {
 	public int getManagerCandidateCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getManagerCandidateCount", vo);
 	}
-	
 	
 }

@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-
+<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
 <script>
 	// 2019.07.09 성재민 
 	// showPopup() 메소드 변수 하나 받게 수정
@@ -46,7 +50,8 @@
 	</script>
 	
 	<br>
-	<table border="1" align="center" class="table table-striped">
+	<table border="1" align="center" class="table">
+		<thead>
 		<tr>
 			<th><label>의뢰기업</label></th>
 			<th><label>시험이름</label></th>
@@ -54,12 +59,14 @@
 			<th><label>시험상태</label></th>
 			<th><label>시험출제상태</label></th>
 		</tr>
+		</thead>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->
 		<!-- 2019.07.11 성재민 -->
 		<!-- 각종 상태값을 코드로 받아서 해당 코드별 문자열로 변환 -->
+		<tbody>
 		<c:forEach items="${ExamList}" var="exam">
-			<tr onclick="showDetail(${exam.examId});">
+			<tr onclick="showDetail(${exam.examId});" class="trexam">
 				<td>${exam.companyId}</td>
 				<td>${exam.examName}</td>
 				<td>${exam.examStartTime}~<br>${exam.examEndTime}</td>
@@ -83,6 +90,7 @@
 				</c:if>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 
 	<my:paging jsFunc="goList" paging="${result.paging }" />

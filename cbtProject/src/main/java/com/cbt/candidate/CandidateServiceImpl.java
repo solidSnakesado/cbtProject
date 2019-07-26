@@ -72,6 +72,7 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDAO.getCandidateList(vo);
 	}
 
+	
 	@Override
 	public List<Map<String, String>> getExamList(CandidateVO vo) {
 		return candidateDAO.getExamList(vo);
@@ -147,5 +148,8 @@ public class CandidateServiceImpl implements CandidateService {
 			map.put("takerList", candidateDAO.managerCandidateList(vo));
 			map.put("paging", paging);
 			return map;	
-	} 
+	}
+
+
+
 }

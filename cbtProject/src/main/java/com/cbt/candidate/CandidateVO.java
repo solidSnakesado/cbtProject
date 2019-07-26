@@ -14,6 +14,8 @@ public class CandidateVO {
 	private String takerPhoneNum; 
 	private String takerEducationNm;
 	private String RoleName;
+
+	
 	
 	public String getRoleName() {
 		return RoleName;

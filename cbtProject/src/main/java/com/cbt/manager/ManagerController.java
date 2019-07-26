@@ -67,8 +67,37 @@ public class ManagerController {
 
 	// 메인
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
-	public String managerMain(Model model, CandidateVO vo, HttpSession session) {
-		model.addAttribute("candidate", candidateService.getCandidateList(vo));
+	public String managerMain(Model model, CandidateVO candidateVO 
+										   , CompanyVO companyVO
+										   , ConsultingVO consultingVO
+										   , ExamVO examVO
+										   , HttpSession session) {
+		
+		candidateVO.setStart(1);
+		candidateVO.setEnd(3);
+		
+		companyVO.setStart(1);
+		companyVO.setEnd(3);
+		
+		/*
+		 * consultingVO.setStart(1); consultingVO.setEnd(3);
+		 * examVO.setStart(1); examVO.setEnd(3);
+		 */
+		
+		model.addAttribute("takerTop3", candidateService.getCandidateList(candidateVO));
+		model.addAttribute("candidate", candidateService.getCandidateList(candidateVO));
+		
+		model.addAttribute("companyTop3", companyService.getCompanyList(companyVO));
+		model.addAttribute("company", companyService.getCompanyList(companyVO));
+		
+		/*
+		 * model.addAttribute("consultingTop3",
+		 * consultingService.getConsultingList(consultingVO));
+		 * model.addAttribute("consulting",
+		 * consultingService.getConsultingList(consultingVO));
+		 * model.addAttribute("examTop3", examService.getExamList(examVO));
+		 * model.addAttribute("exam", examService.getExamList(examVO));
+		 */
 		// 2019.07.20 성재민
 		// 로그인시 답변이 안된 문의 의 갯수를 받아온다.
 		int count = inquiryService.getBeforeReplyCount();
@@ -80,51 +109,51 @@ public class ManagerController {
 	}
 
 	// 등록폼
-	@RequestMapping(value = "insertManager.do", method = RequestMethod.GET)
+	@RequestMapping(value = "managerInsertManager.do", method = RequestMethod.GET)
 	public String insertManagerForm() {
-		return "manager/manager/insertManager";
+		return "manager/manager/managerInsertManager";
 	}
 
 	// 등록처리
-	@RequestMapping(value = "insertManager.do", method = RequestMethod.POST)
+	@RequestMapping(value = "managerInsertManager.do", method = RequestMethod.POST)
 	public String insertManager(ManagerVO vo) {
 		managerService.insertManager(vo);
-		return "redirect:getManagerList.do";
+		return "redirect:managerGetManagerList.do";
 	}
 
 	// 전체조회
-	@RequestMapping("/getManagerList.do")
+	@RequestMapping("/managerGetManagerList.do")
 	public ModelAndView getManagerList(ModelAndView mv, Paging paging,
 			@RequestParam(value = "searchManager", required = false) String searchManager) {
 
 		ManagerVO vo = new ManagerVO();
 		vo.setSearchManager(searchManager);
 		mv.addObject("result", managerService.getManagerList(vo, paging));
-		mv.setViewName("manager/manager/getManagerList");
+		mv.setViewName("manager/manager/managerGetManagerList");
 		return mv;
 	}
 
 	// 수정폼
-	@RequestMapping("/updateManager/{managerId}")
+	@RequestMapping("/managerUpdateManager/{managerId}")
 	public String updateManagerForm(@PathVariable("managerId") String managerId, ManagerVO vo, Model model) {
 		vo.setManagerId(managerId);
 		model.addAttribute("manager", managerService.getManager(vo));
-		return "manager/manager/updateManager";
+		return "manager/manager/managerUpdateManager";
 	}
 
 	// 수정처리
-	@RequestMapping("updateManager.do")
+	@RequestMapping("managerUpdateManager.do")
 	public String updateManager(@ModelAttribute("manager") ManagerVO vo) {
 		System.out.println("===========\n" + vo);
 		managerService.updateManager(vo);
-		return "redirect:getManagerList.do";
+		return "redirect:managerGetManagerList.do";
 	}
 
 	// 삭제처리
 	@RequestMapping("deleteManager.do")
 	public String deleteManager(ManagerVO vo) {
 		managerService.deleteManager(vo);
-		return "redirect:getManagerList.do";
+		return "redirect:managerGetManagerList.do";
 	}
 
 	// 7/5 재용추가
@@ -453,7 +482,7 @@ public class ManagerController {
 	// 차트 조회하기 전에 먼저 종류를 선택하게 한다 (7/22 june) 
 	@RequestMapping(value="managerChart.do", method=RequestMethod.GET)
 	public String  managerChart() {
-		return "manager/manager/simpleChart";
+		return "manager/manager/managerSimpleChart";
 	}
 	
 }

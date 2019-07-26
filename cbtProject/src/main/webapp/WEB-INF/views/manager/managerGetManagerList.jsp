@@ -27,11 +27,11 @@
 		<c:forEach items="${result.managerList }" var="manager">
 		<tr>
 			<td><input type="checkbox" name="mngList" value="${manager.managerId }"></td>
-			<td><a href="updateManager/${manager.managerId }">${manager.managerId }</a></td>
+			<td><a href="managerUpdateManager/${manager.managerId }">${manager.managerId }</a></td>
 			<td>${manager.managerName }</td>
 		</tr>
 		</c:forEach>
 	</table>
 	</form>
 	<br>
-	<a href="insertManager.do">매니저 등록</a>
+	<a href="managerInsertManager.do">매니저 등록</a>

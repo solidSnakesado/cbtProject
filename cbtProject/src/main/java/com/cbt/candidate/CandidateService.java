@@ -23,7 +23,7 @@ public interface CandidateService {
 
 	// 응시자 정보 가져올 리스트 -- 이승환
 	List<CandidateVO> getCandidateList(CandidateVO vo);
-
+	
 	// 응시자 정보 가져올 리스트, 페이징추가
 	public Map<String, Object> managerCandidateList(CandidateVO vo, Paging paging);
 
@@ -44,5 +44,5 @@ public interface CandidateService {
 
 	// temp
 	Map<Object, Object> candidateScheduleCheckPage(Paging paging);
-
+	
 }

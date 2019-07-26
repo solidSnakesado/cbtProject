@@ -74,17 +74,17 @@ public class SurveyController {
 	public String simpleExamList(Model model, HttpSession session) {
 		ManagerVO vo = (ManagerVO) session.getAttribute("manager");
 		model.addAttribute("simpleExamList",examService.getExamSurveyList(vo));
-		return "manager/manager/simpleChart";
+		return "manager/manager/managerSimpleChart";
 	}
 	
 	
 	// temp 차트로 이동 (7/23), june --> 추후 삭제예정
 
-	@RequestMapping(value = "surveyDetailGraph.do", method = RequestMethod.GET)
+	@RequestMapping(value = "managerSurveyDetailGraph.do", method = RequestMethod.GET)
 	public String surveyDetailGraph(Model model, HttpSession session) {
 		ManagerVO vo = (ManagerVO) session.getAttribute("manager");
 		model.addAttribute("simpleExamList",examService.getExamSurveyList(vo));
-		return "manager/manager/surveyDetailGraph";
+		return "manager/manager/managerSurveyDetailGraph";
 	}
 	
 	

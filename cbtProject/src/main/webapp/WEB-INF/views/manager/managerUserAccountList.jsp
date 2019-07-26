@@ -141,7 +141,7 @@
 		<button id="">응시자 삭제</button>
 		<br>
 		<br>
-		<table border="1" align="center">
+		<table border="1" align="center" class="table table-striped">
 			<tr>
 				<th><label>선택</label></th>
 				<th><label>응시자ID</label></th>

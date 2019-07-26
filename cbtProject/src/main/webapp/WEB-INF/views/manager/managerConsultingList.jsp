@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
+<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
+
 	<h4 class="mx-auto pb-2">기업상담목록(관리자)</h4>
 	<script>
 		function goList(p) {
@@ -39,15 +45,18 @@
 		<br>
 		<br>
 		<form action="managerConsultingDelete.do">
-			<table border="1" align="center" class="table table-striped">
+			<table border="1" align="center" class="table">
+				<thead>
 				<tr>
 					<th>선택</th>
 					<th>제목</th>
 					<th>상담희망일</th>
 					<th>상담진행상태</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach items="${result.consultingList}" var="ConsultingVO">
-					<tr>
+					<tr class="trexam">
 						<td><input type="checkbox" name="consultingList"
 							value="${ConsultingVO.consultingId }"></td>
 						<td><a
@@ -56,6 +65,7 @@
 						<td>${ConsultingVO.consultingStateName}</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 			<button id="" align="right" class="btn btn-warning m-3 p-3">삭제</button>
 		</form>

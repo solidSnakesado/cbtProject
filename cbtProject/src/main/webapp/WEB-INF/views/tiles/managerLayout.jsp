@@ -25,7 +25,7 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="managerMain.do">Admin Panel</a>
+                    <a class="brand" href="${pageContext.request.contextPath }/managerMain.do">CBT Admin</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                         <sec:authorize access="isAuthenticated()">  
@@ -34,7 +34,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="insertManager.do">매니저등록</a>
+                                        <a tabindex="-1" href="insertManager.do">매니저 등록</a>
+                                    </li>
+                                    <li>
+                                    	<a href="managerGetManagerList.do">매니저 목록</a>
+                                    </li>
+                                    <li>
+                                    	<a href="categoryMain.do">카테고리 설정</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
@@ -68,7 +74,7 @@
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
 		        	</li>
 		        	<li>
-		        	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
+		        	<a href="${pageContext.request.contextPath }/managerFileUpload.do" class="w3-bar-item w3-button">문제등록</a>
 		        	</li>
 		     
 
