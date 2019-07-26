@@ -89,8 +89,11 @@ public class EstimateController {
 	public void companyEstimateUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
 		//vo.setEstimateId(estimateId);
 		estimateService.updateEstimate(vo);
+		
 		PrintWriter out = response.getWriter();
+		
 		//윈도우창 닫기
+		response.setContentType("text/html; charset=UTF-8");
 		out.print("<script>");
 		out.print("window.opener.top.location.reload();");
 		out.print("window.close();");
@@ -196,6 +199,7 @@ public class EstimateController {
 			estimateService.updateEstimate(vo);
 			
 			//윈도우창 닫기
+			response.setContentType("text/html; charset=UTF-8");
 			out.print("<script>");
 			out.print("window.opener.top.location.reload();");
 			out.print("window.close();");
@@ -270,10 +274,10 @@ public class EstimateController {
 		       //의뢰진행상태 출제 완료 -> 결제대기
 		       estimateService.updatesTradeProgressExchange4(vo);
 		       out.print("<script>");
-				out.print("window.opener.top.location.reload();");
-				out.print("window.close();");
-				out.print("</script>");
-				out.flush();
+		       out.print("window.opener.top.location.reload();");
+		       out.print("window.close();");
+		       out.print("</script>");
+		       out.flush();
 		      try {
 		         mailSender.send(message); //messageHelper.getMimeMessage()
 		      } catch (MailException e) {

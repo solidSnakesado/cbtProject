@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
+   
+   
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
 <script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 <script>
@@ -35,6 +37,7 @@ $(document).ready(function() {
       jQuery(function(){
           jQuery('#date_timepicker_start').datetimepicker({
            format:'Y/m/d H:i',
+           'minDate' : new Date(), //오늘날짜가 minimum
            allowTimes:[
               '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00',
                '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00',
@@ -50,6 +53,7 @@ $(document).ready(function() {
           });
           jQuery('#date_timepicker_end').datetimepicker({
            format:'Y/m/d H:i',
+           "minDate" : new Date(), //오늘날짜가 minimum
            allowTimes:[
               '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00',
                '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00',

@@ -15,7 +15,7 @@
 	
 	// 윈도우 function 처리 함수
 	function estimateDetail(estimateId){
-		var wintype = "toolbar=no,width=1100px,height=900px,top=50,left=420,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+		var wintype = "toolbar=no,width=500px,height=900px,top=50,left=520,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
 		var winopen = window.open("companyEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
 	

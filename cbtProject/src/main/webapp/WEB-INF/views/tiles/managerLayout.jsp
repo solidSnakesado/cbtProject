@@ -13,6 +13,7 @@
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/styles.css" rel="stylesheet" media="screen">
+        <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">  
@@ -99,7 +100,7 @@
             </footer>
         </div>
         <!--/.fluid-container-->
- 		<script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
+ 		
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/bootstrap/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/scripts.js"></script>

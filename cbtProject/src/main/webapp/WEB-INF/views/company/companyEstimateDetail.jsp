@@ -26,7 +26,7 @@
 			$("#Payment").css('display', 'inline');// 결제버튼 보임
 		}
 		else if(tradeProgress =='B5'){	//결제완료(B5)
-			var row = "<tr>	<td >결제날짜</td>	  <td>	<input type='text' class='form-control' value='${myEstimateList.paymentDate}'   readonly> </td></tr>	"
+			var row = "<tr>	<td >결제날짜</td> <td><input type='text' class='form-control' value='${myEstimateList.paymentDate}'   readonly> </td></tr>	"
 			$("#table").append(row);
 		}
 		
