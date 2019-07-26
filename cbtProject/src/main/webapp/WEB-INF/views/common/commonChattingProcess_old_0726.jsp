@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleChat.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
 <title>채팅하기</title>
 <sec:authorize access="isAuthenticated()">  
 	<sec:authentication property="principal.username" var="user_id" />
@@ -52,6 +51,29 @@
 		ws.onmessage = function(event) {
 			onMessage(event);
 		};
+		
+		ws.onclose = function(event) {
+			var sendMessage = {
+					type : "system",
+					msg : "처리완료",
+					id : tempId,
+					rid : roomId
+				};
+			
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				data: JSON.stringify(sendMessage),
+				contentType: "application/json",
+				url:"${pageContext.request.contextPath }/deleteInquiry.do",
+				success : function(data){
+					console.log(data);
+					window.close();
+				}, error : function(){
+					alert('에러발생');
+				}
+			});
+		}
 
 		// 2019.07.18 성재민
 		// 메시지를 화면에 전시
