@@ -139,9 +139,7 @@
 </head>
 <body>
 	<h4 class="mx-auto pb-2">세부 의뢰목록</h4>
-	<form
-		action="${pageContext.request.contextPath}/companyEstimateUpdate.do"
-		name="form" method="POST">
+	<form action="${pageContext.request.contextPath}/managerEstimateUpdate.do" name="form" method="POST">
 		<!-- form name으로 submit처리 -->
 		<table id="table">
 			<tr>
@@ -196,7 +194,7 @@
 				<td><label>응시자 수</label></td>
 				<td><input type="text" name="applicants" class="form-control"
 					value="${myEstimateList.applicants}" id="applicants"
-					onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">명</td>
+					onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"></td>
 			</tr>
 			<tr>
 				<td><label>시험분류</label></td>
@@ -224,10 +222,6 @@
 				<td><my:select items="${N}" name="examInterval"
 						value="${myEstimateList.examInterval}"></my:select></td>
 			</tr>
-
-
-
-
 		</table>
 		<button type="button" id="editButton">수정하기</button>
 		<button type="button" id="sendEmail">확인메일보내기</button>

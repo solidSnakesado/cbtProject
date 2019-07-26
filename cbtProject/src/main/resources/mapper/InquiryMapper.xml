@@ -25,7 +25,7 @@
 	<update id="updateInquiry" parameterType="InquiryVO">
 		UPDATE INQUIRY 
 		<set>
-			REPLY_STATUS 		= '처리중'
+			REPLY_STATUS 		= #{replyStatus}
 		</set>
 		<where>
 			INQUIRY_ROOM_ID 	= #{inquiryRoomId}

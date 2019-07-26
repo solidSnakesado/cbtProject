@@ -277,12 +277,12 @@
 			<version>2.8.5</version>
 		</dependency>
 
-		<!-- 2019.07.18 성재민 -->
+		<!-- 2019.07.26 성재민 -->
 		<!-- 채팅 기능을 위한 추가 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.2.4.RELEASE</version>
 		</dependency>
 
 		<!-- 2019.07.22 이재홍 -->
@@ -298,13 +298,13 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- 2019.07.26 성재민 -->
 		<!-- 자바 코드에서 json을 사용하기 위해 사용 -->
 		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 	<build>
