@@ -1,6 +1,7 @@
 package com.cbt.question;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cbt.candidate.CandidateService;
 import com.cbt.candidate.CandidateVO;
 import com.cbt.common.CustomerUser;
 import com.cbt.exam.ExamService;
@@ -60,6 +62,8 @@ public class QuestionController {
 	ExamService examService;
 	@Autowired
 	TakeExamHistoryService takeExamHistoryService;
+	@Autowired
+	CandidateService candidateService;
 	@Autowired
 	private JavaMailSender mailSender;
 	 
@@ -101,11 +105,11 @@ public class QuestionController {
 	// 시험 시작 이벤트
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
-	public List<Map<String, Object>> getTestStart(TakeExamVO vo, HttpSession session) {
+	public List<Map<String, Object>> getTestStart(TakeExamVO vo, Authentication authentication) {
 		
 		// 세션에서 아이디 담기
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		vo.setTakerId(user.getUsername());
 		
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 시험 제출하지 않은 응시자 가리기
@@ -141,9 +145,9 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateTakeExamHistory(QuestionVO vo, HttpSession session) {
-		CandidateVO candiVO = (CandidateVO)session.getAttribute("candidate");
-		vo.setTakerId(candiVO.getTakerId());
+	public void updateTakeExamHistory(QuestionVO vo, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		vo.setTakerId(user.getUsername());
 		questionService.updateTakeExamHistory(vo);
 		
 	}
@@ -151,17 +155,15 @@ public class QuestionController {
 	@RequestMapping(value = "candidateTestResult.do" , method = RequestMethod.POST)
 	public ModelAndView candidateTestResult(	@RequestParam( value = "takeExamId" , required = false ) int takeExamId,
 												@RequestParam( value = "examId" , required = false ) int examId,
-												HttpSession session ) {
+												Authentication authentication ) {
 		
-		CustomerUser user = (CustomerUser)session.getAttribute("candidate");
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
 		
 		CandidateVO candiVO = new CandidateVO();
 		candiVO.setTakerId(user.getUsername());
-		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("candiVO", candiVO);
-		
+		mv.addObject("candiVO", candidateService.getCandidate(candiVO));
 		
 		ExamVO examVO = new ExamVO();
 		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
@@ -215,12 +217,12 @@ public class QuestionController {
 	
 	// 2019.07.18 김재용
 	// 문제테이블 ALL 리스트 불러오기
-	@RequestMapping(value = "candidateExamList.do", method = RequestMethod.GET)
-	public ModelAndView candidateExamList() {
+	@RequestMapping(value = "managerAllQuestionList.do", method = RequestMethod.GET)
+	public ModelAndView managerAllQuestionList() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("examList", questionService.candidateExamList());
-		mv.setViewName("candidate/candidate/candidateExamList");
+		mv.addObject("examList", questionService.managerAllQuestionList());
+		mv.setViewName("manager/manager/managerAllQuestionList");
 		
 		return mv;
 	}
@@ -228,7 +230,7 @@ public class QuestionController {
 	@RequestMapping(value = "/excelDown.do")
 	public void excelDown(HttpServletResponse response) throws Exception {
 		
-		List<QuestionVO> list = questionService.candidateExamList();
+		List<QuestionVO> list = questionService.managerAllQuestionList();
 		
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet("게시판");
@@ -416,45 +418,46 @@ public class QuestionController {
 	}
 	
 	 // mailForm
-	  @RequestMapping(value = "/mail/mailForm")
-	  public String mailForm() {
-	    return "/mail/mailForm";
-	  }
+	@RequestMapping(value = "/mail/mailForm")
+	public String mailForm() {
+		return "/mail/mailForm";
+	}
 	
 	//mailSending 코드
-		@RequestMapping(value="mail/mailSending")
-		public String mailSending(HttpServletRequest request) {
+	@RequestMapping(value="mail/mailSending")
+	public String mailSending(HttpServletRequest request) {
+		
+		String setfrom = "freehwans@gmail.com";
+		String tomail = request.getParameter("tomail");		//받는사람 이메일
+		String title = request.getParameter("title"); 		//제목
+		String content = request.getParameter("content"); 	//내용
+		String fileName = "";
+		
+		try {
+			// MimeMessage message = mailSender.createMimeMessage();
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
-			String setfrom = "freehwans@gmail.com";
-			String tomail = request.getParameter("tomail");		//받는사람 이메일
-			String title = request.getParameter("title"); 		//제목
-			String content = request.getParameter("content"); 	//내용
-			String fileName = "";
+			messageHelper.setFrom(setfrom);
+			messageHelper.setTo(tomail);
+			messageHelper.setSubject(title);
+			messageHelper.setText(content);
 			
-			try {
-				// MimeMessage message = mailSender.createMimeMessage();
-				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				
-				messageHelper.setFrom(setfrom);
-				messageHelper.setTo(tomail);
-				messageHelper.setSubject(title);
-				messageHelper.setText(content);
-				
-				//파일첨부
-				FileSystemResource fsr = new FileSystemResource(fileName);
-				messageHelper.addAttachment("test2.txt", fsr);
-				mailSender.send(message);
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			return "redirect :/mail/mailForm";
+			//파일첨부
+			FileSystemResource fsr = new FileSystemResource(fileName);
+			messageHelper.addAttachment("test2.txt", fsr);
+			mailSender.send(message);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
+		return "redirect :/mail/mailForm";
+	}
 	
 	
 	
 	@RequestMapping(value = "managerFileUpload.do", method = RequestMethod.GET)
 	public String fileUpload() {
+
 		return "manager/manager/managerFileUpload";
 	}
 	
@@ -477,5 +480,32 @@ public class QuestionController {
 		return "redirect:managerFileUpload.do";
         
     }
+	
+	@RequestMapping(value = "/getTimer.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Date getTimer(ExamVO vo) {
+		
+		ExamVO examVo = examService.getExam(vo);
+		
+		System.out.println(Integer.parseInt(examVo.getExamStartTime()));
+		System.out.println(Integer.parseInt(examVo.getExamEndTime()));
+		
+		Date serverDate = new Date();
+		
+		System.out.println(serverDate);
+		
+		return serverDate;
+	}
+	
+	public Date parse(String str) {
+		
+		String y = str.substring(0, 4);
+		String mon = str.substring(5, 2);
+		String d = str.substring(8, 2);
+		String h = str.substring(11, 2);
+		String min = str.substring(14, 2);
+		
+		return new Date();
+	}
 	
 }

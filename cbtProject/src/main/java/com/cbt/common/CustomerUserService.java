@@ -35,6 +35,7 @@ public class CustomerUserService  implements UserDetailsService{
 		auth.add(new SimpleGrantedAuthority(vo.getRoleName()));
 
 		CustomerUser user = new CustomerUser(username, vo.getTakerPassword(), auth);
+		user.setRoleName(vo.getRoleName());
 		return user;
 	}
 }

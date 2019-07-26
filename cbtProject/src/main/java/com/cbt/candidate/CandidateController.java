@@ -52,17 +52,36 @@ public class CandidateController {
 	
     // 카카오 로그인   -7/19 변경, june
     @RequestMapping(value="/oauth")
-    public String login(@RequestParam("code") String code, HttpSession session) {
+    public String login(@RequestParam("code") String code, Model model, HttpSession session, CandidateVO vo) {
+    	KakaoAPI kakao = new KakaoAPI();
         String access_Token = kakao.getAccessToken(code);
-        HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-        System.out.println("login Controller : " + userInfo);
         
-        // 클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (userInfo.get("email") != null) {
-            session.setAttribute("userId", userInfo.get("email"));
-            session.setAttribute("access_Token", access_Token);
-        }
-        return "candidate/candidate/candidateMain";
+        System.out.println("kakao login access_token : " + access_Token);
+        
+        HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+        String kakaoId = (String) userInfo.get("kakaoId");
+        String kakaoName = (String) userInfo.get("nickname");
+        
+        vo.setTakerId(kakaoId);
+        System.out.println("-----------------------------------------\n kakao id : " + kakaoId);
+		CandidateVO candidate = candidateService.getCandidate(vo);
+		System.out.println("kakao customer : " + candidate);
+		
+		if (candidate == null) {
+			vo.setTakerId(kakaoId);
+			vo.setTakerName(kakaoName);
+			candidateService.insertKakaoCandidate(vo);
+			model.addAttribute("candidate", candidateService.getCandidate(vo));
+			return "candidate/candidate/candidateAccountManageModify";
+		}
+
+		candidate = candidateService.getCandidate(vo);
+        
+		session.setAttribute("takerId", candidate.getTakerId());
+		session.setAttribute("token", access_Token);
+		
+		//return kakaoName;
+		return "candidate/candidate/candidateMain";
     }
     
     // 카카오 로그아웃   -7/19 변경, june
@@ -543,7 +562,7 @@ public class CandidateController {
 		
 		if(authentication != null) {
 			CustomerUser user = (CustomerUser)authentication.getPrincipal();
-			
+
 			for(GrantedAuthority item : user.getAuthorities()) {
 				String roleName = item.getAuthority();
 				

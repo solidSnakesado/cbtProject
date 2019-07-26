@@ -1,22 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styleChat.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleChat.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>채팅하기</title>
+<sec:authorize access="isAuthenticated()">  
+	<sec:authentication property="principal.username" var="user_id" />
+	<sec:authentication property="principal.authorities" var="user_role"/>
+</sec:authorize>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var isStart = false;
 		var Now 	= new Date();
-		var tempId 	= "";
-		var roomId 	= "";
+		var tempId 	= "Guest" + Now.getTime();
+		var roomId 	= tempId;
 		var ws;
 		
 		if (ws != undefined && ws.readyState != WebSocket.CLOSED) {
@@ -24,26 +27,24 @@
 			return;
 		}
 		
-		if("${not empty sessionScope.manager }" != "false"){
-			tempId = '${sessionScope.manager.managerId}';
+		if("${not empty user_id}" != "false"){
+			tempId = '${user_id}';
 			
 			// 2019.07.20 성재민
 			// 받아온 방 번호가 있으면 해당 방 번호를
-			// 없으면 방 번호를 새로 지정 		
+			// 없으면 방 번호를 새로 지정 
+			console.log("체크" + "${not empty roomId}" == "false");
+			
 			if("${not empty roomId}" == "false"){
 				roomId = tempId + Now.getTime();
 			} else {
 				roomId = "${roomId}";
-				console.log("지정");
 			}
 		}
 
 		// 웹소켓 객채 생성
 		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
 		ws.onopen = function(event) {
-			/* if (event.data === undefined)
-				return; */
-
 			onOpen(event);
 		};
 
@@ -96,25 +97,6 @@
 			};
 			
 			ws.send(JSON.stringify(sendMessage));
-			
-			// 2019.07.20 성재민
-			// 메시지 입력이 시작 되면 db 문의 테이블에 인서트
-			if(isStart == false){
-				isStart = true;
-				
-				$.ajax({
-					type: "POST",
-					dataType: "json",
-					data: JSON.stringify(sendMessage),
-					contentType: "application/json",
-					url:"${pageContext.request.contextPath }/updateInquiry.do",
-					success : function(data){
-						console.log(data);
-					}, error : function(){
-						alert('에러발생');
-					}
-				});
-			}
 		}
 
 		// 2019.07.19 성재민
@@ -131,8 +113,8 @@
 			}
 		});
 		
-		// 2019.07.22 성재민
-		// 답변완료 버튼 클릭
+		// 2019.07.26 성재민
+		// 매니저가 답변완료 버튼 클릭
 		$("#tmBtnCloseChat").click(function() {
 			var sendMessage = {
 					type : "system",
@@ -183,7 +165,38 @@
 			$("#tmInputMessage").val('').focus();
 			
 			$("#tmMessageList .tmInner").scrollTop($("#tmMessageList .tmInner")[0].scrollHeight);
+			
+			// 2019.07.20 성재민
+			// 메시지 입력이 시작 되면 db 문의 테이블에 인서트
+			// 응시자 이거나 비 로그인 유저라면 insert
+			// 매니저 라면 update
+			if(isStart == false){
+				isStart = true;
+				var urlValue = "";
+				if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
+					urlValue = "${pageContext.request.contextPath }/insertInquiry.do";
+				} else if("${user_role}" == "[ROLE_MANAGER]"){
+					urlValue = "${pageContext.request.contextPath }/updateInquiry.do";
+				}
+				
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					data: JSON.stringify(sendMessage),
+					contentType: "application/json",
+					url:urlValue,
+					success : function(data){
+						console.log(data);
+					}, error : function(){
+						alert('에러발생');
+					}
+				});
+			}
 		}
+		
+		$(window).on('beforeunload', function() { 
+			<% System.out.println("창 닫기"); %>
+		})
 	});
 </script>
 </head>

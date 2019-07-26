@@ -150,6 +150,8 @@ public class CandidateServiceImpl implements CandidateService {
 			return map;	
 	}
 
-
-
+	@Override
+	public int insertKakaoCandidate(CandidateVO vo) {
+		return candidateDAO.insertKakaoCandidate(vo);
+	} 
 }

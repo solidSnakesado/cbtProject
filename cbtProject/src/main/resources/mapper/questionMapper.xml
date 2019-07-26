@@ -224,7 +224,7 @@
 		WHERE   TAKE_EXAM_ID = #{takeExamId}
 	</select>
 	
-	<select id="candidateExamList" resultMap="questionVO">
+	<select id="managerAllQuestionList" resultMap="questionVO">
 		SELECT  QUESTION_ID,
 		        QUESTION_CONTENT,
 		        EXAMPLE_1,

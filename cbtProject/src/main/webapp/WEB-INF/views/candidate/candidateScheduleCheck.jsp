@@ -30,6 +30,11 @@ function goList(p){
 
 </script>
 <title>CBT 시험 일정 확인</title>
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>
 </head>
 <body>
 	<h4 class="mx-auto pb-2">응시가능한 시험</h4>
@@ -39,6 +44,7 @@ function goList(p){
 	</form>
 
 	<table class="table text-center" border="1">
+	<thead>
 		<tr>
 			<th>시험코드</th>
 			<th>시험명</th>
@@ -47,10 +53,12 @@ function goList(p){
 			<th>문항수</th>
 			<th>합격기준</th>
 		</tr>
+	</thead>
+	<tbody>
 	<c:set var="takerId" value="${takerId}"></c:set>
    	<c:forEach items="${candidateScheduleCheck.schedulePage}" var="examInfo" >
 <%--    	<c:if test="${takerId != null}"> --%>
-		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'">
+		<tr onclick="location.href='candidateExamDetialView.do/${examInfo.EXAM_ID}'" class="trexam">
 <%-- 	</c:if>
 	<c:if test="${takerId == null}">
 		<tr onclick="goLogin();">
@@ -63,6 +71,7 @@ function goList(p){
 			<td>${examInfo.PASSING_SCORE}</td>
 		</tr>
 	</c:forEach>  
+	</tbody>
 	</table><br>
 
 	<div align="center"><my:paging jsFunc="goList" paging="${candidateScheduleCheckPage.paging}"/></div><br>

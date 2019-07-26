@@ -31,14 +31,14 @@
 		background-color: white;
 	}
 	
-	#falseLine {
+	/* #falseLine {
 		position: absolute;
 		width: 150px;
 		height: 150px;
 		right: 900px;
 		top: 200px;
 		background-color: rgba( 255, 255, 255, 0 );
-	}
+	} */
 	
 	@keyframes dash {
 		to {
@@ -46,11 +46,28 @@
 		}
 	}
 	
-	#svg {
-		stroke-dasharray: 200;
-		stroke-dashoffset: 200;
-		animation: dash 0.4s 1s linear forwards;
+	.svg {
+		position: absolute;
+		stroke-dasharray: 500;
+		stroke-dashoffset: 500;
+		animation: dash 0.3s 0.1s linear forwards;
 	}
+	
+	.svg1 {
+		position: absolute;
+		stroke-dasharray: 500;
+		stroke-dashoffset: 500;
+		animation: dash 0.3s 0.4s linear forwards;
+	}
+	
+	.svg2 {
+		position: absolute;
+		stroke-dasharray: 500;
+		stroke-dashoffset: 500;
+		animation: dash 0.3s 0.1s linear forwards;
+	}
+	
+	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
@@ -127,6 +144,8 @@
 		
 		$(".rightAnswer").click(function(){
 			var count = $(this).attr("value");
+			var top = $(this).offset().top;
+			var left = $(this).offset().left;
 			
 			
 			$("#rightAnswerView"+count).hide();
@@ -142,6 +161,8 @@
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
 				$("#point"+count).attr('hidden', false).html("오답 입니다.");
+				$('#questuin'+count).append('<div align="left"><svg class="svg"><path class="path" fill="transparent" stroke="red" d="M 150,0 50,100">')
+									.append('<div align="left"><svg class="svg1"><path class="path" fill="transparent" stroke="red" d="M 50,0 150,100">');
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
@@ -154,6 +175,8 @@
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
 				$("#floatMenu"+count).css('background-color','#A0ACFC');
+				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 50,150 C 200,150 150,0 50,50 C 0,100 50,150 100,150">');
+				
 			}
 			
 			for(var i=1; i<=4; i++){
@@ -209,6 +232,8 @@
 			if(rightAnswer != takerAnswer){
 				$("#floatMenu"+count).css('background-color','#F8A5A6');
 				$("#point"+count).attr('hidden', false).html("오답 입니다.");
+				$('#questuin'+count).append('<div align="left"><svg class="svg"><path class="path" fill="transparent" stroke="red" d="M 150,0 50,100">')
+									.append('<div align="left"><svg class="svg1"><path class="path" fill="transparent" stroke="red" d="M 50,0 150,100">');
 				for(var i=1; i<=4; i++){
 					
 					var exam = $("#exam"+count+i).attr('value');
@@ -223,6 +248,7 @@
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
 				$("#floatMenu"+count).css('background-color','#A0ACFC');
+				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 50,150 C 200,150 150,0 50,50 C 0,100 50,150 100,150">');
 			}
 			
 			for(var i=1; i<=4; i++){
@@ -242,11 +268,11 @@
 </head>
 <body>
 
-<div id="falseLine">
+<!-- <div id="falseLine">
 	<svg id="svg">
 		<path stroke-width='6' fill='transparent' stroke="red" d="M 120,0 C 80,10 40,50 10,90 " />
 	</svg>
-</div>
+</div> -->
 
 	<div id="floatMenu">
 		<p style="font-size: 10px; padding-bottom: 0;" onclick="allView()" >모든 정답 보기</p>
