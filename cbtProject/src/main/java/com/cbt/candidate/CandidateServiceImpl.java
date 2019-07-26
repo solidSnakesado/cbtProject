@@ -147,5 +147,10 @@ public class CandidateServiceImpl implements CandidateService {
 			map.put("takerList", candidateDAO.managerCandidateList(vo));
 			map.put("paging", paging);
 			return map;	
+	}
+
+	@Override
+	public int insertKakaoCandidate(CandidateVO vo) {
+		return candidateDAO.insertKakaoCandidate(vo);
 	} 
 }

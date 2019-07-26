@@ -12,13 +12,20 @@ import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.cbt.privateExam.PrivateExamService;
+import com.cbt.privateExam.PrivateExamVO;
 
 @Controller
 // 2019.07.18 성재민
@@ -26,8 +33,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // /echo.do 라는 url 요청을 통해 웹소켓에 들어가겠다 라는 어노테이션.
 @ServerEndpoint(value = "/echo.do")	
 public class WebSocketChat {
-	private static final List<Session> 	SESSION_LIST 	= new ArrayList<Session>();
-	private static final Logger 		LOGGER 			= LoggerFactory.getLogger(WebSocketChat.class);
+	private static final List<Session> 	SESSION_LIST 		= new ArrayList<Session>();
+	private static final List<Object[]> SESSION_INFO_LIST 	= new ArrayList<Object[]>();
+	private static final Logger 		LOGGER 				= LoggerFactory.getLogger(WebSocketChat.class);
+	
+	@Autowired
+	PrivateExamService privateExamService;
 	
 	public WebSocketChat() {
 		System.out.println("웹소켓(서버) 객체 생성");
@@ -35,7 +46,7 @@ public class WebSocketChat {
 	
 	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
 	public String chatViewPage() {
-		return "empty/common/candidateChattingProcess";
+		return "empty/common/commonChattingProcess";
 	}
 	
 	// 2019.07.20 성재민
@@ -43,7 +54,7 @@ public class WebSocketChat {
 	@RequestMapping(value = "/chatRoomId.do/{roomId}", method = RequestMethod.GET)
 	public String chatView(@PathVariable("roomId") String roomId, Model model) {
 		model.addAttribute("roomId", roomId);
-		return "empty/common/managerChattingProcess";
+		return "empty/common/commonChattingProcess";
 	}
 	
 	// 2019.07.18 성재민
@@ -70,9 +81,39 @@ public class WebSocketChat {
 			for(Session session : WebSocketChat.SESSION_LIST) {
 				if((self.getId().compareTo(session.getId()) != 0)) {
 					session.getBasicRemote().sendText(message);
+				} else {
+					// 2019.07.26 성재민
+					// (self.getId().compareTo(session.getId()) == 0) 일때
+					// 즉 현재 메시지를 보낸 대상이 자기 자신일때 처리
+					// 세션 정보와 유저 id 채팅방 id 를 리스트에 저장
+					boolean isOverlap = false;
+					for(Object[] obj : WebSocketChat.SESSION_INFO_LIST) {
+						if(((Session) obj[0]) == session) {
+							isOverlap = true;
+							break;
+						}
+					}
+					
+					if(isOverlap == false) {
+						JSONParser 	jsonParser 	= new JSONParser();
+						JSONObject	jsonObj		= (JSONObject) jsonParser.parse(message);
+						String 		id 			= (String) jsonObj.get("id");
+						String 		rid 		= (String) jsonObj.get("rid");
+						
+						Object[] tempObj = {
+								session,
+								id,
+								rid
+						};
+
+						SESSION_INFO_LIST.add(tempObj);
+					}
 				}
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -101,7 +142,27 @@ public class WebSocketChat {
 	// 클라이언트와 웹소켓과의 연결이 끊기면 실행되는 메소드
 	@OnClose
 	public void onClose(Session session) {
+		String dd = session.getUserPrincipal().getName();
 		LOGGER.info("Session " + session.getId() + " has ended");
 		SESSION_LIST.remove(session);
+		
+		// 2019.07.26 성재민
+		// 채팅 창이 닫히면 현재 세션값으로 저장된 정보 제거
+		Object deleteObj = null;
+		if(SESSION_INFO_LIST.size() > 0) {
+			for(Object[] obj : SESSION_INFO_LIST) {
+				if(((Session) obj[0]) == session) {
+					deleteObj = obj;
+				}
+			}
+			
+			if(deleteObj != null) {
+				PrivateExamVO vo = new PrivateExamVO();
+				privateExamService.updatePrivateExam(vo);
+				
+				SESSION_INFO_LIST.remove(deleteObj);
+				System.out.println(SESSION_INFO_LIST.size());
+			}
+		}
 	}
 }

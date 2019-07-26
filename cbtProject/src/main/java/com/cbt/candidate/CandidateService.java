@@ -45,4 +45,7 @@ public interface CandidateService {
 	// temp
 	Map<Object, Object> candidateScheduleCheckPage(Paging paging);
 
+	// 카카오 아이디 insert
+	public int insertKakaoCandidate(CandidateVO vo);
+
 }

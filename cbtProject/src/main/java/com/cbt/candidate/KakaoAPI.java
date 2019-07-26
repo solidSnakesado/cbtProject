@@ -58,7 +58,7 @@ public class KakaoAPI {
             //    결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
- 
+            System.out.println("authorize_code : " + authorize_code);
             //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
@@ -93,7 +93,7 @@ public class KakaoAPI {
 	// 카카오 정보 get
 	public HashMap<String, Object> getUserInfo (String access_Token) {
 	    
-	    //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+	    // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 	    HashMap<String, Object> userInfo = new HashMap<>();
 	    String reqURL = "https://kapi.kakao.com/v2/user/me";
 	    try {
@@ -101,9 +101,9 @@ public class KakaoAPI {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("POST");
 	        
-	        //    요청에 필요한 Header에 포함될 내용
+	        // 요청에 필요한 Header에 포함될 내용
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-	        
+	        // 출력되는 값이 200이면 정상작동
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("responseCode : " + responseCode);
 	        
@@ -120,15 +120,16 @@ public class KakaoAPI {
 	        JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
 	        
+	        String id = element.getAsJsonObject().get("id").toString();
 	        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-	        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-	        
+			
 	        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-	        // email 연동시 에러 발생해서 일시 막음. 7/19
-			/* String email = kakao_account.getAsJsonObject().get("email").getAsString(); */ 
+	        
+	        System.out.println("kakao id : " + id);
 	        
 	        userInfo.put("nickname", nickname);
-			/* userInfo.put("account_email", email); */   
+	        userInfo.put("kakaoId", id);
+	        //userInfo.put("email", email);
 	        
 	    } catch (IOException e) {
 	        // TODO Auto-generated catch block
@@ -146,6 +147,8 @@ public class KakaoAPI {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("POST");
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        System.out.println("--- --- kakao logout access_token : " + access_Token);
 	        
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("responseCode : " + responseCode);

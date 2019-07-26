@@ -9,8 +9,12 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<security:http pattern="/js/**" security="none"/>
-	<security:http pattern="/image/*" security="none"/>
-	<security:http pattern="/css/*" security="none"/>
+	<security:http pattern="/image/**" security="none"/>
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/BootstrapAdminTheme/**" security="none"/>
+	<security:http pattern="/chatImages/**" security="none"/>
+	<security:http pattern="/DocumentForm/**" security="none"/>
+	<security:http pattern="/common/**" security="none"/>
 	
 	<security:http>
 		<security:intercept-url method="GET"
@@ -29,6 +33,8 @@
 			pattern="/companySignUp.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/chat.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/echo.do" access="permitAll()" />
 		<security:intercept-url pattern="/manager*"
 			access="hasAuthority('ROLE_MANAGER')" />
 		<security:intercept-url pattern="/company*"

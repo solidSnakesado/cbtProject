@@ -111,7 +111,6 @@
 	<div class="container">
 		<input type="hidden" name="no" value="">
 		<table border="1" class="table text-center" border="1">
-
 			<tr>
 				<th width="150px">시험이름</th>
 				<td id="mainExamName">${detailExam.examName}</td>
@@ -121,8 +120,8 @@
 			<!-- 시험 디테일이 나오고 -->
 			<!-- 응시 할수 없는 시험이라면 -->
 			<!-- 비공개 시험이라는 메시지 출력 -->
-			<%-- <c:if test="${detailExam.disclosureStatus == 'O2'}">
-				<!-- 값 비교 체크를 위한 변수 isMatch 를 <c:set 으로 선언 -->
+			<c:if test="${detailExam.disclosureStatus == 'O2'}">
+				<!-- 값 비교 체크를 위한 변수 isMatch 선언 -->
 				<c:set var="isMatch" value="N"></c:set>
 				<!-- 응시자가 응시 할수 있는 비공개 시험 LIST 를 가져와서 -->
 				<!-- 리스트 안의 값과 현재 시험의 시험 ID 를 비교하여 -->
@@ -187,7 +186,7 @@
 					<br>
 					<br></td>
 				</c:if>
-			</c:if> --%>
+			</c:if>
 
 			<c:if test="${detailExam.disclosureStatus == 'O1'}">
 				<tr>

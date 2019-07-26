@@ -26,7 +26,7 @@
 						var examApplicants 			= 0;			// 2019.07.17 성재민 // 응시가능 인원
 						var examQuestionQuantity	= 0;			// 2019,07,17 성재민 // 출제 문항 수
 						var examPassingScore		= 0
-						var examName = "";
+						var examName 				= "";
 						var passTakerCount 			= 0;
 						
 						examApplicants 			= data[0].applicants;
