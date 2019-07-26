@@ -129,6 +129,11 @@ public class CandidateDAO {
 	public int getManagerCandidateCount(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.getManagerCandidateCount", vo);
 	}
+
+	public int insertKakaoCandidate(CandidateVO vo) {
+		System.out.println("-- -- -- Customer Kakao_Info Insert -- -- --");
+		return mybatis.insert("candidateDAO.insertKakaoCandidate", vo);
+	}
 	
 	
 }
