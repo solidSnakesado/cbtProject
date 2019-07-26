@@ -7,26 +7,40 @@ import org.springframework.security.core.userdetails.User;
 
 public class CustomerUser extends User {
 
+    private String roleName;
     private String fullName;
 
-    private String deptName;
+    public String getFullName() {
+		return fullName;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	private String deptName;
 
     public CustomerUser(String username, String password,
             Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+  
+    public String getRoleName() {
+		return roleName;
+	}
 
-    public String getDeptName() {
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+
+	public String getDeptName() {
         return deptName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
