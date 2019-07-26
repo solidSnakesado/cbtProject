@@ -125,3 +125,8 @@
   		<a href="${pageContext.request.contextPath }/logout" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그아웃</a>
   	</c:if>
 </div>
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>

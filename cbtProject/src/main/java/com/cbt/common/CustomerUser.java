@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 
 public class CustomerUser extends User {
 
-    private String fullName;
+    private String roleName;
 
     private String deptName;
 
@@ -16,17 +16,21 @@ public class CustomerUser extends User {
         super(username, password, authorities);
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+  
+    public String getRoleName() {
+		return roleName;
+	}
 
-    public String getDeptName() {
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+
+	public String getDeptName() {
         return deptName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;

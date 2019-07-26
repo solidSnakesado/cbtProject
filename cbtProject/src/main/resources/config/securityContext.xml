@@ -24,7 +24,11 @@
 		<security:intercept-url
 			pattern="/candidateScheduleCheck.do" access="permitAll()" />
 		<security:intercept-url
+			pattern="/oauth" access="permitAll()" />
+		<security:intercept-url
 			pattern="/companySignUp.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/chat.do" access="permitAll()" />
 		<security:intercept-url pattern="/manager*"
 			access="hasAuthority('ROLE_MANAGER')" />
 		<security:intercept-url pattern="/company*"
@@ -33,7 +37,7 @@
 			access="isAuthenticated()" />
 		<security:form-login
 			login-page="/candidateLogin.do" login-processing-url="/processLogin.do"
-			default-target-url="/candidateMain.do"
+			default-target-url="/main.do"
 			authentication-failure-url="/candidateLogin.do"
 			username-parameter="takerId" password-parameter="takerPassword" />
 		<security:logout logout-url="/logout"

@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<div class="w3-top" style="z-index: 10001">  <!-- 마이페이지가 창이 더 앞에 나올수있또록 z축설정-->
-	<div class="w3-bar w3-black w3-card">
+<div class="w3-top" style="z-index: 10001; ">  <!-- 마이페이지가 창이 더 앞에 나올수있또록 z축설정-->
+	<div class="w3-bar w3-black w3-card" style="background-color: green">
 	<sec:authorize access="hasRole('ROLE_COMPANY')">
     	<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     	<a href="${pageContext.request.contextPath }/companyMain.do" class="w3-bar-item w3-button w3-padding-large">CBT</a>
     	<a href="${pageContext.request.contextPath }/companyIntroduce.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">회사소개</a>
     	<a href="${pageContext.request.contextPath }/companySystemintro.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">시스템소개</a>
     	<a href="${pageContext.request.contextPath }/companyConsultingInsert.do" class="w3-bar-item w3-button w3-padding-large w3-hide-small">상담하기</a>
-
+법인메뉴
     	<div class="w3-dropdown-hover" >
       		<button class="w3-padding-large w3-button" title="More">마이페이지<i class="fa fa-caret-down"></i></button>     
      		 <div class="w3-dropdown-content w3-bar-block w3-card-4" >
