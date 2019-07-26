@@ -1,6 +1,7 @@
 package com.cbt.question;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -160,7 +161,6 @@ public class QuestionController {
 		
 		CandidateVO candiVO = new CandidateVO();
 		candiVO.setTakerId(user.getUsername());
-		candiVO.setTakerName(user.getFullName());
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("candiVO", candidateService.getCandidate(candiVO));
@@ -217,12 +217,12 @@ public class QuestionController {
 	
 	// 2019.07.18 김재용
 	// 문제테이블 ALL 리스트 불러오기
-	@RequestMapping(value = "candidateExamList.do", method = RequestMethod.GET)
-	public ModelAndView candidateExamList() {
+	@RequestMapping(value = "managerAllQuestionList.do", method = RequestMethod.GET)
+	public ModelAndView managerAllQuestionList() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("examList", questionService.candidateExamList());
-		mv.setViewName("candidate/candidate/candidateExamList");
+		mv.addObject("examList", questionService.managerAllQuestionList());
+		mv.setViewName("manager/manager/managerAllQuestionList");
 		
 		return mv;
 	}
@@ -230,7 +230,7 @@ public class QuestionController {
 	@RequestMapping(value = "/excelDown.do")
 	public void excelDown(HttpServletResponse response) throws Exception {
 		
-		List<QuestionVO> list = questionService.candidateExamList();
+		List<QuestionVO> list = questionService.managerAllQuestionList();
 		
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet("게시판");
@@ -418,46 +418,46 @@ public class QuestionController {
 	}
 	
 	 // mailForm
-	  @RequestMapping(value = "/mail/mailForm")
-	  public String mailForm() {
-	    return "/mail/mailForm";
-	  }
+	@RequestMapping(value = "/mail/mailForm")
+	public String mailForm() {
+		return "/mail/mailForm";
+	}
 	
 	//mailSending 코드
-		@RequestMapping(value="mail/mailSending")
-		public String mailSending(HttpServletRequest request) {
+	@RequestMapping(value="mail/mailSending")
+	public String mailSending(HttpServletRequest request) {
+		
+		String setfrom = "freehwans@gmail.com";
+		String tomail = request.getParameter("tomail");		//받는사람 이메일
+		String title = request.getParameter("title"); 		//제목
+		String content = request.getParameter("content"); 	//내용
+		String fileName = "";
+		
+		try {
+			// MimeMessage message = mailSender.createMimeMessage();
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
-			String setfrom = "freehwans@gmail.com";
-			String tomail = request.getParameter("tomail");		//받는사람 이메일
-			String title = request.getParameter("title"); 		//제목
-			String content = request.getParameter("content"); 	//내용
-			String fileName = "";
+			messageHelper.setFrom(setfrom);
+			messageHelper.setTo(tomail);
+			messageHelper.setSubject(title);
+			messageHelper.setText(content);
 			
-			try {
-				// MimeMessage message = mailSender.createMimeMessage();
-				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				
-				messageHelper.setFrom(setfrom);
-				messageHelper.setTo(tomail);
-				messageHelper.setSubject(title);
-				messageHelper.setText(content);
-				
-				//파일첨부
-				FileSystemResource fsr = new FileSystemResource(fileName);
-				messageHelper.addAttachment("test2.txt", fsr);
-				mailSender.send(message);
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			return "redirect :/mail/mailForm";
+			//파일첨부
+			FileSystemResource fsr = new FileSystemResource(fileName);
+			messageHelper.addAttachment("test2.txt", fsr);
+			mailSender.send(message);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
+		return "redirect :/mail/mailForm";
+	}
 	
 	
 	
 	@RequestMapping(value = "fileUpload.do", method = RequestMethod.GET)
 	public String fileUpload() {
-		return "manager/manager/fileUpload";
+		return "empty/manager/fileUpload";
 	}
 	
 	@RequestMapping(value = "/excelUp.do", method = RequestMethod.POST)
@@ -479,5 +479,32 @@ public class QuestionController {
 		return "redirect:fileUpload.do";
         
     }
+	
+	@RequestMapping(value = "/getTimer.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Date getTimer(ExamVO vo) {
+		
+		ExamVO examVo = examService.getExam(vo);
+		
+		System.out.println(Integer.parseInt(examVo.getExamStartTime()));
+		System.out.println(Integer.parseInt(examVo.getExamEndTime()));
+		
+		Date serverDate = new Date();
+		
+		System.out.println(serverDate);
+		
+		return serverDate;
+	}
+	
+	public Date parse(String str) {
+		
+		String y = str.substring(0, 4);
+		String mon = str.substring(5, 2);
+		String d = str.substring(8, 2);
+		String h = str.substring(11, 2);
+		String min = str.substring(14, 2);
+		
+		return new Date();
+	}
 	
 }
