@@ -8,8 +8,8 @@
 	href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/styleChat.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 <title>채팅하기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
