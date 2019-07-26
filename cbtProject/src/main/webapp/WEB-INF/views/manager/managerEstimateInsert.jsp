@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
+<!-- 지우지마세요!!!!! -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
@@ -152,7 +154,7 @@
 		<table class="table table-striped">
 			<%-- <tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr> --%>
-			<tr>
+			<tr >
 				<td><label>카테고리종류 </label></td>
 				<td><select name="categoryId" id="categoryName"
 					class="form-control "></select></td>
@@ -163,9 +165,9 @@
 					<div class="row">
 						<div class="col">
 							<input type="text" name="companyId" id="companyId"
-								class="form-control col-5" style="display: inline"> <input
-								type="text" id="companyName" class="form-control col-5"
-								style="display: inline">
+								class="form-control col-5" style="display: inline"> 
+							<input type="text" id="companyName" 
+								class="form-control col-5" style="display: inline">
 
 							<button type="button" class="btn btn-primary" id="btnCompanyFind"
 								data-toggle="modal" style="display: inline">기업 찾기</button>
@@ -217,7 +219,7 @@
 			<tr>
 				<td><label>시험일시</label></td>
 				<td><input type="text" id="datepicker" name="examDate"
-					value="${myEstimateList.examDate}" class="form-control" readonly></td>
+					value="${myEstimateList.examDate}" class="form-control" ></td>
 			</tr>
 			<tr>
 				<td><label>비고</label></td>
