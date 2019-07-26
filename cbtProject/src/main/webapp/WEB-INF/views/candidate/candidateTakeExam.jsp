@@ -255,11 +255,61 @@
 						}
 						updateAnswer();
 					})
+					
+					function getTimeStamp(serverDate) {
+						var d = new Date(serverDate);
+						var s =
+							leadingZeros(d.getHours(), 2) + ':' +
+							leadingZeros(d.getMinutes(), 2) + ':' +
+							leadingZeros(d.getSeconds(), 2);
+					
+						console.log(s);
+						
+						$("#countdown").html(s);
+						
+						
+					}
+					
+					function leadingZeros(n, digits) {
+						var zero = '';
+						n = n.toString();
+						
+						if (n.length < digits) {
+							for (i = 0; i < digits - n.length; i++)
+							zero += '0';
+						}
+						return zero + n;
+					}
+						
+					$(function() {
+					
+						timer = setInterval( function () {
+						
+							$.ajax ({
+							
+								url : "${pageContext.request.contextPath}/getTimer.do",
+								cache : false,
+								method : "post",
+								data : { examId : examId } , 
+								success : function (html) {
+									
+									var serverDate = new Date(html);
+									console.log(serverDate);
+									$("#countdown").html('타이머 시작');
+									getTimeStamp(serverDate);
+									
+								}
+							
+							});
+						
+						}, 1000);
+					
+					}); 
 				}
 			})
 		})
 	});
-	
+
 	function candidateTestResult(){
 		if(confirm("제출하시겠습니까?? \n 번복불가.") == true) {
 			takeExamForm.submit();
@@ -277,6 +327,7 @@
 	</form>
 	
 	<div id="floatMenu">
+		<div id="countdown"></div>
 		<table id="answer1">
 			<tr>
 				<td>No.</td>

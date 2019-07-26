@@ -41,7 +41,7 @@ public interface QuestionService {
 	
 	List<QuestionVO> candidateTakeExamList(QuestionVO vo);
 	
-	List<QuestionVO> candidateExamList();
+	List<QuestionVO> managerAllQuestionList();
 	
 	List<Map<String, Object>> candidateRightAnswerList(TakeExamVO vo);
 	

@@ -68,7 +68,7 @@
 		        	<a href="${pageContext.request.contextPath }/managerChart.do" class="w3-bar-item w3-button">통계</a>
 		        	</li>
 		        	<li>
-		        	<a href="${pageContext.request.contextPath }/fileUpload.do" class="w3-bar-item w3-button">문제등록</a>
+		        	<a href="${pageContext.request.contextPath }/managerAllQuestionList.do" class="w3-bar-item w3-button">문제관리</a>
 		        	</li>
 		     
 

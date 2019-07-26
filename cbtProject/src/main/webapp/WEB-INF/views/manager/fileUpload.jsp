@@ -30,11 +30,18 @@
 </script>
 </head>
 <body>
+<div align="center">
+<br>
+<br>
+	<h2>시험 문제 업로드</h2>
+	<br>
+	<br>
 	<form id="formUpload" name="formUpload" method="post" enctype="multipart/form-data">
     	<input type="file" id="fileInput" name="fileInput" value="엑셀업로드 작업" accept=".xlsx">
 	</form>
 	<br>
 	<br>
-   	<button id="btn">등록 하기</button>
+   	<button id="btn">등록 하기</button> <button onclick='window.close()'>닫 기</button>
+</div>
 </body>
 </html>
