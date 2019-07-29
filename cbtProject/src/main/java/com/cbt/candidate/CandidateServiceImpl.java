@@ -6,13 +6,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
-import com.cbt.company.CompanyVO;
 
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
