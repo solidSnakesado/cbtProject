@@ -5,13 +5,13 @@
 	<div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-interval="4000">
-      <img src="${pageContext.request.contextPath}/image/systemintro.png" class="d-block w-100" alt="오케이">
+      <img src="${pageContext.request.contextPath}/image/mainImage1.PNG" width="1073" height="535" alt="오케이">
     </div>
     <div class="carousel-item" data-interval="4000">
-      <img src="${pageContext.request.contextPath}/image/company.jpg" class="d-block w-100" alt="빨리끝나자">
+      <img src="${pageContext.request.contextPath}/image/mainImage2.PNG" width="1073" height="535" alt="빨리끝나자">
     </div>
     <div class="carousel-item" data-interval="4000">
-      <img src="${pageContext.request.contextPath}/image/main.PNG" class="d-block w-100" alt="안뇽">
+      <img src="${pageContext.request.contextPath}/image/mainImage3.PNG" width="1073" height="535" alt="안뇽">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev" style="font-color:red">
