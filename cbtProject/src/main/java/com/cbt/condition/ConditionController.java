@@ -36,7 +36,7 @@ public class ConditionController {
 	@RequestMapping(value="getConditionList.do", method=RequestMethod.GET)
 	public String getConditionList(Model model) {
 		List<ConditionVO> conditionList = conditionService.getAllConditionList();
-		model.addAttribute("result", conditionService.getAllConditionList());
+		model.addAttribute("result", conditionList);
 		return "manager/condition/getConditionList";
 	}
 	

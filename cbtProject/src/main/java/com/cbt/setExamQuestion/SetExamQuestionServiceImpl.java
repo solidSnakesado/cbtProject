@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cbt.common.Paging;
 import com.cbt.exam.ExamVO;
 
 @Service("setExamService")

@@ -3,7 +3,6 @@ package com.cbt.setExamQuestion;
 import java.util.List;
 import java.util.Map;
 
-import com.cbt.common.Paging;
 import com.cbt.exam.ExamVO;
 
 public interface SetExamQuestionService {

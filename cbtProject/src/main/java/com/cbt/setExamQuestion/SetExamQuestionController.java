@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cbt.common.Paging;
-import com.cbt.company.CompanyVO;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 import com.cbt.question.QuestionService;
@@ -84,7 +82,8 @@ public class SetExamQuestionController {
 			
 			// 2019.07.16 성재민
 			// 총합이 늘 100 점이 될수 있게 로직을 조정 해야 함
-			setExamvo.setPoint((int)(100 / tempMapList.size()));
+			// 배점 정하는 로직 수정 필요
+			setExamvo.setPoint(100 / tempMapList.size());
 			
 			QuestionVO questionVo = new QuestionVO();
 			questionVo.setQuestionId(setExamvo.getQuestionId());
