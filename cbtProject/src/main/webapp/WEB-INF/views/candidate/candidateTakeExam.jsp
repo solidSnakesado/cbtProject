@@ -25,6 +25,14 @@
 		border-collapse: collapse;
 	}
 	
+/* 	.trexam {
+		cursor:pointer;
+	} */
+	
+	td.trexam:hover {
+		background-color : lightblue;
+	}
+	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -345,7 +353,8 @@
 	
 <button id="btn">시험 시작 !</button>
 	<table border="1" id="mainTab">
-		<tr >
+		<thead>
+		<tr>
 			<td><h2 align="center" id="examId" value=""></h2></td>
 		</tr>
 		<tr height="200">
@@ -363,25 +372,25 @@
 					<tr>
 						<td></td>
 						<td align="right" id="td1"></td>
-						<td align="left" id="exam1"></td>
+						<td align="left" id="exam1" class="trexam"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td align="right" id="td2"></td>
-						<td align="left" id="exam2"></td>
+						<td align="left" id="exam2" class="trexam"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td align="right" id="td3"></td>
-						<td align="left" id="exam3"></td>
+						<td align="left" id="exam3" class="trexam"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td align="right" id="td4"></td>
-						<td align="left" id="exam4"></td>
+						<td align="left" id="exam4" class="trexam"></td>
 						<td></td>
 					</tr>
 				</table>
@@ -397,6 +406,7 @@
 				<button type='button' onclick="candidateTestResult()" >제출 하기</button>
 			</td>
 		</tr>
+		</thead>
 	</table>
 </body>
 </html>

@@ -485,10 +485,10 @@ public class QuestionController {
 	@ResponseBody
 	public Date getTimer(ExamVO vo) {
 		
-		ExamVO examVo = examService.getExam(vo);
-		
-		System.out.println(Integer.parseInt(examVo.getExamStartTime()));
-		System.out.println(Integer.parseInt(examVo.getExamEndTime()));
+//		ExamVO examVo = examService.getExam(vo);
+//		
+//		System.out.println(Integer.parseInt(examVo.getExamStartTime()));
+//		System.out.println(Integer.parseInt(examVo.getExamEndTime()));
 		
 		Date serverDate = new Date();
 		
