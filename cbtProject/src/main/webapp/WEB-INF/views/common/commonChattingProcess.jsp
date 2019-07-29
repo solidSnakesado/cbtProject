@@ -52,6 +52,29 @@
 		ws.onmessage = function(event) {
 			onMessage(event);
 		};
+		
+		ws.onclose = onClose;
+		
+		function onClose(event) {
+			console.log("퇴장");
+			
+			var roleName = "";
+			if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
+				roleName = "ROLE_USER";
+			} else if("${user_role}" == "[ROLE_MANAGER]"){
+				roleName = "ROLE_MANAGER";
+			}
+			
+			var sendMessage = {
+				type : "system_room_out",
+				msg : tempId + "님이 퇴장 하셨습니다.",
+				role : roleName,
+				id : tempId,
+				rid : roomId
+			};
+			
+			ws.send(JSON.stringify(sendMessage));
+		}
 
 		// 2019.07.18 성재민
 		// 메시지를 화면에 전시
@@ -105,7 +128,21 @@
 				rid : roomId
 			};
 			
-			ws.send(JSON.stringify(sendMessage));
+			if(roleName == "ROLE_USER"){
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					data: JSON.stringify(sendMessage),
+					contentType: "application/json",
+					url:"${pageContext.request.contextPath }/insertInquiry.do",
+					success : function(data){
+						console.log(data);
+						ws.send(JSON.stringify(sendMessage));
+					}, error : function(){
+						alert('에러발생');
+					}
+				});
+			}
 		}
 
 		// 2019.07.19 성재민
@@ -193,12 +230,13 @@
 				isStart = true;
 				var urlValue 	= "";
 				var paramValue;
-				if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
+				/* if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
 					urlValue 	= "${pageContext.request.contextPath }/insertInquiry.do";
 					paramValue 	= sendMessage;
 					console.log("유저");
-				} else if("${user_role}" == "[ROLE_MANAGER]"){
-					console.log("매니더");
+				} else  */
+				if("${user_role}" == "[ROLE_MANAGER]"){
+					console.log("매니저");
 					urlValue 	= "${pageContext.request.contextPath }/updateInquiry.do";
 					paramValue 	= {		
 						id : tempId,

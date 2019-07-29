@@ -60,9 +60,6 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 	// add()와 반대로 remove()를 이용해서 세션리스트에서 제거한다.
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		super.afterConnectionClosed(session, status);
-		SESSION_LIST.remove(session);
-
 		// 2019.07.29 성재민
 		// 문의자의 세션이 종료가 되면
 		// 해당 문의의 상태를 처리완료로 변경
@@ -86,10 +83,19 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 				vo.setInquiryRoomId((String) deleteObj[2]);
 				vo.setReplyStatus("처리완료"); 
 				inquiryService.updateInquiry(vo); 
+
+				String msg = "{\"type\":\"system_room_out\","
+							+ "\"msg\":\"" + deleteObj[1] + "님이 퇴장 하셨습니다.\","
+							+ "\"role\":\"" + deleteObj[3] 
+							+ "\",\"id\":\"" + deleteObj[1] 
+							+ "\",\"rid\":\"" + deleteObj[2] + "\"}";
+				sendMessage(msg);
 			} 
 			SESSION_INFO_LIST.remove(deleteObj); 
 		}
 		
+		super.afterConnectionClosed(session, status);
+		SESSION_LIST.remove(session);
 		EchoHandler.LOGGER.info("remove session!");
 	}
 

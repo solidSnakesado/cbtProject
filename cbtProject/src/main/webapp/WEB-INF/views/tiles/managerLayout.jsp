@@ -14,6 +14,71 @@
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/styles.css" rel="stylesheet" media="screen">
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var ws;
+		
+		if (ws != undefined && ws.readyState != WebSocket.CLOSED) {
+			$("#messages").append("<br>" + "WebSocket is already opened.");
+			return;
+		}
+		
+		// 웹소켓 객채 생성
+		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
+		ws.onopen = function(event) {
+			onOpen(event);
+		};
+		
+		ws.onmessage = function(event) {
+			onMessage(event);
+		};
+		
+		function onOpen(event) {
+
+		}
+		
+		// 2019.07.29 성재민
+		// 메시지를 화면에 전시
+		function onMessage(event) {
+			var message 	= JSON.parse(event.data);
+			if(message.role == "ROLE_USER"){
+				if(message.type == "system") {
+					$.ajax({
+						type: "POST",
+						url: "${pageContext.request.contextPath }/getBeforeReplyCount.do",
+						success : function(data){
+							console.log(data);
+							if(data > 0){
+								$("#inquiry").html(data);
+							} else{
+								$("#inquiry").html("");
+							}
+							
+						}, error : function(){
+							alert('에러발생');
+						}
+					});
+				} else if(message.type == "system_room_out"){
+					console.log("퇴장하는 유저");
+					$.ajax({
+						type: "POST",
+						url: "${pageContext.request.contextPath }/getBeforeReplyCount.do",
+						success : function(data){
+							console.log(data);
+							if(data > 0){
+								$("#inquiry").html(data);
+							} else{
+								$("#inquiry").html("");
+							}
+						}, error : function(){
+							alert('에러발생');
+						}
+					});
+				}
+			}
+		}
+	});
+</script>
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">  
