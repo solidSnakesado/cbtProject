@@ -123,5 +123,14 @@ public class ConsultingServiceImpl implements ConsultingService {
 			map.put("paging", paging);
 			return map;	
 	}
+
+	@Override
+	public List<ConsultingVO> mainConsultingList(ConsultingVO vo) {
+		return dao.mainConsultingList(vo);
+		
+	}
+
+
+	
 	
 }

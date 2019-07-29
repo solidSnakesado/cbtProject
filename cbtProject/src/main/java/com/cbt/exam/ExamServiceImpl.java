@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
+import com.cbt.consulting.ConsultingVO;
 import com.cbt.manager.ManagerVO;
 
 @Service
@@ -57,4 +58,11 @@ public class ExamServiceImpl implements ExamService {
 	public List<ExamVO> getExamSurveyList(ManagerVO vo) {
 		return dao.getExamSurveyList(vo);
 	}
+
+	@Override
+	public List<ExamVO> mainExamList(ExamVO vo) {
+		return dao.mainExamList(vo);
+	}
+
+	
 }

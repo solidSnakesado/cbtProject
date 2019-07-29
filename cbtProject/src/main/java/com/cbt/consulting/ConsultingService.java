@@ -38,4 +38,6 @@ public interface ConsultingService {
 	void managerConsultingInsert(ConsultingVO vo);
 	
 	int getConsultingCount();
+
+	List<ConsultingVO> mainConsultingList(ConsultingVO vo);
 }

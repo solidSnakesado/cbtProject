@@ -330,8 +330,8 @@
 		SELECT 
 		    COMPANY.COMPANY_ID									"companyId"
 		  , EXAM.EXAM_ID										"examId"
-		  , TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI:SS') 	"examStartTime"
-		  , TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI:SS')		"examEndTime"
+		  , TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI') 		"examStartTime"
+		  , TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')		"examEndTime"
 		  , EXAM.QUESTION_QUANTITY								"questionQuantity"
 		  , EXAM.ESTIMATE_ID									"estimateId"
 		  , EXAM.NUMBER_OF_TIMES								"numberOfTimes"
@@ -405,4 +405,5 @@
 		</where>
 		ORDER BY C.COMPANY_ID, EXAM_ID
 	</select>
+	
 </mapper>
