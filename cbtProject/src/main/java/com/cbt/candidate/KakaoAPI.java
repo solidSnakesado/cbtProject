@@ -7,10 +7,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.cbt.common.CustomerUser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -45,7 +52,7 @@ public class KakaoAPI {
             //    결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
-            System.out.println("authorize_code : " + authorize_code);
+ 
             //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
@@ -109,11 +116,15 @@ public class KakaoAPI {
 	        
 	        String id = element.getAsJsonObject().get("id").toString();
 	        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+	        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			
 	        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 	        
 	        System.out.println("kakao id : " + id);
-	        
+	        if(kakao_account.get("has_email").getAsBoolean() && kakao_account.get("email") != null) {
+	        	String email = kakao_account.get("email").getAsString();
+	        	userInfo.put("email", email);
+	        }
 	        userInfo.put("nickname", nickname);
 	        userInfo.put("kakaoId", id);
 	        //userInfo.put("email", email);
@@ -125,6 +136,8 @@ public class KakaoAPI {
 	    
 	    return userInfo;
 	}
+	
+	
 
 	//카카오 로그아웃
 	public void kakaoLogout(String access_Token) {
@@ -134,8 +147,6 @@ public class KakaoAPI {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("POST");
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-	        
-	        System.out.println("--- --- kakao logout access_token : " + access_Token);
 	        
 	        int responseCode = conn.getResponseCode();
 	        System.out.println("responseCode : " + responseCode);

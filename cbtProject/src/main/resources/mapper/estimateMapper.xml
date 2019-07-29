@@ -97,20 +97,9 @@
 					, E.EXAM_INTERVAL								"examInterval"
 					, E.ESTIMATE_NAME								"estimateName"
 					, E.PAYMENT_DATE								"paymentDate"
-                    , C_MAIN.CATEGORY_MAIN_ID						"mainCategoryId"
-			        , C_MAIN.CATEGORY_MAIN_NAME						"categoryMainName"
-                    , C_MID.CATEGORY_MIDDLE_ID						"middleCategoryId"
-			        , C_MID.CATEGORY_MIDDLE_NAME					"categoryMiddleName"
-                    , C_SMA.CATEGORY_SMALL_ID 						"smallCategoryId"
-			        , C_SMA.CATEGORY_SMALL_NAME AS  				"categorySmallName"
+       
 		FROM ESTIMATE  E JOIN  CATEGORY C
       	ON C.CATEGORY_ID = E.CATEGORY_ID
-     	JOIN CATEGORY_MAIN C_MAIN
-     	ON C_MAIN.CATEGORY_MAIN_ID = C.CATEGORY_MAIN_ID
-       	JOIN CATEGORY_MIDDLE C_MID
-      	ON C_MID.CATEGORY_MIDDLE_ID = C.CATEGORY_MIDDLE_ID
-      	JOIN CATEGORY_SMALL C_SMA
-       	ON C_SMA.CATEGORY_SMALL_ID = C.CATEGORY_SMALL_ID
        	
 		WHERE ESTIMATE_ID = #{estimateId}
 		
@@ -121,33 +110,43 @@
 		   SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
 			 SELECT 	  E.ESTIMATE_ID
           ,  C.CATEGORY_NAME AS CATEGORYNAME
-					, E.ESTIMATE_PRICE
-					, E.REQUEST_DAY
-					, E.TRADE_PROGRESS
-					, FIND_CODENM(TRADE_PROGRESS) "tradeProgressName"
-					, E.REMARKS
+					, E.ESTIMATE_PRICE				"estimatePrice"
+					, E.REQUEST_DAY					"requestDay"
+					, E.TRADE_PROGRESS				"tradeProgress"
+					, FIND_CODENM(TRADE_PROGRESS) 	"tradeProgressName"
+					, E.REMARKS	
 					, E.APPLICANTS
 					, E.LEVEL_OF_DIFFICULTY
+					, FIND_CODENM(LEVEL_OF_DIFFICULTY) 	"levelOfDifficultyName"
 					, E.CANDIDATE
+					, FIND_CODENM(CANDIDATE)			"candidateName"
 					, E.APPLY_PURPOSE
+					, FIND_CODENM(APPLY_PURPOSE)		"applyPurposeName"
 					, E.EXAM_DATE
 					, E.CATEGORY_ID
 					, E.EXAM_CLASSFICATION
+					, FIND_CODENM(EXAM_CLASSFICATION) 	"examClassficationName"
 					, E.COMPANY_ID
 					, E.EXAM_COUNT
-					, FIND_CODENM(EXAM_COUNT) AS EXAM_COUNT_NAME
+					, FIND_CODENM(EXAM_COUNT) 			"examCountName"
 					, E.EXAM_INTERVAL
+					, FIND_CODENM(EXAM_INTERVAL) 		"examIntervalName"
 					, E.ESTIMATE_NAME
 			FROM ESTIMATE  E JOIN  CATEGORY C
       ON C.CATEGORY_ID = E.CATEGORY_ID
       <where>
       	<if test = "companyId != null and companyId != ''">COMPANY_ID = #{companyId}</if> <!-- 접속한 기업의 정보만 가져올수있도록 세션처리를 위함 -->
+      	<if test = "estimateId != null and estimateId != ''">ESTIMATE_ID = #{estimateId}</if> <!-- 접속한 기업의 정보만 가져올수있도록 세션처리를 위함 -->
       </where>
-      
 			ORDER BY E.ESTIMATE_ID DESC
 		) A ) B 
 		<where>
-			RN BETWEEN #{start} AND #{end}
+		<if test = "start != null and start != ''">
+			<if test = "end != null and end != ''">
+				RN BETWEEN #{start} AND #{end}
+			</if>	
+		</if>
+			
 		</where>
 		
 		
@@ -162,11 +161,6 @@
      		</where>
 		</select>
 		
-	<select id ="getCateoryId" resultType="int">
-		SELECT CATEGORY_ID
-		FROM CATEGORY
-		WHERE CATEGORY_MAIN_ID= #{mainCategoryId} AND CATEGORY_MIDDLE_ID = #{middleCategoryId} AND CATEGORY_SMALL_ID = #{smallCategoryId}
-	</select>
 	
 	
 	<!-- 전체 카테고리 이름 가져옴 -->
