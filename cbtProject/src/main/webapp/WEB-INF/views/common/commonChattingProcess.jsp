@@ -44,7 +44,7 @@
 		}
 
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://http://114.200.227.226:800/cbt/echo.do");
+		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
 		ws.onopen = function(event) {
 			onOpen(event);
 		};
@@ -90,9 +90,17 @@
 		}
 
 		function onOpen(event) {
+			var roleName = "";
+			if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
+				roleName = "ROLE_USER";
+			} else if("${user_role}" == "[ROLE_MANAGER]"){
+				roleName = "ROLE_MANAGER";
+			}
+			
 			var sendMessage = {
 				type : "system",
 				msg : tempId + "님이 입장 하셨습니다.",
+				role : roleName,
 				id : tempId,
 				rid : roomId
 			};
@@ -120,6 +128,7 @@
 			var sendMessage = {
 					type : "system",
 					msg : "처리완료",
+					role : "ROLE_MANAGER",
 					id : tempId,
 					rid : roomId
 				};
@@ -146,10 +155,18 @@
 				$("#tmInputMessage").val('').focus();
 				return;
 			}
+			
+			var roleName = "";
+			if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
+				roleName = "ROLE_USER";
+			} else if("${user_role}" == "[ROLE_MANAGER]"){
+				roleName = "ROLE_MANAGER";
+			}
 
 			var sendMessage = {
 				type : "message",
 				msg : $("#tmInputMessage").val(),
+				role : roleName,
 				id : tempId,
 				rid : roomId
 			};

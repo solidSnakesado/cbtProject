@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,16 +77,19 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 			}
 		}
 
-		/*
-		 * // 2019.07.29 성재민 // 해당 세션이 ROLE_USER 인경우 // 처리 완료로 상태 변경 if (deleteObj !=
-		 * null) { for (GrantedAuthority item : ) { String roleName =
-		 * item.getAuthority(); if (roleName.compareTo("ROLE_USER") == 0) { InquiryVO vo
-		 * = new InquiryVO(); vo.setInquiryRoomId((String) deleteObj[2]);
-		 * vo.setReplyStatus("처리완료"); inquiryService.updateInquiry(vo); break; } }
-		 * 
-		 * SESSION_INFO_LIST.remove(deleteObj); }
-		 */
-
+		// 2019.07.29 성재민 
+		// 해당 세션이 ROLE_USER 인경우 
+		// 처리 완료로 상태 변경 
+		if (deleteObj != null) { 
+			if (((String)deleteObj[3]).compareTo("ROLE_USER") == 0) { 
+				InquiryVO vo = new InquiryVO(); 
+				vo.setInquiryRoomId((String) deleteObj[2]);
+				vo.setReplyStatus("처리완료"); 
+				inquiryService.updateInquiry(vo); 
+			} 
+			SESSION_INFO_LIST.remove(deleteObj); 
+		}
+		
 		EchoHandler.LOGGER.info("remove session!");
 	}
 
@@ -116,13 +118,14 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 					}
 
 					if (isOverlap == false) {
-						String temp = (String) message.getPayload();
+						String jsonMsg = (String) message.getPayload();
 						JSONParser jsonParser = new JSONParser();
-						JSONObject jsonObj = (JSONObject) jsonParser.parse(temp);
+						JSONObject jsonObj = (JSONObject) jsonParser.parse(jsonMsg);
 						String id = (String) jsonObj.get("id");
 						String rid = (String) jsonObj.get("rid");
-						Object[] tempObj = { session, id, rid };
-						SESSION_INFO_LIST.add(tempObj);
+						String role = (String) jsonObj.get("role");
+						Object[] newObj = { session, id, rid, role };
+						SESSION_INFO_LIST.add(newObj);
 					}
 				}
 			}
