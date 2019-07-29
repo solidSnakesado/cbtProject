@@ -13,32 +13,32 @@
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">Statistics</div>
-                                <div class="pull-right"><span class="badge badge-warning">View More</span>
+                                <div class="pull-right"><span class="badge badge-warning"><a href="${pageContext.request.contextPath }/managerChart.do"><font color="white">view more</font></a></span>
 
                                 </div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span3">
-                                    <div class="chart" data-percent="73">73%</div>
-                                    <div class="chart-bottom-heading"><span class="label label-info">Visitors</span>
+                                    <div class="chart" data-percent="35">35명</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">응시자 수</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
                                     <div class="chart" data-percent="53">53%</div>
-                                    <div class="chart-bottom-heading"><span class="label label-info">Page Views</span>
+                                    <div class="chart-bottom-heading"><span class="label label-info">합격률</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
-                                    <div class="chart" data-percent="83">83%</div>
-                                    <div class="chart-bottom-heading"><span class="label label-info">Users</span>
+                                    <div class="chart" data-percent="23">23</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">시험 수</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
-                                    <div class="chart" data-percent="13">13%</div>
-                                    <div class="chart-bottom-heading"><span class="label label-info">Orders</span>
+                                    <div class="chart" data-percent="5">5</div>
+                                    <div class="chart-bottom-heading"><span class="label label-info">의뢰기업수</span>
 
                                     </div>
                                 </div>

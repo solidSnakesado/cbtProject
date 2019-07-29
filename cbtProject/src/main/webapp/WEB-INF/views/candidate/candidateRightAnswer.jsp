@@ -175,7 +175,7 @@
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
 				$("#floatMenu"+count).css('background-color','#A0ACFC');
-				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 50,150 C 200,150 150,0 50,50 C 0,100 50,150 100,150">');
+				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 30 0 C 90 110 0 140 150 0 ">');
 				
 			}
 			
@@ -248,7 +248,7 @@
 			} else if(rightAnswer == takerAnswer){
 				$("#point"+count).attr('hidden', false);
 				$("#floatMenu"+count).css('background-color','#A0ACFC');
-				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 50,150 C 200,150 150,0 50,50 C 0,100 50,150 100,150">');
+				$('#questuin'+count).append('<div align="left"><svg class="svg2"><path class="path" fill="transparent" stroke="blue" d="M 30 0 C 90 110 0 140 150 0 ">');
 			}
 			
 			for(var i=1; i<=4; i++){
@@ -304,7 +304,7 @@
 		<!--테이블 시작 -->
 		
 		<tr>
-			<th valign="top" id="questuin${status.count}">${status.count} . ${list.questionContent}</th>
+			<th valign="top" id="questuin${status.count}"><h3>${status.count} . ${list.questionContent}</h3></th>
 			<th style="width: 20%;"><p id="point${status.count}" value="" hidden="true">+ ${list.point} point</p></th>
 		</tr>
 		
@@ -347,12 +347,12 @@
 		</c:forEach>
 		
 		<tr>
-			<th colspan="2"><a href="#" class="previous">&laquo; Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="next">Next &raquo;</a></th>
+			<th colspan="2"><!-- <a href="#" class="previous">&laquo; Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="next">Next &raquo;</a> --></th>
 			<th></th>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a>
+				<%-- <a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a> --%>
 				<a href="${pageContext.request.contextPath }/candidateMain.do"><button>메인으로</button></a>
 			</td>
 			<td></td>

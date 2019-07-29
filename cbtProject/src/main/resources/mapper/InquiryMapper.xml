@@ -18,7 +18,7 @@
 			, 	'처리전'
 			, 	#{inquiryContent}
 			, 	#{inquiryRoomId}
-			, 	SYSDATE
+			, 	LOCALTIMESTAMP
 		)
 	</insert>
 	
