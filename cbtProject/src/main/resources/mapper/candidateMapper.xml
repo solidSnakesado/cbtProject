@@ -253,5 +253,18 @@
 		SELECT COUNT(*)
 		FROM TAKER
 	</select>
+	
+	<!-- 아이디 찾기 (7/29) 추가 ,june-->
+	<select id="findID" resultType="CandidateVO">
+		SELECT RPAD(SUBSTR(TAKER_ID,1,3), LENGTH(TAKER_ID), '*')
+				  FROM (	SELECT TAKER_ID , TAKER_EMAIL , TAKER_NAME ,'ROLE_USER' ROLE_NAME
+							  FROM TAKER
+							 UNION ALL
+							SELECT COMPANY_ID , COMPANY_EMAIL, COMPANY_NAME,'ROLE_COMPANY' ROLE_NAME
+							  FROM COMPANY
+					    )
+		WHERE TAKER_NAME = #{takerName}  AND TAKER_EMAIL = #{takerEmail}  
+	</select>		
+		
 		
 </mapper>

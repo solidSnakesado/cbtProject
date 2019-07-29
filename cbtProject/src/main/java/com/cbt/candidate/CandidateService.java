@@ -48,4 +48,6 @@ public interface CandidateService {
 	// 카카오 아이디 insert
 	public int insertKakaoCandidate(CandidateVO vo);
 
+	CandidateVO findID(CandidateVO vo);
+
 }

@@ -28,6 +28,8 @@
 		<security:intercept-url
 			pattern="/candidateScheduleCheck.do" access="permitAll()" />
 		<security:intercept-url
+			pattern="/findID.do" access="permitAll()" />
+		<security:intercept-url
 			pattern="/oauth" access="permitAll()" />
 		<security:intercept-url
 			pattern="/companySignUp.do" access="permitAll()" />

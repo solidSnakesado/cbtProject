@@ -150,5 +150,11 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public int insertKakaoCandidate(CandidateVO vo) {
 		return candidateDAO.insertKakaoCandidate(vo);
+	}
+
+	@Override
+	public CandidateVO findID(CandidateVO vo) {
+		return candidateDAO.findID(vo);
+		
 	} 
 }
