@@ -1,9 +1,6 @@
 package com.cbt.exam;
 
 import java.util.List;
-import java.util.Map;
-
-import com.cbt.common.Paging;
 
 import com.cbt.company.CompanyVO;
 import com.cbt.manager.ManagerVO;

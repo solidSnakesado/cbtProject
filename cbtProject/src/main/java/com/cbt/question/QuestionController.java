@@ -1,17 +1,16 @@
 package com.cbt.question;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -22,7 +21,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
@@ -44,10 +42,8 @@ import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 import com.cbt.setExamQuestion.SetExamQuestionService;
 import com.cbt.setExamQuestion.SetExamQuestionVO;
-import com.cbt.takeExam.TakeExamService;
 import com.cbt.takeExam.TakeExamVO;
 import com.cbt.takeExamHistory.TakeExamHistoryService;
-import com.cbt.takeExamHistory.TakeExamHistoryVO;
 
 // 7/2 문제 컨트롤러 생성   -재용
 
@@ -499,11 +495,11 @@ public class QuestionController {
 	
 	public Date parse(String str) {
 		
-		String y = str.substring(0, 4);
-		String mon = str.substring(5, 2);
-		String d = str.substring(8, 2);
-		String h = str.substring(11, 2);
-		String min = str.substring(14, 2);
+		String y 	= str.substring(0, 4);
+		String mon 	= str.substring(5, 2);
+		String d 	= str.substring(8, 2);
+		String h 	= str.substring(11, 2);
+		String min 	= str.substring(14, 2);
 		
 		return new Date();
 	}

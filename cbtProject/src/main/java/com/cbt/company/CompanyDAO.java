@@ -6,9 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cbt.candidate.CandidateVO;
-import com.cbt.consulting.ConsultingVO;
-
 @Repository
 public class CompanyDAO {
 	@Autowired

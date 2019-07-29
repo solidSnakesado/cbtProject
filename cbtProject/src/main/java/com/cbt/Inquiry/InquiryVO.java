@@ -8,6 +8,7 @@ public class InquiryVO {
 	private String 	inquiryRoomId;
 	private String 	replyStatus;
 	private String 	inquiryContent;
+	private String	inquiryTime;
 	
 	public InquiryVO() {
 	}
@@ -50,5 +51,13 @@ public class InquiryVO {
 
 	public void setInquiryContent(String inquiryContent) {
 		this.inquiryContent = inquiryContent;
+	}
+
+	public String getInquiryTime() {
+		return inquiryTime;
+	}
+
+	public void setInquiryTime(String inquiryTime) {
+		this.inquiryTime = inquiryTime;
 	}
 }

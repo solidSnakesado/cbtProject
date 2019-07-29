@@ -1,7 +1,6 @@
 package com.cbt.privateExam;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class PrivateExamController {
 			    		.append("<p>로그인 하시면 시험 등록이 완료가 되며</p>")
 			    		.append("<p>비회원 이시면 회원 가입후 이용가능 합니다.</p>")
 			    		.append("<a href='http://localhost:8081/project/candidateMain.do?examId=" + examId + "'>시험 등록 링크</a>")	// 2019.07.23 성재민 이 부분은 차후 서버 ip로 변경하야애 함.
-			    		.toString());
+			    		.toString(), true);
 			    
 			    messageHelper.setFrom("sado14th@gmail.com");
 			    messageHelper.setTo(new InternetAddress(takerEmail, "cbt", "UTF-8"));
