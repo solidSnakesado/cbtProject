@@ -44,7 +44,7 @@
 		}
 
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://192.168.0.112:8081/project/echo.do");
+		ws = new WebSocket("ws://http://114.200.227.226:800/cbt/echo.do");
 		ws.onopen = function(event) {
 			onOpen(event);
 		};
@@ -172,13 +172,16 @@
 			// 응시자 이거나 비 로그인 유저라면 insert
 			// 매니저 라면 update
 			if(isStart == false){
+				console.log("시작");
 				isStart = true;
 				var urlValue 	= "";
 				var paramValue;
 				if("${user_role}" == "[ROLE_USER]" || "${not empty user_id}" == "false"){
 					urlValue 	= "${pageContext.request.contextPath }/insertInquiry.do";
 					paramValue 	= sendMessage;
+					console.log("유저");
 				} else if("${user_role}" == "[ROLE_MANAGER]"){
+					console.log("매니더");
 					urlValue 	= "${pageContext.request.contextPath }/updateInquiry.do";
 					paramValue 	= {		
 						id : tempId,

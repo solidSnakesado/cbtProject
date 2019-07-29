@@ -78,25 +78,15 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 			}
 		}
 
-		// 2019.07.29 성재민
-		// 해당 세션이 ROLE_USER 인경우
-		// 처리 완료로 상태 변경
-		if (deleteObj != null) {
-			CustomerUser user = (CustomerUser) session.getPrincipal();
-
-			for (GrantedAuthority item : user.getAuthorities()) {
-				String roleName = item.getAuthority();
-				if (roleName.compareTo("ROLE_USER") == 0) {
-					InquiryVO vo = new InquiryVO();
-					vo.setInquiryRoomId((String) deleteObj[2]);
-					vo.setReplyStatus("처리완료");
-					inquiryService.updateInquiry(vo);
-					break;
-				}
-			}
-
-			SESSION_INFO_LIST.remove(deleteObj);
-		}
+		/*
+		 * // 2019.07.29 성재민 // 해당 세션이 ROLE_USER 인경우 // 처리 완료로 상태 변경 if (deleteObj !=
+		 * null) { for (GrantedAuthority item : ) { String roleName =
+		 * item.getAuthority(); if (roleName.compareTo("ROLE_USER") == 0) { InquiryVO vo
+		 * = new InquiryVO(); vo.setInquiryRoomId((String) deleteObj[2]);
+		 * vo.setReplyStatus("처리완료"); inquiryService.updateInquiry(vo); break; } }
+		 * 
+		 * SESSION_INFO_LIST.remove(deleteObj); }
+		 */
 
 		EchoHandler.LOGGER.info("remove session!");
 	}
