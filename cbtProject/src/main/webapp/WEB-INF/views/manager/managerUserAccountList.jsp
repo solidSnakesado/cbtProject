@@ -108,13 +108,14 @@
 	</script>
 	<hr />
 	<form name="searchFrm">
-		정렬기준 <input type="hidden" name="page" value="1"> 
+		정렬기준 
+		<input type="hidden" name="page" value="1"> 
 		<select name="sort">
 			<option value="TAKER_ID">응시자ID
 			<option value="TAKER_NAME">이름
 		</select> 
-	<br> 
-	검색조건 <my:takerListSelect items="${takerMap }" /> <br> 
+	&nbsp;&nbsp;
+	검색조건 <my:takerListSelect items="${takerMap }" />&nbsp;&nbsp;
 	<input type="text" name="searchKeyword" value="${CandidateVO.searchKeyword }">
 	<button>검색</button>
 	</form>
@@ -126,7 +127,8 @@
 	</script>
 	<div class="container">
 		<br>
-	<button type="button" onclick="location.href='managerUserInsert.do'">응시자추가</button>
+	<button type="button" class="btn btn-primary m-3 p-3"
+			onclick="location.href='managerUserInsert.do'">단일응시자추가</button>
 				<form action="${pageContext.request.contextPath}/excelUpload.do"
 					id="formUpload" name="formUpload" method="post"
 					enctype="multipart/form-data">
@@ -138,7 +140,7 @@
 	<br>
 	<br>
 	<form action="managerUserDelete.do">
-		<button id="">응시자 삭제</button>
+		<button id="" class="btn btn-warning m-3 p-3">응시자 삭제</button>
 		<br>
 		<br>
 		<table border="1" align="center" class="table table-striped">

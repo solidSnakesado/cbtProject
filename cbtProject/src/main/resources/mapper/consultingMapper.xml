@@ -227,7 +227,19 @@
 			</choose>
 		</where>
 	</delete>
-
+	
+	<select id="mainConsultingList" resultType="ConsultingVO">
+	SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
+			SELECT 	CONSULTING_ID
+				,CONSULTING_TITLE				
+				,CONSULTING_DESIRED_DATE		"consultingDesiredDate"
+				,FIND_CODENM(CONSULTING_STATE) AS consultingStateName
+		FROM CONSULTING
+			<![CDATA[
+			) A ) B WHERE RN >= #{start} AND RN <=#{end}
+			]]>
+	
+	</select>
 </mapper>
  
  

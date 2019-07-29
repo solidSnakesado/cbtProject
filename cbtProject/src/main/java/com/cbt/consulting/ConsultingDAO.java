@@ -65,4 +65,9 @@ public class ConsultingDAO {
 		return mybatis.selectOne("consultingDAO.getManagerConsultingCount", vo);
 	}
 	
+	public List<ConsultingVO> mainConsultingList(ConsultingVO vo) {
+		return mybatis.selectList("consultingDAO.mainConsultingList", vo);
+	}
+
+	
 }

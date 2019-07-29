@@ -28,8 +28,18 @@ public class ExamVO {
 	private String  sort;
 	private String  searchExam;
 	private String  searchKeyword;
+	private String  examStatusName;
 	
 	
+	
+	public String getExamStatusName() {
+		return examStatusName;
+	}
+
+	public void setExamStatusName(String examStatusName) {
+		this.examStatusName = examStatusName;
+	}
+
 	public String getSort() {
 		return sort;
 	}
@@ -200,7 +210,8 @@ public class ExamVO {
 				+ examName + ", examStatus=" + examStatus + ", disclosureStatus=" + disclosureStatus
 				+ ", setExamStatus=" + setExamStatus + ", examDescriptionSimple=" + examDescriptionSimple
 				+ ", examDescriptionDetail=" + examDescriptionDetail + ", start=" + start + ", end=" + end
-				+ ", companyId=" + companyId + "]";
+				+ ", companyId=" + companyId + ", sort=" + sort + ", searchExam=" + searchExam + ", searchKeyword="
+				+ searchKeyword + ", examStatusName=" + examStatusName + "]";
 	}
 
 	
