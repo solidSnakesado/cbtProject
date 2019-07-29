@@ -3,11 +3,7 @@ package com.cbt.company;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.cbt.candidate.CandidateVO;
 import com.cbt.common.Paging;
-import com.cbt.consulting.ConsultingVO;
 
 public interface CompanyService {
 	// 글 등록

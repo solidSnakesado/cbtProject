@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cbt.common.Paging;
-import com.cbt.company.CompanyVO;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
 import com.cbt.question.QuestionService;

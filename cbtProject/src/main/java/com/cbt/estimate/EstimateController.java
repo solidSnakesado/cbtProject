@@ -2,7 +2,6 @@ package com.cbt.estimate;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.activation.DataSource;
@@ -13,7 +12,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -31,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.category.CategoryVO;
 import com.cbt.categoryMain.CategoryMainService;
-import com.cbt.categoryMain.CategoryMainVO;
 import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
