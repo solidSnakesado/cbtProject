@@ -377,7 +377,7 @@ public class ManagerController {
 	// 2019.07.15 성재민
 	// 시험 목록 전시
 	@RequestMapping(value="managerExamList.do", method=RequestMethod.GET)
-	public String managerExamList(Model model, ExamVO vo) {
+	public String managerExamList(Model model, ExamVO vo, Paging paging) {
 		model.addAttribute("ExamList", managerService.getManagerAllExam(vo));
 		return "manager/manager/managerExamList";
 	}
