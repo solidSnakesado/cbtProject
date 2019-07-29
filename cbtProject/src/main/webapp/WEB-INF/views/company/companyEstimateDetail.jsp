@@ -173,7 +173,7 @@
 </script>
 
 <div align="center">
-	<h4 class="mx-auto pb-2" align="center">세부 의뢰목록</h4>
+	<h4 class="mx-auto pb-2" align="center">세부 의뢰목록 [<a href="<c:url value='/estimateQuestionExcelDown.do/${myEstimateList.estimateId}' />">엑셀 다운</a>]</h4>
 	<form
 		action="${pageContext.request.contextPath}/companyEstimateUpdate.do"
 		name="form" method="POST">
