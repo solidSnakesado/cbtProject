@@ -10,6 +10,7 @@
 			, 	REPLY_STATUS
 			, 	INQUIRY_CONTENT
 			, 	INQUIRY_ROOM_ID
+			,	INQUIRY_TIME
 		) 
 		VALUES (
 				INQUIRY_ID_SEQ.NEXTVAL
@@ -17,6 +18,7 @@
 			, 	'처리전'
 			, 	#{inquiryContent}
 			, 	#{inquiryRoomId}
+			, 	SYSDATE
 		)
 	</insert>
 	
@@ -53,9 +55,10 @@
 		SELECT DISTINCT
 				INQUIRY_ID
 			, 	INQUIRY_TAKER_ID
-			, 	REPLY_STATUS			, 	INQUIRY_CONTENT
-
+			, 	REPLY_STATUS			
+			, 	INQUIRY_CONTENT
 			, 	INQUIRY_ROOM_ID
+			, 	INQUIRY_TIME
 		FROM INQUIRY
 		<where>
 			REPLY_STATUS = '처리전'

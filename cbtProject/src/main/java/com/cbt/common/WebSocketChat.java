@@ -21,11 +21,10 @@
  * 
  * import com.cbt.Inquiry.InquiryService; import com.cbt.Inquiry.InquiryVO;
  * 
- * 
  * // 2019.07.18 성재민 // @ServerEndpoint(value = "/echo.do") 는 // /echo.do 라는 url
  * 요청을 통해 웹소켓에 들어가겠다 라는 어노테이션.
  * 
- * @ServerEndpoint(value = "/echo.do")
+ * @ServerEndpoint(value="/echo.do")
  * 
  * @Controller public class WebSocketChat { private static final List<Session>
  * SESSION_LIST = new ArrayList<Session>(); private static final List<Object[]>
@@ -59,8 +58,8 @@
  * 
  * SESSION_LIST.add(session); }
  * 
- * // 2019.07.18 성재민 // 모든 사용자에게 메시지를 전달한다. // 어떤 누군가에게 메시지가 왔다면 그 메시지를 보낸 자신을
- * 제외한 // 연결된 세션(클라이언트)에게 메시지를 보내는 메소드 private void
+ * // 2019.07.18 성재민 // 모든 사용자에게 메시지를 전달한다. // 어떤 누군가에게 메시지가 왔다면 그 메시지를 보낸
+ * 자신을제외한 // 연결된 세션(클라이언트)에게 메시지를 보내는 메소드 private void
  * sendAllSessionToMessage(Session self, String message) { try { for(Session
  * session : WebSocketChat.SESSION_LIST) {
  * if((self.getId().compareTo(session.getId()) != 0)) {
@@ -74,11 +73,9 @@
  * jsonObj = (JSONObject) jsonParser.parse(message); String id = (String)
  * jsonObj.get("id"); String rid = (String) jsonObj.get("rid");
  * 
- * Object[] tempObj = { session, id, rid };
- * 
- * SESSION_INFO_LIST.add(tempObj); } } } } catch (IOException e) {
- * e.printStackTrace(); } catch (ParseException e) { // TODO Auto-generated
- * catch block e.printStackTrace(); } }
+ * Object[] tempObj = { session, id, rid }; SESSION_INFO_LIST.add(tempObj); } }
+ * } } catch (IOException e) { e.printStackTrace(); } catch (ParseException e) {
+ * // TODO Auto-generatedcatch block e.printStackTrace(); } }
  * 
  * // 2019.07.18 성재민 // 클라이언트에서 메시지가 들어왔을 때, 실행되는 메소드
  * 
@@ -98,17 +95,14 @@
  * @OnClose public void onClose(Session session) { LOGGER.info("Session " +
  * session.getId() + " has ended"); SESSION_LIST.remove(session);
  * 
- * 
  * // 2019.07.26 성재민 // 채팅 창이 닫히면 현재 세션값으로 저장된 정보 제거 Object[] deleteObj = null;
- * if(SESSION_INFO_LIST.size() > 0) { for(Object[] obj : SESSION_INFO_LIST) {
- * if(((Session) obj[0]) == session) { deleteObj = obj; } }
+ * if (SESSION_INFO_LIST.size() > 0) { for (Object[] obj : SESSION_INFO_LIST) {
+ * if (((Session) obj[0]) == session) { deleteObj = obj; } }
  * 
- * if(deleteObj != null) { InquiryVO vo = new InquiryVO();
- * vo.setInquiryRoomId((String)deleteObj[2]); vo.setReplyStatus("처리완료");
- * 
+ * if (deleteObj != null) { InquiryVO vo = new InquiryVO();
+ * vo.setInquiryRoomId((String) deleteObj[2]); vo.setReplyStatus("처리완료");
  * 
  * inquiryService.updateInquiry(vo);
- * 
  * 
  * SESSION_INFO_LIST.remove(deleteObj);
  * System.out.println(SESSION_INFO_LIST.size()); } }

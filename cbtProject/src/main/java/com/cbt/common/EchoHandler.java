@@ -3,9 +3,15 @@ package com.cbt.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.Session;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,14 +23,23 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.cbt.Inquiry.InquiryService;
+import com.cbt.Inquiry.InquiryVO;
+
 // 2019.07.26 성재민
 // 기존 일반 웹소켓을 스프링 웹소켓으로 변경하기 위해 생성
 @Controller
 public class EchoHandler extends TextWebSocketHandler implements InitializingBean {
+	// 2018.07.29 성재민
+	// 문의 상태 변환을 위해 추가
+	@Autowired
+	InquiryService inquiryService;
+	
 	// 2019.07.26 성재민
 	// 웹 소켓 세션을 저장할 리스트 생성
-	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
-	private static final Logger LOGGER = LoggerFactory.getLogger(EchoHandler.class);
+	private static final List<WebSocketSession> 	SESSION_LIST 		= new ArrayList<WebSocketSession>();
+	private static final List<Object[]> 			SESSION_INFO_LIST 	= new ArrayList<Object[]>();
+	private static final Logger 					LOGGER 				= LoggerFactory.getLogger(EchoHandler.class);
 
 	public EchoHandler() {
 		super();
@@ -39,7 +54,7 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
-		sessionList.add(session);
+		SESSION_LIST.add(session);
 		EchoHandler.LOGGER.info("add session!");
 	}
 
@@ -49,7 +64,41 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
-		sessionList.remove(session);
+		SESSION_LIST.remove(session);
+		
+		// 2019.07.29 성재민
+		// 문의자의 세션이 종료가 되면
+		// 해당 문의의 상태를 처리완료로 변경
+		Object[] deleteObj = null;
+		
+		// 2019.07.29 성재민
+		// SESSION_INFO_LIST 에서 현재 연견이 끊어진 세션을 찾음.
+		for(Object[] obj : EchoHandler.SESSION_INFO_LIST) {
+			if((WebSocketSession)obj[0] == session) {
+				deleteObj = obj; 
+				break;
+			}
+		}
+		
+		// 2019.07.29 성재민
+		// 해당 세션이 ROLE_USER 인경우
+		// 처리 완료로 상태 변경
+		if(deleteObj != null) {
+			CustomerUser user = (CustomerUser)session.getPrincipal();
+
+			for(GrantedAuthority item : user.getAuthorities()) {
+				String roleName = item.getAuthority();
+				if(roleName.compareTo("ROLE_USER") == 0) {
+					InquiryVO vo = new InquiryVO();
+					vo.setInquiryRoomId((String)deleteObj[2]); vo.setReplyStatus("처리완료"); 
+					inquiryService.updateInquiry(vo);
+					break;
+				}
+			}
+			
+			SESSION_INFO_LIST.remove(deleteObj);
+		}
+		
 		EchoHandler.LOGGER.info("remove session!");
 	}
 
@@ -59,12 +108,33 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);
 		
-		for (WebSocketSession webSession : this.sessionList) {
+		for (WebSocketSession webSession : EchoHandler.SESSION_LIST) {
 			if (webSession.isOpen()) {
 				try {
 					webSession.sendMessage(message);
 				} catch (Exception ignored) {
 					EchoHandler.LOGGER.error("fail to send message!", ignored);
+				}
+				
+				if(session.getId().compareTo(webSession.getId()) == 0) {
+					boolean isOverlap = false; 
+					
+					for(Object[] obj : EchoHandler.SESSION_INFO_LIST) { 
+						if(((Session) obj[0]) == session) {
+							isOverlap = true; 
+							break; 
+						} 
+					}
+					
+					if(isOverlap == false) { 
+						/*
+						 * JSONParser jsonParser = new JSONParser(); JSONObject jsonObj = (JSONObject)
+						 * jsonParser.parse(message); String id = (String) jsonObj.get("id"); String rid
+						 * = (String) jsonObj.get("rid");
+						 * 
+						 * Object[] tempObj = { session, id, rid }; SESSION_INFO_LIST.add(tempObj);
+						 */
+					} 
 				}
 			}
 		}
@@ -88,7 +158,7 @@ public class EchoHandler extends TextWebSocketHandler implements InitializingBea
 	}
 
 	public void sendMessage(String message) {
-		for (WebSocketSession session : this.sessionList) {
+		for (WebSocketSession session : EchoHandler.SESSION_LIST) {
 			if (session.isOpen()) {
 				try {
 					session.sendMessage(new TextMessage(message));

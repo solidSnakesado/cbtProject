@@ -23,6 +23,7 @@
 				<th><label>문의번호</label></th>
 				<th><label>문의자</label></th>
 				<th><label>문의내용</label></th>
+				<th><label>문의시간</label></th>
 				<th><label>처리상태</label></th>
 			</tr>
 			<c:forEach items="${InquiryList}" var="inquiry">
@@ -30,6 +31,7 @@
 					<td>${inquiry.inquiryId}</td>
 					<td>${inquiry.inquiryTakerId}</td>
 					<td>${inquiry.inquiryContent}</td>
+					<td>${inquiry.inquiryTime}</td>
 					<td>${inquiry.replyStatus}</td>
 				</tr>
 			</c:forEach>
