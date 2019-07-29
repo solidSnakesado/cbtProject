@@ -25,12 +25,24 @@
 		border-collapse: collapse;
 	}
 	
-/* 	.trexam {
-		cursor:pointer;
-	} */
+	.tab {
+		width: 100%;
+	}
 	
-	td.trexam:hover {
-		background-color : lightblue;
+	#exam1:hover {
+		background-color: lightblue;
+	}
+	
+	#exam2:hover {
+		background-color: lightblue;
+	}
+	
+	#exam3:hover {
+		background-color: lightblue;
+	}
+	
+	#exam4:hover {
+		background-color: lightblue;
 	}
 	
 </style>
@@ -76,6 +88,7 @@
 		var examName		=	"${examVO.examName}";
 		var passingScore	=	"${examVO.passingScore}";
 		var examStartTime	=	"${examVO.examStartTime}";
+		var examEndTime		=	"${examVO.examEndTime}";
 		
 		console.log(takerId);
 		console.log(examId);
@@ -83,6 +96,7 @@
 		console.log(examName);
 		console.log(passingScore);
 		console.log(examStartTime);
+		console.log(examEndTime);
 		
 		
 		$("#floatMenu").hide();
@@ -160,7 +174,7 @@
 							$("[name ='rExam']").val([data[numbers[i]].takerAnswer]);
 						}
 			        	
-			        	$("#examId").html(data[numbers[i]].examId+" 시험 응시");
+			        	$("#examId").html(examName);
 			        	$("#question").html(a+" .   "+data[numbers[i]].questionContent);
 						$("#point").html("배점 : " + data[numbers[i]].point);
 			        	
@@ -176,7 +190,7 @@
 			        	ex[num[2]] = data[numbers[c-1]].example3;
 			        	ex[num[3]] = data[numbers[c-1]].example4;
 			        	
-						$("#answer1").append($("<tr>")
+						$("#answer1").append($("<tr>").attr("value",c).attr("name","goExam"+c+"")
 							.append($("<td>").attr("id","answer"+c).html(c+" . "))
 							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[0])))
 							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[1])))
@@ -185,9 +199,20 @@
 						
 						if(data[numbers[c-1]].takerAnswer != null){
 							$("[name ='exam"+c+"']").val([data[numbers[c-1]].takerAnswer]);
+							$("[name ='exam"+c+"']").parent().parent().css('background-color','lightblue');
 						} 
 						
 					}
+			        
+			        $("tr[name^='goExam']").on("click", function() {
+			        	console.log($(this).attr('value'));
+			        	i = parseInt($(this).attr('value')-1);
+			        	a = parseInt($(this).attr('value'));
+			        	
+			        	mixExam();
+			        	
+			        })
+			        
 			        
 			        
 			        /* 섞은 보기 출력 */
@@ -197,9 +222,9 @@
 					/* 실시간 문제 업데이트 */
 					function updateAnswer(){
 						
-						$("input:radio[name ='rExam']").on("click", function() {
-							var choice = $(this).attr('id');
-				        	var takerAnswer = $(this).val();
+						$("tr[class^='tr']").on("click", function() {
+							var choice = $(this).find('input').attr('id');
+				        	var takerAnswer = $(this).find('input').val();
 				        	var setExamQuestionId = data[numbers[i]].setExamQuestionId;
 				    		console.log(choice);
 				    		console.log(takerAnswer);
@@ -213,6 +238,7 @@
 								success : function(data){
 									
 					    			$("[name ='exam"+a+"']").val([takerAnswer]);
+					    			$("[name ='exam"+a+"']").parent().parent().css('background-color','lightblue');
 									
 								}
 				    		})
@@ -228,8 +254,6 @@
 							
 							i = i+1;	
 							a = a+1;
-							
-							console.log(a+"번 문제");
 							
 							mixExam();
 							
@@ -250,8 +274,6 @@
 							
 							i = i-1;	
 							a = a-1;
-							
-							console.log(a+"번 문제");
 							
 							mixExam();
 							
@@ -288,36 +310,55 @@
 						}
 						return zero + n;
 					}
-						
-					$(function() {
 					
+					
+				 	$(function() {
+				 		
+				 		var eTime = new Date(examEndTime);
+						var sTime = new Date(examStartTime);
+						
+						var h = eTime.getHours() - sTime.getHours();
+						var mi = eTime.getMinutes() - sTime.getMinutes();
+						
+				 		var examTime = 0;
+						var hour = 0;
+						var min = 0;
+						var sec = 0;
+						
+						console.log(h);
+						console.log(mi);
+						
+						examTime = (h*3600)+(mi*60);
+				 		
 						timer = setInterval( function () {
 						
-							$.ajax ({
+							console.log(examTime);
 							
-								url : "${pageContext.request.contextPath}/getTimer.do",
-								cache : false,
-								method : "post",
-								data : { examId : examId } , 
-								success : function (html) {
-									
-									var serverDate = new Date(html);
-									console.log(serverDate);
-									$("#countdown").html('타이머 시작');
-									getTimeStamp(serverDate);
-									
+							
+							hour = parseInt(examTime/3600);
+							min = parseInt((examTime%3600)/60);
+							sec = examTime%60;
+							
+							$('#countdown').html(hour+" : "+min+" : "+sec);
+							
+							if(parseInt(examTime) == 0) {
+								alert('시간초과');
+								takeExamForm.submit();
+							} else {
+								examTime --;
+								if(parseInt(examTime) <= 60) {
+									$('#countdown').css('background-color','red');
 								}
-							
-							});
+							}
 						
 						}, 1000);
 					
-					}); 
+					});
 				}
 			})
 		})
 	});
-
+	
 	function candidateTestResult(){
 		if(confirm("제출하시겠습니까?? \n 번복불가.") == true) {
 			takeExamForm.submit();
@@ -353,8 +394,7 @@
 	
 <button id="btn">시험 시작 !</button>
 	<table border="1" id="mainTab">
-		<thead>
-		<tr>
+		<tr >
 			<td><h2 align="center" id="examId" value=""></h2></td>
 		</tr>
 		<tr height="200">
@@ -362,35 +402,35 @@
 		</tr>
 		<tr>
 			<td align="left" valign="top" width="900" height="100">
-				<table>
+				<table class="tab">
 					<tr>
-						<th rowspan="5"></th>
-						<th width="80" ></th>
-						<th id="point" align="right"></th>
-						<th rowspan="5"></th>
+						<th width="80px;"></th>
+						<th ></th>
+						<th ></th>
+						<th id="point" align="right" style="padding-left: 80%"></th>
 					</tr>
-					<tr>
+					<tr class="tr1">
 						<td></td>
-						<td align="right" id="td1"></td>
-						<td align="left" id="exam1" class="trexam"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td align="right" id="td2"></td>
-						<td align="left" id="exam2" class="trexam"></td>
+						<td align="right" id="td1" hidden="true"></td>
+						<td align="left" id="exam1" style="font-size: 20px;" colspan="4"></td>
 						<td></td>
 					</tr>
-					<tr>
+					<tr class="tr2">
 						<td></td>
-						<td align="right" id="td3"></td>
-						<td align="left" id="exam3" class="trexam"></td>
+						<td align="right" id="td2" hidden="true"></td>
+						<td align="left" id="exam2" style="font-size: 20px;" colspan="4"></td>
 						<td></td>
 					</tr>
-					<tr>
+					<tr class="tr3">
 						<td></td>
-						<td align="right" id="td4"></td>
-						<td align="left" id="exam4" class="trexam"></td>
+						<td align="right" id="td3" hidden="true"></td>
+						<td align="left" id="exam3" style="font-size: 20px;" colspan="4"></td>
+						<td></td>
+					</tr>
+					<tr class="tr4">
+						<td></td>
+						<td align="right" id="td4" hidden="true"></td>
+						<td align="left" id="exam4" style="font-size: 20px;" colspan="4"></td>
 						<td></td>
 					</tr>
 				</table>
@@ -406,7 +446,6 @@
 				<button type='button' onclick="candidateTestResult()" >제출 하기</button>
 			</td>
 		</tr>
-		</thead>
 	</table>
 </body>
 </html>
