@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -293,8 +294,7 @@ public class EstimateController {
 		
 	  //companyID와 NAME을 가져오기위함
 	  @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.GET)
-	  @ResponseBody public List<CompanyVO> getcompanyNameList(CompanyVO vo,HttpServletRequest request, HttpServletResponse response) {
-	  
+	  @ResponseBody public  List<CompanyVO> getcompanyNameList(CompanyVO vo) {
 	  
 	  return companyService.getCompanyList(vo);
 	  

@@ -58,6 +58,7 @@
 				dataType: "json",
 				url:"${pageContext.request.contextPath }/getcompanyNameList.do",
 				success : function(data) {
+					console.log(data);
 					$('#tbodyCompany').empty();
 					// company ID, Name 출력
 					for(var i = 0; i < data.length; ++i){
@@ -158,7 +159,7 @@
 					class="form-control "></select></td>
 			</tr>
 			<tr>
-				<td><label>기업 이름</label></td>
+				<td><label>기업 ID/ 기업 이름</label></td>
 				<td>
 					<div class="row">
 						<div class="col">
@@ -268,7 +269,9 @@
 					<tbody id='tbodyCompany'>
 
 					</tbody>
+					
 				</table>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
