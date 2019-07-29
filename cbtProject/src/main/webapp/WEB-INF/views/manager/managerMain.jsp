@@ -52,7 +52,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">응시자</div>
-                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerUserAccountList.do"><font color="white">see more</font></a></span>
+                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerUserAccountList.do"><font color="white">view more</font></a></span>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -85,7 +85,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">회사목록</div>
-                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerAccountList.do"><font color="white">see more</font></a></span>
+                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerAccountList.do"><font color="white">view more</font></a></span>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -120,7 +120,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">상담목록</div>
-                                    <div class="pull-right"><span class="badge badge-info">17</span>
+                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerConsultingList.do"><font color="white">view more</font></a></span>
 
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">시험목록</div>
-                                    <div class="pull-right"><span class="badge badge-info">812</span>
+                                    <div class="pull-right"><span class="badge badge-info"><a href="${pageContext.request.contextPath }/managerExamList.do"><font color="white">view more</font></a></span>
 
                                     </div>
                                 </div>
@@ -163,16 +163,21 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Date</th>
-                                                <th>Amount</th>
+                                                <th>의뢰기업</th>
+                                                <th>시험이름</th>
+                                                <th>시험상태</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach items="${exam }" var="ExamVO" varStatus="st">
+                                        <input type="hidden" name="${ExamVO.examId }" id="${ExamVO.examId }">
                                             <tr>
-                                                <td>1</td>
-                                                <td>02/02/2013</td>
-                                                <td>$25.12</td>
+                                                <td>${st.count }</td>
+                                                <td>${ExamVO.companyId}</td>
+                                                <td>${ExamVO.examName}</td>
+                                                <td>${ExamVO.examStatusName}</td>
                                             </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

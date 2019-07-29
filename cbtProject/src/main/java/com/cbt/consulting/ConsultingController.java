@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cbt.common.CustomerUser;
 import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
 
@@ -20,18 +22,28 @@ public class ConsultingController {
 	@Autowired
 	ConsultingService consultingService;
 	
+	// security 적용에 따른 변경(7/29)
 	@RequestMapping(value = "companyConSultingList.do", method = RequestMethod.GET)
-	public String companyConsultingList(HttpSession session, Model model, Paging paging) {
-		CompanyVO loginCompany = (CompanyVO) session.getAttribute("company");
-		if(loginCompany != null) {
+	public String companyConsultingList(Authentication authentication, Model model, Paging paging) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		if(user != null) {
 			ConsultingVO vo = new ConsultingVO();
-			vo.setCompanyId(loginCompany.getCompanyId());
+			vo.setCompanyId(user.getUsername());
 			model.addAttribute("result", consultingService.getConsultingList(vo, paging));
 			return "company/company/companyConSultingList";
 		} else {
 			return "company/company/companyLogin";
 		}
 	}
+	/*
+	 * public String companyConsultingList(HttpSession session, Model model, Paging
+	 * paging) { CompanyVO loginCompany = (CompanyVO)
+	 * session.getAttribute("company"); if(loginCompany != null) { ConsultingVO vo =
+	 * new ConsultingVO(); vo.setCompanyId(loginCompany.getCompanyId());
+	 * model.addAttribute("result", consultingService.getConsultingList(vo,
+	 * paging)); return "company/company/companyConSultingList"; } else { return
+	 * "company/company/companyLogin"; } }
+	 */
 	
 	// 2019.07.08 성재민
 	// id int로 변경

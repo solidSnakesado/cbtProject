@@ -70,10 +70,11 @@ public class ManagerController {
 		companyVO.setStart(1);
 		companyVO.setEnd(3);
 		
-		/*
-		 * consultingVO.setStart(1); consultingVO.setEnd(3);
-		 * examVO.setStart(1); examVO.setEnd(3);
-		 */
+		consultingVO.setStart(1); 
+		consultingVO.setEnd(3);
+		
+		examVO.setStart(1); 
+		examVO.setEnd(3);
 		
 		model.addAttribute("takerTop3", candidateService.getCandidateList(candidateVO));
 		model.addAttribute("candidate", candidateService.getCandidateList(candidateVO));
@@ -81,14 +82,17 @@ public class ManagerController {
 		model.addAttribute("companyTop3", companyService.getCompanyList(companyVO));
 		model.addAttribute("company", companyService.getCompanyList(companyVO));
 		
+		model.addAttribute("consultingTop3", consultingService.mainConsultingList(consultingVO));
+		model.addAttribute("consulting", consultingService.mainConsultingList(consultingVO));
+		
+		model.addAttribute("examTop3", examService.mainExamList(examVO));
+		model.addAttribute("exam", examService.mainExamList(examVO));
+		
 		/*
-		 * model.addAttribute("consultingTop3",
-		 * consultingService.getConsultingList(consultingVO));
-		 * model.addAttribute("consulting",
-		 * consultingService.getConsultingList(consultingVO));
 		 * model.addAttribute("examTop3", examService.getExamList(examVO));
 		 * model.addAttribute("exam", examService.getExamList(examVO));
 		 */
+		
 		// 2019.07.20 성재민
 		// 로그인시 답변이 안된 문의 의 갯수를 받아온다.
 		int count = inquiryService.getBeforeReplyCount();
@@ -373,7 +377,7 @@ public class ManagerController {
 	// 2019.07.15 성재민
 	// 시험 목록 전시
 	@RequestMapping(value="managerExamList.do", method=RequestMethod.GET)
-	public String managerExamList(Model model, ExamVO vo) {
+	public String managerExamList(Model model, ExamVO vo, Paging paging) {
 		model.addAttribute("ExamList", managerService.getManagerAllExam(vo));
 		return "manager/manager/managerExamList";
 	}

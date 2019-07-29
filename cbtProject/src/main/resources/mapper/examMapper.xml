@@ -28,8 +28,8 @@
 					)
 		VALUES ( 
 					EXAM_ID_SEQ.NEXTVAL
-				,	TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI:SS')
-				,	TO_DATE(#{examEndTime}, 'YYYY-MM-DD HH24:MI:SS')
+				,	TO_DATE(#{examStartTime}, 'YYYY-MM-DD HH24:MI')
+				,	TO_DATE(#{examEndTime}, 'YYYY-MM-DD HH24:MI')
 				,	#{questionQuantity}
 				,	#{estimateId}
 				,	#{numberOfTimes}
@@ -152,6 +152,9 @@
 		</where>
 		ORDER BY EXAM_START_TIME DESC
 	</select>
+	
+		
+	
 	<select id="getExamCount" resultType="int">
 		SELECT COUNT(*)
 		FROM EXAM
@@ -189,4 +192,20 @@
 		
 	</select>
 	
+	
+	<select id="mainExamList" resultType="ExamVO">
+		SELECT B.* FROM (SELECT A.* , ROWNUM RN FROM (
+				SELECT 				
+			COMPANY.COMPANY_ID				
+		  , EXAM.EXAM_NAME
+		  , FIND_CODENM(EXAM_STATUS) AS EXAM_STATUS_NAME					
+		FROM EXAM 
+        JOIN ESTIMATE ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		JOIN COMPANY ON COMPANY.COMPANY_ID = ESTIMATE.COMPANY_ID
+		
+			<![CDATA[
+			) A ) B WHERE RN >= #{start} AND RN <=#{end}
+			]]>
+	
+	</select>
 </mapper>

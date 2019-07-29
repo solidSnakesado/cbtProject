@@ -18,14 +18,15 @@
 	</script>
 	<hr />
 	<form name="searchFrm">
-		정렬기준 <input type="hidden" name="page" value="1"> 
+		정렬기준 
+		<input type="hidden" name="page" value="1"> 
 		<select name="sort" class="form-control">
 			<option value="COMPANY_ID">기업ID
 			<option value="COMPANY_NAME">기업이름
 			<option value="COMPANY_MANAGER">담당자
 		</select> 
-		<br> 
-		검색조건 <my:companyListSelect items="${companyMap }" /><br>
+		&nbsp;&nbsp;
+		검색조건 <my:companyListSelect items="${companyMap }" />&nbsp;&nbsp;
 		 <input type="text" name="searchKeyword" class="form-control" value="${CompanyVO.searchKeyword }">
 		<button class="btn btn-primary">검색</button>
 	</form>
