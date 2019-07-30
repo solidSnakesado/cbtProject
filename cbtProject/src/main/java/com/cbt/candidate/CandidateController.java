@@ -1,14 +1,19 @@
 package com.cbt.candidate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,7 +57,7 @@ public class CandidateController {
 	
     // 카카오 로그인   -7/19 변경, june
     @RequestMapping(value="/oauth")
-    public String login(@RequestParam("code") String code, Model model, HttpSession session, CandidateVO vo) {
+    public String login(@RequestParam("code") String code, Model model, Authentication authentication, CandidateVO vo) {
     	KakaoAPI kakao = new KakaoAPI();
         String access_Token = kakao.getAccessToken(code);
         
@@ -67,6 +72,14 @@ public class CandidateController {
 		CandidateVO candidate = candidateService.getCandidate(vo);
 		System.out.println("kakao customer : " + candidate);
 		
+		if (userInfo.get("kakaoId") != null) {
+            List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+    		auth.add(new SimpleGrantedAuthority("ROLE_USER"));
+    		
+    		CustomerUser principal = new CustomerUser((String)userInfo.get("kakaoId"), access_Token, auth);
+            authentication =  new UsernamePasswordAuthenticationToken(principal, null, auth);
+            SecurityContextHolder.getContext().setAuthentication(authentication); 
+		}
 		if (candidate == null) {
 			vo.setTakerId(kakaoId);
 			vo.setTakerName(kakaoName);
@@ -74,12 +87,8 @@ public class CandidateController {
 			model.addAttribute("candidate", candidateService.getCandidate(vo));
 			return "candidate/candidate/candidateAccountManageModify";
 		}
-
 		candidate = candidateService.getCandidate(vo);
-        
-		session.setAttribute("takerId", candidate.getTakerId());
-		session.setAttribute("token", access_Token);
-		
+
 		//return kakaoName;
 		return "candidate/candidate/candidateMain";
     }
@@ -681,4 +690,16 @@ public class CandidateController {
 		 * updateCandidate(@ModelAttribute("candidate")CandidateVO vo) {
 		 * candidateService.updateCandidate(vo); return "candidate/candidateMain"; }
 		 */
+	//ID 찾기 폼
+	@RequestMapping(value = "findID.do",  method = RequestMethod.GET)
+	public String findIDform() {
+		return "candidate/candidate/findID";
+	}
+	@RequestMapping(value = "findID.do",  method = RequestMethod.POST)
+	public String findID(CandidateVO vo, Model model) {
+		String findID = candidateService.findID(vo);
+		model.addAttribute("findID", findID); 
+		return "candidate/candidate/findIDResult";
+	}
+	
 }

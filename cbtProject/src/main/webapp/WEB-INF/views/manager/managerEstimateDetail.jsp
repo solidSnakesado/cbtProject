@@ -138,7 +138,7 @@
 </script>
 </head>
 <body>
-	<h4 class="mx-auto pb-2">세부 의뢰목록</h4>
+	<h4 class="mx-auto pb-2">세부 의뢰목록 [<a href="<c:url value='/estimateQuestionExcelDown.do/${myEstimateList.estimateId}' />">엑셀 다운</a>]</h4>
 	<form action="${pageContext.request.contextPath}/managerEstimateUpdate.do" name="form" method="POST">
 		<!-- form name으로 submit처리 -->
 		<table id="table">
@@ -149,7 +149,7 @@
 					onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td>
 			</tr>
 			<tr>
-				<td><label>카테고리ID</label></td>
+				<td><label>카테고리</label></td>
 				<td><select name="categoryId" id="categoryName"
 					class="form-control"></select></td>
 			</tr>

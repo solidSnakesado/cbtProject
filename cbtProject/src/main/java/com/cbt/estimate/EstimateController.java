@@ -2,7 +2,11 @@ package com.cbt.estimate;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -13,6 +17,13 @@ import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -34,6 +45,8 @@ import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
 import com.cbt.condition.ConditionService;
+import com.cbt.question.QuestionVO;
+import com.cbt.setExamQuestion.SetExamQuestionVO;
 
 /* @RestController가 @ResponseBody를 포함하고 있기 때문에
  * view가 필요하고 restfulAPI와 묶고 싶을 경우 클래스에 @Controller로 지정해주고, restfulAPI에는 일일이 @ResponseBody를 붙여야된다.
@@ -231,12 +244,7 @@ public class EstimateController {
 			return "empty/manager/managerEstimateDetail";
 		}
 		
-		@RequestMapping(value="getCateoryId.do", method = RequestMethod.GET)
-		@ResponseBody
-		public int cateoryIdFind(EstimateVO vo) {
-			System.out.println("메인 카테고리: "+vo.getMainCategoryId());
-			return estimateService.getCateoryId(vo);
-		}
+	
 		
 		
 		//카테고리 id와 이름을 가져옴
@@ -286,13 +294,144 @@ public class EstimateController {
 		
 	  //companyID와 NAME을 가져오기위함
 	  @RequestMapping(value = "getcompanyNameList.do", method = RequestMethod.GET)
-	  @ResponseBody public List<CompanyVO> getcompanyNameList(CompanyVO vo,HttpServletRequest request, HttpServletResponse response) {
-	  
+	  @ResponseBody public  List<CompanyVO> getcompanyNameList(CompanyVO vo) {
 	  
 	  return companyService.getCompanyList(vo);
 	  
 	  }
 	 
 		
+	//엑셀
+	  
+	  @RequestMapping(value = "/estimateQuestionExcelDown.do/{estimateId}")
+		public void estimateQuestionExcelDown(@PathVariable("estimateId") int estimateId, HttpServletResponse response) {
+			EstimateVO vo = new EstimateVO();
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");	//날짜 타입변환을 위해 사용
+			String RequestDay; //날짜 타입변환을 위해 사용
+			String ExamDate;	//날짜 타입변환을 위해 사용
+			vo.setEstimateId(estimateId);
+			
+			List<EstimateVO> estimateList 	= estimateService.getEstimateList(vo);
 		
+		
+			Workbook 	wb 		= new HSSFWorkbook();
+			Sheet 		sheet 	= wb.createSheet("의뢰 견적서");
+			Row 		row 	= null;
+			Cell 		cell 	= null;
+			int 		rowNo 	= 0;
+
+			CellStyle headStyle = wb.createCellStyle();
+			CellStyle bodyStyle = wb.createCellStyle();
+			
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("estimateId");	//의뢰ID
+			cell = row.createCell(1);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("categoryName");	//카테고리명
+			cell = row.createCell(2);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("companyId");		//기업ID
+			cell = row.createCell(3);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("estimateName");	//의뢰이름
+			cell = row.createCell(4);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("requestDay");	//의뢰일
+			cell = row.createCell(5);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("estimatePrice");	//금액
+			cell = row.createCell(6);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("tradeProgressName");	//의뢰진행상태
+			cell = row.createCell(7);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("candidateName");		//응시대상자
+			cell = row.createCell(8);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("applyPurposeName");	//응시목적
+			cell = row.createCell(9);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("applicants");	//응시자 수
+			cell = row.createCell(10);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("examClassficationName");	//시험분류
+			cell = row.createCell(11);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("levelOfDifficultyName");		//난이도
+			cell = row.createCell(12);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("examDate");		//시험일시
+			cell = row.createCell(13);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("remarks");		//비고
+			cell = row.createCell(14);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("examIntervalName");		//시험간격
+			
+			
+			for(EstimateVO evo : estimateList) {
+				row = sheet.createRow(rowNo++);
+				cell = row.createCell(0);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getEstimateId());
+				cell = row.createCell(1);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getCategoryName());
+				cell = row.createCell(2);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getCompanyId());
+				cell = row.createCell(3);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getEstimateName());
+				cell = row.createCell(4);
+				cell.setCellStyle(bodyStyle);
+				RequestDay = transFormat.format(evo.getRequestDay());	//date ->String
+				cell.setCellValue(RequestDay);
+				cell = row.createCell(5);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getEstimatePrice());
+				cell = row.createCell(6);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getTradeProgressName());
+				cell = row.createCell(7);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getCandidateName());
+				cell = row.createCell(8);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getApplyPurposeName());
+				cell = row.createCell(9);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getApplicants());
+				cell = row.createCell(10);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getExamClassficationName());
+				cell = row.createCell(11);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getLevelOfDifficultyName());
+				cell = row.createCell(12);
+				cell.setCellStyle(bodyStyle);
+				ExamDate = transFormat.format(evo.getExamDate()); //date ->String
+				cell.setCellValue(ExamDate);
+				cell = row.createCell(13);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getRemarks());
+				cell = row.createCell(14);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(evo.getExamIntervalName());
+			}
+			
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "Attachment;Filename=EstimateList.xls");
+			
+			try {
+				wb.write(response.getOutputStream());
+				wb.close();
+				response.getOutputStream().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }

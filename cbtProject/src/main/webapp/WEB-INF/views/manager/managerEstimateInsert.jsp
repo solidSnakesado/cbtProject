@@ -58,6 +58,7 @@
 				dataType: "json",
 				url:"${pageContext.request.contextPath }/getcompanyNameList.do",
 				success : function(data) {
+					console.log(data);
 					$('#tbodyCompany').empty();
 					// company ID, Name 출력
 					for(var i = 0; i < data.length; ++i){
@@ -158,14 +159,14 @@
 					class="form-control "></select></td>
 			</tr>
 			<tr>
-				<td><label>기업 이름</label></td>
+				<td><label>기업 ID/ 기업 이름</label></td>
 				<td>
 					<div class="row">
 						<div class="col">
 							<input type="text" name="companyId" id="companyId"
-								class="form-control col-5" style="display: inline"> 
+								class="form-control col-5" style="display: inline" readonly> 
 							<input type="text" id="companyName" 
-								class="form-control col-5" style="display: inline">
+								class="form-control col-5" style="display: inline" readonly>
 
 							<button type="button" class="btn btn-primary" id="btnCompanyFind"
 								data-toggle="modal" style="display: inline">기업 찾기</button>
@@ -180,8 +181,8 @@
 			</tr>
 			<tr>
 				<td><label>금액 </label></td>
-				<td><input type="text" name="estimatePrice" id="estimatePrice"
-					class="form-control  "></td>
+				<td><input type="text" name="estimatePrice" id="estimatePrice" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+					class="form-control" placeholder="숫자로 입력"></td>
 			</tr>
 			<tr>
 				<td><label>의뢰진행상태</label></td>
@@ -201,8 +202,8 @@
 			<tr>
 				<td><label>응시자 수</label></td>
 				<td><input type="text" name="applicants"
-					value="${myEstimateList.applicants}" id="applicants"
-					class="form-control col-11" style="display: inline">명</td>
+					value="${myEstimateList.applicants}" id="applicants" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+					class="form-control col-11" style="display: inline" placeholder="ex)100명->100 숫자만입력" ></td>
 			</tr>
 			<tr>
 				<td><label>시험분류</label></td>
@@ -217,7 +218,7 @@
 			<tr>
 				<td><label>시험일시</label></td>
 				<td><input type="text" id="datepicker" name="examDate"
-					value="${myEstimateList.examDate}" class="form-control" ></td>
+					value="${myEstimateList.examDate}" class="form-control" placeholder="클릭하여 날짜를 선택해주세요"></td>
 			</tr>
 			<tr>
 				<td><label>비고</label></td>
@@ -268,7 +269,9 @@
 					<tbody id='tbodyCompany'>
 
 					</tbody>
+					
 				</table>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

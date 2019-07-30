@@ -135,5 +135,9 @@ public class CandidateDAO {
 		System.out.println("-- -- -- Customer Kakao_Info Insert -- -- --");
 		return mybatis.insert("candidateDAO.insertKakaoCandidate", vo);
 	}
+
+	public String findID(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.findID",vo);
+	}
 	
 }

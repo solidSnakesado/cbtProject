@@ -87,7 +87,13 @@
 			,COMPANY_NAME "companyName"
 			,COMPANY_MANAGER "companyManager"
 		FROM COMPANY) A ) B
-		WHERE RN BETWEEN #{start} AND #{end} 
+		<where>
+			<if test="start != null and start != ''">
+				<if test="end != null and end != ''">
+		 			RN BETWEEN #{start} AND #{end} 
+		 		</if>
+		 	</if>
+		 </where>
 	</select>
 	
 		<!-- 관리자 회사 등록 -->
