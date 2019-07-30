@@ -107,7 +107,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="insertManager.do">매니저 등록</a>
+                                        <a tabindex="-1" href="managerInsertManager.do">매니저 등록</a>
                                     </li>
                                     <li>
                                     	<a href="managerGetManagerList.do">매니저 목록</a>
