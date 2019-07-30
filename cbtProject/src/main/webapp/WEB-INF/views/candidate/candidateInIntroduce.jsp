@@ -16,11 +16,11 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#header").load("candidateInHeader.do")
 		});
-	</script>
+	</script> -->
 	<header id="header"></header>
       <h1>YEDAM은?</h1>
    <hr />
