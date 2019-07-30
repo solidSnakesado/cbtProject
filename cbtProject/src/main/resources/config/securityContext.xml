@@ -17,10 +17,10 @@
 	<security:http pattern="/common/**" security="none"/>
 	
 	<security:http>
+		<security:intercept-url 
+			pattern="/candidateMain.do" access="permitAll()" />
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
-		<security:intercept-url
-			pattern="/candidateMain.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/idcheck.do" access="permitAll()" />
 		<security:intercept-url

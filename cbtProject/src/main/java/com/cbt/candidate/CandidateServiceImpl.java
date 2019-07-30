@@ -153,7 +153,7 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public CandidateVO findID(CandidateVO vo) {
+	public String findID(CandidateVO vo) {
 		return candidateDAO.findID(vo);
 		
 	} 

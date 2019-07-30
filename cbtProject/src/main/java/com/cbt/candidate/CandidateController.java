@@ -696,10 +696,9 @@ public class CandidateController {
 		return "candidate/candidate/findID";
 	}
 	@RequestMapping(value = "findID.do",  method = RequestMethod.POST)
-	public String findID(CandidateVO vo) {
-		vo.setTakerEmail("takerEmail");
-		vo.setTakerName("takerName");
-		vo = candidateService.findID(vo);
+	public String findID(CandidateVO vo, Model model) {
+		String findID = candidateService.findID(vo);
+		model.addAttribute("findID", findID); 
 		return "candidate/candidate/findIDResult";
 	}
 	
