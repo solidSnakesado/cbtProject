@@ -6,15 +6,15 @@
 	data-ride="carousel">
 	<div class="carousel-inner">
 		<div class="carousel-item active" data-interval="4000">
-			<img src="${pageContext.request.contextPath}/image/mainImage1.PNG"
+			<img src="${pageContext.request.contextPath}/image/mainImage1.png"
 				width="1073" height="535" alt="오케이">
 		</div>
 		<div class="carousel-item" data-interval="4000">
-			<img src="${pageContext.request.contextPath}/image/mainImage2.PNG"
+			<img src="${pageContext.request.contextPath}/image/mainImage2.png"
 				width="1073" height="535" alt="빨리끝나자">
 		</div>
 		<div class="carousel-item" data-interval="4000">
-			<img src="${pageContext.request.contextPath}/image/mainImage3.PNG"
+			<img src="${pageContext.request.contextPath}/image/mainImage3.png"
 				width="1073" height="535" alt="안뇽">
 		</div>
 	</div>
