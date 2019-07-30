@@ -14,6 +14,12 @@
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath }/BootstrapAdminTheme/assets/styles.css" rel="stylesheet" media="screen">
         <script src="${pageContext.request.contextPath }/BootstrapAdminTheme/vendors/jquery-1.9.1.min.js"></script>
+
+<style>
+	.container {width:100%}
+	.btnGroup {text-align:right; padding-bottom: 10px}
+</style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		var ws;
@@ -79,6 +85,7 @@
 		}
 	});
 </script>
+
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">  
@@ -147,7 +154,9 @@
 
 	  <sec:authorize access="isAnonymous()"> 
 		<li><a href="managerLogin.do" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">로그인</a></li>
+		<li>
 		</sec:authorize>
+		
 
 
                         </ul>

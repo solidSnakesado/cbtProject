@@ -37,13 +37,13 @@
 						 	 : "${CompanyVO.searchCompany}";
 	</script>
 	<div class="container">
-		<br>
+		<div class="btnGroup">
 		<button type="button" class="btn btn-primary"
 			onclick="location.href='managerAccountInsert.do'">기업 추가</button>
-		<br>
-		<br>
+		<button id="" class="btn btn-danger">삭제</button>
+		</div>
 		<form action="managerAccountDelete.do">
-			<button id="" class="btn btn-danger">삭제</button>
+
 			<table border="1" align="center" class="table table-striped">
 				<thead>
 				<tr>

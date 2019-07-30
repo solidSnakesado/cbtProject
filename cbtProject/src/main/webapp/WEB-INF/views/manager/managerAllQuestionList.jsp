@@ -13,7 +13,7 @@
 <body>
 	<h4 class="mx-auto pb-2">Board List</h4>
 	<div align="right">
-		[<a href="" onclick='window.open("${pageContext.request.contextPath }/fileUpload.do","fileUp","width=600,height=300");'>엑셀 업로드</a>] [<a href="<c:url value='${pageContext.request.contextPath }/excelDown.do' />">엑셀 다운</a>]
+		[<a href="" onclick='window.open("${pageContext.request.contextPath }/managerFileUpload.do","fileUp","width=600,height=300");'>엑셀 업로드</a>] [<a href="<c:url value='${pageContext.request.contextPath }/excelDown.do' />">엑셀 다운</a>]
 	</div>
 	<table border="1">
 		<thead>

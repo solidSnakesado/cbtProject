@@ -6,7 +6,7 @@
                         <div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Success</h4>
-                        	The operation completed successfully</div>
+                        	매니저님 환영합니다.</div>
                     	</div>
                     <div class="row-fluid">
                         <!-- block -->
@@ -19,25 +19,25 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span3">
-                                    <div class="chart" data-percent="35">35명</div>
+                                    <div class="chart" data-percent="100">35명</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">응시자 수</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
-                                    <div class="chart" data-percent="53">53%</div>
+                                    <div class="chart" data-percent="100">53%</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">합격률</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
-                                    <div class="chart" data-percent="23">23</div>
+                                    <div class="chart" data-percent="100">23</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">시험 수</span>
 
                                     </div>
                                 </div>
                                 <div class="span3">
-                                    <div class="chart" data-percent="5">5</div>
+                                    <div class="chart" data-percent="100">5</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">의뢰기업수</span>
 
                                     </div>
