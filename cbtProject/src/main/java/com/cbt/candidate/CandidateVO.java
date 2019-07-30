@@ -14,9 +14,16 @@ public class CandidateVO {
 	private String takerPhoneNum; 
 	private String takerEducationNm;
 	private String RoleName;
+	private String companyId;
+	
+	public String getCompanyId() {
+		return companyId;
+	}
 
-	
-	
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	public String getRoleName() {
 		return RoleName;
 	}
