@@ -3,12 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>카테고리 목록</title>
+
 <script type="text/javascript">
 	//function setCategoryName(mainId, middleId, smallId) {
 		/* $.ajax({
@@ -68,8 +63,8 @@
 		location.href = "${pageContext.request.contextPath }/updateCategory.do/" + categoryId;
 	}
 </script>
-</head>
-<body>
+
+
 	<h3>카테고리 목록</h3>
 	<button id="insertCategoryBtn" name="insertCategoryBtn" onclick="categoryInsert()">카테고리 생성</button><br><br>
 	<!-- 2019.07.24 성재민 -->
@@ -102,5 +97,3 @@
 			<!-- <script>setCategoryName("${category.categoryMainId}", "${category.categoryMiddleId}", "${category.categorySamllId}")</script> -->
 		</c:forEach>
 	</table>
-</body>
-</html>

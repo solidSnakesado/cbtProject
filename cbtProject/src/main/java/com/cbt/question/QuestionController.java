@@ -452,7 +452,7 @@ public class QuestionController {
 	
 	
 	@RequestMapping(value = "managerFileUpload.do", method = RequestMethod.GET)
-	public String fileUpload() {
+	public String managerFileUpload() {
 
 		return "manager/manager/managerFileUpload";
 	}

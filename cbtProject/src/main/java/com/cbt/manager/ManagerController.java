@@ -1,14 +1,23 @@
 package com.cbt.manager;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,6 +65,9 @@ public class ManagerController {
 	// 문의 처리를 위해 추가
 	@Autowired
 	InquiryService inquiryService;
+	@Autowired 
+	private JavaMailSenderImpl mailSender;
+	
 
 	// 메인
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
@@ -480,4 +493,20 @@ public class ManagerController {
 		return "manager/manager/managerSimpleChart";
 	}
 	
+	@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
+	@ResponseBody
+	public void managerSendEmail(EstimateVO vo,
+								HttpServletRequest request,
+								HttpServletResponse response) throws MessagingException, IOException   {
+		
+		PrintWriter out = response.getWriter();
+		 MimeMessage message = mailSender.createMimeMessage();
+	     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	      
+	      messageHelper.setSubject("결제사항 및 시험확인");
+	      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
+	      messageHelper.setFrom("dtg3431@gmail.com");
+	      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
+	
+	}
 }
