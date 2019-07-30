@@ -139,5 +139,9 @@ public class CandidateDAO {
 	public String findID(CandidateVO vo) {
 		return mybatis.selectOne("candidateDAO.findID",vo);
 	}
+
+	public int emailcheck(CandidateVO vo) {
+		return mybatis.selectOne("candidateDAO.emailcheck",vo);
+	}
 	
 }

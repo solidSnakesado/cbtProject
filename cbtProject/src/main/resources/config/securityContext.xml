@@ -24,6 +24,8 @@
 		<security:intercept-url
 			pattern="/idcheck.do" access="permitAll()" />
 		<security:intercept-url
+			pattern="/Emailcheck.do" access="permitAll()" />
+		<security:intercept-url
 			pattern="/insertCandidate.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/candidateScheduleCheck.do" access="permitAll()" />

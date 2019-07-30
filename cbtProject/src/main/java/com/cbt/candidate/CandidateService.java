@@ -50,5 +50,8 @@ public interface CandidateService {
 
 	// ID 찾기
 	String findID(CandidateVO vo);
+	
+	// 이메일 중복체크
+	int emailcheck(CandidateVO vo);
 
 }

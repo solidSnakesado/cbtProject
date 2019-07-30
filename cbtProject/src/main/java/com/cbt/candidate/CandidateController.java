@@ -702,4 +702,20 @@ public class CandidateController {
 		return "candidate/candidate/findIDResult";
 	}
 	
+	//이메일 중복 체크
+	@ResponseBody
+	@RequestMapping(value="Emailcheck.do",method=RequestMethod.POST, consumes="application/json")
+  	public  Map<String, Boolean> emailcheck(@RequestBody CandidateVO vo, Model model){
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		int n = candidateService.emailcheck(vo);
+		if (n == 0) {
+			map.put("result", true);
+		}
+		else {
+			map.put("result", false);
+		}
+	return map;
+		 
+	}
+	
 }

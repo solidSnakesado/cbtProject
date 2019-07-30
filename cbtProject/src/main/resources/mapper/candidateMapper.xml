@@ -273,7 +273,17 @@
 							  FROM COMPANY
 					    )
 		WHERE TAKER_NAME = #{takerName}  AND TAKER_EMAIL = #{takerEmail}  
-	</select>		
-		
-		
+	</select>	
+	<!-- 이메일 중복 체크(7/30) 추가 ,june-->
+	<select id="emailcheck" parameterType="CandidateVO" resultType="Integer">
+		SELECT 		COUNT(*)
+		  FROM (	SELECT TAKER_ID , TAKER_EMAIL , 'ROLE_USER' ROLE_NAME
+					  FROM TAKER
+					 UNION ALL
+					SELECT COMPANY_ID , COMPANY_EMAIL, 'ROLE_COMPANY' ROLE_NAME
+					  FROM COMPANY
+			    )
+		WHERE		TAKER_EMAIL = #{takerEmail}
+	</select>
+	
 </mapper>
