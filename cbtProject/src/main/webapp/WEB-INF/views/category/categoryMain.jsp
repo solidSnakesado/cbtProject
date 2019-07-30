@@ -66,7 +66,9 @@
 
 
 	<h3>카테고리 목록</h3>
-	<button id="insertCategoryBtn" name="insertCategoryBtn" onclick="categoryInsert()">카테고리 생성</button><br><br>
+	<div>
+	<button id="insertCategoryBtn" name="insertCategoryBtn" class="btn btn-primary" onclick="categoryInsert()">카테고리 생성</button>
+	</div>
 	<!-- 2019.07.24 성재민 -->
 	<!-- style="margin: auto;" 추가 -->
 	<table border="1" style="margin: auto;">
@@ -76,8 +78,8 @@
 			<th>대분류</th>
 			<th>중분류</th>
 			<th>소분류</th>
-			<th></th>
-			<th></th>
+			<th>수정</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach items="${categoryList}" var="category">
 			<tr>
@@ -89,8 +91,8 @@
 				<td>${category.categoryMainName}</td>
 				<td>${category.categoryMiddleName}</td>
 				<td>${category.categorySamllName}</td>
-				<td><button id="updateBtn" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
-				<td><button id="deleteBtn" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
+				<td><button id="updateBtn" class="btn btn-primary" onclick="categoryUpdate(${category.categoryId})">수정하기</button></td>
+				<td><button id="deleteBtn" class="btn btn-warning" onclick="categoryDelete(${category.categoryId})">삭제하기</button></td>
 			</tr>
 			<!-- 2019.07.24 성재민 -->
 			<!-- setCategoryName() 함수 부분 주석 추리 -->

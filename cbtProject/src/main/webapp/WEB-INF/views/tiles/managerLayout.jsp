@@ -124,9 +124,7 @@
                             </sec:authorize>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="#">Dashboard</a>
-                            </li>
+                            
                             <li>
 		        	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
 		        	</li>

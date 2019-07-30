@@ -38,7 +38,7 @@
 				<option value="D2">시험중
 				<option value="D3">시험종료
 			</select>&nbsp;&nbsp;
-			<button>검색</button>
+			<button class="btn btn-primary">검색</button>
 		</form>
 		
 		<script>

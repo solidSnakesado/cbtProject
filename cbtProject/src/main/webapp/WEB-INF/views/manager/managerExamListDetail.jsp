@@ -101,5 +101,5 @@
 	</table>
 	<br>
 	<button onclick = "location.href = '${pageContext.request.contextPath }/'" class="btn btn-primary m-3 p-3" >통계보기</button>
-	<input type = "button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
-	<button type="button" class="btn btn-primary m-3 p-3" onclick = "location.href = '${pageContext.request.contextPath}/managerExamUpdate.do/${examId }'">수정하기</button>
+	<input type = "button" class="btn btn-warning" onclick = "location.href = '${pageContext.request.contextPath }/managerExamList.do'" value = "돌아가기">
+	<button type = "button" class="btn btn-primary" onclick = "location.href = '${pageContext.request.contextPath}/managerExamUpdate.do/${examId }'">수정하기</button>
