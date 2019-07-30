@@ -493,20 +493,4 @@ public class ManagerController {
 		return "manager/manager/managerSimpleChart";
 	}
 	
-	@RequestMapping(value = "managerSendEmail.do", method = RequestMethod.GET)
-	@ResponseBody
-	public void managerSendEmail(EstimateVO vo,
-								HttpServletRequest request,
-								HttpServletResponse response) throws MessagingException, IOException   {
-		
-		PrintWriter out = response.getWriter();
-		 MimeMessage message = mailSender.createMimeMessage();
-	     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-	      
-	      messageHelper.setSubject("결제사항 및 시험확인");
-	      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
-	      messageHelper.setFrom("dtg3431@gmail.com");
-	      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
-	
-	}
 }
