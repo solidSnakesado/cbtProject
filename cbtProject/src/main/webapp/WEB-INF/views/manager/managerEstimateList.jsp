@@ -88,8 +88,8 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onClick="location.href ='managerExamInsert.do/${estimate.estimateId}'">시험출제</button></td>
-						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" class="btn btn-primary" onClick="location.href ='managerExamInsert.do/${estimate.estimateId}'">시험출제</button></td>
+						<td><button type="button" class="btn btn-warning" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

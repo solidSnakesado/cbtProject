@@ -29,7 +29,7 @@
 	&nbsp; &nbsp;
 		검색조건 <my:consultingListSelect items="${consultingMap }"/>&nbsp;&nbsp;
 		<input type="text" name="searchKeyword" value="${ConsultingVO.searchKeyword }">
-		<button>검색</button>
+		<button class="btn btn-primary">검색</button> 
 	</form>
 	 <script>
 		searchFrm.sort.value="${ConsultingVO.sort}"==""?searchFrm.sort.options[0].value

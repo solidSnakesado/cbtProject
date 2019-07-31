@@ -107,7 +107,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="insertManager.do">매니저 등록</a>
+                                        <a tabindex="-1" href="managerInsertManager.do">매니저 등록</a>
                                     </li>
                                     <li>
                                     	<a href="managerGetManagerList.do">매니저 목록</a>
@@ -124,9 +124,7 @@
                             </sec:authorize>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="#">Dashboard</a>
-                            </li>
+                            
                             <li>
 		        	<a href="${pageContext.request.contextPath }/managerAccountControl.do" class="w3-bar-item w3-button">회원관리</a>
 		        	</li>

@@ -156,5 +156,11 @@ public class CandidateServiceImpl implements CandidateService {
 	public String findID(CandidateVO vo) {
 		return candidateDAO.findID(vo);
 		
+	}
+
+	@Override
+	public int emailcheck(CandidateVO vo) {
+		// TODO Auto-generated method stub
+		return candidateDAO.emailcheck(vo);
 	} 
 }

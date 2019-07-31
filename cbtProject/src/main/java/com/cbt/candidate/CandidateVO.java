@@ -15,8 +15,25 @@ public class CandidateVO {
 	private String takerEducationNm;
 	private String RoleName;
 
+	private String companyId;
+	private String compnayEmail;
 	
+	public String getCompnayEmail() {
+		return compnayEmail;
+	}
 	
+	public void setCompnayEmail(String compnayEmail) {
+		this.compnayEmail = compnayEmail;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	public String getRoleName() {
 		return RoleName;
 	}

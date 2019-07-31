@@ -56,13 +56,12 @@
     	<!-- 2019.07.09 성재민 -->
     	<!-- 로그인 여부에 따라 로그인/로그아웃이 표시 -->
     	<sec:authorize access="isAnonymous()"> 
-    		<a href="${pageContext.request.contextPath }/companyLogin.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">로그인1</a>
+    		<a href="${pageContext.request.contextPath }/companyLogin.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">로그인</a>
     		<a href="${pageContext.request.contextPath }/companySignUp.do" class="w3-padding-large w3-hover-red w3-hide-small w3-right">회원가입</a>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">  
     		<a href="${pageContext.request.contextPath }/logout" class="w3-padding-large w3-hover-red w3-hide-small w3-right">${company.companyId }로그아웃</a>
 		</sec:authorize>
-    	<a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   	</div>
 </div>
 

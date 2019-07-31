@@ -18,11 +18,17 @@
 	
 	<security:http>
 		<security:intercept-url 
+			pattern="/" access="permitAll()" />
+			<security:intercept-url 
+			pattern="/candidateInIntroduce.do" access="permitAll()" />
+		<security:intercept-url 
 			pattern="/candidateMain.do" access="permitAll()" />
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/idcheck.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/Emailcheck.do" access="permitAll()" />
 		<security:intercept-url
 			pattern="/insertCandidate.do" access="permitAll()" />
 		<security:intercept-url
