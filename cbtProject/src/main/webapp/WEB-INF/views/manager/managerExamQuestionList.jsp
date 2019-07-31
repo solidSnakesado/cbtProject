@@ -13,7 +13,7 @@
 		<!-- <button id="excelDownBtn" name="excelDownBtn">엑셀 다운</button> -->
 		<button onclick="location.href='${pageContext.request.contextPath }/managerExamList.do'">시험목록으로</button>
 		[<a href="<c:url value='/managerExamQuestionExcelDown.do/${examId}' />">엑셀 다운</a>]
-		[<a href="<c:url value='/managerExamSend.do/${examId}' />">이메일전송</a>]
+		[<a href="<c:url value='/managerExamSend.do' />">이메일전송</a>]
 		
 	</div>
 	<table border="1">

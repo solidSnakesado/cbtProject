@@ -1,5 +1,8 @@
 package com.cbt.manager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -52,4 +55,5 @@ public interface ManagerService {
 	// 2019.07.23 성재민
 	// 모든 비공개 시험 정보 가져오기
 	public List<Map<String, Object>> getManagerAllPrivateExamList();
+
 }
