@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
 <script>
 	$(document).ready(function(){
 		
@@ -65,7 +70,7 @@
 		<input type="text" id="examTime2" name="examStartTime" class="form-control" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
 	<table id="table" border="1" class="table text-center">
-		<tr >
+		<tr>
 			<th>시험코드</th>
 			<th>수험번호</th>
 			<th>시험명</th>
@@ -93,5 +98,5 @@
 	
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging}"/></div><br>
 	
-	<div align="right"><a href="candidateMain.do"><button>돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><a href="candidateMain.do"><button class="btn btn-warning">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 
