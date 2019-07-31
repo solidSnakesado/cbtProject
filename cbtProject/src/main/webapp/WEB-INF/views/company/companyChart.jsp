@@ -28,6 +28,12 @@
 </script>
 </head>
 <body>
-
+	<label>시험 선택</label>
+	<select name="" id="" class="form-control">
+		<option value="-1">-시험을 선택하세요-</option>
+		<%-- <c:forEach items="${}" var="">
+			<option value="${}">${}</option>
+		</c:forEach> --%>
+	</select>
 </body>
 </html>

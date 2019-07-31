@@ -50,12 +50,12 @@
 				<td><input type="text" name="takerEmail"></td>
 			</tr>
 			<tr>
-				<td align="center" colspan="2"><input type="button" value="ID찾기" onclick="checkForm()"/></td>
+				<td align="center" colspan="2"><input type="button" value="ID찾기" class="btn btn-primary" onclick="checkForm()"/></td>
 			</tr>
 		</table>
 	</form>
 	<div align="right">
-		<a href="${pageContext.request.contextPath }/insertCandidate.do"><button>회원가입</button></a> &nbsp; <a href="candidateMain.do"><button>돌아가기</button></a><br> <br>
+		<a href="${pageContext.request.contextPath }/insertCandidate.do"><button class="btn btn-primary">회원가입</button></a> &nbsp; <a href="candidateMain.do"><button class="btn btn-warning">돌아가기</button></a><br> <br>
 	</div>	
 
  	<a href = "https://kauth.kakao.com/oauth/authorize?client_id=69907cd9d071e81c5215c21beccec7ee&redirect_uri=http://localhost/project/oauth&response_type=code">
