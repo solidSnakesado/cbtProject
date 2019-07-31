@@ -30,6 +30,8 @@ public interface CompanyService {
 	// 07.16 승환추가
 	public Map<String, Object> managerAccountList(CompanyVO vo, Paging paging);
 	
-
+	// 2019.07.31 성재민
+	// 사업자 번호가 기존에 입력된 값인지 체크
+	public int getBusinessNumCount(CompanyVO vo);
 
 }

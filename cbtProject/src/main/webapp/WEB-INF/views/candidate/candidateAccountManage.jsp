@@ -2,33 +2,39 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my"  tagdir="/WEB-INF/tags"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>
 <script type="text/javascript">
 
-	function btn_js_confirm_click() {
-		var check = confirm("정말로 탈퇴하시겠습니까?");
-		if (check){
-			alert("탈퇴처리");
-			document.fmField.submit();
-		}
+	$(document).ready(function() {	
+		$("#deleteBtn").click(function() {
+			if(confirm("계정을 탈퇴 하시겠습니까?")){
+				document.fmField.submit();
+			} else{
+				alert("수정이 취소 되었습니다.");
+			}
 			
-		else
-			alert("취소");
-	}
+		});
+	});
 </script>
 
 </head>
 <body>
 
 <h4 class="mx-auto pb-2">나의 정보</h4>
--- ${user_id}
+${candidate.takerName}님의 정보입니다.
 <form id="fmField" name="fmField" action="deleteCandidate.do" method="POST">
 <input type="hidden" name="takerId" value="${candidate.takerId}"/>
-	<table class="table table-striped">
+	<table class="table text-center" border="1">
 	      <tr>
 	        <th>ID</th>
 	        <td>${candidate.takerId}</td>
@@ -48,9 +54,9 @@
 	</table>
 <!--테이블 끝-->
 <!-- <button class="btn btn-warning m-3 p-3">삭제</button> -->
-<input type="button" name="btn_js_confirm" id="btn_js_confirm" onclick="btn_js_confirm_click();" value="탈퇴하기" />
+<input type="button" name="deleteBtn" id="deleteBtn" onclick="deleteBtn();" value="탈퇴하기" class="btn btn-primary"/> &nbsp; <input type="reset" value="취소" class="btn btn-primary"/>
 
 </form>
    
  <!--      <button type="button" value="submit" onclick="alert('수정되었습니다.')">수정확인</button> -->
-      <button type="button" class="btn btn-primary m-3 p-3" value="reset" onclick="location.href='candidateMain.do'">취소</button>
+      <button type="button" class="btn btn-primary m-3 p-3" value="reset" onclick="location.href='candidateMain.do'"> 돌아가기 </button>

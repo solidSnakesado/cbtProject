@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,14 +23,15 @@ import com.cbt.exam.ExamVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
-
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+	
 	@Autowired
 	ManagerDAO managerDAO;
 
 	@Override
 	public void insertManager(ManagerVO vo) {
+		vo.setManagerPassword(scpwd.encode(vo.getManagerPassword()));
 		managerDAO.insertManager(vo);
-
 	}
 
 	@Override
