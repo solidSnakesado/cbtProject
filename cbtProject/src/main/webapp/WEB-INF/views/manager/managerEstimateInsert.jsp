@@ -154,7 +154,7 @@
 			<%-- <tr>	<td>의뢰ID</td>		<td>	<input type="text" name="estimateId" value="${myEstimateList.estimateId}"
 			 id="estimateId"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" readonly></td></tr> --%>
 			<tr >
-				<td><label>카테고리종류 </label></td>
+				<td><label>카테고리 </label></td>
 				<td><select name="categoryId" id="categoryName"
 					class="form-control "></select></td>
 			</tr>

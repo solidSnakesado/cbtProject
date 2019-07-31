@@ -124,6 +124,17 @@
 		</where>
 	</select>
 	
+	<!-- 2019.07.31 성재민 -->
+	<!-- 사업자 번호 체크를 위해 입력한 사업자 번호와 동일한 번호가 있는지 확인하는 질의 -->
+	<select id="getBusinessNumCount" resultType="int">
+		SELECT 
+			COUNT(BUSINESS_NUMBER)
+		FROM COMPANY
+		<where>
+			BUSINESS_NUMBER = #{businessNumber}
+		</where>
+	</select>
+	
 </mapper>
  
 

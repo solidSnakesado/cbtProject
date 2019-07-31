@@ -12,6 +12,18 @@
 		alert("로그인 오류.\nID와 비밀번호를 다시 입력해 주세요.");
 	</script>
 </c:if>
+<c:if test="${not empty joinResult}">
+	<c:if test="${joinResult == 'true'}">
+		<script type="text/javascript">
+			alert("가입이 완료 되었습니다.");
+		</script>
+	</c:if>
+	<c:if test="${joinResult == 'false'}">
+		<script type="text/javascript">
+			alert("가입 중 오류가 발생하였습니다.");
+		</script>
+	</c:if>
+</c:if>
 </head>
 <body>
 
@@ -61,7 +73,7 @@
 		<a href="${pageContext.request.contextPath }/insertCandidate.do"><button class="btn btn-primary">회원가입</button></a> &nbsp; <a href="candidateMain.do"><button class="btn btn-warning">돌아가기</button></a> &nbsp; <a href="${pageContext.request.contextPath }/findID.do"><button class="btn btn-info">ID찾기</button></a> <br> <br>
 	</div>	
 
- 	<a href = "https://kauth.kakao.com/oauth/authorize?client_id=69907cd9d071e81c5215c21beccec7ee&redirect_uri=http://localhost/project/oauth&response_type=code">
+ 	<a href = "https://kauth.kakao.com/oauth/authorize?client_id=c26738f5694564442fa900de9d855473&redirect_uri=http://localhost/app/oauth&response_type=code">
     <img src="${pageContext.request.contextPath}/image/kakaoLogin.jpg">
     </a>
 </body>

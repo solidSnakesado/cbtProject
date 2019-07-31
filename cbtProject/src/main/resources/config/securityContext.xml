@@ -25,8 +25,12 @@
 			pattern="/candidateMain.do" access="permitAll()" />
 		<security:intercept-url method="GET"
 			pattern="/candidateLogin.do" access="permitAll()" />
+		<security:intercept-url method="GET"
+			pattern="/companyLogin.do/{joinResult}" access="permitAll()" />
 		<security:intercept-url
 			pattern="/idcheck.do" access="permitAll()" />
+		<security:intercept-url
+			pattern="/businessNumCheck.do/{businessNum}" access="permitAll()" />
 		<security:intercept-url
 			pattern="/Emailcheck.do" access="permitAll()" />
 		<security:intercept-url

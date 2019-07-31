@@ -5,19 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cbt.common.Paging;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-
+	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+	
 	@Autowired
 	CompanyDAO companyDAO;
 	
 	@Override
 	public void insertCompany(CompanyVO vo) {
 		// TODO Auto-generated method stub
+		vo.setCompanyPassword(scpwd.encode(vo.getCompanyPassword()));
 		companyDAO.insertCompany(vo);
 	}
 
@@ -89,6 +92,10 @@ public class CompanyServiceImpl implements CompanyService {
 		return map;	
 	}
 
-	
-
+	// 2019.07.31 성재민
+	// 사업자 번호가 기존에 입력된 값인지 체크
+	@Override
+	public int getBusinessNumCount(CompanyVO vo) {
+		return companyDAO.getBusinessNumCount(vo);
+	}
 }

@@ -1,13 +1,25 @@
 package com.cbt.company;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cbt.candidate.CandidateVO;
+import com.cbt.common.CustomerUser;
+import com.cbt.condition.ConditionService;
+import com.cbt.exam.ExamService;
 
 // 2019.06.27 성재민
 // 컴퍼니 메인 컨트롤러 연결
@@ -16,20 +28,41 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
+	// 2019.07.31 성재민
+	// 기업 회원 가입시 회사분류와 세부업종 값을 받아오기 위해 ConditionService 사용
+	@Autowired
+	ConditionService conditionService;
+	
+	// 2019.07.31 성재민
+	// 기업에서 차트를 그리기 위해 시험 정보를 가져오기 위해 사용
+	@Autowired
+	ExamService examService;
+	
 	@RequestMapping(value = "companyMain.do", method = RequestMethod.GET)
 	public String companyMain() {
 		return "company/company/companyMain";
 	}
 	
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.GET)
-	public String companySignUpForm() {
+	public String companySignUpForm(Model model) {
+		model.addAttribute("companyClassificationList", conditionService.getConditionDetailList("E")); 	// E-회사분류
+		model.addAttribute("companySectorsList", conditionService.getConditionDetailList("F")); 		// F-세부업종
 		return "company/company/companySignUp";
 	}
 	
+	// 2019.07.31 성재민
+	// 가입 후 가입 완료 메시지를 위한 기능 추가
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
 	public String companySignUp(CompanyVO vo) {
-		companyService.insertCompany(vo);
-		return "redirect:companyLogin.do";
+		String joinResult = "false";
+		try {
+			companyService.insertCompany(vo);
+			joinResult = "true";
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return "redirect:companyLogin.do/" + joinResult;
 	}
 	
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.GET)
@@ -45,7 +78,13 @@ public class CompanyController {
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.GET)
 	public String companyLoginForm() {		
-		return "company/company/companyLogin";
+		return "candidate/candidate/candidateLogin";
+	}
+	
+	@RequestMapping(value = "companyLogin.do/{joinResult}",  method = RequestMethod.GET)
+	public String companyLoginForm(@PathVariable("joinResult") String joinResult, Model model) {		
+		model.addAttribute("joinResult", joinResult);
+		return "candidate/candidate/candidateLogin";
 	}
 	
 	@RequestMapping(value = "companyLogin.do",  method = RequestMethod.POST)
@@ -78,8 +117,11 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "companyDelete.do",  method = RequestMethod.GET)
-	public String companyDelete(HttpSession session) {
-		CompanyVO vo = (CompanyVO) session.getAttribute("company");
+	public String companyDelete(HttpSession session, Authentication authentication) {
+		//CompanyVO vo = (CompanyVO) session.getAttribute("company");
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		CompanyVO vo = new CompanyVO();
+		vo.setCompanyId(user.getUsername());
 		
 		companyService.deleteCompany(vo);
 		session.invalidate();
@@ -105,8 +147,34 @@ public class CompanyController {
 		return "company/company/companySystemintro";
 	}
 
+	// 2019.07.31 성재민
+	// 차트를 그리기 위한 정보 추가
 	@RequestMapping(value="companyChart.do", method=RequestMethod.GET)
-	public String companyChart() {
+	public String companyChart(Authentication authentication) {
+		// 2019.07.31 성재민
+		// 차트를 위한 시험 정보를 가져옴
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		CompanyVO vo = new CompanyVO();
+		vo.setCompanyId(user.getUsername());
+		examService.getExamList(vo);
 		return "company/company/companyChart";
+	}
+	
+	// 2019.07.31 성재민
+	// 사업자 번호 중복 체크
+	@ResponseBody
+	@RequestMapping(value="businessNumCheck.do/{businessNum}",method=RequestMethod.POST)
+	public  Map<String, Boolean> idcheck(@PathVariable("businessNum") String businessNum, Model model){
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		CompanyVO vo = new CompanyVO();
+		vo.setBusinessNumber(businessNum);
+		int n = companyService.getBusinessNumCount(vo); 
+		if (n == 0) { 
+			map.put("result", true); 
+		} else { 
+			map.put("result", false); 
+		}
+		
+		return map;	 
 	}
 }
