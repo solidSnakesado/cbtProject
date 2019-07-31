@@ -72,7 +72,7 @@
 			<table border="1" class="table table-striped">
 				<tr>
 					<th><label>순번</label></th>
-					<th><label>카테고리ID</label></th>
+					<th><label>카테고리</label></th>
 					<th><label>의뢰이름</label></th>
 					<th><label>의뢰일</label></th>
 					<th><label>진행상태</label></th>
