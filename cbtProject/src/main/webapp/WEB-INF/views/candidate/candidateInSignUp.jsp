@@ -18,17 +18,14 @@ function openIdChk() {
      
     if(special_pattern.test(takerId) == true) {
         window.alert("아이디에는 특수문자를 사용하실 수 없습니다");
-    	e.preventDefault();
     	return false; 
     }
     if(takerId.search(/\s/) != -1) {
         window.alert("아이디에는 공백를 사용하실 수 없습니다");
-    	e.preventDefault();
     	return false; 
     }
      if(takerId == '' || !(takerId.length >= 4 && takerId.length <= 12)) {
         window.alert("아이디 자리수를 확인하시오");
-    	e.preventDefault();
         document.fmField.takerId.focus();
         return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
     } 
@@ -71,27 +68,23 @@ function openIdChk() {
 		if (takerId.value == ''
 				|| !(takerId.value.length >= 4 && takerId.value.length <= 12)) {
 			window.alert("아이디를 입력하시오");
-			e.preventDefault();
 			document.fmField.takerId.focus();
 			return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
 		}
 		if (idck == 0) {
 			window.alert("아이디 중복 체크를 해주세요.");
-			e.preventDefault();
 			document.fmField.takerId.focus();
 			return false;
 		}
 		// 암호 입력 유무 체크
 		if (document.fmField.takerPassword.value == '') {
 			window.alert('password를 입력하세요.');
-			e.preventDefault();
 			document.fmField.takerPassword.focus()
 			return false;
 		}
 		// 암호 입력동일 여부 체크
 		if (document.fmField.takerPassword.value != document.fmField.takerPasswordRe.value) {
 			window.alert('암호를 확인 하세요.');
-			e.preventDefault();
 			document.fmField.takerPassword.focus()
 			return false;
 		}
@@ -103,46 +96,40 @@ function openIdChk() {
 		//  
 		if (document.fmField.takerName.value == '') {
 			window.alert('이름을 입력하세요.');
-			e.preventDefault();
 			document.fmField.takerName.focus()
 			return false;
 		}
 		if (document.fmField.takerInfo.value == '' ) {
 			window.alert('생년월일을 입력하세요.');
-			e.preventDefault();
 			document.fmField.takerInfo.focus()
 			return false;
 		}
 		if (takerInfo.value.length != 6) {
 			window.alert('생년월일을 확인하세요.');
-			e.preventDefault();
 			document.fmField.takerInfo.focus()
 			return false;
 		}
 		if (document.fmField.takerEmail.value == '') {
 			window.alert('이메일 주소를 입력하세요.');
-			e.preventDefault();
 			document.fmField.takerEmail.focus()
 			return false;
 		}
 		if( regEmail.test(email) == false) {
 			window.alert('올바른 이메일형태가 아닙니다');
-			e.preventDefault();
 			document.fmField.takerEmail.focus()
 			return false;
 		}
 		if (document.fmField.takerPhoneNum.value == '') {
 			window.alert('연락처를 입력하세요.');
-			e.preventDefault();
 			document.fmField.takerPhoneNum.focus()
 			return false;
 		}
 		if (takerPhoneNum.value.length < 11 || takerPhoneNum.value.length > 13) {
 		window.alert("연락처를 입력하시오");
-		e.preventDefault();
 		document.fmField.takerPhoneNum.focus();
 		return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
-	}
+		}
+		window.alert("회원가입이 정상 처리됩니다");
 		document.fmField.submit();
 	}
 </script>

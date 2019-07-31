@@ -80,10 +80,10 @@ function checkForm() {
 </head>
 <body>
 	<!-- 마이페이지<개인> 계정관리-->
-	<h4 class="mx-auto pb-2">계정관리</h4>${username} 님의 정보입니다.
+	<h4 class="mx-auto pb-2">계정관리</h4>${candidate.takerName} 님의 정보입니다.
 <%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
 		<form id="fmField" name="fmField" action="updateCandidate.do" method="post">
-		<table class="table text-center">
+		<table class="table text-center" border="1">
 			<tr>
 				<th><label>ID</label></th>
 				<td><input type="hidden" name="takerId" class="form-control" value="${candidate.takerId}"/>${candidate.takerId}</td>
@@ -113,7 +113,7 @@ function checkForm() {
 				<td><input type="text" name="takerPhoneNum" class="form-control" value="${candidate.takerPhoneNum}" /></td>
 			</tr>
 			<tr>
-				<th colspan="2"><button type="button" onclick="checkForm()">수정</button>&nbsp; <input type="reset" value="취소" /></th>
+				<th colspan="2"><button type="button" onclick="checkForm()" class="btn btn-warning">수정</button>&nbsp; <input type="reset" value="취소" class="btn btn-warning"/></th>
 			</tr>
 
 		</table>
