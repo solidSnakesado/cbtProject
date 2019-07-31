@@ -12,6 +12,18 @@
 		alert("로그인 오류.\nID와 비밀번호를 다시 입력해 주세요.");
 	</script>
 </c:if>
+<c:if test="${not empty joinResult}">
+	<c:if test="${joinResult == 'true'}">
+		<script type="text/javascript">
+			alert("가입이 완료 되었습니다.");
+		</script>
+	</c:if>
+	<c:if test="${joinResult == 'false'}">
+		<script type="text/javascript">
+			alert("가입 중 오류가 발생하였습니다.");
+		</script>
+	</c:if>
+</c:if>
 </head>
 <body>
 

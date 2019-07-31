@@ -1,8 +1,5 @@
 package com.cbt.exam;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.velocity.runtime.directive.Parse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
