@@ -14,15 +14,15 @@
 	function showDetail(examId){
 		location.href = "managerExamListDetail.do/" + examId;
 	}
+	
+	function goList(p) {
+		searchFrm.page.value=p;
+		searchFrm.submit();
+	}
 </script>
 
 	<h3>시험목록확인(기업)</h3>
-	<script>
-		function goList(p) {
-			searchFrm.page.value=p;
-			searchFrm.submit();
-		}
-	</script>
+
 	<div>
 		<form name="searchFrm">
 			정렬기준 <input type="hidden" id="page" value="1"> 
