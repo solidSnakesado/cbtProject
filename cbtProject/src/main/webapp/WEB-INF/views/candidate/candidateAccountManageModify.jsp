@@ -6,7 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Insert title here</title>
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>
 <script>
 function openMailChk() {
 	
@@ -80,42 +87,48 @@ function checkForm() {
 </head>
 <body>
 	<!-- 마이페이지<개인> 계정관리-->
-	<h4 class="mx-auto pb-2">계정관리</h4>${candidate.takerName} 님의 정보입니다.
+	<h4 class="mx-auto pb-2">계정관리</h4>
 <%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
 		<form id="fmField" name="fmField" action="updateCandidate.do" method="post">
 		<table class="table text-center" border="1">
-			<tr>
-				<th><label>ID</label></th>
-				<td><input type="hidden" name="takerId" class="form-control" value="${candidate.takerId}"/>${candidate.takerId}</td>
-			</tr>
- 			<tr>
-				<th><label>패스워드</label></th>
-				<td><input type="password" name="takerPassword" class="form-control"/></td>
-			</tr> 
- 			<tr>
-				<th><label>패스워드확인</label></th>
-				<td><input type="password" name="takerPasswordRe" class="form-control"/></td>
-			</tr> 
-			<tr>
-				<th><label>이름</label></th>
-				<td><input type="hidden" name="takerName" class="form-control"/>${candidate.takerName}</td>
-			</tr>
-			<tr>
-				<th><label>생년월일</label></th>
-				<td><input type="text" name="takerInfo" class="form-control" value="${candidate.takerInfo}"/></td>
-			</tr>
-			<tr>
-				<th><label>E-mail</label></th>
-				<td><input type="text" name="takerEmail" class="form-control" value="${candidate.takerEmail}">&nbsp;<input type="button" value="메일변경" onclick="openMailChk();"></td>
-			</tr>
-			<tr>
-				<th><label>연락처</label></th>
-				<td><input type="text" name="takerPhoneNum" class="form-control" value="${candidate.takerPhoneNum}" /></td>
-			</tr>
-			<tr>
-				<th colspan="2"><button type="button" onclick="checkForm()" class="btn btn-warning">수정</button>&nbsp; <input type="reset" value="취소" class="btn btn-warning"/></th>
-			</tr>
-
+			<thead>
+				<tr>
+					<th colspan="2"><h4>${candidate.takerName}님의 정보입니다.</h4></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><label>ID</label></th>
+					<td><input type="hidden" name="takerId" class="form-control" value="${candidate.takerId}"/>${candidate.takerId}</td>
+				</tr>
+	 			<tr>
+					<th><label>패스워드</label></th>
+					<td><input type="password" name="takerPassword" class="form-control"/></td>
+				</tr> 
+	 			<tr>
+					<th><label>패스워드확인</label></th>
+					<td><input type="password" name="takerPasswordRe" class="form-control"/></td>
+				</tr> 
+				<tr>
+					<th><label>이름</label></th>
+					<td><input type="hidden" name="takerName" class="form-control"/>${candidate.takerName}</td>
+				</tr>
+				<tr>
+					<th><label>생년월일</label></th>
+					<td><input type="text" name="takerInfo" class="form-control" value="${candidate.takerInfo}"/></td>
+				</tr>
+				<tr>
+					<th><label>E-mail</label></th>
+					<td><input type="text" name="takerEmail" class="form-control" value="${candidate.takerEmail}">&nbsp;<input type="button" value="메일변경" onclick="openMailChk();"></td>
+				</tr>
+				<tr>
+					<th><label>연락처</label></th>
+					<td><input type="text" name="takerPhoneNum" class="form-control" value="${candidate.takerPhoneNum}" /></td>
+				</tr>
+				<tr>
+					<th colspan="2"><button type="button" onclick="checkForm()" class="btn btn-warning">수정</button>&nbsp; <input type="reset" value="취소" class="btn btn-warning"/></th>
+				</tr>
+			</tbody>
 		</table>
 		<!--테이블 끝-->
 	</form>

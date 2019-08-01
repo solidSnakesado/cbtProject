@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Insert title here</title>
 <style type="text/css">
 	.trexam {cursor: pointer; }
@@ -31,10 +33,16 @@
 <body>
 
 <h4 class="mx-auto pb-2">나의 정보</h4>
-${candidate.takerName}님의 정보입니다.
+
 <form id="fmField" name="fmField" action="deleteCandidate.do" method="POST">
 <input type="hidden" name="takerId" value="${candidate.takerId}"/>
 	<table class="table text-center" border="1">
+		<thead>
+			<tr>
+				<th colspan="2"><h4>${candidate.takerName}님의 정보입니다.</h4></th>
+			</tr>
+		</thead>
+		<tbody>
 	      <tr>
 	        <th>ID</th>
 	        <td>${candidate.takerId}</td>
@@ -50,11 +58,12 @@ ${candidate.takerName}님의 정보입니다.
 	      <tr>
 	         <th>이메일</th>
 	         <td>${candidate.takerEmail}</td>
-	         </tr>
+	      </tr>
+	   </tbody>
 	</table>
 <!--테이블 끝-->
 <!-- <button class="btn btn-warning m-3 p-3">삭제</button> -->
-<input type="button" name="deleteBtn" id="deleteBtn" onclick="deleteBtn();" value="탈퇴하기" class="btn btn-primary"/> &nbsp; <input type="reset" value="취소" class="btn btn-primary"/>
+<input type="button" name="deleteBtn" id="deleteBtn" onclick="deleteBtn();" value="탈퇴하기" class="btn btn-warning"/> &nbsp; <input type="reset" value="취소" class="btn btn-warning"/>
 
 </form>
    
