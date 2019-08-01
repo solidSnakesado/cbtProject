@@ -12,6 +12,10 @@
 			google.load("visualization", "1", {packages : ["corechart"]});
 			google.setOnLoadCallback(loadPageData);
 
+			$("#backExamListBtn").click(function() {
+				location.href = "${pageContext.request.contextPath }/companyExamListDetail.do/${examId}";
+			});
+			
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
@@ -67,7 +71,12 @@
 							for(var questionIdx = 0; questionIdx < totalScroeQuestionArr.length; ++questionIdx){
 								if(totalScroeQuestionArr[questionIdx].questionId == row.setExamQuestionId){
 									totalScroeQuestionArr[questionIdx].questionPoint += row.point;
-									takerScroeQuestionArr[questionIdx].questionPoint += row.takerScore;
+									if(row.takerScore == null || row.takerScore == undefined){
+										takerScroeQuestionArr[questionIdx].questionPoint += 0;
+									} else{
+										takerScroeQuestionArr[questionIdx].questionPoint += row.takerScore;
+									}
+									
 									isNewQuestion = false;
 								}
 							}
@@ -75,11 +84,19 @@
 							if(isNewQuestion == true) {
 								totalScroeQuestionArr.push(questionIdPoint);
 								
+								
 								var takerIdPoint = {
 									questionId : row.setExamQuestionId,
 									questionPoint : row.takerScore
 								}
-										
+								
+								if(row.takerScore == null || row.takerScore == undefined){
+									takerIdPoint.questionPoint = 0;
+								}
+								
+								console.log("값체크");
+								console.log(takerIdPoint);		
+								
 								takerScroeQuestionArr.push(takerIdPoint);
 							}
 						});
@@ -208,5 +225,6 @@
 	<div id="chartDiv" style="float:left; width: 50%; height: 450px;"></div>
 	<div id="chartDiv2" style="float:left; width: 50%; height: 450px;"></div>
 	<div id="chartDiv3" style="float:left; width: 90%; height: 450px;"></div>
+	<button id="backExamListBtn">시험상세로 돌아가기</button>
 </body>
 </html>
