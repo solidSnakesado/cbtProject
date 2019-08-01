@@ -63,7 +63,7 @@
 			<input type="hidden" name="page" value="1">
 		</form>
 		<div style="text-align: right">
-			<button type="button" class="btn btn-primary btn-ml-1" value="등록"
+			<button type="button" class="btn btn-primary" value="등록"
 				id="btnInsert" onclick="location.href='managerEstimateInsert.do'">의뢰등록</button>
 		</div>
 		<br>
@@ -71,7 +71,8 @@
 
 			<table border="1" class="table table-striped">
 				<tr>
-					<th><label>순번</label></th>
+					<th><label>의뢰ID</label></th>
+					<th><label>기업명</label></th>
 					<th><label>카테고리</label></th>
 					<th><label>의뢰이름</label></th>
 					<th><label>의뢰일</label></th>
@@ -83,13 +84,14 @@
 				<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
+						<td onClick="estimateDetail(${estimate.companyName})">${estimate.companyName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
 						<td><button type="button" class="btn btn-primary" onClick="location.href ='managerExamInsert.do/${estimate.estimateId}'">시험출제</button></td>
-						<td><button type="button" class="btn btn-warning" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" class="btn btn-danger" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
