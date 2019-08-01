@@ -51,7 +51,7 @@
 	
 	<header id="header"></header>
 	<form id="fmField" name="fmField" action="processLogin.do" method="POST">
-		<table border="1" align="center" class="table text-center">
+		<table class="table text-center">
 <%-- 			<tr>
 				<td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/user.jpg"/></td>
 			</tr> --%>
