@@ -444,6 +444,7 @@ public class ManagerController {
 	@ModelAttribute("consultingMap")
 	public Map<String, String> consultingMap() {
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("기업", "COMPANY_ID");
 		map.put("제목", "CONSULTING_TITLE");
 		map.put("상담희망일", "CONSULTING_DESIRED_DATE");
 		map.put("상담진행상태", "CONSULTING_STATE_NM");
