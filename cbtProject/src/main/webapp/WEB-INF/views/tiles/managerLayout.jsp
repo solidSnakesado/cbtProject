@@ -47,7 +47,22 @@
 		// 메시지를 화면에 전시
 		function onMessage(event) {
 			var message 	= JSON.parse(event.data);
-			if(message.role == "ROLE_USER"){
+			$.ajax({
+				type: "POST",
+				url: "${pageContext.request.contextPath }/getBeforeReplyCount.do",
+				success : function(data){
+					console.log(data);
+					if(data > 0){
+						$("#inquiry").html(data);
+					} else{
+						$("#inquiry").html("");
+					}
+					
+				}, error : function(){
+					alert('에러발생');
+				}
+			});
+			/* if(message.role == "ROLE_USER"){
 				if(message.type == "system") {
 					$.ajax({
 						type: "POST",
@@ -81,7 +96,7 @@
 						}
 					});
 				}
-			}
+			} */
 		}
 	});
 </script>
