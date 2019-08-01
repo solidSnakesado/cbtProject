@@ -223,9 +223,9 @@
 						value="${myEstimateList.examInterval}"></my:select></td>
 			</tr>
 		</table>
-		<button type="button" id="editButton">수정하기</button>
-		<button type="button" id="sendEmail">확인메일보내기</button>
-		<button type="button" onclick="windowClose()">취소</button>
+		<button type="button" id="editButton" class="btn btn-primary m-3 p-3">수정하기</button>
+		<button type="button" id="sendEmail" class="btn btn-success m-3 p-3">확인메일보내기</button>
+		<button type="button" onclick="windowClose()" class="btn btn-warning m-3 p-3">닫기</button>
 	</form>
 
 	<script>
