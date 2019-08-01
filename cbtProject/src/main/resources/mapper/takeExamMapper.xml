@@ -82,7 +82,7 @@
 										,EXAM_ID
 										,TAKER_ID	)
 				VALUES				(	TAKE_EXAM_ID_SEQ.NEXTVAL
-										,NULL
+										,SYSDATE
 										,NULL
 										,#{examId}
 										,#{takerId}

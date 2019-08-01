@@ -22,7 +22,12 @@
 				cache: false,
 				data: data,
 				success: function(result) {
-					alert("성공");
+					// 2019.08.01 성재민
+					// 문제 업로드 이후 팝업창 닫고
+					// 부모창 리로드
+					alert("문제 업로드에 성공하였습니다.");
+					opener.parent.location.reload();
+					window.close();
 				}
 			});
 		})
