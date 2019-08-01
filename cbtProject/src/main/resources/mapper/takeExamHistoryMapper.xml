@@ -116,6 +116,7 @@
 		<where>
 			TE.EXAM_ID 	= ${examId}
 		</where>
+		ORDER BY TEH.SET_EXAM_QUESTION_ID
 	</select>
 	
 	
