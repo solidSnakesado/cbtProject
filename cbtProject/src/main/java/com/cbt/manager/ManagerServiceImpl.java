@@ -1,9 +1,16 @@
 package com.cbt.manager;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -23,6 +30,9 @@ import com.cbt.exam.ExamVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements ManagerService {
+	
+	
+	
 	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 	
 	@Autowired
@@ -147,4 +157,6 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<Map<String, Object>> getManagerAllPrivateExamList() {
 		return managerDAO.getManagerAllPrivateExamList();
 	}
+	
+	
 }

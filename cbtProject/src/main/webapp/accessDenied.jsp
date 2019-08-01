@@ -7,7 +7,8 @@
   <meta charset="UTF-8">
 </head>
 <body>
-<h1>액세스 거부</h1>
-액세스가 거부되었습니다.
+<div align="center"><h1>액세스 거부</h1></div>
+<div align="center"><img src="${pageContext.request.contextPath}/image/accessError.jpg"></div>
+<div align="center">올바른 경로가 아닙니다.</div>
 </body>
 </html>

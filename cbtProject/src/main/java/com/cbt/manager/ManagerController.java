@@ -6,10 +6,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -483,5 +489,40 @@ public class ManagerController {
 	public String  managerChart() {
 		return "manager/manager/managerSimpleChart";
 	}
+	
+	//mailForm
+	@RequestMapping(value="managerExamSendForm.do")
+	public String managerExamSendForm() {
+		return "manager/manager/managerExamSend";
+	}
+	
+	//mailSending 
+	@RequestMapping(value="managerExamSend.do")
+	public String managerExamMailSend(HttpServletRequest request) {
+		String setfrom = "freehwans@gmail.com";
+		String tomail = request.getParameter("tomail");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+			
+			messageHelper.setFrom(setfrom);
+			messageHelper.setTo(tomail);
+			messageHelper.setSubject(title);
+			messageHelper.setText(content);
+			DataSource dataSource = new FileDataSource("C:\\Users\\user\\Desktop\\project_css.txt");
+			messageHelper.addAttachment(MimeUtility.encodeText("project_css.txt", "utf-8", "B"), dataSource);
+			mailSender.send(message);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:managerExamSendForm.do";
+	}
+	
+	
 	
 }
