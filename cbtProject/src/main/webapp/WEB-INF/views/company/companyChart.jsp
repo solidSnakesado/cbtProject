@@ -10,16 +10,22 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#chartBtn").click(function() {
+		$("#examSelect").change(function() {
 			google.load("visualization", "1", {packages : ["corechart"]});
 			google.setOnLoadCallback(loadPageData);
+			
+			var examIdx = $("#examSelect option:selected").val();
+			console.log(examIdx);
 
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
-					url : "${pageContext.request.contextPath }/getTakeExamHistoryForTakerIdAndExamIdList.do/1",
+					url : "${pageContext.request.contextPath }/getTakeExamHistoryForExamIdList.do/" + examIdx,
 					success: function(data) {
-
+						if(data != null){
+							console.log("그래프");
+							console.log(data);
+						}
 					}
 				});
 			}
@@ -29,11 +35,11 @@
 </head>
 <body>
 	<label>시험 선택</label>
-	<select name="" id="" class="form-control">
+	<select name="examSelect" id="examSelect" class="form-control">
 		<option value="-1">-시험을 선택하세요-</option>
-		<%-- <c:forEach items="${}" var="">
-			<option value="${}">${}</option>
-		</c:forEach> --%>
+		<c:forEach items="${examList}" var="exam">
+			<option value="${exam.examId}">${exam.examName}</option>
+		</c:forEach>
 	</select>
 </body>
 </html>

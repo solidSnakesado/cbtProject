@@ -6,7 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Insert title here</title>
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>
 <script>
 function openMailChk() {
 	
@@ -39,6 +46,7 @@ function checkForm() {
 	var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;	// 특수문자
 	var takerName = document.fmField.takerName;
 	var takerInfo = document.fmField.takerInfo;
+	var takerPhoneNum = document.fmField.takerPhoneNum;
 	
 	var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
 	var email = document.fmField.takerEmail.value;
@@ -73,49 +81,56 @@ function checkForm() {
 		window.alert("연락처를 입력하시오");
 		document.fmField.takerPhoneNum.focus();
 		return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
-}
+	}
+	window.alert("정보가 정상적으로 전달되었습니다");
 	document.fmField.submit();
 }
 </script>
 </head>
 <body>
 	<!-- 마이페이지<개인> 계정관리-->
-	<h4 class="mx-auto pb-2">계정관리</h4>${candidate.takerName} 님의 정보입니다.
+	<h4 class="mx-auto pb-2">계정관리</h4>
 <%-- 	<form action="${pageContext.request.contextPath }/updateCandidate.do" method="post"> --%>
 		<form id="fmField" name="fmField" action="updateCandidate.do" method="post">
 		<table class="table text-center" border="1">
-			<tr>
-				<th><label>ID</label></th>
-				<td><input type="hidden" name="takerId" class="form-control" value="${candidate.takerId}"/>${candidate.takerId}</td>
-			</tr>
- 			<tr>
-				<th><label>패스워드</label></th>
-				<td><input type="password" name="takerPassword" class="form-control"/></td>
-			</tr> 
- 			<tr>
-				<th><label>패스워드확인</label></th>
-				<td><input type="password" name="takerPasswordRe" class="form-control"/></td>
-			</tr> 
-			<tr>
-				<th><label>이름</label></th>
-				<td><input type="hidden" name="takerName" class="form-control"/>${candidate.takerName}</td>
-			</tr>
-			<tr>
-				<th><label>생년월일</label></th>
-				<td><input type="text" name="takerInfo" class="form-control" value="${candidate.takerInfo}"/></td>
-			</tr>
-			<tr>
-				<th><label>E-mail</label></th>
-				<td><input type="text" name="takerEmail" class="form-control" value="${candidate.takerEmail}">&nbsp;<input type="button" value="메일변경" onclick="openMailChk();"></td>
-			</tr>
-			<tr>
-				<th><label>연락처</label></th>
-				<td><input type="text" name="takerPhoneNum" class="form-control" value="${candidate.takerPhoneNum}" /></td>
-			</tr>
-			<tr>
-				<th colspan="2"><button type="button" onclick="checkForm()" class="btn btn-warning">수정</button>&nbsp; <input type="reset" value="취소" class="btn btn-warning"/></th>
-			</tr>
-
+			<thead>
+				<tr>
+					<th colspan="2"><h4>${candidate.takerName}님의 정보입니다.</h4></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><label>ID</label></th>
+					<td><input type="hidden" name="takerId" class="form-control" value="${candidate.takerId}"/>${candidate.takerId}</td>
+				</tr>
+	 			<tr>
+					<th><label>패스워드</label></th>
+					<td><input type="password" name="takerPassword" class="form-control"/></td>
+				</tr> 
+	 			<tr>
+					<th><label>패스워드확인</label></th>
+					<td><input type="password" name="takerPasswordRe" class="form-control"/></td>
+				</tr> 
+				<tr>
+					<th><label>이름</label></th>
+					<td><input type="hidden" name="takerName" class="form-control"/>${candidate.takerName}</td>
+				</tr>
+				<tr>
+					<th><label>생년월일</label></th>
+					<td><input type="text" name="takerInfo" class="form-control" value="${candidate.takerInfo}"/></td>
+				</tr>
+				<tr>
+					<th><label>E-mail</label></th>
+					<td><input type="text" name="takerEmail" class="form-control" value="${candidate.takerEmail}">&nbsp;<input type="button" value="메일변경" onclick="openMailChk();"></td>
+				</tr>
+				<tr>
+					<th><label>연락처</label></th>
+					<td><input type="text" name="takerPhoneNum" class="form-control" value="${candidate.takerPhoneNum}" /></td>
+				</tr>
+				<tr>
+					<th colspan="2"><button type="button" onclick="checkForm()" class="btn btn-warning">수정</button>&nbsp; <input type="reset" value="취소" class="btn btn-warning"/></th>
+				</tr>
+			</tbody>
 		</table>
 		<!--테이블 끝-->
 	</form>

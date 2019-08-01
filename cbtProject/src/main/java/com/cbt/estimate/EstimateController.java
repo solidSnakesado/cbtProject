@@ -124,11 +124,9 @@ public class EstimateController {
 												EstimateVO vo,
 												Model model) {
 		
-		vo.setEstimateId(estimateId); 
+		vo.setEstimateId(estimateId);
 		
-		/* 
-		 * model.addAttribute("cateoryMain", categoryMainService.getAllCategoryMain());
-		 */
+		
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));  //기업별 디테일 의뢰 조회
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
@@ -267,7 +265,7 @@ public class EstimateController {
 		     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 		      
 		      messageHelper.setSubject("결제사항 및 시험확인");
-		      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
+		      messageHelper.setText("이용해주셔서 감사합니다. 결제y 정보입니다.");
 		      messageHelper.setFrom("dtg3431@gmail.com");
 		      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 

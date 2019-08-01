@@ -9,14 +9,14 @@
       <input type="text" name="tomail" size="120" style="width:100%" placeholder="상대의 이메일" class="form-control" >
     </div>     
     <div align="center"><!-- 제목 -->
-      <input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
+      <input type="text" name="subject" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
     </div>
     <p>
     <div align="center"><!-- 내용 --> 
       <textarea name="content" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" class="form-control"></textarea>
     </div>
     <div align="center">
-      <input type="file" name="attachment" style="width:100%" class="form-control">
+      <input type="file" name="filename" style="width:100%" class="form-control">
     </div>
     <p>
     <div align="center">

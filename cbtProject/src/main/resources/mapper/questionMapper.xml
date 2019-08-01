@@ -136,7 +136,7 @@
 										TAKE_EXAM_ID	)
 
 				SELECT  	t.TAKER_ID, 
-							ROWNUM+(SELECT MAX(TAKE_EXAM_HISTORY_ID) FROM TAKE_EXAM_HISTORY) TAKE_EXAM_HISTORY_ID, 
+							TAKE_EXAM_HISTORY_ID_SEQ.NEXTVAL, 
 							s.SET_EXAM_QUESTION_ID,
 							t.TAKE_EXAM_ID
 							
@@ -163,7 +163,7 @@
 				
 		FROM 	EXAM e JOIN TAKE_EXAM t
 		ON 		e.EXAM_ID = t.EXAM_ID
-		WHERE 	t.TAKER_ID = #{takerId}
+		WHERE 	t.TAKER_ID = #{takerId} AND t.SCORE IS NOT NULL
 	</select>
 	
 	<!-- 2019.07.17 성재민 -->
@@ -254,7 +254,7 @@
 										CATEGORY_ID				"categoryId",
 										QUESTION_TYPE			"questionType"	)
 
-		values		((SELECT MAX(QUESTION_ID)+1 FROM QUESTION),
+		values		QUESTION_ID_SEQ.NEXTVAL,
 					#{questionContent},
 					#{example1},
 					#{example2},
@@ -269,34 +269,30 @@
 	</insert>
 	
 	<insert id="insertQuestion" parameterType="QuestionVO">
-
-
-		insert into QUESTION (			QUESTION_ID				,
-										QUESTION_CONTENT		,
-										EXAMPLE_1				,
-										EXAMPLE_2				,
-										EXAMPLE_3				,
-										EXAMPLE_4				,
-										RIGHT_ANSWER			,
-										RIGHT_COMMENTARY		,
-										LEVEL_OF_DIFFICULTY		,
-										CATEGORY_ID				,
-										QUESTION_TYPE				)
-
-
-		values		((SELECT MAX(QUESTION_ID)+1 FROM QUESTION),
-					#{questionContent},
-					#{example1},
-					#{example2},
-					#{example3},
-					#{example4},
-					#{rightAnswer},
-					#{rightCommentary},
-					#{levelOfDifficulty},
-					#{categoryId},
-					#{questionType})
-				
-				
+		INSERT INTO QUESTION (
+			QUESTION_ID, 
+			QUESTION_CONTENT, 
+			EXAMPLE_1, 
+			EXAMPLE_2, 
+			EXAMPLE_3, 
+			EXAMPLE_4, 
+			RIGHT_ANSWER, 
+			RIGHT_COMMENTARY, 
+			LEVEL_OF_DIFFICULTY, 
+			CATEGORY_ID, 
+			QUESTION_TYPE) 
+		VALUES (
+			QUESTION_ID_SEQ.NEXTVAL,
+			#{questionContent},
+			#{example1},
+			#{example2},
+			#{example3},
+			#{example4},
+			#{rightAnswer},
+			#{rightCommentary},
+			#{levelOfDifficulty},
+			#{categoryId},
+			#{questionType})
 	</insert>
 	
 	<select id="selectExamName" resultType="QuestionVO">

@@ -49,7 +49,7 @@ import com.cbt.takeExamHistory.TakeExamHistoryService;
 
 @Controller
 public class QuestionController {
-	
+
 	@Autowired
 	QuestionService questionService;
 	@Autowired
@@ -62,172 +62,169 @@ public class QuestionController {
 	CandidateService candidateService;
 	@Autowired
 	private JavaMailSender mailSender;
-	 
-	
+
 	// 2019.07.17 김재용
 	// 시험 시작 화면으로 가기
-	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)	
+	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)
 	public ModelAndView candidateTakeExamList(TakeExamVO vo, HttpServletResponse response) throws IOException {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(vo);
 		// 응시자ID 가지고 해당 시험을 제출한 사람 가리기 제출하지 않은사람은 9999 리턴
 		int check = questionService.takeExamScoreNullCheck(vo);
-		if( check != 9999 ) {
-			
+		if (check != 9999) {
+
 			// 이미 제출한 응시자면 alert
 			response.setContentType("text/html charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('이미 응시 완료한 시험입니다.'); history.go(-1);</script>");
 			out.flush();
-			
+
 		} else {
 			ExamVO examVO = new ExamVO();
 			examVO.setExamId(vo.getExamId());
-			
+
 			// 시험 디테일 불러오기
 			mv.addObject("examVO", examService.getExam(examVO));
-			
+
 			mv.addObject("takerId", vo.getTakerId());
 			mv.addObject("takeExamId", vo.getTakeExamId());
-			
+
 		}
-		
+
 		mv.setViewName("candidate/candidate/candidateTakeExam");
-		
+
 		return mv;
 	}
-	
+
 	// 2019.07.17 김재용
 	// 시험 시작 이벤트
 	@RequestMapping("/getTestStart.do")
 	@ResponseBody
 	public List<Map<String, Object>> getTestStart(TakeExamVO vo, Authentication authentication) {
-		
+
 		// 세션에서 아이디 담기
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
 		vo.setTakerId(user.getUsername());
-		
+
 		// 응시자ID 로 의뢰된 문항수와 HISTORY 내역비교 해서
 		// 시험 제출하지 않은 응시자 가리기
 		int history = questionService.getHistoryCount(vo);
-		if(history == 0) {
+		if (history == 0) {
 
 			// 시험 시작시 HISTORY에 내역 미리 insert
 			questionService.insertTakeExamHistory(vo);
 		}
-		
+
 		// 문제 담기
 		List<Map<String, Object>> list = questionService.getTestStart(vo);
-		
+
 		return list;
 	}
-	
+
 	@RequestMapping(value = "candidateRightAnswer.do/{examId}", method = RequestMethod.GET)
 	public ModelAndView candidateRightAnswerList(@PathVariable("examId") int examId, Authentication authentication) {
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-		
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+
 		TakeExamVO vo = new TakeExamVO();
-		
+
 		vo.setTakerId(user.getUsername());
 		vo.setExamId(examId);
-		
+
 		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("rightAnswer",questionService.candidateRightAnswerList(vo));
+
+		mv.addObject("rightAnswer", questionService.candidateRightAnswerList(vo));
 		mv.setViewName("candidate/candidate/candidateRightAnswer");
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/updateTakeExamHistory.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateTakeExamHistory(QuestionVO vo, Authentication authentication) {
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
 		vo.setTakerId(user.getUsername());
 		questionService.updateTakeExamHistory(vo);
-		
+
 	}
-	
-	@RequestMapping(value = "candidateTestResult.do" , method = RequestMethod.POST)
-	public ModelAndView candidateTestResult(	@RequestParam( value = "takeExamId" , required = false ) int takeExamId,
-												@RequestParam( value = "examId" , required = false ) int examId,
-												Authentication authentication ) {
-		
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-		
+
+	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.POST)
+	public ModelAndView candidateTestResult(@RequestParam(value = "takeExamId", required = false) int takeExamId,
+			@RequestParam(value = "examId", required = false) int examId, Authentication authentication) {
+
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+
 		CandidateVO candiVO = new CandidateVO();
 		candiVO.setTakerId(user.getUsername());
 		ModelAndView mv = new ModelAndView();
-		
+
 		mv.addObject("candiVO", candidateService.getCandidate(candiVO));
-		
+
 		ExamVO examVO = new ExamVO();
 		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
 		examVO.setExamId(examId);
 		mv.addObject("examVO", examService.getExam(examVO));
-		
+
 		// 응시자ID를 가지고 제출 정답을 문제정답과 비교해 채점하여 히스토리에 점수 UPDATE
 		questionService.rightAnswer(takeExamId);
-		
+
 		TakeExamVO takeExamVO = new TakeExamVO();
 		// 시험 ID 와 응시자 ID 를 가지고
 		// 맞힌 문제 수 answerCount , 맞힌 문제 합계점수 sumTakerScore 담기
 		takeExamVO.setTakeExamId(takeExamId);
 		takeExamVO.setExamId(examId);
 		mv.addObject("takeExamVO", takeExamHistoryService.getTakeExamHistoryForSumPointAndCount(takeExamVO));
-		
+
 		// 제출한 응시자 총점 기록
 		questionService.rightLastAnswer(takeExamVO);
-		
+
 		mv.setViewName("candidate/candidate/candidateTestResult");
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping("candidateExaminationList.do")
 	public ModelAndView candidateExaminationList(Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-		
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+
 		CandidateVO vo = new CandidateVO();
 		vo.setTakerId(user.getUsername());
-		
+
 		mv.addObject("candidateExaminationList", questionService.candidateExaminationList(vo));
-		
+
 		mv.setViewName("candidate/candidate/candidateExaminationList");
 		return mv;
 	}
-	
-	
-	@RequestMapping(value = "candidateExaminationListDetail.do", method = RequestMethod.POST)	
+
+	@RequestMapping(value = "candidateExaminationListDetail.do", method = RequestMethod.POST)
 	public ModelAndView candidateExaminationListDetail(TakeExamVO vo, Authentication authentication) {
 		ModelAndView mv = new ModelAndView();
-		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-		
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+
 		vo.setTakerId(user.getUsername());
-		
+
 		mv.addObject("candidateExaminationListDetail", questionService.candidateExaminationListDetail(vo));
 		mv.setViewName("candidate/candidate/candidateExaminationListDetail");
 		return mv;
 	}
-	
+
 	// 2019.07.18 김재용
 	// 문제테이블 ALL 리스트 불러오기
 	@RequestMapping(value = "managerAllQuestionList.do", method = RequestMethod.GET)
 	public ModelAndView managerAllQuestionList() {
 		ModelAndView mv = new ModelAndView();
-		
+
 		mv.addObject("examList", questionService.managerAllQuestionList());
 		mv.setViewName("manager/manager/managerAllQuestionList");
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/excelDown.do")
 	public void excelDown(HttpServletResponse response) throws Exception {
-		
+
 		List<QuestionVO> list = questionService.managerAllQuestionList();
-		
+
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet("게시판");
 		Row row = null;
@@ -237,7 +234,6 @@ public class QuestionController {
 		CellStyle headStyle = wb.createCellStyle();
 
 		CellStyle bodyStyle = wb.createCellStyle();
-
 
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
@@ -273,8 +269,8 @@ public class QuestionController {
 		cell = row.createCell(10);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("questionType");
-		
-		for(QuestionVO vo : list) {
+
+		for (QuestionVO vo : list) {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
@@ -309,43 +305,41 @@ public class QuestionController {
 			cell = row.createCell(10);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(vo.getQuestionType());
-			
+
 		}
-		
+
 //		response.setContentType("application/vnd.ms-excel");
 		response.setContentType("application / vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		
+
 		response.setHeader("Content-Disposition", "attachment;filename=test.xlsx");
-		
+
 		wb.write(response.getOutputStream());
 		wb.close();
-		
+
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/managerExamQuestionExcelDown.do/{examId}")
 	public void managerExamQuestionExcelDown(@PathVariable("examId") int examId, HttpServletResponse response) {
 		SetExamQuestionVO vo = new SetExamQuestionVO();
 		vo.setExamId(examId);
-		List<SetExamQuestionVO> setExamList 	= setExamQuestionService.getSetExamQuestionListForExamId(vo);
-		List<QuestionVO> 		questionList 	= new ArrayList<QuestionVO>();
-		
-		for(SetExamQuestionVO setExam : setExamList) {
+		List<SetExamQuestionVO> setExamList = setExamQuestionService.getSetExamQuestionListForExamId(vo);
+		List<QuestionVO> questionList = new ArrayList<QuestionVO>();
+
+		for (SetExamQuestionVO setExam : setExamList) {
 			QuestionVO questionVO = new QuestionVO();
 			questionVO.setQuestionId(setExam.getQuestionId());
 			questionList.add(questionService.getQuestion(questionVO));
 		}
-		
-		Workbook 	wb 		= new HSSFWorkbook();
-		Sheet 		sheet 	= wb.createSheet("출제 문제");
-		Row 		row 	= null;
-		Cell 		cell 	= null;
-		int 		rowNo 	= 0;
+
+		Workbook wb = new HSSFWorkbook();
+		Sheet sheet = wb.createSheet("출제 문제");
+		Row row = null;
+		Cell cell = null;
+		int rowNo = 0;
 
 		CellStyle headStyle = wb.createCellStyle();
 		CellStyle bodyStyle = wb.createCellStyle();
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
@@ -371,8 +365,8 @@ public class QuestionController {
 		cell = row.createCell(7);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("rightCommentary");
-		
-		for(QuestionVO qvo : questionList) {
+
+		for (QuestionVO qvo : questionList) {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
@@ -397,12 +391,12 @@ public class QuestionController {
 			cell.setCellValue(qvo.getRightAnswer());
 			cell = row.createCell(7);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(qvo.getRightCommentary());			
+			cell.setCellValue(qvo.getRightCommentary());
 		}
-		
+
 		response.setContentType("application/vnd.ms-excel");
 		response.setHeader("Content-Disposition", "Attachment;Filename=test1.xls");
-		
+
 		try {
 			wb.write(response.getOutputStream());
 			wb.close();
@@ -412,96 +406,93 @@ public class QuestionController {
 			e.printStackTrace();
 		}
 	}
-	
-	 // mailForm
+
+	// mailForm
 	@RequestMapping(value = "/mail/mailForm")
 	public String mailForm() {
 		return "/mail/mailForm";
 	}
-	
-	//mailSending 코드
-	@RequestMapping(value="mail/mailSending")
+
+	// mailSending 코드
+	@RequestMapping(value = "mail/mailSending")
 	public String mailSending(HttpServletRequest request) {
-		
+
 		String setfrom = "freehwans@gmail.com";
-		String tomail = request.getParameter("tomail");		//받는사람 이메일
-		String title = request.getParameter("title"); 		//제목
-		String content = request.getParameter("content"); 	//내용
+		String tomail = request.getParameter("tomail"); // 받는사람 이메일
+		String title = request.getParameter("title"); // 제목
+		String content = request.getParameter("content"); // 내용
 		String fileName = "";
-		
+
 		try {
 			// MimeMessage message = mailSender.createMimeMessage();
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			
+
 			messageHelper.setFrom(setfrom);
 			messageHelper.setTo(tomail);
 			messageHelper.setSubject(title);
 			messageHelper.setText(content);
-			
-			//파일첨부
+
+			// 파일첨부
 			FileSystemResource fsr = new FileSystemResource(fileName);
 			messageHelper.addAttachment("test2.txt", fsr);
 			mailSender.send(message);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect :/mail/mailForm";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "managerFileUpload.do", method = RequestMethod.GET)
 	public String managerFileUpload() {
 
 		return "manager/manager/managerFileUpload";
 	}
-	
+
 	@RequestMapping(value = "/excelUp.do", method = RequestMethod.POST)
-    public String ExcelUp(MultipartHttpServletRequest request, Model model){
- 
-        
+	public String ExcelUp(MultipartHttpServletRequest request, Model model) {
+
 		MultipartFile file = null;
 		Iterator<String> iterator = request.getFileNames();
-		if(iterator.hasNext()) {
+		if (iterator.hasNext()) {
 			file = request.getFile(iterator.next());
 		}
 		List<QuestionVO> list = questionService.uploadExcelFile(file);
-		//model.addAttribute("list", list);
-		
-		for(QuestionVO vo : list) {
+		// model.addAttribute("list", list);
+
+		for (QuestionVO vo : list) {
 			questionService.insertQuestion(vo);
-		}	
-		
+		}
+
 		return "redirect:managerFileUpload.do";
-        
-    }
-	
+
+	}
+
 	@RequestMapping(value = "/getTimer.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Date getTimer(ExamVO vo) {
-		
+
 //		ExamVO examVo = examService.getExam(vo);
 //		
 //		System.out.println(Integer.parseInt(examVo.getExamStartTime()));
 //		System.out.println(Integer.parseInt(examVo.getExamEndTime()));
-		
+
 		Date serverDate = new Date();
-		
+
 		System.out.println(serverDate);
-		
+
 		return serverDate;
 	}
-	
+
 	public Date parse(String str) {
-		
-		String y 	= str.substring(0, 4);
-		String mon 	= str.substring(5, 2);
-		String d 	= str.substring(8, 2);
-		String h 	= str.substring(11, 2);
-		String min 	= str.substring(14, 2);
-		
+
+		String y = str.substring(0, 4);
+		String mon = str.substring(5, 2);
+		String d = str.substring(8, 2);
+		String h = str.substring(11, 2);
+		String min = str.substring(14, 2);
+
 		return new Date();
 	}
-	
+
 }

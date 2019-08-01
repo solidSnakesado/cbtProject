@@ -3,7 +3,6 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
->
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 2019.07.10 성재민

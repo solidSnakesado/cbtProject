@@ -42,6 +42,13 @@ public class ExamDAO {
 		}
 	}
 	
+	// 2019.07.31 성재민
+	// 완료된 시험 리스트를 가져오는 메소드
+	// 현재는 테스트 구간이라 모든 값을 가져옴 수정 필요.
+	public List<ExamVO> getCompleteExamList(CompanyVO vo) {
+		return mybatis.selectList("ExamDAO.getCompleteExamList", vo);
+	}
+	
 	// temp (7/22, june) --> 삭제예정
 	public List<ExamVO> getExamSurveyList(ManagerVO vo) {
 		// TODO Auto-generated method stub

@@ -12,6 +12,10 @@
 			google.load("visualization", "1", {packages : ["corechart"]});
 			google.setOnLoadCallback(loadPageData);
 
+			$("#backExamListBtn").click(function() {
+				location.href = "${pageContext.request.contextPath }/companyExamListDetail.do/${examId}";
+			});
+			
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
@@ -34,65 +38,75 @@
 						examPassingScore		= data[0].passingScore;
 						examName 				= data[0].examName;
 						
+						console.log(examApplicants);
+						console.log(examQuestionQuantity);
+						console.log(examPassingScore);
+						console.log(examName);
+
 						$("#pageTitle").text(examName + " 통계");
 						
 						var takerIdArr 				= new Array();	// 2019.07.17 성재민 // 응시자 id 저장 변수
-						var takerTotalscoreArr 		= new Array();	// 2019.07.17 성재민 // 응시자 별 총점 저장 변수 // 응시자 id 와 인덱스가 같음(응시자 id 의 1번 인덱스 응시자의 점수는 1번 인뎃스 점수)
-						var takerScoreQuestionArr 	= new Array(examQuestionQuantity);	// 문제별 점수 누적 배열 // 출제 문항 수 만큼 길이 지정 
-						var totalScroeQuestionArr	= new Array(examQuestionQuantity);
-
-						// 2019.07.17 성재민
-						// 배열 초기화
-						for(var idx = 0; idx < examQuestionQuantity; ++idx){
-							takerScoreQuestionArr[idx] 	= 0;
-							totalScroeQuestionArr[idx] 	= 0;
-						}
+						var totalScroeQuestionArr	= new Array();
+						var takerScroeQuestionArr	= new Array();
 						
-						var newId = true;	// 2019.07.17 성재민 // 응시자 이름 체크 변수(배열에 push 할때.)
-
-						data.forEach(function (row) {
-							if(row.takerScore > 0){
-								takerScoreQuestionArr[row.setExamQuestionId - 1] += row.takerScore;
-							}
-							
-							totalScroeQuestionArr[row.setExamQuestionId - 1] += row.point;
-							
+						var newId 	= true;	// 2019.07.17 성재민 // 응시자 이름 체크 변수(배열에 push 할때.)
+						var idx 	= 0;
+						data.forEach(function (row) {	
 							for(var i = 0; i < takerIdArr.length; ++i) {
 								if(takerIdArr[i] == row.takerId){
 									newId = false;
 									break;
-								} else {
-									newId = true;
 								}
 							}
 							if(newId == true){
 								takerIdArr.push(row.takerId);
-								takerTotalscoreArr.push(0);
 							}
-						});
-						
-						data.forEach(function (row) {
-							// console.log(row.takerId);
-							for(var i = 0; i < takerIdArr.length; ++i) {
-								if(takerIdArr[i] == row.takerId){
-									takerTotalscoreArr[i] += row.takerScore;
+							
+							var questionIdPoint = {
+								questionId : row.setExamQuestionId,
+								questionPoint : row.point
+							}
+							
+							var isNewQuestion = true;
+							for(var questionIdx = 0; questionIdx < totalScroeQuestionArr.length; ++questionIdx){
+								if(totalScroeQuestionArr[questionIdx].questionId == row.setExamQuestionId){
+									totalScroeQuestionArr[questionIdx].questionPoint += row.point;
+									if(row.takerScore == null || row.takerScore == undefined){
+										takerScroeQuestionArr[questionIdx].questionPoint += 0;
+									} else{
+										takerScroeQuestionArr[questionIdx].questionPoint += row.takerScore;
+									}
+									
+									isNewQuestion = false;
+								}
+							}
+							
+							if(isNewQuestion == true) {
+								totalScroeQuestionArr.push(questionIdPoint);
+								
+								
+								var takerIdPoint = {
+									questionId : row.setExamQuestionId,
+									questionPoint : row.takerScore
 								}
 								
-								// 커트라인보다 점수가 높은
-								// 합격 인원 수 체크
-								if(takerTotalscoreArr[i] >= examPassingScore){
-									++passTakerCount;
+								if(row.takerScore == null || row.takerScore == undefined){
+									takerIdPoint.questionPoint = 0;
 								}
+								
+								console.log("값체크");
+								console.log(takerIdPoint);		
+								
+								takerScroeQuestionArr.push(takerIdPoint);
 							}
 						});
 					
-/* 						console.log("응시자 id 목록" + takerIdArr);
-						console.log("응시자 점수 목록" + takerTotalscoreArr);
-						console.log("응시 가능 인원 수" + examPossibleApplicants);
-						console.log("응시 인원 수" + takerIdArr.length);
-						console.log("문항별 획득 점수" + takerScoreQuestionArr);
-						console.log("문항별 총점 점수" + totalScroeQuestionArr);
-						console.log("합격 커트라인 점수 " + examPassingScore); */
+ 						console.log("응시자 id 목록 " + takerIdArr);
+						console.log("응시 가능 인원 수 " + examApplicants);
+						console.log("응시 인원 수 " + takerIdArr.length);
+						console.log(totalScroeQuestionArr);
+						console.log(takerScroeQuestionArr);
+						console.log("합격 커트라인 점수 " + examPassingScore);
 						
 						var chartAttendanceRateData = new google.visualization.DataTable();
 						
@@ -164,15 +178,17 @@
 					    var chartCorrectAnswerRateData = new google.visualization.DataTable();
 					    
 					    chartCorrectAnswerRateData.addColumn('string', '문제');
-					    chartCorrectAnswerRateData.addColumn('number', '');		    
+					    chartCorrectAnswerRateData.addColumn('number', '정답율');		    
 					    
+					    
+					    var num = 1;
 					    for(var qIdx = 0; qIdx < totalScroeQuestionArr.length; ++qIdx){
-					    	var correctAnswerRate = (takerScoreQuestionArr[qIdx] / totalScroeQuestionArr[qIdx]) * 100;
-					    	console.log("정답율" + correctAnswerRate);
+					    	var correctAnswerRate = (parseFloat(takerScroeQuestionArr[qIdx].questionPoint) / parseFloat(totalScroeQuestionArr[qIdx].questionPoint)) * 100;
+					    	console.log(num + "문제" + correctAnswerRate);
 					    	chartCorrectAnswerRateData.addRows([
-					    		["문제 " + (qIdx + 1),correctAnswerRate]
+					    		["문제 " + num++, correctAnswerRate]
 					    	]);
-					    }
+					    }		    
 					    
 					    var CorrectAnswerRateChartOptions = {
 					    		title : examName + " 문제별 정답율",
@@ -209,5 +225,6 @@
 	<div id="chartDiv" style="float:left; width: 50%; height: 450px;"></div>
 	<div id="chartDiv2" style="float:left; width: 50%; height: 450px;"></div>
 	<div id="chartDiv3" style="float:left; width: 90%; height: 450px;"></div>
+	<button id="backExamListBtn">시험상세로 돌아가기</button>
 </body>
 </html>

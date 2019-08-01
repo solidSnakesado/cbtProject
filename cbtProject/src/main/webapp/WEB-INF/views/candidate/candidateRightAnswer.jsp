@@ -31,14 +31,42 @@
 		background-color: white;
 	}
 	
-	/* #falseLine {
+	p:hover,
+	p:focus {
+		color: #CA2006;
+		font-size : 20px;
+		box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+		transform: translateY(-0.25em);
+	}
+	
+	div.rightAnswer:hover,
+	div.rightAnswer:focus {
+		color: #CA2006;
+		font-size : 20px;
+		box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+		transform: translateY(-0.25em);
 		position: absolute;
-		width: 150px;
-		height: 150px;
-		right: 900px;
-		top: 200px;
-		background-color: rgba( 255, 255, 255, 0 );
-	} */
+	}
+	
+	button {  
+		color: var(--color);
+		transition: 0.25s;
+	
+	&:hover,
+	&:focus { 
+		border-color: var(--hover);
+		color: #fff;
+	}
+	}
+	
+	button {
+		background: none;
+		border: 1px solid;
+		font: inherit;
+		line-height: 1;
+		margin: 0.5em;
+		padding: 1em 2em;
+	}
 	
 	@keyframes dash {
 		to {
@@ -140,7 +168,6 @@
 			})
 			
 		})
-		
 		
 		$(".rightAnswer").click(function(){
 			var count = $(this).attr("value");
@@ -275,7 +302,7 @@
 </div> -->
 
 	<div id="floatMenu">
-		<p style="font-size: 10px; padding-bottom: 0;" onclick="allView()" >모든 정답 보기</p>
+		<p style="font-size: 10px"onclick="allView()" ><button>모든 정답 보기</button></p>
 		<table class="scroll">
 			<tr>
 				<th style="padding: 0px;">바로가기</th>
@@ -297,6 +324,7 @@
 		<tr>
 			<th><input id="takerAnswer${status.count}" value="${list.takerAnswer}" hidden="true"></th>
 			<th align="left" valign="top" ></th>
+			<th></th>
 		</tr>
 		<!---------------------내용시작------------------>
 		
@@ -305,13 +333,15 @@
 		
 		<tr>
 			<th valign="top" id="questuin${status.count}"><h3>${status.count} . ${list.questionContent}</h3></th>
+			<th></th>
 			<th style="width: 20%;"><p id="point${status.count}" value="" hidden="true">+ ${list.point} point</p></th>
 		</tr>
 		
 		<tr>
 			<td class="exam${status.count}" id="exam${status.count}1" value="${list.example1}" >1. ${list.example1}</td>
+			<td></td>
 			<td rowspan="2">
-				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" >정답 보기</div>
+				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" ><button>정답 보기</button></div>
 				<div class="rightAnswer" id="rightAnswerHide${status.count}" value="${list.rightAnswer}" style="display: none;">정답 : ${list.rightAnswer}</div>
 			</td>
 		</tr>
@@ -319,10 +349,12 @@
 		<tr>
 			<td class="exam${status.count}" id="exam${status.count}2" value="${list.example2}" >2. ${list.example2}</td>
 			<td></td>
+			<td></td>
 		</tr>
 		
 		<tr>
 			<td class="exam${status.count}" id="exam${status.count}3" value="${list.example3}" >3. ${list.example3}</td>
+			<td></td>
 			<td rowspan="2">
 				<div id="CommentaryView${status.count}" ></div>
 				<div id="CommentaryHide${status.count}" style="display: none;">해설 : ${list.rightCommentary}</div>
@@ -332,14 +364,17 @@
 		<tr>
 			<td class="exam${status.count}" id="exam${status.count}4" value="${list.example4}" >4. ${list.example4}</td>
 			<td></td>
+			<td></td>
 		</tr>
 		
 		<tr>
 			<th></th>
 			<th></th>
+			<th></th>
 		</tr>
 		
 		<tr>
+			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
@@ -347,13 +382,15 @@
 		</c:forEach>
 		
 		<tr>
+			<th></th>
 			<th colspan="2"><!-- <a href="#" class="previous">&laquo; Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="next">Next &raquo;</a> --></th>
 			<th></th>
 		</tr>
 		<tr>
+			<td></td>
 			<td colspan="2">
 				<%-- <a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a> --%>
-				<a href="${pageContext.request.contextPath }/candidateMain.do"><button>메인으로</button></a>
+				<a href="${pageContext.request.contextPath }/candidateMain.do"><button class="btn btn-warning">메인으로</button></a>
 			</td>
 			<td></td>
 		</tr>

@@ -153,7 +153,34 @@
 		ORDER BY EXAM_START_TIME DESC
 	</select>
 	
-		
+	<!-- 2019.07.11 성재민 -->
+	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
+	<!-- D2(시험중) D3(시험완료) -->
+	<select id="getCompleteExamList" parameterType="CompanyVO" resultType="ExamVO">
+		SELECT 
+				EXAM_ID
+			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+			,	TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
+			,	QUESTION_QUANTITY
+			,	EXAM.ESTIMATE_ID
+			,	NUMBER_OF_TIMES
+			,	PASSING_SCORE
+			,	EXAM.APPLICANTS
+			,	EXAM_NAME
+			,	EXAM_STATUS
+			,	DISCLOSURE_STATUS
+			,	SET_EXAM_STATUS
+			,	EXAM_DESCRIPTION_SIMPLE
+			,	EXAM_DESCRIPTION_DETAIL
+		FROM EXAM
+		JOIN ESTIMATE
+		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		<where>
+			ESTIMATE.COMPANY_ID = #{companyId}
+			AND (EXAM_STATUS = 'D2' OR EXAM_STATUS = 'D1' OR EXAM_STATUS = 'D3')
+		</where>
+		ORDER BY EXAM_START_TIME ASC
+	</select>
 	
 	<select id="getExamCount" resultType="int">
 		SELECT COUNT(*)

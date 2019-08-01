@@ -26,7 +26,7 @@
 			CONSULTING_ID_SEQ.NEXTVAL
 			,#{consultingContents}
 			,TO_DATE(REPLACE(#{consultingDesiredDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI')
-			,0
+			,'C1'
 			, #{consultingTitle}
 			<if test="companyId != null and companyId != ''">
 				,#{companyId}
