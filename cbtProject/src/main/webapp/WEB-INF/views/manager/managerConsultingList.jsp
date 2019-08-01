@@ -42,7 +42,7 @@
 		<div class="btnGroup">
 		<button type="button" class="btn btn-primary m-3 p-3"
 			onclick="location.href='managerConsultingInsert.do'">상담내역 추가</button>
-		<button id="" align="right" class="btn btn-warning m-3 p-3">삭제</button>
+		
 		</div>
 
 		<form action="managerConsultingDelete.do">
@@ -68,6 +68,7 @@
 				</c:forEach>
 				</tbody>
 			</table>
+			<button id="" align="right" class="btn btn-warning m-3 p-3">삭제</button>
 		</form> 
 		<hr />
 		<my:paging jsFunc="goList" paging="${result.paging }" />

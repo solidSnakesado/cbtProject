@@ -25,6 +25,7 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	public void updateCandidate(CandidateVO vo) {
+		vo.setTakerPassword(scpwd.encode(vo.getTakerPassword()));
 		candidateDAO.updateCandidate(vo);
 	}
 
