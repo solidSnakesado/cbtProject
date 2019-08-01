@@ -1,23 +1,33 @@
 package com.cbt.manager;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class EmailVO {
 	String from;
-	String to;
+	String tomail;
 	String subject;
 	String content;
-	String filename;
+	private MultipartFile filename;
 	
+	
+	public MultipartFile getFilename() {
+		return filename;
+	}
+	public void setFilename(MultipartFile filename) {
+		this.filename = filename;
+	}
 	public String getFrom() {
 		return from;
 	}
 	public void setFrom(String from) {
 		this.from = from;
 	}
-	public String getTo() {
-		return to;
+	
+	public String getTomail() {
+		return tomail;
 	}
-	public void setTo(String to) {
-		this.to = to;
+	public void setTomail(String tomail) {
+		this.tomail = tomail;
 	}
 	public String getSubject() {
 		return subject;
@@ -31,15 +41,10 @@ public class EmailVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+
 	@Override
 	public String toString() {
-		return "EmailVO [from=" + from + ", to=" + to + ", subject=" + subject + ", content=" + content + ", filename="
+		return "EmailVO [from=" + from + ", tomail=" + tomail + ", subject=" + subject + ", content=" + content + ", filename="
 				+ filename + "]";
 	}	
 }
