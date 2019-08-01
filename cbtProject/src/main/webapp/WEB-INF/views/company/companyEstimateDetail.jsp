@@ -15,6 +15,7 @@
 <script>
 	//의뢰서
 	$(document).ready(function() {
+		
 		var tradeProgress = '${myEstimateList.tradeProgress}'; //의뢰진행상태
 		$("#Payment").css('display', 'none');		//결제 버튼 숨김
 		$("#editButton").css('display', 'none');	//수정 버튼 숨김
@@ -121,6 +122,7 @@
 	
 	// @@@@@@@@@@@@@@@@@@@@@@@ 결제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 	function payment(estimateId) {
+		console.log('${myEstimateList.companyEmail}');
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp01620829'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		
@@ -131,7 +133,7 @@
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : '${myEstimateList.estimateName}',	//상품명
 			amount : '${myEstimateList.estimatePrice}',	//가격
-			buyer_email : 'dtg3444@naver.com',
+			buyer_email : 'dtg3444@naver.com', //기업이메일
 			buyer_name : '${myEstimateList.companyId}', //구매자이름
 			buyer_tel : '010-1234-5678',
 			buyer_addr : '서울특별시 강남구 삼성동',
@@ -143,14 +145,11 @@
 				
 				
 				var msg = '결제가 완료되었습니다.';
+				msg += '  결제 금액 : ' + rsp.paid_amount;
 				
-				
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
 				alert("결제OK!!!!!!!!!!!!!!!!!!!!!");
-				
+				window.close();
+				opener.location.reload();
 				$.ajax({
 					type:"POST",
 					data: {estimateId : estimateId},
@@ -158,8 +157,6 @@
 					url:"${pageContext.request.contextPath }/companyPaymentUpdate.do",
 					success : function(){
 						alert('성공');
-					}, error : function() {
-						alert('에러발생');
 					}
 				});
 				

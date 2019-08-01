@@ -4,8 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Insert title here</title>
-
+<style type="text/css">
+	.trexam {cursor: pointer; }
+	 tr.trexam:hover { background-color: lightblue; } 
+	thead {background-color: lightgrey}
+</style>
 <script>
 var idck = 0;
 var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
@@ -144,66 +150,70 @@ function openIdChk() {
 		}); */
 	</script>
 	<header id="header"></header>
-	<div align="right"><a href="companySignUp.do"><button>법인회원가입</button></a>&nbsp;&nbsp;
-	<a href="candidateMain.do"><button>돌아가기</button></a></div><br>
+	<div align="right"><a href="companySignUp.do"><button class="btn btn-primary m-3 p-3">법인회원가입</button></a>&nbsp;&nbsp;
+	<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
 		<table border="1" align="center" class="table text-center">
-			<tr>
-				<th colspan="2">
-					<h4 class="mx-auto pb-2">회원가입 페이지</h4>
-				</th>
-			</tr>
-			<tr>
-				<td><label>응시자ID</label></td>
-				<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
-				<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
-			</tr>
-			<tr>
-				<td><label>응시자PW</label></td>
-				<td colspan="2" align="left"><input type="password" name="takerPassword" class="form-control" id="takerPassword">
-				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
-			</tr>
-			<tr>
-				<td><label>PW확인</label></td>
-				<td colspan="2" align="left"><input type="password" name="takerPasswordRe" class="form-control" id="takerPasswordRe">
-				<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
-			</tr>
-			<tr>
-				<td><label>성명</label></td>
-				<td colspan="2" align="left"><input type="text" name="takerName" id="takerName" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td><label>생년월일</label></td>
-				<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo" class="form-control">
-				<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
-			</tr>
-			<tr>
-				<td><label>E-mail</label></td>
-				<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail" class="form-control">
-				<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
-			</tr>
-			<tr>
-				<td><label>최종학력</label></td>
-				<td colspan="2" align="left"><select name="takerEducation" class="form-control">
-						<option value="J1">중졸</option>
-						<option value="J2">고졸</option>
-						<option value="J3">초대졸</option>
-						<option value="J4">학사</option>
-						<option value="J5">석사</option>
-						<option value="J6">박사</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td><label>연락처</label></td>
-				<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum" class="form-control">
-				<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
-			</tr>
+			<thead>
+				<tr>
+					<th colspan="2">
+						<h4 class="mx-auto pb-2">회원가입 페이지</h4>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><label>응시자ID</label></td>
+					<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
+					<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
+				</tr>
+				<tr>
+					<td><label>응시자PW</label></td>
+					<td colspan="2" align="left"><input type="password" name="takerPassword" class="form-control" id="takerPassword">
+					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
+				</tr>
+				<tr>
+					<td><label>PW확인</label></td>
+					<td colspan="2" align="left"><input type="password" name="takerPasswordRe" class="form-control" id="takerPasswordRe">
+					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
+				</tr>
+				<tr>
+					<td><label>성명</label></td>
+					<td colspan="2" align="left"><input type="text" name="takerName" id="takerName" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td><label>생년월일</label></td>
+					<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo" class="form-control">
+					<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
+				</tr>
+				<tr>
+					<td><label>E-mail</label></td>
+					<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail" class="form-control">
+					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
+				</tr>
+				<tr>
+					<td><label>최종학력</label></td>
+					<td colspan="2" align="left"><select name="takerEducation" class="form-control">
+							<option value="J1">중졸</option>
+							<option value="J2">고졸</option>
+							<option value="J3">초대졸</option>
+							<option value="J4">학사</option>
+							<option value="J5">석사</option>
+							<option value="J6">박사</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><label>연락처</label></td>
+					<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum" class="form-control">
+					<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
+				</tr>
+			</tbody>
 		</table>
 		<br> <br>
 		<div align="center">
-			<button type="button" onclick="checkForm()">가입</button> &nbsp; <input type="reset" value="취소" /> &nbsp;
+			<button type="button" onclick="checkForm()" class="btn btn-warning">가입</button> &nbsp; <input type="reset" value="취소" class="btn btn-warning"/> &nbsp;
 		</div>
 	</form>
 

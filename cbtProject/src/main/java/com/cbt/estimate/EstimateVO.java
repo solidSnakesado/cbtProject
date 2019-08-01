@@ -29,7 +29,7 @@ public class EstimateVO {
 	private String examInterval;		//시험간격(코드)
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone ="Asia/Seoul")
 	private Date paymentDate;			//결제날짜
-	
+	private String companyEmail;		//기업 이메일
 	
 	////////////////DB 사용하지 않는 변수들/////////////////
 	//코드값에대한 이름을 저장하기위한 변수들
@@ -51,6 +51,12 @@ public class EstimateVO {
 	
 	public int getEstimateId() {
 		return estimateId;
+	}
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 	public String getLevelOfDifficultyName() {
 		return levelOfDifficultyName;
@@ -218,13 +224,15 @@ public class EstimateVO {
 				+ ", tradeProgress=" + tradeProgress + ", candidate=" + candidate + ", applyPurpose=" + applyPurpose
 				+ ", applicants=" + applicants + ", examClassfication=" + examClassfication + ", levelOfDifficulty="
 				+ levelOfDifficulty + ", examDate=" + examDate + ", remarks=" + remarks + ", examCount=" + examCount
-				+ ", examInterval=" + examInterval + ", paymentDate=" + paymentDate + ", categoryName=" + categoryName
-				+ ", examCountName=" + examCountName + ", tradeProgressName=" + tradeProgressName
-				+ ", applyPurposeName=" + applyPurposeName + ", candidateName=" + candidateName
+				+ ", examInterval=" + examInterval + ", paymentDate=" + paymentDate + ", companyEmail=" + companyEmail
+				+ ", categoryName=" + categoryName + ", examCountName=" + examCountName + ", tradeProgressName="
+				+ tradeProgressName + ", applyPurposeName=" + applyPurposeName + ", candidateName=" + candidateName
 				+ ", examClassficationName=" + examClassficationName + ", levelOfDifficultyName="
 				+ levelOfDifficultyName + ", examIntervalName=" + examIntervalName + ", start=" + start + ", end=" + end
 				+ "]";
 	}
+	
+	
 	
 	
 	

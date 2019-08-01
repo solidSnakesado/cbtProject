@@ -97,9 +97,11 @@
 					, E.EXAM_INTERVAL								"examInterval"
 					, E.ESTIMATE_NAME								"estimateName"
 					, E.PAYMENT_DATE								"paymentDate"
-       
+         			, COM.COMPANY_EMAIL           					"companyEmail"
 		FROM ESTIMATE  E JOIN  CATEGORY C
       	ON C.CATEGORY_ID = E.CATEGORY_ID
+   		JOIN COMPANY COM
+   		ON COM.COMPANY_ID = E.COMPANY_ID
        	
 		WHERE ESTIMATE_ID = #{estimateId}
 		
