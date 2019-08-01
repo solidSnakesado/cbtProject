@@ -163,7 +163,7 @@
 				
 		FROM 	EXAM e JOIN TAKE_EXAM t
 		ON 		e.EXAM_ID = t.EXAM_ID
-		WHERE 	t.TAKER_ID = #{takerId}
+		WHERE 	t.TAKER_ID = #{takerId} AND t.SCORE IS NOT NULL
 	</select>
 	
 	<!-- 2019.07.17 성재민 -->
