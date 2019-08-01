@@ -103,7 +103,7 @@
 		
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
-			
+			console.log("문제 풀기");
 			$("#floatMenu").show();
 			
 			$.ajax({

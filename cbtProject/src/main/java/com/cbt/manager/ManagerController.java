@@ -1,6 +1,9 @@
 package com.cbt.manager;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +14,7 @@ import javax.activation.FileDataSource;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -493,34 +497,43 @@ public class ManagerController {
 	//mailForm
 	@RequestMapping(value="managerExamSendForm.do")
 	public String managerExamSendForm() {
-		return "manager/manager/managerExamSend";
+		return "empty/manager/managerExamSend";
 	}
 	
 	//mailSending 
 	@RequestMapping(value="managerExamSend.do")
-	public String managerExamMailSend(HttpServletRequest request) {
-		String setfrom = "freehwans@gmail.com";
-		String tomail = request.getParameter("tomail");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-
+	public void managerExamMailSend(HttpServletRequest request, EmailVO vo ,HttpServletResponse response) throws IOException {
+		vo.setFrom("freehwans@gmail.com");
+		PrintWriter out = response.getWriter();
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
 			
-			messageHelper.setFrom(setfrom);
-			messageHelper.setTo(tomail);
-			messageHelper.setSubject(title);
-			messageHelper.setText(content);
-			DataSource dataSource = new FileDataSource("C:\\Users\\user\\Desktop\\project_css.txt");
-			messageHelper.addAttachment(MimeUtility.encodeText("project_css.txt", "utf-8", "B"), dataSource);
+			messageHelper.setFrom(vo.getFrom());
+			messageHelper.setTo(vo.getTomail());
+			messageHelper.setSubject(vo.getSubject());
+			messageHelper.setText(vo.getSubject());
+			String fileName = "";
+			MultipartFile uploadFile = vo.getFilename();
+			if(uploadFile != null && uploadFile.getSize() > 0) {
+				fileName = uploadFile.getOriginalFilename();
+				uploadFile.transferTo(new File("d:/upload/" + fileName));
+				DataSource dataSource = new FileDataSource("d:/upload/" + fileName);
+				messageHelper.addAttachment(MimeUtility.encodeText(fileName, "utf-8", "B"), dataSource);
+			}
+
 			mailSender.send(message);
 			
+			response.setContentType("text/html; charset=UTF-8");
+			out.print("<script>");
+			out.print("alert('메일 발송 성공!');");
+			out.print("window.close();");
+			out.print("</script>");
+			out.flush();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:managerExamSendForm.do";
 	}
 	
 	
