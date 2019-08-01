@@ -54,8 +54,8 @@
 			<td>
 				<c:set var="point" value="${takeExamVO.sumTakerScore}"/>
 				<c:set var="passingScore" value="${examVO.passingScore}" />
-				<c:if test="${passingScore lt point}">합격</c:if>
-				<c:if test="${passingScore ge point}">불합격</c:if>
+				<c:if test="${passingScore le point}">합격</c:if>
+				<c:if test="${passingScore gt point}">불합격</c:if>
 			</td>
 		</tr>
 	</table>
