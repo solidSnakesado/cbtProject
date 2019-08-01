@@ -124,11 +124,9 @@ public class EstimateController {
 												EstimateVO vo,
 												Model model) {
 		
-		vo.setEstimateId(estimateId); 
+		vo.setEstimateId(estimateId);
 		
-		/* 
-		 * model.addAttribute("cateoryMain", categoryMainService.getAllCategoryMain());
-		 */
+		
 		model.addAttribute("myEstimateList", estimateService.getEstimate(vo));  //기업별 디테일 의뢰 조회
 		model.addAttribute("B", conditionService.getConditionDetailList("B")); 	//B-의뢰진행상태
 		model.addAttribute("G", conditionService.getConditionDetailList("G")); 	//G-시험난이도
