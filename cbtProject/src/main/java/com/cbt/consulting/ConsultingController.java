@@ -63,9 +63,12 @@ public class ConsultingController {
 	// 2019.07.08 성재민
 	// vo객체 변경에 따른 수정 필요.
 	@RequestMapping(value = "companyConsultingInsert.do", method = RequestMethod.POST) 
-	public String companyConsultingInsert(ConsultingVO vo, HttpSession session) {
+	public String companyConsultingInsert(ConsultingVO vo, Authentication authentication) {
+		CustomerUser user = (CustomerUser)authentication.getPrincipal();
+		vo.setCompanyId(user.getUsername());
 		consultingService.insertConsulting(vo);
-		if(session.getAttribute("company") == null) {
+		
+		if(user == null) {
 			return "redirect:companyMain.do";
 		} else {
 			return "redirect:companyConSultingList.do";
