@@ -14,7 +14,7 @@ import com.cbt.common.Paging;
 @Service("candidateService")
 public class CandidateServiceImpl implements CandidateService {
 	BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
-
+	
 	@Resource
 	private CandidateDAO candidateDAO;
 	
