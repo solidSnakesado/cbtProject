@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	var idck 			= 0;
 	var specialPattern 	= /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 	var pattern1 		= /[0-9]/;	// 숫자 
 	var pattern2 		= /[a-zA-Z]/;	// 문자 
@@ -43,7 +42,7 @@
 					console.log(response);
 					if (response.result == true) {
 						window.alert("사용가능한 아이디입니다.");
-						idck = 1
+						$("#isCheckId").val("true");
 					} else {
 						window.alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 					}
@@ -62,7 +61,7 @@
 		        return false; 
 		    } 
 			
-			if(businessNumber.length != 11) {
+			if(businessNumber.length != 10) {
 		        window.alert("사업자 번호 자리수를 확인하세요");
 		        return false; 
 		    } 
@@ -73,7 +72,7 @@
 				success : function(response) {
 					if (response.result == true) {
 						window.alert("사용가능한 사업자 번호입니다.");
-						idck = 1
+						$("#isCheckBisinessNumber").val("true");
 					} else {
 						window.alert("사업자 번호가 존재합니다. 다른 번호를 입력해주세요.");
 					}
@@ -81,6 +80,14 @@
 				error : function(error) {
 					console.log(error);
 				}
+			});
+		});
+		
+		$("#resetBtn").click(function() {
+			$("#fmField").each(function() {
+				$("#isCheckId").val("false");
+				$("#isCheckBisinessNumber").val("false");
+				this.reset();
 			});
 		});
 		
@@ -104,7 +111,6 @@
 			var companyEmail	= $("#companyEmail").val();
 			
 			console.log(companyId.value);
-			//console.log(idDuplication);
 			console.log(companyPassword.value);
 			console.log(companyPwCheck.value);
 			
@@ -123,10 +129,15 @@
 				return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
 			}
 			
-			if (idck == 0) {
+			if ($("#isCheckId").val() != "true") {
 				window.alert("아이디 중복 체크를 해주세요.");
 				return false;
 			}
+			
+			if ($("#isCheckBisinessNumber").val() != "true") {
+				window.alert("사업자번호 중복 체크를 해주세요.");
+				return false;
+			}		
 			
 			// 암호 입력 유무 체크
 			if (document.fmField.companyPassword.value == '') {
@@ -216,6 +227,7 @@
 				return false;
 			}
 			
+			window.alert("회원가입이 정상 처리됩니다");
 			document.fmField.submit();
 		});
 	});
@@ -223,23 +235,35 @@
 </head>
 <body>
 	<header id="header"></header>
+	<div align="right">
+		<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a>
+	</div>
+	<br>
 	<h4 class="mx-auto pb-2">기업 회원 가입 페이지</h4>
 	<form id="fmField" name="fmField"  action="companySignUp.do" method="post">
-		<table border="1" align="center" class="table text-center">
+		<table border="1" class="table text-center">
 			<tr>
 				<td><label>기업ID</label></td>
 				<td align="left">
 					<input type="text" name="companyId" id="companyId" class="form-control">&nbsp;
 					<input type="button" id="idCheckBtn" value="중복확인"/>
+					<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
+					<input type="hidden" id="isCheckId" value="false">
 				</td>
 			</tr>
 			<tr>
 				<td><label>기업PW</label></td>
-				<td><input type="password" name="companyPassword" id="companyPassword" class="form-control"></td>
+				<td>
+					<input type="password" name="companyPassword" id="companyPassword" class="form-control">
+					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
+				</td>
 			</tr>
 			<tr>
 				<td><label>PW확인</label></td>
-				<td><input type="password" name="companyPwCheck" id="companyPwCheck" class="form-control"></td>
+				<td>
+					<input type="password" name="companyPwCheck" id="companyPwCheck" class="form-control">
+					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
+				</td>
 			</tr>
 			<tr>
 				<td><label>기업명</label></td>
@@ -248,8 +272,10 @@
 			<tr>
 				<td><label>사업자번호</label></td>
 				<td align="left">
-					<input type="text" name="businessNumber" id="businessNumber" class="form-control">
+					<input type="text" name="businessNumber" id="businessNumber" class="form-control" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
 					<input type="button" id="businessNumberCheckBtn" value="중복확인"/>
+					<font size="1">숫자로만 입력하세요.(ex.4353534534)</font>
+					<input type="hidden" id="isCheckBisinessNumber" value="false">
 				</td>
 			<tr>
 				<td><label>회사분류</label></td>
@@ -283,18 +309,24 @@
 			</tr>
 			<tr>
 				<td><label>연락처</label></td>
-				<td><input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control"></td>
+				<td>
+					<input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control">
+					<font size="1">숫자로만 입력하세요(ex.01012341234) </font>
+				</td>
 			</tr>
 			<tr>
 				<td><label>E-mail</label></td>
-				<td><input type="text" name="companyEmail" id="companyEmail" class="form-control"></td>
+				<td>
+					<input type="text" name="companyEmail" id="companyEmail" class="form-control">
+					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font>
+				</td>
 			</tr>
 		</table>
 		<div align="right">
 			<button type="button" id="joinBtn" class="btn btn-primary m-3 p-3">가입</button>&nbsp;&nbsp;&nbsp; 
 			<!-- <input type="submit" value="가입" class="btn btn-primary m-3 p-3">
 			<input type="reset" value="취소" class="btn btn-warning m-3 p-3"> -->
-			<input type="reset" value="취소" /> &nbsp;
+			<input type="button" id="resetBtn" value="취소" class="btn btn-warning m-3 p-3"/> &nbsp;
 		</div>
 	</form>
 	<br>

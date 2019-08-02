@@ -13,7 +13,6 @@
 	thead {background-color: lightgrey}
 </style>
 <script>
-var idck = 0;
 var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
 var pattern1 = /[0-9]/;	// 숫자 
 var pattern2 = /[a-zA-Z]/;	// 문자 
@@ -46,8 +45,8 @@ function openIdChk() {
 				console.log(response);
 				if (response.result == true) {
 					window.alert("사용가능한 아이디입니다.");
+					$("#isCheckId").val("true");
 					$("#takerId").focus();
-					idck = 1
 				} else {
 					window.alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 				}
@@ -77,7 +76,9 @@ function openIdChk() {
 			document.fmField.takerId.focus();
 			return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
 		}
-		if (idck == 0) {
+		
+		//if (idck == 0) {
+		if ($("#isCheckId").val() != "true") {
 			window.alert("아이디 중복 체크를 해주세요.");
 			document.fmField.takerId.focus();
 			return false;
@@ -138,6 +139,13 @@ function openIdChk() {
 		window.alert("회원가입이 정상 처리됩니다");
 		document.fmField.submit();
 	}
+	
+	function resetForm() {
+		$("#fmField").each(function() {
+			$("#isCheckId").val("false");
+			this.reset();
+		});
+	};
 </script>
 	
 	
@@ -154,7 +162,7 @@ function openIdChk() {
 	<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
-		<table border="1" align="center" class="table text-center">
+		<table border="1" class="table text-center">
 			<thead>
 				<tr>
 					<th colspan="2">
@@ -166,7 +174,9 @@ function openIdChk() {
 				<tr>
 					<td><label>응시자ID</label></td>
 					<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
-					<font size="1">4~8자 영문/숫자로 구성하여 주세요</font></td>
+						<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
+						<input type="hidden" id="isCheckId" value="false">
+					</td>
 				</tr>
 				<tr>
 					<td><label>응시자PW</label></td>
@@ -191,7 +201,7 @@ function openIdChk() {
 				<tr>
 					<td><label>E-mail</label></td>
 					<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail" class="form-control">
-					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</td>
+					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font></td>
 				</tr>
 				<tr>
 					<td><label>최종학력</label></td>
@@ -213,7 +223,8 @@ function openIdChk() {
 		</table>
 		<br> <br>
 		<div align="center">
-			<button type="button" onclick="checkForm()" class="btn btn-warning">가입</button> &nbsp; <input type="reset" value="취소" class="btn btn-warning"/> &nbsp;
+			<button type="button" onclick="checkForm()" class="btn btn-primary">가입</button> &nbsp; 
+			<input type="button" id="resetBtn" onclick="resetForm()" value="취소" class="btn btn-warning"/> &nbsp;
 		</div>
 	</form>
 
