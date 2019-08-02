@@ -366,12 +366,12 @@ public class ManagerController {
 	
 	// 2019.07.15 성재민
 	// 엑셀 업로드 처리
-	@RequestMapping(value="excelUploadForm.do", method=RequestMethod.GET)
+	@RequestMapping(value="managerExcelUploadForm.do", method=RequestMethod.GET)
 	public String ExcelForm() {
-		return "manager/manager/excelUpload";
+		return "manager/manager/managerExcelUpload";
 	}
 		
-	@RequestMapping(value="excelUpload.do", method=RequestMethod.POST)
+	@RequestMapping(value="managerExcelUpload.do", method=RequestMethod.POST)
 	public String ExcelUplod(MultipartHttpServletRequest request, Model model) {
 		
 		MultipartFile file = null;
