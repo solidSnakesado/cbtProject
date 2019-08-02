@@ -227,6 +227,7 @@
 				return false;
 			}
 			
+			window.alert("회원가입이 정상 처리됩니다");
 			document.fmField.submit();
 		});
 	});

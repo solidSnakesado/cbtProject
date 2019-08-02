@@ -55,17 +55,15 @@ public class CompanyController {
 	// 2019.07.31 성재민
 	// 가입 후 가입 완료 메시지를 위한 기능 추가
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
-	public String companySignUp(CompanyVO vo, HttpSession session) {
-		String joinResult = "false";
+	public String companySignUp(CompanyVO vo) {
+
 		try {
 			companyService.insertCompany(vo);
-			joinResult = "true";
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
-		session.setAttribute("joinResult", joinResult);
-
 		return "redirect:candidateLogin.do";
 	}
 
