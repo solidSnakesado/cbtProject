@@ -55,7 +55,7 @@ public class CompanyController {
 	// 2019.07.31 성재민
 	// 가입 후 가입 완료 메시지를 위한 기능 추가
 	@RequestMapping(value = "companySignUp.do", method = RequestMethod.POST)
-	public String companySignUp(CompanyVO vo) {
+	public String companySignUp(CompanyVO vo, HttpSession session) {
 		String joinResult = "false";
 		try {
 			companyService.insertCompany(vo);
@@ -63,8 +63,10 @@ public class CompanyController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		session.setAttribute("joinResult", joinResult);
 
-		return "redirect:companyLogin.do/" + joinResult;
+		return "redirect:candidateLogin.do";
 	}
 
 	@RequestMapping(value = "companyUpdate.do", method = RequestMethod.GET)
@@ -78,33 +80,33 @@ public class CompanyController {
 		return "company/company/companyMain";
 	}
 
-	@RequestMapping(value = "companyLogin.do", method = RequestMethod.GET)
-	public String companyLoginForm() {
-		return "candidate/candidate/candidateLogin";
-	}
+	// 2019.08.02 성재민
+	// companyLoginForm() 수정
+	/*
+	 * @RequestMapping(value = "companyLogin.do", method = RequestMethod.GET) public
+	 * String companyLoginForm() { return "candidate/candidate/candidateLogin"; }
+	 */
 
-	@RequestMapping(value = "companyLogin.do/{joinResult}", method = RequestMethod.GET)
-	public String companyLoginForm(@PathVariable("joinResult") String joinResult, Model model) {
-		model.addAttribute("joinResult", joinResult);
-		return "candidate/candidate/candidateLogin";
-	}
-
-	@RequestMapping(value = "companyLogin.do", method = RequestMethod.POST)
-	public String companyLogin(CompanyVO vo, HttpSession session, Model model) {
-		String targetPage = "company/company/companyLogin";
-		CompanyVO loginCompany = companyService.loginCompany(vo);
-
-		if (loginCompany != null) {
-			session.setAttribute("company", loginCompany);
-			targetPage = "redirect:companyMain.do";
-		} else {
-			// 2019.07.10 성재민
-			// 로그인 실패시 로그인 실패 메시지를 띄우기 위해 값 설정
-			model.addAttribute("loginFail", true);
-		}
-
-		return targetPage;
-	}
+	/*
+	 * @RequestMapping(value = "companyLogin.do", method = RequestMethod.GET) public
+	 * String companyLoginForm(Model model, HttpSession session) { String joinResult
+	 * = (String) session.getAttribute("joinResult"); if(joinResult != null &&
+	 * joinResult != "") { model.addAttribute("joinResult", joinResult);
+	 * session.removeAttribute("joinResult"); }
+	 * 
+	 * return "candidate/candidate/candidateLogin"; }
+	 * 
+	 * @RequestMapping(value = "companyLogin.do", method = RequestMethod.POST)
+	 * public String companyLogin(CompanyVO vo, HttpSession session, Model model) {
+	 * String targetPage = "company/company/companyLogin"; CompanyVO loginCompany =
+	 * companyService.loginCompany(vo);
+	 * 
+	 * if (loginCompany != null) { //session.setAttribute("company", loginCompany);
+	 * targetPage = "redirect:candidateMain.do"; } else { // 2019.07.10 성재민 // 로그인
+	 * 실패시 로그인 실패 메시지를 띄우기 위해 값 설정 model.addAttribute("loginFail", true); }
+	 * 
+	 * return targetPage; }
+	 */
 
 	// 로그아웃 폼
 	@RequestMapping(value = "companyLogout.do", method = RequestMethod.GET)
