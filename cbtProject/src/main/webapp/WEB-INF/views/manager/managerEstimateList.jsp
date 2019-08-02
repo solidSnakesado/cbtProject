@@ -72,7 +72,7 @@
 			<table border="1" class="table table-striped">
 				<tr>
 					<th><label>의뢰ID</label></th>
-					<th><label>기업명</label></th>
+					
 					<th><label>카테고리</label></th>
 					<th><label>의뢰이름</label></th>
 					<th><label>의뢰일</label></th>
@@ -84,7 +84,6 @@
 				<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
-						<td onClick="estimateDetail(${estimate.companyName})">${estimate.companyName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>

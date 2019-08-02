@@ -1,6 +1,7 @@
 package com.cbt.estimate;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -28,7 +29,7 @@ public class EstimateVO {
 	private String examCount;			//시험횟수(코드)
 	private String examInterval;		//시험간격(코드)
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone ="Asia/Seoul")
-	private Date paymentDate;			//결제날짜
+	private Timestamp paymentDate;			//결제날짜
 	private String companyEmail;		//기업 이메일
 	private String companyName;			//기업명
 	////////////////DB 사용하지 않는 변수들/////////////////
@@ -175,10 +176,14 @@ public class EstimateVO {
 	public void setExamInterval(String examInterval) {
 		this.examInterval = examInterval;
 	}
-	public Date getPaymentDate() {
+	
+	
+	
+	
+	public Timestamp getPaymentDate() {
 		return paymentDate;
 	}
-	public void setPaymentDate(Date paymentDate) {
+	public void setPaymentDate(Timestamp paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	public String getCategoryName() {

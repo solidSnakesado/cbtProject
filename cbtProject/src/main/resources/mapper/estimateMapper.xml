@@ -77,7 +77,7 @@
 	<select id="getEstimate" resultType="EstimateVO">
     	   SELECT 	  E.ESTIMATE_ID
           			, C.CATEGORY_NAME AS CATEGORYNAME
-					, E.ESTIMATE_PRICE
+					, E.ESTIMATE_PRICE								"estimatePrice"
 					, E.REQUEST_DAY
 					, E.TRADE_PROGRESS
 					, FIND_CODENM(TRADE_PROGRESS)					"tradeProgressName"
@@ -89,7 +89,7 @@
 					, E.EXAM_DATE
 					, E.CATEGORY_ID									"categoryId"
 					, E.EXAM_CLASSFICATION
-					, E.COMPANY_ID
+					, E.COMPANY_ID									"companyId"
 					, E.EXAM_COUNT
 					, FIND_CODENM(APPLY_PURPOSE)					"applyPurposeName"
 					, FIND_CODENM(CANDIDATE)						"candidateName"

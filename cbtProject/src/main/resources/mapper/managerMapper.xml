@@ -220,7 +220,7 @@
 		FROM TAKER
 		<where>
 			<if test="searchKeyword != null and searchKeyword != ''">
-				${searchTaker} like '%' || #{searchKeyword} || '%'
+				${searchKeyword} like '%' || #{searchKeyword} || '%'
 			</if>
 		</where>
 		<if test="sort == null or sort=='' ">

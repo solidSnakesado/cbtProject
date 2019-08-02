@@ -153,25 +153,21 @@
 					data: {estimateId : estimateId},
 					dataType: "json",
 					url:'${pageContext.request.contextPath }/companyPaymentUpdate.do',
-					
-					success : function(){
+					success : function(data){
 						alert('성공');
+						opener.location.reload();
+						window.close();
 					}, error : function() {
 						
  					}
 				});
-				window.close();
-				opener.location.reload();
-				location.reload();
+				
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
 			}
 			
 			alert(msg);
-			window.close();
-			opener.location.reload();
-			location.reload();
 		});  
 	}
 </script>
