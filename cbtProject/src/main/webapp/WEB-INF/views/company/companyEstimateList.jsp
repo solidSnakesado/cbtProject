@@ -68,7 +68,7 @@
 					<th><label>의뢰일</label></th>
 					<th><label>진행상태</label></th>
 					<th><label>시험일시</label></th>
-					<th><label>삭제</label></th>
+					<th><label >삭제</label></th>
 				</tr>
 					<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
@@ -78,7 +78,8 @@
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.tradeProgressName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.examDate}</td>
-						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})">삭제</button></td>
+						<td><button type="button" onClick="deleteEstimateId(event,${estimate.estimateId})"
+								class="btn btn-danger" >삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

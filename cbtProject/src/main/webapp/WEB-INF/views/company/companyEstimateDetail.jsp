@@ -122,18 +122,20 @@
 	
 	// @@@@@@@@@@@@@@@@@@@@@@@ 결제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 	function payment(estimateId) {
-		console.log('${myEstimateList.companyEmail}');
+
+		
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp01620829'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		
 		
 		IMP.request_pay({
+			
 			pg : 'inicis', // version 1.1.0부터 지원.
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : '${myEstimateList.estimateName}',	//상품명
 			amount : '${myEstimateList.estimatePrice}',	//가격
-			buyer_email : 'dtg3444@naver.com', //기업이메일
+			buyer_email : '${myEstimateList.companyEmail}',	 //기업이메일
 			buyer_name : '${myEstimateList.companyId}', //구매자이름
 			buyer_tel : '010-1234-5678',
 			buyer_addr : '서울특별시 강남구 삼성동',
@@ -141,31 +143,36 @@
 			m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 		}, function(rsp) {
 			if (rsp.success) {
-				
-				
-				
 				var msg = '결제가 완료되었습니다.';
 				msg += '  결제 금액 : ' + rsp.paid_amount;
 				
 				alert("결제OK!!!!!!!!!!!!!!!!!!!!!");
-				window.close();
-				opener.location.reload();
+				
 				$.ajax({
 					type:"POST",
 					data: {estimateId : estimateId},
 					dataType: "json",
-					url:"${pageContext.request.contextPath }/companyPaymentUpdate.do",
+					url:'${pageContext.request.contextPath }/companyPaymentUpdate.do',
+					
 					success : function(){
 						alert('성공');
-					}
+					}, error : function() {
+						
+ 					}
 				});
-				
+				window.close();
+				opener.location.reload();
+				location.reload();
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
 			}
+			
 			alert(msg);
-		}); 
+			window.close();
+			opener.location.reload();
+			location.reload();
+		});  
 	}
 </script>
 
@@ -267,10 +274,10 @@
 
 		</table>
 		<div>
-			<button type="button" id="editButton">수정하기</button>
+			<button type="button" id="editButton" class="btn btn-primary m-3 p-3">수정하기</button>
 			<button type="button" id="Payment"
-				onclick="payment(${myEstimateList.estimateId})">결제</button>
-			<button type="button" onclick="windowClose()">취소</button>
+				onclick="payment(${myEstimateList.estimateId})" class="btn btn-danger m-3 p-3">결제</button>
+			<button type="button" onclick="windowClose()" class="btn btn-warning m-3 p-3">닫기</button>
 		</div>
 	</form>
 

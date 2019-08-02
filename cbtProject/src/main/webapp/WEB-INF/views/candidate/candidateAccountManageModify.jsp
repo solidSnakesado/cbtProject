@@ -46,6 +46,7 @@ function checkForm() {
 	var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;	// 특수문자
 	var takerName = document.fmField.takerName;
 	var takerInfo = document.fmField.takerInfo;
+	var takerPhoneNum = document.fmField.takerPhoneNum;
 	
 	var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
 	var email = document.fmField.takerEmail.value;
@@ -80,7 +81,8 @@ function checkForm() {
 		window.alert("연락처를 입력하시오");
 		document.fmField.takerPhoneNum.focus();
 		return false; // 아이디 입력이 안되어 있다면 submint 이벤트를 중지
-}
+	}
+	window.alert("정보가 정상적으로 전달되었습니다");
 	document.fmField.submit();
 }
 </script>

@@ -42,14 +42,17 @@
 		<div class="btnGroup">
 		<button type="button" class="btn btn-primary m-3 p-3"
 			onclick="location.href='managerConsultingInsert.do'">상담내역 추가</button>
-		<button id="" align="right" class="btn btn-warning m-3 p-3">삭제</button>
+		
 		</div>
 
 		<form action="managerConsultingDelete.do">
+		<button id="" align="right" class="btn btn-warning m-3 p-3">삭제</button>
+		<br><br>
 			<table border="1" align="center" class="table">
 				<thead>
 				<tr>
 					<th>선택</th>
+					<th>기업명</th>
 					<th>제목</th>
 					<th>상담희망일</th>
 					<th>상담진행상태</th>
@@ -60,6 +63,7 @@
 					<tr class="trexam">
 						<td><input type="checkbox" name="consultingList"
 							value="${ConsultingVO.consultingId }"></td>
+						<td>${ConsultingVO.companyId }</td>
 						<td><a
 							href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
 						<td>${ConsultingVO.consultingDesiredDate}</td>
@@ -68,6 +72,7 @@
 				</c:forEach>
 				</tbody>
 			</table>
+			
 		</form> 
 		<hr />
 		<my:paging jsFunc="goList" paging="${result.paging }" />

@@ -24,6 +24,15 @@
 		</script>
 	</c:if>
 </c:if>
+
+<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+    <font color="red">
+        <p>로그인 정보가 다릅니다 !!<br/>
+            ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+    </font>
+</c:if>
+
 </head>
 <body>
 
@@ -86,7 +95,7 @@
 	</div>	
 
  	<a href = "https://kauth.kakao.com/oauth/authorize?client_id=c26738f5694564442fa900de9d855473&redirect_uri=http://localhost/project/oauth&response_type=code">
-    <img src="${pageContext.request.contextPath}/image/kakaoLogin.jpg">
+    	<img src="${pageContext.request.contextPath}/image/kakaoLogin.jpg">
     </a>
 </body>
 </html>

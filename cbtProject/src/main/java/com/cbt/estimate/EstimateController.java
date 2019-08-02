@@ -144,9 +144,13 @@ public class EstimateController {
 	
 	@RequestMapping(value = "companyPaymentUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void companyPaymentUpdate(EstimateVO vo , HttpServletResponse response) throws IOException {
+	public void companyPaymentUpdate(EstimateVO vo)
+			throws IOException, MessagingException {
 		//vo.setEstimateId(estimateId);
+		
 		estimateService.updatesTradeProgressExchange5(vo);
+	      
+	    
 	}
 	
 	
@@ -265,7 +269,7 @@ public class EstimateController {
 		     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 		      
 		      messageHelper.setSubject("결제사항 및 시험확인");
-		      messageHelper.setText("이용해주셔서 감사합니다. 결제y 정보입니다.");
+		      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
 		      messageHelper.setFrom("dtg3431@gmail.com");
 		      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 
@@ -324,49 +328,49 @@ public class EstimateController {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("estimateId");	//의뢰ID
+			cell.setCellValue("의뢰ID");	//의뢰ID
 			cell = row.createCell(1);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("categoryName");	//카테고리명
+			cell.setCellValue("카테고리");	//카테고리
 			cell = row.createCell(2);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("companyId");		//기업ID
+			cell.setCellValue("기업ID");		//기업ID
 			cell = row.createCell(3);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("estimateName");	//의뢰이름
+			cell.setCellValue("의뢰이름");	//의뢰이름
 			cell = row.createCell(4);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("requestDay");	//의뢰일
+			cell.setCellValue("의뢰일");	//의뢰일
 			cell = row.createCell(5);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("estimatePrice");	//금액
+			cell.setCellValue("금액");	//금액
 			cell = row.createCell(6);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("tradeProgressName");	//의뢰진행상태
+			cell.setCellValue("의뢰진행상태");	//의뢰진행상태
 			cell = row.createCell(7);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("candidateName");		//응시대상자
+			cell.setCellValue("응시대상자");		//응시대상자
 			cell = row.createCell(8);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("applyPurposeName");	//응시목적
+			cell.setCellValue("응시목적");	//응시목적
 			cell = row.createCell(9);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("applicants");	//응시자 수
+			cell.setCellValue("응시자 수 ");	//응시자 수
 			cell = row.createCell(10);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("examClassficationName");	//시험분류
+			cell.setCellValue("시험분류");	//시험분류
 			cell = row.createCell(11);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("levelOfDifficultyName");		//난이도
+			cell.setCellValue("난이도");		//난이도
 			cell = row.createCell(12);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("examDate");		//시험일시
+			cell.setCellValue("시험일시");		//시험일시
 			cell = row.createCell(13);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("remarks");		//비고
+			cell.setCellValue("비고");		//비고
 			cell = row.createCell(14);
 			cell.setCellStyle(headStyle);
-			cell.setCellValue("examIntervalName");		//시험간격
+			cell.setCellValue("시험간격");		//시험간격
 			
 			
 			for(EstimateVO evo : estimateList) {

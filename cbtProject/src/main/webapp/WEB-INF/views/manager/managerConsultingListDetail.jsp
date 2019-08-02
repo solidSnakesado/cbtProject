@@ -23,12 +23,8 @@
 			<td><input type="datetime-local" name="consultingDesiredDate" class="form-control" id="consultingDesiredDate" value="${result.consultingDesiredDate}"></td>
 		</tr>
 		<tr>
-			<th><label>상담일</label></th><c:if test="${not empty consulting.consultingDate }">
-			<td><input type="datetime-local" name="consultingDate" class="form-control" id="consultingDate" readonly="readonly" value="${result.consultingDate}"></td>
-			</c:if>
-			<c:if test="${empty consulting.consultingDate }">
-				<td>상담일이 지정되지 않았습니다.</td>
-			</c:if>
+			<th><label>상담일</label></th>
+			<td><input type="datetime-local" name="consultingDate" class="form-control" id="consultingDate" value="${result.consultingDate}"></td>
 		</tr>
 		<tr>
 		<tr>
