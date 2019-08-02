@@ -62,8 +62,8 @@
 				<tbody>
 				<c:forEach items="${result.consultingList}" var="ConsultingVO">
 					<tr class="trexam">
-						<td><input type="checkbox" name="consultingList"
-							value="${ConsultingVO.consultingId }"></td>
+						<td><label><input type="checkbox" name="consultingList"
+							value="${ConsultingVO.consultingId }"></label></td>
 						<td>${ConsultingVO.companyId }</td>
 						<td><a
 							href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
