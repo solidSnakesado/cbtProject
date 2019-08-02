@@ -84,7 +84,7 @@
 				<c:forEach items="${result.estimateList}" var="estimate">
 					<tr>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateId}</td>
-						<td onClick="estimateDetail(${estimate.companyName})">${estimate.companyName}</td>
+						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.companyName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.categoryName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.estimateName}</td>
 						<td onClick="estimateDetail(${estimate.estimateId})">${estimate.requestDay}</td>

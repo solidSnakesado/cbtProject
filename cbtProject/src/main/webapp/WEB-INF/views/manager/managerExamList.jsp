@@ -69,7 +69,7 @@
 			<tr onclick="showDetail(${exam.examId});" class="trexam">
 				<td>${exam.companyId}</td>
 				<td>${exam.examName}</td>
-				<td>${exam.examStartTime} ~<br>&nbsp;&nbsp;&nbsp;&nbsp;${exam.examEndTime}</td>
+				<td>${exam.examStartTime} ~<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${exam.examEndTime}</td>
 				<c:if test="${exam.examStatus == 'D1'}">
 					<td>시험전</td>
 				</c:if>

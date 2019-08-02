@@ -49,7 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public Map<String, Object> getCompanyList(CompanyVO vo, Paging paging) {
 		//출력건수
-				paging.setPageUnit(5);
+				paging.setPageUnit(10);
 				//페이지번호 파라미터
 				if(paging.getPage() == null) {
 					paging.setPage(1);
@@ -75,7 +75,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public Map<String, Object> managerAccountList(CompanyVO vo, Paging paging) {
 		//출력건수
-		paging.setPageUnit(5);
+		paging.setPageUnit(10);
 		//페이지번호 파라미터
 		if(paging.getPage() == null) {
 			paging.setPage(1);
