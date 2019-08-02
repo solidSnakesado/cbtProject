@@ -19,7 +19,7 @@
 			],
 			onShow:function( ct ){
 				this.setOptions({
-					maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+					maxDate:jQuery('#consultingDesiredDate').val()?jQuery('#consultingDesiredDate').val():false
 				})
 			},
 			timepicker:true

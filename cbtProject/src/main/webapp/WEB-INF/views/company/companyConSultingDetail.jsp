@@ -3,12 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
+<script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		jQuery.datetimepicker.setLocale('kr'); // 한국어
+		
+		jQuery('#consultingDesiredDate').datetimepicker({
+			format:'Y/m/d H:i', 'minDate' : new Date(), //오늘날짜가 minimum
+			allowTimes:[
+				'9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00',
+				'12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00',
+				'16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '19:30',
+				'20:00', '20:30', '21:00'
+			],
+			onShow:function( ct ){
+				this.setOptions({
+					maxDate:jQuery('#consultingDesiredDate').val()?jQuery('#consultingDesiredDate').val():false
+				})
+			},
+			timepicker:true
+		});
+	});
+</script>
 
 	<h4 class="mx-auto pb-2">상담 세부 항목</h4>
 	<table align="center">
 		<tr>
 			<th><label>상담희망일</label></th>
-			<td style="text-align: left;"><input type="datetime-local" name="consultingDesiredDate" id="consultingDesiredDate" class="form-control" value="${consulting.consultingDesiredDate}" readonly></td>
+			<td style="text-align: left;"><input type="text" name="consultingDesiredDate" id="consultingDesiredDate" class="form-control" value="${consulting.consultingDesiredDate}" readonly></td>
 		</tr>
 		<tr>
 			<th><label>제목</label></th>
