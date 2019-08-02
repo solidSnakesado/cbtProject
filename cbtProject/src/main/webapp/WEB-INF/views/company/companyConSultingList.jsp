@@ -3,17 +3,7 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<script type="text/javascript">
-	$(document).ready(function() {
-		// 2019.07.10 성재민
-		// 날짜가 2019-07-03T14:50 으로 표시되는데
-		// 중간에 표시되는 T 를 공백문자 하나로 변환하여 다시 지정
-		var arrTD = $("td[id^='consultingDesiredDate_']");
-		for(var i = 0; i < arrTD.length; ++i){
-			$(arrTD[i]).text($(arrTD[i]).text().replace("T", " "))
-		}
-	});
-	
+<script type="text/javascript">	
 	function goList(p){
 		searchFrm.page.value = p;
 		searchFrm.submit();
@@ -29,13 +19,31 @@
 		<tr>
 			<th>제목</th>
 			<th>상담희망일</th>
+			<th>상담일</th>
+			<th>상담상태</th>
 		</tr>
 		<c:forEach items="${result.consultingList}" var="consulting">
 			<tr onclick="location.href='companyConSultingDetail.do/${consulting.consultingId}'">
 				<td>${consulting.consultingTitle}</td>
 				<!-- 2019.07.10 성재민 -->
 				<!-- 상담 신청일이 저장되는 td 를 식별하기 위새 id 추가(식별값으로 consultingId 사용) -->
-				<td id="consultingDesiredDate_${consulting.consultingId}">${consulting.consultingDesiredDate}</td>
+				<td>${consulting.consultingDesiredDate}</td>
+				<td>
+					<c:if test="${not empty consulting.consultingDate }">
+						${consulting.consultingDate }
+					</c:if>
+					<c:if test="${empty consulting.consultingDate }">
+						상담일이 지정되지 않았습니다.
+					</c:if>
+				</td>
+				<td>
+					<c:if test="${consulting.consultingState == 'C1'}">
+						상담전
+					</c:if>
+					<c:if test="${consulting.consultingState == 'C2'}">
+						상담완료
+					</c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -53,20 +53,31 @@
 				<tr>
 					<th>선택</th>
 					<th>기업명</th>
-					<th>제목</th>
+					<th>제목</th>	
 					<th>상담희망일</th>
+					<th>상담일</th>
 					<th>상담진행상태</th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${result.consultingList}" var="ConsultingVO">
 					<tr class="trexam">
-						<td><input type="checkbox" name="consultingList"
-							value="${ConsultingVO.consultingId }"></td>
+						<td><label><input type="checkbox" name="consultingList"
+							value="${ConsultingVO.consultingId }"></label></td>
 						<td>${ConsultingVO.companyId }</td>
 						<td><a
 							href="managerConsultingListDetail.do/${ConsultingVO.consultingId }">${ConsultingVO.consultingTitle}</a></td>
 						<td>${ConsultingVO.consultingDesiredDate}</td>
+						<!-- 2019.08.02 성재민 -->
+						<!-- 상담일 전시 추가 -->
+						<td>
+							<c:if test="${not empty ConsultingVO.consultingDate }">
+								${ConsultingVO.consultingDate}
+							</c:if>
+							<c:if test="${empty ConsultingVO.consultingDate }">
+								상담일이 지정되지 않았습니다.
+							</c:if>
+						</td>
 						<td>${ConsultingVO.consultingStateName}</td>
 					</tr>
 				</c:forEach>

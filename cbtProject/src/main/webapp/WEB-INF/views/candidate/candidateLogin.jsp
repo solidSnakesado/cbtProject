@@ -1,3 +1,4 @@
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -7,24 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:if test="${not empty loginFail}">
-	<script type="text/javascript">
-		alert("로그인 오류.\nID와 비밀번호를 다시 입력해 주세요.");
-	</script>
-</c:if>
-<c:if test="${not empty joinResult}">
-	<c:if test="${joinResult == 'true'}">
-		<script type="text/javascript">
-			alert("가입이 완료 되었습니다.");
-		</script>
-	</c:if>
-	<c:if test="${joinResult == 'false'}">
-		<script type="text/javascript">
-			alert("가입 중 오류가 발생하였습니다.");
-		</script>
-	</c:if>
-</c:if>
-
 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
     <font color="red">
         <p>로그인 정보가 다릅니다 !!<br/>
@@ -35,7 +18,6 @@
 
 </head>
 <body>
-
 
 <!-- 통합로그인 되면서 삭제처리(7/24) -->
 <!-- <div  align="right"><a href="companyLogin.do"><button>기 업 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div> -->

@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
 <script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-<title>Insert title here</title>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		jQuery.datetimepicker.setLocale('kr'); // 한국어
@@ -22,16 +19,59 @@
 			],
 			onShow:function( ct ){
 				this.setOptions({
-					maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+					maxDate:jQuery('#consultingDesiredDate').val()?jQuery('#consultingDesiredDate').val():false
 				})
 			},
 			timepicker:true
 		});
+		
+		$("#insertConcultingBtn").click(function() {
+			var consultingDesiredDate 	= $("#consultingDesiredDate").val();
+			var consultingTitle 		= $("#consultingTitle").val();
+			var consultingContents 		= $("#consultingContents").val();
+			
+			console.log(consultingDesiredDate);
+			console.log(consultingTitle);
+			console.log(consultingContents);
+			
+			if(consultingDesiredDate == ''){
+				window.alert('상담희망일을 입력해 주세요.');
+				$("#consultingDesiredDate").focus();
+				return false;
+			}
+			
+			if(consultingTitle == ''){
+				window.alert('제목을 입력해 주세요.');
+				$("#consultingTitle").focus();
+				return false;
+			}
+			
+			if(consultingContents == ''){
+				window.alert('상담내용을 입력해 주세요.');
+				$("#consultingContents").focus();
+				return false;
+			}
+			
+			var inputDate 	= new Date(consultingDesiredDate);
+			var curDate		= new Date();
+			
+			console.log("입력시간");
+			console.log(inputDate);
+			console.log("현재시간");
+			console.log(curDate);
+			
+			if(inputDate <= curDate){
+				alert("상담희망일을 현재 시간보다 이전으로 입력하셨습니다.");	
+				$("#consultingDesiredDate").focus();
+			}
+
+			$("#consultingForm").submit();
+		});
 	});
 </script>
-</head>
-<body>
-	<form name="companyConsultingInsert.do" method="post">
+
+<div>
+	<form action="companyConsultingInsert.do" name="consultingForm" id="consultingForm" method="post">
 		<c:if test="${not empty sessionScope.company }">
 			<input type="hidden" name="companyId" value="${company.companyId}">
 		</c:if>
@@ -44,18 +84,17 @@
 			</tr>
 			<tr>
 				<th><label>제목</label></th>
-				<td><input type="text" name="consultingTitle" class="form-control" placeholder="제목을 입력해 주세요."><td>
+				<td><input type="text" id="consultingTitle" name="consultingTitle" class="form-control" placeholder="제목을 입력해 주세요."><td>
 			</tr>
 			<tr>
-			
+				
 				<th><label>상담내용</label></th>
-				<td><textarea name="consultingContents" cols="80" rows="8" class="form-control"
+				<td><textarea id="consultingContents" name="consultingContents" cols="80" rows="8" class="form-control"
 						placeholder="상담하고자 하시는 시험의 종류와 예상인원을 작성하여 주세요. 세부적으로 작성하실수록 상담이 쉬워집니다."></textarea>
 				<td>
 			</tr>
 		</table>
-		<input type="submit" value="상담신청" class="btn btn-primary m-3 p-3">
-		<button onclick="location.href='companyMain.do'">돌아가기</button>	
+		<input type="button" id="insertConcultingBtn" value="상담신청" class="btn btn-primary m-3 p-3">
+		<button onclick="location.href='companyMain.do'" class="btn btn-primary m-3 p-3">돌아가기</button>	
 	</form>
-</body>
-</html>
+</div>

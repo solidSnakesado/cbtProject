@@ -15,12 +15,12 @@
 </c:if>
 </head>
 <body>
-<div  align="right"><a href="candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
+<div  align="right"><a href="${pageContext.request.contextPath }/candidateLogin.do"><button>개 인 계 정</button></a> &nbsp; <a href="managerLogin.do"><button>관리자계정 </button></a></div>
 <br>
 	<form action="companyLogin.do" method="post">
 		<table border="1" align="center" class="table text-center">
 			<tr>
-				<br><td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/company.jpg"/><br></td>
+				<td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/company.jpg"/><br></td>
 			</tr>
 			<tr>
 				<td>ID</td>
