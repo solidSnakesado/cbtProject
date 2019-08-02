@@ -2,35 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document)
 			.ready(
 					function() {
-						function checkFileType(filePath) {
-							var fileFormat = filePath.split(".");
-							if (fileFormat.indexOf("xlsx") > -1) {
-								return true;
-							} else {
-								return false;
-							}
-						}
-
-						function fileCheck() {
-							var file = $("#fileInput").val();
-							if (file == "" || file == null) {
-								alert("파일을 선택해주세요.");
-								return false;
-							} else if (!checkFileType(file)) {
-								alert("엑셀 파일만 업로드 가능합니다.");
-								return false;
-							}
-
-							if (confirm("업로드 하시겠습니까?")) {
-								$("#formUpload").submit();
-							}
-						}
-
+						
 						// 2019.07.23 성재민
 						// 해당 유저의 이메일로 이메일 전송
 						// 이후 해당 유저가 로그인시(비회원일 경우 회원가입후)
@@ -107,6 +85,30 @@
 									}
 								});
 					});
+	
+	function fileCheck() {
+		var file = $("#fileInput").val();
+		if (file == "" || file == null) {
+			alert("파일을 선택해주세요.");
+			return false;
+		} else if (!checkFileType(file)) {
+			alert("엑셀 파일만 업로드 가능합니다.");
+			return false;
+		}
+
+		if (confirm("업로드 하시겠습니까?")) {
+			$("#formUpload").submit();
+		}
+	}
+	
+	function checkFileType(filePath) {
+		var fileFormat = filePath.split(".");
+		if (fileFormat.indexOf("xlsx") > -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	// 2019.07.23 성재민
 	// 체크박스가 체크가 되면 드랍 다운 박스 활성화.
@@ -159,12 +161,12 @@
 </script>
 <div class="container">
 	<div class="btnGroup">
-		<form action="${pageContext.request.contextPath}/excelUpload.do"
+		<form action="${pageContext.request.contextPath}/managerExcelUpload.do"
 			id="formUpload" name="formUpload" method="post"
 			enctype="multipart/form-data"> 
 			<input type="file" id="fileInput" class="form-control-file" name="fileInput" value="파일검색"
 				accept=".xlsx"> <input type="button" 
-				onclick="fileCheck()" class="btn btn-info" value="엑셀응시자 추가">
+				onclick="fileCheck()" class="btn btn-info" value="엑셀응시자 추가"/>
 &nbsp;&nbsp;&nbsp; 
 		<button type="button" class="btn btn-primary m-3 p-3"
 			onclick="location.href='managerUserInsert.do'">단일응시자추가</button>
@@ -184,9 +186,9 @@
 				<tr>
 					<!-- 2019.07.23 성재민 -->
 					<!-- 체크박스 이름 변경 -->
-					<td><input type="checkbox" name="takerListCheckBox"
+					<td><label><input type="checkbox" name="takerListCheckBox" align="center"
 						value="${CandidateVO.takerId }"
-						onclick="takerListCheckBoxOnclick()"></td>
+						onclick="takerListCheckBoxOnclick()"></label></td>
 					<td>${CandidateVO.takerId }</td>
 					<td><a
 						href="managerUserAccountEdit.do/${CandidateVO.takerId }">${CandidateVO.takerName }</a></td>
