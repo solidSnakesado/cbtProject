@@ -173,7 +173,9 @@ function openIdChk() {
 			<tbody>
 				<tr>
 					<td><label>응시자ID</label></td>
-					<td align="left"><input type="text" name="takerId" id="takerId">&nbsp;<input type="button" value="중복확인" onclick="openIdChk();"/>
+					<td align="left">
+						<input type="text" name="takerId" id="takerId">&nbsp;
+						<input type="button" value="중복확인" onclick="openIdChk();"/>
 						<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
 						<input type="hidden" id="isCheckId" value="false">
 					</td>
@@ -189,19 +191,26 @@ function openIdChk() {
 					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font></td>
 				</tr>
 				<tr>
-					<td><label>성명</label></td>
-					<td colspan="2" align="left"><input type="text" name="takerName" id="takerName" class="form-control">
+					<td>
+						<label>성명</label>
+					</td>
+					<td colspan="2" align="left">
+						<input type="text" name="takerName" id="takerName" class="form-control">
 					</td>
 				</tr>
 				<tr>
 					<td><label>생년월일</label></td>
-					<td colspan="2" align="left"><input type="text" name="takerInfo" id="takerInfo" class="form-control">
-					<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font></td>
+					<td colspan="2" align="left">
+						<input type="text" name="takerInfo" id="takerInfo" class="form-control">
+						<font size="1">6자리로 입력하세요. (ex.YYMMDD) </font>
+					</td>
 				</tr>
 				<tr>
 					<td><label>E-mail</label></td>
-					<td colspan="2" align="left"><input type="text" name="takerEmail" id="takerEmail" class="form-control">
-					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font></td>
+					<td colspan="2" align="left">]
+						<input type="text" name="takerEmail" id="takerEmail" class="form-control">
+						<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font>
+					</td>
 				</tr>
 				<tr>
 					<td><label>최종학력</label></td>
@@ -216,8 +225,10 @@ function openIdChk() {
 				</tr>
 				<tr>
 					<td><label>연락처</label></td>
-					<td colspan="2" align="left"><input type="text" name="takerPhoneNum" id="takerPhoneNum" class="form-control">
-					<font size="1">숫자로만 입력하세요(ex.01012341234) </font></td>
+					<td colspan="2" align="left">
+						<input type="text" name="takerPhoneNum" id="takerPhoneNum" class="form-control">
+						<font size="1">숫자로만 입력하세요(ex.01012341234) </font>
+					</td>
 				</tr>
 			</tbody>
 		</table>

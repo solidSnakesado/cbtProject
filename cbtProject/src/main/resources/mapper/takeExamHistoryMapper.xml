@@ -106,6 +106,7 @@
 			, 	APPLICANTS					"applicants"
 			, 	QUESTION_QUANTITY			"questionQuantity"
 			,	TAKER_SCORE					"takerScore"
+			,   QUESTION_ID               	"questionId"
 			, 	POINT						"point"
 		FROM TAKE_EXAM_HISTORY TEH JOIN TAKE_EXAM TE
 		ON TEH.TAKE_EXAM_ID = TE.TAKE_EXAM_ID

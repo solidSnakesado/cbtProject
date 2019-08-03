@@ -20,6 +20,7 @@
 				,COMPANY_CREDIT
 				,COMPANY_MANAGER
 				,COMPANY_MANAGER_TELNUM
+				,COMPANY_EMAIL
 			)
 		VALUES (
 				#{companyId}
@@ -31,6 +32,7 @@
 				,#{companyCredit}
 				,#{companyManager}
 				,#{companyManagerTelNum}
+				,#{companyEmail}
 			)
 	</insert>
 
@@ -63,11 +65,15 @@
 			<if test="companyManagerTelNum != null and companyManagerTelNum != '' ">
 				COMPANY_MANAGER_TELNUM = #{companyManagerTelNum},
 			</if>
+			<if test="companyEmail != null and companyEmail != '' ">
+				COMPANY_EMAIL = #{companyEmail},
+			</if>
 		</set>
 		<where>
 			COMPANY_ID = #{companyId}
 		</where>
 	</update>
+	
 	<!-- 단건, 다건 삭제 // 이승환추가 -->
 	<delete id="deleteCompany" parameterType="CompanyVO">
 		DELETE FROM COMPANY
@@ -101,6 +107,7 @@
 			,COMPANY_CREDIT
 			,COMPANY_MANAGER
 			,COMPANY_MANAGER_TELNUM
+			,COMPANY_EMAIL
 		FROM COMPANY
 		<where>
 			COMPANY_ID = #{companyId}
@@ -117,6 +124,7 @@
 			,COMPANY_CREDIT
 			,COMPANY_MANAGER
 			,COMPANY_MANAGER_TELNUM
+			,COMPANY_EMAIL
 		FROM COMPANY
 		<where>
 			COMPANY_ID = #{companyId}
