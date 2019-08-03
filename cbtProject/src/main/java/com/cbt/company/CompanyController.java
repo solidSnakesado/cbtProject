@@ -124,7 +124,18 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "companyAccount.do", method = RequestMethod.GET)
-	public String companyAccount() {
+	public String companyAccount(Model model, Authentication authentication) {
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+		CompanyVO vo = new CompanyVO();
+		vo.setCompanyId(user.getUsername());
+		vo = companyService.getCompany(vo);
+		vo = companyService.loginCompany(vo);
+		vo.setCompanyPassword(vo.getCompanyPassword());
+		model.addAttribute("company", vo);
+		model.addAttribute("companyClassificationList", conditionService.getConditionDetailList("E")); // E-회사분류
+		model.addAttribute("companySectorsList", conditionService.getConditionDetailList("F")); // F-세부업종
+		
+		
 		return "company/company/companyAccount";
 	}
 
