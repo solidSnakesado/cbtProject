@@ -161,17 +161,13 @@
 			<tr>
 				<td><label>기업 ID/ 기업 이름</label></td>
 				<td>
-					<div class="row">
-						<div class="col">
-							<input type="text" name="companyId" id="companyId"
-								class="form-control col-5" style="display: inline" readonly> 
-							<input type="text" id="companyName" 
-								class="form-control col-5" style="display: inline" readonly>
+					<input type="text" name="companyId" id="companyId"
+						class="form-control col-5" style="display: inline" readonly> 
+					<input type="text" id="companyName" 
+						class="form-control col-5" style="display: inline" readonly>
 
-							<button type="button" class="btn btn-primary" id="btnCompanyFind"
-								data-toggle="modal" style="display: inline">기업 찾기</button>
-						</div>
-					</div>
+					<button type="button" class="btn btn-primary" id="btnCompanyFind"
+						data-toggle="modal" style="display: inline">기업 찾기</button>				
 				</td>
 			</tr>
 			<tr>
@@ -182,7 +178,7 @@
 			<tr>
 				<td><label>금액 </label></td>
 				<td><input type="text" name="estimatePrice" id="estimatePrice" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
-					class="form-control" placeholder="숫자로 입력"></td>
+					class="form-control" placeholder="숫자로 입력"><b> 원</b></td>
 			</tr>
 			<tr>
 				<td><label>의뢰진행상태</label></td>

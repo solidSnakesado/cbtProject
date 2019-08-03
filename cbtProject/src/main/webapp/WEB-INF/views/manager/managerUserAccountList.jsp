@@ -4,6 +4,11 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
 <script>
 	$(document)
 			.ready(
@@ -170,12 +175,12 @@
 &nbsp;&nbsp;&nbsp; 
 		<button type="button" class="btn btn-primary m-3 p-3"
 			onclick="location.href='managerUserInsert.do'">단일응시자추가</button>
-		<button id="" class="btn btn-warning m-3 p-3">응시자 삭제</button>
+		
 		</form>
 	</div>
-	<form action="managerUserDelete.do">
-
-		<table border="1" align="center" class="table table-striped">
+	<form action="${pageContext.request.contextPath}/managerUserDelete.do">
+	<button id="" class="btn btn-warning">응시자 삭제</button>
+		<table border="1" align="center" class="table">
 			<tr>
 				<th><label>선택</label></th>
 				<th><label>응시자ID</label></th>
@@ -183,7 +188,7 @@
 				<th><label>E-Mail</label></th>
 			</tr>
 			<c:forEach items="${result.takerList }" var="CandidateVO">
-				<tr>
+				<tr class="trexam">
 					<!-- 2019.07.23 성재민 -->
 					<!-- 체크박스 이름 변경 -->
 					<td><label><input type="checkbox" name="takerListCheckBox" align="center"

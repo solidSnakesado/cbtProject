@@ -26,7 +26,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void updateCompany(CompanyVO vo) {
-		// TODO Auto-generated method stub
+		vo.setCompanyPassword(scpwd.encode(vo.getCompanyPassword()));
 		companyDAO.updateCompany(vo);
 	}
 

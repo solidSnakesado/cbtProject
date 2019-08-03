@@ -6,6 +6,11 @@
 			$("#header").load("candidateInHeader.jsp")
 		});
 	</script>
+<style type="text/css">
+   .trexam {cursor: pointer; }
+    tr.trexam:hover { background-color: lightblue; } 
+   thead {background-color: lightgrey}
+</style>
 
 	<h4 class="mx-auto pb-2">매니저 목록</h4>
 	<form>
@@ -25,7 +30,7 @@
 			<th><label>관리자 이름</label></th>
 		</tr>
 		<c:forEach items="${result.managerList }" var="manager">
-		<tr>
+		<tr class="trexam">
 			<td><input type="checkbox" name="mngList" value="${manager.managerId }"></td>
 			<td><a href="managerUpdateManager/${manager.managerId }">${manager.managerId }</a></td>
 			<td>${manager.managerName }</td>

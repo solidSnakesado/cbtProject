@@ -149,7 +149,7 @@ public class CompanyController {
 		companyService.deleteCompany(vo);
 		session.invalidate();
 
-		return "redirect:companyLogin.do";
+		return "redirect:candidateMain.do";
 	}
 
 	// 관리자 컴퍼니 정보 수정처리

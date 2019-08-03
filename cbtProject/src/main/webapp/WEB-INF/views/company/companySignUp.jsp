@@ -236,7 +236,7 @@
 <body>
 	<header id="header"></header>
 	<div align="right">
-		<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a>
+		<a href="${pageContext.request.contextPath}/candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a>
 	</div>
 	<br>
 	<h4 class="mx-auto pb-2">기업 회원 가입 페이지</h4>
@@ -267,7 +267,9 @@
 			</tr>
 			<tr>
 				<td><label>기업명</label></td>
-				<td><input type="text" name="companyName" id="companyName" class="form-control"></td>
+				<td>
+					<input type="text" name="companyName" id="companyName" class="form-control">
+				</td>
 			</tr>
 			<tr>
 				<td><label>사업자번호</label></td>
@@ -310,7 +312,7 @@
 			<tr>
 				<td><label>연락처</label></td>
 				<td>
-					<input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control">
+					<input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
 					<font size="1">숫자로만 입력하세요(ex.01012341234) </font>
 				</td>
 			</tr>
