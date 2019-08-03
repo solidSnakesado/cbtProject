@@ -2,21 +2,64 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html onmouseout="blockOver()">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" /> --%>
 <title>Insert title here</title>
 <style>
+
+	.floatMenu:hover { 
+		background-color: lightblue;
+	}
+
+	.wrap {
+		height: 80px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.button {
+		width: 140px;
+		height: 45px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #000;
+		background-color: #fff;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	.button:hover {
+		background-color: #2EE59D;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+
+	#mainTable {
+		
+		width	:	80%;
+		height	:	80%;
+		margin-top: 10%;
+		margin-left: 5%;
+	}
 
 	#floatMenu {
 		position: absolute;
 		width: 100px;
 		height: 200px;
 		right: 20px;
-		top: 120px;
+		top: 200px;
 		background-color: white;
 	}
 	
@@ -49,6 +92,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+	function blockRightClick(){
+	    return window.close();
+	}
+	function blockSelect(){
+	    return false;
+	}
+	
+	function blockOver(){
+		return false;
+	}
+
+	
 	var i = 0;
 	var data;
 	var a = 1;
@@ -104,6 +159,9 @@
 		/* 문제풀기 시작 버튼 */
 		$('#btn').on("click", function() {
 			console.log("문제 풀기");
+			
+			/* document.documentElement.webkitRequestFullscreen(); */
+			
 			$("#floatMenu").show();
 			
 			$.ajax({
@@ -190,12 +248,12 @@
 			        	ex[num[2]] = data[numbers[c-1]].example3;
 			        	ex[num[3]] = data[numbers[c-1]].example4;
 			        	
-						$("#answer1").append($("<tr>").attr("value",c).attr("name","goExam"+c+"")
+						$("#answer1").append($("<tr>").attr('class','floatMenu').attr("value",c).attr("name","goExam"+c+"")
 							.append($("<td>").attr("id","answer"+c).html(c+" . "))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[0])))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[1])))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[2])))
-							.append($("<td>").append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[3]))))
+							.append($("<td>").attr('class','floatMenu').append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[0])))
+							.append($("<td>").attr('class','floatMenu').append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[1])))
+							.append($("<td>").attr('class','floatMenu').append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[2])))
+							.append($("<td>").attr('class','floatMenu').append($("<input>").attr("type","radio").attr("onclick","return(false);").attr("name","exam"+c).attr("value",ex[3]))))
 						
 						if(data[numbers[c-1]].takerAnswer != null){
 							$("[name ='exam"+c+"']").val([data[numbers[c-1]].takerAnswer]);
@@ -261,7 +319,7 @@
 						} else {
 							
 							console.log('없어');
-							alert('마지막이야');
+							window.alert('마지막이야');
 						}
 						updateAnswer();
 					})
@@ -281,10 +339,40 @@
 						} else {
 							
 							console.log('없어');
-							alert('처음이야');
 						}
 						updateAnswer();
 					})
+					
+					$('#endBtn').on("click", function() {
+						
+						var check	=	0;
+						
+						for(var c=1; c <= count; c++){
+							if($("input:radio[name='exam"+c+"']").is(":checked") == false){
+								$("input:radio[name='exam"+c+"']").parent().parent().attr('style','background-color : red; transition : width, 1s, ease, 1s;');
+								/* setTimeout(function(){console.log('1111');$("input:radio[name='exam"+c+"']").parent().parent().attr('style','background-color : red; transition : width, 1s, ease, 1s;');}, 1000); */
+
+								check = 1;
+							}
+						}
+						
+						if(check == 0){
+							takeExamForm.submit();
+							
+						}
+						
+					})
+					
+					window.onkeydown = function(event) {
+						var kcode = event.keyCode;
+						if(kcode == 27) {
+							event.returnValue = false;
+							window.close();
+						} else {
+							window.close();
+						}
+					}
+					
 					
 					function getTimeStamp(serverDate) {
 						var d = new Date(serverDate);
@@ -359,18 +447,10 @@
 		})
 	});
 	
-	function candidateTestResult(){
-		if(confirm("제출하시겠습니까?? \n 번복불가.") == true) {
-			takeExamForm.submit();
-		} else {
-			return false;
-		}
-	}
-	
 </script>
 </head>
-<body>
-	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestResult.do" method="post">
+<body onselectstart="return blockSelect()" oncontextmenu="return blockRightClick()" style="width: 100%; height: 100%;">
+	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestRedirect.do" method="post">
 		<input type="text" id="eId" name="examId" value="${examVO.examId }" hidden="ture">
 		<input type="text" id="tId" name="takeExamId" value="${takeExamId }" hidden="ture">
 	</form>
@@ -379,11 +459,11 @@
 		<div id="countdown"></div>
 		<table id="answer1">
 			<tr>
-				<td>No.</td>
-				<td>1.</td>
-				<td>2.</td>
-				<td>3.</td>
-				<td>4.</td>
+				<th>No.</th>
+				<th>1.</th>
+				<th>2.</th>
+				<th>3.</th>
+				<th>4.</th>
 			</tr>
 			<tr>
 				<td colspan="5" align="center" valign="top">
@@ -391,61 +471,62 @@
 			</tr>
 		</table>
 	</div>
-	
-<button id="btn">시험 시작 !</button>
-	<table border="1" id="mainTab">
-		<tr >
-			<td><h2 align="center" id="examId" value=""></h2></td>
-		</tr>
-		<tr height="200">
-			<td><div><h2 align="center" id="question"></h2><p align="right" id="timer"></p></div></td>
-		</tr>
-		<tr>
-			<td align="left" valign="top" width="900" height="100">
-				<table class="tab">
-					<tr>
-						<th width="80px;"></th>
-						<th ></th>
-						<th ></th>
-						<th id="point" align="right" style="padding-left: 80%"></th>
-					</tr>
-					<tr class="tr1">
-						<td></td>
-						<td align="right" id="td1" hidden="true"></td>
-						<td align="left" id="exam1" style="font-size: 20px;" colspan="4"></td>
-						<td></td>
-					</tr>
-					<tr class="tr2">
-						<td></td>
-						<td align="right" id="td2" hidden="true"></td>
-						<td align="left" id="exam2" style="font-size: 20px;" colspan="4"></td>
-						<td></td>
-					</tr>
-					<tr class="tr3">
-						<td></td>
-						<td align="right" id="td3" hidden="true"></td>
-						<td align="left" id="exam3" style="font-size: 20px;" colspan="4"></td>
-						<td></td>
-					</tr>
-					<tr class="tr4">
-						<td></td>
-						<td align="right" id="td4" hidden="true"></td>
-						<td align="left" id="exam4" style="font-size: 20px;" colspan="4"></td>
-						<td></td>
-					</tr>
-				</table>
-			</td>
-		<tr>
-			<td align="center" colspan="2">
-				<button class="previous" id="pBtn" >Previous</button>
-				<button class="next"  id="nBtn" >Next</button>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center" valign="top">
-				<button type='button' onclick="candidateTestResult()" >제출 하기</button>
-			</td>
-		</tr>
-	</table>
+	<div id="mainTabDiv">
+		<p class="wrap" >
+			<button class="button" id="btn">시험 시작 !</button>
+		</p>
+		
+		<div id="mainTab">
+		<table border="1" id="mainTable">
+			<tr >
+				<td><h2 align="center" id="examId" value=""></h2></td>
+			</tr>
+			<tr height="200">
+				<td><div><h2 align="center" id="question"></h2><p align="right" id="timer"></p></div></td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" width="900" height="100">
+					<table class="tab">
+						<tr>
+							<th width="80px;"></th>
+							<th ></th>
+							<th ></th>
+							<th id="point" align="right" style="padding-left: 80%"></th>
+						</tr>
+						<tr class="tr1">
+							<td></td>
+							<td align="right" id="td1" hidden="true"></td>
+							<td align="left" id="exam1" style="font-size: 20px;" colspan="4"></td>
+							<td></td>
+						</tr>
+						<tr class="tr2">
+							<td></td>
+							<td align="right" id="td2" hidden="true"></td>
+							<td align="left" id="exam2" style="font-size: 20px;" colspan="4"></td>
+							<td></td>
+						</tr>
+						<tr class="tr3">
+							<td></td>
+							<td align="right" id="td3" hidden="true"></td>
+							<td align="left" id="exam3" style="font-size: 20px;" colspan="4"></td>
+							<td></td>
+						</tr>
+						<tr class="tr4">
+							<td></td>
+							<td align="right" id="td4" hidden="true"></td>
+							<td align="left" id="exam4" style="font-size: 20px;" colspan="4"></td>
+							<td></td>
+						</tr>
+					</table>
+				</td>
+		</table>
+		<p align="center">
+			<br>
+			<button class="previous" id="pBtn" >Previous</button>
+			<button type='button' id="endBtn" >제출</button>
+			<button class="next"  id="nBtn" >Next</button>
+		</p>
+		</div>
+	</div>
 </body>
 </html>

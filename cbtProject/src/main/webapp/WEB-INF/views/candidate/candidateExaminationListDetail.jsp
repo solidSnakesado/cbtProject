@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$("#chartBtn").click(function() {
 			google.load("visualization", "1", {packages : ["corechart"]});

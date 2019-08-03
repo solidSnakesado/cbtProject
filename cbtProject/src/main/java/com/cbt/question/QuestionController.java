@@ -90,8 +90,8 @@ public class QuestionController {
 			mv.addObject("takeExamId", vo.getTakeExamId());
 
 		}
-
-		mv.setViewName("candidate/candidate/candidateTakeExam");
+		
+		mv.setViewName("empty/candidate/candidateTakeExam");
 
 		return mv;
 	}
@@ -145,6 +145,65 @@ public class QuestionController {
 		vo.setTakerId(user.getUsername());
 		questionService.updateTakeExamHistory(vo);
 
+	}
+	
+	@RequestMapping(value = "candidateTestRedirect.do", method = RequestMethod.POST)
+	public void candidateTestRedirect(@RequestParam(value = "takeExamId", required = false) int takeExamId,
+			@RequestParam(value = "examId", required = false) int examId, Authentication authentication,
+			HttpServletResponse response) throws IOException {
+
+		// 응시자ID를 가지고 제출 정답을 문제정답과 비교해 채점하여 히스토리에 점수 UPDATE
+		questionService.rightAnswer(takeExamId);
+
+		TakeExamVO takeExamVO = new TakeExamVO();
+		takeExamVO.setTakeExamId(takeExamId);
+		takeExamVO.setExamId(examId);
+
+		// 제출한 응시자 총점 기록
+		questionService.rightLastAnswer(takeExamVO);
+		
+		response.setContentType("text/html charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>if (window.opener && !window.opener.closed)\r\n" + 
+				"window.opener.location = 'candidateTestResult.do/"+takeExamId+"/"+examId+"';\r\n" + 
+				"window.close();</script>");
+		out.flush();
+
+	}
+	
+	@RequestMapping(value = "candidateTestResult.do/{takeExamId}/{examId}", method = RequestMethod.GET)
+	public ModelAndView candidateGetTestResult(@PathVariable(value = "takeExamId", required = false) int takeExamId,
+			@PathVariable(value = "examId", required = false) int examId, Authentication authentication) {
+
+		CustomerUser user = (CustomerUser) authentication.getPrincipal();
+
+		CandidateVO candiVO = new CandidateVO();
+		candiVO.setTakerId(user.getUsername());
+		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("candiVO", candidateService.getCandidate(candiVO));
+
+		ExamVO examVO = new ExamVO();
+		// 시험 ID 를 가지고 해당시험의 상세 정보 가져오기
+		examVO.setExamId(examId);
+		mv.addObject("examVO", examService.getExam(examVO));
+
+		// 응시자ID를 가지고 제출 정답을 문제정답과 비교해 채점하여 히스토리에 점수 UPDATE
+		questionService.rightAnswer(takeExamId);
+
+		TakeExamVO takeExamVO = new TakeExamVO();
+		// 시험 ID 와 응시자 ID 를 가지고
+		// 맞힌 문제 수 answerCount , 맞힌 문제 합계점수 sumTakerScore 담기
+		takeExamVO.setTakeExamId(takeExamId);
+		takeExamVO.setExamId(examId);
+		mv.addObject("takeExamVO", takeExamHistoryService.getTakeExamHistoryForSumPointAndCount(takeExamVO));
+
+		// 제출한 응시자 총점 기록
+		questionService.rightLastAnswer(takeExamVO);
+
+		mv.setViewName("candidate/candidate/candidateTestResult");
+
+		return mv;
 	}
 
 	@RequestMapping(value = "candidateTestResult.do", method = RequestMethod.POST)

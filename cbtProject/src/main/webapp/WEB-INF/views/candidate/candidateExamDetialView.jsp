@@ -10,10 +10,18 @@
 <script>
 	$(document).ready(function() {
 	
+		
+	/* 	function testStart(){
+			
+			window.open('${pageContext.request.contextPath }/candidateTakeExam.do', '시험시작', 'width = 500, height = 500, top = 100, left = 100, status = no , toolbars = no, location = no');
+			
+		} */
+		
+		
 		var score = ${takeExamId.score};
 		
 		if (score != 9999) {
-			$("[id ='btn']").html('응시결과 확인');
+			$("[id ='btn']").html('응시결과 확인').attr('id','noId');
 			$("[id ='takeExamForm']").attr('action','${pageContext.request.contextPath }/candidateTestResult.do');
 			alert('응시 완료한 시험입니다.');
 		} else if (nowDate <= sDate) {
@@ -29,8 +37,25 @@
 		console.log("시험시작 : " + sDate);
 		console.log("시험종료 : " + eDate);
 		
-		$("[id ='btn']").click(function() {
+		$("[id ='noId']").click(function() {
+			takeExamForm.method	=	"post";
+			takeExamForm.submit();
+		})
 		
+		$("[id ='btn']").click(function() {
+			
+			
+			var url		=	'${pageContext.request.contextPath }/candidateTakeExam.do';
+			var title	=	'시험시작';
+			var status	=	'width = 300, height = 50, top = 500, left = 600, status = no , toolbars = no, location = no';
+
+			window.open("",title,status);
+			
+			
+			takeExamForm.target	=	title;
+			takeExamForm.action	=	url;
+			takeExamForm.method	=	"post";
+			
 			takeExamForm.submit();
 		
 		});
@@ -101,7 +126,7 @@
 </script>
 </head>
 <body>
-	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTakeExam.do" method="post">
+	<form id="takeExamForm" name="takeExamForm">
 		<input type="text" id="eId" name="examId" value="${detailExam.examId }" hidden="true">
 		<input type="text" id="tId" name="takeExamId" value="${takeExamId.takeExamId }" hidden="true">
 	</form>

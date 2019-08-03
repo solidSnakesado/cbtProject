@@ -45,7 +45,6 @@
 		font-size : 20px;
 		box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
 		transform: translateY(-0.25em);
-		position: absolute;
 	}
 	
 	button {  
