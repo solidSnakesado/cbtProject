@@ -8,6 +8,39 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>candidateTestResult.jsp</title>
+<style>
+	.wrap {
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.button {
+		width: 140px;
+		height: 45px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #fff;
+		background-color: #5F5E5E;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	.button:hover {
+		background-color: lightblue;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function surveyDo(){
@@ -60,7 +93,7 @@
 		</tr>
 	</table>
 	<br>
-	<div><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div>
+	<div><button class="button" onclick="surveyDo()">문제해설</button>&nbsp;&nbsp;&nbsp;<button class="button" onclick="mainDo()">메인으로</button></div>
 	<!-- 수정 (7/19) june -->
 	<!-- <div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div> -->
 	<form id="survey" name="survey" action="${pageContext.request.contextPath }/candidateSurvey.do/${takeExamVO.takeExamId}/${examVO.examId}"  method="GET">

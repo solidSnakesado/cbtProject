@@ -47,24 +47,61 @@
 		transform: translateY(-0.25em);
 	}
 	
-	button {  
-		color: var(--color);
-		transition: 0.25s;
+	.wrap {
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 	
-	&:hover,
-	&:focus { 
-		border-color: var(--hover);
+	#button {
+		width: 90px;
+		height: 35px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
 		color: #fff;
-	}
+		background-color: #5F5E5E;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
 	}
 	
-	button {
-		background: none;
-		border: 1px solid;
-		font: inherit;
-		line-height: 1;
-		margin: 0.5em;
-		padding: 1em 2em;
+	#button:hover {
+		background-color: lightblue;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+	
+	.button {
+		width: 140px;
+		height: 45px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #fff;
+		background-color: #5F5E5E;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	.button:hover {
+		background-color: lightblue;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
 	}
 	
 	@keyframes dash {
@@ -301,7 +338,7 @@
 </div> -->
 
 	<div id="floatMenu">
-		<p style="font-size: 10px"onclick="allView()" ><button>모든 정답 보기</button></p>
+		<p style="font-size: 10px"onclick="allView()" ><button id="button">모두 보기</button></p>
 		<table class="scroll">
 			<tr>
 				<th style="padding: 0px;">바로가기</th>
@@ -340,7 +377,7 @@
 			<td class="exam${status.count}" id="exam${status.count}1" value="${list.example1}" >1. ${list.example1}</td>
 			<td></td>
 			<td rowspan="2">
-				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" ><button>정답 보기</button></div>
+				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" ><button class='button'>정답 보기</button></div>
 				<div class="rightAnswer" id="rightAnswerHide${status.count}" value="${list.rightAnswer}" style="display: none;">정답 : ${list.rightAnswer}</div>
 			</td>
 		</tr>
@@ -389,7 +426,7 @@
 			<td></td>
 			<td colspan="2">
 				<%-- <a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a> --%>
-				<a href="${pageContext.request.contextPath }/candidateMain.do"><button class="btn btn-warning">메인으로</button></a>
+				<a href="${pageContext.request.contextPath }/candidateMain.do"><button class="button">메인으로</button></a>
 			</td>
 			<td></td>
 		</tr>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html onmouseout="blockOver()">
+<html onmouseout="return blockOver()" onselectstart="return blockSelect()" oncontextmenu="return blockRightClick()">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -15,7 +15,7 @@
 	}
 
 	.wrap {
-		height: 80px;
+		height: 100px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -25,12 +25,12 @@
 		width: 140px;
 		height: 45px;
 		font-family: 'Roboto', sans-serif;
-		font-size: 11px;
+		font-size: 14px;
 		text-transform: uppercase;
 		letter-spacing: 2.5px;
 		font-weight: 500;
-		color: #000;
-		background-color: #fff;
+		color: #fff;
+		background-color: #5F5E5E;
 		border: none;
 		border-radius: 45px;
 		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
 	}
 	
 	.button:hover {
-		background-color: #2EE59D;
+		background-color: lightblue;
 		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 		color: #fff;
 		transform: translateY(-7px);
@@ -52,6 +52,10 @@
 		height	:	80%;
 		margin-top: 10%;
 		margin-left: 5%;
+		border-color: #fff;
+		border: none;
+		border-radius: 25px;
+		
 	}
 
 	#floatMenu {
@@ -66,48 +70,113 @@
 	#floatMenu table {
 		width: 100%;
 		border-collapse: collapse;
+		border: none;
+		border-radius: 25px;
+		
 	}
 	
 	.tab {
 		width: 100%;
+		border-color: #fff;
+		border: none;
+		border-radius: 25px;
+		font-size: 20px;
 	}
 	
 	#exam1:hover {
-		background-color: lightblue;
+		color: red;
+		font: bolder;
+		font-size: 22px;
+		transition : width, 1s, ease, 0.4s;
+		transform: translateY(-7px);
+		text-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		
 	}
 	
 	#exam2:hover {
-		background-color: lightblue;
+		color: red;
+		font: lighter;
+		font-size: 22px;
+		transition : width, 1s, ease, 0.4s;
+		transform: translateY(-7px);
+		text-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 	}
 	
 	#exam3:hover {
-		background-color: lightblue;
+		color: red;
+		font: 500;
+		font-size: 22px;
+		transition : width, 1s, ease, 0.4s;
+		transform: translateY(-7px);
+		text-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 	}
 	
 	#exam4:hover {
+		color: red;
+		font: large;
+		font-size: 22px;
+		transition : width, 1s, ease, 0.4s;
+		transform: translateY(-7px);
+		text-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	}
+	
+	#answer1 tr:hover {
+		padding-top: 6px;
+		padding-bottom : 6px;
+		color: red;
 		background-color: lightblue;
+		font: large;
+		transition : width, 1s, ease, 0.4s;
+		transform: translateX(-10px);
+		border-radius: 25px;
+	}
+	
+	#answer1 tr {
+		margin: 6px;
+		font: large;
+		transition : width, 1s, ease, 0.4s;
+		border-collapse: collapse;
+		border: none;
+		border-radius: 25px;
+	}
+	
+	#answer1 td {
+		margin: 6px;
+		font: large;
+		transition : width, 1s, ease, 0.4s;
+		border-collapse: collapse;
+		border: none;
 	}
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+	// 우클릭 방지
 	function blockRightClick(){
 	    return window.close();
 	}
-	function blockSelect(){
-	    return false;
-	}
 	
+	// 
 	function blockOver(){
+		if(swap != 0){
+			return window.close();
+		}
 		return false;
 	}
 
-	
 	var i = 0;
 	var data;
 	var a = 1;
 	var count = 0;
+	var swap = 0;
+	
+	function resize(){
+		$( window ).resize(function() {
+			swap = 1;
+		})
+	}
+	
 	$(document).ready(function() {
 		
 		// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
@@ -130,10 +199,12 @@
 		
 		$('#btn').click(function () {  
 			if($("#btn").css("display") == "none"){   
-				$('#btn').show();  
+				$('#btn').show(); 
+				$('#warBtn').show(); 
 			} else {  
 				$('#btn').hide();
 				$('#mainTab').show();
+				$('#warBtn').hide();
 			}  
 		});
 		
@@ -160,8 +231,10 @@
 		$('#btn').on("click", function() {
 			console.log("문제 풀기");
 			
-			/* document.documentElement.webkitRequestFullscreen(); */
+			document.documentElement.webkitRequestFullscreen();
 			
+			setTimeout("resize()", 2000);
+
 			$("#floatMenu").show();
 			
 			$.ajax({
@@ -234,7 +307,7 @@
 			        	
 			        	$("#examId").html(examName);
 			        	$("#question").html(a+" .   "+data[numbers[i]].questionContent);
-						$("#point").html("배점 : " + data[numbers[i]].point);
+						$("#point").html(" +  " + data[numbers[i]].point + " Point");
 			        	
 			        }
 			        
@@ -319,7 +392,6 @@
 						} else {
 							
 							console.log('없어');
-							window.alert('마지막이야');
 						}
 						updateAnswer();
 					})
@@ -350,7 +422,6 @@
 						for(var c=1; c <= count; c++){
 							if($("input:radio[name='exam"+c+"']").is(":checked") == false){
 								$("input:radio[name='exam"+c+"']").parent().parent().attr('style','background-color : red; transition : width, 1s, ease, 1s;');
-								/* setTimeout(function(){console.log('1111');$("input:radio[name='exam"+c+"']").parent().parent().attr('style','background-color : red; transition : width, 1s, ease, 1s;');}, 1000); */
 
 								check = 1;
 							}
@@ -449,7 +520,7 @@
 	
 </script>
 </head>
-<body onselectstart="return blockSelect()" oncontextmenu="return blockRightClick()" style="width: 100%; height: 100%;">
+<body>
 	<form id="takeExamForm" name="takeExamForm" action="${pageContext.request.contextPath }/candidateTestRedirect.do" method="post">
 		<input type="text" id="eId" name="examId" value="${examVO.examId }" hidden="ture">
 		<input type="text" id="tId" name="takeExamId" value="${takeExamId }" hidden="ture">
@@ -458,8 +529,8 @@
 	<div id="floatMenu">
 		<div id="countdown"></div>
 		<table id="answer1">
-			<tr>
-				<th>No.</th>
+			<tr style="">
+				<th id="first">No.</th>
 				<th>1.</th>
 				<th>2.</th>
 				<th>3.</th>
@@ -496,37 +567,40 @@
 						<tr class="tr1">
 							<td></td>
 							<td align="right" id="td1" hidden="true"></td>
-							<td align="left" id="exam1" style="font-size: 20px;" colspan="4"></td>
+							<td align="left" id="exam1"  colspan="4"></td>
 							<td></td>
 						</tr>
 						<tr class="tr2">
 							<td></td>
 							<td align="right" id="td2" hidden="true"></td>
-							<td align="left" id="exam2" style="font-size: 20px;" colspan="4"></td>
+							<td align="left" id="exam2"  colspan="4"></td>
 							<td></td>
 						</tr>
 						<tr class="tr3">
 							<td></td>
 							<td align="right" id="td3" hidden="true"></td>
-							<td align="left" id="exam3" style="font-size: 20px;" colspan="4"></td>
+							<td align="left" id="exam3"  colspan="4"></td>
 							<td></td>
 						</tr>
 						<tr class="tr4">
 							<td></td>
 							<td align="right" id="td4" hidden="true"></td>
-							<td align="left" id="exam4" style="font-size: 20px;" colspan="4"></td>
+							<td align="left" id="exam4"  colspan="4"></td>
 							<td></td>
 						</tr>
 					</table>
 				</td>
 		</table>
-		<p align="center">
+		<p style="margin-left: 30%;">
 			<br>
-			<button class="previous" id="pBtn" >Previous</button>
-			<button type='button' id="endBtn" >제출</button>
-			<button class="next"  id="nBtn" >Next</button>
+			<button type='button' id="pBtn" class="button" >Previous</button>
+			<button type='button' id="endBtn" class="button" >submission</button>
+			<button type='button'  id="nBtn" class="button" >Next</button>
 		</p>
 		</div>
+		<p id="warBtn">
+			&nbsp;&nbsp;시험 시작 시 마우스 <b style="color: #5A63F8">좌클릭</b>을 제외한 모든 입력시 시험이 종료되니 주의하세요 !
+		</p>
 	</div>
 </body>
 </html>

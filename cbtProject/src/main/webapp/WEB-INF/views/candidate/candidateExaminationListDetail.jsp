@@ -8,6 +8,39 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>응시 세부 목록</title>
+<style>
+	.wrap {
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.button {
+		width: 140px;
+		height: 45px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #fff;
+		background-color: #5F5E5E;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	.button:hover {
+		background-color: lightblue;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -252,8 +285,8 @@
 	<!-- 통계보기 버튼 추가 -->
 	<br>
 	<div>
-		<button id="chartBtn">통계보기</button>
-		<a href="${pageContext.request.contextPath }/candidateRightAnswer.do/${examId}"><button>풀이보기</button></a>
+		<button id="chartBtn" class='button'>통계보기</button>
+		<a href="${pageContext.request.contextPath }/candidateRightAnswer.do/${examId}"><button class='button'>풀이보기</button></a>
 	</div>
 	<!-- chart가 생성될 공간 -->
 	<!-- chart가 생성될 공간 -->
