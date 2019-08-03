@@ -75,17 +75,23 @@
 		<tr>
 			<th><label>출제상태</label></th>
 			<c:if test="${selectedExam.setExamStatus == 'I1'}">
-				<td>출제전 <input type="button" id="I1SetExam" value="출제하기"></td>
+				<td>출제중 <input type="button" id="I1SetExam" value="출제하기"></td>
 			</c:if>
 			<c:if test="${selectedExam.setExamStatus == 'I2'}">
 				<td>
-					출제중 <input type="button" id="I2SetExam" value="출제하기">
+					출제완료 <!-- <input type="button" id="I2SetExam" value="출제하기"> -->
 					[<a href="<c:url value='/managerExamQuestionExcelDown.do/${examId}' />">엑셀 다운</a>]
 				</td>
 			</c:if>
 			<c:if test="${selectedExam.setExamStatus == 'I3'}">
 				<td>
-					출제완료
+					시험전
+					[<a href="<c:url value='/managerExamQuestionExcelDown.do/${examId}' />">엑셀 다운</a>]
+				</td>
+			</c:if>
+			<c:if test="${selectedExam.setExamStatus == 'I4'}">
+				<td>
+					시험완료
 					[<a href="<c:url value='/managerExamQuestionExcelDown.do/${examId}' />">엑셀 다운</a>]
 				</td>
 			</c:if>

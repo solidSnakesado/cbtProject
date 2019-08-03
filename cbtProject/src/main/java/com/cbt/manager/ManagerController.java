@@ -436,7 +436,14 @@ public class ManagerController {
 	
 	@RequestMapping(value = "managerExamUpdate.do", method = RequestMethod.POST)
 	public String updateExam(@ModelAttribute("exam") ExamVO vo) {
+		System.out.println("시험상태"+vo.getSetExamStatus());
+		System.out.println("아이뒤"+vo.getEstimateId());
+		if(vo.getSetExamStatus().equals("I2")) { //시험출제상태를 출제 완료로 수정하면 의뢰에서도 출제완료로 수정
+			System.out.println("성공했다임마ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+			estimateService.updatesTradeProgressExchange3(vo.getEstimateId());
+		}
 		examService.updateExam(vo);
+		
 		return "redirect:managerExamList.do";
 	}
 	

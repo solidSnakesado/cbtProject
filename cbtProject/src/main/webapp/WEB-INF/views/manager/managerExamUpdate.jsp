@@ -78,6 +78,7 @@
 	<h4 class="mx-auto pb-2">개별 시험 의뢰 목록 (기업화면)</h4>
 	<form action="${pageContext.request.contextPath }/managerExamUpdate.do" method="post">
 	<input type = "hidden" name = "examId" value = "${selectedExam.examId}">
+	<input type = "hidden" name = "estimateId" value = "${selectedExam.estimateId}">
 	<table border = "1" align="center">
 		<tr>
 			<th><label>의뢰ID</label></th>

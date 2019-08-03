@@ -57,6 +57,11 @@ public class EstimateDAO {
 		mybatis.update("EstimateDAO.updatesTradeProgressExchange2", estimateId);
 	}
     
+    //상태 2. -> 3. 변경
+    public void updatesTradeProgressExchange3(int estimateId) {
+		mybatis.update("EstimateDAO.updatesTradeProgressExchange3", estimateId);
+	}
+    
     //상태 3. -> 4. 변경
     public void updatesTradeProgressExchange4(EstimateVO vo) {
 		mybatis.update("EstimateDAO.updatesTradeProgressExchange4", vo);

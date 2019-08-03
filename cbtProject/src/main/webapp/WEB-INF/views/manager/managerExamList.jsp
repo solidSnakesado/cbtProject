@@ -80,13 +80,16 @@
 					<td>시험완료</td>
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I1'}">
-					<td>출제전</td>
-				</c:if>
-				<c:if test="${exam.setExamStatus == 'I2'}">
 					<td>출제중</td>
 				</c:if>
-				<c:if test="${exam.setExamStatus == 'I3'}">
+				<c:if test="${exam.setExamStatus == 'I2'}">
 					<td>출제완료</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I3'}">
+					<td>시험전</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I4'}">
+					<td>시험완료</td>
 				</c:if>
 			</tr>
 		</c:forEach>
