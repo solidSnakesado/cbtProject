@@ -20,6 +20,7 @@
 				,COMPANY_CREDIT
 				,COMPANY_MANAGER
 				,COMPANY_MANAGER_TELNUM
+				,COMPANY_EMAIL
 			)
 		VALUES (
 				#{companyId}
@@ -31,6 +32,7 @@
 				,#{companyCredit}
 				,#{companyManager}
 				,#{companyManagerTelNum}
+				,#{companyEmail}
 			)
 	</insert>
 
@@ -62,6 +64,9 @@
 			</if>
 			<if test="companyManagerTelNum != null and companyManagerTelNum != '' ">
 				COMPANY_MANAGER_TELNUM = #{companyManagerTelNum},
+			</if>
+			<if test="companyEmail != null and companyEmail != '' ">
+				COMPANY_EMAIL = #{companyEmail},
 			</if>
 		</set>
 		<where>
@@ -101,6 +106,7 @@
 			,COMPANY_CREDIT
 			,COMPANY_MANAGER
 			,COMPANY_MANAGER_TELNUM
+			,COMPANY_EMAIL
 		FROM COMPANY
 		<where>
 			COMPANY_ID = #{companyId}
@@ -117,6 +123,7 @@
 			,COMPANY_CREDIT
 			,COMPANY_MANAGER
 			,COMPANY_MANAGER_TELNUM
+			,COMPANY_EMAIL
 		FROM COMPANY
 		<where>
 			COMPANY_ID = #{companyId}

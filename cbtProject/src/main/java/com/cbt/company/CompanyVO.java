@@ -10,6 +10,7 @@ public class CompanyVO {
 	private String companyCredit;       
 	private String companyManager;    
 	private String companyManagerTelNum;	// 2019.07.02 성재민 COMPANY_MANAGER_TELNUM 추가
+	private String companyEmail;
 	private String[] cpnList;
 	private String companyClassificationName;
 	private String companySectorsName;
@@ -20,6 +21,14 @@ public class CompanyVO {
 	private String searchKeyword;
 	
 	
+
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
+	}
 
 	public String getCompanyId() {
 		return companyId;
