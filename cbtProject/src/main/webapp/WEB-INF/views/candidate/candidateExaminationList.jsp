@@ -3,9 +3,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <style type="text/css">
-   .trexam {cursor: pointer; }
-    tr.trexam:hover { background-color: lightblue; } 
-   thead {background-color: lightgrey}
+	.trexam {cursor: pointer; }
+	
+	tbody tr:hover{ background-color: lightblue; } 
+	
+	thead tr:hover{ background-color: lightgrey; }
+	
+	tr {
+		margin: 6px;
+		font: large;
+		transition : width, 1s, ease, 0.4s;
+		border-collapse: collapse;
+		border: none;
+		border-radius: 25px;
+	}
+	
+	.wrap {
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.button {
+		width: 140px;
+		height: 45px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 2.5px;
+		font-weight: 500;
+		color: #fff;
+		background-color: #5F5E5E;
+		border: none;
+		border-radius: 45px;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease 0s;
+		cursor: pointer;
+		outline: none;
+	}
+	
+	.button:hover {
+		background-color: lightblue;
+		box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		color: #fff;
+		transform: translateY(-7px);
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -70,6 +113,7 @@
 		<input type="text" id="examTime2" name="examStartTime" class="form-control" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
 	<table id="table" border="1" class="table text-center">
+	<thead id="thead" style="background-color : lightgrey;">
 		<tr>
 			<th>시험코드</th>
 			<th>수험번호</th>
@@ -78,6 +122,8 @@
 			<th>시험일시</th>
 			<th>응시 상태</th>
 		</tr>
+	</thead>
+	<tbody>
 	<c:forEach items="${candidateExaminationList}" var="list" varStatus="status">
 		<tr id="result${status.count}" class="result" value="${status.count}">
 			<td id="examId${status.count}" value="${list.examId}" >${list.examId}</td>
@@ -94,9 +140,10 @@
 		</c:if>
 		</tr>
 	</c:forEach>
+	</tbody>
 	</table>
 	
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging}"/></div><br>
 	
-	<div align="right"><a href="candidateMain.do"><button class="btn btn-warning">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><a href="candidateMain.do"><button class="button">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 
