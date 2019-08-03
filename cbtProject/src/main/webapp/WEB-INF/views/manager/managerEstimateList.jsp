@@ -4,9 +4,6 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
 <style>
-	
-    
-    
     tr:hover td {background:#ABCDEF !important}; /*마우스 hover 색상  */
 </style>
 
@@ -61,7 +58,20 @@
 		<!-- 페이징 처리폼 -->
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
-		</form>
+			<!-- 190803 검색 수정부분 -->
+			
+		검색조건 <my:estimateListSelect items="${consultingMap }"/>&nbsp;&nbsp;
+		<input type="text" name="searchKeyword" value="${ConsultingVO.searchKeyword }">
+		<button class="btn btn-primary">검색</button> 
+	</form>
+	 <script>
+		searchFrm.sort.value="${ConsultingVO.sort}"==""?searchFrm.sort.options[0].value
+							:"${ConsultingVO.sort}";
+		searchFrm.searchConsulting.value="${ConsultingVO.searchConsulting}"==""
+									?searchFrm.searchConsulting.options[0].value
+									:"${ConsultingVO.searchConsulting}";
+	</script>
+			<!-- 190803 검색 수정부분 -->
 		<div style="text-align: right">
 			<button type="button" class="btn btn-primary" value="등록"
 				id="btnInsert" onclick="location.href='managerEstimateInsert.do'">의뢰등록</button>

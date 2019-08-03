@@ -1,19 +1,19 @@
 package com.cbt.common;
 
-import java.io.File;
 
 public class EmailVO {
 	private String subject; //이메일제목
 	private String text;
 	private String fromEmail; //보낼이메일주소
 	private String ToEmail; //받는 이메일 주소	
-	private File attachFile;
+	private String attachFile;
 	
 	
-	public File getAttachFile() {
+	
+	public String getAttachFile() {
 		return attachFile;
 	}
-	public void setAttachFile(File attachFile) {
+	public void setAttachFile(String attachFile) {
 		this.attachFile = attachFile;
 	}
 	public String getSubject() {

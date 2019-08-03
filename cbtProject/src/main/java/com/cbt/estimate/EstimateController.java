@@ -6,10 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -23,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -49,8 +45,6 @@ import com.cbt.common.Paging;
 import com.cbt.company.CompanyService;
 import com.cbt.company.CompanyVO;
 import com.cbt.condition.ConditionService;
-import com.cbt.question.QuestionVO;
-import com.cbt.setExamQuestion.SetExamQuestionVO;
 
 /* @RestController가 @ResponseBody를 포함하고 있기 때문에
  * view가 필요하고 restfulAPI와 묶고 싶을 경우 클래스에 @Controller로 지정해주고, restfulAPI에는 일일이 @ResponseBody를 붙여야된다.
@@ -151,6 +145,7 @@ public class EstimateController {
 		
 		emailVO.setFromEmail("dtg3431@gmail.com");
 		emailVO.setToEmail(vo.getCompanyEmail()); //기업 이메일로처리
+		
 		String test= "";
 		try {
 			byte[] encodded = Files.readAllBytes(Paths.get(request.getSession().getServletContext().getRealPath("DocumentForm/mail.html")));
@@ -275,6 +270,8 @@ public class EstimateController {
 		emailVO.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
 		emailVO.setFromEmail("dtg3431@gmail.com");
 		emailVO.setToEmail("dtg3444@naver.com"); //기업 이메일로처리
+		emailVO.setAttachFile(request.getSession().getServletContext().getRealPath("/DocumentForm/결제방법.pdf"));
+		
 		this.sendEmail(emailVO);
 		//
 		
@@ -440,10 +437,12 @@ public class EstimateController {
 		messageHelper.setText(vo.getText(),true);
 		messageHelper.setFrom(vo.getFromEmail());
 		messageHelper.setTo(new InternetAddress(vo.getToEmail(), "", "UTF-8"));
-
+		
+		
+		
 		if(vo.getAttachFile() != null) {
 			DataSource dataSource = new FileDataSource(vo.getAttachFile());
-			messageHelper.addAttachment(MimeUtility.encodeText(vo.getAttachFile().getName(), "UTF-8", "B"), dataSource);
+			messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
 		}
 		
 //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));
