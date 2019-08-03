@@ -53,13 +53,19 @@
 						var idx 	= 0;
 						data.forEach(function (row) {	
 							for(var i = 0; i < takerIdArr.length; ++i) {
-								if(takerIdArr[i] == row.takerId){
+								if(takerIdArr[i].takerId == row.takerId){
+									takerIdArr[i].questionPoint += row.point;
 									newId = false;
 									break;
 								}
 							}
 							if(newId == true){
-								takerIdArr.push(row.takerId);
+								var takerIdPoint = {
+										takerId : row.takerId,
+										questionPoint : row.point
+									}
+								
+								takerIdArr.push(takerIdPoint);
 							}
 							
 							var questionIdPoint = {
@@ -84,8 +90,8 @@
 							if(isNewQuestion == true) {
 								totalScroeQuestionArr.push(questionIdPoint);
 								
-								
 								var takerIdPoint = {
+									qId: row.questionId,
 									questionId : row.setExamQuestionId,
 									questionPoint : row.takerScore
 								}
@@ -102,11 +108,19 @@
 						});
 					
  						console.log("응시자 id 목록 " + takerIdArr);
+ 						console.log(takerIdArr);
 						console.log("응시 가능 인원 수 " + examApplicants);
 						console.log("응시 인원 수 " + takerIdArr.length);
 						console.log(totalScroeQuestionArr);
 						console.log(takerScroeQuestionArr);
 						console.log("합격 커트라인 점수 " + examPassingScore);
+						
+						for(var takerIndex = 0; takerIndex < takerIdArr.length; ++takerIndex){
+							if(takerIdArr[takerIndex].questionPoint > examPassingScore){
+								++passTakerCount;
+								break;
+							}
+						}
 						
 						var chartAttendanceRateData = new google.visualization.DataTable();
 						
@@ -186,7 +200,7 @@
 					    	var correctAnswerRate = (parseFloat(takerScroeQuestionArr[qIdx].questionPoint) / parseFloat(totalScroeQuestionArr[qIdx].questionPoint)) * 100;
 					    	console.log(num + "문제" + correctAnswerRate);
 					    	chartCorrectAnswerRateData.addRows([
-					    		["문제 " + num++, correctAnswerRate]
+					    		["문제 " + takerScroeQuestionArr[qIdx].qId, correctAnswerRate]
 					    	]);
 					    }		    
 					    
@@ -211,6 +225,7 @@
 					    var chart3 = new google.visualization.LineChart(document.getElementById('chartDiv3'));
 						chart3.draw(chartCorrectAnswerRateData, CorrectAnswerRateChartOptions);
 					    window.addEventListener('resize', function() { chart3.draw(chartCorrectAnswerRateData, CorrectAnswerRateChartOptions); }, false);
+					
 					}	
 				});
 			}
