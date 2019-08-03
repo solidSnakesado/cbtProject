@@ -78,6 +78,11 @@ public class EstimateServiceImpl implements EstimateService {
 		
 	}
 	@Override
+	public void updatesTradeProgressExchange3(int estimateId) {
+		estimateDAO.updatesTradeProgressExchange3(estimateId);
+		
+	}
+	@Override
 	public void updatesTradeProgressExchange4(EstimateVO vo) {
 		estimateDAO.updatesTradeProgressExchange4(vo);
 		

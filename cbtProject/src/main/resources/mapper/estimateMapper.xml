@@ -181,6 +181,13 @@
 		WHERE ESTIMATE_ID       =  #{value}
 	</update>
 	
+	<update id="updatesTradeProgressExchange3" >
+		UPDATE ESTIMATE
+		SET	 
+			 TRADE_PROGRESS 	=  'B3'
+		WHERE ESTIMATE_ID       =  #{estimateId}
+	</update>
+	
 	<update id="updatesTradeProgressExchange4">
 		UPDATE ESTIMATE
 		SET	 

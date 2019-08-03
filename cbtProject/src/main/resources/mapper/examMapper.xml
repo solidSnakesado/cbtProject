@@ -108,7 +108,7 @@
 			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
 			,	TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
 			,	QUESTION_QUANTITY
-			,	ESTIMATE_ID
+			,	ESTIMATE_ID										"estimateId"						
 			,	NUMBER_OF_TIMES
 			,	PASSING_SCORE
 			,	APPLICANTS

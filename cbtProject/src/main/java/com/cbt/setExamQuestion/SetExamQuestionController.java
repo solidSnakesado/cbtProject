@@ -97,9 +97,11 @@ public class SetExamQuestionController {
 		// 2019.07.11 성재민
 		// 출제 상태 출제 중으로 변경 출제 중으로
 		// 출제된 문제 기업회원에게 컨펌 후 다시 출제 하거나 출제를 확정한다.
-		examVo.setSetExamStatus("I2");
-		examService.updateExam(examVo);
 		
+		
+//		examVo.setSetExamStatus("I2");
+//		examService.updateExam(examVo);
+//		
 		model.addAttribute("questionVOList", questionVOList);
 		model.addAttribute("examId", setExamvoList.get(0).getExamId());
 		
