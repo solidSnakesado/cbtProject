@@ -68,6 +68,7 @@
 			COMPANY_ID = #{companyId}
 		</where>
 	</update>
+	
 	<!-- 단건, 다건 삭제 // 이승환추가 -->
 	<delete id="deleteCompany" parameterType="CompanyVO">
 		DELETE FROM COMPANY

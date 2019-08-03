@@ -40,11 +40,10 @@
 		<div class="btnGroup">
 		<button type="button" class="btn btn-primary"
 			onclick="location.href='managerAccountInsert.do'">기업 추가</button>
-		<button id="" class="btn btn-danger">삭제</button>
 		</div>
 		<form action="managerAccountDelete.do">
-
-			<table border="1" align="center" class="table table-striped">
+		<button id="" class="btn btn-danger">삭제</button>
+			<table border="1" align="center" class="table">
 				<thead>
 				<tr>
 					<th>선택</th>
@@ -56,8 +55,8 @@
 				<tbody>
 				<c:forEach items="${result.companyList }" var="CompanyVO">
 					<tr class="trexam">
-						<td><input type="checkbox" name="companyList"
-							value="${CompanyVO.companyId }"></td>
+						<td><label><input type="checkbox" name="companyList"
+							value="${CompanyVO.companyId }"></label></td>
 						<td>${CompanyVO.companyId }</td>
 						<td><a href="managerAccountManage.do/${CompanyVO.companyId }">${CompanyVO.companyName }</a></td>
 						<td>${CompanyVO.companyManager }</td>
