@@ -162,7 +162,7 @@ function openIdChk() {
 	<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
-		<table border="1" class="table text-center">
+		<table class="table text-center">
 			<thead class="table-success">
 				<tr>
 					<td colspan="2">

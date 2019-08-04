@@ -369,30 +369,31 @@
 		
 		
 		<!--테이블 시작 -->
-		
+		<thead class="table-success">
 		<tr>
-			<th valign="top" id="questuin${status.count}"><h3>${status.count} . ${list.questionContent}</h3></th>
+			<th id="questuin${status.count}"><h3 align="left" style="padding-left: 15%">${status.count} . ${list.questionContent}</h3></th>
 			<th></th>
-			<th style="width: 20%;"><p id="point${status.count}" value="" hidden="true">+ ${list.point} point</p></th>
+			<th style="width: 20%;"><p id="point${status.count}" hidden="true">+ ${list.point} point</p></th>
 		</tr>
-		
+		</thead>
+		<tbody>
 		<tr>
-			<td class="exam${status.count}" id="exam${status.count}1" value="${list.example1}" >1. ${list.example1}</td>
+			<td align="left" class="exam${status.count}" id="exam${status.count}1" value="${list.example1}" style="padding-left: 20%">1. ${list.example1} </td>
 			<td></td>
 			<td rowspan="2">
-				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" ><button class='button'>정답 보기</button></div>
+				<div class="rightAnswer" id="rightAnswerView${status.count}" value="${status.count}" ><button class='btn btn-success'>정답 보기</button></div>
 				<div class="rightAnswer" id="rightAnswerHide${status.count}" value="${list.rightAnswer}" style="display: none;">정답 : ${list.rightAnswer}</div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="exam${status.count}" id="exam${status.count}2" value="${list.example2}" >2. ${list.example2}</td>
+			<td align="left" class="exam${status.count}" id="exam${status.count}2" value="${list.example2}" style="padding-left: 20%">2. ${list.example2}</td>
 			<td></td>
 			<td></td>
 		</tr>
 		
 		<tr>
-			<td class="exam${status.count}" id="exam${status.count}3" value="${list.example3}" >3. ${list.example3}</td>
+			<td align="left" class="exam${status.count}" id="exam${status.count}3" value="${list.example3}" style="padding-left: 20%">3. ${list.example3}</td>
 			<td></td>
 			<td rowspan="2">
 				<div id="CommentaryView${status.count}" ></div>
@@ -401,7 +402,7 @@
 		</tr>
 		
 		<tr>
-			<td class="exam${status.count}" id="exam${status.count}4" value="${list.example4}" >4. ${list.example4}</td>
+			<td align="left" class="exam${status.count}" id="exam${status.count}4" value="${list.example4}" style="padding-left: 20%">4. ${list.example4}</td>
 			<td></td>
 			<td></td>
 		</tr>
@@ -429,12 +430,12 @@
 			<td></td>
 			<td colspan="2">
 				<%-- <a href="${pageContext.request.contextPath }/candidateMain.do"><button>수정 요청</button></a> --%>
-				<a href="${pageContext.request.contextPath }/candidateMain.do"><button class="button">메인으로</button></a>
+				<a href="${pageContext.request.contextPath }/candidateMain.do"><button class="btn btn-primary">메인으로</button></a>
 			</td>
 			<td></td>
 		</tr>
 		
-	
+	</tbody>
 	</table>
 			
 

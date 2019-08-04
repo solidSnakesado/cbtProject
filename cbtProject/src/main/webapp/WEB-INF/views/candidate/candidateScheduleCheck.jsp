@@ -88,8 +88,8 @@
 		<input type = "hidden" name="page" value="1">
 	</form>
 
-	<table class="table text-center" border="1">
-	<thead>
+	<table class="table text-center">
+	<thead class="table-success">
 		<tr>
 			<th>시험코드</th>
 			<th>시험명</th>
@@ -121,6 +121,6 @@
 
 	<div align="center"><my:paging jsFunc="goList" paging="${candidateScheduleCheckPage.paging}"/></div><br>
 	
-	<div align="right"><a href="candidateMain.do"><button class="button">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><a href="candidateMain.do"><button class="btn btn-primary">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

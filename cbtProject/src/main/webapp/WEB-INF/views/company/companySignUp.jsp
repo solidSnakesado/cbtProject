@@ -242,7 +242,7 @@
 	<br>
 	
 	<form id="fmField" name="fmField"  action="companySignUp.do" method="post">
-		<table border="1" class="table text-center">
+		<table class="table text-center">
 			<thead class="table-secondary">
 				<tr>
 					<td colspan="2">

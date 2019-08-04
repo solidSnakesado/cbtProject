@@ -19,16 +19,25 @@
 			google.setOnLoadCallback(loadPageData);
 			
 			var examIdx = $("#examSelect option:selected").val();
-			console.log(examIdx);
 
 			function loadPageData() {
 				$.ajax({
 					type: "POST",
 					url : "${pageContext.request.contextPath }/getTakeExamHistoryForExamIdList.do/" + examIdx,
 					success: function(data) {
+						console.log(data);
 						if(data.length <= 0){
+							$("#pageTitle").hide();
+							$("#chartDiv").hide();
+							$("#chartDiv2").hide();
+							$("#chartDiv3").hide();
 							return;
 						}
+						
+						$("#pageTitle").show();
+						$("#chartDiv").show();
+						$("#chartDiv2").show();
+						$("#chartDiv3").show();
 						
 						var examApplicants 			= 0;			// 2019.07.17 성재민 // 응시가능 인원
 						var examQuestionQuantity	= 0;			// 2019,07,17 성재민 // 출제 문항 수

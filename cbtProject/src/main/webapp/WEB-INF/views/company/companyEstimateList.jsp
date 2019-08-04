@@ -42,7 +42,10 @@
 				return false;
 			}
 		}
-		
+	
+	function backMainBtn() {
+		location.href = "${pageContext.request.contextPath }/companyMain.do";
+	}
 			
 </script>
 
@@ -60,7 +63,7 @@
 		
 		<form action="companyEstimateList.do">
 			
-			<table border="1" class="table table-striped">
+			<table class="table text-center">
 				<tr>
 					<th><label>의뢰ID</label></th>
 					<th><label>카테고리</label></th>
@@ -87,4 +90,7 @@
 		
 		<my:paging jsFunc="goList" paging="${result.paging}"/>
 		
+		<div align="right">
+			<input type="button" id="backMainBtn" value="돌아가기" class="btn btn-primary" onclick="backMainBtn()">
+		</div>
 	</div>	

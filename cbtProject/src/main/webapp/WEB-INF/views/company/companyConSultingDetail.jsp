@@ -25,11 +25,21 @@
 			},
 			timepicker:true
 		});
+		
+		$("#deleteBtn").click(function() {
+			if (confirm("삭제 하시겠습니까?")){ 
+				// 삭제하는 페이지로 Go Go 
+				location.href = '${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}';
+			} else { 
+				alert("삭제 취소 되었습니다."); 
+				return; 
+			} 
+		});
 	});
 </script>
 
 	<h4 class="mx-auto pb-2">상담 세부 항목</h4>
-	<table align="center">
+	<table class="table text-center">
 		<tr>
 			<th><label>상담희망일</label></th>
 			<td style="text-align: left;"><input type="text" name="consultingDesiredDate" id="consultingDesiredDate" class="form-control" value="${consulting.consultingDesiredDate}" readonly></td>
@@ -58,7 +68,7 @@
 	<br>
 
 	<c:if test="${consulting.consultingState == 'C1'}">
-		<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
+		<input type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
 	</c:if>
-	<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
-	<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
+	<input id="deleteBtn" type="button" class="btn btn-warning" value="삭제하기">
+	<input type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">

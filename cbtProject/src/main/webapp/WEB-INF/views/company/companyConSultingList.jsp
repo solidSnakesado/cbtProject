@@ -10,12 +10,12 @@
 	}
 </script>
 
-	<h4 class="mx-auto pb-2">상담목록확인(기업)</h4>
+	<h4 class="mx-auto pb-2">상담목록</h4>
 
 	<form name="searchFrm">
 		<input type = "hidden" name="page" value="1">
 	</form>
-	<table border="1" align="center">
+	<table class="table text-center">
 		<tr>
 			<th>제목</th>
 			<th>상담희망일</th>
@@ -49,5 +49,6 @@
 	</table>
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging }"/></div>
 	
-	<br>
-	<button onclick="location.href='companyMain.do'" class="btn btn-primary m-3 p-3" >돌아가기</button>
+	<div align="right">
+		<button onclick="location.href='companyMain.do'" class="btn btn-primary" >돌아가기</button>
+	</div>
