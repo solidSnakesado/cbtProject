@@ -33,7 +33,7 @@
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">Computer Based Testing(CBT)</h1>
-          <p class="lead mb-5 text-white-50">환영합니다.</p>
+          <p class="lead mb-5 text-white-50">개인 고객님 환영합니다.</p>
         </div>
       </div>
     </div>
@@ -113,13 +113,7 @@
   </div>
   <!-- /.container -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; CBT Project 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+
 
 <!--   
   <script src="vendor/jquery/jquery.min.js"></script>

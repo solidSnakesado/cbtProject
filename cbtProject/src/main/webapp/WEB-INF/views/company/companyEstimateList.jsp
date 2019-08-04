@@ -91,6 +91,6 @@
 		<my:paging jsFunc="goList" paging="${result.paging}"/>
 		
 		<div align="right">
-			<input type="button" id="backMainBtn" value="돌아가기" class="btn btn-primary" onclick="backMainBtn()">
+			<input type="button" id="backMainBtn" value="돌아가기" class="btn btn-info" onclick="backMainBtn()">
 		</div>
 	</div>	

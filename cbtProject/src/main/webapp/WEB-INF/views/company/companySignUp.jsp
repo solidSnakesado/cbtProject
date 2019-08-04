@@ -337,7 +337,7 @@
 		</table>
 		<br> <br>
 		<div align="center">
-			<button type="button" id="joinBtn" class="btn btn-primary">가입</button>&nbsp;&nbsp;&nbsp; 
+			<button type="button" id="joinBtn" class="btn btn-info">가입</button>&nbsp;&nbsp;&nbsp; 
 			<!-- <input type="submit" value="가입" class="btn btn-primary m-3 p-3">
 			<input type="reset" value="취소" class="btn btn-warning m-3 p-3"> -->
 			<input type="button" id="resetBtn" value="취소" class="btn btn-warning"/> &nbsp;

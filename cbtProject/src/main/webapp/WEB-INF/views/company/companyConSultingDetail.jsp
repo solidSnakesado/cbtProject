@@ -71,4 +71,4 @@
 		<input type="button" class="btn btn-success" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do/${consulting.consultingId}'" value="수정하기">
 	</c:if>
 	<input id="deleteBtn" type="button" class="btn btn-warning" value="삭제하기">
-	<input type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
+	<input type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
