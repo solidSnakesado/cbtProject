@@ -236,99 +236,111 @@
 <body>
 	<header id="header"></header>
 	<div align="right">
+		<a href="${pageContext.request.contextPath}/insertCandidate.do"><button class="btn btn-primary m-3 p-3">개인회원가입</button></a>&nbsp;&nbsp;
 		<a href="${pageContext.request.contextPath}/candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a>
 	</div>
 	<br>
-	<h4 class="mx-auto pb-2">기업 회원 가입 페이지</h4>
+	
 	<form id="fmField" name="fmField"  action="companySignUp.do" method="post">
 		<table border="1" class="table text-center">
-			<tr>
-				<td><label>기업ID</label></td>
-				<td align="left">
-					<input type="text" name="companyId" id="companyId" class="form-control">&nbsp;
-					<input type="button" id="idCheckBtn" value="중복확인"/>
-					<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
-					<input type="hidden" id="isCheckId" value="false">
-				</td>
-			</tr>
-			<tr>
-				<td><label>기업PW</label></td>
-				<td>
-					<input type="password" name="companyPassword" id="companyPassword" class="form-control">
-					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
-				</td>
-			</tr>
-			<tr>
-				<td><label>PW확인</label></td>
-				<td>
-					<input type="password" name="companyPwCheck" id="companyPwCheck" class="form-control">
-					<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
-				</td>
-			</tr>
-			<tr>
-				<td><label>기업명</label></td>
-				<td>
-					<input type="text" name="companyName" id="companyName" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td><label>사업자번호</label></td>
-				<td align="left">
-					<input type="text" name="businessNumber" id="businessNumber" class="form-control" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
-					<input type="button" id="businessNumberCheckBtn" value="중복확인"/>
-					<font size="1">숫자로만 입력하세요.(ex.4353534534)</font>
-					<input type="hidden" id="isCheckBisinessNumber" value="false">
-				</td>
-			<tr>
-				<td><label>회사분류</label></td>
-				<td>
-					<select name="companyClassification" id="companyClassification" class="form-control">
-						<option value="-1">-회사분류를 선택하세요-</option>
-						<c:forEach items="${companyClassificationList}" var="companyClassificationItem">
-							<option value="${companyClassificationItem.detailCd}">${companyClassificationItem.detailNm}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td><label>세부업종</label></td>
-				<td>
-					<select name="companySectors" id="companySectors" class="form-control">
-						<option value="-1">-세부업종를 선택하세요-</option>
-						<c:forEach items="${companySectorsList}" var="companySectorItem">
-							<option value="${companySectorItem.detailCd}">${companySectorItem.detailNm}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td><label>주거래 은행</label></td>
-				<td><input type="text" name="companyCredit" id="companyCredit" class="form-control"></td>
-			</tr>
-			<tr>
-				<td><label>담당자</label></td>
-				<td><input type="text" name="companyManager" id="companyManager" class="form-control"></td>
-			</tr>
-			<tr>
-				<td><label>연락처</label></td>
-				<td>
-					<input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
-					<font size="1">숫자로만 입력하세요(ex.01012341234) </font>
-				</td>
-			</tr>
-			<tr>
-				<td><label>E-mail</label></td>
-				<td>
-					<input type="text" name="companyEmail" id="companyEmail" class="form-control">
-					<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font>
-				</td>
-			</tr>
+			<thead class="table-secondary">
+				<tr>
+					<td colspan="2">
+						<h4>기업 회원 가입 페이지</h4>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><label>기업ID</label></td>
+					<td align="left">
+						<input type="text" name="companyId" id="companyId" class="form-control-with-button">&nbsp;
+						<input type="button" id="idCheckBtn" value="중복확인" class="btn btn-info"/>
+						<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
+						<input type="hidden" id="isCheckId" value="false">
+					</td>
+				</tr>
+				<tr>
+					<td><label>기업PW</label></td>
+					<td align="left">
+						<input type="password" name="companyPassword" id="companyPassword" class="form-control">
+						<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
+					</td>
+				</tr>
+				<tr>
+					<td><label>PW확인</label></td>
+					<td align="left">
+						<input type="password" name="companyPwCheck" id="companyPwCheck" class="form-control">
+						<font size="1">8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다 </font>
+					</td>
+				</tr>
+				<tr>
+					<td><label>기업명</label></td>
+					<td align="left">
+						<input type="text" name="companyName" id="companyName" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td><label>사업자번호</label></td>
+					<td align="left">
+						<input type="text" name="businessNumber" id="businessNumber" class="form-control-with-button" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
+						&nbsp;
+						<input type="button" id="businessNumberCheckBtn" value="중복확인" class="btn btn-info"/>
+						<font size="1">숫자로만 입력하세요.(ex.4353534534)</font>
+						<input type="hidden" id="isCheckBisinessNumber" value="false">
+					</td>
+				<tr>
+					<td><label>회사분류</label></td>
+					<td align="left">
+						<select name="companyClassification" id="companyClassification" class="form-control">
+							<option value="-1">-회사분류를 선택하세요-</option>
+							<c:forEach items="${companyClassificationList}" var="companyClassificationItem">
+								<option value="${companyClassificationItem.detailCd}">${companyClassificationItem.detailNm}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label>세부업종</label></td>
+					<td align="left">
+						<select name="companySectors" id="companySectors" class="form-control">
+							<option value="-1">-세부업종를 선택하세요-</option>
+							<c:forEach items="${companySectorsList}" var="companySectorItem">
+								<option value="${companySectorItem.detailCd}">${companySectorItem.detailNm}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label>주거래 은행</label></td>
+					<td align="left"><input type="text" name="companyCredit" id="companyCredit" class="form-control"></td>
+				</tr>
+				<tr>
+					<td><label>담당자</label></td>
+					<td align="left"><input type="text" name="companyManager" id="companyManager" class="form-control"></td>
+				</tr>
+				<tr>
+					<td><label>연락처</label></td>
+					<td align="left">
+						<input type="text" name="companyManagerTelNum" id="companyManagerTelNum" class="form-control" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10">
+						<font size="1">숫자로만 입력하세요(ex.01012341234) </font>
+					</td>
+				</tr>
+				<tr>
+					<td><label>E-mail</label></td>
+					<td align="left">
+						<input type="text" name="companyEmail" id="companyEmail" class="form-control">
+						<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font>
+					</td>
+				</tr>
+			</tbody>
 		</table>
-		<div align="right">
-			<button type="button" id="joinBtn" class="btn btn-primary m-3 p-3">가입</button>&nbsp;&nbsp;&nbsp; 
+		<br> <br>
+		<div align="center">
+			<button type="button" id="joinBtn" class="btn btn-primary">가입</button>&nbsp;&nbsp;&nbsp; 
 			<!-- <input type="submit" value="가입" class="btn btn-primary m-3 p-3">
 			<input type="reset" value="취소" class="btn btn-warning m-3 p-3"> -->
-			<input type="button" id="resetBtn" value="취소" class="btn btn-warning m-3 p-3"/> &nbsp;
+			<input type="button" id="resetBtn" value="취소" class="btn btn-warning"/> &nbsp;
 		</div>
 	</form>
 	<br>

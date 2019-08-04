@@ -3386,7 +3386,7 @@ input[type="button"].btn-block {
 }
 
 .btn-primary:active,
-.btn-primary.active {
+.primary.active {
   background-color: #003399 \9;
 }
 
