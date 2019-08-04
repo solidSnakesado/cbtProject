@@ -33,7 +33,7 @@
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">Computer Based Testing(CBT)</h1>
-          <p class="lead mb-5 text-white-50">환영합니다.</p>
+          <p class="lead mb-5 text-white-50">개인 고객님 환영합니다.</p>
         </div>
       </div>
     </div>
@@ -47,6 +47,7 @@
         <h2>CBT란?</h2>
         <hr>
         <p>컴퓨터를 이용하여 시험에 응시하고 성적 처리도 컴퓨터를 통해 이루어지는 시험방식입니다. </p>
+        <p>기업에 적합한 역량을 키워나가고 싶으십니까? CBT로 합격의 길에 한발 다가설수 있습니다!</p>
         <p>해설, 모의고사, 오답노트, 자동채점, 교사용/학생용 성적관리</p>
         <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
       </div>
@@ -113,13 +114,7 @@
   </div>
   <!-- /.container -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; CBT Project 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+
 
 <!--   
   <script src="vendor/jquery/jquery.min.js"></script>

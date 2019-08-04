@@ -99,7 +99,7 @@
 				<td>
 			</tr>
 		</table>
-		<input type="button" id="insertConcultingBtn" value="상담신청" class="btn btn-primary">
+		<input type="button" id="insertConcultingBtn" value="상담신청" class="btn btn-info">
 		<input type="button" id="backMainBtn" class="btn btn-warning" value="돌아가기">
 	</form>
 </div>

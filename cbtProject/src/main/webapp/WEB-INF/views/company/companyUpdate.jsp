@@ -70,7 +70,7 @@
 		</table>
 		<div align="right">
 			<!-- <button onclick="location.href='companySignUp.do'">가입</button>&nbsp;&nbsp;&nbsp; -->
-			<input type="submit" value="수정" class="btn btn-primary">
+			<input type="submit" value="수정" class="btn btn-info">
 			<input type="reset" value="취소" class="btn btn-warning">
 			<button onclick="location.href='companyMain.do'" class="btn btn-primary">돌아가기</button>
 		</div>

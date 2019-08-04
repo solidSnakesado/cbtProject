@@ -85,7 +85,7 @@
 	<br>
 	<div align="right">
 		<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" class="btn btn-warning">통계보기</button>
-		<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기" class="btn btn-primary">
+		<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기" class="btn btn-info">
 	</div>
 </body>
 </html>
