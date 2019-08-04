@@ -9,6 +9,9 @@
 		searchFrm.submit();
 	}
 </script>
+<style>
+	tr:hover td {background:#ABCDEF !important};  /*마우스 hover 색상  */
+</style>
 
 	<h4 class="mx-auto pb-2">상담목록</h4>
 

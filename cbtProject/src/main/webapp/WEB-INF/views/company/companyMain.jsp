@@ -49,7 +49,7 @@
         <p>컴퓨터를 이용하여 시험에 응시하고 성적 처리도 컴퓨터를 통해 이루어지는 시험방식입니다. </p>
         <p>기업에 필요한 인재, 적합한 인재를 찾아드립니다!</p>
         <p>해설, 모의고사, 오답노트, 자동채점, 교사용/학생용 성적관리</p>
-        <a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
+        <a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/companySystemintro.do">시스템 소개 &raquo;</a>
       </div>
       <div class="col-md-4 mb-5">
         <h2>Contact Us</h2>
@@ -100,11 +100,11 @@
         <div class="card h-100">
           <img class="card-img-top" src="${pageContext.request.contextPath}/image/3.jpg">
           <div class="card-body">
-            <h4 class="card-title">문의하기</h4>
-            <p class="card-text">문의 사항이 있으신가요?</p><p>24시간 내내 관리자가 기다리고있을께요!</p>
+            <h4 class="card-title">상담하기</h4>
+            <p class="card-text">상담을 원하는 사항이 있으신가요?</p><p>24시간 내내 관리자가 기다리고있을께요!</p>
           </div>
           <div class="card-footer">
-            <a href="javascript:connectChat();" class="btn btn-info">문의하기</a>
+            <a href="${pageContext.request.contextPath }/companyConsultingInsert.do" class="btn btn-info">상담하기</a>
           </div>
         </div>
       </div>

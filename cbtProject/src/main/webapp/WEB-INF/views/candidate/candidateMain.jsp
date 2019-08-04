@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +50,10 @@
         <p>컴퓨터를 이용하여 시험에 응시하고 성적 처리도 컴퓨터를 통해 이루어지는 시험방식입니다. </p>
         <p>기업에 적합한 역량을 키워나가고 싶으십니까? CBT로 합격의 길에 한발 다가설수 있습니다!</p>
         <p>해설, 모의고사, 오답노트, 자동채점, 교사용/학생용 성적관리</p>
-        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
+        <sec:authorize access="isAnonymous()"> 
+			<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
+		</sec:authorize>
+        
       </div>
       <div class="col-md-4 mb-5">
         <h2>Contact Us</h2>

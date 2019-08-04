@@ -13,15 +13,23 @@
 		searchFrm.page.value = p;
 		searchFrm.submit();
 	}
+	
+	function backMainBtn() {
+		location.href = "${pageContext.request.contextPath }/companyMain.do";
+	}
 </script>
+<style>
+	tr:hover td {background:#ABCDEF !important};  /*마우스 hover 색상  */
+</style>
 	
 	<h4 class="mx-auto pb-2">시험목록확인(기업)</h4>
 	<div>
 	<form name="searchFrm">
 		<input type="hidden"  name="page" value="1"> 
 	</form>
-	<table border="1" align="center">
-		<thead>
+	
+	<table class="table text-center">
+		<thead class="table-secondary">
 		<tr >
 			<th><label>시험이름</label></th>
 			<th><label>시험일시</label></th>
@@ -38,7 +46,7 @@
 		<c:forEach items="${result.companyExamList}" var="exam">
 			<tr onclick="showDetail(${exam.examId});">
 				<td>${exam.examName}</td>
-				<td>${exam.examStartTime}~<br>${exam.examEndTime}</td>
+				<td>${exam.examStartTime} ~<br>${exam.examEndTime}</td>
 				<c:if test="${exam.examStatus == 'D1'}">
 					<td>시험전</td>
 				</c:if>
@@ -49,13 +57,16 @@
 					<td>시험완료</td>
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I1'}">
-					<td>출제전</td>
-				</c:if>
-				<c:if test="${exam.setExamStatus == 'I2'}">
 					<td>출제중</td>
 				</c:if>
-				<c:if test="${exam.setExamStatus == 'I3'}">
+				<c:if test="${exam.setExamStatus == 'I2'}">
 					<td>출제완료</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I3'}">
+					<td>시험전</td>
+				</c:if>
+				<c:if test="${exam.setExamStatus == 'I4'}">
+					<td>시험완료</td>
 				</c:if>
 				<!-- 2019.07.23 성재민 공개/비공개 항목 추가 -->
 				<c:if test="${exam.disclosureStatus == 'O1'}">
@@ -70,4 +81,9 @@
 	</table>
 	
 	</div>
+	<br>
 	<my:paging jsFunc="goList" paging="${result.paging}"/>
+	
+	<div align="right">
+		<input type="button" id="backMainBtn" value="돌아가기" class="btn btn-success" onclick="backMainBtn()">
+	</div>
