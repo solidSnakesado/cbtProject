@@ -162,22 +162,25 @@ function openIdChk() {
 	<a href="candidateMain.do"><button class="btn btn-primary m-3 p-3">돌아가기</button></a></div><br>
 	
 	<form id="fmField" name="fmField" action="insertCandidate.do" method="post" >
-		<table border="1" class="table text-center">
-			<thead>
+		<table class="table text-center">
+			<thead class="table-success">
 				<tr>
-					<th colspan="2">
-						<h4 class="mx-auto pb-2">회원가입 페이지</h4>
-					</th>
+					<td colspan="2">
+						<h4>회원가입 페이지</h4>
+					</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td><label>응시자ID</label></td>
 					<td align="left">
-						<input type="text" name="takerId" id="takerId">&nbsp;
-						<input type="button" value="중복확인" onclick="openIdChk();"/>
-						<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
-						<input type="hidden" id="isCheckId" value="false">
+						<div>
+							<input type="text" name="takerId" id="takerId" class="form-control-with-button">&nbsp;
+							<input type="button" value="중복확인" onclick="openIdChk();" class="btn btn-info"/>
+							<br>
+							<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
+							<input type="hidden" id="isCheckId" value="false">
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -207,7 +210,7 @@ function openIdChk() {
 				</tr>
 				<tr>
 					<td><label>E-mail</label></td>
-					<td colspan="2" align="left">]
+					<td colspan="2" align="left">
 						<input type="text" name="takerEmail" id="takerEmail" class="form-control">
 						<font size="1">@가 포함된 형태로 입력하세요 (ex.cbt@cbt.com)</font>
 					</td>

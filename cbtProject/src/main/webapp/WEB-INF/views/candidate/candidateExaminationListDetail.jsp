@@ -234,7 +234,7 @@
 </head>
 <body>
 
-	<h4 class="mx-auto pb-2">마이페이지(개인) 응시목록 세부목록</h4>
+	<h4 class="mx-auto pb-2">응시 결과</h4>
 	<br>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -249,7 +249,7 @@
 	<c:set var="takerInfo" value="${candidateExaminationListDetail.takerInfo }" />
 	<c:set var="score" value="${candidateExaminationListDetail.score }" />
 	<c:set var="passingScore" value="${candidateExaminationListDetail.passingScore }" />
-	<table border = "1" class="table text-center">
+	<table class="table text-center">
 	<%-- <c:forEach items="candidateExaminationListDetail" var="list"> --%>
 		<tr>
 			<th>시험명</th>
@@ -286,8 +286,8 @@
 	<!-- 통계보기 버튼 추가 -->
 	<br>
 	<div>
-		<button id="chartBtn" class='button'>통계보기</button>
-		<a href="${pageContext.request.contextPath }/candidateRightAnswer.do/${examId}"><button class='button'>풀이보기</button></a>
+		<button id="chartBtn" class='btn btn-primary'>통계보기</button>
+		<a href="${pageContext.request.contextPath }/candidateRightAnswer.do/${examId}"><button class='btn btn-warning'>풀이보기</button></a>
 	</div>
 	<!-- chart가 생성될 공간 -->
 	<!-- chart가 생성될 공간 -->

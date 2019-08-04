@@ -17,7 +17,7 @@
 <br>
 	<script type="text/javascript">
 	function checkForm() {
-	    var takerName 		= document.fmField.takerName;
+	    var takerName 	= document.fmField.takerName;
 	    var takerEmail 	= document.fmField.takerEmail;
 	    // 아이디 입력 유무 체크
 	    if(document.fmField.takerName.value == '') {
@@ -35,18 +35,20 @@
 	
 	<header id="header"></header>
 	<form id="fmField" name="fmField" action="findID.do" method="POST">
-		<table border="1" align="center" class="table text-center">
+		<table class="table text-center">
+			<thead class="table-success">
+				<tr>
+					<th colspan="2">
+						<h4 class="mx-auto pb-2">ID 찾기</h4>
+					</th>
+				</tr>
+			</thead>
 			<tr>
-				<th colspan="2">
-					<h4 class="mx-auto pb-2">ID 찾기</h4>
-				</th>
-			</tr>
-			<tr>
-				<td>이름 :</td>
+				<td><label>이름</label></td>
 				<td><input type="text" name="takerName""></td>
 			</tr>
 			<tr>
-				<td>가입된 Email :</td>
+				<td><label>가입된 Email</label></td>
 				<td><input type="text" name="takerEmail"></td>
 			</tr>
 			<tr>

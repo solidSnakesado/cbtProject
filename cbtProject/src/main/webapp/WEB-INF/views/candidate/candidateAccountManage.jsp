@@ -32,12 +32,12 @@
 </head>
 <body>
 
-<h4 class="mx-auto pb-2">나의 정보</h4>
+<h4 class="mx-auto pb-2">계정 삭제</h4>
 
 <form id="fmField" name="fmField" action="deleteCandidate.do" method="POST">
 <input type="hidden" name="takerId" value="${candidate.takerId}"/>
-	<table class="table text-center" border="1">
-		<thead>
+	<table class="table text-center">
+		<thead class="table-success">
 			<tr>
 				<th colspan="2"><h4>${candidate.takerName}님의 정보입니다.</h4></th>
 			</tr>
@@ -63,7 +63,7 @@
 	</table>
 <!--테이블 끝-->
 <!-- <button class="btn btn-warning m-3 p-3">삭제</button> -->
-<input type="button" name="deleteBtn" id="deleteBtn" onclick="deleteBtn();" value="탈퇴하기" class="btn btn-warning"/> &nbsp; <input type="reset" value="취소" class="btn btn-warning"/>
+<input type="button" name="deleteBtn" id="deleteBtn" onclick="deleteBtn();" value="탈퇴하기" class="btn btn-primary"/> &nbsp; <input type="reset" value="취소" class="btn btn-warning"/>
 
 </form>
    

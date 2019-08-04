@@ -63,9 +63,14 @@
 			if(inputDate <= curDate){
 				alert("상담희망일을 현재 시간보다 이전으로 입력하셨습니다.");	
 				$("#consultingDesiredDate").focus();
+				return false;
 			}
 
 			$("#consultingForm").submit();
+		});
+		
+		$("#backMainBtn").click(function() {
+			location.href = "${pageContext.request.contextPath }/companyMain.do";
 		});
 	});
 </script>
@@ -76,7 +81,7 @@
 			<input type="hidden" name="companyId" value="${company.companyId}">
 		</c:if>
 		<h4 class="mx-auto pb-2">기업상담신청</h4>
-		<table style="padding: 5px 0 5px 0;">
+		<table class="table text-center">
 			<tr>
 				<th><label>상담희망일</label></th>
 				<td><input type="text" id="consultingDesiredDate" name="consultingDesiredDate" size="80" class="form-control"
@@ -94,7 +99,7 @@
 				<td>
 			</tr>
 		</table>
-		<input type="button" id="insertConcultingBtn" value="상담신청" class="btn btn-primary m-3 p-3">
-		<button onclick="location.href='companyMain.do'" class="btn btn-primary m-3 p-3">돌아가기</button>	
+		<input type="button" id="insertConcultingBtn" value="상담신청" class="btn btn-primary">
+		<input type="button" id="backMainBtn" class="btn btn-warning" value="돌아가기">
 	</form>
 </div>

@@ -93,7 +93,7 @@
 		</tr>
 	</table>
 	<br>
-	<div><button class="button" onclick="surveyDo()">문제해설</button>&nbsp;&nbsp;&nbsp;<button class="button" onclick="mainDo()">메인으로</button></div>
+	<div><button class="button" onclick="surveyDo()">문제 해설</button>&nbsp;&nbsp;&nbsp;<button class="button" onclick="mainDo()">메인으로</button></div>
 	<!-- 수정 (7/19) june -->
 	<!-- <div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div> -->
 	<form id="survey" name="survey" action="${pageContext.request.contextPath }/candidateSurvey.do/${takeExamVO.takeExamId}/${examVO.examId}"  method="GET">

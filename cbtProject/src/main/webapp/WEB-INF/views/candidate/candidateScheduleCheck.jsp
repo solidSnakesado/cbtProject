@@ -10,6 +10,7 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
 <style>
+
 	.wrap {
 		height: 100px;
 		display: flex;
@@ -50,25 +51,27 @@
 		border: none;
 		border-radius: 25px;
 	}
+	
 </style>
 <script>
-$(document).ready(function(){
-	var arrTD = $("td[id^='Exam_List_']");
-	for(var i = 0; i < arrTD.length; ++i){
-		$(arrTD[i]).text($(arrTD[i]).text().replace("T"," "))
+
+	$(document).ready(function(){
+		var arrTD = $("td[id^='Exam_List_']");
+		for(var i = 0; i < arrTD.length; ++i){
+			$(arrTD[i]).text($(arrTD[i]).text().replace("T"," "))
+		}
+	});
+	
+	function goList(p){
+		searchFrm.page.value = p;
+		searchFrm.submit();
 	}
-});
-
-function goList(p){
-	searchFrm.page.value = p;
-	searchFrm.submit();
-}
-
-// 로그인체크후 로그인하러가기     2019.07.20 김재용 --> 통합화 이후 미사용
-/* function goLogin(){
-	alert('로그인이 필요한 서비스입니다.');
-	location.href="${pageContext.request.contextPath }/candidateLogin.do";
-} */
+	
+	// 로그인체크후 로그인하러가기     2019.07.20 김재용 --> 통합화 이후 미사용
+	/* function goLogin(){
+		alert('로그인이 필요한 서비스입니다.');
+		location.href="${pageContext.request.contextPath }/candidateLogin.do";
+	} */
 
 </script>
 <title>CBT 시험 일정 확인</title>
@@ -85,8 +88,8 @@ function goList(p){
 		<input type = "hidden" name="page" value="1">
 	</form>
 
-	<table class="table text-center" border="1">
-	<thead>
+	<table class="table text-center">
+	<thead class="table-success">
 		<tr>
 			<th>시험코드</th>
 			<th>시험명</th>
@@ -118,6 +121,6 @@ function goList(p){
 
 	<div align="center"><my:paging jsFunc="goList" paging="${candidateScheduleCheckPage.paging}"/></div><br>
 	
-	<div align="right"><a href="candidateMain.do"><button class="button">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><a href="candidateMain.do"><button class="btn btn-primary">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

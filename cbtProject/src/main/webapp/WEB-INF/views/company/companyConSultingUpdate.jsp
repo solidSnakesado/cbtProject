@@ -41,13 +41,23 @@
 			
 			$("#updateForm").submit();
 		});
+		
+		$("#deleteBtn").click(function() {
+			if (confirm("삭제 하시겠습니까?")){ 
+				// 삭제하는 페이지로 Go Go 
+				location.href = '${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}';
+			} else { 
+				alert("삭제 취소 되었습니다."); 
+				return; 
+			} 
+		});
 	});
 </script>
 
 	<h4 class="mx-auto pb-2">상담 수정</h4>
 	<form action="${pageContext.request.contextPath}/companyConSultingUpdate.do" method="post" id="updateForm" name="updateForm">
 		<input type="hidden" name="consultingId" value="${consulting.consultingId}">
-		<table style="padding: 5px 0 5px 0;">
+		<table class="table text-center">
 			<tr>
 				<th><label>상담희망일</label></th>
 				<td style="text-align: left;"><input type="text" name="consultingDesiredDate" id="consultingDesiredDate" class="form-control" value="${consulting.consultingDesiredDate}"></td>
@@ -62,7 +72,7 @@
 			</tr>
 		</table>
 		<br>
-		<input type="button" class="btn btn-primary m-3 p-3" id="updateBtn" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do'" value="수정하기">
-		<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingDelete.do/${consulting.consultingId}'" value="삭제하기">
-		<input type="button" class="btn btn-primary m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
+		<input type="button" class="btn btn-success" id="updateBtn" onclick="location.href='${pageContext.request.contextPath }/companyConSultingUpdate.do'" value="수정하기">
+		<input type="button" class="btn btn-warning" id="deleteBtn" value="삭제하기">
+		<input type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/companyConSultingList.do'" value="목록으로">
 	</form>

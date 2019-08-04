@@ -112,38 +112,38 @@
 		<input type="text" id="passScore2" name="passingScore" class="form-control" value="${QuestionVO.passingScore }" hidden="ture">
 		<input type="text" id="examTime2" name="examStartTime" class="form-control" value="${QuestionVO.examStartTime }" hidden="ture">
 	</form>
-	<table id="table" border="1" class="table text-center">
-	<thead id="thead" style="background-color : lightgrey;">
-		<tr>
-			<th>시험코드</th>
-			<th>수험번호</th>
-			<th>시험명</th>
-			<th>커트라인</th>
-			<th>시험일시</th>
-			<th>응시 상태</th>
-		</tr>
-	</thead>
-	<tbody>
-	<c:forEach items="${candidateExaminationList}" var="list" varStatus="status">
-		<tr id="result${status.count}" class="result" value="${status.count}">
-			<td id="examId${status.count}" value="${list.examId}" >${list.examId}</td>
-			<td id="takeExamId${status.count}" value="${list.takeExamId }">${list.takeExamId}</td>
-			<td id="examName${status.count}" value="${list.examName}">${list.examName}</td>
-			<td id="passingScore${status.count}" value="${list.passingScore}">${list.passingScore}</td>
-			<td id="examStartTime${status.count}" value="${list.examStartTime}">${list.examStartTime}</td>
-		<c:if test="${list.score == 9999 }">
-			<td id="score${status.count}" value="${list.score}">응시 대기
-		</c:if>
-		<c:if test="${list.score != 9999 }">
-			<td id="score${status.count}" value="${list.score}">응시 완료 &nbsp;&nbsp;
-			</td>
-		</c:if>
-		</tr>
-	</c:forEach>
-	</tbody>
+	<table id="table" class="table text-center">
+		<thead id="thead" class="table-success">
+			<tr>
+				<th>시험코드</th>
+				<th>수험번호</th>
+				<th>시험명</th>
+				<th>커트라인</th>
+				<th>시험일시</th>
+				<th>응시 상태</th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="${candidateExaminationList}" var="list" varStatus="status">
+			<tr id="result${status.count}" class="result" value="${status.count}">
+				<td id="examId${status.count}" value="${list.examId}" >${list.examId}</td>
+				<td id="takeExamId${status.count}" value="${list.takeExamId }">${list.takeExamId}</td>
+				<td id="examName${status.count}" value="${list.examName}">${list.examName}</td>
+				<td id="passingScore${status.count}" value="${list.passingScore}">${list.passingScore}</td>
+				<td id="examStartTime${status.count}" value="${list.examStartTime}">${list.examStartTime}</td>
+			<c:if test="${list.score == 9999 }">
+				<td id="score${status.count}" value="${list.score}">응시 대기
+			</c:if>
+			<c:if test="${list.score != 9999 }">
+				<td id="score${status.count}" value="${list.score}">응시 완료 &nbsp;&nbsp;
+				</td>
+			</c:if>
+			</tr>
+		</c:forEach>
+		</tbody>
 	</table>
 	
 	<div align="center"><my:paging jsFunc="goList" paging="${result.paging}"/></div><br>
 	
-	<div align="right"><a href="candidateMain.do"><button class="button">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
+	<div align="right"><a href="candidateMain.do"><button class="btn btn-primary">돌아가기</button></a></div>&nbsp;&nbsp;&nbsp;
 
