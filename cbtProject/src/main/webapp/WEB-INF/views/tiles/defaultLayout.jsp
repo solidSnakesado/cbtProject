@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<title>W3.CSS Template</title>
+<title>CBT ! 최고의 선택 ! 최고의 인재를 선발해드립니다!</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
