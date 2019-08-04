@@ -47,6 +47,7 @@
         <h2>CBT란?</h2>
         <hr>
         <p>컴퓨터를 이용하여 시험에 응시하고 성적 처리도 컴퓨터를 통해 이루어지는 시험방식입니다. </p>
+        <p>기업에 필요한 인재, 적합한 인재를 찾아드립니다!</p>
         <p>해설, 모의고사, 오답노트, 자동채점, 교사용/학생용 성적관리</p>
         <a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
       </div>
