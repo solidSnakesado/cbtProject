@@ -8,8 +8,25 @@ public class ManagerVO {
 	private String managerName;
 	private String searchManager;
 	private String[] mngList;
+	//페이징
+	private int start;	//페이징시작번호
+	private int end;	//페이징끝번호
+		
+		
 	
 	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public String[] getMngList() {
 		return mngList;
 	}

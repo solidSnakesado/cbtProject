@@ -35,11 +35,8 @@ public class ExamDAO {
 	// 2019.07.08 성재민
 	// 시험 리스트를 가져오는 메소드
 	public List<ExamVO> getExamList(CompanyVO vo) {
-		if(vo == null) {
-			return mybatis.selectList("ExamDAO.getExamList");
-		} else {
+		 
 			return mybatis.selectList("ExamDAO.getExamList", vo);
-		}
 	}
 	
 	// 2019.07.31 성재민
@@ -59,6 +56,8 @@ public class ExamDAO {
 		return mybatis.selectList("ExamDAO.mainExamList", vo);
 	}
 	
-	
+	public int getExamCount(CompanyVO vo) {
+    	return mybatis.selectOne("ExamDAO.getExamCompanyCount", vo);
+    }
 	
 }

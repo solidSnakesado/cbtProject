@@ -16,7 +16,7 @@
 	}
 	
 	function goList(p) {
-		searchFrm.page.value=p;
+		searchFrm.page.value = p;
 		searchFrm.submit();
 	}
 </script>
@@ -25,7 +25,7 @@
 
 	<div>
 		<form name="searchFrm">
-			정렬기준 <input type="hidden" id="page" value="1"> 
+			정렬기준 <input type="hidden" id="page" name="page" value="1"> 
 			<select	name="sort">
 				<option value="COMPANY.COMPANY_ID">회사명
 				<option value="EXAM_STATUS">시험상태
@@ -65,7 +65,7 @@
 		<!-- 2019.07.11 성재민 -->
 		<!-- 각종 상태값을 코드로 받아서 해당 코드별 문자열로 변환 -->
 		<tbody>
-		<c:forEach items="${ExamList}" var="exam">
+		<c:forEach items="${result.examList}" var="exam">
 			<tr onclick="showDetail(${exam.examId});" class="trexam">
 				<td>${exam.companyId}</td>
 				<td>${exam.examName}</td>
@@ -95,6 +95,6 @@
 		</c:forEach>
 		</tbody>
 	</table>
-
-	<my:paging jsFunc="goList" paging="${result.paging }" />
+	
 	</div>
+	<my:paging jsFunc="goList" paging="${result.paging}"/>

@@ -1,11 +1,15 @@
 package com.cbt.exam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.cbt.common.Paging;
+import com.cbt.company.CompanyDAO;
 import com.cbt.company.CompanyVO;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.manager.ManagerVO;
@@ -39,10 +43,23 @@ public class ExamServiceImpl implements ExamService {
 	// 2019.07.08 성재민
 	// 시험 리스트를 가져오는 메소드
 	@Override
-	public List<ExamVO> getExamList(CompanyVO vo) {
-		return dao.getExamList(vo);
+	public Map<String, Object> getExamList(CompanyVO vo, Paging paging) {
+		
+		paging.setPageUnit(10);
+		//페이지번호 파라미터
+		if(paging.getPage() == null) {
+			paging.setPage(1);
+		}
+		// 시작/마지막 레코드 번호
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		// 전체 건수
+		paging.setTotalRecord(dao.getExamCount(vo));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("companyExamList", dao.getExamList(vo));
+		map.put("paging", paging);
+		return map;
 	}
-
 	@Override
 	public List<ExamVO> getExamList(ExamVO vo) {
 		// TODO Auto-generated method stub

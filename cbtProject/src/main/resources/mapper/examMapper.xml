@@ -129,28 +129,40 @@
 	<!-- 2019.07.11 성재민 -->
 	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
 	<select id="getExamList" parameterType="CompanyVO" resultType="ExamVO">
+		SELECT B.* FROM( SELECT A.*, ROWNUM RN FROM (
 		SELECT 
-				EXAM_ID
-			,	TO_CHAR(EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
-			,	TO_CHAR(EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
-			,	QUESTION_QUANTITY
+				EXAM.EXAM_ID
+			,	TO_CHAR(EXAM.EXAM_START_TIME, 'YYYY-MM-DD HH24:MI')	"examStartTime"
+			,	TO_CHAR(EXAM.EXAM_END_TIME, 'YYYY-MM-DD HH24:MI')	"examEndTime"
+			,	EXAM.QUESTION_QUANTITY
 			,	EXAM.ESTIMATE_ID
-			,	NUMBER_OF_TIMES
-			,	PASSING_SCORE
+			,	EXAM.NUMBER_OF_TIMES
+			,	EXAM.PASSING_SCORE
 			,	EXAM.APPLICANTS
-			,	EXAM_NAME
-			,	EXAM_STATUS
-			,	DISCLOSURE_STATUS
-			,	SET_EXAM_STATUS
-			,	EXAM_DESCRIPTION_SIMPLE
-			,	EXAM_DESCRIPTION_DETAIL
-		FROM EXAM
-		JOIN ESTIMATE
+			,	EXAM.EXAM_NAME
+			,	EXAM.EXAM_STATUS
+			,	EXAM.DISCLOSURE_STATUS
+			,	EXAM.SET_EXAM_STATUS
+			,	EXAM.EXAM_DESCRIPTION_SIMPLE
+			,	EXAM.EXAM_DESCRIPTION_DETAIL
+		FROM EXAM EXAM
+		JOIN ESTIMATE ESTIMATE
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+		
 		<where>
 			ESTIMATE.COMPANY_ID = #{companyId}
 		</where>
-		ORDER BY EXAM_START_TIME DESC
+		
+		ORDER BY 2 DESC
+		) A ) B 
+		<where>
+		<if test = "start != null and start != ''">
+			<if test = "end != null and end != ''">
+				RN BETWEEN #{start} AND #{end}
+			</if>	
+		</if>
+			
+		</where>
 	</select>
 	
 	<!-- 2019.07.11 성재민 -->
@@ -187,6 +199,16 @@
 		FROM EXAM
 	</select>
 	
+	<select id="getExamCompanyCount" resultType="int">
+		SELECT COUNT(*)
+		FROM EXAM EXAM JOIN ESTIMATE ESTIMATE
+        ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
+        
+        <where>
+      			ESTIMATE.COMPANY_ID = #{companyId} <!-- 접속한 기업의 정보만 가져올수있도록 세션처리를 위함 -->
+     	</where>
+	
+	</select>
 	
 	<!-- TEMP..설문통계용 -->
 	<select id="getExamSurveyList" parameterType="ManagerVO" resultType="SurveyVO">

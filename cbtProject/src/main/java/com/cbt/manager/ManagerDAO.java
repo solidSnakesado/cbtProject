@@ -76,4 +76,8 @@ public class ManagerDAO {
 		return mybatis.selectList("ManagerDAO.getManagerList", vo);
 	}
 	
+	public int getExamCount(ExamVO vo) {
+    	return mybatis.selectOne("ManagerDAO.getExamCount", vo);
+    }
+	
 }

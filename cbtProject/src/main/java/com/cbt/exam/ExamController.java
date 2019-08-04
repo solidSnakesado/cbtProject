@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.common.CustomerUser;
+import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
 
 @Controller
@@ -21,18 +23,13 @@ public class ExamController {
 	// 해당 기업의 시험만 검색 할수 있도록 로그인 된 기업의 정보를 메소드의 전달인자로 사용
 	// security 적용에 따른 변경(7/29)
 	@RequestMapping(value = "companyExamList.do", method = RequestMethod.GET)
-	public String companyExamList(CompanyVO vo, Model model, Authentication authentication) {
+	public ModelAndView companyExamList(CompanyVO vo, Paging paging, ModelAndView mv,
+			Authentication authentication) {
 		CustomerUser user = (CustomerUser)authentication.getPrincipal();
-
-		if(user == null) {
-			model.addAttribute("loginFail", true);
-			return "company/company/companyLogin";
-		}
-		System.out.println(user);
 		vo.setCompanyId(user.getUsername());
-		model.addAttribute("companyExamList", examService.getExamList(vo));
-
-		return "company/company/companyExamList";
+		mv.addObject("result", examService.getExamList(vo, paging));
+		mv.setViewName("company/company/companyExamList");
+		return mv;
 	}
 	/*
 	 * public String companyExamList(Model model, HttpSession session) { CompanyVO

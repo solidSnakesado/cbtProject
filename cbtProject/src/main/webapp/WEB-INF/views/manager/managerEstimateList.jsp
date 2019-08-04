@@ -15,7 +15,7 @@
 	}
 	function estimateDetail(estimateId){
 		console.log("estimateId :" + estimateId);
-		var wintype = "toolbar=no,width=700,height=700,top=200,left=400,directories=no,menubar=no,scrollbars=yes";// 의뢰 디테일을 보기위한 윈도우창 띄움
+		var wintype = "toolbar=no,width=700,height=700,top=100,left=370,directories=no,menubar=no,scrollbars=yes";// 의뢰 디테일을 보기위한 윈도우창 띄움
 		var winopen = window.open("managerEstimateDetail.do/"+estimateId,"windowopen",wintype);
 	}
 	
@@ -48,25 +48,20 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<h4 class="mx-auto pb-2">의뢰목록</h4>
+		<h2 class="mx-auto pb-2">의뢰목록</h2>
 	</div>
 	<hr/>
-	
-	
-	
+
 	<div class="container" >
 		<!-- 페이징 처리폼 -->
 		<form name="searchFrm">
 			<input type="hidden" name="page" value="1">
 			<!-- 190803 검색 수정부분 -->
-			
-		검색조건 <my:estimateListSelect items="${consultingMap }"/>&nbsp;&nbsp;
+		<%-- 검색조건 <my:estimateListSelect items="${estimateMap }"/>&nbsp;&nbsp;
 		<input type="text" name="searchKeyword" value="${ConsultingVO.searchKeyword }">
-		<button class="btn btn-primary">검색</button> 
-	</form>
-	 <script>
-		searchFrm.sort.value="${ConsultingVO.sort}"==""?searchFrm.sort.options[0].value
-							:"${ConsultingVO.sort}";
+		<button class="btn btn-primary">검색</button>  --%>
+		</form>
+	<script>
 		searchFrm.searchConsulting.value="${ConsultingVO.searchConsulting}"==""
 									?searchFrm.searchConsulting.options[0].value
 									:"${ConsultingVO.searchConsulting}";
@@ -82,7 +77,7 @@
 			<table border="1" class="table table-striped">
 				<tr>
 					<th><label>의뢰ID</label></th>
-					
+				
 					<th><label>카테고리</label></th>
 					<th><label>의뢰이름</label></th>
 					<th><label>의뢰일</label></th>
@@ -106,6 +101,5 @@
 			</table>
 		</form>
 		<my:paging jsFunc="goList" paging="${result.paging}" />
-
 
 	</div>
