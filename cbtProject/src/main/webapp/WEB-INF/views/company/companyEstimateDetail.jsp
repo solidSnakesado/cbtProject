@@ -270,10 +270,10 @@
 
 		</table>
 		<div>
-			<button type="button" id="editButton" class="btn btn-primary m-3 p-3">수정하기</button>
+			<button type="button" id="editButton" class="btn btn-primary">수정하기</button>
 			<button type="button" id="Payment"
-				onclick="payment(${myEstimateList.estimateId})" class="btn btn-danger m-3 p-3">결제</button>
-			<button type="button" onclick="windowClose()" class="btn btn-warning m-3 p-3">닫기</button>
+				onclick="payment(${myEstimateList.estimateId})" class="btn btn-danger">결제</button>
+			<button type="button" onclick="windowClose()" class="btn btn-warning">닫기</button>
 		</div>
 	</form>
 

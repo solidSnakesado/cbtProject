@@ -164,10 +164,17 @@
 	</form>
 
 	<header id="header"></header>
-	<h4 class="mx-auto pb-2">시험 상세 보기</h4>
+	
 	<div class="container">
 		<input type="hidden" name="no" value="">
-		<table border="1" class="table text-center" border="1">
+		<table class="table text-center">
+			<thead class="table-success">
+				<tr>
+					<th colspan="2">
+						<h4>시험 상세 보기</h4>
+					</th>
+				</tr>
+			</thead>
 			<tr>
 				<th width="150px">시험이름</th>
 				<td id="mainExamName">${detailExam.examName}</td>
@@ -289,8 +296,10 @@
 			</c:if>
 		</table>
 		<br>
-		<button type="button" class="button" id="btn" value="${detailExam.examId}">응시하기</button>
-		<input type="button" class="button" onclick="location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value="돌아가기">
+		<div align="right">
+			<button type="button" class="btn btn-primary" id="btn" value="${detailExam.examId}">응시하기</button>
+			<input type="button" class="btn btn-warning" onclick="location.href = '${pageContext.request.contextPath }/candidateScheduleCheck.do'" value="돌아가기">
+		</div>
 	</div>
 </body>
 </html>

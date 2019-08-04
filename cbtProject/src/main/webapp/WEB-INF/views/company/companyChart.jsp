@@ -259,9 +259,9 @@
 	<h1 id="pageTitle"></h1>
 	<br>
 	<!-- chart가 생성될 공간 -->
-	<div id="chartDiv" style="float:left; width: 50%; height: 450px;"></div>
-	<div id="chartDiv2" style="float:left; width: 50%; height: 450px;"></div>
-	<div id="chartDiv3" style="float:left; width: 90%; height: 450px;"></div>
-	<button id="backMainBtn">메인으로 돌아가기</button>
+	<div id="chartDiv" style="float:left; width: 50%; height: 450px; display: none;"></div>
+	<div id="chartDiv2" style="float:left; width: 50%; height: 450px; display: none;"></div>
+	<div id="chartDiv3" style="float:left; width: 90%; height: 450px; display: none;"></div>
+	<button id="backMainBtn" class="btn btn-primary">메인으로 돌아가기</button>
 </body>
 </html>

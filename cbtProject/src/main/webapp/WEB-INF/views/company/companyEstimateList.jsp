@@ -54,7 +54,7 @@
 </style>
 
 <h4 class="mx-auto pb-2">의뢰목록</h4>
-<hr/>		
+<br>		
 <div class="container">
 
 		<form name="searchFrm">

@@ -53,7 +53,7 @@
 			});
 		});
 		
-		$("#submit").click(function() {
+		$("#joinBtn").click(function() {
 			var takerId 		= $("#takerId").val();
 			var idDuplication 	= $("#idDuplication").val();
 			var takerPassword 	= $("#takerPassword").val();
@@ -61,6 +61,7 @@
 			var takerName 		= $("#takerName").val();
 			var takerInfo 		= $("#takerInfo").val();
 			var takerEmail 		= $("#takerEmail").val();
+			var takerPhoneNum 	= $("#takerPhoneNum").val();
 			
 			var regEmail 		= /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
 			var email 			= $("#takerEmail").val();
@@ -121,14 +122,14 @@
 				return false;
 			}
 			
-			if (takerEmail == '') {
-				window.alert('이메일 주소를 입력하세요.');
+			if(regEmail.test(email) == false){
+				window.alert('올바른 이메일형태가 아닙니다');
 				$("#takerEmail").focus();
 				return false;
 			}
 			
-			if(regEmail.test(email) == false){
-				window.alert('올바른 이메일형태가 아닙니다');
+			if (takerEmail == '') {
+				window.alert('이메일 주소를 입력하세요.');
 				$("#takerEmail").focus();
 				return false;
 			}
@@ -149,19 +150,23 @@
 			$("#fmField").submit();
 		});
 	});
+	
+	$("#backBtn").click(function() {
+		
+	});
 </script>
 	<h4 class="mx-auto pb-2" >응시자 등록 페이지(관리자 화면)</h4>
-	<hr>	
+	<br>	
 
 	<form id="fmField" action="${pageContext.request.contextPath }/managerUserInsert.do" method="post" enctype="application/x-www-form-urlencoded">
-		<table border="1" class="table text-center">
+		<table class="table text-center">
 			<tr>
 				<th>
 					<label>응시자ID</label>
 				</th>
 				<td>
 					<input type="text" name="takerId" id="takerId" class="form-control">&nbsp;
-					<input type="button" value="중복확인" id="idCheckBtn"/>
+					<input type="button" value="중복확인" id="idCheckBtn" class="btn btn-primary"/>
 					<font size="1">4~8자 영문/숫자로 구성하여 주세요</font>
 					<input type="hidden" id="isCheckId" value="false">
 				</td>
@@ -232,8 +237,8 @@
 			</tr>
 		</table>
 		<br>
-		<input type="button" id="submit" value="등록" class="btn btn-primary m-3 p-3">
-		<input type="button" id="reset" class="btn btn-warning m-3 p-3" onclick="location.href='managerUserAccountList.do'" value="돌아가기">
+		<input type="button" id="joinBtn" value="등록" class="btn btn-primary m-3 p-3">
+		<input type="button" id="backBtn" class="btn btn-warning m-3 p-3" onclick="location.href='managerUserAccountList.do'" value="돌아가기">
 	</form>
 
 </body>

@@ -11,12 +11,18 @@
   <meta name="author" content="">
 
 
-  <!-- Bootstrap core CSS -->
+<%--   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/business-frontpage.css" rel="stylesheet">
-
+  <link href="${pageContext.request.contextPath }/css/business-frontpage.css" rel="stylesheet">
+ --%>
+ <script type="text/javascript">
+ 	function connectChat() {
+		var wintype = "toolbar=no,width=800px,height=900px,top=50,left=420,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+		var winopen = window.open("${pageContext.request.contextPath }/chat.do","windowopen",wintype);
+	}
+</script>
 </head>
 
 <body>
@@ -27,7 +33,7 @@
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">Computer Based Testing(CBT)</h1>
-          <p class="lead mb-5 text-white-50">응시자 여러분 환영합니다.</p>
+          <p class="lead mb-5 text-white-50">환영합니다.</p>
         </div>
       </div>
     </div>
@@ -42,7 +48,7 @@
         <hr>
         <p>컴퓨터를 이용하여 시험에 응시하고 성적 처리도 컴퓨터를 통해 이루어지는 시험방식입니다. </p>
         <p>해설, 모의고사, 오답노트, 자동채점, 교사용/학생용 성적관리</p>
-        <a class="btn btn-primary btn-lg" href="companySystemintro.jsp">Call to Action &raquo;</a>
+        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/candidateLogin.do">이용하기 &raquo;</a>
       </div>
       <div class="col-md-4 mb-5">
         <h2>Contact Us</h2>
@@ -54,10 +60,10 @@
           <br>
         </address>
         <address>
-          <abbr title="Phone">P:</abbr>
+          <abbr title="Phone">전화번호</abbr>
           (053) 456-7890
           <br>
-          <abbr title="Email">E:</abbr>
+          <abbr title="Email">이메일</abbr>
           <a href="mailto:#">yedam11@naver.com</a>
         </address>
       </div>
@@ -67,37 +73,37 @@
     <div class="row">
       <div class="col-md-4 mb-5">
         <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+          <img class="card-img-top" src="${pageContext.request.contextPath}/image/1.jpg">
           <div class="card-body">
             <h4 class="card-title">회사소개</h4>
             <p class="card-text">CBT는 채용의 전문가 집단으로 구성된 </p><p>채용솔루션/채용대행 전문기업입니다.</p>
           </div>
           <div class="card-footer">
-            <a href="candidateInIntroduce.do" class="btn btn-primary">Find Out More!</a>
+            <a href="${pageContext.request.contextPath}/candidateInIntroduce.do" class="btn btn-primary">회사소개</a>
           </div>
         </div>
       </div>
       <div class="col-md-4 mb-5">
         <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+          <img class="card-img-top" src="${pageContext.request.contextPath}/image/2.jpg">
           <div class="card-body">
             <h4 class="card-title">시험일정</h4>
             <p class="card-text">지금 치고 있는 시험이 어떤것이 있는지 궁금하신가요?</p><p>직접 확인해보세요!</p>
           </div>
           <div class="card-footer">
-            <a href="candidateScheduleCheck.do" class="btn btn-primary">Find Out More!</a>
+            <a href="${pageContext.request.contextPath}/candidateScheduleCheck.do" class="btn btn-primary">시험일정</a>
           </div>
         </div>
       </div>
       <div class="col-md-4 mb-5">
         <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+          <img class="card-img-top" src="${pageContext.request.contextPath}/image/3.jpg">
           <div class="card-body">
-            <h4 class="card-title">상담하기</h4>
-            <p class="card-text">저희와 상담이 하고싶으세요?</p><p>24시간 내내 관리자가 기다리고있을께요!</p>
+            <h4 class="card-title">문의하기</h4>
+            <p class="card-text">문의 사항이 있으신가요?</p><p>24시간 내내 관리자가 기다리고있을께요!</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+            <a href="javascript:connectChat();" class="btn btn-primary">문의하기</a>
           </div>
         </div>
       </div>
@@ -115,9 +121,9 @@
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
+<!--   
   <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 </body>
 

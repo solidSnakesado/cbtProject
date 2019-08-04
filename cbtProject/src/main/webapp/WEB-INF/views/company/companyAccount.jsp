@@ -182,7 +182,7 @@
 
 	<h4 class="mx-auto pb-2">기업 회원 정보 수정</h4>
 	<form id="updateForm" action="${pageContext.request.contextPath}/companyUpdate.do" method="post">
-		<table border="1" class="table text-center">
+		<table class="table text-center">
 			<tr>
 				<td><label>기업ID</label></td>
 				<td><input type="text" name="companyId" id="companyId" class="form-control" value="${company.companyId}" readonly="readonly"></td>
@@ -264,7 +264,7 @@
 		</table>
 		<div align="right">
 			<!-- <button onclick="location.href='companySignUp.do'">가입</button>&nbsp;&nbsp;&nbsp; -->
-			<input id="updateBtn" type="button" value="수정" class="btn btn-primary">
+			<input id="updateBtn" type="button" value="수정" class="btn btn-success">
 			<input type="button" id="deleteBtn" value="삭제" class="btn btn-warning">
 			<button onclick="location.href='${pageContext.request.contextPath}/companyMain.do'" class="btn btn-primary">돌아가기</button>
 		</div>

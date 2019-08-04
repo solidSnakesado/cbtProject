@@ -12,9 +12,10 @@
 	<!-- 2019.07.11 성재민 -->
 	<!-- 시험 정보 상세 보기 수정 -->
 	<header id="header"></header>
-	<h3>시험 상세</h3>
+	<h4 class="mx-auto pb-2">시험 정보 상세 보기</h4>
+	<br>
 	<input type = "hidden" name = "no" value = "${ dto.no }">
-	<table border = "1" align="center">
+	<table class="table text-center">
 		<tr>
 			<th width="150px">시험이름</th>
 			<td>${selectedExam.examName}</td>
@@ -82,7 +83,9 @@
 		</tr>
 	</table>
 	<br>
-	<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" >통계보기</button>
-	<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기">
+	<div align="right">
+		<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" class="btn btn-warning">통계보기</button>
+		<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기" class="btn btn-primary">
+	</div>
 </body>
 </html>
