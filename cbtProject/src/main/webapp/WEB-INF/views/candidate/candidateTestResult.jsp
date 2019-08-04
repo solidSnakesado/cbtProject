@@ -61,7 +61,7 @@
 	</script>
 	<header id="header"></header>
 	<h2 align="center">수고하셨습니다.</h2>
-	<table border="1" align="center" class="table text-center">
+	<table class="table text-center">
 		<tr>
 			<th>시험명</th>
 			<td>${examVO.examName}</td>
@@ -71,11 +71,11 @@
 			<td>${candiVO.takerName}</td>
 		</tr>
 		<tr>
-			<th>출제문항 / 정답</th>
-			<td>${examVO.questionQuantity} / ${takeExamVO.answerCount}</td>
+			<th>정답 / 출제문항</th>
+			<td>${takeExamVO.answerCount} / ${examVO.questionQuantity}</td>
 		</tr>
 		<tr>
-			<th>점수</th>
+			<th>획득점수</th>
 			<td>${takeExamVO.sumTakerScore}</td>
 		</tr>
 		<tr>
@@ -87,13 +87,16 @@
 			<td>
 				<c:set var="point" value="${takeExamVO.sumTakerScore}"/>
 				<c:set var="passingScore" value="${examVO.passingScore}" />
-				<c:if test="${passingScore le point}">합격</c:if>
-				<c:if test="${passingScore gt point}">불합격</c:if>
+				<c:if test="${passingScore le point}"><font color="blue">합격</font></c:if>
+				<c:if test="${passingScore gt point}"><font color="tomato">불합격</font></c:if>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<div><button class="button" onclick="surveyDo()">문제 해설</button>&nbsp;&nbsp;&nbsp;<button class="button" onclick="mainDo()">메인으로</button></div>
+	<div>
+		<button class="btn btn-primary" onclick="surveyDo()">문제 해설</button>&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-success" onclick="mainDo()">메인으로</button>
+	</div>
 	<!-- 수정 (7/19) june -->
 	<!-- <div align="right"><button onclick="surveyDo()">설문작성 후 문제해설 보기</button>&nbsp;&nbsp;&nbsp;<button onclick="mainDo()">메인으로</button></div> -->
 	<form id="survey" name="survey" action="${pageContext.request.contextPath }/candidateSurvey.do/${takeExamVO.takeExamId}/${examVO.examId}"  method="GET">

@@ -593,9 +593,9 @@
 		</table>
 		<p style="margin-left: 30%;">
 			<br>
-			<button type='button' id="pBtn" class="button" >Previous</button>
-			<button type='button' id="endBtn" class="button" >submission</button>
-			<button type='button'  id="nBtn" class="button" >Next</button>
+			<button type='button' id="pBtn" class="button" >이전문제</button>
+			<button type='button' id="endBtn" class="button" >제출하기</button>
+			<button type='button'  id="nBtn" class="button" >다음문제</button>
 		</p>
 		</div>
 		<p id="warBtn">

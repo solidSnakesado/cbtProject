@@ -223,8 +223,8 @@ $(document).ready(function() {
 -->
 			</table>
 			<div align="center">
-				<input type="BUTTON" value="제출" class="btn btn-primary m-3 p-3" onclick="checkForm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="reset" value="초기화" class="btn btn-warning m-3 p-3">
+				<input type="BUTTON" value="제출하기" class="btn btn-primary" onclick="checkForm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="초기화" class="btn btn-warning">
 			</div>
 		</form>
 </body>
