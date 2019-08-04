@@ -44,27 +44,33 @@
 	<form id="fmField" name="fmField" action="processLogin.do" method="POST">
 	<div align="center">
 		<div class="col-sm-6" >
-			<table class="table text-center" border="1">
+			<table class="table text-center">
 				<thead>
 					<tr>
-						<th colspan="2"><h4><b>로그인</b></h4></th>
+						<th class="table th" colspan="2"><h4><b>로그인</b></h4></th>
 					</tr>
 				</thead>
 				<tbody>
 				<tr>
-					<td align="center"><img src="${pageContext.request.contextPath}/image/LogIn.png"/></td>
+					<td colspan="2" align="center"><img src="${pageContext.request.contextPath}/image/LogIn.png"/></td>
 				</tr> 
 					<tr>
-						<!-- <td><label>ID</label></td> -->
-						<td> ID : &nbsp;<input type="text" name="takerId" value="${candidateVO.takerId}"></td>
+						<td><label>ID</label></td>
+						<td>	
+							<input type="text" name="takerId" value="${candidateVO.takerId}" class="form-control">
+						</td>
 					</tr>
 					<tr>
-						<!-- <td><label></label></td> -->
-						<td> PW : &nbsp;<input type="password" name="takerPassword"></td>
+						<td><label>PW</label></td>
+						<td>
+							<input type="password" name="takerPassword" class="form-control">
+						</td>
 					</tr>
 					<tr>
-						<td align="center"><input type="button" class="btn btn-primary" value="로그인" onclick="checkForm()"/>&nbsp; 
-						<input type="reset" class="btn btn-primary" value="취소" /></td>
+						<td colspan="2" align="center">
+							<input type="button" class="btn btn-primary" value="로그인" onclick="checkForm()"/>&nbsp; 
+							<input type="reset" class="btn btn-primary" value="취소" />
+						</td>
 					</tr>
 				</tbody>
 			</table>

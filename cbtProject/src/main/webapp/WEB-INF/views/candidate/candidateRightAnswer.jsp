@@ -9,15 +9,18 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>Insert title here</title>
 <style>
+
 	table {
 		width: 100%;
 		border-top: 1px solid #444444;
 		border-collapse: collapse;
 	}
+	
 	th {
 		border-bottom: 1px solid #444444;
 		padding: 10px;
 	}
+	
 	td {
 		padding: 10px;
 	}
