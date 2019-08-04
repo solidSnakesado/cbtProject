@@ -140,8 +140,23 @@ public class ManagerServiceImpl implements ManagerService {
 	// 2019.07.15 성재민
 	// 모든 시험 리턴
 	@Override
-	public List<Map<String, String>> getManagerAllExam(ExamVO vo) {
-		return managerDAO.getManagerAllExam(vo);
+	public Map<String, Object> getManagerAllExam(ExamVO vo, Paging paging) {
+		paging.setPageUnit(10);
+		//페이지번호 파라미터
+		if(paging.getPage() == null) {
+			paging.setPage(1);
+		}
+		// 시작/마지막 레코드 번호
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		// 전체 건수
+		paging.setTotalRecord(managerDAO.getExamCount(vo));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("examList", managerDAO.getManagerAllExam(vo));
+		map.put("paging", paging);
+		return map;
+
 	}
 
 	// 2019.07.15 성재민

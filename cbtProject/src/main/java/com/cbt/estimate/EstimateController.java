@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -31,6 +36,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,11 +75,7 @@ public class EstimateController {
 			Authentication authentication) throws IOException {
 		// 해당 기업의 ID값으로 세션처리
 		CustomerUser user = (CustomerUser) authentication.getPrincipal();
-
 		vo.setCompanyId(user.getUsername());
-		// vo.setCompanyId(((CompanyVO)session.getAttribute("company")).getCompanyId());
-		// //세션에 저장된아이디값읽어옴
-
 		mv.addObject("result", estimateService.getEstimateList(vo, paging));
 		mv.setViewName("company/company/companyEstimateList");
 		return mv;
@@ -138,8 +140,9 @@ public class EstimateController {
 	@RequestMapping(value = "companyPaymentUpdate.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int companyPaymentUpdate(EstimateVO vo,EmailVO emailVO, HttpServletRequest request) throws IOException, MessagingException {
-		
+		 
 		estimateService.updatesTradeProgressExchange5(vo);
+		
 		vo = estimateService.getEstimate(vo);
 		emailVO.setSubject("[KG이니시스 결제확인]"+ vo.getCompanyId() +"님,(주)케이지이니시스에서 결제하신 내역 확인바랍니다."); 
 		
@@ -147,6 +150,8 @@ public class EstimateController {
 		emailVO.setToEmail(vo.getCompanyEmail()); //기업 이메일로처리
 		
 		String test= "";
+		
+
 		try {
 			byte[] encodded = Files.readAllBytes(Paths.get(request.getSession().getServletContext().getRealPath("DocumentForm/mail.html")));
 			test = new String(encodded, "UTF-8");
@@ -266,21 +271,57 @@ public class EstimateController {
 		estimateService.updatesTradeProgressExchange4(vo);
 		PrintWriter out = response.getWriter();		
 		//메일발송
-		emailVO.setSubject("결제사항 및 시험확인"); 
+	/*	emailVO.setSubject("결제사항 및 시험확인"); 
 		emailVO.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
 		emailVO.setFromEmail("dtg3431@gmail.com");
 		emailVO.setToEmail("dtg3444@naver.com"); //기업 이메일로처리
 		emailVO.setAttachFile(request.getSession().getServletContext().getRealPath("/DocumentForm/결제방법.pdf"));
 		
-		this.sendEmail(emailVO);
-		//
+		*/
 		
-		//결과 출력
-		out.print("<script>");
-		out.print("window.opener.top.location.reload();");
-		out.print("window.close();");
-		out.print("</script>");
-		out.flush();
+
+		 MimeMessage message = mailSender.createMimeMessage();
+	     MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	      
+	      messageHelper.setSubject("결제사항 및 시험확인");
+	      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
+	      messageHelper.setFrom("dtg3431@gmail.com");
+	      messageHelper.setTo(new InternetAddress("dtg3444@naver,com", "재홍", "UTF-8"));
+
+	      DataSource dataSource = new FileDataSource(request.getSession().getServletContext().getRealPath("/DocumentForm/결제방법.pdf"));
+	       messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);
+	       
+	       //messageHelper.addInline("inlinetest", new FileDataSource("C:\\이재홍.jpg"));
+	       System.out.println("mail send ok");
+	       //의뢰진행상태 출제 완료 -> 결제대기
+	       estimateService.updatesTradeProgressExchange4(vo);
+	       out.print("<script>");
+	       out.print("window.opener.top.location.reload();");
+	       out.print("window.close();");
+	       out.print("</script>");
+	       out.flush();
+	      try {
+	         mailSender.send(message); //messageHelper.getMimeMessage()
+	      } catch (MailException e) {
+	         e.printStackTrace();
+	      }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		 * this.sendEmail(emailVO); //
+		 * 
+		 * //결과 출력 out.print("<script>");
+		 * out.print("window.opener.top.location.reload();");
+		 * out.print("window.close();"); out.print("</script>"); out.flush();
+		 */
 		//
 	}
 
@@ -452,5 +493,6 @@ public class EstimateController {
 		} catch (MailException e) {
 			e.printStackTrace();
 		}
-	}
+	}	
+
 }

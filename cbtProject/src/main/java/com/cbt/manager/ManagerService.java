@@ -46,7 +46,7 @@ public interface ManagerService {
 	
 	// 2019.07.15 성재민
 	// 모든 시험 리턴
-	public List<Map<String, String>> getManagerAllExam(ExamVO vo);
+	public Map<String, Object> getManagerAllExam(ExamVO vo, Paging paging);
 	
 	// 2019.07.15 성재민
 	// 시험 id로 하나만 검색

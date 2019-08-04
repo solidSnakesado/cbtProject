@@ -22,6 +22,7 @@ public interface EstimateService {
 	
 	public Map<String, Object> getEstimateList(EstimateVO vo, Paging paging);
 	
+	
 	int getCateoryId(EstimateVO vo);
 	
 	//카테고리 nameList를 가져오는 메서드

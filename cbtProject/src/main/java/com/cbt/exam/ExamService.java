@@ -1,7 +1,9 @@
 package com.cbt.exam;
 
 import java.util.List;
+import java.util.Map;
 
+import com.cbt.common.Paging;
 import com.cbt.company.CompanyVO;
 import com.cbt.consulting.ConsultingVO;
 import com.cbt.manager.ManagerVO;
@@ -19,7 +21,7 @@ public interface ExamService {
 
 	List<ExamVO> getExamList(ExamVO vo);
 	
-	List<ExamVO> getExamList(CompanyVO vo);
+	public Map<String, Object> getExamList(CompanyVO vo , Paging paging);
 
 	// temp(7/22) --> 삭제예정
 	List<ExamVO> getExamSurveyList(ManagerVO vo);

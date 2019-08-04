@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <script>
 	// 2019.07.09 성재민 
 	// showPopup() 메소드 변수 하나 받게 수정
@@ -8,10 +9,19 @@
 	function showDetail(examId){
 		location.href = "companyExamListDetail.do/" + examId;
 	}
+	function goList(p) {
+		searchFrm.page.value = p;
+		searchFrm.submit();
+	}
 </script>
-
+	
 	<h4 class="mx-auto pb-2">시험목록확인(기업)</h4>
+	<div>
+	<form name="searchFrm">
+		<input type="hidden"  name="page" value="1"> 
+	</form>
 	<table border="1" align="center">
+		<thead>
 		<tr >
 			<th><label>시험이름</label></th>
 			<th><label>시험일시</label></th>
@@ -19,11 +29,13 @@
 			<th><label>시험출제상태</label></th>
 			<th><label>시험공개여부</label></th>	<!-- 2019.07.23 성재민 항목 추가 -->
 		</tr>
+		</thead>
 		<!-- 2019.07.09 성재민 -->
 		<!-- c:forEach 로 값 설정 -->
 		<!-- 2019.07.11 성재민 -->
 		<!-- 각종 상태값을 코드로 받아서 해당 코드별 문자열로 변환 -->
-		<c:forEach items="${companyExamList}" var="exam">
+		<tbody>
+		<c:forEach items="${result.companyExamList}" var="exam">
 			<tr onclick="showDetail(${exam.examId});">
 				<td>${exam.examName}</td>
 				<td>${exam.examStartTime}~<br>${exam.examEndTime}</td>
@@ -54,6 +66,8 @@
 				</c:if>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
-</body>
-</html>
+	
+	</div>
+	<my:paging jsFunc="goList" paging="${result.paging}"/>

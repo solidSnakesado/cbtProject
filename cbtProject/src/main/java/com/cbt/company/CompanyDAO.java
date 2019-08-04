@@ -54,4 +54,6 @@ public class CompanyDAO {
 	public int getBusinessNumCount(CompanyVO vo) {
 		return mybatis.selectOne("companyDAO.getBusinessNumCount", vo);
 	}
+	
+	
 }
