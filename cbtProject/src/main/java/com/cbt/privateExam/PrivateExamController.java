@@ -62,7 +62,6 @@ public class PrivateExamController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
 		
 		return true;

@@ -25,9 +25,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -545,6 +547,23 @@ public class ManagerController {
 		}
 	}
 	
-	
-	
+	@RequestMapping(value = "managerDeleteTakerList.do", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean managerDeleteTakerList(@RequestBody List<String> param) {
+		boolean returnValue = true;
+		for(String item : param) {
+			item = item.replace("\n", "");
+			item = item.replace("\t", "");	
+			try {
+				CandidateVO vo = new CandidateVO();
+				vo.setTakerId(item);
+				candidateService.deleteCandidate(vo);
+			} catch (Exception e) {
+				returnValue = false;
+				e.printStackTrace();
+			}
+		}
+		
+		return returnValue;
+	}
 }

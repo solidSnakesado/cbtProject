@@ -26,14 +26,19 @@ thead {
 			var selectedIdx = $("#privateExam option:selected").val();
 			if (selectedIdx != -1) {
 				let list = [];
-				$("[name='takerListCheckBox']:checked").each(function(i,checkbox) {
+				var chkBox = $("input[name='takerListCheckBox']:checked");
+				console.log("체크됨1");
+				console.log(chkBox.parent().parent());
+				chkBox.each(function(i) {
 					console.log("체크됨");
-					var tr = $(checkbox).parent().parent();
-					var td = $(tr).children();
+					
+					var tr = chkBox.parent().parent().eq(i);
+					console.log(tr.text());
+					var td = tr.children();
 					let obj = {};
 					obj["examId"] = selectedIdx;
-					obj["takerEmail"] = td.eq(2).text();
-					console.log(obj);
+					obj["takerEmail"] = td.eq(3).text();
+					console.log(td.eq(1).val());
 					list.push(obj);
 				});
 				
@@ -44,10 +49,10 @@ thead {
 					dataType : "json",
 					data : JSON.stringify(list),
 					success : function(data) {
-						alert('성공');
+						alert('메일 전송 완료');
 						location.reload();
 					}, error : function() {
-						alert('에러발생');
+						alert('메일 전송 중 에러가 발생했습니다.');
 					}
 				});
 			}
@@ -63,6 +68,34 @@ thead {
 			} else {
 				$("#privateExamAddBtn").prop("disabled", true);
 			}
+		});
+		
+		$("#takerDeleteBtn").click(function() {
+			var chkBox = $("input[name='takerListCheckBox']:checked");
+			let takerList = [];
+			chkBox.each(function(i) {
+				var tr 		= chkBox.parent().parent().eq(i);
+				var td 		= tr.children();
+				var takerId = td.eq(1).text();
+				let obj = {};
+				takerList.push(takerId);
+			});
+			
+			console.log(takerList);
+			
+			$.ajax({
+				contentType : 'application/json',
+				type : "POST",
+				url : "${pageContext.request.contextPath}/managerDeleteTakerList.do",
+				dataType : "json",
+				data : JSON.stringify(takerList),
+				success : function(data) {
+					alert('선택한 응시자의 삭제가 완료 되었습니다.');
+					location.reload();
+				}, error : function() {
+					alert('응시자 삭제중 에러가 발생했습니다.');
+				}
+			});
 		});
 	});
 
@@ -154,8 +187,10 @@ thead {
 
 		</form>
 	</div>
-	<form action="${pageContext.request.contextPath}/managerUserDelete.do">
-		<button id="" class="btn btn-warning">응시자 삭제</button>
+	<%-- <form action="${pageContext.request.contextPath}/managerUserDelete.do"> --%>
+		<button id="takerDeleteBtn" class="btn btn-warning">응시자 삭제</button>
+		<br>
+		<br>
 		<table border="1" align="center" class="table">
 			<tr>
 				<th><label>선택</label></th>
@@ -167,18 +202,25 @@ thead {
 				<tr class="trexam">
 					<!-- 2019.07.23 성재민 -->
 					<!-- 체크박스 이름 변경 -->
-					<td><label><input type="checkbox"
+					<td>
+						<input type="checkbox"
 							name="takerListCheckBox" align="center"
 							value="${CandidateVO.takerId }"
-							onclick="takerListCheckBoxOnclick()"></label></td>
-					<td>${CandidateVO.takerId }</td>
-					<td><a
-						href="managerUserAccountEdit.do/${CandidateVO.takerId }">${CandidateVO.takerName }</a></td>
-					<td>${CandidateVO.takerEmail }</td>
+							onclick="takerListCheckBoxOnclick()">
+					</td>
+					<td>
+						${CandidateVO.takerId }
+					</td>
+					<td>
+						<a href="managerUserAccountEdit.do/${CandidateVO.takerId }">${CandidateVO.takerName }</a>
+					</td>
+					<td>
+						${CandidateVO.takerEmail }
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
-	</form>
+	<!-- </form> -->
 	<br> <select id="privateExam" disabled="disabled">
 		<c:forEach items="${privateExamList}" var="privateExam">
 			<option value="-1" selected="selected">선택하세요.</option>
