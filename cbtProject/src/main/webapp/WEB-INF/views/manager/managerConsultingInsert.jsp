@@ -22,10 +22,10 @@
 				<th><label>내용</label></th><td><textarea name="consultingContents" class="form-control" rows="8" cols="40"></textarea></td>
 			</tr>
 			<tr>
-				<th><label>상담희망일</label></th><td><input type="datetime-local" class="form-control" name="consultingDesiredDate" size="80"></td>
+				<th><label>상담희망일</label></th><td><input type="datetime-local" class="form-control" name="consultingDesiredDate" size="80" autocomplete="off"></td>
 			</tr>
 			<tr>
-				<th><label>상담일</label></th><td><input type="datetime-local" class="form-control" name="consultingDate" size="80"></td>
+				<th><label>상담일</label></th><td><input type="datetime-local" class="form-control" name="consultingDate" size="80" autocomplete="off"></td>
 			</tr>
 			<tr>
 				<th><label>비고</label></th><td><textarea name="consultingRemarks" class="form-control" rows="4" cols="40"></textarea></td>
