@@ -521,7 +521,8 @@ public class ManagerController {
 	
 	//mailForm
 	@RequestMapping(value="managerExamSendForm.do")
-	public String managerExamSendForm() {
+	public String managerExamSendForm(ExamVO examVO, Model model) {
+		model.addAttribute("selectedExam", managerService.getManagerExam(examVO));
 		return "empty/manager/managerExamSend";
 	}
 	
