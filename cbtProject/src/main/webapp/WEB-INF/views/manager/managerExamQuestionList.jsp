@@ -16,9 +16,11 @@
 	<table align="center" class="table">
 		<tr>
 			<th><label>의뢰기업</label></th>
-			<td>${selectedExam.companyId}
-			<span id="companyEmail">${selectedExam.companyEmail}</span></td>
+			<td>${selectedExam.companyId}</td>
 		</tr>
+		<tr>
+			<th><label>기업이메일</label></th>
+			<td>${selectedExam.companyEmail}</td>
 		<tr>
 			<th><label>시험이름</label></th>
 			<td id ="examName">${selectedExam.examName}</td>

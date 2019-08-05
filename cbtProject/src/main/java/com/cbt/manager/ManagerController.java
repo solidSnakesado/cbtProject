@@ -539,7 +539,7 @@ public class ManagerController {
 			messageHelper.setFrom(vo.getFrom());
 			messageHelper.setTo(vo.getTomail());
 			messageHelper.setSubject(vo.getSubject());
-			messageHelper.setText(vo.getSubject());
+			messageHelper.setText(vo.getContent());
 			String fileName = "";
 			MultipartFile uploadFile = vo.getFilename();
 			if(uploadFile != null && uploadFile.getSize() > 0) {

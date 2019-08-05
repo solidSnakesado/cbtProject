@@ -14,9 +14,9 @@
     <p>
     <div align="center"><!-- 내용 --> 
       <textarea name="content" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" class="form-control">
-      ${selectedExam.companyId}님  ${selectedExam.questionQuantity} 문항을 첨부파일로 보내드리니 확인부탁드립니다.
-      전화로 연락 주시면 처리하겠습니다. 연락처 010-xxxx-xxxx으로 연락해주세요.
-      	-예담기업-
+${selectedExam.companyId}님  ${selectedExam.questionQuantity} 문항을 첨부파일로 보내드리니 확인부탁드립니다.
+전화로 연락 주시면 처리하겠습니다. 연락처 010-xxxx-xxxx으로 연락해주세요.
+    													-예담기업-
       </textarea>
     </div>
     <div align="center">
