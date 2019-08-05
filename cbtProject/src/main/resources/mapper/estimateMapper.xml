@@ -5,7 +5,7 @@
 	<!-- 의뢰 등록 -->
 	<insert id="insertEstimate" parameterType="EstimateVO">
 		<selectKey keyProperty="estimateId" resultType="int" order="BEFORE">
-			SELECT MAX(ESTIMATE_ID)+1 FROM ESTIMATE
+			SELECT NVL(MAX(ESTIMATE_ID),0)+1 FROM ESTIMATE
 		</selectKey>
 		INSERT INTO ESTIMATE (	  ESTIMATE_ID
 								, ESTIMATE_PRICE
