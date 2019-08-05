@@ -521,7 +521,8 @@ public class ManagerController {
 	
 	//mailForm
 	@RequestMapping(value="managerExamSendForm.do")
-	public String managerExamSendForm() {
+	public String managerExamSendForm(ExamVO examVO, Model model) {
+		model.addAttribute("selectedExam", managerService.getManagerExam(examVO));
 		return "empty/manager/managerExamSend";
 	}
 	
@@ -538,7 +539,7 @@ public class ManagerController {
 			messageHelper.setFrom(vo.getFrom());
 			messageHelper.setTo(vo.getTomail());
 			messageHelper.setSubject(vo.getSubject());
-			messageHelper.setText(vo.getSubject());
+			messageHelper.setText(vo.getContent());
 			String fileName = "";
 			MultipartFile uploadFile = vo.getFilename();
 			if(uploadFile != null && uploadFile.getSize() > 0) {

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.manager.ManagerService;
 import com.cbt.question.QuestionService;
 import com.cbt.question.QuestionVO;
 
@@ -27,6 +28,8 @@ public class SetExamQuestionController {
 	SetExamQuestionService setExamQuestionService;
 	@Autowired
 	ExamService examService;
+	@Autowired
+	ManagerService managerService;
 	@Autowired
 	QuestionService questionService;
 	
@@ -67,6 +70,8 @@ public class SetExamQuestionController {
 	// 이전에 출제된 문제를 삭제후 다시 출제
 	@RequestMapping("/setQuestionList.do/{examId}")
 	public String setQuestionList(@PathVariable("examId") int examId, SetExamQuestionVO vo, Model model) {
+		
+
 		SetExamQuestionVO deleteVO = new SetExamQuestionVO();
 		deleteVO.setExamId(examId);
 		setExamQuestionService.deleteSetExamQuestionForExamId(deleteVO);
@@ -112,14 +117,16 @@ public class SetExamQuestionController {
 		
 		// 2019.07.11 성재민
 		// 출제된 문제 볼수 있는 화면으로 연결이 되어야 함.
-		return "manager/manager/managerExamQuestionList";
+		return "redirect:/getQuestionList.do/"+examId +"/";
 	}
 	
 	@RequestMapping("/getQuestionList.do/{examId}")
 	public String getQuestionSetList(@PathVariable("examId") int examId, Model model) {
-		model.addAttribute(questionService.getQuestionSetList(examId));
-		
-		return "";
+		ExamVO examVO = new ExamVO();
+		examVO.setExamId(examId);
+		model.addAttribute("selectedExam", managerService.getManagerExam(examVO));
+		model.addAttribute("result" ,questionService.getQuestionSetList(examId));
+		return "manager/manager/managerExamQuestionList";
 	}
 	
 }

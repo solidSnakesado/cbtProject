@@ -369,6 +369,7 @@
 		  , EXAM.SET_EXAM_STATUS								"setExamStatus"
 		  , EXAM.EXAM_DESCRIPTION_SIMPLE						"examDescriptionSimple"
 		  , EXAM.EXAM_DESCRIPTION_DETAIL						"examDescriptionDetail"
+		  , COMPANY_EMAIL										"companyEmail"
 		FROM EXAM JOIN ESTIMATE
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
 		JOIN COMPANY

@@ -337,7 +337,7 @@
 				,s.EXAM_ID						"examId"
 		FROM 	SET_EXAM_QUESTION s JOIN QUESTION q 
 		ON		q.QUESTION_ID = s.QUESTION_ID
-		WHERE	s.EXAM_ID = #{examId}
+		WHERE	s.EXAM_ID = #{value}
 	</select>
 	
 	

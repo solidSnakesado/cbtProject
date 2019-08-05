@@ -66,24 +66,25 @@
 		<!-- 각종 상태값을 코드로 받아서 해당 코드별 문자열로 변환 -->
 		<tbody>
 		<c:forEach items="${result.examList}" var="exam">
-			<tr onclick="showDetail(${exam.examId});" class="trexam">
-				<td>${exam.companyId}</td>
-				<td>${exam.examName}</td>
-				<td>${exam.examStartTime} ~<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${exam.examEndTime}</td>
+			<tr  class="trexam">
+				<td onclick="showDetail(${exam.examId});">${exam.companyId}</td>
+				<td onclick="showDetail(${exam.examId});">${exam.examName}</td>
+				<td onclick="showDetail(${exam.examId});">${exam.examStartTime} ~<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${exam.examEndTime}</td>
 				<c:if test="${exam.examStatus == 'D1'}">
-					<td>시험전</td>
+					<td onclick="showDetail(${exam.examId});">시험전</td>
 				</c:if>
 				<c:if test="${exam.examStatus == 'D2'}">
-					<td>시험중</td>
+					<td onclick="showDetail(${exam.examId});">시험중</td>
 				</c:if>
 				<c:if test="${exam.examStatus == 'D3'}">
-					<td>시험완료</td>
+					<td onclick="showDetail(${exam.examId});">시험완료</td>
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I1'}">
 					<td>출제중</td>
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I2'}">
-					<td>출제완료</td>
+					<td>출제완료 <button onclick="location.href='getQuestionList.do/${exam.examId}'" type="button">문제보기</button></td>
+					
 				</c:if>
 				<c:if test="${exam.setExamStatus == 'I3'}">
 					<td>시험전</td>

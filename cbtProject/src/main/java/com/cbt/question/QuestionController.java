@@ -40,6 +40,7 @@ import com.cbt.candidate.CandidateVO;
 import com.cbt.common.CustomerUser;
 import com.cbt.exam.ExamService;
 import com.cbt.exam.ExamVO;
+import com.cbt.manager.ManagerService;
 import com.cbt.setExamQuestion.SetExamQuestionService;
 import com.cbt.setExamQuestion.SetExamQuestionVO;
 import com.cbt.takeExam.TakeExamVO;
@@ -62,7 +63,9 @@ public class QuestionController {
 	CandidateService candidateService;
 	@Autowired
 	private JavaMailSender mailSender;
-
+	@Autowired
+	ManagerService managerService;
+	
 	// 2019.07.17 김재용
 	// 시험 시작 화면으로 가기
 	@RequestMapping(value = "candidateTakeExam.do", method = RequestMethod.POST)
@@ -379,6 +382,12 @@ public class QuestionController {
 
 	@RequestMapping(value = "/managerExamQuestionExcelDown.do/{examId}")
 	public void managerExamQuestionExcelDown(@PathVariable("examId") int examId, HttpServletResponse response) {
+		//기업정보조회
+		ExamVO examVO = new ExamVO();
+		examVO.setExamId(examId);
+		Map<String, String> company = managerService.getManagerExam(examVO);
+		
+		//시험문제조회
 		SetExamQuestionVO vo = new SetExamQuestionVO();
 		vo.setExamId(examId);
 		List<SetExamQuestionVO> setExamList = setExamQuestionService.getSetExamQuestionListForExamId(vo);
@@ -452,9 +461,9 @@ public class QuestionController {
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(qvo.getRightCommentary());
 		}
-
+		String fileName = company.get("companyId")+ System.currentTimeMillis()+".xls";
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "Attachment;Filename=test1.xls");
+		response.setHeader("Content-Disposition", "Attachment;Filename="+fileName);
 
 		try {
 			wb.write(response.getOutputStream());
