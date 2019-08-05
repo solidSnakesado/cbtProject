@@ -85,7 +85,7 @@
 			<tr>
 				<th><label>상담희망일</label></th>
 				<td><input type="text" id="consultingDesiredDate" name="consultingDesiredDate" size="80" class="form-control"
-					placeholder="상담을 원하시는 시간을 입력하여 주시면 최대한 반영하도록 하겠습니다."></td>
+					placeholder="상담을 원하시는 시간을 입력하여 주시면 최대한 반영하도록 하겠습니다." autocomplete="off"></td>
 			</tr>
 			<tr>
 				<th><label>제목</label></th>
