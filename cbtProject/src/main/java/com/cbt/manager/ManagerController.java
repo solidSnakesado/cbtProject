@@ -383,8 +383,22 @@ public class ManagerController {
 		}
 		
 		List<CandidateVO> list = managerService.uploadExcelFile(file);	
+		
+		// 2019.08.05 성재민
 		for(CandidateVO vo : list) {
-			candidateService.insertCandidate(vo);
+			if(vo == null) {
+				continue;
+			}
+			
+			if(vo.getTakerId() == "" || vo.getTakerId() == null) {
+				continue;
+			}
+			
+			try {
+				candidateService.insertCandidate(vo);
+			} catch (Exception e) {
+				continue;
+			}
 		}	
 		
 		return "redirect:managerUserAccountList.do";
