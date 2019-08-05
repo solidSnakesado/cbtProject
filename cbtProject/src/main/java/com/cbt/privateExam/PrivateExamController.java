@@ -48,7 +48,7 @@ public class PrivateExamController {
 			    		.append("<p>아래 링크를 클릭하시면 홈페이지로 연결됩니다.</p>")
 			    		.append("<p>로그인 하시면 시험 등록이 완료가 되며</p>")
 			    		.append("<p>비회원 이시면 회원 가입후 이용가능 합니다.</p>")
-			    		.append("<a href='http://114.200.227.226/cbt/candidateMain.do?examId=" + examId + "'>시험 등록 링크</a>")	// 2019.07.23 성재민 이 부분은 차후 서버 ip로 변경하야애 함.
+			    		.append("<a href='http://cbt.com/cbt/candidateMain.do?examId=" + examId + "'>시험 등록 링크</a>")	// 2019.07.23 성재민 이 부분은 차후 서버 ip로 변경하야애 함.
 			    		.toString(), true);
 			    
 			    messageHelper.setFrom("sado14th@gmail.com");

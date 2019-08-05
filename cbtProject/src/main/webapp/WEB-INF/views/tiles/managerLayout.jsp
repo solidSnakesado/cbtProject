@@ -30,7 +30,7 @@
 		}
 		
 		// 웹소켓 객채 생성
-		ws = new WebSocket("ws://114.200.227.226/cbt/echo.do");
+		ws = new WebSocket("ws://cbt.com/cbt/echo.do");
 		ws.onopen = function(event) {
 			onOpen(event);
 		};
