@@ -286,7 +286,7 @@ public class EstimateController {
 	      messageHelper.setSubject("결제사항 및 시험확인");
 	      messageHelper.setText("이용해주셔서 감사합니다. 결제 정보입니다.");
 	      messageHelper.setFrom("dtg3431@gmail.com");
-	      messageHelper.setTo(new InternetAddress("dtg3444@naver,com", "재홍", "UTF-8"));
+	      messageHelper.setTo(new InternetAddress("dtg3444@naver.com", "재홍", "UTF-8"));
 
 	      DataSource dataSource = new FileDataSource(request.getSession().getServletContext().getRealPath("/DocumentForm/결제방법.pdf"));
 	       messageHelper.addAttachment(MimeUtility.encodeText("결제방법.pdf", "UTF-8", "B"), dataSource);

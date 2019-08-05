@@ -34,7 +34,7 @@
 																estimateId : estimateId
 															},
 															success : function() {
-																alert('성공');
+																alert('메일을 보내었습니다!!!!');
 																location
 																		.reload();
 															},
