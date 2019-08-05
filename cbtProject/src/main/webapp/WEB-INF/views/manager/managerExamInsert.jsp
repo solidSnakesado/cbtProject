@@ -9,6 +9,9 @@
    
    
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
+	<style>
+		input[type="text"], select, textarea{width:70%}
+	</style>
 <script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -76,8 +79,9 @@ $(document).ready(function() {
 
 	<h4 class="mx-auto pb-2">관리자 시험 등록 페이지</h4>
 
-  <div class="row">
-    <div class="col-sm">
+  <div class="row" style="padding-left:50px"  >
+  <div class="span2"></div>
+    <div class="span4">
     	<h5>의뢰 내용</h5>
       	<table style="padding: 5px 0 5px 0;" align = "center" class="table">
 			<tr>
@@ -111,7 +115,7 @@ $(document).ready(function() {
 			
 		</table>
     </div>
-    <div class="col-sm">
+    <div class="span4">
     	<h5>시험 등록</h5>
       	<form action="${pageContext.request.contextPath }/managerExamInsert.do/${estimate.estimateId}" method="post" >
 		<input  id="examName" name="examName" hidden="true">
@@ -119,19 +123,19 @@ $(document).ready(function() {
 		<table  style="width:100%">
 			<tr>
 				<th><label>기업Id</label></th>
-				<td><input id="companyId" name="companyId" class="form-control" value="${estimate.companyId }" readonly></td>
+				<td><input type="text" id="companyId" name="companyId" class="form-control" value="${estimate.companyId }" readonly></td>
 			</tr>
 			<tr>
 				<th><label>시험이름</label></th>
-				<td><input id="estimateName" name="estimateName" class="form-control" value="${estimate.estimateName }" readonly></td>
+				<td><input type="text" id="estimateName" name="estimateName" class="form-control" value="${estimate.estimateName }" readonly></td>
 			</tr>
 			<tr>
 				<th><label>시작일</label></th>
-				<td><input type="text" id="date_timepicker_start" class="form-control"  name="examStartTime"></td>
+				<td><input type="text" id="date_timepicker_start" class="form-control"  name="examStartTime" value="${estimate.examDate}"></td>
 			</tr>
 			<tr>
 				<th><label>종료일</label></th>
-				<td><input type="text" id="date_timepicker_end"  class="form-control"  name="examEndTime"></td>
+				<td><input type="text" id="date_timepicker_end"  class="form-control"  name="examEndTime" value="${estimate.examDate}"></td>
 			</tr>
 			<tr>
 				<th><label>응시자 수</label></th>
@@ -173,6 +177,7 @@ $(document).ready(function() {
 		<input type="reset" id="reset" class="btn btn-warning m-3 p-3" onclick="location.href='${pageContext.request.contextPath }/managerEstimateList.do'" value="돌아가기">	
 	</form>
     </div>
+    <div class="span2"></div>
   </div>
 
 

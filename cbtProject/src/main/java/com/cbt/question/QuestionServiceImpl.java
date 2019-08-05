@@ -237,4 +237,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.candidateTestResult(vo);
 	}
 
+	@Override
+	public List<Map<String, Object>> getQuestionSetList(int examId) {
+		return questionDAO.getQuestionSetList(examId);
+	}
+
 }

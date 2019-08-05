@@ -47,9 +47,8 @@
 
 </head>
 <body>
-	<div style="text-align:center">
-		<h2 class="mx-auto pb-2">의뢰목록</h2>
-	</div>
+	
+	<h4 class="mx-auto pb-2">의뢰목록</h4>
 	<hr/>
 
 	<div class="container" >

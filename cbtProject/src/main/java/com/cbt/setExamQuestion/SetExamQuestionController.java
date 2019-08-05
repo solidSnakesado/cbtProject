@@ -60,11 +60,13 @@ public class SetExamQuestionController {
 		return mv;
 	}
 	
+	
+	
 	// 2019.07.16 성재민
 	// 출제 하기 버튼을 누르면 연결
 	// 이전에 출제된 문제를 삭제후 다시 출제
-	@RequestMapping("/getQuestionList.do/{examId}")
-	public String getQuestionList(@PathVariable("examId") int examId, SetExamQuestionVO vo, Model model) {
+	@RequestMapping("/setQuestionList.do/{examId}")
+	public String setQuestionList(@PathVariable("examId") int examId, SetExamQuestionVO vo, Model model) {
 		SetExamQuestionVO deleteVO = new SetExamQuestionVO();
 		deleteVO.setExamId(examId);
 		setExamQuestionService.deleteSetExamQuestionForExamId(deleteVO);
@@ -112,4 +114,12 @@ public class SetExamQuestionController {
 		// 출제된 문제 볼수 있는 화면으로 연결이 되어야 함.
 		return "manager/manager/managerExamQuestionList";
 	}
+	
+	@RequestMapping("/getQuestionList.do/{examId}")
+	public String getQuestionSetList(@PathVariable("examId") int examId, Model model) {
+		model.addAttribute(questionService.getQuestionSetList(examId));
+		
+		return "";
+	}
+	
 }

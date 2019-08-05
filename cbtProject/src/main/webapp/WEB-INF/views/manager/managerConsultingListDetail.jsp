@@ -44,7 +44,6 @@
 		});
 	});
 </script>
-
 	<h4 class="mx-auto pb-2">개별 시험 상담 목록 (관리자화면)</h4>
 	<form action="${pageContext.request.contextPath }/managerConsultingListDetail.do" method="post">
 	<input type="hidden" name="consultingId" value="${result.consultingId }">

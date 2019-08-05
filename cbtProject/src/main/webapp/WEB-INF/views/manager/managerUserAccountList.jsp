@@ -181,11 +181,10 @@ thead {
 			<input type="file" id="fileInput" class="form-control-file"
 				name="fileInput" value="파일검색" accept=".xlsx"> <input
 				type="button" onclick="fileCheck()" class="btn btn-info"
-				value="엑셀응시자 추가" /> &nbsp;&nbsp;&nbsp;
-			<button type="button" class="btn btn-primary m-3 p-3"
-				onclick="location.href='managerUserInsert.do'">단일응시자추가</button>
-
+				value="엑셀응시자 추가" />
 		</form>
+		<button type="button" class="btn btn-primary m-3 p-3"
+				onclick="location.href='managerUserInsert.do'">단일응시자 추가</button>
 	</div>
 	<%-- <form action="${pageContext.request.contextPath}/managerUserDelete.do"> --%>
 		<button id="takerDeleteBtn" class="btn btn-warning">응시자 삭제</button>
@@ -221,9 +220,10 @@ thead {
 			</c:forEach>
 		</table>
 	<!-- </form> -->
-	<br> <select id="privateExam" disabled="disabled">
+	<br> 
+	<select id="privateExam" disabled="disabled">
+		<option value="-1" selected="selected">선택하세요.</option>
 		<c:forEach items="${privateExamList}" var="privateExam">
-			<option value="-1" selected="selected">선택하세요.</option>
 			<option value="${privateExam.examId}">${privateExam.companyName}
 				- ${privateExam.examName}</option>
 		</c:forEach>

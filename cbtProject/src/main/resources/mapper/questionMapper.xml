@@ -324,6 +324,24 @@
 			</where>
 	</select>
 	
+	<select id="getQuestionSetList" resultType="map">
+		SELECT	q.QUESTION_ID					"questionId"
+				,s.SET_EXAM_QUESTION_ID			"setExamQuestionId"
+				,q.EXAMPLE_1					"example1"
+				,q.EXAMPLE_2					"example2"
+				,q.EXAMPLE_3					"example3"
+				,q.EXAMPLE_4					"example4"
+				,q.RIGHT_COMMENTARY				"rightCommentary"
+				,q.QUESTION_CONTENT				"questionContent"
+				,s.POINT						"point"
+				,s.EXAM_ID						"examId"
+		FROM 	SET_EXAM_QUESTION s JOIN QUESTION q 
+		ON		q.QUESTION_ID = s.QUESTION_ID
+		WHERE	s.EXAM_ID = #{examId}
+	</select>
+	
+	
+	
 </mapper>
  
  

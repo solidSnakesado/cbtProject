@@ -60,5 +60,7 @@ public interface QuestionService {
 	public List<QuestionVO> uploadExcelFile(MultipartFile excelFile);
 	
 	QuestionVO selectExamName(int examId);
+	
+	List<Map<String, Object>>getQuestionSetList(int examId);
 
 }
