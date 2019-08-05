@@ -118,4 +118,8 @@ public class QuestionDAO {
 		return vo;
 	}
 	
+	public List<Map<String, Object>>getQuestionSetList(int examId){
+		return mybatis.selectList("QuestionDAO.getQuestionSetList", examId);
+	}
+	
 }

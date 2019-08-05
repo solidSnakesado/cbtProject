@@ -4,17 +4,17 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		$("#I1SetExam").click(function() {
 			console.log("send");
-			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+			location.href="${pageContext.request.contextPath }/setQuestionList.do/${selectedExam.examId}"
 		});
 		
 		$("#I2SetExam").click(function() {
 			console.log("send");
-			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+			location.href="${pageContext.request.contextPath }/setQuestionList.do/${selectedExam.examId}"
 		});
-	});
+	}); */
 	
 	jQuery.datetimepicker.setLocale('kr'); // 한국어
 	   

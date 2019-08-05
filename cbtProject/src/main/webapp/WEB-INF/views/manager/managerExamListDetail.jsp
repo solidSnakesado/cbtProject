@@ -6,12 +6,12 @@
 	$(document).ready(function() {
 		$("#I1SetExam").click(function() {
 			console.log("send");
-			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+			location.href="${pageContext.request.contextPath }/setQuestionList.do/${selectedExam.examId}"
 		});
 		
 		$("#I2SetExam").click(function() {
 			console.log("send");
-			location.href="${pageContext.request.contextPath }/getQuestionList.do/${selectedExam.examId}"
+			location.href="${pageContext.request.contextPath }/setQuestionList.do/${selectedExam.examId}"
 		});
 	});
 </script>
@@ -20,7 +20,6 @@
 	<!-- 시험 정보 상세 보기 수정 -->
 
 	<h4 class="mx-auto pb-2">개별 시험 의뢰 목록 (기업화면)</h4>
-
 	<input type = "hidden" name = "no" value = "${ dto.no }">
 	<table align="center" class="table">
 		<tr>
