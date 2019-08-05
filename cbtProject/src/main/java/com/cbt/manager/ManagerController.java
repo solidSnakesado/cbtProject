@@ -544,8 +544,8 @@ public class ManagerController {
 			MultipartFile uploadFile = vo.getFilename();
 			if(uploadFile != null && uploadFile.getSize() > 0) {
 				fileName = uploadFile.getOriginalFilename();
-				uploadFile.transferTo(new File("d:/upload/" + fileName));
-				DataSource dataSource = new FileDataSource("d:/upload/" + fileName);
+				uploadFile.transferTo(new File("c:/upload/" + fileName));
+				DataSource dataSource = new FileDataSource("c:/upload/" + fileName);
 				messageHelper.addAttachment(MimeUtility.encodeText(fileName, "utf-8", "B"), dataSource);
 			}
 

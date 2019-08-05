@@ -146,7 +146,7 @@
 				var msg = '결제가 완료되었습니다.';
 				msg += '  결제 금액 : ' + rsp.paid_amount;
 				
-				alert("결제OK!!!!!!!!!!!!!!!!!!!!!");
+				
 				
 				$.ajax({
 					type:"POST",
@@ -154,7 +154,6 @@
 					dataType: "json",
 					url:'${pageContext.request.contextPath }/companyPaymentUpdate.do',
 					success : function(data){
-						alert('성공');
 						opener.location.reload();
 						window.close();
 					}, error : function() {
