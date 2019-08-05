@@ -84,4 +84,9 @@ public class ExamServiceImpl implements ExamService {
 	public List<ExamVO> getCompleteExamList(CompanyVO vo) {
 		return dao.getCompleteExamList(vo);
 	}
+
+	@Override
+	public List<ExamVO> getExamList(CompanyVO vo) {
+		return dao.getExamList(vo);
+	}
 }

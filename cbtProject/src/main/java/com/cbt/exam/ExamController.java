@@ -1,5 +1,7 @@
 package com.cbt.exam;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,13 @@ public class ExamController {
 		mv.addObject("result", examService.getExamList(vo, paging));
 		mv.setViewName("company/company/companyExamList");
 		return mv;
+	}
+	
+	@RequestMapping(value = "getCompanyExamList.do/{companyId}", method = RequestMethod.POST)
+	public List<ExamVO> companyExamList(@PathVariable("companyId") String companyId) {
+		CompanyVO vo = new CompanyVO();
+		vo.setCompanyId(companyId);
+		return examService.getExamList(vo);
 	}
 	/*
 	 * public String companyExamList(Model model, HttpSession session) { CompanyVO

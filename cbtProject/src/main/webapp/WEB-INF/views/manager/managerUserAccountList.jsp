@@ -22,27 +22,19 @@
 	    right:0;
 	    top:0;
 	    bottom:0;
-	    background: rgba(0,0,0,0.2); /*not in ie */
+	    background: rgba(0,0,0,0.08); /*not in ie */
 	    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
 	}
 
     .wrap-loading div{ /*로딩 이미지*/
         position: fixed;
-        top:50%;
-        left:50%;
-        margin-left: -21px;
-        margin-top: -21px;
+        top:40%;
+        left:43%;
     }
 
     .display-none{ /*감추기*/
-
         display:none;
-
     }
-
-
-
-출처: https://skylhs3.tistory.com/4 [다루이의 생활일기]
 </style>
 <script>
 	$(document).ready(function() {
@@ -55,11 +47,8 @@
 			if (selectedIdx != -1) {
 				let list = [];
 				var chkBox = $("input[name='takerListCheckBox']:checked");
-				console.log("체크됨1");
 				console.log(chkBox.parent().parent());
-				chkBox.each(function(i) {
-					console.log("체크됨");
-					
+				chkBox.each(function(i) {		
 					var tr = chkBox.parent().parent().eq(i);
 					console.log(tr.text());
 					var td = tr.children();
@@ -81,11 +70,14 @@
 						location.reload();
 					}, beforeSend : function() {
 						// 로딩 이미지 보여주기
+						$('.wrap-loading').removeClass('display-none');
 					}, complete : function() {
 						// 로딩 이미지 감추기
+						$('.wrap-loading').addClass('display-none');
 					}, error : function() {
 						alert('메일 전송 중 에러가 발생했습니다.');
 					}
+					, timeout:1000000
 				});
 			}
 		});
@@ -267,3 +259,10 @@
 	<hr />
 	<my:paging jsFunc="goList" paging="${result.paging }" />
 </div>
+
+<!-- 2019.08.05 성재민 -->
+<!-- 로딩 화면 추가 -->
+<div class="wrap-loading display-none">
+    <div><img src="${pageContext.request.contextPath}/image/loadingImage.gif" /></div>
+</div>   
+

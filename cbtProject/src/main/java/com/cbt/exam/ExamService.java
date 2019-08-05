@@ -32,4 +32,6 @@ public interface ExamService {
 	// 완료된 시험 리스트를 가져오는 메소드
 	// 현재는 테스트 구간이라 모든 값을 가져옴 수정 필요.
 	List<ExamVO> getCompleteExamList(CompanyVO vo);
+	
+	List<ExamVO> getExamList(CompanyVO vo);
 }
