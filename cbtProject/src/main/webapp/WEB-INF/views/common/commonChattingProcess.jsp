@@ -273,10 +273,10 @@
 				<span class="icon_quit hidden">나가기</span>
 			</button>
 		</sec:authorize>
-		<div class="tmHead" style="width: 60%; margin-left: 20%;">
+		<div class="tmHead" style="width: 90%; margin-left: 5%;">
 			<h2 class="logo"></h2>
 		</div>
-		<div class="tmBody" style="width: 60%; height: 750px; margin-left: auto; margin-right: auto;">
+		<div class="tmBody" style="width: 90%; height: 750px; margin-left: auto; margin-right: auto;">
 			<!-- 2019.07.19 성재민 -->
 			<!-- 채팅 메시지 목록 -->
 			<div id="tmMessageList" style="height: 91%;">

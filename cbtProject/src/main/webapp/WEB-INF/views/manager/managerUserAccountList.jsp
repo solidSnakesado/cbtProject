@@ -220,9 +220,10 @@ thead {
 			</c:forEach>
 		</table>
 	<!-- </form> -->
-	<br> <select id="privateExam" disabled="disabled">
+	<br> 
+	<select id="privateExam" disabled="disabled">
+		<option value="-1" selected="selected">선택하세요.</option>
 		<c:forEach items="${privateExamList}" var="privateExam">
-			<option value="-1" selected="selected">선택하세요.</option>
 			<option value="${privateExam.examId}">${privateExam.companyName}
 				- ${privateExam.examName}</option>
 		</c:forEach>

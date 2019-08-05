@@ -27,7 +27,7 @@
 	<!-- 문의하기 버튼 클릭시 채팅 창으로 연결 -->
 	<script type="text/javascript">
 		function connectChat() {
-			var wintype = "toolbar=no,width=800px,height=900px,top=50,left=420,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
+			var wintype = "toolbar=no,width=600px,height=800px,top=50,left=420,directories=no,menubar=no,scrollbars=yes";// 윈도우창 띄움
 			var winopen = window.open("${pageContext.request.contextPath }/chat.do","windowopen",wintype);
 		}
 	</script>
