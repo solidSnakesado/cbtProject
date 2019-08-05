@@ -4,6 +4,9 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/datetimepicker-master/jquery.datetimepicker.css">
 <script src="${pageContext.request.contextPath}/js/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<style>
+	input[type="text"],textarea,select{width:80%} 
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		jQuery.datetimepicker.setLocale('kr'); // 한국어

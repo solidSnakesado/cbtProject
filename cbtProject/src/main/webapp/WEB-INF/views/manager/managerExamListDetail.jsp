@@ -53,10 +53,10 @@
 		</tr>
 		<tr>
 			<th><label>공개여부</label></th>
-			<c:if test="${selectedExam.disclosureStatus == '1'}">
+			<c:if test="${selectedExam.disclosureStatus == 'O1'}">
 				<td>공개</td>
 			</c:if>
-			<c:if test="${selectedExam.disclosureStatus == '2'}">
+			<c:if test="${selectedExam.disclosureStatus == 'O2'}">
 				<td>비공개</td>
 			</c:if>
 		</tr>

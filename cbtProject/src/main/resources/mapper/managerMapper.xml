@@ -367,7 +367,7 @@
 		  , EXAM.EXAM_STATUS									"examStatus"
 		  , EXAM.DISCLOSURE_STATUS								"disclosureStatus"
 		  , EXAM.SET_EXAM_STATUS								"setExamStatus"
-		  , EXAM.EXAM_DESCRIPTION_SIMPLE						"setExamStatus"
+		  , EXAM.EXAM_DESCRIPTION_SIMPLE						"examDescriptionSimple"
 		  , EXAM.EXAM_DESCRIPTION_DETAIL						"examDescriptionDetail"
 		FROM EXAM JOIN ESTIMATE
 		ON EXAM.ESTIMATE_ID = ESTIMATE.ESTIMATE_ID
@@ -381,7 +381,7 @@
 	
 	<insert id="managerExamInsert" parameterType="ExamVO">
 		<selectKey keyProperty="examId" resultType="int" order="BEFORE">
-			SELECT MAX(EXAM_ID)+1 FROM EXAM
+			SELECT NVL(MAX(EXAM_ID),0)+1 FROM EXAM
 		</selectKey>
 		INSERT INTO EXAM (
 							  EXAM_ID
