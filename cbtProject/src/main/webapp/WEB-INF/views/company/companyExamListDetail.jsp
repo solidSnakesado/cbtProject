@@ -83,6 +83,32 @@
 		</tr>
 	</table>
 	<br>
+	<table class="table text-center">
+		<tr>
+			<th>No.</th>
+			<th>I D</th>
+			<th>Name</th>
+			<th>Date of examination</th>
+			<th>Score</th>
+			<th>Result</th>
+		</tr>
+		<c:forEach items="selectedExamTaker" var="exam" varStatus="status">
+		<tr>
+			<td>${status.count} .</td>
+			<td>${exam.takerId}</td>
+			<td>${exam.takerName}</td>
+			<td>
+				<c:if test="${exam.takeExamDate ne 0}"><font color="blue">${exam.takeExamDate}</font></c:if>
+				<c:if test="${exam.takeExamDate eq 0}"><font color="tomato">불참</font></c:if>
+			</td>
+			<td>${exam.score}</td>
+			<td>
+				<c:if test="${selectedExam.passingScore le exam.score}"><font color="blue">합격</font></c:if>
+				<c:if test="${selectedExam.passingScore gt exam.score}"><font color="tomato">불합격</font></c:if>
+			</td>
+		</tr>
+		</c:forEach>
+	</table>
 	<div align="right">
 		<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" class="btn btn-warning">통계보기</button>
 		<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기" class="btn btn-info">

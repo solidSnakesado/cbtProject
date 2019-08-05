@@ -1,6 +1,7 @@
 package com.cbt.exam;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,9 @@ public class ExamDAO {
 	public int getExamCount(CompanyVO vo) {
     	return mybatis.selectOne("ExamDAO.getExamCompanyCount", vo);
     }
+	
+	public List<Map<String, Object>> getExamTaker(ExamVO vo){
+		return mybatis.selectList("ExamVO.getExamTaker", vo);
+	}
 	
 }
