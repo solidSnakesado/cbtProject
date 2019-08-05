@@ -91,12 +91,12 @@
 	<table class="table text-center">
 	<thead class="table-success">
 		<tr>
-			<th>시험코드</th>
 			<th>시험명</th>
 			<th>시험시작시간</th>
 			<th>시험종료시간</th>
 			<th>문항수</th>
 			<th>합격기준</th>
+			<th>공개 여부</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -108,12 +108,15 @@
 	<c:if test="${takerId == null}">
 		<tr onclick="goLogin();">
 	</c:if> --%>
-			<td>${examInfo.EXAM_ID}</td>
 			<td>${examInfo.EXAM_NAME}</td>
 			<td>${examInfo.EXAM_START_TIME}</td>
 			<td>${examInfo.EXAM_END_TIME}</td>
 			<td>${examInfo.QUESTION_QUANTITY}</td>
 			<td>${examInfo.PASSING_SCORE}</td>
+			<td>
+				<c:if test="${examInfo.DISCLOSURE_STATUS eq 'O1'}"><font color="blue">공개</font></c:if>
+				<c:if test="${examInfo.DISCLOSURE_STATUS eq 'O2'}"><font color="tomato">비공개</font></c:if>
+			</td>
 		</tr>
 	</c:forEach>  
 	</tbody>

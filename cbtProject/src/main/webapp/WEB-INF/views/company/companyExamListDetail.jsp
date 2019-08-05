@@ -105,10 +105,16 @@
 			<td>${exam.takerId}</td>
 			<td>${exam.takerName}</td>
 			<td>${exam.takeExamDate}</td>
-			<td>${exam.score} &nbsp;</td>
 			<td>
-				<c:if test="${selectedExam.passingScore le exam.score}"><font color="blue">합격</font></c:if>
-				<c:if test="${selectedExam.passingScore gt exam.score}"><font color="tomato">불합격</font></c:if>
+				<c:if test="${exam.score eq 9999}"><font color="blue">미 응시자</font></c:if>
+				<c:if test="${exam.score ne 9999}"><font color="tomato">${exam.score}</font></c:if>
+			</td>
+			<td>
+				<c:if test="${exam.score eq 9999}"><font color="blue">미 응시자</font></c:if>
+				<c:if test="${exam.score ne 9999}">
+					<c:if test="${selectedExam.passingScore le exam.score}"><font color="blue">합격</font></c:if>
+					<c:if test="${selectedExam.passingScore gt exam.score}"><font color="tomato">불합격</font></c:if>
+				</c:if>
 			</td>
 		</tr>
 		</c:forEach>

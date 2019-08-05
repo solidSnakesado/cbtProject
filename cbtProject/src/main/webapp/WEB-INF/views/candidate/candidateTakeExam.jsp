@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html onmouseout="return blockOver()" onselectstart="return blockSelect()" oncontextmenu="return blockRightClick()">
+<html onmouseout="blockOver()" onselectstart="return blockSelect()" oncontextmenu="return blockRightClick()">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"

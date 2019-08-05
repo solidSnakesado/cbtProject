@@ -127,15 +127,13 @@
 	</select>
 	
 	<select id="getExamTaker" parameterType="ExamVO" resultType="map">
-		SELECT	t.TAKER_ID				"takerId"
-				, t.TAKER_NAME			"takerName"
-				, NVL(TO_CHAR(te.TAKE_EXAM_DATE,'YYYY-MM-DD hh24:mm'),'미응시')	"takeExamDate"
-				, te.SCORE	"score"
-				
-		FROM	TAKE_EXAM te RIGHT OUTER JOIN TAKER t
-		ON		te.TAKER_ID = t.TAKER_ID JOIN PRIVATE_EXAM p
-		ON		t.TAKER_ID = p.TAKER_ID
-		WHERE	p.EXAM_ID = #{examId}
+		SELECT  t.TAKER_ID																"takerId"
+		        ,TAKER_NAME																"takerName"
+		        , NVL(TO_CHAR(te.TAKE_EXAM_DATE,'YYYY-MM-DD hh24:mm'),'미 응시자')			"takeExamDate"
+		        , NVL(te.SCORE,9999)													"score"
+		FROM    TAKER t JOIN    TAKE_EXAM te
+		ON      t.TAKER_ID = te.TAKER_ID
+		WHERE   te.EXAM_ID = #{examId}
 	</select>
 	
 	<!-- 2019.07.11 성재민 -->
