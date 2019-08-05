@@ -129,10 +129,10 @@
 	<select id="getExamTaker" parameterType="ExamVO" resultType="map">
 		SELECT	t.TAKER_ID				"takerId"
 				, t.TAKER_NAME			"takerName"
-				, te.TAKE_EXAM_DATE		"takeExamDate"
-				, NVL(te.SCORE,9999)	"score"
+				, NVL(TO_CHAR(te.TAKE_EXAM_DATE,'YYYY-MM-DD hh24:mm'),'미응시')	"takeExamDate"
+				, te.SCORE	"score"
 				
-		FROM	TAKE_EXAM te JOIN TAKER t
+		FROM	TAKE_EXAM te RIGHT OUTER JOIN TAKER t
 		ON		te.TAKER_ID = t.TAKER_ID JOIN PRIVATE_EXAM p
 		ON		t.TAKER_ID = p.TAKER_ID
 		WHERE	p.EXAM_ID = #{examId}

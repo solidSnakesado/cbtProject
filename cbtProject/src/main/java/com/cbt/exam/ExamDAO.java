@@ -62,7 +62,7 @@ public class ExamDAO {
     }
 	
 	public List<Map<String, Object>> getExamTaker(ExamVO vo){
-		return mybatis.selectList("ExamVO.getExamTaker", vo);
+		return mybatis.selectList("ExamDAO.getExamTaker", vo);
 	}
 	
 }
