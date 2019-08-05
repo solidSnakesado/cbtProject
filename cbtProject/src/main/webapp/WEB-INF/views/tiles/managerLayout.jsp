@@ -58,8 +58,6 @@
 						$("#inquiry").html("");
 					}
 					
-				}, error : function(){
-					alert('에러발생');
 				}
 			});
 			/* if(message.role == "ROLE_USER"){

@@ -138,8 +138,6 @@
 					success : function(data){
 						console.log(data);
 						ws.send(JSON.stringify(sendMessage));
-					}, error : function(){
-						alert('에러발생');
 					}
 				});
 			}
@@ -179,8 +177,6 @@
 				success : function(data){
 					console.log(data);
 					window.close();
-				}, error : function(){
-					alert('에러발생');
 				}
 			});
 		});
@@ -253,8 +249,6 @@
 					url:urlValue,
 					success : function(data){
 						console.log(data);
-					}, error : function(){
-						alert('에러발생');
 					}
 				});
 			}
