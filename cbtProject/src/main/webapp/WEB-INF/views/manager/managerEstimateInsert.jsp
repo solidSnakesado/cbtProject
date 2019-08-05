@@ -214,7 +214,7 @@
 			<tr>
 				<td><label>시험일시</label></td>
 				<td><input type="text" id="datepicker" name="examDate"
-					value="${myEstimateList.examDate}" class="form-control" placeholder="클릭하여 날짜를 선택해주세요"></td>
+					value="${myEstimateList.examDate}" class="form-control" autocomplete="off" placeholder="클릭하여 날짜를 선택해주세요"></td>
 			</tr>
 			<tr>
 				<td><label>비고</label></td>

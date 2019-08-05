@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -83,6 +84,35 @@
 		</tr>
 	</table>
 	<br>
+	<br>
+	<br>
+	<br>
+	<h4 class="mx-auto pb-2">응시자별 현황</h4>
+	<div class="mx-auto pb-2" style="font-size: 15px; text-align : right;">${fn:length(selectedExamTaker)} / ${selectedExam.applicants}</div>
+	<br>
+	<table class="table text-center">
+		<tr>
+			<th>No.</th>
+			<th>I D</th>
+			<th>Name</th>
+			<th>Date of examination</th>
+			<th>Score</th>
+			<th>Result</th>
+		</tr>
+		<c:forEach items="${selectedExamTaker}" var="exam" varStatus="status">
+		<tr>
+			<td id="count" value="${status.count}">${status.count} .</td>
+			<td>${exam.takerId}</td>
+			<td>${exam.takerName}</td>
+			<td>${exam.takeExamDate}</td>
+			<td>${exam.score} &nbsp;</td>
+			<td>
+				<c:if test="${selectedExam.passingScore le exam.score}"><font color="blue">합격</font></c:if>
+				<c:if test="${selectedExam.passingScore gt exam.score}"><font color="tomato">불합격</font></c:if>
+			</td>
+		</tr>
+		</c:forEach>
+	</table>
 	<div align="right">
 		<button onclick = "location.href = '${pageContext.request.contextPath }/companyExamListDetailGraph.do/${selectedExam.examId}'" class="btn btn-warning">통계보기</button>
 		<input type = "button" onclick = "location.href = '${pageContext.request.contextPath }/companyExamList.do'" value = "돌아가기" class="btn btn-info">

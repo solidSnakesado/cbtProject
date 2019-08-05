@@ -61,11 +61,11 @@
 		</tr>
 		<tr>
 			<th><label>상담희망일</label></th>
-			<td><input type="text" name="consultingDesiredDate" class="form-control" id="consultingDesiredDate" value="${result.consultingDesiredDate}"></td>
+			<td><input type="text" name="consultingDesiredDate" class="form-control" id="consultingDesiredDate" autocomplete="off" value="${result.consultingDesiredDate}"></td>
 		</tr>
 		<tr>
 			<th><label>상담일</label></th>
-			<td><input type="text" name="consultingDate" class="form-control" id="consultingDate" value="${result.consultingDate}"></td>
+			<td><input type="text" name="consultingDate" class="form-control" id="consultingDate" autocomplete="off" value="${result.consultingDate}"></td>
 		</tr>
 		<tr>
 		<tr>

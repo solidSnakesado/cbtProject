@@ -4,17 +4,45 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
-.trexam {
-	cursor: pointer;
-}
+	.trexam {
+		cursor: pointer;
+	}
+	
+	tr.trexam:hover {
+		background-color: lightblue;
+	}
+	
+	thead {
+		background-color: lightgrey
+	}
 
-tr.trexam:hover {
-	background-color: lightblue;
-}
+	.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+	    position: fixed;
+	    left:0;
+	    right:0;
+	    top:0;
+	    bottom:0;
+	    background: rgba(0,0,0,0.2); /*not in ie */
+	    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+	}
 
-thead {
-	background-color: lightgrey
-}
+    .wrap-loading div{ /*로딩 이미지*/
+        position: fixed;
+        top:50%;
+        left:50%;
+        margin-left: -21px;
+        margin-top: -21px;
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+
+    }
+
+
+
+출처: https://skylhs3.tistory.com/4 [다루이의 생활일기]
 </style>
 <script>
 	$(document).ready(function() {
@@ -51,6 +79,10 @@ thead {
 					success : function(data) {
 						alert('메일 전송 완료');
 						location.reload();
+					}, beforeSend : function() {
+						// 로딩 이미지 보여주기
+					}, complete : function() {
+						// 로딩 이미지 감추기
 					}, error : function() {
 						alert('메일 전송 중 에러가 발생했습니다.');
 					}

@@ -45,6 +45,7 @@ public class ExamController {
 		ExamVO vo = new ExamVO();
 		vo.setExamId(examId);
 		model.addAttribute("selectedExam", examService.getExam(vo));
+		model.addAttribute("selectedExamTaker", examService.getExamTaker(vo));
 		
 		return "company/company/companyExamListDetail";
 	}

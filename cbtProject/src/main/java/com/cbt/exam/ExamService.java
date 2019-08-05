@@ -17,8 +17,9 @@ public interface ExamService {
 	void deleteExam(ExamVO vo);
 	
 	ExamVO getExam(ExamVO vo);
-
-
+	
+	List<Map<String, Object>> getExamTaker(ExamVO vo);
+	
 	List<ExamVO> getExamList(ExamVO vo);
 	
 	public Map<String, Object> getExamList(CompanyVO vo , Paging paging);
