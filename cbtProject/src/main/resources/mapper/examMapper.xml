@@ -126,6 +126,16 @@
 		
 	</select>
 	
+	<select id="getExamTaker" parameterType="ExamVO" resultType="map">
+		SELECT  t.TAKER_ID																"takerId"
+		        ,TAKER_NAME																"takerName"
+		        , NVL(TO_CHAR(te.TAKE_EXAM_DATE,'YYYY-MM-DD hh24:mm'),'미 응시자')			"takeExamDate"
+		        , NVL(te.SCORE,9999)													"score"
+		FROM    TAKER t JOIN    TAKE_EXAM te
+		ON      t.TAKER_ID = te.TAKER_ID
+		WHERE   te.EXAM_ID = #{examId}
+	</select>
+	
 	<!-- 2019.07.11 성재민 -->
 	<!-- vo 객체의 변수타입이 문자열로 변경되어 TO_CHAR 로 변환 추가 -->
 	<select id="getExamList" parameterType="CompanyVO" resultType="ExamVO">

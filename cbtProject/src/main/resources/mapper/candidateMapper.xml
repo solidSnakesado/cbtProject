@@ -102,10 +102,25 @@
 								    ,QUESTION_QUANTITY								
 								    ,PASSING_SCORE									
 								    ,EXAM_DESCRIPTION_SIMPLE						
-								    ,EXAM_DESCRIPTION_DETAIL						
-				FROM    			EXAM
-				WHERE				EXAM_END_TIME > SYSDATE
-				ORDER BY			EXAM_ID DESC ) A ) B
+								    ,EXAM_DESCRIPTION_DETAIL	
+                                    ,DISCLOSURE_STATUS
+				FROM    			EXAM e JOIN ESTIMATE es
+                ON                  e.ESTIMATE_ID = es.ESTIMATE_ID
+				WHERE				EXAM_END_TIME > SYSDATE     
+                AND     es.TRADE_PROGRESS = 'B5' 
+                AND     DISCLOSURE_STATUS = 'O1' 
+                
+                <if test="takerId != null and takerId != '' "> 
+                
+                OR (DISCLOSURE_STATUS = 'O2' AND EXISTS (SELECT 1 
+                                                         FROM PRIVATE_EXAM 
+                                                         WHERE TAKER_ID = #{takerId} 
+                                                         AND EXAM_ID = e.EXAM_ID) )
+				</if>
+				
+				ORDER BY			e.EXAM_ID DESC
+				
+				 ) A ) B
 				<where>
 					RN BETWEEN #{start} AND #{end}
 				</where>

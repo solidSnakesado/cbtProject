@@ -89,4 +89,9 @@ public class ExamServiceImpl implements ExamService {
 	public List<ExamVO> getExamList(CompanyVO vo) {
 		return dao.getExamList(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> getExamTaker(ExamVO vo) {
+		return dao.getExamTaker(vo);
+	}
 }

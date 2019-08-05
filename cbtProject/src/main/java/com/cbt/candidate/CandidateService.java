@@ -43,7 +43,7 @@ public interface CandidateService {
 	int ExamScheduleCount();
 
 	// temp
-	Map<Object, Object> candidateScheduleCheckPage(Paging paging);
+	Map<Object, Object> candidateScheduleCheckPage(Paging paging, String takerId);
 	
 	// 카카오 아이디 insert
 	public int insertKakaoCandidate(CandidateVO vo);

@@ -108,8 +108,9 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	
 	@Override
-	public Map<Object, Object> candidateScheduleCheckPage(Paging paging) {
+	public Map<Object, Object> candidateScheduleCheckPage(Paging paging, String takerId) {
 		CandidateVO vo = new CandidateVO();
+		vo.setTakerId(takerId);
 		vo.setStart(1);
 		vo.setEnd(5);
 		if(paging != null) {

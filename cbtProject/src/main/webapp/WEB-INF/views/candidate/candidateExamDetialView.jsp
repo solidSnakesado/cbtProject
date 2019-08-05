@@ -79,7 +79,7 @@
 			
 			var url		=	'${pageContext.request.contextPath }/candidateTakeExam.do';
 			var title	=	'시험시작';
-			var status	=	'width = 550, height = 170, top = 300, left = 500, status = no , toolbars = no, location = no';
+			var status	=	'width = 550, height = 200, top = 300, left = 500, status = no , toolbars = no, location = no';
 
 			window.open("",title,status);
 			
