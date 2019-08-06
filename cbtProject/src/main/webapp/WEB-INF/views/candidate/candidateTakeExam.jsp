@@ -13,7 +13,7 @@
 	.floatMenu:hover { 
 		background-color: lightblue;
 	}
-
+	
 	.wrap {
 		height: 100px;
 		display: flex;
@@ -354,6 +354,9 @@
 					function updateAnswer(){
 						
 						$("tr[class^='tr']").on("click", function() {
+							
+							var tr = $(this);
+							
 							var choice = $(this).find('input').attr('id');
 				        	var takerAnswer = $(this).find('input').val();
 				        	var setExamQuestionId = data[numbers[i]].setExamQuestionId;
@@ -370,7 +373,10 @@
 									
 					    			$("[name ='exam"+a+"']").val([takerAnswer]);
 					    			$("[name ='exam"+a+"']").parent().parent().css('background-color','lightblue');
-									
+					    			for(var i=1; i<=4; i++){
+										$('.tr'+i).css('background-color','white');
+									}
+									tr.css('background-color','lightblue');
 								}
 				    		})
 						})
@@ -564,25 +570,25 @@
 							<th ></th>
 							<th id="point" align="right" style="padding-left: 80%"></th>
 						</tr>
-						<tr class="tr1">
+						<tr class="tr1" value="0">
 							<td></td>
 							<td align="right" id="td1" hidden="true"></td>
 							<td align="left" id="exam1"  colspan="4"></td>
 							<td></td>
 						</tr>
-						<tr class="tr2">
+						<tr class="tr2" value="0">
 							<td></td>
 							<td align="right" id="td2" hidden="true"></td>
 							<td align="left" id="exam2"  colspan="4"></td>
 							<td></td>
 						</tr>
-						<tr class="tr3">
+						<tr class="tr3" value="0">
 							<td></td>
 							<td align="right" id="td3" hidden="true"></td>
 							<td align="left" id="exam3"  colspan="4"></td>
 							<td></td>
 						</tr>
-						<tr class="tr4">
+						<tr class="tr4" value="0">
 							<td></td>
 							<td align="right" id="td4" hidden="true"></td>
 							<td align="left" id="exam4"  colspan="4"></td>
